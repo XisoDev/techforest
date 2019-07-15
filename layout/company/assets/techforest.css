@@ -27,10 +27,10 @@
     vertical-align:4px;
 }
 .btn-group-xxs > .btn, .btn-xxs {
-    padding: .45rem .5rem .6rem;
+    padding: .55rem .5rem .55rem;
     font-size: .675rem;
     line-height: .3;
-    vertical-align:4px;
+    vertical-align:2px;
 }
 
 /*공용컬러*/
@@ -41,28 +41,96 @@ body{
 .red{
     color:rgb(245,112,102);
 }
+.bg-red{
+    color:#FFF;
+    background-color:rgb(245,112,102);
+}
 .color_primary{
     color:rgb(25,43,95);
+}
+.bg-primary{
+    background-color:rgb(25,43,95);
+    color:#FFF;
 }
 
 
 /*커스텀 섹션*/
+img{
+    max-width:100%;
+}
+.content_padding{
+    padding:20px 15px;
+}
 .welcome_seciton{
     background-color:rgba(32,56,130,1);
+    background-size: 76%;
+    background-position: 200% 100%;
+    background-repeat:no-repeat;
     color:#FFF;
     padding:80px 15px 20px;
 }
 .tech_card{
-    max-width:150px;
-    padding:40px 30px 20px;
     text-align:center;
     background-color:rgb(224,231,244);
     border-radius:10px;
-    margin-right:10px;
+}
+.flex-card-slick .tech_card{
+    margin-right:15px;
 }
 .tech_card .thumbnail{
-    max-width:150px;
+    border-radius:50%;
+    overflow:hidden;
+    background-color:rgb(224,231,244);
+    background-size:contain;
+    background-repeat:no-repeat;
+    background-position:center;
+    margin:10px 25px;
+}
+.square:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
 }
 .tech_card .thumbnail img{
     max-width:100%;
+}
+.tech_card .thumbnail .icon_wrap{
+    padding:40px 0 20px;
+}
+
+.xxs_content{
+    padding:0 10px;
+    margin:5px 0 0;
+    line-height:14px;
+    font-size:12px;
+    font-weight:300;
+}
+.xxs_content .icon_wrap{
+    width:15px;
+    height:15px;
+    display:inline-block;
+    text-align:center;
+}
+
+.banners_slick .slick-dots {
+    left:auto;
+    top: -30px;
+    right: 10px;
+    width:auto;
+}
+.banners_slick .slick-dots li{
+    width:10px;
+    height:10px;
+    margin:0 2px;
+}
+.banners_slick.slick-dotted.slick-slider{
+    margin-bottom:0;
+}
+
+.affix_middle.affix{
+    width:100%;
+    position:fixed;
+    z-index:100;
+    bottom:0;
+    left:0;
 }
