@@ -1,0 +1,68 @@
+/* 서체지정 */
+*{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight:400;
+}
+.weight_lighter{
+    font-weight:300;
+}
+.weight_normal{
+    font-weight:400;
+}
+.weight_bold{
+    font-weight:500;
+}
+.weight_super{
+    font-weight:900;
+}
+
+/*부트스트랩 손보기*/
+.btn-round{
+    border-radius:200px;
+}
+.btn-group-xs > .btn, .btn-xs {
+    padding: .55rem 1rem;
+    font-size: .875rem;
+    line-height: .5;
+    vertical-align:4px;
+}
+.btn-group-xxs > .btn, .btn-xxs {
+    padding: .45rem .5rem .6rem;
+    font-size: .675rem;
+    line-height: .3;
+    vertical-align:4px;
+}
+
+/*공용컬러*/
+body{
+    background:rgb(244,246,251);
+    color:#333;
+}
+.red{
+    color:rgb(245,112,102);
+}
+.color_primary{
+    color:rgb(25,43,95);
+}
+
+
+/*커스텀 섹션*/
+.welcome_seciton{
+    background-color:rgba(32,56,130,1);
+    color:#FFF;
+    padding:80px 15px 20px;
+}
+.tech_card{
+    max-width:150px;
+    padding:40px 30px 20px;
+    text-align:center;
+    background-color:rgb(224,231,244);
+    border-radius:10px;
+    margin-right:10px;
+}
+.tech_card .thumbnail{
+    max-width:150px;
+}
+.tech_card .thumbnail img{
+    max-width:100%;
+}
