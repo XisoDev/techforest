@@ -2,7 +2,10 @@
 
     //웹폰트 로드
     $add_html_header[] = "<link href=\"//fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500,900&display=swap\" rel=\"stylesheet\">";
+//    시트
     $add_html_header[] = "<link rel=\"stylesheet\" href=\"/layout/company/assets/vendor/bootstrap/css/bootstrap.css\">";
+//    커스텀
+    $add_html_header[] = "<link rel=\"stylesheet\" href=\"/layout/company/assets/global_layout.css?nocache=".time()."\">";
     $add_html_header[] = "<link rel=\"stylesheet\" href=\"/layout/company/assets/techforest.css?nocache=".time()."\">";
     $add_html_header[] = "<link rel=\"stylesheet\" href=\"/layout/company/assets/vendor/slick/slick.css\">";
     $add_html_header[] = "<link rel=\"stylesheet\" href=\"/layout/company/assets/vendor/slick/slick-theme.css\">";
