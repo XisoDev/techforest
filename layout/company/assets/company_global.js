@@ -19,19 +19,16 @@ jQuery(document).ready(function($){
         }
     }
 
-    trigger.click(function () {
-        buttonSwitch();
-    });
-
     $('[data-toggle="offcanvas"]').click(function () {
-        $('#header').toggleClass('toggled');
+        $('body').toggleClass('toggled');
+        buttonSwitch();
     });
 
     //홈
     $('.flex-card-slick').slick({
         dots: false,
         speed: 300,
-        slidesToShow: 2.1,
+        slidesToShow: 1.6,
         slidesToScroll: 1,
         centerMode: false,
         infinite:false,
@@ -71,6 +68,12 @@ jQuery(document).ready(function($){
     $(window).scroll(function(event) {
         if($('.affix_middle').length){
             affix("affix_middle");
+        }
+
+        if($(document).scrollTop() > 50){
+            $("#header").addClass('shrink');
+        }else{
+            $("#header").removeClass('shrink');
         }
     });
 });

@@ -22,7 +22,7 @@ $site_info->url = $site_info->protocol . $site_info->domain;
 $site_info->title = "기술자숲";
 $site_info->keyword = "중장년, 숙련공, 기술직, 취업, 채용, 이직, 강소기업, 중소기업, 현장직, 생산직";
 $site_info->desc = "기술인력 구인구직 매칭서비스 / 중장년 숙련공 기술직 취업 채용 교육행사 정보";
-$site_info->layout = 'company';
+$site_info->layout = 'none';
 
 //set Category
 $category = array();

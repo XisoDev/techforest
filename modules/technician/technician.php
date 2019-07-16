@@ -6,14 +6,16 @@
  * Time: 19:17
  */
 
-class pageView{
+class technicianView{
 
     function index($args){
         global $set_template_file;
+        global $site_info;
+        $site_info->layout = "technician";
 
         $output = new Object();
 
-        $set_template_file = "home.php";
+        $set_template_file = "technician/index.php";
 
         return $output;
     }

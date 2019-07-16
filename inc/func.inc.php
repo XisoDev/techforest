@@ -32,6 +32,19 @@ function loadLayout($layout = 'default'){
     include $layout_info->path . "load.php";
 }
 
+function moduleLoadDefault($file_path = false){
+    if(!$file_path) return;
+
+    global $add_html_header;
+    global $add_html_footer;
+    global $add_body_class;
+    global $add_global_var;
+
+    $file_path = sprintf(_XISO_PATH_ . '/%s/',$file_path);
+
+    include $file_path . "_load.php";
+}
+
 function set_message($message,$type = 'info'){
     global $_XISO_MESSAGE_;
     global $_XISO_ERROR_;

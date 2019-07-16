@@ -7,18 +7,6 @@ body, html {
     height: 100%;
 }
 
-.nav .open > a {
-    background-color: transparent;
-}
-
-.nav .open > a:hover {
-    background-color: transparent;
-}
-
-.nav .open > a:focus {
-    background-color: transparent;
-}
-
 #header{
     position:fixed;
     top:0;
@@ -35,17 +23,19 @@ body, html {
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
-
-#header.toggled {
+body.toggled{
+    overflow:hidden;
+}
+.toggled #header {
     padding-left: 300px;
     height:100%;
 }
 
-#header.toggled #sidebar-wrapper {
+.toggled #header #sidebar-wrapper {
     width: 300px;
 }
 
-#header.toggled #page-content-wrapper {
+.toggled #header #page-content-wrapper {
     margin-right: -300px;
     position: absolute;
 }
@@ -63,7 +53,7 @@ body, html {
     height: 32px;
     margin-left: 15px;
     position: fixed;
-    top: 20px;
+    top: 12px;
     width: 32px;
     z-index: 999;
 }
@@ -159,13 +149,13 @@ body, html {
 }
 
 .hamburger.is-closed .hamb-top, .hamburger.is-closed .hamb-bottom, .hamburger.is-open .hamb-top, .hamburger.is-open .hamb-bottom {
-    height: 3px;
+    height: 2px;
     left: 0;
     position: absolute;
     width: 100%;
 }
 .hamburger.is-closed .hamb-middle, .hamburger.is-open .hamb-middle{
-    height: 3px;
+    height: 2px;
     left: 0;
     position: absolute;
     width: 80%;
@@ -258,7 +248,7 @@ body, html {
 }
 
 .hamb-bottom, .hamb-middle, .hamb-top {
-    background-color: white;
+    background-color: #333;
 }
 
 
@@ -300,19 +290,72 @@ body, html {
     background-position:center;
 }
 
-nav a{
+aside a{
     color:#000;
     padding:20px 15px;
     font-size:18px;
     font-weight:300;
 }
-nav a:hover,
-nav a.active{
+aside a:hover,
+aside a.active{
     background:rgb(239,244,254);
 }
-.nav.submenu{
+aside.nav .submenu{
     padding-left:40px;
 }
-.nav.submenu a{
+aside.nav .submenu a{
     font-size:16px;
+}
+
+nav.navbar{
+    -webkit-transition: all ease 250ms;
+    -moz-transition: all ease 250ms;
+    -ms-transition: all ease 250ms;
+    -o-transition: all ease 250ms;
+    transition: all ease 250ms;
+    -webkit-transform: translateY(-100%);
+    -moz-transform: translateY(-100%);
+    -ms-transform: translateY(-100%);
+    -o-transform: translateY(-100%);
+    transform: translateY(-100%);
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+}
+#header.shrink nav.navbar{
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0);
+}
+
+/* 알람관련 */
+.toggle_alert{
+    color:#333;
+    background: transparent;
+    border: none;
+    display: block;
+    font-size: 32px;
+    margin-right: 15px;
+    position: fixed;
+    top: 2px;
+    right:0;
+    text-align:Center;
+    width: 32px;
+    z-index: 999;
+}
+.toggle_alert .badge{
+    border-radius:50%;
+    font-size:9px;
+    position:absolute;
+    right:-8px;
+    bottom:5px;
+}
+
+
+.welcome_seciton {
+    background-color: rgba(255, 219, 119, 1);
+    color:#333;
 }

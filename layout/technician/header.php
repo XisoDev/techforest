@@ -44,8 +44,8 @@
         </aside>
     </div>
     <div id="page-content-wrapper">
-        <nav class="navbar navbar-expand-lg bg-primary">
-            <a class="navbar-brand text-white mx-auto" href="#">기술자숲</a>
+        <nav class="navbar navbar-expand-lg bg-warning">
+            <a class="navbar-brand text-primary mx-auto" href="#">기술자숲</a>
         </nav>
         <button type="button" class="hamburger animated fadeInLeft is-closed" data-toggle="offcanvas">
             <span class="hamb-top"></span>

@@ -31,11 +31,6 @@ if(isset($_GET['document_srl'])){
 //모듈 런
 $function_name = $act;
 $call_file = sprintf(_XISO_PATH_ . "/modules/%s/%s.php",$module,$module);
-
-//레이아웃 로드
-$layout_info = new stdClass();
-loadLayout($site_info->layout);
-
 if(file_exists($call_file)){
     require_once $call_file;
 
@@ -54,6 +49,9 @@ if(file_exists($call_file)){
     set_error("존재하지 않는 모듈입니다.");
 }
 
+//레이아웃 로드
+$layout_info = new stdClass();
+loadLayout($site_info->layout);
 
 ?>
 <!DOCTYPE html>

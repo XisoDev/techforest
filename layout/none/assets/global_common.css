@@ -62,29 +62,27 @@ img{
     padding:20px 15px;
 }
 .welcome_seciton{
-    background-color:rgba(32,56,130,1);
     background-size: 76%;
     background-position: 200% 100%;
     background-repeat:no-repeat;
-    color:#FFF;
     padding:80px 15px 20px;
 }
 .tech_card{
     text-align:center;
     background-color:rgb(224,231,244);
     border-radius:10px;
+    overflow:hidden;
 }
 .flex-card-slick .tech_card{
     margin-right:15px;
 }
 .tech_card .thumbnail{
-    border-radius:50%;
+    min-height:120px;
     overflow:hidden;
     background-color:rgb(224,231,244);
-    background-size:contain;
+    background-size:cover;
     background-repeat:no-repeat;
     background-position:center;
-    margin:10px 25px;
 }
 .square:after {
     content: "";
@@ -98,6 +96,15 @@ img{
     padding:40px 0 20px;
 }
 
+.sm_content{
+    font-size:16px;
+    font-weight:300;
+}
+.xs_content{
+    font-size:14px;
+    font-weight:300;
+    vertical-align: -2px;
+}
 .xxs_content{
     padding:0 10px;
     margin:5px 0 0;

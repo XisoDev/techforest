@@ -10,6 +10,7 @@ class memberController{
         $member_info->email_address = "xiso@amuz.co.kr";
         $member_info->user_name = "이우진";
         $member_info->nick_name = "(주)아뮤즈";
+        $member_info->company = $member_info->nick_name;
         $member_info->mobile = onlynumber("01057595999");
         $member_info->mobile_format = mobile_format("01057595999");
         $member_info->birthday = onlynumber('19900229');
@@ -22,7 +23,6 @@ class memberController{
 
     function procMemberLogin($args){
         if($args->user_id != 'xiso') return new Object(-1, "존재하지 않는 아이디 입니다.");
-        if($args->password != $args->password2) return new Object(-1, "비밀번호 확인이 잘못 되었습니다.");
         if($args->password != 'test') return new Object(-1, "비밀번호가 잘못 되었습니다.");
 
         //비밀번호 일치하면 세션생성 후 로그인 기록 변경

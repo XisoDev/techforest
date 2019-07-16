@@ -6,14 +6,16 @@
  * Time: 19:17
  */
 
-class pageView{
+class companyView{
 
     function index($args){
         global $set_template_file;
+        global $site_info;
+        $site_info->layout = "company";
 
         $output = new Object();
 
-        $set_template_file = "home.php";
+        $set_template_file = "company/index.php";
 
         return $output;
     }

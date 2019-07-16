@@ -36,6 +36,7 @@ class memberView{
     }
 
     function login($args){
+        moduleLoadDefault('oPage/member');
         $output = new Object();
         global $set_template_file;
 
@@ -46,7 +47,6 @@ class memberView{
             $set_template_file = "member/login.php";
             $output->add('page_title',"로그인이 필요합니다.");
         }
-
 
         return $output;
     }
