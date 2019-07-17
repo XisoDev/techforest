@@ -12,7 +12,7 @@
 
                 <?php if($logged_info) { ?>
                     <div class="col-4">
-                        <div class="avatar square" style="background-image:url('<?=$tpath?>/assets/images/no_avatar.png');"></div>
+                        <div class="avatar square" style="background-image:url('/layout/none/assets/images/no_avatar.png');"></div>
                     </div>
                     <div class="col-8">
                         <h5 class="weight_normal mb-1 mt-2"><?=$logged_info->user_name?> 님</h5>

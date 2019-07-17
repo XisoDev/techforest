@@ -98,7 +98,7 @@
                     <div class="row">
                         <div class="col-4 mr-0 pr-0">
                             <div class="content_padding">
-                                <div class="mx-auto avatar square bg-white" style="background-image:url('<?=$tpath?>/assets/images/no_avatar.png');">
+                                <div class="mx-auto avatar square bg-white" style="background-image:url('/layout/none/assets/images/no_avatar.png');">
                                 </div>
                             </div>
                         </div>
@@ -156,7 +156,7 @@
         <div class="banners_slick mt-5">
             <?php for($i=1; $i<=4; $i++){ ?>
                 <div class="banner bg-primary">
-                    <img src="<?=$tpath?>/assets/images/no_banner.png" />
+                    <img src="/layout/none/assets/images/no_banner.png" />
                 </div>
             <?php } ?>
         </div>

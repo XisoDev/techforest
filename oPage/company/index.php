@@ -109,7 +109,7 @@
             <div class="flex-card-slick">
                 <?php for($i=1; $i<=4; $i++){ ?>
                     <div class="tech_card bg-white overflow-hidden">
-                        <div class="avatar square" style="margin: 10px 25px; background-image:url('<?=$tpath?>/assets/images/no_avatar.png');">
+                        <div class="avatar square" style="margin: 10px 25px; background-image:url('/layout/none/assets/images/no_avatar.png');">
                         </div>
                         <h6 class="weight_normal mb-3">공*영 (56세)</h6>
                         <p class="text-left xxs_content"><span class="bg-red icon_wrap"><i class="xi-wrench"></i></span> co2용접 | 배관</p>
@@ -129,7 +129,7 @@
         <div class="banners_slick mt-5">
             <?php for($i=1; $i<=4; $i++){ ?>
                 <div class="banner bg-primary">
-                    <img src="<?=$tpath?>/assets/images/no_banner.png" />
+                    <img src="/layout/none/assets/images/no_banner.png" />
                 </div>
             <?php } ?>
         </div>
