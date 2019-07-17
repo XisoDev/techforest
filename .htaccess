@@ -1,0 +1,14 @@
+RewriteEngine On
+RewriteBase /
+
+# mid link
+RewriteRule ^([a-zA-Z0-9_]+)/?$ index.php?mid=$1
+
+# mid + document link
+RewriteRule ^([a-zA-Z0-9_]+)/([0-9]+)/?$ index.php?mid=$1&document_srl=$2
+
+# vid + mid link
+RewriteRule ^([a-zA-Z0-9_]+)/([a-zA-Z0-9_]+)/?$ index.php?mid=$1&act=$2
+
+# vid + mid + document link
+RewriteRule ^([a-zA-Z0-9_]+)/([a-zA-Z0-9_]+)/([0-9]+)/?$ index.php?mid=$1&act=$2&document_srl=$3
