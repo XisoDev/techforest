@@ -8,7 +8,8 @@
         <div class="col-3"></div>
     </div>
     </div>
-
+    
+    <!-- 모듈명.액션명(함수명) -->
     <form action="/proc.php?act=member.procMemberLogin" method="post">
     <div class="row">
         <div class="col-12">

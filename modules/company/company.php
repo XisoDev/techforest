@@ -43,9 +43,9 @@ class companyView{
         $oDB->where("m_address", NULL, 'IS NOT');
         $oDB->where("m_name", NULL, 'IS NOT');
         $oDB->where("mc.m_idx", NULL, 'IS NOT');
-        $oDB->where("m_address != ''");
-        $oDB->where("m_birthday != ''");
-        $oDB->where("duty_name != ''");
+        $oDB->where("m_address",'','!=');
+        $oDB->where("m_birthday",'','!=');
+        $oDB->where("duty_name",'','!=');
         $oDB->where("substr(m_birthday,1,4) != 0000");
         $oDB->where("substr(m_phone,1,3) != 000");
         $oDB->where("substr(m_phone,5,4) != 0000");
@@ -57,7 +57,33 @@ class companyView{
       }
 
       function new_member2(){
+        $columns = "distinct m.m_idx, group_concat(distinct(mc.duty_name)) as duty_name,";
+        $columns .= "concat(concat(substr(m.m_name,1,1),'*'),substr(m.m_name,3,10)) as m_name,";
+        $columns .= "YEAR(CURRENT_TIMESTAMP) - YEAR(m_birthday) - (RIGHT(CURRENT_TIMESTAMP, 5) < RIGHT(m_birthday, 5)) as m_birthday,";
+        $columns .= "m_phone, m_address, local_name, city_name, district_name, m_city_idx, m_district_idx";
 
-      }
+        $oDB->where("(m.m_idx = ? or m.m_idx = ? or m.m_idx = ? or m.m_idx = ?)");
+        $oDB->where("duty_name",'','!=');
+        $oDB->orderBy("m.m_idx","DESC");
+        $oDB->join("TF_member_career_tb mc", "m.m_idx = mc.m_idx", "LEFT");
+        $oDB->join("TF_local_tb l", "m.m_local_idx = l.local_idx", "LEFT");
+        $oDB->join("TF_city_tb c", "m.m_city_idx = c.city_idx", "LEFT");
+        $oDB->join("TF_district_tb d", "m.m_district_idx = d.district_idx", "LEFT");
+        $row = $oDB->get("TF_member_tb m",null,$columns);
+
+  $sql = "SELECT distinct m.m_idx, group_concat(distinct(mc.duty_name)) as duty_name,
+          concat(concat(substr(m.m_name,1,1),'*'),substr(m.m_name,3,10)) as m_name,
+          YEAR(CURRENT_TIMESTAMP) - YEAR(m_birthday) - (RIGHT(CURRENT_TIMESTAMP, 5) < RIGHT(m_birthday, 5)) as m_birthday,
+          m_phone, m_address, local_name, city_name, district_name, m_city_idx, m_district_idx
+          FROM TF_member_tb m
+          LEFT JOIN TF_member_career_tb mc ON m.m_idx = mc.m_idx
+          LEFT JOIN TF_local_tb l ON m.m_local_idx = l.local_idx
+          LEFT JOIN TF_city_tb c ON m.m_city_idx = c.city_idx
+          LEFT JOIN TF_district_tb d ON m.m_district_idx = d.district_idx
+          WHERE (m.m_idx = $num1 or m.m_idx = $num2 or m.m_idx = $num3 or m.m_idx = $num4) and
+                duty_name != ''
+          GROUP BY m.m_idx";
+
+          return $row;
 
 }
