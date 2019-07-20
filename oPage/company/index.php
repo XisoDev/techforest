@@ -6,10 +6,10 @@
         <div class="col">
         <?php if(!$logged_info) { ?>
         <h4 class="weight_lighter">안녕하세요</h4>
-        <h4 class="weight_bold mb-3">기술자숲 채용담당자님:)</h4>
+        <h4 class="weight_bold mb-3">채용담당자님:)</h4>
         <?php } ?>
         <?php if($logged_info) { ?>
-        <h5 class="weight_lighter"><?=$logged_info->company?> 채용담당자님:)</h5>
+        <h5 class="weight_lighter"><?=$logged_info['c_name']?> 채용담당자님:)</h5>
         <h5 class="weight_lighter mb-3">어떤 기술자를 찾고 계신가요?</h5>
         <?php } ?>
         <ul class="nav">
@@ -102,7 +102,7 @@
         <?php } ?>
         <?php if($logged_info) { ?>
             <div class="col-12">
-                <h6 class="weight_lighter mt-4"><span class="red"><?=$logged_info->company?></span>에 딱 맞는 공고를 찾아왔어요!</h6>
+                <h6 class="weight_lighter mt-4"><span class="red"><?=$logged_info['c_name']?></span>에 딱 맞는 공고를 찾아왔어요!</h6>
             </div>
         <?php } ?>
         <div class="col-12 mt-2">
@@ -129,30 +129,22 @@
 <!--    배너슬라이드 섹션-->
 <br>
 <div id="demo" class="carousel slide standard" data-ride="carousel">
-  <!-- Indicators -->
-  <ul class="carousel-indicators">
-    <li data-target="#demo" data-slide-to="0" class="active"></li>
-    <li data-target="#demo" data-slide-to="1"></li>
-    <li data-target="#demo" data-slide-to="2"></li>
-    <li data-target="#demo" data-slide-to="3"></li>
-    <li data-target="#demo" data-slide-to="4"></li>
-  </ul>
 
   <!-- The slideshow -->
   <div class="carousel-inner slick_wrap affix_middle">
-    <div class="carousel-item active">
+    <div class="carousel-item bg-primary active">
       <img src="/layout/none/assets/images/no_banner.png" alt="banner1" width="100%">
     </div>
-    <div class="carousel-item">
+    <div class="carousel-item bg-primary">
       <img src="/layout/none/assets/images/no_banner.png" alt="banner2" width="100%">
     </div>
-    <div class="carousel-item">
+    <div class="carousel-item bg-primary">
       <img src="/layout/none/assets/images/no_banner.png" alt="banner3" width="100%">
     </div>
-    <div class="carousel-item">
+    <div class="carousel-item bg-primary">
       <img src="/layout/none/assets/images/no_banner.png" alt="banner4" width="100%">
     </div>
-    <div class="carousel-item">
+    <div class="carousel-item bg-primary">
       <img src="/layout/none/assets/images/no_banner.png" alt="banner5" width="100%">
     </div>
   </div>
