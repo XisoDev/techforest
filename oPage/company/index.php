@@ -107,13 +107,16 @@
         <?php } ?>
         <div class="col-12 mt-2">
             <div class="flex-card-slick">
-                <?php for($i=1; $i<=4; $i++){ ?>
+                <?php foreach($output->get("new_member2") as $val){ ?>
+                  <?php $desired_work_place = $val['local_name'] . " ";
+                        if($val['m_city_idx'] != -1){ $desired_work_place .= $val['city_name']; }
+                        if($val['m_district_idx'] != -1){ $desired_work_place .= $val['district_name']; }?>
                     <div class="tech_card bg-white overflow-hidden">
                         <div class="avatar square" style="margin: 10px 25px; background-image:url('/layout/none/assets/images/no_avatar.png');">
                         </div>
-                        <h6 class="weight_normal mb-3">공*영 (56세)</h6>
-                        <p class="text-left xxs_content"><span class="bg-red icon_wrap"><i class="xi-wrench"></i></span> co2용접 | 배관</p>
-                        <p class="text-left xxs_content"><span class="bg-red icon_wrap"><i class="xi-map-marker"></i></span> 경남 | 부산</p>
+                        <h6 class="weight_normal mb-3"><?=$val['m_name']?> (<?=$val['m_birthday']?>세)</h6>
+                        <p class="text-left xxs_content"><span class="bg-red icon_wrap"><i class="xi-wrench"></i></span>주요경력 : <?=$val['duty_name']?></p>
+                        <p class="text-left xxs_content"><span class="bg-red icon_wrap"><i class="xi-map-marker"></i></span>희망지역 : <?=$desired_work_place?></p>
                         <a href="#" class="btn btn-block btn-warning mt-3 rounded-0">이력서 보기</a>
                     </div>
                 <?php } ?>
@@ -124,16 +127,43 @@
 
 
 <!--    배너슬라이드 섹션-->
-<div class="standard">
-    <div class="slick_wrap affix_middle">
-        <div class="banners_slick mt-5">
-            <?php for($i=1; $i<=4; $i++){ ?>
-                <div class="banner bg-primary">
-                    <img src="/layout/none/assets/images/no_banner.png" />
-                </div>
-            <?php } ?>
-        </div>
+<br>
+<div id="demo" class="carousel slide standard" data-ride="carousel">
+  <!-- Indicators -->
+  <ul class="carousel-indicators">
+    <li data-target="#demo" data-slide-to="0" class="active"></li>
+    <li data-target="#demo" data-slide-to="1"></li>
+    <li data-target="#demo" data-slide-to="2"></li>
+    <li data-target="#demo" data-slide-to="3"></li>
+    <li data-target="#demo" data-slide-to="4"></li>
+  </ul>
+
+  <!-- The slideshow -->
+  <div class="carousel-inner slick_wrap affix_middle">
+    <div class="carousel-item active">
+      <img src="/layout/none/assets/images/no_banner.png" alt="banner1" width="100%">
     </div>
+    <div class="carousel-item">
+      <img src="/layout/none/assets/images/no_banner.png" alt="banner2" width="100%">
+    </div>
+    <div class="carousel-item">
+      <img src="/layout/none/assets/images/no_banner.png" alt="banner3" width="100%">
+    </div>
+    <div class="carousel-item">
+      <img src="/layout/none/assets/images/no_banner.png" alt="banner4" width="100%">
+    </div>
+    <div class="carousel-item">
+      <img src="/layout/none/assets/images/no_banner.png" alt="banner5" width="100%">
+    </div>
+  </div>
+
+  <!-- Left and right controls -->
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
 </div>
 
 
