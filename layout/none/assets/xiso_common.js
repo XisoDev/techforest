@@ -1,10 +1,42 @@
-
+/**
+ * @brief php의 number_format 옮김
+ * by xiso
+ */
 Number.prototype.number_format = function(round_decimal) {
     return this.toFixed(round_decimal).replace(/(\d)(?=(\d{3})+$)/g, "$1,");
 };
 
 /**
- * @brief exec_json (exec_xml와 같은 용도)
+ * @brief 카운팅애니메이션 정의
+ * by xiso
+ */
+jQuery(document).ready(function($){
+    $(".auto_counter").each(function(){
+        var counter = parseInt($(this).attr('data-counter'));
+        var counter_format = counter.number_format();
+        var running_time = parseInt($(this).attr('data-duration'));
+        var obj_id = $(this).attr("id");
+        $({counter: 0}).animate({counter: counter}, {
+            duration: running_time,
+            easing:'easeOutSine',
+            step: function() {
+                console.log(Math.ceil(this.counter).number_format());
+                $("#" + obj_id).html(Math.ceil(this.counter).number_format());
+            },
+            complete: function() {
+                setTimeout(function(){
+                    $("#" + obj_id).html(counter_format);
+                    console.log('complete');
+                },800);
+            }
+        });
+    });
+});
+
+
+/**
+ * @brief exec_json (ajax용)
+ * by xiso
  **/
 $.exec_json = window.exec_json = function(action, data, callback_sucess, callback_error){
     if(typeof(data) == 'undefined' || data == false) data = {};
