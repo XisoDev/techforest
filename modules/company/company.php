@@ -70,7 +70,7 @@ class companyView{
         $m_idxs = array();
         foreach($rand_new_member as $val) $m_idxs[] = $val['m_idx'];
 
-        $oDB->where('m.m_idx',$m_idxs,"IN");
+        $oDB->where("m.m_idx",$m_idxs,"IN");
         $oDB->where("duty_name","",'!=');
         $oDB->groupBy("m.m_idx");
         $oDB->join("TF_member_career_tb AS mc", "m.m_idx = mc.m_idx", "LEFT");

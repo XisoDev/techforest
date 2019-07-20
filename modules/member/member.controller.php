@@ -6,8 +6,9 @@ class memberController{
 
         global $oDB;
 
-
-
+        $oDB->where("m_id",);
+        $row = $oDB->getOne("TF_member_tb");
+        //
         // $member_info = new stdClass();
         // $member_info->member_srl = 1;
         // $member_info->user_id = "xiso";
@@ -22,19 +23,30 @@ class memberController{
         // $member_info->last_login = onlynumber("2019-07-14 10:35:12");
         // $member_info->sex = "M";
 
-        return $member_info;
+        return $row;
     }
 
     function procMemberLogin($args){
-        if($args->user_id != 'xiso') return new Object(-1, "존재하지 않는 아이디 입니다.");
-        if($args->password != 'test') return new Object(-1, "비밀번호가 잘못 되었습니다.");
+        global $oDB;
+
+        $oDB->where("m_id",$args->user_id);
+        $row = $oDB->getOne("TF_member_tb");
+
+        if(!$row['m_id']) return new Object(-1, "존재하지 않는 아이디 입니다.");
+        if($args->password != $row['m_pw']) return new Object(-1, "비밀번호가 잘못 되었습니다.");
 
         //비밀번호 일치하면 세션생성 후 로그인 기록 변경
         $_SESSION['LOGGED_INFO'] = 1;
 
         $output = new Object(0, "로그인 되었습니다.");
         $output->add('member_info',$this->getMemberInfoByMemberSrl($_SESSION['LOGGED_INFO']));
-        if($args->cur) $output->success_return_url = $args->cur;
+
+        if($row->is_commerce == 'Y'){
+          $output->success_return_url = 'company';
+        }else{
+          $output->success_return_url = 'technician';
+        }
+        //if($args->cur) $output->success_return_url = $args->cur;
         return $output;
     }
 

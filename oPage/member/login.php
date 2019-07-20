@@ -8,7 +8,7 @@
         <div class="col-3"></div>
     </div>
     </div>
-    
+
     <!-- 모듈명.액션명(함수명) -->
     <form action="/proc.php?act=member.procMemberLogin" method="post">
     <div class="row">
@@ -23,7 +23,7 @@
                     <input type="text"
                            onfocus="jQuery('.bigger_logo').addClass('focus');"
                            onblur="jQuery('.bigger_logo').removeClass('focus');"
-                           class="form-control form-round" name="user_id" placeholder="이메일 주소 또는 아이디" required>
+                           class="form-control form-round" name="user_id" id="user_id" placeholder="아이디" required>
                 </div>
             </div>
         </div>
@@ -44,7 +44,7 @@
         </div>
         <div class="col-5 text-left mt-0">
             <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="customCheck1">
+                <input type="checkbox" class="custom-control-input" id="customCheck1" checked>
                 <label class="custom-control-label xs_content" for="customCheck1">아이디 저장</label>
             </div>
         </div>
