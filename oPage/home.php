@@ -1,10 +1,42 @@
+<style>
+    html,body{height:100%;}
+    .welcome_seciton{
+        position:relative;
+        height:50%;
+        background-size: 110%;
+        background-position: -100% 100%;
+        background-repeat: no-repeat;
+        padding: 40px 15px 20px;
+    }
+</style>
+<div class="container-fluid welcome_seciton bg-primary" style="background-image:url('/oPage/images/home_welcome.png');">
+    <img src="/oPage/images/gear.png" class="rotating" style="z-index:0; position:absolute; width:30%; right:-5%; top:-5%;"  />
+    <img src="/oPage/images/gear.png" class="rotating_slow" style="z-index:0; position:absolute; left:-35%; width:60%; top:3%;" />
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h4 class="weight_lighter"><span class="weight_bold">기술자</span>를</h4>
+                <h4 class="weight_lighter mb-3">찾으시나요?</h4>
 
-<h1>제작중</h1>
+                <a href="<?=getUrl('company')?>" class="btn border-white btn-round text-white xs_content">기업회원</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid welcome_seciton bg-warning" style="background-image:url('/oPage/images/technician_welcome.png');">
+    <img src="/oPage/images/gear.png" class="rotating" style="z-index:0; position:absolute; width:30%; right:-5%; top:-5%;"  />
+    <img src="/oPage/images/gear.png" class="rotating_slow" style="z-index:0; position:absolute; left:-35%; width:60%; top:3%;" />
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h4 class="weight_lighter"><span class="weight_bold">일자리</span>를</h4>
+                <h4 class="weight_lighter mb-3">찾으시나요?</h4>
 
-<a href="<?=getUrl('company')?>" class="btn btn-block btn-primary">기업용</a>
-<a href="<?=getUrl('technician')?>" class="btn btn-block btn-warning">기술자용</a>
-
-
+                <a href="<?=getUrl('technician')?>" class="btn border-white btn-round text-white xs_content">개인회원</a>
+            </div>
+        </div>
+    </div>
+</div>
 <?php
 
 /* ajax 예제
