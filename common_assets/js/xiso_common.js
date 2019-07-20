@@ -22,7 +22,7 @@ $.exec_json = window.exec_json = function(action, data, callback_sucess, callbac
             $("#preloader").css('opacity', '');
         }, 1000));
 
-        $.extend(data,{module:action[0],act:action[1],xiso_token:_xiso_token});
+        $.extend(data,{module:action[0],act:action[1]});
         try {
             $.ajax({
                 type: "POST",
