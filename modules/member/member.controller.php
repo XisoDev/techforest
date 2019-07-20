@@ -6,7 +6,7 @@ class memberController{
 
         global $oDB;
 
-        $oDB->where("m_id",);
+        $oDB->where("m_id");
         $row = $oDB->getOne("TF_member_tb");
         //
         // $member_info = new stdClass();
