@@ -65,10 +65,14 @@ $.exec_json = window.exec_json = function(action, data, callback_sucess, callbac
                 data: $.param(data),
                 // data: data,
                 success: function(ret_obj) {
-                    $("#preloader").hide().trigger('cancel_confirm');
                     // console.log(ret_obj);
                     if(ret_obj.error != '0') {
-                        alert(ret_obj.message);
+                        toastr.options = {
+                            "progressBar" : true,
+                            "timeOut" : 5000,
+                            "positionClass" : "toast-bottom-right"
+                        }
+                        toastr.error(ret_obj.message);
                         if($.isFunction(callback_error)) callback_error(ret_obj);
 
                         return false;

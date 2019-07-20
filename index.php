@@ -16,6 +16,11 @@ if(isset($_GET['mid'])){
     $module = "page";
 }
 
+//모듈 유형에따라 현재 어느쪽 화면을 보고있는지 세션에 물리기
+if($module == "technician" || $module == "company"){
+    $_SESSION["USER_TYPE"] = $module;
+}
+
 if(isset($_GET['act'])){
     $act = $_GET['act'];
 }else{

@@ -51,6 +51,38 @@ class memberView{
         return $output;
     }
 
+    function signUp($args){
+        global $set_template_file;
+
+        if(!isset($_SESSION["USER_TYPE"])){
+            header("location:" . getUrl('page','selectType'));
+            return;
+        }
+
+        if(isset($args->user_type)) $_SESSION["USER_TYPE"] = $args->user_type;
+        if($_SESSION["USER_TYPE"] == "company"){
+            $set_template_file = "member/signup.company.php";
+        }else{
+            if(!$_SESSION['nice_auth']["CI"]){
+                header("location:" . getUrl('member','niceAuth'));
+                return true;
+            };
+
+
+            $set_template_file = "member/signup.technician.php";
+        }
+    }
+
+    function niceAuth($args){
+        if($_SESSION['nice_auth']["CI"]){
+            header("location:" . getUrl('member','signUp'));
+            return true;
+        };
+
+        global $set_template_file;
+        $set_template_file = "member/nice_auth.php";
+    }
+
     function findPassword($args){
         $output = new Object();
         global $set_template_file;

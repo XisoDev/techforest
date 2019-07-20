@@ -50,13 +50,57 @@ class memberController{
         return $output;
     }
 
+    function procMemberNiceAuth($args){
+
+        $args->receive_sex = 1;
+
+        $_SESSION['nice_auth'] = array();
+        $_SESSION['nice_auth']["CI"] = "asdklzxASDFMCMcvjnrek433#@CBKMDFalkl";
+        $_SESSION['nice_auth']["DI"] = "AJKDJEKMCLXE";
+        $_SESSION['nice_auth']["user_name"] = "이우진";
+        $_SESSION['nice_auth']["birthday"] = "19900325";
+        $_SESSION['nice_auth']["gender"] = ($args->receive_sex == 1) ? "M" : "F";
+
+        //핸드폰일때만 들어오는것
+        $_SESSION['nice_auth']["agent"] = "SKT";
+        $_SESSION['nice_auth']["mobile"] = "01057595999";
+
+        return new Object(0,sprintf("%s님의 본인인증에 성공하였습니다.",$_SESSION['nice_auth']["user_name"]));
+    }
+
     function procLogout(){
         unset($_SESSION['LOGGED_INFO']);
         return new Object();
     }
 
-    function join(){
+    function procMemberSignupTechnician($args){
+//
+//        $output = new Object(-1,"실패함");
+//        $output->add('abcd',"이런게있을때만");
+//        return $output;
+//
+//
+        //
 
+        global $oDB;
+        $row = 0;
+
+        //쿼리
+        if(count($row)) return new Object(-1, "이미 존재하는 계정입니다.");
+
+        //비밀번호 일치하는지 확인
+
+
+        //insert
+
+        if($row){
+            //로그인
+            $_SESSION['LOGGED_INFO'] = $row['m_idx'];
+
+            return new Object(0,"가입에 성공하였습니다.");
+        }else{
+            return new Object(0,"실패함");
+        }
     }
 
 }

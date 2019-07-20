@@ -1,16 +1,19 @@
+<form action="/proc.php?act=member.procMemberSignupCompany" method="post">
+    <input type="hidden" name="success_return_url" value="<?=getUrl('company')?>" />
 <div class="container">
     <div class="row">
         <div class="col-12 mt-3 mx-0 px-0">
             <h6>회원종류 선택</h6>
         </div>
+
         <div class="col-6 mx-0 px-0 pr-1">
-            <button type="button" class="btn btn-block btn-round btn-light">개인 회원가입</button>
+            <a href="<?=getUrl('member','signUp',false,array("user_type" => "technician"))?>" class="btn btn-block btn-round btn-light">개인 회원가입</a>
         </div>
         <div class="col-6 mx-0 px-0 pl-1">
-            <button type="button" class="btn btn-block btn-round btn-primary">기업 회원가입</button>
+            <a href="<?=getUrl('member','signUp',false,array("user_type" => "company"))?>" class="btn btn-block btn-round btn-primary">기업 회원가입</a>
         </div>
 
-        <div class="col-12 mt-3 mx-0 px-0">
+        <div class="col-12 mt-3 mx-0 px-0 mt-4">
             <h6>정보입력</h6>
 
             <div class="input-group mb-2">
@@ -58,9 +61,31 @@
                 </div>
                 <input type="text" class="form-control" placeholder="0000">
             </div>
+            <p class="xxs_content px-0 mx-0"><span class="red"><i class="xi-error"></i> 휴대전화 권장</span> : 매칭결과 안내문자를 받을 수 있습니다.</p>
         </div>
 
-        <div class="col-12 text-left mt-0 mx-0 px-0">
+        <div class="col-12 mx-0 px-0 pl-1 mb-2">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="이메일 주소 입력">
+
+                <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            @
+                        </span>
+                </div>
+                <select class="form-control" onchange="if(this.value == 99){jQuery(this).hide(); jQuery(this).next().show();}">
+                    <option value="" selected="selected">메일 호스트 선택</option>
+                    <option value="1">naver.com</option>
+                    <option value="2">gmail.com</option>
+                    <option value="99">직접입력</option>
+                </select>
+                <input type="text" class="form-control" placeholder="직접입력" style="display:none;">
+            </div>
+
+        </div>
+
+        <div class="col-12 text-left mt-0 mx-0 px-0 mt-4">
+            <h6>약관동의</h6>
             <div class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" id="customCheck2">
                 <label class="custom-control-label xs_content" for="customCheck2">기술자숲 이용약관에 동의합니다.</label>
@@ -78,3 +103,4 @@
 
     </div>
 </div>
+</form>

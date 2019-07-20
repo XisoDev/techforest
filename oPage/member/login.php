@@ -42,15 +42,15 @@
                 </div>
             </div>
         </div>
-        <div class="col-5 text-left mt-0">
+        <div class="col-4 text-left mt-0 pr-0 mr-0">
             <div class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" id="customCheck1" checked>
                 <label class="custom-control-label xs_content" for="customCheck1">아이디 저장</label>
             </div>
         </div>
-        <div class="col-7 text-right mt-0">
+        <div class="col-8 text-right mt-0 ml-0 pl-0">
             <a href="#" class="xs_content">아이디 찾기</a>
-            <span class="xxs_content">|</span>
+            <span class="xxs_content px-0">|</span>
             <a href="#" class="xs_content">비밀번호 찾기</a>
         </div>
 
@@ -58,8 +58,8 @@
             <button type="submit" class="btn btn-primary btn-block btn-round">로그인</button>
         </div>
         <div class="col-12 mt-1">
-            <button type="button" class="btn btn-info btn-block btn-round" data-toggle="modal" data-target="#signupModal">회원가입</button>
-
+            <a href="<?=getUrl('member','signUp')?>" class="btn btn-info btn-block btn-round">회원가입</a>
+<!--            <button type="button" class="btn btn-info btn-block btn-round" data-toggle="modal" data-target="#signupModal">회원가입</button>-->
         </div>
     </div>
     </form>
@@ -77,7 +77,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <?php include _XISO_PATH_ . "/oPage/member/signup.php"; ?>
+                <?php include _XISO_PATH_ . "/oPage/member/signup.technician.form.php"; ?>
             </div>
         </div>
     </div>

@@ -46,7 +46,7 @@
         params["is_view"] = "Y";
 
         exec_json("company.index",params,function(ret_obj){
-            console.log(ret_obj);
+            //성공했을 때 처리할 명령
         });
 
     });
