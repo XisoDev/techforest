@@ -26,8 +26,8 @@ $add_html_footer[] = '<script src="/layout/none/vendor/toastr/toastr.min.js"></s
 $add_html_footer[] = '<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>';
 $add_html_footer[] = '<script src="/layout/none/vendor/bootstrap/js/bootstrap.min.js"></script>';
 $add_html_footer[] = '<script src="/layout/none/vendor/slick/slick.min.js"></script>';
+$add_html_footer[] = '<script src="/common_assets/js/xiso_common.js"></script>';
 $add_html_footer[] = '<script src="/layout/company/assets/company_global.js?nocache='.time().'"></script>';
-
 //하단 스크립트 로드.
 if($api_key["google_map"])
     $add_html_footer[] = '<script src="//maps.googleapis.com/maps/api/js?v=3&key='.$api_key["google_map"].'"></script>';
