@@ -33,7 +33,7 @@
         </div>
         <aside class="nav flex-column">
             <a class="nav-link active" href="<?=getUrl('company','job_register')?>"><i class="xi-pen-o"></i> 공고등록</a>
-            <a class="nav-link" href="<?=getUrl('company','job_list')?>"><i class="xi-documents-o"></i> 공고 지원자관리</a>
+            <a class="nav-link" href="<?=getUrl('company','job')?>"><i class="xi-documents-o"></i> 공고 지원자관리</a>
             <a class="nav-link" href="#"><i class="xi-documents-o"></i> 공고 지원자관리</a>
                 <ul class="nav submenu">
                     <li class="nav-item">

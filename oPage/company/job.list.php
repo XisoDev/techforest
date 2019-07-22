@@ -35,7 +35,7 @@
                     <a href="#" class="btn btn-light btn-block rounded-0">수정</a>
                 </div>
                 <div class="col-6 mx-0 px-0">
-                    <a href="<?=getUrl('company','job_appList',100);?>" class="btn btn-light btn-block rounded-0 red">지원자 (4)</a>
+                    <a href="<?=getUrl('company','job',100);?>" class="btn btn-light btn-block rounded-0 red">지원자 (4)</a>
                 </div>
             </div>
         </div>
@@ -63,7 +63,7 @@
             </div>
             <div class="row mt-1 mx-0 px-0">
                 <div class="col-12 mx-0 px-0">
-                    <a href="<?=getUrl('company','job_appList',12345);?>" class="btn btn-secondary btn-block rounded-0">지원자 보기(1)</a>
+                    <a href="<?=getUrl('company','job',12345);?>" class="btn btn-secondary btn-block rounded-0">지원자 보기(1)</a>
                 </div>
             </div>
         </div>

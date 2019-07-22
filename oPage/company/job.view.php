@@ -30,7 +30,7 @@
                 </div>
             </div>
             <p class="xxs_content text-right"><i class="xi-clock-o"></i> 지원일자 2019.05.30 10:40:18</p>
-            <a href="#" class="btn btn-block btn-warning mt-3 rounded-0">지원자 정보 상세보기</a>
+            <a href="<?=getUrl('company','application',100)?>" class="btn btn-block btn-warning mt-3 rounded-0">지원자 정보 상세보기</a>
         </div>
         <?php } ?>
     </div>
@@ -47,7 +47,7 @@
             <h6 class="weight_normal mb-3">나상호 (56세)</h6>
             <p class="text-left xxs_content"><span class="bg-red icon_wrap"><i class="xi-wrench"></i></span> 주요경력 : 기계 | 연구직</p>
             <p class="text-left xxs_content"><span class="bg-red icon_wrap"><i class="xi-map-marker"></i></span> 희망지역 : 부산</p>
-            <a href="#" class="btn btn-block btn-warning mt-3 rounded-0">이력서 보기</a>
+            <a href="<?=getUrl('company','application',100)?>" class="btn btn-block btn-warning mt-3 rounded-0">이력서 보기</a>
         </div>
         <?php } ?>
     </div>

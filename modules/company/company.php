@@ -24,17 +24,29 @@ class companyView{
         return $output;
     }
 
-    function job_list($args){
-        global $set_template_file;
-        $set_template_file = "company/job.list.php";
-
+    //공고 및 지원자관리의 목록과 상세보기를 컨트롤
+    function job($args){
         global $site_info;
         $site_info->layout = "company";
+
 
         global $add_body_class;
         $add_body_class[] = "shrink";
 
+        global $set_template_file;
+
+        //$args->document_srl을 db에서 조회해서 존재하는 글이면 view를 뿌리고 아니면 list를 뿌려주면 됩니다.
+
         $output = new Object();
+        if($args->document_srl > 0){
+            $set_template_file = "company/job.view.php";
+            //여기 array 에는 해당 document_srl 로 조회한 job 정보를 넣으면됨.
+            $output->add('oJob',array());
+        }else{
+            //여기 array 에는 해당 job list를 담으면 됨. (php파일에서 foreach로 쓸수있음).
+            $output->add('job_list',array());
+            $set_template_file = "company/job.list.php";
+        }
 
 
         return $output;
@@ -58,7 +70,7 @@ class companyView{
 
     function job_appRegister($args){
         global $set_template_file;
-        $set_template_file = "company/job.app.reg.php";
+        $set_template_file = "company/job.reg.app.php";
 
         global $site_info;
         $site_info->layout = "company";
@@ -74,31 +86,11 @@ class companyView{
 
     function job_appRegisterComplete($args){
         global $set_template_file;
-        $set_template_file = "company/job.app.reg.complete.php";
+        $set_template_file = "company/job.reg.complete.php";
 
         $output = new Object();
 
         return $output;
-    }
-
-    function job_appList($args){
-        global $set_template_file;
-        $set_template_file = "company/job.app.list.php";
-
-        global $site_info;
-        $site_info->layout = "company";
-
-        global $add_body_class;
-        $add_body_class[] = "shrink";
-
-        //공고번호
-        //$args->document_srl
-        //이걸로 조회해서 $output->add() 하시면됩니다.
-        $output = new Object();
-
-
-        return $output;
-
     }
 
 
