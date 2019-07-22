@@ -118,6 +118,7 @@ loadLayout($site_info->layout);
 </head>
 <body class="<?=join(" ",$add_body_class);?>">
 <?php
+    date_default_timezone_set('Asia/Seoul');
     include $layout_info->path . "header.php";
 
     if($output->error < 0){

@@ -9,7 +9,7 @@
         <h4 class="weight_lighter mb-3">맞춤 일자리를 확인하세요!</h4>
         <?php } ?>
         <?php if($logged_info) { ?>
-        <h5 class="weight_bold"><?=$logged_info->user_name?>님:)</h5>
+        <h5 class="weight_bold"><?=$logged_info['m_name']?>님:)</h5>
         <h5 class="weight_lighter mb-3">어떤 일자리를 찾고 계신가요?</h5>
         <?php } ?>
         <ul class="nav">
@@ -87,7 +87,7 @@
         <?php }else{ ?>
             <div class="col-12">
                 <h6 class="weight_lighter mt-4 mb-1">
-                    <span class="red"><?=$logged_info->user_name?></span>님의 이력서 완성도는
+                    <span class="red"><?=$logged_info['m_name']?></span>님의 이력서 완성도는
                     <span class="red">'낮음'</span>입니다.
                 </h6>
                 <h6 class="weight_lighter mt-0 mb-2">
@@ -104,7 +104,7 @@
                         </div>
                         <div class="col-8 ml-0 pl-0">
                             <div class="text-left">
-                                <h5 class="weight_bold mb-2 pt-3"><?=$logged_info->user_name?>
+                                <h5 class="weight_bold mb-2 pt-3"><?=$logged_info['m_name']?>
                                     <span class="xs_content weight_lighter"><?=zdate($logged_info->birthday,"Y.m.d")?> (56세)</span>
                                 </h5>
                                 <p class="xxs_content weight_lighter px-0"><span class="bg-red icon_wrap"><i class="xi-dashboard"></i></span> <b>희망직무</b> : 용접</p>
@@ -119,7 +119,7 @@
             </div>
 
             <div class="col-12 mt-2">
-                <h5 class="weight_bold mt-3"><span class="red"><?=$logged_info->user_name?></span>님 께서,</h5>
+                <h5 class="weight_bold mt-3"><span class="red"><?=$logged_info['m_name']?></span>님 께서,</h5>
                 <h6 class="weight_lighter mt-1 mb-2">지원하실 확률이 높은 공고를 찾아왔어요!</h6>
 
                 <div class="flex-card-slick">
@@ -150,15 +150,66 @@
     </div>
 </div>
 
-<!--    배너슬라이드 섹션 // 기술자쪽은 affix 하지않음-->
-<div class="standard">
-    <div class="slick_wrap">
-        <div class="banners_slick mt-5">
-            <?php for($i=1; $i<=4; $i++){ ?>
-                <div class="banner bg-primary">
-                    <img src="/layout/none/assets/images/no_banner.png" />
+<!--    배너슬라이드 섹션-->
+<br>
+<div id="demo" class="carousel slide standard" data-ride="carousel">
+
+  <!-- The slideshow -->
+  <div class="carousel-inner slick_wrap affix_middle">
+    <div class="carousel-item bg-primary active">
+      <img src="/layout/none/assets/images/no_banner.png" alt="banner1" width="100%">
+    </div>
+    <div class="carousel-item bg-primary">
+      <img src="/layout/none/assets/images/no_banner.png" alt="banner2" width="100%">
+    </div>
+    <div class="carousel-item bg-primary">
+      <img src="/layout/none/assets/images/no_banner.png" alt="banner3" width="100%">
+    </div>
+    <div class="carousel-item bg-primary">
+      <img src="/layout/none/assets/images/no_banner.png" alt="banner4" width="100%">
+    </div>
+    <div class="carousel-item bg-primary">
+      <img src="/layout/none/assets/images/no_banner.png" alt="banner5" width="100%">
+    </div>
+  </div>
+
+  <!-- Left and right controls -->
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h5 class="weight_lighter mt-4">
+                실시간 지원현황
+            </h5>
+            <div class="tech_card bg-white text-left">
+                <div class="content_padding weight_lighter">
+                  <?php foreach($output->get("now_application") as $val){
+                      $diff = time() - strtotime($val['reg_date']);
+                        if ( $diff>86400 ) {
+                          $application_time= ceil($diff/86400).'일 전';
+                        } else if ( $diff>3600 ) {
+                          $application_time= ceil($diff/3600).'시간 전';
+                        } else if ( $diff>60 ) {
+                          $application_time= ceil($diff/60).'분 전';
+                        } else {
+                          $application_time= $diff.'초 전';
+                        }
+                    ?>
+                      <p>
+                        <span class="btn btn-round btn-xxs btn-danger"><?=$application_time?></span>
+                        <?=$val['c_name']?>에 지원자가 발생했습니다.
+                      </p>
+                <?}?>
                 </div>
-            <?php } ?>
+            </div>
         </div>
     </div>
 </div>

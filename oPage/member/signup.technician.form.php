@@ -1,3 +1,27 @@
+<script type="text/javascript">
+function id_check(){
+  var m_id = $("#signup_id").val();
+  $.ajax({
+    type :'POST',
+    url : "../../id_check.php",
+    data : {
+      "m_id" : m_id
+    },
+    dataType : 'JSON',
+    success: function (response) {
+      if (response.result == 1) {
+          alert(response.message);
+      } else {
+          alert(response.message);
+      }
+    },
+    error: function (request, status, error) {
+        alert("ERROR Code : " + request.status + "\n" + "ERROR Message : " + request.responseText + "\n" + "ERROR : " + error);
+    }
+  });
+}
+
+</script>
 <form action="/proc.php?act=member.procMemberSignupTechnician" method="post">
     <input type="hidden" name="success_return_url" value="<?=getUrl('technician')?>" />
 <div class="container">
@@ -17,24 +41,25 @@
             <h6>정보입력</h6>
 
             <div class="input-group mb-2">
-                <input type="text" class="form-control" id="signup_id" placeholder="아이디" required>
-                <button type="button" class="btn btn-primary rounded-0">중복확인</button>
+                <input type="text" class="form-control" id="signup_id" name="m_id" value=<?=$_SESSION['signup']['m_id']?> placeholder="아이디" required>
+                <!-- <a href="/proc.php?act=member.id_check" class="btn btn-primary rounded-0">중복확인</a> -->
+                <button class="btn btn-primary rounded-0" onclick="id_check()">중복확인</button>
             </div>
 
-            <input type="password" class="form-control mb-2" placeholder="비밀번호 (6자리 이상)" required>
-            <input type="password" class="form-control mb-2" placeholder="비밀번호 확인" required>
+            <input type="password" class="form-control mb-2" name="m_pw1" id="m_pw1" value=<?=$_SESSION['signup']['m_pw1']?> placeholder="비밀번호(6자리 이상)" required>
+            <input type="password" class="form-control mb-2" name="m_pw2" id="m_pw2" value=<?=$_SESSION['signup']['m_pw2']?> placeholder="비밀번호 확인" required>
         </div>
 
         <div class="col-12 mx-0 px-0 pl-1 mb-2">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="이메일 주소 입력">
+                <input type="text" class="form-control" name="m_email1" value="<?=$_SESSION['signup']['m_email1']?>" placeholder="이메일 주소 입력">
                 <div class="input-group-prepend">
                         <span class="input-group-text">
                             @
                         </span>
                 </div>
-                <select class="form-control" onchange="if(this.value == 99){jQuery(this).hide(); jQuery(this).next().show();}">
-                    <option value="" selected="selected">메일 호스트 선택</option>
+                <select class="form-control" name="m_email2" value="<?=$_SESSION['signup']['m_email2']?>" onchange="if(this.value == 99){jQuery(this).hide(); jQuery(this).next().show();}">
+                    <option value="" selected="selected">이메일 주소 선택</option>
                     <option value="1">naver.com</option>
                     <option value="2">gmail.com</option>
                     <option value="99">직접입력</option>

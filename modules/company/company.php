@@ -17,7 +17,7 @@ class companyView{
         $output = new Object();
         $output->add('application_list',$this->getApplicationCompany());
         $output->add('new_member2',$this->new_member2());
-
+        $output->add('now_application',$this->now_application());
 
         $set_template_file = "company/index.php";
 
@@ -91,6 +91,23 @@ class companyView{
   //         WHERE (m.m_idx = $num1 or m.m_idx = $num2 or m.m_idx = $num3 or m.m_idx = $num4) and
   //               duty_name != ''
   //         GROUP BY m.m_idx";
+
+          return $row;
+        }
+
+        function  now_application(){
+          global $oDB;
+
+          $oDB->orderby("al.reg_date","DESC");
+          $oDB->join("TF_hire_tb h","al.h_idx = h.h_idx", "LEFT");
+          $oDB->join("TF_member_commerce_tb mc","h.c_idx = mc.c_idx", "LEFT");
+          $row = $oDB->get("TF_application_letter al",3,"al.h_idx, al.reg_date, mc.c_name");
+
+          // $sql = "SELECT al.h_idx, al.reg_date, mc.c_name
+          //         FROM TF_application_letter al
+          //         LEFT JOIN TF_hire_tb h ON al.h_idx = h.h_idx
+          //         LEFT JOIN TF_member_commerce_tb mc ON h.c_idx = mc.c_idx
+          //         ORDER BY al.reg_date DESC";
 
           return $row;
         }

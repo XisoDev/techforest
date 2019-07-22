@@ -165,13 +165,26 @@
             <h5 class="weight_lighter mt-4">
                 실시간 지원현황
             </h5>
-
             <div class="tech_card bg-white text-left">
                 <div class="content_padding weight_lighter">
-                <p><span class="btn btn-round btn-xxs btn-danger">07분 전</span> 학남건설에 지원자가 발생했습니다.</p>
-                <p><span class="btn btn-round btn-xxs btn-danger">21분 전</span> 학남건설에 지원자가 발생했습니다.</p>
+                  <?php foreach($output->get("now_application") as $val){
+                      $diff = time() - strtotime($val['reg_date']);
+                        if ( $diff>86400 ) {
+                          $application_time= ceil($diff/86400).'일 전';
+                        } else if ( $diff>3600 ) {
+                          $application_time= ceil($diff/3600).'시간 전';
+                        } else if ( $diff>60 ) {
+                          $application_time= ceil($diff/60).'분 전';
+                        } else {
+                          $application_time= $diff.'초 전';
+                        }
+                    ?>
+                      <p>
+                        <span class="btn btn-round btn-xxs btn-danger"><?=$application_time?></span>
+                        <?=$val['c_name']?>에 지원자가 발생했습니다.
+                      </p>
+                <?}?>
                 </div>
-                <a href="#" class="btn btn-block btn-lg btn-light weight_normal mt-3 rounded-0">실시간 지원현황 더 보기</a>
             </div>
         </div>
     </div>

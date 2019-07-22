@@ -15,7 +15,7 @@
                         <div class="avatar square" style="background-image:url('/layout/none/assets/images/no_avatar.png');"></div>
                     </div>
                     <div class="col-8">
-                        <h5 class="weight_normal mb-1 mt-2"><?=$logged_info->user_name?> 님</h5>
+                        <h5 class="weight_normal mb-1 mt-2"><?=$logged_info['m_name']?> 님</h5>
                         <h5 class="weight_lighter mt-0">환영합니다.</h5>
                     </div>
                 <?php } ?>

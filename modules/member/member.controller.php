@@ -6,8 +6,9 @@ class memberController{
 
         global $oDB;
 
-        $oDB->where("m_idx",$m_idx);
-        $row = $oDB->getOne("TF_member_tb");
+        $oDB->where("m.m_idx",$m_idx);
+        $oDB->join("TF_member_commerce_tb mc","mc.m_idx = m.m_idx","LEFT");
+        $row = $oDB->getOne("TF_member_tb m");
         //
         // $member_info = new stdClass();
         // $member_info->member_srl = 1;
@@ -78,20 +79,45 @@ class memberController{
 //        $output = new Object(-1,"실패함");
 //        $output->add('abcd',"이런게있을때만");
 //        return $output;
-//
-//
-        //
 
         global $oDB;
-        $row = 0;
+        //$row = 0;
 
         //쿼리
-        if(count($row)) return new Object(-1, "이미 존재하는 계정입니다.");
+        //if(count($row)) return new Object(-1, "이미 존재하는 계정입니다.");
+        $_SESSION['signup'] = array();
+        $_SESSION['signup']['m_id'] = $args->m_id;
+        $_SESSION['signup']['m_pw1'] = $args->m_pw1;
+        $_SESSION['signup']['m_pw2'] = $args->m_pw2;
+        $_SESSION['signup']['m_email1'] = $args->m_email1;
+        $_SESSION['signup']['m_email2'] = $args->m_email2;
 
         //비밀번호 일치하는지 확인
-
+        if($args->m_pw1 && $args->m_pw1 != $args->m_pw2){
+          return new Object(-1,"비밀번호를 확인해주세요.");
+        }
+        if($_SESSION['id_check'] == 0){
+          return new Object(-1,"아이디 중복확인을 해주세요.");
+        }
 
         //insert
+        $now_date = date(YmdHis);
+        $m_email = $args->m_eamil1."@".$args->m_eamil2;
+        $data = array(
+          "m_id" => $args->m_id,
+          "m_pw" => $args->m_pw,
+          "m_name" => "김다현",
+          "m_human" => "F",
+          "m_birthday" => "19930712",
+          "m_phone" => "010-2292-7916",
+          "m_email" => $m_email,
+          "is_commerce" => "N",
+          "is_device" => "W",
+          "is_external" => "A",
+          "reg_date" => $now_date,
+          "edit_date" => $now_date
+        );
+        $row = $oDB->insert("TF_member_tb", $data);
 
         if($row){
             //로그인
@@ -99,8 +125,7 @@ class memberController{
 
             return new Object(0,"가입에 성공하였습니다.");
         }else{
-            return new Object(0,"실패함");
+            return new Object(0,"네트워크 오류가 발생했습니다.");
         }
     }
-
 }
