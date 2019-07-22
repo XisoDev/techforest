@@ -87,6 +87,15 @@ img{
     background-repeat:no-repeat;
     background-position:center;
 }
+.avatar{
+    border-radius:50%;
+    overflow:hidden;
+    background-color:rgb(224,231,244);
+    background-size:contain;
+    background-repeat:no-repeat;
+    background-position:center;
+    position:relative;
+}
 .square:after {
     content: "";
     display: block;

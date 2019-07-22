@@ -23,7 +23,7 @@
             </div>
             <div class="btn-group rounded-0 btn-block mt-2">
                 <?php if($logged_info) { ?>
-                    <a href="#" class="btn btn-primary">내 정보 관리</a>
+                    <a href="<?=getUrl('member')?>" class="btn btn-primary">내 정보 관리</a>
                     <a href="/proc.php?act=member.procLogout" class="btn btn-primary">로그아웃</a>
                 <?php }else{ ?>
                     <a href="<?=getUrl('member','login',false,array('cur' => $current_url))?>" class="btn btn-primary">로그인</a>

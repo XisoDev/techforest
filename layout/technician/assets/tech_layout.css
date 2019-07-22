@@ -281,14 +281,6 @@ body.toggled{
     padding:40px 0 0 0;
     background:rgb(46,58,90);
 }
-.avatar{
-    border-radius:50%;
-    overflow:hidden;
-    background-color:rgb(224,231,244);
-    background-size:contain;
-    background-repeat:no-repeat;
-    background-position:center;
-}
 
 aside a{
     color:#000;

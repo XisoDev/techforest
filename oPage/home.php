@@ -15,10 +15,10 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h4 class="weight_lighter"><span class="weight_bold">기술자</span>를</h4>
-                <h4 class="weight_lighter mb-3">찾으시나요?</h4>
+                <h2 class="weight_lighter"><span class="weight_bold">기술자</span>를</h2>
+                <h2 class="weight_lighter mb-3">찾으시나요?</h2>
 
-                <a href="<?=getUrl('company')?>" class="btn border-white btn-round text-white xs_content">기업회원</a>
+                <a href="<?=getUrl('company')?>" class="btn border-white btn-round text-white btn-lg">기업회원</a>
             </div>
         </div>
     </div>
@@ -29,10 +29,10 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h4 class="weight_lighter"><span class="weight_bold">일자리</span>를</h4>
-                <h4 class="weight_lighter mb-3">찾으시나요?</h4>
+                <h2 class="weight_lighter"><span class="weight_bold">일자리</span>를</h2>
+                <h2 class="weight_lighter mb-3">찾으시나요?</h2>
 
-                <a href="<?=getUrl('technician')?>" class="btn border-white btn-round text-white xs_content">개인회원</a>
+                <a href="<?=getUrl('technician')?>" class="btn btn-round border-dark btn-lg">개인회원</a>
             </div>
         </div>
     </div>

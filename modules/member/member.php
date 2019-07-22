@@ -34,6 +34,14 @@ class memberView{
         $args->act = "myprofile";
         return $this->index($args);
     }
+    function updateIdpw($args){
+        $args->act = "updateIdpw";
+        return $this->index($args);
+    }
+    function settingAlert($args){
+        $args->act = "settingAlert";
+        return $this->index($args);
+    }
 
     function login($args){
         moduleLoadDefault('oPage/member');
