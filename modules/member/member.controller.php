@@ -74,6 +74,27 @@ class memberController{
         return new Object();
     }
 
+    function procMemberCheckHasID($args){
+
+        $id = $args->m_id;
+        $_SESSION['id_check'] = 0;
+
+        if(!$id) return new Object(-1,"아이디를 입력해 주세요.");
+
+        if(mb_strlen($id, "UTF-8") < 2 || mb_strlen($id, "UTF-8") > 16)
+            return new Object(-1, "아이디는 2 ~ 16자 내로 입력해주세요.");
+
+        global $oDB;
+        $oDB->where("m_id","$id");
+        $row = $oDB->getOne("TF_member_tb",null,"m_id");
+
+        if($row) return new Object(-1,"중복된 아이디가 있습니다.");
+
+
+        $_SESSION['id_check'] = 1;
+        return new Object(0,"사용가능한 아이디 입니다.");
+    }
+
     function procMemberSignupTechnician($args){
 //
 //        $output = new Object(-1,"실패함");

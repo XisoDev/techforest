@@ -10,7 +10,7 @@
         </div>
         <div class="form-group">
             <label for=""><i class="xi-call"></i> 휴대폰번호</label>
-            <input type="text" class="form-control" id="" placeholder="휴대전화번호를 입력하세요. 예) 010-1234-5678" value="<?=$logged_info['m_phone']?>" readonly="readonly">
+            <input type="text" class="form-control" id="" placeholder="휴대전화번호를 입력하세요." value="<?=$logged_info['m_phone']?>" readonly="readonly">
             <a href="#" onclick="jQuery(this).prev().removeAttr('readonly');" class="bg-red btn btn-xs btn-round">변경</a>
         </div>
         <div class="form-group">

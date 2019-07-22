@@ -24,6 +24,83 @@ class companyView{
         return $output;
     }
 
+    function job_list($args){
+        global $set_template_file;
+        $set_template_file = "company/job.list.php";
+
+        global $site_info;
+        $site_info->layout = "company";
+
+        global $add_body_class;
+        $add_body_class[] = "shrink";
+
+        $output = new Object();
+
+
+        return $output;
+    }
+
+    function job_register($args){
+        global $set_template_file;
+        $set_template_file = "company/job.reg.php";
+
+        global $site_info;
+        $site_info->layout = "company";
+
+        global $add_body_class;
+        $add_body_class[] = "shrink";
+
+        $output = new Object();
+
+
+        return $output;
+    }
+
+    function job_appRegister($args){
+        global $set_template_file;
+        $set_template_file = "company/job.app.reg.php";
+
+        global $site_info;
+        $site_info->layout = "company";
+
+        global $add_body_class;
+        $add_body_class[] = "shrink";
+
+        $output = new Object();
+
+
+        return $output;
+    }
+
+    function job_appRegisterComplete($args){
+        global $set_template_file;
+        $set_template_file = "company/job.app.reg.complete.php";
+
+        $output = new Object();
+
+        return $output;
+    }
+
+    function job_appList($args){
+        global $set_template_file;
+        $set_template_file = "company/job.app.list.php";
+
+        global $site_info;
+        $site_info->layout = "company";
+
+        global $add_body_class;
+        $add_body_class[] = "shrink";
+
+        //공고번호
+        //$args->document_srl
+        //이걸로 조회해서 $output->add() 하시면됩니다.
+        $output = new Object();
+
+
+        return $output;
+
+    }
+
 
       function getApplicationCompany(){
         global $oDB;

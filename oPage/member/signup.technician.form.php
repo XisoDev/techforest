@@ -1,24 +1,30 @@
 <script type="text/javascript">
 function id_check(){
-  var m_id = $("#signup_id").val();
-  $.ajax({
-    type :'POST',
-    url : "../../id_check.php",
-    data : {
-      "m_id" : m_id
-    },
-    dataType : 'JSON',
-    success: function (response) {
-      if (response.result == 1) {
-          alert(response.message);
-      } else {
-          alert(response.message);
-      }
-    },
-    error: function (request, status, error) {
-        alert("ERROR Code : " + request.status + "\n" + "ERROR Message : " + request.responseText + "\n" + "ERROR : " + error);
-    }
-  });
+    var params = {};
+    params["m_id"] = $("#signup_id").val();
+    exec_json("member.procMemberCheckHasID",params,function(ret_obj){
+       //통신에러나 모듈내부에서 에러가있을땐 알아서 처리해주므로 성공시만 처리하면됨.
+       // alert(ret_obj.message); // alert 해도되지만 toastr 권장
+        toastr.success(ret_obj.message);
+    });
+  // $.ajax({
+  //   type :'POST',
+  //   url : "../../id_check.php",
+  //   data : {
+  //     "m_id" : m_id
+  //   },
+  //   dataType : 'JSON',
+  //   success: function (response) {
+  //     if (response.result == 1) {
+  //         alert(response.message);
+  //     } else {
+  //         alert(response.message);
+  //     }
+  //   },
+  //   error: function (request, status, error) {
+  //       alert("ERROR Code : " + request.status + "\n" + "ERROR Message : " + request.responseText + "\n" + "ERROR : " + error);
+  //   }
+  // });
 }
 
 </script>
@@ -41,13 +47,13 @@ function id_check(){
             <h6>정보입력</h6>
 
             <div class="input-group mb-2">
-                <input type="text" class="form-control" id="signup_id" name="m_id" value=<?=$_SESSION['signup']['m_id']?> placeholder="아이디" required>
+                <input type="text" class="form-control" id="signup_id" name="m_id" value="<?=$_SESSION['signup']['m_id']?>" placeholder="아이디" required>
                 <!-- <a href="/proc.php?act=member.id_check" class="btn btn-primary rounded-0">중복확인</a> -->
-                <button class="btn btn-primary rounded-0" onclick="id_check()">중복확인</button>
+                <button class="btn btn-primary rounded-0" onclick="id_check(); return false;">중복확인</button>
             </div>
 
-            <input type="password" class="form-control mb-2" name="m_pw1" id="m_pw1" value=<?=$_SESSION['signup']['m_pw1']?> placeholder="비밀번호(6자리 이상)" required>
-            <input type="password" class="form-control mb-2" name="m_pw2" id="m_pw2" value=<?=$_SESSION['signup']['m_pw2']?> placeholder="비밀번호 확인" required>
+            <input type="password" class="form-control mb-2" name="m_pw1" id="m_pw1" value="<?=$_SESSION['signup']['m_pw1']?>" placeholder="비밀번호(6자리 이상)" required>
+            <input type="password" class="form-control mb-2" name="m_pw2" id="m_pw2" value="<?=$_SESSION['signup']['m_pw2']?>" placeholder="비밀번호 확인" required>
         </div>
 
         <div class="col-12 mx-0 px-0 pl-1 mb-2">

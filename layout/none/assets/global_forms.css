@@ -1,9 +1,19 @@
+/*폼에있는 아이콘*/
+.right-icon{
+    position:absolute;
+    font-size:22px;
+    color:#AAA;
+    right:12px;
+    bottom:12px;
+}
+
 .input-group-text{
     background:#FFF;
 }
 .form-control{
     padding: 1.375rem 0.75rem;
     outline: none !important;
+    font-size:12px;
 }
 select.form-control{
     min-height:46px;

@@ -53,10 +53,10 @@
             <span class="hamb-bottom"></span>
         </button>
         <?php if($logged_info) { ?>
-        <button type="button" class="toggle_alert">
-            <i class="xi-bell-o"></i>
-            <span class="badge bg-red">9</span>
-        </button>
+            <a href="<?=getUrl('ncenter')?>" class="toggle_alert">
+                <i class="xi-bell-o"></i>
+                <span class="badge bg-red">9</span>
+            </a>
         <?php } ?>
     </div>
 </header>

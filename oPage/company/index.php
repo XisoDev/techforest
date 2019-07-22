@@ -83,7 +83,7 @@
                                 <a href="#" class="btn btn-light btn-block rounded-0">수정</a>
                             </div>
                             <div class="col-6 mx-0 px-0">
-                                <a href="#" class="btn btn-light btn-block rounded-0 red">지원자 (4)</a>
+                                <a href="<?=getUrl('company','job_appList',12345);?>" class="btn btn-light btn-block rounded-0 red">지원자 (4)</a>
                             </div>
                         </div>
                     </div>
@@ -189,3 +189,28 @@
         </div>
     </div>
 </div>
+
+
+
+<!--// 팝업 배너 모달 -->
+<div class="modal fade" id="tech_modal_example" tabindex="-1" role="dialog" aria-labelledby="tech_forest_modal_window" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content text-center" style="border-radius:10px">
+            <a href="#" class="text-white pull-right text-right" style="margin-top:-40px;" onclick="jQuery('#tech_modal_example').modal('hide');" ><i class="xi-close xi-2x"></i></a>
+            <div class="square avatar bg-red mx-auto" style="width:120px; margin-top:-60px; background-image:url('/oPage/ncenter/images/header_icon.png');"></div>
+            <div class="content_padding">
+                <h6 class="weight_lighter">지금 공고를 등록하시면 <span class="red">적합한 구직자와 빠르게</span> 연결될 수 있습니다.</h6>
+
+                <h6 class="weight_normal mb-2 mt-4 mb-3">공고를 등록하시겠습니까?</h6>
+                <a class="btn btn-block btn-danger btn-round btn-lg mb-3" href="#">공고 등록 하러가기</a>
+            </div>
+
+            <a href="#" class="mt-2 btn btn-block btn-light" onclick="jQuery('#tech_modal_example').modal('hide');" style="border-radius:10px;">메인페이지로 이동</a>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    jQuery(window).on('load',function(){
+        jQuery('#tech_modal_example').modal('show');
+    });
+</script>

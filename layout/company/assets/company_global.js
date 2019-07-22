@@ -24,6 +24,18 @@ jQuery(document).ready(function($){
         buttonSwitch();
     });
 
+    //지원자관리
+    $('.tech-card-slick').slick({
+        dots: true,
+        speed: 300,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        centerMode: false,
+        infinite:false,
+        arrows: false,
+        variableWidth: false,
+        centerPadding: '0'
+    });
     //홈
     $('.flex-card-slick').slick({
         dots: false,
@@ -70,10 +82,12 @@ jQuery(document).ready(function($){
             affix("affix_middle");
         }
 
-        if($(document).scrollTop() > 50){
-            $("#header").addClass('shrink');
-        }else{
-            $("#header").removeClass('shrink');
+        if(!$("body").hasClass("shrink")){
+            if($(document).scrollTop() > 50){
+                $("#header").addClass('shrink');
+            }else{
+                $("#header").removeClass('shrink');
+            }
         }
     });
 });

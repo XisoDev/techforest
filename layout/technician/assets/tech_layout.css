@@ -315,6 +315,7 @@ nav.navbar{
     left:0;
     width:100%;
 }
+body.shrink #header nav.navbar,
 #header.shrink nav.navbar{
     -webkit-transform: translateY(0);
     -moz-transform: translateY(0);
@@ -346,6 +347,10 @@ nav.navbar{
     bottom:5px;
 }
 
+/*사이드바 열리면 알람버튼 사라지게 (x랑 겹침) */
+.toggled .toggle_alert{
+    display:none;
+}
 
 .welcome_seciton {
     background-color: rgba(255, 219, 119, 1);

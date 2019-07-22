@@ -32,8 +32,8 @@
             </div>
         </div>
         <aside class="nav flex-column">
-            <a class="nav-link active" href="#"><i class="xi-pen-o"></i> 공고등록</a>
-            <a class="nav-link" href="#"><i class="xi-documents-o"></i> 공고 지원자관리</a>
+            <a class="nav-link active" href="<?=getUrl('company','job_register')?>"><i class="xi-pen-o"></i> 공고등록</a>
+            <a class="nav-link" href="<?=getUrl('company','job_list')?>"><i class="xi-documents-o"></i> 공고 지원자관리</a>
             <a class="nav-link" href="#"><i class="xi-documents-o"></i> 공고 지원자관리</a>
                 <ul class="nav submenu">
                     <li class="nav-item">
@@ -53,10 +53,10 @@
             <span class="hamb-bottom"></span>
         </button>
         <?php if($logged_info) { ?>
-        <button type="button" class="toggle_alert">
+        <a href="<?=getUrl('ncenter')?>" class="toggle_alert">
             <i class="xi-bell-o"></i>
             <span class="badge bg-red">9</span>
-        </button>
+        </a>
         <?php } ?>
     </div>
 </header>
