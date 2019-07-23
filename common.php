@@ -49,7 +49,7 @@ if($_SESSION['_XISO_MESSAGE_']){
 $userAgent = $_SERVER["HTTP_USER_AGENT"];
 
 //Check Mobile
-$mAgent = array("iPhone","iPod","Android","Blackberry", 
+$mAgent = array("iPhone","iPod","Android","Blackberry",
     "Opera Mini", "Windows ce", "Nokia", "sony" );
 $isMobile = false;
 for($i=0; $i<sizeof($mAgent); $i++){
@@ -89,6 +89,15 @@ if($_SESSION['LOGGED_INFO']){
     $logged_info = false;
 }
 
+//기업세션
+require_once "./modules/company/company.controller.php";
+$oCompany = new companyController();
+if($_SESSION['LOGGED_INFO']){
+    $logged_info = $oCompany->getMemberInfoByCompanySrl($_SESSION['LOGGED_INFO']);
+}else{
+    $logged_info = false;
+}
+
 //모듈내에서 읽어올 변수들 미리생성
 $add_html_header = array();
 $add_html_footer = array();
@@ -100,4 +109,3 @@ $is_dark = false;
 
 if(isset($_GET['cur'])) $current_url = $_GET['cur'];
 else $current_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-

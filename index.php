@@ -8,7 +8,7 @@
 
 //load Default Info
 require_once "./common.php";
-
+$_SESSION['id_check'] = 0;
 //url 읽어서 모듈 로드
 if(isset($_GET['mid'])){
     $module = $_GET['mid'];

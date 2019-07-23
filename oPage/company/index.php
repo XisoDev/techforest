@@ -9,7 +9,7 @@
         <h4 class="weight_bold mb-3">채용담당자님:)</h4>
         <?php } ?>
         <?php if($logged_info) { ?>
-        <h5 class="weight_lighter"><?=$logged_info['c_name']?> 채용담당자님:)</h5>
+        <h5 class="weight_lighter"><?=$logged_info['m_name']?> 채용담당자님:)</h5>
         <h5 class="weight_lighter mb-3">어떤 기술자를 찾고 계신가요?</h5>
         <?php } ?>
         <ul class="nav">
@@ -23,7 +23,7 @@
             </li>
             <?php if(!$logged_info) { ?>
             <li class="nav-item">
-                <a class="nav-link btn btn-danger btn-round btn-xs" href="#"">회원가입</a>
+                <a class="nav-link btn btn-danger btn-round btn-xs"  href="<?=getUrl('member','signUp')?>">회원가입</a>
             </li>
             <?php } ?>
         </ul>
@@ -193,6 +193,7 @@
 
 
 <!--// 팝업 배너 모달 -->
+
 <div class="modal fade" id="tech_modal_example" tabindex="-1" role="dialog" aria-labelledby="tech_forest_modal_window" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content text-center" style="border-radius:10px">
@@ -210,7 +211,9 @@
     </div>
 </div>
 <script type="text/javascript">
+  if(<?=$_SESSION['LOGGED_INFO']?> > 0){
     jQuery(window).on('load',function(){
         jQuery('#tech_modal_example').modal('show');
     });
+  }
 </script>

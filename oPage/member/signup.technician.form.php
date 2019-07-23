@@ -1,5 +1,5 @@
 <script type="text/javascript">
-function id_check(){
+function technician_id_check(){
     var params = {};
     params["m_id"] = $("#signup_id").val();
     exec_json("member.procMemberCheckHasID",params,function(ret_obj){
@@ -7,27 +7,9 @@ function id_check(){
        // alert(ret_obj.message); // alert 해도되지만 toastr 권장
         toastr.success(ret_obj.message);
     });
-  // $.ajax({
-  //   type :'POST',
-  //   url : "../../id_check.php",
-  //   data : {
-  //     "m_id" : m_id
-  //   },
-  //   dataType : 'JSON',
-  //   success: function (response) {
-  //     if (response.result == 1) {
-  //         alert(response.message);
-  //     } else {
-  //         alert(response.message);
-  //     }
-  //   },
-  //   error: function (request, status, error) {
-  //       alert("ERROR Code : " + request.status + "\n" + "ERROR Message : " + request.responseText + "\n" + "ERROR : " + error);
-  //   }
-  // });
 }
-
 </script>
+
 <form action="/proc.php?act=member.procMemberSignupTechnician" method="post">
     <input type="hidden" name="success_return_url" value="<?=getUrl('technician')?>" />
 <div class="container">
@@ -49,7 +31,7 @@ function id_check(){
             <div class="input-group mb-2">
                 <input type="text" class="form-control" id="signup_id" name="m_id" value="<?=$_SESSION['signup']['m_id']?>" placeholder="아이디" required>
                 <!-- <a href="/proc.php?act=member.id_check" class="btn btn-primary rounded-0">중복확인</a> -->
-                <button class="btn btn-primary rounded-0" onclick="id_check(); return false;">중복확인</button>
+                <button class="btn btn-primary rounded-0" onclick="technician_id_check(); return false;">중복확인</button>
             </div>
 
             <input type="password" class="form-control mb-2" name="m_pw1" id="m_pw1" value="<?=$_SESSION['signup']['m_pw1']?>" placeholder="비밀번호(6자리 이상)" required>
@@ -64,13 +46,13 @@ function id_check(){
                             @
                         </span>
                 </div>
-                <select class="form-control" name="m_email2" value="<?=$_SESSION['signup']['m_email2']?>" onchange="if(this.value == 99){jQuery(this).hide(); jQuery(this).next().show();}">
+                <select class="form-control" name="m_email2" id="m_email2" onchange="if(this.value == 99){jQuery(this).hide(); jQuery(this).next().show();}">
                     <option value="" selected="selected">이메일 주소 선택</option>
-                    <option value="1">naver.com</option>
-                    <option value="2">gmail.com</option>
+                    <option value="naver.com">naver.com</option>
+                    <option value="gmail.com">gmail.com</option>
                     <option value="99">직접입력</option>
                 </select>
-                <input type="text" class="form-control" placeholder="직접입력" style="display:none;">
+                <input type="text" class="form-control" name="m_email2_1" placeholder="직접입력" style="display:none;">
             </div>
             <p class="xxs_content px-0 mx-0"><span class="red"><i class="xi-error"></i> 일자리정보 & 이벤트정보를 안내 해 드립니다.</span></p>
 
@@ -79,12 +61,12 @@ function id_check(){
         <div class="col-12 text-left mt-0 mx-0 px-0 mt-4">
             <h6>약관동의</h6>
             <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="customCheck2">
+                <input type="checkbox" class="custom-control-input" name="agree1" id="customCheck2" checked>
                 <label class="custom-control-label xs_content" for="customCheck2">기술자숲 이용약관에 동의합니다.</label>
                 <a href="#" class="btn btn-xxs btn-light btn-round">내용보기</a>
             </div>
             <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="customCheck3">
+                <input type="checkbox" class="custom-control-input" name="agree2" id="customCheck3" checked>
                 <label class="custom-control-label xs_content" for="customCheck3">개인정보 수집 및 이용약관에 동의합니다.</label>
                 <a href="#" class="btn btn-xxs btn-light btn-round">내용보기</a>
             </div>
