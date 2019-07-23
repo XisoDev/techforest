@@ -25,6 +25,32 @@ class companyView{
         return $output;
     }
 
+    //이력서보기
+    function application($args){
+        // $args->document_srl 여기로 이력서번호가 들어옴.
+        global $site_info;
+        $site_info->layout = "company";
+
+
+        global $add_body_class;
+        $add_body_class[] = "shrink";
+
+        global $set_template_file;
+
+        $output = new Object();
+
+        if($args->document_srl > 0){
+            $set_template_file = "company/application.view.php";
+            //여기 array 에는 해당 document_srl 로 조회한 job 정보를 넣으면됨.
+            $output->add('oJob',array());
+        }else{
+            $set_template_file = "404.html";
+            $output->setError(-1);
+            $output->setMessage('존재하지 않는 이력서를 호출하였습니다.');
+        }
+        return $output;
+    }
+
     //공고 및 지원자관리의 목록과 상세보기를 컨트롤
     function job($args){
         global $site_info;
@@ -95,7 +121,7 @@ class companyView{
     }
 
 
-      function getApplicationCompany(){
+    function getApplicationCompany(){
         global $oDB;
 
         $oDB->orderBy("al.reg_date","DESC");
@@ -104,9 +130,9 @@ class companyView{
         $row = $oDB->get("TF_application_letter al",3,"al.h_idx,al.reg_date,mc.c_name");
 
         return $row;
-      }
+    }
 
-      function new_member(){
+    function new_member(){
         global $oDB;
 
         $oDB->where("m_birthday",NULL, 'IS NOT');
@@ -124,9 +150,9 @@ class companyView{
         $row = $oDB->get("TF_member_tb m",4,"m.m_idx");
 
         return $row;
-      }
+    }
 
-      function new_member2(){
+    function new_member2(){
         global $oDB;
 
         $columns = "distinct m.m_idx, group_concat(distinct(mc.duty_name)) as duty_name,";
@@ -149,35 +175,29 @@ class companyView{
         $oDB->join("TF_district_tb AS d", "m.m_district_idx = d.district_idx", "LEFT");
         $row = $oDB->get("TF_member_tb AS m",null,$columns);
 
-  // $sql = "SELECT distinct m.m_idx, group_concat(distinct(mc.duty_name)) as duty_name,
-  //         concat(concat(substr(m.m_name,1,1),'*'),substr(m.m_name,3,10)) as m_name,
-  //         YEAR(CURRENT_TIMESTAMP) - YEAR(m_birthday) - (RIGHT(CURRENT_TIMESTAMP, 5) < RIGHT(m_birthday, 5)) as m_birthday,
-  //         m_phone, m_address, local_name, city_name, district_name, m_city_idx, m_district_idx
-  //         FROM TF_member_tb m
-  //         LEFT JOIN TF_member_career_tb mc ON m.m_idx = mc.m_idx
-  //         LEFT JOIN TF_local_tb l ON m.m_local_idx = l.local_idx
-  //         LEFT JOIN TF_city_tb c ON m.m_city_idx = c.city_idx
-  //         LEFT JOIN TF_district_tb d ON m.m_district_idx = d.district_idx
-  //         WHERE (m.m_idx = $num1 or m.m_idx = $num2 or m.m_idx = $num3 or m.m_idx = $num4) and
-  //               duty_name != ''
-  //         GROUP BY m.m_idx";
+        // $sql = "SELECT distinct m.m_idx, group_concat(distinct(mc.duty_name)) as duty_name,
+        //         concat(concat(substr(m.m_name,1,1),'*'),substr(m.m_name,3,10)) as m_name,
+        //         YEAR(CURRENT_TIMESTAMP) - YEAR(m_birthday) - (RIGHT(CURRENT_TIMESTAMP, 5) < RIGHT(m_birthday, 5)) as m_birthday,
+        //         m_phone, m_address, local_name, city_name, district_name, m_city_idx, m_district_idx
+        //         FROM TF_member_tb m
+        //         LEFT JOIN TF_member_career_tb mc ON m.m_idx = mc.m_idx
+        //         LEFT JOIN TF_local_tb l ON m.m_local_idx = l.local_idx
+        //         LEFT JOIN TF_city_tb c ON m.m_city_idx = c.city_idx
+        //         LEFT JOIN TF_district_tb d ON m.m_district_idx = d.district_idx
+        //         WHERE (m.m_idx = $num1 or m.m_idx = $num2 or m.m_idx = $num3 or m.m_idx = $num4) and
+        //               duty_name != ''
+        //         GROUP BY m.m_idx";
 
-          return $row;
-        }
+        return $row;
+    }
 
-        function  now_application(){
-          global $oDB;
+    function  now_application(){
+        global $oDB;
 
-          $oDB->orderby("al.reg_date","DESC");
-          $oDB->join("TF_hire_tb h","al.h_idx = h.h_idx", "LEFT");
-          $oDB->join("TF_member_commerce_tb mc","h.c_idx = mc.c_idx", "LEFT");
-          $row = $oDB->get("TF_application_letter al",3,"al.h_idx, al.reg_date, mc.c_name");
-
-          // $sql = "SELECT al.h_idx, al.reg_date, mc.c_name
-          //         FROM TF_application_letter al
-          //         LEFT JOIN TF_hire_tb h ON al.h_idx = h.h_idx
-          //         LEFT JOIN TF_member_commerce_tb mc ON h.c_idx = mc.c_idx
-          //         ORDER BY al.reg_date DESC";
+        $oDB->orderby("al.reg_date","DESC");
+        $oDB->join("TF_hire_tb h","al.h_idx = h.h_idx", "LEFT");
+        $oDB->join("TF_member_commerce_tb mc","h.c_idx = mc.c_idx", "LEFT");
+        $row = $oDB->get("TF_application_letter al",3,"al.h_idx, al.reg_date, mc.c_name");
 
           return $row;
         }
