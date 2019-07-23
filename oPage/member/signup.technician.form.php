@@ -19,10 +19,10 @@ function technician_id_check(){
         </div>
 
         <div class="col-6 mx-0 px-0 pr-1">
-            <a href="<?=getUrl('member','signUp',false,array("user_type" => "technician"))?>" class="btn btn-block btn-round btn-primary">개인 회원가입</a>
+            <a href="<?=getUrl('member','signUp',false,array("user_type"=>"technician"))?>" class="btn btn-block btn-round btn-primary">개인 회원가입</a>
         </div>
         <div class="col-6 mx-0 px-0 pl-1">
-            <a href="<?=getUrl('member','signUp',false,array("user_type" => "company"))?>" class="btn btn-block btn-round btn-light">기업 회원가입</a>
+            <a href="<?=getUrl('member','signUp',false,array("user_type"=>"company"))?>" class="btn btn-block btn-round btn-light">기업 회원가입</a>
         </div>
 
         <div class="col-12 mt-3 mx-0 px-0 mt-4">

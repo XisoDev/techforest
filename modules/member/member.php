@@ -66,8 +66,8 @@ class memberView{
             header("location:" . getUrl('page','selectType'));
             return;
         }
-
         if(isset($args->user_type)) $_SESSION["USER_TYPE"] = $args->user_type;
+
         if($_SESSION["USER_TYPE"] == "company"){
             $set_template_file = "member/signup.company.php";
         }else{
