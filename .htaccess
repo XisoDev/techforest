@@ -2,13 +2,15 @@ RewriteEngine On
 RewriteBase /
 
 # mid link
-RewriteRule ^([a-zA-Z0-9_]+)/?$ index.php?mid=$1
-
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteRule ^([a-zA-Z0-9_]+)/?$ ./index.php?mid=$1 [L,QSA]
 # mid + document link
-RewriteRule ^([a-zA-Z0-9_]+)/([0-9]+)/?$ index.php?mid=$1&document_srl=$2
+RewriteRule ^([a-zA-Z0-9_]+)/([0-9]+)$ ./index.php?mid=$1&document_srl=$2 [L,QSA]
 
 # vid + mid link
-RewriteRule ^([a-zA-Z0-9_]+)/([a-zA-Z0-9_]+)/?$ index.php?mid=$1&act=$2
-
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteRule ^([a-zA-Z0-9_]+)/([a-zA-Z0-9_]+)/?$ ./index.php?mid=$1&act=$2 [L,QSA]
 # vid + mid + document link
-RewriteRule ^([a-zA-Z0-9_]+)/([a-zA-Z0-9_]+)/([0-9]+)/?$ index.php?mid=$1&act=$2&document_srl=$3
+RewriteRule ^([a-zA-Z0-9_]+)/([a-zA-Z0-9_]+)/([0-9]+)$ ./index.php?mid=$1&act=$2&document_srl=$3 [L,QSA]
+
+
