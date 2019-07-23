@@ -18,6 +18,7 @@ class companyView{
         $output->add('application_list',$this->getApplicationCompany());
         $output->add('new_member2',$this->new_member2());
         $output->add('now_application',$this->now_application());
+        $output->add('hire_ing',$this->hire_ing());
 
         $set_template_file = "company/index.php";
 
@@ -179,5 +180,29 @@ class companyView{
           //         ORDER BY al.reg_date DESC";
 
           return $row;
+        }
+
+        function hire_ing(){
+          global $oDB;
+
+          date_default_timezone_set('Asia/Seoul');
+          $now_date = date(YmdHis);
+
+          $m_idx = $_SESSION['LOGGED_INFO'];
+
+          $oDB->orderby("h.h_idx","DESC");
+          $oDB->groupBy("h.h_idx");
+          $oDB->where("co.m_idx",$m_idx);
+          $oDB->where("h.job_end_date",$now_date,">");
+          $oDB->joinwhere("TF_application_letter al","al.isVisible","Y");
+          $oDB->join("TF_application_letter al","al.h_idx = h.h_idx","LEFT");
+          $oDB->join("TF_district_tb d","d.district_idx = h.district_idx","LEFT");
+          $oDB->join("TF_city_tb c","c.city_idx = h.city_idx","LEFT");
+          $oDB->join("TF_local_tb l","l.local_idx = h.local_idx","LEFT");
+          $oDB->join("TF_member_commerce_tb co","h.c_idx = co.c_idx","LEFT");
+          $row = $oDB->get("TF_hire_tb h",null,"local_name,city_name,district_name,h.h_idx,h_title,salary_idx,job_salary,count(al.m_idx) AS applicant,TO_DAYS(h.job_end_date )-TO_DAYS(NOW( )) AS job_end_day");
+
+          return $row;
+
         }
 }
