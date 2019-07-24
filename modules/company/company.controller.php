@@ -1,16 +1,16 @@
 <?
 class companyController{
-  function getMemberInfoByCompanySrl($m_idx = 0){
-
-      global $oDB;
-
-      $oDB->where("m.m_idx",$m_idx);
-      $oDB->where("is_commerce","Y");
-      $oDB->join("TF_member_commerce_tb mc","mc.m_idx = m.m_idx","LEFT");
-      $row = $oDB->getOne("TF_member_tb m");
-
-      return $row;
-  }
+  // function getMemberInfoByCompanySrl($m_idx = 0){
+  //
+  //     global $oDB;
+  //
+  //     $oDB->where("m.m_idx",$m_idx);
+  //     $oDB->where("is_commerce","Y");
+  //     $oDB->join("TF_member_commerce_tb mc","mc.m_idx = m.m_idx","LEFT");
+  //     $row = $oDB->getOne("TF_member_tb m");
+  //
+  //     return $row;
+  // }
 
   function procCompanyCheckHasID($args){
 

@@ -1,3 +1,36 @@
+<?php
+$m_idx = $_SESSION['LOGGED_INFO'];
+
+//이력서완성도(경력 개수)
+$oDB->where("m_idx",$m_idx);
+$count_career_row = $oDB->getOne("TF_member_career_tb","count(m_idx) as count_career");
+
+//이력서완성도(경력 직무상세내용 개수)
+$oDB->where("m_idx",$m_idx);
+$oDB->where("c_content","","!=");
+$oDB->where("c_content",NULL, 'IS NOT');
+$count_c_content_row = $oDB->getOne("TF_member_career_tb","count(c_content) as count_c_content");
+
+//이력서완성도(기본정보+희망4종 입력 여부)
+$oDB->where("m.m_idx",$m_idx);
+$oDB->where("d.m_idx",NULL,"IS NOT");
+$oDB->where("m.m_address2",NULL,"IS NOT");
+$oDB->where("m.m_address2","","!=");
+$oDB->where("m.m_address","","!=");
+$oDB->where("m.m_phone","","!=");
+$oDB->where("m.m_birthday","","!=");
+$oDB->where("m.m_email","","!=");
+$oDB->join("TF_member_duty d","m.m_idx = d.m_idx", "LEFT");
+$oDB->join("TF_member_occupation o","m.m_idx = o.m_idx", "LEFT");
+$oDB->join("TF_member_order mo","m.m_idx = mo.m_idx", "LEFT");
+$myinfo_row = $oDB->getOne("TF_member_tb m","count(m.m_idx) as count_myinfo");
+
+//이력서 정보
+
+
+?>
+
+
 <div class="container-fluid welcome_seciton" style="background-image:url('/oPage/images/technician_welcome.png');">
     <img src="/oPage/images/gear.png" class="rotating" style="position:absolute; width:30%; right:-5%; top:-5%;"  />
     <img src="/oPage/images/gear.png" class="rotating_slow" style="position:absolute; left:-35%; width:60%; top:3%;" />
@@ -9,7 +42,7 @@
         <h4 class="weight_lighter mb-3">맞춤 일자리를 확인하세요!</h4>
         <?php } ?>
         <?php if($logged_info) { ?>
-        <h5 class="weight_bold"><?=$logged_info['m_name']?>님:)</h5>
+        <h5 class="weight_bold"><?=$logged_info['m_name']?>님 :)</h5>
         <h5 class="weight_lighter mb-3">어떤 일자리를 찾고 계신가요?</h5>
         <?php } ?>
         <ul class="nav">
@@ -23,7 +56,7 @@
             </li>
             <?php if(!$logged_info) { ?>
             <li class="nav-item">
-                <a class="nav-link btn btn-danger btn-round btn-xs" href="#"">회원가입</a>
+                <a class="nav-link btn btn-danger btn-round btn-xs" href="<?=getUrl('member','signUp')?>">회원가입</a>
             </li>
             <?php } ?>
         </ul>
@@ -88,7 +121,16 @@
             <div class="col-12">
                 <h6 class="weight_lighter mt-4 mb-1">
                     <span class="red"><?=$logged_info['m_name']?></span>님의 이력서 완성도는
-                    <span class="red">'낮음'</span>입니다.
+                    <span class="red">
+                      <?php if($count_career_row['count_career'] == $count_c_content_row['count_c_content'] && $myinfo_row['count_myinfo']){
+                        echo '높음';
+                      }else if($count_career_row['count_career'] > $count_c_content_row['count_c_content'] && $myinfo_row['count_myinfo']){
+                        echo '중간';
+                      }else{
+                        echo '낮음';
+                      }
+                      ?>
+                    </span>입니다.
                 </h6>
                 <h6 class="weight_lighter mt-0 mb-2">
                     상세 경력을 기입하고 취업 성공률을 높여보세요!
@@ -105,7 +147,7 @@
                         <div class="col-8 ml-0 pl-0">
                             <div class="text-left">
                                 <h5 class="weight_bold mb-2 pt-3"><?=$logged_info['m_name']?>
-                                    <span class="xs_content weight_lighter"><?=zdate($logged_info->birthday,"Y.m.d")?> (56세)</span>
+                                    <span class="xs_content weight_lighter"><?=zdate($logged_info['m_birthday'],"Y.m.d")?> (56세)</span>
                                 </h5>
                                 <p class="xxs_content weight_lighter px-0"><span class="bg-red icon_wrap"><i class="xi-dashboard"></i></span> <b>희망직무</b> : 용접</p>
                                 <p class="xxs_content weight_lighter px-0"><span class="bg-red icon_wrap"><i class="xi-wrench"></i></span> <b>주요경력</b> : 없음</p>

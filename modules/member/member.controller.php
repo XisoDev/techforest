@@ -6,7 +6,7 @@ class memberController{
         global $oDB;
 
         $oDB->where("m.m_idx",$m_idx);
-        $oDB->where("is_commerce","N");
+        $oDB->join("TF_member_commerce_tb mc","m.m_idx = mc.m_idx","LEFT");
         $row = $oDB->getOne("TF_member_tb m");
         //
         // $member_info = new stdClass();
@@ -131,9 +131,6 @@ class memberController{
         }
         if(mb_strlen($args->m_pw1, "UTF-8") < 6){
           return new Object(-1,"비밀번호는 6자리 이상으로 지정해주세요.");
-        }
-        if(!$args->agree1 || !$args->agree2){
-          return new Object(-1,"약관에 동의해주세요.");
         }
 
         date_default_timezone_set('Asia/Seoul');

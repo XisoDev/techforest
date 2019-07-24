@@ -56,10 +56,18 @@
 
         <?php if($logged_info) { ?>
         <div class="col-9 mr-0 pr-0">
-            <h6 class="weight_lighter mt-4">총 <span class="red">2건</span>의 진행중인 공고가 있어요.</h6>
+          <? date_default_timezone_set('Asia/Seoul');
+             $now_date = date(YmdHis);
+             $m_idx = $_SESSION['LOGGED_INFO'];
+             $oDB->where("co.m_idx",$m_idx);
+             $oDB->where("h.job_end_date",$now_date,">");
+             $oDB->join("TF_member_commerce_tb co","h.c_idx = co.c_idx","LEFT");
+             $row = $oDB->getOne("TF_hire_tb h","count(h.h_idx) as count_hire");
+            ?>
+            <h6 class="weight_lighter mt-4">총 <span class="red"><?=$row['count_hire']?></span>의 진행중인 공고가 있어요.</h6>
         </div>
         <div class="col-3 ml-0 pl-0">
-            <a href="#" class="mt-3 btn btn-block btn-primary btn-xxs btn-round">추가등록<i class="xi-plus"></i></a>
+            <a href="<?=getUrl('company','job_register')?>" class="mt-3 btn btn-block btn-primary btn-xxs btn-round">추가등록<i class="xi-plus"></i></a>
         </div>
         <div class="col-12 mt-2">
             <div class="flex-card-slick">

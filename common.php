@@ -89,15 +89,6 @@ if($_SESSION['LOGGED_INFO']){
     $logged_info = false;
 }
 
-//기업세션
-require_once "./modules/company/company.controller.php";
-$oCompany = new companyController();
-if($_SESSION['LOGGED_INFO']){
-    $logged_info = $oCompany->getMemberInfoByCompanySrl($_SESSION['LOGGED_INFO']);
-}else{
-    $logged_info = false;
-}
-
 //모듈내에서 읽어올 변수들 미리생성
 $add_html_header = array();
 $add_html_footer = array();
