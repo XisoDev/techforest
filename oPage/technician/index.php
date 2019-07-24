@@ -23,10 +23,22 @@ $oDB->where("m.m_email","","!=");
 $oDB->join("TF_member_duty d","m.m_idx = d.m_idx", "LEFT");
 $oDB->join("TF_member_occupation o","m.m_idx = o.m_idx", "LEFT");
 $oDB->join("TF_member_order mo","m.m_idx = mo.m_idx", "LEFT");
-$myinfo_row = $oDB->getOne("TF_member_tb m","count(m.m_idx) as count_myinfo");
+$count_myinfo_row = $oDB->getOne("TF_member_tb m","count(m.m_idx) as count_myinfo");
 
 //이력서 정보
+$columns = "distinct m.m_idx, group_concat(distinct(mc.duty_name)) as duty_name, group_concat(md.duty_name) as hope_duty,";
+$columns .= "YEAR(CURRENT_TIMESTAMP) - YEAR(m_birthday) - (RIGHT(CURRENT_TIMESTAMP, 5) < RIGHT(m_birthday, 5))+1 as m_birthday,";
+$columns .= "local_name, city_name, district_name, m_city_idx, m_district_idx";
 
+$oDB->where("m.m_idx",$m_idx);
+$oDB->where("mc.duty_name","",'!=');
+$oDB->groupBy("m.m_idx");
+$oDB->join("TF_member_career_tb AS mc", "m.m_idx = mc.m_idx", "LEFT");
+$oDB->join("TF_member_duty AS md", "m.m_idx = md.m_idx", "LEFT");
+$oDB->join("TF_local_tb AS l", "m.m_local_idx = l.local_idx", "LEFT");
+$oDB->join("TF_city_tb AS c", "m.m_city_idx = c.city_idx", "LEFT");
+$oDB->join("TF_district_tb AS d", "m.m_district_idx = d.district_idx", "LEFT");
+$myinfo_row = $oDB->getOne("TF_member_tb AS m",$columns);
 
 ?>
 
@@ -122,9 +134,9 @@ $myinfo_row = $oDB->getOne("TF_member_tb m","count(m.m_idx) as count_myinfo");
                 <h6 class="weight_lighter mt-4 mb-1">
                     <span class="red"><?=$logged_info['m_name']?></span>님의 이력서 완성도는
                     <span class="red">
-                      <?php if($count_career_row['count_career'] == $count_c_content_row['count_c_content'] && $myinfo_row['count_myinfo']){
+                      <?php if($count_career_row['count_career'] == $count_c_content_row['count_c_content'] && $count_myinfo_row['count_myinfo']){
                         echo '높음';
-                      }else if($count_career_row['count_career'] > $count_c_content_row['count_c_content'] && $myinfo_row['count_myinfo']){
+                      }else if($count_career_row['count_career'] > $count_c_content_row['count_c_content'] && $count_myinfo_row['count_myinfo']){
                         echo '중간';
                       }else{
                         echo '낮음';
@@ -147,11 +159,14 @@ $myinfo_row = $oDB->getOne("TF_member_tb m","count(m.m_idx) as count_myinfo");
                         <div class="col-8 ml-0 pl-0">
                             <div class="text-left">
                                 <h5 class="weight_bold mb-2 pt-3"><?=$logged_info['m_name']?>
-                                    <span class="xs_content weight_lighter"><?=zdate($logged_info['m_birthday'],"Y.m.d")?> (56세)</span>
+                                    <span class="xs_content weight_lighter">(<?=$myinfo_row['m_birthday']?>세)</span>
                                 </h5>
-                                <p class="xxs_content weight_lighter px-0"><span class="bg-red icon_wrap"><i class="xi-dashboard"></i></span> <b>희망직무</b> : 용접</p>
-                                <p class="xxs_content weight_lighter px-0"><span class="bg-red icon_wrap"><i class="xi-wrench"></i></span> <b>주요경력</b> : 없음</p>
-                                <p class="xxs_content weight_lighter px-0"><span class="bg-red icon_wrap"><i class="xi-map-marker"></i></span> <b>희망지역</b> : 부산</p>
+                                <?php $desired_work_place = $myinfo_row['local_name'] . " ";
+                                      if($myinfo_row['m_city_idx'] != -1){ $desired_work_place .= $myinfo_row['city_name']; }
+                                      if($myinfo_row['m_district_idx'] != -1){ $desired_work_place .= $myinfo_row['district_name']; }?>
+                                <p class="xxs_content weight_lighter px-0"><span class="bg-red icon_wrap"><i class="xi-dashboard"></i></span> <b>희망직무</b> : <?=$myinfo_row['hope_duty']?></p>
+                                <p class="xxs_content weight_lighter px-0"><span class="bg-red icon_wrap"><i class="xi-wrench"></i></span> <b>주요경력</b> : <?=$myinfo_row['duty_name']?></p>
+                                <p class="xxs_content weight_lighter px-0"><span class="bg-red icon_wrap"><i class="xi-map-marker"></i></span> <b>희망지역</b> : <?=$desired_work_place?></p>
                             </div>
                         </div>
                     </div>

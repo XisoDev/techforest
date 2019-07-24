@@ -157,7 +157,7 @@ class companyView{
 
         $columns = "distinct m.m_idx, group_concat(distinct(mc.duty_name)) as duty_name,";
         $columns .= "concat(concat(substr(m.m_name,1,1),'*'),substr(m.m_name,3,10)) as m_name,";
-        $columns .= "YEAR(CURRENT_TIMESTAMP) - YEAR(m_birthday) - (RIGHT(CURRENT_TIMESTAMP, 5) < RIGHT(m_birthday, 5) + 1) as m_birthday,";
+        $columns .= "YEAR(CURRENT_TIMESTAMP) - YEAR(m_birthday) - (RIGHT(CURRENT_TIMESTAMP, 5) < RIGHT(m_birthday, 5))+1 as m_birthday,";
         $columns .= "m_phone, m_address, local_name, city_name, district_name, m_city_idx, m_district_idx";
 
         // $rand_new_member = $this->new_member();
