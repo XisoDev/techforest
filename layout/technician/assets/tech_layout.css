@@ -7,7 +7,7 @@ body, html {
     height: 100%;
 }
 
-#header{
+#header_mobile{
     position:fixed;
     top:0;
     width:100%;
@@ -15,7 +15,7 @@ body, html {
     height:50px;
 }
 
-#header {
+#header_mobile {
     padding-left: 0;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -26,16 +26,16 @@ body, html {
 body.toggled{
     overflow:hidden;
 }
-.toggled #header {
+.toggled #header_mobile {
     padding-left: 300px;
     height:100%;
 }
 
-.toggled #header #sidebar-wrapper {
+.toggled #header_mobile #sidebar-wrapper {
     width: 300px;
 }
 
-.toggled #header #page-content-wrapper {
+.toggled #header_mobile #page-content-wrapper {
     margin-right: -300px;
     position: absolute;
 }
@@ -299,7 +299,7 @@ aside.nav .submenu a{
     font-size:16px;
 }
 
-nav.navbar{
+#header_mobile nav.navbar{
     -webkit-transition: all ease 250ms;
     -moz-transition: all ease 250ms;
     -ms-transition: all ease 250ms;
@@ -315,8 +315,8 @@ nav.navbar{
     left:0;
     width:100%;
 }
-body.shrink #header nav.navbar,
-#header.shrink nav.navbar{
+body.shrink #header_mobile nav.navbar,
+#header_mobile.shrink nav.navbar{
     -webkit-transform: translateY(0);
     -moz-transform: translateY(0);
     -ms-transform: translateY(0);

@@ -37,9 +37,11 @@
 }
 
 /*공용컬러*/
-body{
-    background:rgb(244,246,251);
-    color:#333;
+@media screen and (max-width:767px) {
+    body {
+        background: rgb(244, 246, 251);
+        color: #333;
+    }
 }
 .red{
     color:rgb(245,112,102);

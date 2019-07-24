@@ -1,4 +1,35 @@
-<header id="header" class="">
+<header class="header_pc d-none d-lg-block">
+    <div class="container py-0 my-0">
+        <nav class="navbar navbar-expand-lg navbar-light m-0 p-0">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item xs_content weight_normal"><a class="nav-link" href="#">내 정보 관리</a></li>
+                <li class="nav-item xs_content weight_normal"><a class="nav-link xs_content">|</a></li>
+                <li class="nav-item xs_content weight_normal"><a class="nav-link" href="#">로그아웃</a></li>
+                <li class="nav-item xs_content active weight_normal"><a class="nav-link" href="#"><i class="xi-bell"></i></a></li>
+            </ul>
+        </nav>
+    </div>
+    <hr class="p-0 m-0" />
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" href="#"><img src="/oPage/images/logo.png" height="40" /></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item px-2 active"><a class="nav-link" href="#">공고등록</a></li>
+                    <li class="nav-item px-2 weight_normal"><a class="nav-link" href="#">공고・지원자관리</a></li>
+                    <li class="nav-item px-2 weight_normal"><a class="nav-link" href="#">기술자숲 소개</a></li>
+                    <li class="nav-item px-2 weight_normal"><a class="nav-link" href="#">서비스 이용현황</a></li>
+                    <li class="nav-item px-2 weight_normal"><a class="nav-link" href="#">문의</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
+<header id="header_mobile" class="d-lg-none">
     <div class="overlay" data-toggle="offcanvas" style="display: none;"></div>
     <div id="sidebar-wrapper">
         <div class="sidebar-card">
