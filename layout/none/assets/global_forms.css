@@ -55,7 +55,8 @@ select.form-control{
 }
 
 .tf_underline_form .toggle.tech_forest,
-.tf_underline_form a.btn{
+.tf_underline_form a.btn,
+.tf_underline_form button{
     position:absolute;
     right:0;
     bottom:10px;
