@@ -209,7 +209,7 @@ $myinfo_row = $oDB->getOne("TF_member_tb AS m",$columns);
 
 <!--    배너슬라이드 섹션-->
 <br>
-<div id="demo" class="carousel slide standard" data-ride="carousel">
+<div id="demo" class="carousel slide standard d-sm-none" data-ride="carousel">
 
   <!-- The slideshow -->
   <div class="carousel-inner slick_wrap affix_middle">

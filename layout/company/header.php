@@ -1,6 +1,6 @@
 <header class="header_pc d-none d-lg-block">
     <div class="container py-0 my-0">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light m-0 p-0">
+        <nav class="navbar navbar-expand-lg navbar-light m-0 p-0">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item xs_content weight_normal"><a class="nav-link" href="#">내 정보 관리</a></li>
                 <li class="nav-item xs_content weight_normal"><a class="nav-link xs_content">|</a></li>
@@ -11,7 +11,7 @@
     </div>
     <hr class="p-0 m-0" />
     <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light">
             <a class="navbar-brand" href="#"><img src="/oPage/images/logo.png" height="40" /></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

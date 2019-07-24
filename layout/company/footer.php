@@ -8,10 +8,13 @@ if(!isset($footer_false)){
 <footer class="d-none d-sm-block bg-dark">
     <div class="container">
         <div class="row">
-            <div class="col-2">
+            <div class="col-3 pt-5">
 <!--                logo ?-->
+                <a href="<?=getUrl()?>">
+                <img src="/oPage/images/logo_gray.png" height="49" />
+                </a>
             </div>
-            <div class="col-10 pt-3">
+            <div class="col-9 pt-3">
                 <h6 class="text-warning mt-4 mb-0 pt-0 pb-0">CONTACT</h6>
                 <p class="text-light weight_lighter xs_content">
                     경남 창원시 마산회원구 봉암북7길 21, ICT 진흥센터 5동 706호<br />
