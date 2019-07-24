@@ -33,21 +33,4 @@ class technicianView{
       return $row;
     }
 
-
-// 이력서 완성도(기본정보+희망4종)
-// $sql = "SELECT *
-//         FROM TF_member_tb m
-//         LEFT JOIN TF_member_order mo ON m.m_idx = mo.m_idx
-//         LEFT JOIN TF_member_occupation o ON m.m_idx = o.m_idx
-//         LEFT JOIN TF_member_duty d ON m.m_idx = d.m_idx
-//         WHERE m.m_email != '' and
-//               m.m_birthday != '' and
-//               m.m_phone != '' and
-//               m.m_address != '' and
-//               m.m_address2 IS NOT NULL and
-//               m.m_address2 != '' and
-//               d.m_idx IS NOT NULL and
-//               m.m_idx = $get_m_idx";
-//   $my_info4_2 = record_set($sql);
-
 }

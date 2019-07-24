@@ -19,7 +19,8 @@ $add_html_header[] = "<link rel=\"stylesheet\" href=\"/layout/none/assets/global
 //    레이아웃 전용 커스텀
 $add_html_header[] = "<link rel=\"stylesheet\" href=\"/layout/company/assets/company_layout.css?nocache=".time()."\">";
 //    폼 커스텀
-$add_html_header[] = "<link rel=\"stylesheet\" href=\"/layout/none/assets/global_forms.css?nocache=".time()."\">";
+$add_html_header[] = "<link rel=\"stylesheet\" href=\"/layout/none/assets/global_forms.css?nocache=".time()."\">"
+$add_html_footer[] = '<script src="/layout/none/assets/default.js"></script>';;
 
 $add_body_class[] = 'for_company';
 

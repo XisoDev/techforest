@@ -33,6 +33,7 @@ $add_html_footer[] = '<script src="/layout/none/vendor/slick/slick.min.js"></scr
 $add_html_footer[] = '<script src="/layout/none/vendor/jquery.easing.js"></script>';
 $add_html_footer[] = '<script src="/layout/none/assets/xiso_common.js"></script>';
 $add_html_footer[] = '<script src="/layout/technician/assets/tech_global.js?nocache='.time().'"></script>';
+$add_html_footer[] = '<script src="/layout/none/assets/default.js"></script>';
 
 //하단 스크립트 로드.
 if($api_key["google_map"])
