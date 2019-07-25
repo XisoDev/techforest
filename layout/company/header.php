@@ -64,14 +64,28 @@
         </div>
         <aside class="nav flex-column">
             <a class="nav-link active" href="<?=getUrl('company','job_register')?>"><i class="xi-pen-o"></i> 공고등록</a>
-            <a class="nav-link" href="<?=getUrl('company','job')?>"><i class="xi-documents-o"></i> 공고 지원자관리</a>
-            <a class="nav-link" href="#"><i class="xi-documents-o"></i> 공고 지원자관리</a>
+            <a class="nav-link" href="<?=getUrl('company','job')?>"><i class="xi-documents-o"></i> 공고・지원자관리</a>
+            <a class="nav-link" href="#"><i class="xi-documents-o"></i> 서비스 이용현황</a>
                 <ul class="nav submenu">
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="#">- 공고등록</a>
+                        <a class="nav-link disabled" href="#">- 유료서비스 안내</a>
+                        <a class="nav-link disabled" href="#">- 서비스이용 및 결제내역</a>
                     </li>
                 </ul>
-            <a class="nav-link" href="#"><i class="xi-documents-o"></i> 공고 지원자관리</a>
+            <a class="nav-link" href="#"><i class="xi-documents-o"></i> 기술자숲 소개</a>
+              <ul class="nav submenu">
+                  <li class="nav-item">
+                      <a class="nav-link disabled" href="#">- 기업 소개</a>
+                      <a class="nav-link disabled" href="#">- 서비스 소개</a>
+                  </li>
+              </ul>
+            <a class="nav-link" href="#"><i class="xi-documents-o"></i> 문의하기</a>
+              <ul class="nav submenu">
+                  <li class="nav-item">
+                      <a class="nav-link disabled" href="#">- 1:1 문의</a>
+                      <a class="nav-link disabled" href="#">- 자주묻는 질문</a>
+                  </li>
+              </ul>
         </aside>
     </div>
     <div id="page-content-wrapper">
