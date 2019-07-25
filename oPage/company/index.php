@@ -69,6 +69,22 @@
         <div class="col-3 ml-0 pl-0">
             <a href="<?=getUrl('company','job_register')?>" class="mt-3 btn btn-block btn-primary btn-xxs btn-round">추가등록<i class="xi-plus"></i></a>
         </div>
+        <?php if($row['count_hire'] == 0){?>
+          <div class="col-12 mt-2">
+              <div class="flex-card-slick">
+                  <?php for($i=1; $i<=3; $i++){ ?>
+                      <div class="tech_card">
+                          <div class="thumbnail">
+                              <div class="icon_wrap">
+                                  <i class="xi-plus-circle xi-2x color_primary"></i>
+                              </div>
+                          </div>
+                          <p class="weight_lighter mt-2">공고등록하고<br />맞춤기술자 보기</p>
+                      </div>
+                  <?php } ?>
+              </div>
+          </div>
+        <?php }else{ ?>
         <div class="col-12 mt-2">
             <div class="flex-card-slick">
                 <?php foreach($output->get("hire_ing") as $val){ ?>
@@ -111,20 +127,14 @@
             </div>
         </div>
         <?php } ?>
+        <?php } ?>
 
-        <?php if(!$logged_info) { ?>
         <div class="col-12">
         <h5 class="weight_lighter mt-4">
             <span class="btn btn-round btn-xxs btn-primary">NEW</span>
             새로운 기술자가 등록됐어요!
         </h5>
         </div>
-        <?php } ?>
-        <?php if($logged_info) { ?>
-            <div class="col-12">
-                <h6 class="weight_lighter mt-4"><span class="red"><?=$logged_info['c_name']?></span>에 딱 맞는 공고를 찾아왔어요!</h6>
-            </div>
-        <?php } ?>
         <div class="col-12 mt-2">
             <div class="flex-card-slick">
                 <?php foreach($output->get("new_member2") as $val){ ?>

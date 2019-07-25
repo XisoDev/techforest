@@ -167,4 +167,128 @@ class memberController{
             return new Object(0,"네트워크 오류가 발생했습니다.");
         }
     }
+
+    function edit_phone($args){
+
+      date_default_timezone_set('Asia/Seoul');
+      $now_date = date(YmdHis);
+
+      $m_phone = $args->m_phone;
+      $m_idx = $_SESSION['LOGGED_INFO'];
+
+      $data = array(
+        "m_phone" => $m_phone,
+        "edit_date" => $now_date
+      );
+      global $oDB;
+      $oDB->where("m_idx",$m_idx);
+      $row = $oDB->update("TF_member_tb",$data);
+
+      if($row){
+        return new Object(0,"휴대폰번호가 변경되었습니다.");
+      }else{
+        return new Object(-1,"네트워크 오류가 발생했습니다.");
+      }
+
+    }
+
+    function edit_email($args){
+      date_default_timezone_set('Asia/Seoul');
+      $now_date = date(YmdHis);
+
+      $m_email = $args->m_email;
+      $m_idx = $_SESSION['LOGGED_INFO'];
+
+      $data = array(
+        "m_email" => $m_email,
+        "edit_date" => $now_date
+      );
+      global $oDB;
+      $oDB->where("m_idx",$m_idx);
+      $row = $oDB->update("TF_member_tb",$data);
+
+      if($row){
+        return new Object(0,"이메일 주소가 변경되었습니다.");
+      }else{
+        return new Object(-1,"네트워크 오류가 발생했습니다.");
+      }
+
+    }
+
+    function edit_pass($args){
+      date_default_timezone_set('Asia/Seoul');
+      $now_date = date(YmdHis);
+
+      $m_pw = $args->new_pass;
+      $m_idx = $_SESSION['LOGGED_INFO'];
+
+      $data = array(
+        "m_pw" => $m_pw,
+        "edit_date" => $now_date
+      );
+      global $oDB;
+      $oDB->where("m_idx",$m_idx);
+      $row = $oDB->update("TF_member_tb",$data);
+
+      if($row){
+        return new Object(0,"비밀번호가 변경되었습니다.");
+      }else{
+        return new Object(-1,"네트워크 오류가 발생했습니다.");
+      }
+    }
+
+    function edit_InCharge_name($args){
+      date_default_timezone_set('Asia/Seoul');
+      $now_date = date(YmdHis);
+
+      $select7 = $args->InCharge_name;
+      $m_idx = $_SESSION['LOGGED_INFO'];
+
+      $data = array(
+        "select7" => $select7,
+        "edit_date" => $now_date
+      );
+      global $oDB;
+      $oDB->where("m_idx",$m_idx);
+      $row = $oDB->update("TF_member_commerce_tb",$data);
+
+      if($row){
+        return new Object(0,"채용담당자 정보가 변경되었습니다.");
+      }else{
+        return new Object(-1,"네트워크 오류가 발생했습니다.");
+      }
+    }
+
+    function edit_id($args){
+      global $oDB;
+
+      $m_id = $args->m_id;
+      $m_idx = $_SESSION['LOGGED_INFO'];
+
+      $oDB->where("m_id",$m_id);
+      $id_row = $oDB->getOne("TF_member_tb",null,"m_id");
+      if(!$id_row){
+
+      }else{
+        return new Object(-1,"중복되는 아이디가 있습니다.");
+      }
+
+
+      date_default_timezone_set('Asia/Seoul');
+      $now_date = date(YmdHis);
+
+      $data = array(
+        "m_id" => $m_id,
+        "edit_date" => $now_date
+      );
+
+      $oDB->where("m_idx",$m_idx);
+      $row = $oDB->update("TF_member_tb",$data);
+
+      if($row){
+        return new Object(0,"아이디가 전환되었습니다.");
+      }else{
+        return new Object(-1,"네트워크 오류가 발생했습니다.");
+      }
+    }
 }
