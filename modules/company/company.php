@@ -19,6 +19,7 @@ class companyView{
         $output->add('new_member2',$this->new_member2());
         $output->add('now_application',$this->now_application());
         $output->add('hire_ing',$this->hire_ing());
+        // $output->add('hire_call',$this->hire_call());
 
         $set_template_file = "company/index.php";
 
@@ -225,4 +226,19 @@ class companyView{
           return $row;
 
         }
+
+        // function hire_call(){
+        //   global $oDB;
+        //
+        //   date_default_timezone_set('Asia/Seoul');
+        //   $now_date = date(YmdHis);
+        //
+        //   $c_idx = $_SESSION['c_idx'];
+        //
+        //   $oDB->where("c_idx",$c_idx);
+        //   $row = $oDB->get("TF_hire_tb");
+        //
+        //   return $row;
+        //
+        // }
 }

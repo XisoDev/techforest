@@ -51,7 +51,8 @@ jQuery(document).ready(function($){
         todayHighlight: true,
         autoclose: true,
         format: "yyyy-mm-dd",
-        language: "kr"
+        language: "kr",
+        showMonthAfterYear:true
     });
 });
 

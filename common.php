@@ -85,9 +85,16 @@ require_once "./modules/member/member.controller.php";
 $oMember = new memberController();
 if($_SESSION['LOGGED_INFO']){
     $logged_info = $oMember->getMemberInfoByMemberSrl($_SESSION['LOGGED_INFO']);
+    if($logged_info['is_commerce'] == 'Y'){
+      $_SESSION['c_idx'] = $logged_info['c_idx'];
+    }
 }else{
     $logged_info = false;
 }
+
+
+
+
 
 //모듈내에서 읽어올 변수들 미리생성
 $add_html_header = array();

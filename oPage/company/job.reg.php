@@ -13,9 +13,15 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link weight_bold" href="<?=getUrl('company','job_appRegister')?>" >
-                2단계<br />공고등록
-            </a>
+            <?if(!$logged_info['c_name'] || !$logged_info['registration'] || !$logged_info['address'] || !$logged_info['address2'] || !$logged_info['phonenumber'] || !$logged_info['select6']){?>
+              <a class="nav-link weight_bold" onclick="back()" >
+                  2단계<br />공고등록
+              </a>
+            <?}else{?>
+              <a class="nav-link weight_bold" href="<?=getUrl('company','job_appRegister')?>" >
+                  2단계<br />공고등록
+              </a>
+            <?}?>
         </li>
     </ul>
     <div class="content_padding mt-0 pt-0">
@@ -31,7 +37,6 @@
         </div>
 
             <!--성공하면 자동으로 2단계로 보낼수있음.-->
-            <input type="hidden" name="success_return_url" value="<?=getUrl('company','job_appRegister')?>" />
             <div class="container">
                 <div class="row">
                     <div class="col-12 mt-3 mx-0 px-0">
@@ -82,7 +87,7 @@
                             <select class="form-control" id="c_phone1" required>
                               <?
                                 $phonenumber = explode("-", $logged_info['phonenumber']);
-                                $phone_arr = array("선택", "02", "031", "032", "033", "041", "042", "043", "044", "051", "052", "053", "054", "055", "061", "062", "063", "064", "010", "070");
+                                $phone_arr = array("010", "02", "031", "032", "033", "041", "042", "043", "044", "051", "052", "053", "054", "055", "061", "062", "063", "064", "070");
 
                                 for($i = 0; $i < count($phone_arr); $i++) {
                                   if($phone_arr[$i] == $phonenumber[0]) {
@@ -164,23 +169,73 @@ $footer_false = true;
     var registration = $('#registration1').val() + "-" +  $('#registration2').val() + "-" +  $('#registration3').val();
     var address = $('#address').val();
     var address2 = $('#address2').val();
-    var select7 = $('#c_phone1').val() + "-" + $('#c_phone2').val() + "-" + $('#c_phone3').val();
+    var phonenumber = $('#c_phone1').val() + "-" + $('#c_phone2').val() + "-" + $('#c_phone3').val();
     var select6 = $('#c_email1').val() + "@" + $('#c_email2').val();
     var c_introduction = $('#c_introduction').val();
+
+    if(c_name == ""){
+      $('#c_name').focus();
+      return toastr.error("회사명을 입력해주세요.");
+    }
+
+    if($('#registration1').val() == ""){
+      $('#registration1').focus();
+      return toastr.error("사업자등록번호를 입력해주세요.");
+    }
+
+    if($('#registration2').val() == ""){
+      $('#registration2').focus();
+      return toastr.error("사업자등록번호를 입력해주세요.");
+    }
+
+    if($('#registration3').val() == ""){
+      $('#registration3').focus();
+      return toastr.error("사업자등록번호를 입력해주세요.");
+    }
+
+    if(address == ""){
+      $('#address').focus();
+      return toastr.error("주소를 입력해주세요.");
+    }
+
+    if(address2 == ""){
+      $('#address2').focus();
+      return toastr.error("상세주소를 입력해주세요.");
+    }
+
+    if($('#c_phone2').val() == ""){
+      $('#c_phone2').focus();
+      return toastr.error("담당자연락처를 입력해주세요.");
+    }
+
+    if($('#c_phone3').val() == ""){
+      $('#c_phone3').focus();
+      return toastr.error("담당자연락처를 입력해주세요.");
+    }
+
+    if($('#c_email1').val() == ""){
+      $('#c_email1').focus();
+      return toastr.error("담당자이메일을 입력해주세요.");
+    }
+
+    if($('#c_email2').val() == ""){
+      $('#c_email2').focus();
+      return toastr.error("담당자이메일을 입력해주세요.");
+    }
 
     var params = {};
     params["c_name"] = c_name;
     params["registration"] = registration;
     params["address"] = address;
     params["address2"] = address2;
-    params["select7"] = select7;
+    params["phonenumber"] = phonenumber;
     params["select6"] = select6;
     params["c_introduction"] = c_introduction;
     exec_json("company.company_info",params,function(ret_obj){
        //통신에러나 모듈내부에서 에러가있을땐 알아서 처리해주므로 성공시만 처리하면됨.
        // alert(ret_obj.message); // alert 해도되지만 toastr 권장
         toastr.success(ret_obj.message);
-        //location.reload();
+        document.location.href="<?=getUrl('company','job_appRegister')?>";
     });
 
   }
@@ -262,5 +317,9 @@ $footer_false = true;
 
    function click_email(email) {
      $("#c_email2").val(email);
+   }
+
+   function back(){
+     toastr.error("기업정보등록 후 이용하실 수 있습니다.");
    }
 </script>

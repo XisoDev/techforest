@@ -129,7 +129,7 @@ class companyController{
     $registration = $args->registration;
     $address = $args->address;
     $address2 = $args->address2;
-    $select7 = $args->select7;
+    $phonenumber = $args->phonenumber;
     $select6= $args->select6;
     $c_introduction = $args->c_introduction;
 
@@ -143,7 +143,7 @@ class companyController{
       "registration" => $registration,
       "address" => $address,
       "address2" => $address2,
-      "select7" => $select7,
+      "phonenumber" => $phonenumber,
       "select6" => $select6,
       "c_introduction" => $c_introduction,
       "reg_date" => $now_date

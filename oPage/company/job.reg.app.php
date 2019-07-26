@@ -1,3 +1,26 @@
+<?php
+date_default_timezone_set('Asia/Seoul');
+$now_date = date(YmdHis);
+
+$c_idx = $_SESSION['c_idx'];
+
+//이전공고 불러오기
+$oDB->where("c_idx",$c_idx);
+$oDB->where("job_end_date",$now_date,"<");
+$row = $oDB->get("TF_hire_tb");
+
+//직종리스트
+$oDB->orderBy("o_idx","ASC");
+$oDB->where("o_idx","1","!=");
+$oDB->where("o_is_show","Y");
+$occupation_row = $oDB->get("TF_occupation",null,"o_idx,o_name,o_is_show");
+
+//직무리스트
+$oDB->orderBy("duty_name","ASC");
+$oDB->orderBy("o_idx","ASC");
+$duty_row = $oDB->get("TF_duty");
+?>
+
 <section class="bg-white">
     <div class="content_padding mt-4 pt-5">
         <a href="#" onclick="history.back();"><i class="xi-arrow-left xi-2x"></i></a>
@@ -17,13 +40,14 @@
     </ul>
     <div class="content_padding mt-0 pt-0">
         <form action="" method="post">
-<!--            성공하면 메인으로 돌려보냄-->
-            <input type="hidden" name="success_return_url" value="<?=getUrl('company')?>" />
             <div class="container">
                 <div class="row">
                     <div class="col-12 mx-0 px-0 mb-2">
                         <select class="form-control">
                             <option value="">이전 채용공고 불러오기</option>
+                              <?php foreach($row as $val){ ?>
+                                <option value="<?=$val['h_idx']?>">[마감] <?=$val['h_title']?></option>
+                              <?php } ?>
                         </select>
                     </div>
                     <div class="col-12 mt-3 mx-0 px-0">
@@ -41,8 +65,10 @@
                         <h6>직종</h6>
                     </div>
                     <div class="col-12 mx-0 px-0 mb-2">
-                        <select class="form-control">
-                            <option value="">건설 / 조선</option>
+                        <select class="form-control" onchange="occupation(this)">
+                          <?php foreach($occupation_row as $val){
+                              echo "<option value=\"" . $val["o_idx"] . "\">" . $val["o_name"] . "</option>";
+                           } ?>
                         </select>
                     </div>
 
@@ -50,7 +76,7 @@
                         <h6>직무</h6>
                     </div>
                     <div class="col-12 mx-0 px-0 mb-2">
-                        <select class="form-control">
+                        <select class="form-control" id="select_duty">
                             <option value="">현장관리직</option>
                         </select>
                     </div>
@@ -111,9 +137,9 @@
                             <select class="form-control">
                                 <option value="0" selected="selected">김해시</option>
                             </select>
-                            <select class="form-control">
+                            <!-- <select class="form-control">
                                 <option value="0" selected="selected">삼안동</option>
-                            </select>
+                            </select> -->
                         </div>
                     </div>
 
@@ -124,11 +150,11 @@
                         <input type="text" class="form-control xiso_date" />
                         <i class="xi-calendar-check right-icon"></i>
                     </div>
-                    <div class="col-6 mx-0 px-0 mb-2 pl-1 position-relative">
+                    <!-- <div class="col-6 mx-0 px-0 mb-2 pl-1 position-relative">
                         <select class="form-control">
                             <option value="0" selected="selected">오전 8시</option>
                         </select>
-                    </div>
+                    </div> -->
 
                     <div class="col-12 mt-3 mx-0 px-0">
                         <h6>공고종료</h6>
@@ -137,11 +163,11 @@
                         <input type="text" class="form-control xiso_date" />
                         <i class="xi-calendar-check right-icon"></i>
                     </div>
-                    <div class="col-6 mx-0 px-0 mb-2 pl-1 position-relative">
+                    <!-- <div class="col-6 mx-0 px-0 mb-2 pl-1 position-relative">
                         <select class="form-control">
                             <option value="0" selected="selected">오후 10시 30분</option>
                         </select>
-                    </div>
+                    </div> -->
 
                     <div class="col-12 mt-3 mx-0 px-0">
                         <h6>기타정보</h6>
@@ -200,10 +226,10 @@
                         <input type="text" class="form-control" placeholder="871-81-00755" readonly="readonly" />
                     </div>
 
-                    <div class="col-12 text-left mt-0 mx-0 px-0 mt-4">
+                    <!-- <div class="col-12 text-left mt-0 mx-0 px-0 mt-4">
                         <h6>회사 간단소개</h6>
                         <textarea class="form-control"></textarea>
-                    </div>
+                    </div> -->
 
                     <div class="col-6 mt-4 px-0 mx-0 pr-1">
                         <button type="submit" class="btn border-primary btn-block btn-round">임시저장</button>
@@ -220,9 +246,23 @@
             </div>
         </form>
     </div>
-
-
 </section>
+
+<script type="text/javascript">
+var duty_arr = <? echo json_encode($duty_row); ?>;
+
+function occupation(obj){
+  $("#select_duty").empty();
+
+  for(var i = 0; i < duty_arr.length; i++){
+    if(obj.value == duty_arr[i]["o_idx"]){
+      var option = $('<option value="' +duty_arr[i]["duty_name"]+ '">' +duty_arr[i]["duty_name"]+ '</option>');
+      $("#select_duty").append(option);
+    }
+  }
+}
+
+</script>
 
 <?php
 $footer_false = true;
