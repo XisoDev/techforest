@@ -46,7 +46,7 @@
                         <div class="avatar square" style="background-image:url('/layout/none/assets/images/no_avatar.png');"></div>
                     </div>
                     <div class="col-8">
-                        <h5 class="weight_normal mb-1 mt-2"><?=$logged_info['m_name']?> 님</h5>
+                        <h5 class="weight_normal mb-1 mt-2"><?=$logged_info['c_name']?> 님</h5>
                         <h5 class="weight_lighter mt-0">환영합니다.</h5>
                     </div>
                 <?php } ?>
@@ -90,7 +90,7 @@
     </div>
     <div id="page-content-wrapper">
         <nav class="navbar navbar-expand-lg bg-primary">
-            <a class="navbar-brand text-white mx-auto" href="#">기술자숲</a>
+            <a class="navbar-brand text-white mx-auto" href="<?=getUrl('company')?>">기술자숲</a>
         </nav>
         <button type="button" class="hamburger animated fadeInLeft is-closed" data-toggle="offcanvas">
             <span class="hamb-top"></span>

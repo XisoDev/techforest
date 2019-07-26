@@ -9,7 +9,7 @@
         <h4 class="weight_bold mb-3">채용담당자님:)</h4>
         <?php } ?>
         <?php if($logged_info) { ?>
-        <h5 class="weight_lighter"><?=$logged_info['m_name']?> 채용담당자님:)</h5>
+        <h5 class="weight_lighter"><?=$logged_info['c_name']?> 채용담당자님:)</h5>
         <h5 class="weight_lighter mb-3">어떤 기술자를 찾고 계신가요?</h5>
         <?php } ?>
         <ul class="nav">

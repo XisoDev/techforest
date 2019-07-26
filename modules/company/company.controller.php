@@ -121,4 +121,40 @@ class companyController{
           return new Object(-1,"네트워크 오류가 발생했습니다.");
       }
   }
+
+  function company_info($args){
+    global $oDB;
+
+    $c_name = $args->c_name;
+    $registration = $args->registration;
+    $address = $args->address;
+    $address2 = $args->address2;
+    $select7 = $args->select7;
+    $select6= $args->select6;
+    $c_introduction = $args->c_introduction;
+
+    $m_idx=$_SESSION['LOGGED_INFO'];
+
+    date_default_timezone_set('Asia/Seoul');
+    $now_date = date(YmdHis);
+
+    $data = array(
+      "c_name" => $c_name,
+      "registration" => $registration,
+      "address" => $address,
+      "address2" => $address2,
+      "select7" => $select7,
+      "select6" => $select6,
+      "c_introduction" => $c_introduction,
+      "reg_date" => $now_date
+    );
+    $oDB->where("m_idx",$m_idx);
+    $row = $oDB->update("TF_member_commerce_tb", $data);
+
+    if($row){
+        return new Object(0,"기업정보가 등록되었습니다.");
+    }else{
+      return new Object(-1,"네트워크 오류가 발생했습니다.");
+    }
+  }
 }
