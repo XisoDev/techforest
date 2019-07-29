@@ -51,3 +51,12 @@ function getCookie(cookieName) {
 }
 	return unescape(cookieValue);
 }
+
+function onlyNumber(obj){
+	regNumber = /^[0-9]*$/;
+
+	if(!regNumber.test(obj.value)) {
+		$(obj).val($(obj).val().replace(/[^0-9]/g,""));
+		return toastr.error("숫자만 입력해주세요.");
+	}
+}

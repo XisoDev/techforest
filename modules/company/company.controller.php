@@ -157,4 +157,94 @@ class companyController{
       return new Object(-1,"네트워크 오류가 발생했습니다.");
     }
   }
+
+  function job_register_success($args){
+    global $oDB;
+
+    $c_idx = $args->c_idx;
+    $m_idx = $args->m_idx;
+    $h_title = $args->h_title;
+    $job_description = $args->job_description;
+    $o_idx = $args->o_idx;
+    $duty_name= $args->duty_name;
+    $salary_idx = $args->salary_idx;
+    $job_salary = $args->job_salary;
+    $job_is_career = $args->job_is_career;
+    $job_achievement = $args->job_achievement;
+    $w_idx = $args->w_idx;
+    $local_idx = $args->local_idx;
+    $city_idx = $args->city_idx;
+    $district_idx = $args->district_idx;
+    $job_start_date = $args->job_start_date;
+    $job_end_date = $args->job_end_date;
+    $job_manager = $args->job_manager;
+    $phonenumber = $args->phonenumber;
+    $select6 = $args->select6;
+    $h_certificate_array = $args->h_certificate_array;
+
+    date_default_timezone_set('Asia/Seoul');
+    $now_date = date(YmdHis);
+
+    if($h_idx > 0){
+
+    } else {
+      $oDB->orderBy("job_idx","DESC");
+      $oDB->where("c_idx",$c_idx);
+      $job_idx_row = $oDB->getOne("TF_hire_tb",1,"MAX(job_idx)+1 as job_idx");
+
+      $data = array(
+        "c_idx" => $c_idx,
+        "o_idx" => $o_idx,
+        "duty_name" => $duty_name,
+        "w_idx" => $w_idx,
+        "salary_idx" => $salary_idx,
+        "h_title" => $h_title,
+        "job_description" => $job_description,
+        "job_salary" => $job_salary,
+        "job_achievement" => $job_achievement,
+        "job_is_career" => $job_is_career,
+        "job_manager" => $job_manager,
+        "job_start_date" => $job_start_date,
+        "job_end_date" => $job_end_date,
+        "local_idx" => $local_idx,
+        "city_idx" => $city_idx,
+        "district_idx" => $district_idx,
+        "job_idx" => $job_idx_row['job_idx'],
+        "reg_date" => $now_date,
+        "edit_date" => $now_date
+      );
+      $row = $oDB->insert("TF_hire_tb", $data);
+
+      if($row){
+        $oDB->orderBy("h_idx","DESC");
+        $oDB->where("reg_date",$now_date);
+        $oDB->where("c_idx",$c_idx);
+        $h_row = $oDB->getOne("TF_hire_tb",1,"h_idx");
+        $h_idx = $h_row[0];
+
+        if($h_row > 0 && $h_certificate_array){
+          $oDB->where("h_idx",$h_idx);
+          $del_certificate = $oDB->delete("TF_hire_certificate");
+          if(!$del_certificate){
+            return new Object(-1,"네트워크 오류가 발생했습니다.(-2)");
+          }
+
+          for($i=0; $i<count($h_certificate_array); $i++) {
+            $certificate_data = array(
+              "h_idx"=>$h_idx,
+              "certificate_name"=>$h_certificate_array[$i]
+            );
+            $certificate_row = $oDB->insert("TF_hire_certificate",$certificate_data);
+          }
+          if(!$certificate_row){
+            return new Object(-1,"네트워크 오류가 발생했습니다.(-1)");
+          }
+        }
+
+        return new Object(0,"공고가 등록되었습니다.");
+      }else{
+        return new Object(-1,"네트워크 오류가 발생했습니다.");
+      }
+    }
+  }
 }

@@ -52,7 +52,6 @@ jQuery(document).ready(function($){
         autoclose: true,
         format: "yyyy-mm-dd",
         language: "kr",
-        showMonthAfterYear:true
     });
 });
 
