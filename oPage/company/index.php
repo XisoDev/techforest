@@ -1,32 +1,38 @@
+<?php
+  $c_idx = $_SESSION['c_idx'];
+  $oDB->where("c_idx",$c_idx);
+  $mc_row = $oDB->get("TF_member_commerce_tb");
+?>
+
 <div class="container-fluid welcome_seciton" style="background-image:url('/oPage/images/home_welcome.png');">
     <img src="/oPage/images/gear.png" class="rotating" style="position:absolute; width:30%; right:-5%; top:-5%;"  />
     <img src="/oPage/images/gear.png" class="rotating_slow" style="position:absolute; left:-35%; width:60%; top:3%;" />
     <div class="container">
     <div class="row">
         <div class="col">
-        <?php if(!$logged_info) { ?>
-        <h4 class="weight_lighter">안녕하세요</h4>
-        <h4 class="weight_bold mb-3">채용담당자님:)</h4>
-        <?php } ?>
-        <?php if($logged_info) { ?>
-        <h5 class="weight_lighter"><?=$logged_info['c_name']?> 채용담당자님:)</h5>
-        <h5 class="weight_lighter mb-3">어떤 기술자를 찾고 계신가요?</h5>
-        <?php } ?>
-        <ul class="nav">
-            <?php if(!$logged_info) { ?>
-            <li class="nav-item">
-                <a class="nav-link btn btn-warning btn-round btn-xs" href="<?=getUrl('member','login',false,array('cur' => $current_url))?>">로그인</a>
-            </li>
-            <?php } ?>
-            <li class="nav-item">
-                <!--            blank--> &nbsp;
-            </li>
-            <?php if(!$logged_info) { ?>
-            <li class="nav-item">
-                <a class="nav-link btn btn-danger btn-round btn-xs"  href="<?=getUrl('member','signUp')?>">회원가입</a>
-            </li>
-            <?php } ?>
-        </ul>
+          <?php if(!$logged_info) { ?>
+            <h4 class="weight_lighter">안녕하세요</h4>
+            <h4 class="weight_bold mb-3">채용담당자님:)</h4>
+          <?php } ?>
+          <?php if($logged_info) { ?>
+            <h5 class="weight_lighter"><?=$logged_info['c_name']?> 채용담당자님:)</h5>
+            <h5 class="weight_lighter mb-3">어떤 기술자를 찾고 계신가요?</h5>
+          <?php } ?>
+          <ul class="nav">
+              <?php if(!$logged_info) { ?>
+              <li class="nav-item">
+                  <a class="nav-link btn btn-warning btn-round btn-xs" href="<?=getUrl('member','login',false,array('cur' => $current_url))?>">로그인</a>
+              </li>
+              <?php } ?>
+              <li class="nav-item">
+                  <!--            blank--> &nbsp;
+              </li>
+              <?php if(!$logged_info) { ?>
+              <li class="nav-item">
+                  <a class="nav-link btn btn-danger btn-round btn-xs"  href="<?=getUrl('member','signUp')?>">회원가입</a>
+              </li>
+              <?php } ?>
+          </ul>
         </div>
     </div>
     </div>
@@ -116,10 +122,10 @@
                         </div>
                         <div class="row mt-1 mx-0 px-0">
                             <div class="col-6 mx-0 px-0">
-                                <a href="#" class="btn btn-light btn-block rounded-0">수정</a>
+                                <a href="<?=getUrl('company','edit_hire',false,array('h_idx' => $val['h_idx']));?>" class="btn btn-light btn-block rounded-0">수정</a>
                             </div>
                             <div class="col-6 mx-0 px-0">
-                                <a href="<?=getUrl('company','job',12345);?>" class="btn btn-light btn-block rounded-0 red">지원자 (<?=$val['applicant']?>)</a>
+                                <a href="<?=getUrl('company','job',$val['h_idx']);?>" class="btn btn-light btn-block rounded-0 red">지원자 (<?=$val['applicant']?>)</a>
                             </div>
                         </div>
                     </div>
@@ -220,10 +226,7 @@
     </div>
 </div>
 
-
-
-<!--// 팝업 배너 모달 -->
-
+<!-- 메인에 뜨는 공고등록 유도 팝업 -->
 <div class="modal fade" id="tech_modal_example" tabindex="-1" role="dialog" aria-labelledby="tech_forest_modal_window" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content text-center" style="border-radius:10px">
@@ -231,17 +234,17 @@
             <div class="square avatar bg-red mx-auto" style="width:120px; margin-top:-60px; background-image:url('/oPage/ncenter/images/header_icon.png');"></div>
             <div class="content_padding">
                 <h6 class="weight_lighter">지금 공고를 등록하시면 <span class="red">적합한 구직자와 빠르게</span> 연결될 수 있습니다.</h6>
-
                 <h6 class="weight_normal mb-2 mt-4 mb-3">공고를 등록하시겠습니까?</h6>
                 <a class="btn btn-block btn-danger btn-round btn-lg mb-3" href="#">공고 등록 하러가기</a>
             </div>
-
-            <a href="#" class="mt-2 btn btn-block btn-light" onclick="jQuery('#tech_modal_example').modal('hide');" style="border-radius:10px;">메인페이지로 이동</a>
+            <button class="mt-2 btn btn-block btn-light" onclick="jQuery('#tech_modal_example').modal('hide');" style="border-radius:10px;">메인페이지로 이동</button>
         </div>
     </div>
 </div>
+
+
 <script type="text/javascript">
-  if(<?=$_SESSION['LOGGED_INFO']?> > 0){
+  if(<?=$_SESSION['LOGGED_INFO']?> > 0 && <?=$row['count_hire']?> < 0 ){
     jQuery(window).on('load',function(){
         jQuery('#tech_modal_example').modal('show');
     });

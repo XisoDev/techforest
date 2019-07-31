@@ -4,8 +4,7 @@ $now_date = date(YmdHis);
 
 $c_idx = $_SESSION['c_idx'];
 $m_idx = $_SESSION['LOGGED_INFO'];
-
-$h_idx = 0;
+$h_idx = $_REQUEST['h_idx'];
 
 if(!$h_idx || $h_idx < 1) {
   $h_idx = 0;
@@ -14,7 +13,8 @@ if(!$h_idx || $h_idx < 1) {
 if($h_idx > 0){
   //공고정보
   $oDB->where("h_idx",$h_idx);
-  $row = $oDB->get("TF_hire_tb");
+
+  $edit_row = $oDB->get("TF_hire_tb");
 }
 
 //이전공고 불러오기
@@ -69,8 +69,9 @@ $oDB->orderBy("local_idx","ASC");
 $oDB->where("district_visible","Y");
 $district_arr = $oDB->get("TF_district_tb",null," district_idx, district_name, local_idx");
 
-?>
 
+?>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <section class="bg-white">
     <div class="content_padding mt-4 pt-5">
         <a href="#" onclick="history.back();"><i class="xi-arrow-left xi-2x"></i></a>
@@ -100,16 +101,16 @@ $district_arr = $oDB->get("TF_district_tb",null," district_idx, district_name, l
                         </select>
                     </div>
                     <div class="col-2 mx-0 px-0 mb-2 pl-1">
-                        <button class="btn btn-primary btn-block" style="height:45px;" onclick="hire_call()">확인</button>
+                        <button class="btn btn-primary btn-block" style="height:45px;" onclick="hire_call()"></button>
                     </div>
                     <div class="col-12 mt-3 mx-0 px-0">
                         <h6>공고제목</h6>
                     </div>
                     <div class="col-12 mx-0 px-0 mb-2">
-                        <input type="text" class="form-control" id="h_title" placeholder="공고제목" required>
+                        <input type="text" class="form-control" id="h_title" value="<?=$edit_row[0]['h_title']?>" placeholder="공고제목을 입력해주세요." required>
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="customCheck2">
-                            <label class="custom-control-label xs_content" for="customCheck2">단기일자리 (3개월이내)</label>
+                            <input type="checkbox" class="custom-control-input" id="short_term_check">
+                            <label class="custom-control-label xs_content" for="short_term_check">단기일자리 (3개월이내)</label>
                         </div>
                     </div>
 
@@ -135,7 +136,7 @@ $district_arr = $oDB->get("TF_district_tb",null," district_idx, district_name, l
                         <h6>직무 상세내용</h6>
                     </div>
                     <div class="col-12 mx-0 px-0 mb-2">
-                        <textarea class="form-control" id="job_description"></textarea>
+                        <textarea class="form-control" id="job_description" value="<?=$edit_row[0]['job_description']?>"></textarea>
                     </div>
 
                     <div class="col-12 mt-3 mx-0 px-0">
@@ -159,7 +160,7 @@ $district_arr = $oDB->get("TF_district_tb",null," district_idx, district_name, l
 
                                 <input type="text" class="form-control" id="salary" style="width:50px;" maxlength="10" onkeyup="onlyNumber(this)">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="salary_text">만원 이상</span>
+                                    <span class="input-group-text" id="salary_text" style="font-size:12px;">만원 이상</span>
                                 </div>
                             </div>
                         </div>
@@ -290,7 +291,6 @@ $district_arr = $oDB->get("TF_district_tb",null," district_idx, district_name, l
                         <textarea class="form-control"></textarea>
                     </div>
 
-<!--                    담당자정보-->
                     <div class="col-12 mt-3 mx-0 px-0">
                         <h6>담당자 정보</h6>
                     </div>
@@ -301,7 +301,7 @@ $district_arr = $oDB->get("TF_district_tb",null," district_idx, district_name, l
                     <div class="col-12 mx-0 px-0 pl-1 mb-2">
                       <label style="font-size:13px;">담당자 연락처</label>
                         <div class="input-group">
-                            <select class="form-control">
+                            <select class="form-control" id="c_phone1">
                               <?
                                 $phonenumber = explode("-", $logged_info['m_phone']);
                                 $phone_arr = array("선택", "02", "031", "032", "033", "041", "042", "043", "044", "051", "052", "053", "054", "055", "061", "062", "063", "064", "010", "070");
@@ -318,11 +318,11 @@ $district_arr = $oDB->get("TF_district_tb",null," district_idx, district_name, l
                             <div class="input-group-prepend">
                                 <span class="input-group-text">-</span>
                             </div>
-                            <input type="text" class="form-control" value="<?=$phonenumber[1]?>" maxlength="4" placeholder="0000" onkeyup="onlyNumber(this)">
+                            <input type="text" class="form-control" id="c_phone2" value="<?=$phonenumber[1]?>" maxlength="4" placeholder="0000" onkeyup="onlyNumber(this)">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">-</span>
                             </div>
-                            <input type="text" class="form-control" value="<?=$phonenumber[2]?>" maxlength="4" placeholder="0000" onkeyup="onlyNumber(this)">
+                            <input type="text" class="form-control" id="c_phone3" value="<?=$phonenumber[2]?>" maxlength="4" placeholder="0000" onkeyup="onlyNumber(this)">
                         </div>
                     </div>
                     <div class="col-12 mx-0 px-0 mb-2">
@@ -363,6 +363,16 @@ $district_arr = $oDB->get("TF_district_tb",null," district_idx, district_name, l
             </div>
     </div>
 </section>
+
+<div class="modal fade" id="job_reg_complete" style="display:none;" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <?php include "job.reg.complete.php"; ?>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script type="text/javascript">
 var duty_arr = <? echo json_encode($duty_row); ?>;
@@ -483,6 +493,11 @@ function hire_call(){
 }
 
 function hire_ok(){
+  if($("#short_term_check").is(":checked")){ //단기일자리 체크했을 때,
+      var short_term_check = 1;
+  }else{
+    var short_term_check = 0;
+  }
   var title = $("#h_title").val();
   var description = $("#job_description").val();
   var job_salary = $("#salary").val();
@@ -521,6 +536,7 @@ function hire_ok(){
     return toastr.error("공고종료일을 입력하세요.");
   }
 
+
   var params = {};
   params["h_idx"] = <?=$h_idx?>;
   params["c_idx"] = <?=$c_idx?>;
@@ -543,18 +559,21 @@ function hire_ok(){
   params["phonenumber"] = phonenumber;
   params["select6"] = select6;
   params["h_certificate_array"] = h_certificate_array;
+  params["h_certificate_count"] = h_certificate_count;
+  params["short_term_check"] = short_term_check;
 
   exec_json("company.job_register_success",params,function(ret_obj){
      //통신에러나 모듈내부에서 에러가있을땐 알아서 처리해주므로 성공시만 처리하면됨.
      // alert(ret_obj.message); // alert 해도되지만 toastr 권장
       toastr.success(ret_obj.message);
-      document.location.href="<?=getUrl('company','job_appRegisterComplete')?>";
+      jQuery('#job_reg_complete').modal('show');
   });
-
 }
+
 
 </script>
 
 <?php
 $footer_false = true;
+
 ?>

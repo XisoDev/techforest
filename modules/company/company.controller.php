@@ -11,7 +11,6 @@ class companyController{
   //
   //     return $row;
   // }
-
   function procCompanyCheckHasID($args){
 
       $id = $args->m_id;
@@ -161,6 +160,7 @@ class companyController{
   function job_register_success($args){
     global $oDB;
 
+    $h_idx = $args->h_idx;
     $c_idx = $args->c_idx;
     $m_idx = $args->m_idx;
     $h_title = $args->h_title;
@@ -181,16 +181,23 @@ class companyController{
     $phonenumber = $args->phonenumber;
     $select6 = $args->select6;
     $h_certificate_array = $args->h_certificate_array;
+    $h_certificate_count = $args->h_certificate_count;
+    $short_term_check = $args->short_term_check;
 
     date_default_timezone_set('Asia/Seoul');
     $now_date = date(YmdHis);
+
+    if($short_term_check == 1){
+      $h_title = "[단기]". $args->h_title;
+    }
 
     if($h_idx > 0){
 
     } else {
       $oDB->orderBy("job_idx","DESC");
       $oDB->where("c_idx",$c_idx);
-      $job_idx_row = $oDB->getOne("TF_hire_tb",1,"MAX(job_idx)+1 as job_idx");
+      $job_idx_row = $oDB->get("TF_hire_tb",null,"MAX(job_idx)+1");
+      $job_idx = (int)$job_idx_row[0];
 
       $data = array(
         "c_idx" => $c_idx,
@@ -209,38 +216,50 @@ class companyController{
         "local_idx" => $local_idx,
         "city_idx" => $city_idx,
         "district_idx" => $district_idx,
-        "job_idx" => $job_idx_row['job_idx'],
+        "job_idx" => $job_idx,
         "reg_date" => $now_date,
         "edit_date" => $now_date
       );
       $row = $oDB->insert("TF_hire_tb", $data);
 
+      $data_info = array(
+        "select6" => $select6,
+        "select7" => $job_manager,
+        "phonenumber" => $phonenumber,
+        "edit_date" => $now_date
+      );
+
+      $oDB->where("c_idx",$c_idx);
+      $row_info = $oDB->update("TF_member_commerce_tb",$data_info);
+
       if($row){
         $oDB->orderBy("h_idx","DESC");
         $oDB->where("reg_date",$now_date);
         $oDB->where("c_idx",$c_idx);
-        $h_row = $oDB->getOne("TF_hire_tb",1,"h_idx");
-        $h_idx = $h_row[0];
+        $h_row = $oDB->get("TF_hire_tb",null,"h_idx");
+        $h_idx = $h_row[0]["h_idx"];
 
-        if($h_row > 0 && $h_certificate_array){
-          $oDB->where("h_idx",$h_idx);
-          $del_certificate = $oDB->delete("TF_hire_certificate");
-          if(!$del_certificate){
+        $short_term_data = array(
+          "h_idx" => $h_idx
+        );
+        $short_term = $oDB->insert("TF_hire_short_term",$short_term_data);
+
+        // $oDB->where("h_idx",$h_idx);
+        // $del = $oDB->delete("TF_hire_certificate");
+        // if(!$del){
+        //   return new Object(-1,"네트워크 오류가 발생했습니다.(-2)");
+        // }
+
+        for($i = 0; $i < $h_certificate_count; $i++) {
+          $certificate_data[$i] = array(
+            "h_idx" => $h_idx,
+            "certificate_name" => $h_certificate_array[$i]
+          );
+          $certificate_row = $oDB->insert("TF_hire_certificate", $certificate_data[$i]);
+          if(!$certificate_row){
             return new Object(-1,"네트워크 오류가 발생했습니다.(-2)");
           }
-
-          for($i=0; $i<count($h_certificate_array); $i++) {
-            $certificate_data = array(
-              "h_idx"=>$h_idx,
-              "certificate_name"=>$h_certificate_array[$i]
-            );
-            $certificate_row = $oDB->insert("TF_hire_certificate",$certificate_data);
-          }
-          if(!$certificate_row){
-            return new Object(-1,"네트워크 오류가 발생했습니다.(-1)");
-          }
         }
-
         return new Object(0,"공고가 등록되었습니다.");
       }else{
         return new Object(-1,"네트워크 오류가 발생했습니다.");

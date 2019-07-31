@@ -1,8 +1,6 @@
 <style>
-    html,body{
-        height:100%;
-    }
-    body{
+
+    #job_reg_complete{
         background-image:url("/oPage/company/images/complete_human.png");
         background-size:80%;
         background-repeat:no-repeat;
@@ -16,6 +14,7 @@
     }
 
 </style>
+
 <section class="content_padding pt-5 text-center">
     <h4 class="red py-3">공고등록 완료!</h4>
     <h6 class="weight_lighter">적합한 기술자에게 전달중 !</h6>

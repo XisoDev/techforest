@@ -57,25 +57,25 @@ class companyView{
         global $site_info;
         $site_info->layout = "company";
 
-
         global $add_body_class;
         $add_body_class[] = "shrink";
 
         global $set_template_file;
 
         //$args->document_srl을 db에서 조회해서 존재하는 글이면 view를 뿌리고 아니면 list를 뿌려주면 됩니다.
-
         $output = new Object();
+        print_r($args);
+        exit();
         if($args->document_srl > 0){
             $set_template_file = "company/job.view.php";
             //여기 array 에는 해당 document_srl 로 조회한 job 정보를 넣으면됨.
             $output->add('oJob',array());
         }else{
+            $set_template_file = "company/job.list.php";
             //여기 array 에는 해당 job list를 담으면 됨. (php파일에서 foreach로 쓸수있음).
             $output->add('job_list',array());
-            $set_template_file = "company/job.list.php";
-        }
 
+        }
 
         return $output;
     }
@@ -193,15 +193,15 @@ class companyView{
     }
 
     function  now_application(){
-        global $oDB;
+      global $oDB;
 
-        $oDB->orderby("al.reg_date","DESC");
-        $oDB->join("TF_hire_tb h","al.h_idx = h.h_idx", "LEFT");
-        $oDB->join("TF_member_commerce_tb mc","h.c_idx = mc.c_idx", "LEFT");
-        $row = $oDB->get("TF_application_letter al",3,"al.h_idx, al.reg_date, mc.c_name");
+      $oDB->orderby("al.reg_date","DESC");
+      $oDB->join("TF_hire_tb h","al.h_idx = h.h_idx", "LEFT");
+      $oDB->join("TF_member_commerce_tb mc","h.c_idx = mc.c_idx", "LEFT");
+      $row = $oDB->get("TF_application_letter al",3,"al.h_idx, al.reg_date, mc.c_name");
 
-          return $row;
-        }
+      return $row;
+    }
 
         function hire_ing(){
           global $oDB;
@@ -227,18 +227,15 @@ class companyView{
 
         }
 
-        // function hire_call(){
-        //   global $oDB;
-        //
-        //   date_default_timezone_set('Asia/Seoul');
-        //   $now_date = date(YmdHis);
-        //
-        //   $c_idx = $_SESSION['c_idx'];
-        //
-        //   $oDB->where("c_idx",$c_idx);
-        //   $row = $oDB->get("TF_hire_tb");
-        //
-        //   return $row;
-        //
-        // }
+        function edit_hire($args){
+          global $set_template_file;
+
+          $output = new Object();
+
+          $h_idx = $args->h_idx;
+          $set_template_file = "company/job.reg.app.php";
+
+          return $output;
+
+        }
 }

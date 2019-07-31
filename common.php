@@ -93,9 +93,6 @@ if($_SESSION['LOGGED_INFO']){
 }
 
 
-
-
-
 //모듈내에서 읽어올 변수들 미리생성
 $add_html_header = array();
 $add_html_footer = array();
