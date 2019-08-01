@@ -1,9 +1,11 @@
 <style>
     html,body{
+        height:100%;
+    }
+    body{
         background-image:url('/oPage/images/home_bg.jpg');
         background-size:cover;
         background-position:center;
-        height:100%;
     }
     .welcome_seciton{
         position:relative;

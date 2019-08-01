@@ -281,8 +281,12 @@ class companyController{
         );
         $short_term = $oDB->insert("TF_hire_short_term",$short_term_data);
 
-        // $oDB->where("h_idx",$h_idx);
-        // $del = $oDB->delete("TF_hire_certificate");
+        // 위에서 정리된 oDB안의 내용을 reset없이 달고오면 안됩니다.
+        // $oDB = new MysqliDb($_db_config['host'], $_db_config['user_name'],$_db_config['password'],$_db_config['db'],$_db_config['port']);
+         // global $_db_config;
+         // $oDBDelete = new MysqliDb($_db_config['host'], $_db_config['user_name'],$_db_config['password'],$_db_config['db'],$_db_config['port']);
+        // $oDBDelete->where("h_idx",$h_idx);
+        // $del = $oDBDelete->delete("TF_hire_certificate");
         // if(!$del){
         //   return new Object(-1,"네트워크 오류가 발생했습니다.(-2)");
         // }
