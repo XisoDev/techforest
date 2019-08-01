@@ -19,7 +19,7 @@
     <hr class="p-0 m-0" />
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="#"><img src="/oPage/images/logo.png" height="40" /></a>
+            <a class="navbar-brand" href="<?=getUrl('technician')?>"><img src="/oPage/images/logo.png" height="40" /></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
