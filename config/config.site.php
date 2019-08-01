@@ -26,3 +26,4 @@ $site_info->layout = 'none';
 
 //set Category
 $category = array();
+

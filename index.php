@@ -33,6 +33,9 @@ if(isset($_GET['document_srl'])){
     $document_srl = false;
 }
 
+//메뉴리스트 로드
+require_once "./config/config.menu.php";
+
 //모듈 런
 $function_name = $act;
 $call_file = sprintf(_XISO_PATH_ . "/modules/%s/%s.php",$module,$module);

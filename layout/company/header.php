@@ -2,9 +2,16 @@
     <div class="container py-0 my-0">
         <nav class="navbar navbar-expand-lg navbar-light m-0 p-0">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item xs_content weight_normal"><a class="nav-link" href="#">내 정보 관리</a></li>
-                <li class="nav-item xs_content weight_normal"><a class="nav-link xs_content">|</a></li>
-                <li class="nav-item xs_content weight_normal"><a class="nav-link" href="#">로그아웃</a></li>
+                <?php
+                $key = true;
+                foreach($oMenu->common->list as $item){
+                    echo sprintf('<li class="nav-item xs_content weight_normal %s"><a class="nav-link" href="%s" %s>%s</a></li>',$item["active"],$item["link"],$item["new_window"],$item["title"]);
+                    if($key){
+                        echo "<li class=\"nav-item xs_content weight_normal\"><a class=\"nav-link xs_content\">|</a></li>";
+                        $key = false;
+                    }
+                }
+                ?>
                 <li class="nav-item xs_content active weight_normal"><a class="nav-link" href="#"><i class="xi-bell"></i></a></li>
             </ul>
         </nav>
@@ -19,11 +26,13 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item px-2 active"><a class="nav-link" href="#">공고등록</a></li>
-                    <li class="nav-item px-2 weight_normal"><a class="nav-link" href="#">공고・지원자관리</a></li>
-                    <li class="nav-item px-2 weight_normal"><a class="nav-link" href="#">기술자숲 소개</a></li>
-                    <li class="nav-item px-2 weight_normal"><a class="nav-link" href="#">서비스 이용현황</a></li>
-                    <li class="nav-item px-2 weight_normal"><a class="nav-link" href="#">문의</a></li>
+                    <?php
+                    foreach($oMenu->company->list as $item){
+                        echo sprintf('<li class="nav-item px-2 weight_normal %s"><a class="nav-link" href="%s" %s>%s',$item["active"],$item["link"],$item["new_window"],$item["title"]);
+
+                        echo "</a></li>";
+                    }
+                    ?>
                 </ul>
             </div>
         </nav>
@@ -53,39 +62,29 @@
             </div>
             </div>
             <div class="btn-group rounded-0 btn-block mt-2">
-                <?php if($logged_info) { ?>
-                    <a href="<?=getUrl('member')?>" class="btn btn-primary">내 정보 관리</a>
-                    <a href="/proc.php?act=member.procLogout" class="btn btn-primary">로그아웃</a>
-                <?php }else{ ?>
-                    <a href="<?=getUrl('member','login',false,array('cur' => $current_url))?>" class="btn btn-primary">로그인</a>
-                    <a href="#" class="btn btn-primary">회원가입</a>
-                <?php } ?>
+                <?php
+                    foreach($oMenu->common->list as $item){
+                        echo sprintf('<a href="%s" %s class="btn btn-primary">%s</a>', $item["link"], $item["new_window"],$item["title"]);
+                    }
+                ?>
             </div>
         </div>
         <aside class="nav flex-column">
-            <a class="nav-link active" href="<?=getUrl('company','job_register')?>"><i class="xi-pen-o"></i> 공고등록</a>
-            <a class="nav-link" href="<?=getUrl('company','job')?>"><i class="xi-documents-o"></i> 공고・지원자관리</a>
-            <a class="nav-link" href="#"><i class="xi-documents-o"></i> 서비스 이용현황</a>
-                <ul class="nav submenu">
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#">- 유료서비스 안내</a>
-                        <a class="nav-link disabled" href="#">- 서비스이용 및 결제내역</a>
-                    </li>
-                </ul>
-            <a class="nav-link" href="#"><i class="xi-documents-o"></i> 기술자숲 소개</a>
-              <ul class="nav submenu">
-                  <li class="nav-item">
-                      <a class="nav-link disabled" href="#">- 기업 소개</a>
-                      <a class="nav-link disabled" href="#">- 서비스 소개</a>
-                  </li>
-              </ul>
-            <a class="nav-link" href="#"><i class="xi-documents-o"></i> 문의하기</a>
-              <ul class="nav submenu">
-                  <li class="nav-item">
-                      <a class="nav-link disabled" href="#">- 1:1 문의</a>
-                      <a class="nav-link disabled" href="#">- 자주묻는 질문</a>
-                  </li>
-              </ul>
+            <?php
+            foreach($oMenu->company->list as $item){
+                echo sprintf('<a class="nav-link %s" href="%s" %s><i class="%s"></i> %s',$item["active"],$item["link"],$item["new_window"],$item["icon"],$item["title"]);
+                echo "</a>";
+                if(is_array($item["submenu"])){
+                    echo "<ul class=\"nav submenu\">";
+                    echo "<li class=\"nav-item\">";
+                    foreach($item["submenu"] as $sub_item){
+                        echo sprintf("<a class=\"nav-link disabled\" href=\"%s\" %s>- %s</a>",$sub_item["link"], $sub_item["new_window"], $sub_item["title"]);
+                    }
+                    echo "</li>";
+                    echo "</ul>";
+                }
+            }
+            ?>
         </aside>
     </div>
     <div id="page-content-wrapper">
