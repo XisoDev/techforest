@@ -192,7 +192,44 @@ class companyController{
     }
 
     if($h_idx > 0){
+      $data = array(
+        "o_idx" => $o_idx,
+        "duty_name" => $duty_name,
+        "w_idx" => $w_idx,
+        "salary_idx" => $salary_idx,
+        "h_title" => $h_title,
+        "job_description" => $job_description,
+        "job_salary" => $job_salary,
+        "job_achievement" => $job_achievement,
+        "job_is_career" => $job_is_career,
+        "job_manager" => $job_manager,
+        "job_start_date" => $job_start_date,
+        "job_end_date" => $job_end_date,
+        "local_idx" => $local_idx,
+        "city_idx" => $city_idx,
+        "district_idx" => $district_idx,
+        "edit_date" => $now_date,
+        "hire_is_show" => 'N'
+      );
+      $oDB->where("h_idx",$h_idx);
+      $a_row = $oDB->update("TF_hire_tb", $data);
 
+      $data_info = array(
+        "select6" => $select6,
+        "select7" => $select7,
+        "phonenumber" => $phonenumber,
+        "edit_date" => $now_date
+      );
+
+      $oDB->where("c_idx",$c_idx);
+      $row_info = $oDB->update("TF_member_commerce_tb",$data_info);
+
+      if($a_row){
+        $update_check = 1;
+        return new Object(0,"공고가 수정되었습니다.");
+      }else{
+        return new Object(-1,"네트워크 오류가 발생했습니다.(-3)");
+      }
     } else {
       $oDB->orderBy("job_idx","DESC");
       $oDB->where("c_idx",$c_idx);
@@ -224,7 +261,7 @@ class companyController{
 
       $data_info = array(
         "select6" => $select6,
-        "select7" => $job_manager,
+        "select7" => $select7,
         "phonenumber" => $phonenumber,
         "edit_date" => $now_date
       );
@@ -265,5 +302,23 @@ class companyController{
         return new Object(-1,"네트워크 오류가 발생했습니다.");
       }
     }
+  }
+
+  function close_hire($args){
+    global $oDB;
+
+    $h_idx = $args->h_idx;
+
+    date_default_timezone_set('Asia/Seoul');
+    $now_date = date(YmdHis);
+
+    $data = array(
+      "job_end_date" => $now_date
+    );
+    $oDB->where("h_idx",$h_idx);
+    $row = $oDB->update("TF_hire_tb",$data);
+  }
+  if($row){
+    return new Object(0,"공고마감처리가 완료되었습니다.");
   }
 }

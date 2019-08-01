@@ -1,9 +1,3 @@
-<?php
-  $c_idx = $_SESSION['c_idx'];
-  $oDB->where("c_idx",$c_idx);
-  $mc_row = $oDB->get("TF_member_commerce_tb");
-?>
-
 <div class="container-fluid welcome_seciton" style="background-image:url('/oPage/images/home_welcome.png');">
     <img src="/oPage/images/gear.png" class="rotating" style="position:absolute; width:30%; right:-5%; top:-5%;"  />
     <img src="/oPage/images/gear.png" class="rotating_slow" style="position:absolute; left:-35%; width:60%; top:3%;" />
@@ -122,7 +116,7 @@
                         </div>
                         <div class="row mt-1 mx-0 px-0">
                             <div class="col-6 mx-0 px-0">
-                                <a href="<?=getUrl('company','edit_hire',false,array('h_idx' => $val['h_idx']));?>" class="btn btn-light btn-block rounded-0">수정</a>
+                                <a href="<?=getUrl('company','job_appRegister',false,array('h_idx' => $val['h_idx']));?>" class="btn btn-light btn-block rounded-0">수정</a>
                             </div>
                             <div class="col-6 mx-0 px-0">
                                 <a href="<?=getUrl('company','job',$val['h_idx']);?>" class="btn btn-light btn-block rounded-0 red">지원자 (<?=$val['applicant']?>)</a>

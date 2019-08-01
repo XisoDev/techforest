@@ -13,9 +13,12 @@ if(!$h_idx || $h_idx < 1) {
 if($h_idx > 0){
   //공고정보
   $oDB->where("h_idx",$h_idx);
-
   $edit_row = $oDB->get("TF_hire_tb");
 }
+
+//자격증불러오기
+$oDB->where("h_idx",$h_idx);
+$edit_certificate = $oDB->get("TF_hire_certificate");
 
 //이전공고 불러오기
 $oDB->where("c_idx",$c_idx);
@@ -32,10 +35,6 @@ $occupation_row = $oDB->get("TF_occupation",null,"o_idx,o_name,o_is_show");
 $oDB->orderBy("duty_name","ASC");
 $oDB->orderBy("o_idx","ASC");
 $duty_row = $oDB->get("TF_duty");
-
-//필요자격증
-// $oDB->where("h_idx",$h_idx);
-// $certificate_row = $oDB->get("TF_hire_certificate",null,"certificate_name");
 
 // 자격증리스트
 $oDB->orderBy("seq","ASC");
@@ -69,6 +68,10 @@ $oDB->orderBy("local_idx","ASC");
 $oDB->where("district_visible","Y");
 $district_arr = $oDB->get("TF_district_tb",null," district_idx, district_name, local_idx");
 
+//급여리스트
+$oDB->orderBy("salary_idx","ASC");
+$oDB->where("salary_is_show","Y");
+$salary_list = $oDB->get("TF_salary",null,"salary_idx, salary_name, salary_is_show");
 
 ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -119,9 +122,14 @@ $district_arr = $oDB->get("TF_district_tb",null," district_idx, district_name, l
                     </div>
                     <div class="col-12 mx-0 px-0 mb-2">
                         <select class="form-control" id="o_idx" onchange="occupation(this)">
-                          <?php foreach($occupation_row as $val){
-                              echo "<option value=\"" . $val["o_idx"] . "\">" . $val["o_name"] . "</option>";
-                           } ?>
+                          <?php
+                            foreach($occupation_row as $val){
+                              if($val["o_idx"] == $edit_row[0]["o_idx"]){
+                                echo "<option value=\"" . $val["o_idx"] . "\" selected=\"selected\">" . $val["o_name"] . "</option>";
+                              }else{
+                                echo "<option value=\"" . $val["o_idx"] . "\">" . $val["o_name"] . "</option>";
+                              }
+                            } ?>
                         </select>
                     </div>
 
@@ -136,13 +144,21 @@ $district_arr = $oDB->get("TF_district_tb",null," district_idx, district_name, l
                         <h6>직무 상세내용</h6>
                     </div>
                     <div class="col-12 mx-0 px-0 mb-2">
-                        <textarea class="form-control" id="job_description" value="<?=$edit_row[0]['job_description']?>"></textarea>
+                        <textarea class="form-control" id="job_description"><?=$edit_row[0]['job_description']?></textarea>
                     </div>
 
                     <div class="col-12 mt-3 mx-0 px-0">
                         <h6 class="pull-left pt-1">필요자격증</h6>
                         <button class="btn btn-primary btn-xs ml-2" onclick="add_item()">추가하기</button>
-                        <div id="field" class="mt-2"></div>
+                        <div id="field" class="mt-2">
+                          <?php
+                            foreach ($edit_certificate as $val) { ?>
+                              <div style="margin:1px; display:flex">
+                                <input type="text" name="h_certificate" maxlength="25" value="<?=$val['certificate_name']?>" style="width:90%; height:35px" />
+                                <div style="flex:1; position:relative"><img src="../../img/close.png" alt="삭제" style="max-width:15px; position:absolute; margin:auto; top:0; bottom:0; left:0; right:0" onclick="remove_item(this)" /></div>
+                              </div>
+                            <?php } ?>
+                        </div>
                     </div>
 
                     <div class="col-12 mt-3 mx-0 px-0">
@@ -152,13 +168,18 @@ $district_arr = $oDB->get("TF_district_tb",null," district_idx, district_name, l
                         <div class="col-12 mx-0 px-0 pl-1 mb-2">
                             <div class="input-group">
                                 <select class="form-control" id="job_salary" onchange="salary_select_change(this)">
-                                    <option value="1" selected="selected">연봉</option>
-                                    <option value="2">월급</option>
-                                    <option value="3">일급</option>
-                                    <option value="4">시급</option>
+                                  <?php
+                                    foreach($salary_list as $val) {
+                                      if($val["salary_idx"] == $edit_row[0]["salary_idx"]) {
+                                        echo "<option value=\"" . $val["salary_idx"] . "\" selected=\"selected\">" . $val["salary_name"] . "</option>";
+                                      } else {
+                                        echo "<option value=\"" . $val["salary_idx"] . "\">" . $val["salary_name"] . "</option>";
+                                      }
+                                    }
+                                  ?>
                                 </select>
 
-                                <input type="text" class="form-control" id="salary" style="width:50px;" maxlength="10" onkeyup="onlyNumber(this)">
+                                <input type="text" class="form-control" id="salary" style="width:50px;" maxlength="10" value="<?=$edit_row[0]["job_salary"]?>" onkeyup="onlyNumber(this)">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="salary_text" style="font-size:12px;">만원 이상</span>
                                 </div>
@@ -177,7 +198,7 @@ $district_arr = $oDB->get("TF_district_tb",null," district_idx, district_name, l
 
                             for($i = 0; $i < count($job_is_career_arr); $i++) {
 
-                              if($job_is_career_arr[$i] == $row["job_is_career"]) {
+                              if($job_is_career_arr[$i] == $edit_row[0]["job_is_career"]) {
                                 echo "<option value=\"" . $job_is_career_arr[$i] . "\" selected=\"selected\">" . $job_is_career_arr[$i] . "</option>";
                               } else {
                                 echo "<option value=\"" . $job_is_career_arr[$i] . "\">" . $job_is_career_arr[$i] . "</option>";
@@ -197,7 +218,7 @@ $district_arr = $oDB->get("TF_district_tb",null," district_idx, district_name, l
 
                             for($i = 0; $i < count($job_achievement_arr); $i++) {
 
-                              if($job_achievement_arr[$i] == $row[0]["job_achievement"]) {
+                              if($job_achievement_arr[$i] == $edit_row[0]["job_achievement"]) {
                                 echo "<option value=\"" . $job_achievement_arr[$i] . "\" selected=\"selected\">" . $job_achievement_arr[$i] . "</option>";
                               } else {
                                 echo "<option value=\"" . $job_achievement_arr[$i] . "\">" . $job_achievement_arr[$i] . "</option>";
@@ -214,12 +235,11 @@ $district_arr = $oDB->get("TF_district_tb",null," district_idx, district_name, l
                     <div class="col-12 mx-0 px-0 mb-2">
                         <select class="form-control" id="w_idx">
                           <?php
-      											for($i = 0; $i < count($w_list); $i++) {
-
-      												if($w_list[$i]["w_idx"] == $hire_info[0]["w_idx"]) {
-      													echo "<option value=\"" . $w_list[$i]["w_idx"] . "\" selected=\"selected\">" . $w_list[$i]["w_name"] . "</option>";
+      											foreach($w_list as $val) {
+      												if($val["w_idx"] == $edit_row[0]["w_idx"]) {
+      													echo "<option value=\"" . $val["w_idx"] . "\" selected=\"selected\">" . $val["w_name"] . "</option>";
       												} else {
-      													echo "<option value=\"" . $w_list[$i]["w_idx"] . "\">" . $w_list[$i]["w_name"] . "</option>";
+      													echo "<option value=\"" . $val["w_idx"] . "\">" . $val["w_name"] . "</option>";
       												}
       											}
       										?>
@@ -234,7 +254,7 @@ $district_arr = $oDB->get("TF_district_tb",null," district_idx, district_name, l
                             <select class="form-control" id="local_select" onchange="workPlace(this)">
                               <?php
                                 foreach($local_arr as $val){
-                                  $selected = ($val['local_idx'] == $row[0]['local_idx']) ? "selected":"";
+                                  $selected = ($val['local_idx'] == $edit_row[0]['local_idx']) ? "selected":"";
                               ?>
                                   <option value="<?= $val['local_idx']; ?>" <?= $selected; ?>><?= $val['local_name']; ?></option>
                               <? } ?>
@@ -243,8 +263,8 @@ $district_arr = $oDB->get("TF_district_tb",null," district_idx, district_name, l
                               <option value=""></option>
                               <?php
                                 foreach($city_arr as $val){
-                                  if($value['local_idx'] == $row[0]['local_idx']){
-                                    $selected = ($val['city_idx']==$row[0]['city_idx']) ? "selected":"";
+                                  if($value['local_idx'] == $edit_row[0]['local_idx']){
+                                    $selected = ($val['city_idx']==$edit_row[0]['city_idx']) ? "selected":"";
                               ?>
                                     <option value="<?= $val['city_idx']; ?>" <?= $selected; ?>><? echo $val['city_name'];?></option>
                               <?php
@@ -256,8 +276,8 @@ $district_arr = $oDB->get("TF_district_tb",null," district_idx, district_name, l
                               <option value=""></option>
                               <?php
                                 foreach($district_arr as $val){
-                                  if($val['local_idx'] == $row[0]['local_idx']){
-                                    $selected = ($val['district_idx'] == $row[0]['district_idx']) ? "selected":"";
+                                  if($val['local_idx'] == $edit_row[0]['local_idx']){
+                                    $selected = ($val['district_idx'] == $edit_row[0]['district_idx']) ? "selected":"";
                                 ?>
                                     <option value="<?= $val['district_idx']; ?>" <?= $selected; ?>><?= $val['district_name']; ?></option>
                                 <?php
@@ -272,7 +292,7 @@ $district_arr = $oDB->get("TF_district_tb",null," district_idx, district_name, l
                         <h6>공고시작</h6>
                     </div>
                     <div class="col-12 mx-0 px-0 mb-2 pr-1 position-relative">
-                        <input type="text" class="form-control xiso_date" id="job_start_date" />
+                        <input type="text" class="form-control xiso_date" id="job_start_date" value="<?=substr($edit_row[0]["job_start_date"], 0, 10)?>" />
                         <i class="xi-calendar-check right-icon"></i>
                     </div>
 
@@ -280,7 +300,7 @@ $district_arr = $oDB->get("TF_district_tb",null," district_idx, district_name, l
                         <h6>공고종료</h6>
                     </div>
                     <div class="col-12 mx-0 px-0 mb-2 pr-1 position-relative">
-                        <input type="text" class="form-control xiso_date" id="job_end_date" />
+                        <input type="text" class="form-control xiso_date" id="job_end_date" value="<?=substr($edit_row[0]["job_start_date"], 0, 10)?>"/>
                         <i class="xi-calendar-check right-icon"></i>
                     </div>
 
@@ -288,7 +308,7 @@ $district_arr = $oDB->get("TF_district_tb",null," district_idx, district_name, l
                         <h6>기타정보</h6>
                     </div>
                     <div class="col-12 mx-0 px-0 mb-2">
-                        <textarea class="form-control"></textarea>
+                        <textarea class="form-control"><?=$edit_row[0]['job_manager']?></textarea>
                     </div>
 
                     <div class="col-12 mt-3 mx-0 px-0">
@@ -386,6 +406,10 @@ function occupation(obj){
       $("#select_duty").append(option);
     }
   }
+
+  if(<?=$h_idx?> > 0){
+    $("#select_duty").val("<?=$edit_row[0]['duty_name']?>").attr("selected", "selected");
+  }
 }
 
 /*
@@ -450,8 +474,7 @@ function workPlace(obj){
       }
     }
 
-  }
-  else if(obj.value > 8 && obj.value < 18){
+  }else if(obj.value > 8 && obj.value < 18){
     $("#city_select").prop('disabled', false);
     $("#city_select").empty();
     $("#district_select").prop('disabled', true);
@@ -489,7 +512,7 @@ function click_email(email) {
 
 function hire_call(){
   var hire_sel = $("#hire_call_select option:selected").val();
-  location.href="./job_appRegister?h_idx="+hire_sel;
+  document.location.href = "<?=getUrl('company','edit_hire',false,array('h_idx' => hire_sel))?>";
 }
 
 function hire_ok(){
@@ -566,6 +589,7 @@ function hire_ok(){
      //통신에러나 모듈내부에서 에러가있을땐 알아서 처리해주므로 성공시만 처리하면됨.
      // alert(ret_obj.message); // alert 해도되지만 toastr 권장
       toastr.success(ret_obj.message);
+      // alert(ret_obj.result);
       jQuery('#job_reg_complete').modal('show');
   });
 }

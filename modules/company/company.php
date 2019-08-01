@@ -64,8 +64,7 @@ class companyView{
 
         //$args->document_srl을 db에서 조회해서 존재하는 글이면 view를 뿌리고 아니면 list를 뿌려주면 됩니다.
         $output = new Object();
-        print_r($args);
-        exit();
+
         if($args->document_srl > 0){
             $set_template_file = "company/job.view.php";
             //여기 array 에는 해당 document_srl 로 조회한 job 정보를 넣으면됨.
@@ -227,15 +226,4 @@ class companyView{
 
         }
 
-        function edit_hire($args){
-          global $set_template_file;
-
-          $output = new Object();
-
-          $h_idx = $args->h_idx;
-          $set_template_file = "company/job.reg.app.php";
-
-          return $output;
-
-        }
 }
