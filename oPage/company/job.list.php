@@ -4,6 +4,11 @@ $now_date = date(YmdHis);
 
 $m_idx = $_SESSION['LOGGED_INFO'];
 
+if(!$m_idx || $m_idx < 1){
+
+}
+
+
 //진행중인 공고리스트
 $oDB->orderby("h.h_idx","DESC");
 $oDB->groupBy("h.h_idx");
@@ -34,7 +39,7 @@ $end_row = $oDB->get("TF_hire_tb h",null,"local_name,city_name,district_name,h.h
 ?>
 
 <section class="content_padding mt-4 pt-5 bg-white">
-    <a href="#" onclick="history.back();"><i class="xi-arrow-left xi-2x"></i></a>
+    <i class="xi-arrow-left xi-2x" onclick="history.back();"></i>
     <h5 class="weight_normal">공고 ・ 지원자관리</h5>
 </section>
 <div class="container">
@@ -83,7 +88,7 @@ $end_row = $oDB->get("TF_hire_tb h",null,"local_name,city_name,district_name,h.h
                     <a href="#" class="btn btn-light btn-block rounded-0">수정</a>
                 </div>
                 <div class="col-6 mx-0 px-0">
-                    <a href="<?=getUrl('company','job',100);?>" class="btn btn-light btn-block rounded-0 red">지원자 (<?=$val['applicant']?>)</a>
+                    <a href="<?=getUrl('company','job',false,array('h_idx' => $val['h_idx']));?>" class="btn btn-light btn-block rounded-0 red">지원자 (<?=$val['applicant']?>)</a>
                 </div>
             </div>
         </div>
@@ -94,7 +99,7 @@ $end_row = $oDB->get("TF_hire_tb h",null,"local_name,city_name,district_name,h.h
         <h6 class="weight_normal">마감된공고를 확인하세요.</h6>
     </div>
     <?php foreach($end_row as $val){ ?>
-        <div class="tech_card bg-white mb-4">
+        <div class="tech_card bg-white mb-4" id="end_list">
             <div class="thumbnail mx-0 px-0" style="background-image:url('http://www.planttech.co.kr/wp-content/uploads/2018/07/%EC%82%BC%EC%84%B1%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%811-820x457.png')">
                 <div class="overlay"><span class="overlay-content"><?=$logged_info['c_name']?></span></div>
             </div>
@@ -123,12 +128,12 @@ $end_row = $oDB->get("TF_hire_tb h",null,"local_name,city_name,district_name,h.h
             </div>
             <div class="row mt-1 mx-0 px-0">
                 <div class="col-12 mx-0 px-0">
-                    <a href="<?=getUrl('company','job',12345);?>" class="btn btn-secondary btn-block rounded-0">지원자 보기(<?=$val['applicant']?>)</a>
+                    <a href="<?=getUrl('company','job',false,array('h_idx' => $val['h_idx']));?>" class="btn btn-secondary btn-block rounded-0">지원자 보기(<?=$val['applicant']?>)</a>
                 </div>
             </div>
         </div>
     <?php } ?>
-    <a href="#" class="btn btn-block btn-primary">마감된 공고 더보기</a>
+    <button class="btn btn-block btn-primary" onclick="">마감된 공고 더보기</button>
 </div>
 
 <script type="text/javascript">
@@ -139,7 +144,11 @@ $end_row = $oDB->get("TF_hire_tb h",null,"local_name,city_name,district_name,h.h
       params["h_idx"] = h_idx;
       exec_json("company.close_hire",params,function(ret_obj){
           toastr.success(ret_obj.message);
+          location.reload();
       });
     }
   }
+
+
+
 </script>

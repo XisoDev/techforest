@@ -119,7 +119,7 @@
                                 <a href="<?=getUrl('company','job_appRegister',false,array('h_idx' => $val['h_idx']));?>" class="btn btn-light btn-block rounded-0">수정</a>
                             </div>
                             <div class="col-6 mx-0 px-0">
-                                <a href="<?=getUrl('company','job',$val['h_idx']);?>" class="btn btn-light btn-block rounded-0 red">지원자 (<?=$val['applicant']?>)</a>
+                                <a href="<?=getUrl('company','job',false,array('h_idx' => $val['h_idx']));?>" class="btn btn-light btn-block rounded-0 red">지원자 (<?=$val['applicant']?>)</a>
                             </div>
                         </div>
                     </div>
@@ -211,7 +211,7 @@
                     ?>
                       <p>
                         <span class="btn btn-round btn-xxs btn-danger"><?=$application_time?></span>
-                        <?=$val['c_name']?>에 지원자가 발생했습니다.
+                        <?=$val['c_name']?> 에 지원자가 발생했습니다.
                       </p>
                 <?}?>
                 </div>
@@ -243,4 +243,5 @@
         jQuery('#tech_modal_example').modal('show');
     });
   }
+
 </script>

@@ -317,8 +317,10 @@ class companyController{
     );
     $oDB->where("h_idx",$h_idx);
     $row = $oDB->update("TF_hire_tb",$data);
+    if($row){
+      return new Object(0,"공고마감처리가 완료되었습니다.");
+
+    }
   }
-  if($row){
-    return new Object(0,"공고마감처리가 완료되었습니다.");
-  }
+
 }
