@@ -35,11 +35,21 @@ if(!isset($footer_false)){
                 </div>
                 <nav class="navbar navbar-expand-lg navbar-light m-0 p-0">
                     <ul class="navbar-nav">
-                        <li class="nav-item xs_content weight_normal"><a class="text-secondary ml-0 pl-0 nav-link" href="#">이용약관</a></li>
-                        <li class="nav-item xs_content weight_normal"><a class="text-secondary nav-link xs_content">|</a></li>
-                        <li class="nav-item xs_content weight_normal"><a class="text-secondary nav-link" href="#">문의하기</a></li>
-                        <li class="nav-item xs_content weight_normal"><a class="text-secondary nav-link xs_content">|</a></li>
-                        <li class="nav-item xs_content weight_normal"><a class="text-secondary nav-link" href="#">회원탈퇴</a></li>
+                        <?php
+                        $key = true;
+                        foreach($oMenu->footer->list as $item_key => $item){
+                            if($key){
+                                $add_class = "ml-0 pl-0";
+                                $key = false;
+                            }else{
+                                $add_class = "";
+                            }
+                            echo sprintf('<li class="nav-item xs_content weight_normal"><a class="text-secondary nav-link %s" href="%s" %s>%s</a></li>',$add_class,$item["link"],$item["new_window"],$item["title"]);
+                            if($item_key < count($oMenu->footer->list)-1){
+                                echo "<li class=\"nav-item xs_content weight_normal\"><a class=\"text-secondary nav-link xs_content\">|</a></li>";
+                            }
+                        }
+                        ?>
                     </ul>
                 </nav>
 

@@ -56,6 +56,30 @@ $oMenu->common->list[] = array(
 //하단메뉴
 $oMenu->footer = new stdClass();
 $oMenu->footer->list = array();
+$oMenu->footer->list[] = array(
+    "title" => "이용약관",
+    "link" => "#",
+    "active_mid" => "page",
+    "active_act" => time(),
+    "new_window" => "N",
+    "is_logged" => "N",
+);
+$oMenu->footer->list[] = array(
+    "title" => "문의하기",
+    "link" => "#",
+    "active_mid" => "page",
+    "active_act" => time(),
+    "new_window" => "N",
+    "is_logged" => "N",
+);
+$oMenu->footer->list[] = array(
+    "title" => "회원탈퇴",
+    "link" => "#",
+    "active_mid" => "page",
+    "active_act" => time(),
+    "new_window" => "N",
+    "is_logged" => "N",
+);
 
 //기업메뉴
 $oMenu->company = new stdClass();
