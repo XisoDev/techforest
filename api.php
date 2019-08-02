@@ -7,7 +7,12 @@ $output = new stdClass();
 $request = file_get_contents("php://input");
 
 parse_str($request,$args);
+
+if(!count($args)){
+    $args = $_REQUEST;
+}
 $args = (object)$args;
+
 
 if($args->act && $args->module){
 
@@ -34,13 +39,13 @@ if($args->act && $args->module){
         if(method_exists($object, $function_name)){
             $output = $object->$function_name($args);
         }else{
-            $output = new Object(-1, "잘못된 요청입니다." . $object . " - " . $function_name);
+            $output = new Object(-7, "잘못된 요청입니다." . $object . " - " . $function_name);
         }
     }else{
-        $output = new Object(-1, "존재하지 않는 모듈입니다.");
+        $output = new Object(-8, "존재하지 않는 모듈입니다.");
     }
 }else{
-    $output = new Object(-1, "응답할 데이터가 없습니다.");
+    $output = new Object(-9, "응답할 데이터가 없습니다.");
 }
 
 echo json_encode($output);
