@@ -4,7 +4,7 @@ $now_date = date(YmdHis);
 
 $c_idx = $_SESSION['c_idx'];
 $m_idx = $_SESSION['LOGGED_INFO'];
-$h_idx = $_REQUEST['h_idx'];
+$h_idx = $document_srl;
 
 if(!$h_idx || $h_idx < 1) {
   $h_idx = 0;
@@ -155,7 +155,7 @@ $salary_list = $oDB->get("TF_salary",null,"salary_idx, salary_name, salary_is_sh
                             foreach ($edit_certificate as $val) { ?>
                               <div style="margin:1px; display:flex">
                                 <input type="text" name="h_certificate" maxlength="25" value="<?=$val['certificate_name']?>" style="width:90%; height:35px" />
-                                <div style="flex:1; position:relative"><img src="../../img/close.png" alt="삭제" style="max-width:15px; position:absolute; margin:auto; top:0; bottom:0; left:0; right:0" onclick="remove_item(this)" /></div>
+                                <div style="flex:1; position:relative"><img src="../../../img/close.png" alt="삭제" style="max-width:15px; position:absolute; margin:auto; top:0; bottom:0; left:0; right:0" onclick="remove_item(this)" /></div>
                               </div>
                             <?php } ?>
                         </div>

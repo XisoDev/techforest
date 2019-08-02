@@ -69,8 +69,13 @@ class memberController{
     }
 
     function procLogout(){
-        unset($_SESSION['LOGGED_INFO']);
-        return new Object();
+      if($_SESSION["USER_TYPE"] == "company"){
+        header("Location:" . getUrl('company'));
+      }else{
+        header("Location:" . getUrl('technician'));
+      }
+      unset($_SESSION['LOGGED_INFO']);
+      return new Object();
     }
 
     function procMemberCheckHasID($args){

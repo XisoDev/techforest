@@ -44,21 +44,26 @@ class companyView{
     //이력서보기
     function application($args){
         // $args->document_srl 여기로 이력서번호가 들어옴.
+        global $set_template_file;
         global $site_info;
+        global $add_body_class;
+        global $oDB;
         $site_info->layout = "company";
 
-
-        global $add_body_class;
         $add_body_class[] = "shrink";
-
-        global $set_template_file;
 
         $output = new Object();
 
         if($args->document_srl > 0){
             $set_template_file = "company/application.view.php";
             //여기 array 에는 해당 document_srl 로 조회한 job 정보를 넣으면됨.
-            $output->add('oJob',array());
+            //$output->add('oJob',array());
+            $m_idx = $args->document_srl;
+            $oDB->where("m_idx",$m_idx);
+            $app_info_row = $oDB->get("TF_member_tb");
+
+            $output->add('app_info_row',$app_info_row);
+
         }else{
             $set_template_file = "404.html";
             $output->setError(-1);
@@ -81,15 +86,35 @@ class companyView{
         $output = new Object();
 
         global $oDB;
+
+        $now_date = date("YmdHis");
+        $m_idx = $_SESSION['LOGGED_INFO'];
+
         if($args->document_srl > 0){
-            $set_template_file = "company/job.view.php";
-            //여기 array 에는 해당 document_srl 로 조회한 job 정보를 넣으면됨.
-            $output->add('oJob',array());
+          $set_template_file = "company/job.view.php";
+          //여기 array 에는 해당 document_srl 로 조회한 job 정보를 넣으면됨.
+          //$output->add('oJob',array());
+          $h_idx = $args->document_srl;
+          $c_idx = $_SESSION['c_idx'];
+
+          $oDB->orderBy("al.seq","DESC");
+          $oDB->groupBy("al.m_idx");
+          $oDB->where("al.isVisible","Y");
+          $oDB->where("h.c_idx",$c_idx);
+          $oDB->where("al.h_idx",$h_idx);
+          $oDB->join("TF_a_line_self ls","ls.m_idx = al.m_idx","LEFT");
+          $oDB->join("TF_hire_tb h","al.h_idx = h.h_idx","LEFT");
+          $oDB->join("TF_member_tb m","al.m_idx = m.m_idx","LEFT");
+          $oDB->join("TF_member_career_tb AS mc", "m.m_idx = mc.m_idx", "LEFT");
+          $application_row = $oDB->get("TF_application_letter al",null,"group_concat(distinct(mc.duty_name)) as duty_name, m.m_idx, m.m_name, m.m_human, m.m_birthday, m.m_phone, m.m_email, al.reg_date, a_line_self");
+
+          $output->add('application_row',$application_row);
+
         }else{
             $set_template_file = "company/job.list.php";
             //date 포맷은 텍스트로 쓰셔요~
-            $now_date = date("YmdHis");
-            $m_idx = $_SESSION['LOGGED_INFO'];
+
+            //m_idx없을때
             if(!$m_idx || $m_idx < 1){
 
             }

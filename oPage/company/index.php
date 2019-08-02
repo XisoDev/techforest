@@ -116,10 +116,10 @@
                         </div>
                         <div class="row mt-1 mx-0 px-0">
                             <div class="col-6 mx-0 px-0">
-                                <a href="<?=getUrl('company','job_appRegister',false,array('h_idx' => $val['h_idx']));?>" class="btn btn-light btn-block rounded-0">수정</a>
+                                <a href="<?=getUrl('company','job_appRegister',$val['h_idx']);?>" class="btn btn-light btn-block rounded-0">수정</a>
                             </div>
                             <div class="col-6 mx-0 px-0">
-                                <a href="<?=getUrl('company','job',false,array('h_idx' => $val['h_idx']));?>" class="btn btn-light btn-block rounded-0 red">지원자 (<?=$val['applicant']?>)</a>
+                                <a href="<?=getUrl('company','job',$val['h_idx']);?>" class="btn btn-light btn-block rounded-0 red">지원자 (<?=$val['applicant']?>)</a>
                             </div>
                         </div>
                     </div>

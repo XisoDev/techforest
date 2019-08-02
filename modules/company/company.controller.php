@@ -224,17 +224,36 @@ class companyController{
       $oDB->where("c_idx",$c_idx);
       $row_info = $oDB->update("TF_member_commerce_tb",$data_info);
 
+      //global $_db_config;
+      //$oDBDelete = new MysqliDb($_db_config['host'], $_db_config['user_name'],$_db_config['password'],$_db_config['db'],$_db_config['port']);
+      $oDB->where("h_idx",$h_idx);
+      $del = $oDB->delete("TF_hire_certificate");
+      if(!$del){
+        return new Object(-1,"네트워크 오류가 발생했습니다.(-3)");
+      }
+
+      for($i = 0; $i < $h_certificate_count; $i++) {
+        $certificate_data[$i] = array(
+          "h_idx" => $h_idx,
+          "certificate_name" => $h_certificate_array[$i]
+        );
+        $certificate_row = $oDB->insert("TF_hire_certificate", $certificate_data[$i]);
+        if(!$certificate_row){
+          return new Object(-1,"네트워크 오류가 발생했습니다.(-1)");
+        }
+      }
+
       if($a_row){
         $update_check = 1;
         return new Object(0,"공고가 수정되었습니다.");
       }else{
-        return new Object(-1,"네트워크 오류가 발생했습니다.(-3)");
+        return new Object(-1,"네트워크 오류가 발생했습니다.(-2)");
       }
     } else {
       $oDB->orderBy("job_idx","DESC");
       $oDB->where("c_idx",$c_idx);
-      $job_idx_row = $oDB->get("TF_hire_tb",null,"MAX(job_idx)+1");
-      $job_idx = (int)$job_idx_row[0];
+      $job_idx_row = $oDB->get("TF_hire_tb",null,"MAX(job_idx)+1 as job_idx");
+      $job_idx = (int)$job_idx_row[0]['job_idx'];
 
       $data = array(
         "c_idx" => $c_idx,
@@ -282,14 +301,7 @@ class companyController{
         $short_term = $oDB->insert("TF_hire_short_term",$short_term_data);
 
         // 위에서 정리된 oDB안의 내용을 reset없이 달고오면 안됩니다.
-        // $oDB = new MysqliDb($_db_config['host'], $_db_config['user_name'],$_db_config['password'],$_db_config['db'],$_db_config['port']);
-         // global $_db_config;
-         // $oDBDelete = new MysqliDb($_db_config['host'], $_db_config['user_name'],$_db_config['password'],$_db_config['db'],$_db_config['port']);
-        // $oDBDelete->where("h_idx",$h_idx);
-        // $del = $oDBDelete->delete("TF_hire_certificate");
-        // if(!$del){
-        //   return new Object(-1,"네트워크 오류가 발생했습니다.(-2)");
-        // }
+        //$oDB = new MysqliDb($_db_config['host'], $_db_config['user_name'],$_db_config['password'],$_db_config['db'],$_db_config['port']);
 
         for($i = 0; $i < $h_certificate_count; $i++) {
           $certificate_data[$i] = array(
@@ -298,7 +310,7 @@ class companyController{
           );
           $certificate_row = $oDB->insert("TF_hire_certificate", $certificate_data[$i]);
           if(!$certificate_row){
-            return new Object(-1,"네트워크 오류가 발생했습니다.(-2)");
+            return new Object(-1,"네트워크 오류가 발생했습니다.(-1)");
           }
         }
         return new Object(0,"공고가 등록되었습니다.");
