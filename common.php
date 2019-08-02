@@ -27,6 +27,7 @@ for ($i=0; $i<$ext_cnt; $i++) {
 
 define("_XISO_", TRUE);
 @session_start();
+date_default_timezone_set('Asia/Seoul');
 
 if (!defined('_XISO_PATH_')){
     define('_XISO_PATH_', str_replace('common.php', '', str_replace('\\', '/', __FILE__)));

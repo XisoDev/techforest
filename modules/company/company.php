@@ -26,6 +26,21 @@ class companyView{
         return $output;
     }
 
+    function service($args){
+        global $site_info;
+        $site_info->layout = "company";
+
+        global $add_body_class;
+        $add_body_class[] = "shrink";
+
+        global $set_template_file;
+        $set_template_file = "company/service.list.php";
+
+        $output = new Object();
+        return $output;
+
+    }
+
     //이력서보기
     function application($args){
         // $args->document_srl 여기로 이력서번호가 들어옴.
@@ -65,15 +80,47 @@ class companyView{
         //$args->document_srl을 db에서 조회해서 존재하는 글이면 view를 뿌리고 아니면 list를 뿌려주면 됩니다.
         $output = new Object();
 
+        global $oDB;
         if($args->document_srl > 0){
             $set_template_file = "company/job.view.php";
             //여기 array 에는 해당 document_srl 로 조회한 job 정보를 넣으면됨.
             $output->add('oJob',array());
         }else{
             $set_template_file = "company/job.list.php";
-            //여기 array 에는 해당 job list를 담으면 됨. (php파일에서 foreach로 쓸수있음).
-            $output->add('job_list',array());
+            //date 포맷은 텍스트로 쓰셔요~
+            $now_date = date("YmdHis");
+            $m_idx = $_SESSION['LOGGED_INFO'];
+            if(!$m_idx || $m_idx < 1){
 
+            }
+            //진행중인 공고리스트
+            $oDB->orderby("h.h_idx","DESC");
+            $oDB->groupBy("h.h_idx");
+            $oDB->where("co.m_idx",$m_idx);
+            $oDB->where("h.job_end_date",$now_date,">");
+            $oDB->joinwhere("TF_application_letter al","al.isVisible","Y");
+            $oDB->join("TF_application_letter al","al.h_idx = h.h_idx","LEFT");
+            $oDB->join("TF_district_tb d","d.district_idx = h.district_idx","LEFT");
+            $oDB->join("TF_city_tb c","c.city_idx = h.city_idx","LEFT");
+            $oDB->join("TF_local_tb l","l.local_idx = h.local_idx","LEFT");
+            $oDB->join("TF_member_commerce_tb co","h.c_idx = co.c_idx","LEFT");
+            $row = $oDB->get("TF_hire_tb h",null,"local_name,city_name,district_name,h.h_idx,h_title,salary_idx,job_salary,count(al.m_idx) AS applicant,TO_DAYS(h.job_end_date )-TO_DAYS(NOW( )) AS job_end_day");
+
+            //마감된 공고리스트
+            $oDB->orderby("h.h_idx","DESC");
+            $oDB->groupBy("h.h_idx");
+            $oDB->where("co.m_idx",$m_idx);
+            $oDB->where("h.job_end_date",$now_date,"<");
+            $oDB->joinwhere("TF_application_letter al","al.isVisible","Y");
+            $oDB->join("TF_application_letter al","al.h_idx = h.h_idx","LEFT");
+            $oDB->join("TF_district_tb d","d.district_idx = h.district_idx","LEFT");
+            $oDB->join("TF_city_tb c","c.city_idx = h.city_idx","LEFT");
+            $oDB->join("TF_local_tb l","l.local_idx = h.local_idx","LEFT");
+            $oDB->join("TF_member_commerce_tb co","h.c_idx = co.c_idx","LEFT");
+            $end_row = $oDB->get("TF_hire_tb h",null,"local_name,city_name,district_name,h.h_idx,h_title,salary_idx,job_salary,count(al.m_idx) AS applicant,TO_DAYS(h.job_end_date )-TO_DAYS(NOW( )) AS job_end_day");
+
+            $output->add('row',$row);
+            $output->add('end_row',$end_row);
         }
 
         return $output;

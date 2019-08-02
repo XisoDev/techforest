@@ -1,41 +1,7 @@
 <?php
-date_default_timezone_set('Asia/Seoul');
-$now_date = date(YmdHis);
-
-$m_idx = $_SESSION['LOGGED_INFO'];
-
-if(!$m_idx || $m_idx < 1){
-
-}
-
-
-//진행중인 공고리스트
-$oDB->orderby("h.h_idx","DESC");
-$oDB->groupBy("h.h_idx");
-$oDB->where("co.m_idx",$m_idx);
-$oDB->where("h.job_end_date",$now_date,">");
-$oDB->joinwhere("TF_application_letter al","al.isVisible","Y");
-$oDB->join("TF_application_letter al","al.h_idx = h.h_idx","LEFT");
-$oDB->join("TF_district_tb d","d.district_idx = h.district_idx","LEFT");
-$oDB->join("TF_city_tb c","c.city_idx = h.city_idx","LEFT");
-$oDB->join("TF_local_tb l","l.local_idx = h.local_idx","LEFT");
-$oDB->join("TF_member_commerce_tb co","h.c_idx = co.c_idx","LEFT");
-$row = $oDB->get("TF_hire_tb h",null,"local_name,city_name,district_name,h.h_idx,h_title,salary_idx,job_salary,count(al.m_idx) AS applicant,TO_DAYS(h.job_end_date )-TO_DAYS(NOW( )) AS job_end_day");
-
-//마감된 공고리스트
-$oDB->orderby("h.h_idx","DESC");
-$oDB->groupBy("h.h_idx");
-$oDB->where("co.m_idx",$m_idx);
-$oDB->where("h.job_end_date",$now_date,"<");
-$oDB->joinwhere("TF_application_letter al","al.isVisible","Y");
-$oDB->join("TF_application_letter al","al.h_idx = h.h_idx","LEFT");
-$oDB->join("TF_district_tb d","d.district_idx = h.district_idx","LEFT");
-$oDB->join("TF_city_tb c","c.city_idx = h.city_idx","LEFT");
-$oDB->join("TF_local_tb l","l.local_idx = h.local_idx","LEFT");
-$oDB->join("TF_member_commerce_tb co","h.c_idx = co.c_idx","LEFT");
-$end_row = $oDB->get("TF_hire_tb h",null,"local_name,city_name,district_name,h.h_idx,h_title,salary_idx,job_salary,count(al.m_idx) AS applicant,TO_DAYS(h.job_end_date )-TO_DAYS(NOW( )) AS job_end_day");
-
-
+//두가지유형 다적어드림.
+//endrow는 변수에 넣어서 밑에서 쓰고 row는 밑에서 바로씀. 상황에따라 사용하시면됨. 굳이 루프한번쓰려고 변수에 따로 저장할필요는 없음
+$end_row = $output->get('end_row');
 ?>
 
 <section class="content_padding mt-4 pt-5 bg-white">
@@ -46,7 +12,7 @@ $end_row = $oDB->get("TF_hire_tb h",null,"local_name,city_name,district_name,h.h
     <div class="content_padding px-0">
     <h6><span class="red">진행중</span>인 공고를 확인해보세요.</h6>
     </div>
-    <?php foreach($row as $val){ ?>
+    <?php foreach($output->get('row') as $val){ ?>
         <div class="tech_card bg-white mb-4">
             <div class="thumbnail mx-0 px-0" style="background-image:url('http://www.planttech.co.kr/wp-content/uploads/2018/07/%EC%82%BC%EC%84%B1%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%811-820x457.png')">
                 <div class="overlay"><span class="overlay-content"><?=$logged_info['c_name']?></span></div>
