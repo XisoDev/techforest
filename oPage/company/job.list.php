@@ -88,7 +88,7 @@ $end_row = $oDB->get("TF_hire_tb h",null,"local_name,city_name,district_name,h.h
                     <a href="#" class="btn btn-light btn-block rounded-0">수정</a>
                 </div>
                 <div class="col-6 mx-0 px-0">
-                    <a href="<?=getUrl('company','job',false,array('h_idx' => $val['h_idx']));?>" class="btn btn-light btn-block rounded-0 red">지원자 (<?=$val['applicant']?>)</a>
+                    <a href="<?=getUrl('company','job',$val['h_idx']);?>" class="btn btn-light btn-block rounded-0 red">지원자 (<?=$val['applicant']?>)</a>
                 </div>
             </div>
         </div>
@@ -128,7 +128,7 @@ $end_row = $oDB->get("TF_hire_tb h",null,"local_name,city_name,district_name,h.h
             </div>
             <div class="row mt-1 mx-0 px-0">
                 <div class="col-12 mx-0 px-0">
-                    <a href="<?=getUrl('company','job',false,array('h_idx' => $val['h_idx']));?>" class="btn btn-secondary btn-block rounded-0">지원자 보기(<?=$val['applicant']?>)</a>
+                    <a href="<?=getUrl('company','job',12345);?>" class="btn btn-secondary btn-block rounded-0">지원자 보기(<?=$val['applicant']?>)</a>
                 </div>
             </div>
         </div>
