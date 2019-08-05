@@ -1,3 +1,6 @@
+<?php
+  $info_row = $output->get('app_info_row');
+?>
 <section class="content_padding mt-4 pt-5 bg-white">
     <a href="#" onclick="history.back();"><i class="xi-arrow-left xi-2x"></i></a>
     <h5 class="weight_normal">지원자정보 상세보기</h5>
@@ -18,10 +21,32 @@
     <div class="tech_card bg-white overflow-hidden pt-0 my-3">
         <span class="btn btn-block btn-warning mt-0 rounded-0 mb-3">책임감있는 열정적인 10년차 용접사!</span>
         <ul class="xs_content text-left">
-            <li>이름 : 이학남[남자]</li>
-            <li>생년월일 : 1992.06.30</li>
-            <li>주소 : 부산시 사상구 모라로 22</li>
-            <li>희망급여 : 회사내규에 따름</li>
+            <li>이름 : <?=$info_row[0]['m_name']?>
+              <?php
+                if($info_row[0]["m_human"] == "M") {
+                  echo "[남자]";
+                } else if($info_row[0]["m_human"] == "F") {
+                  echo "[여자]";
+                } else {
+                  echo "";
+                }
+              ?>
+            </li>
+            <li>생년월일 : <?= date("Y-m-d", strtotime($info_row[0]["m_birthday"])); ?></li>
+            <li>주소 : <?=$info_row[0]['m_address']?> <?=$info_row[0]['m_address2']?></li>
+            <?
+              if(!empty($info_row[0]["desired_salary"]) || $info_row[0]["salary_idx"] == 0){
+                if($info_row[0]["salary_name"] == "연봉" || $info_row[0]["salary_name"] == "월급"){
+                  echo "<li>희망급여 : " .$info_row[0]['salary_name']." ".number_format($info_row[0]['desired_salary']). " 만원 이상</li>";
+                }
+                else if($info_row[0]["salary_name"] == "일급" || $info_row[0]["salary_name"] == "시급"){
+                  echo "<li>희망급여 : " .$info_row[0]['salary_name']." ".number_format($info_row[0]['desired_salary']). " 원 이상</li>";
+                }
+                else if($info_row[0]["salary_idx"] == 0){
+                  echo "<li>희망급여 : 회사내규에 따름</li>";
+                }
+              }
+              ?>
             <li>희망직종 : 건설/조선</li>
         </ul>
     </div>
