@@ -69,13 +69,17 @@ class memberController{
     }
 
     function procLogout(){
-      if($_SESSION["USER_TYPE"] == "company"){
-        header("Location:" . getUrl('company'));
-      }else{
-        header("Location:" . getUrl('technician'));
-      }
-      unset($_SESSION['LOGGED_INFO']);
-      return new Object();
+        //객체를 먼저생성하고
+        $output = new Object();
+        //리다이렉트 주소를 붙인다음
+        if($_SESSION["USER_TYPE"] == "company"){
+            $output->success_return_url = getUrl('company');
+        }else{
+            $output->success_return_url = getUrl('technician');
+        }
+        unset($_SESSION['LOGGED_INFO']);
+        //생성된 객체를 리턴
+        return $output;
     }
 
     function procMemberCheckHasID($args){
