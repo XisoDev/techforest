@@ -115,6 +115,7 @@ class memberController{
         $_SESSION['signup']['m_id'] = $args->m_id;
         $_SESSION['signup']['m_pw1'] = $args->m_pw1;
         $_SESSION['signup']['m_pw2'] = $args->m_pw2;
+        $_SESSION['signup']['select7'] = $args->select7;
         $_SESSION['signup']['m_email1'] = $args->m_email1;
         $_SESSION['signup']['m_email2'] = $args->m_email2;
 
@@ -151,6 +152,7 @@ class memberController{
           "m_birthday" => "19930712",
           "m_phone" => "010-2292-7916",
           "m_email" => $m_email,
+          "select7" => $args->$select7,
           "is_commerce" => "N",
           "is_device" => "W",
           "is_external" => "A",

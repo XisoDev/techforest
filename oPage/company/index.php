@@ -238,7 +238,7 @@
 
 
 <script type="text/javascript">
-  if(<?=$_SESSION['LOGGED_INFO']?> > 0 && <?=$row['count_hire']?> < 0 ){
+  if(<?=$_SESSION['LOGGED_INFO']?> > 0 && <?=$row['count_hire']?> < 0 || "<?=$logged_info['registration']?>" == "" || "<?=$logged_info['address']?>" == ""){
     jQuery(window).on('load',function(){
         jQuery('#tech_modal_example').modal('show');
     });

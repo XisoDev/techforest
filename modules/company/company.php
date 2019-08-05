@@ -59,8 +59,10 @@ class companyView{
             //여기 array 에는 해당 document_srl 로 조회한 job 정보를 넣으면됨.
             //$output->add('oJob',array());
             $m_idx = $args->document_srl;
-            $oDB->where("m_idx",$m_idx);
-            $app_info_row = $oDB->get("TF_member_tb");
+            $oDB->where("m.m_idx",$m_idx);
+            $oDB->join("TF_member_order mo","m.m_idx = mo.m_idx", "LEFT");
+            $oDB->join("TF_salary s","mo.salary_idx = s.salary_idx", "LEFT");
+            $app_info_row = $oDB->get("TF_member_tb m");
 
             $output->add('app_info_row',$app_info_row);
 
@@ -277,7 +279,6 @@ class companyView{
         function hire_ing(){
           global $oDB;
 
-          date_default_timezone_set('Asia/Seoul');
           $now_date = date(YmdHis);
 
           $m_idx = $_SESSION['LOGGED_INFO'];

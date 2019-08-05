@@ -33,8 +33,20 @@
               ?>
             </li>
             <li>생년월일 : <?= date("Y-m-d", strtotime($info_row[0]["m_birthday"])); ?></li>
-            <li>주소 : <?=$info_row[0]['m_address']?><?=$info_row[0]['m_address2']?></li>
-            <li>희망급여 : 회사내규에 따름</li>
+            <li>주소 : <?=$info_row[0]['m_address']?> <?=$info_row[0]['m_address2']?></li>
+            <?
+              if(!empty($info_row[0]["desired_salary"]) || $info_row[0]["salary_idx"] == 0){
+                if($info_row[0]["salary_name"] == "연봉" || $info_row[0]["salary_name"] == "월급"){
+                  echo "<li>희망급여 : " .$info_row[0]['salary_name']." ".number_format($info_row[0]['desired_salary']). " 만원 이상</li>";
+                }
+                else if($info_row[0]["salary_name"] == "일급" || $info_row[0]["salary_name"] == "시급"){
+                  echo "<li>희망급여 : " .$info_row[0]['salary_name']." ".number_format($info_row[0]['desired_salary']). " 원 이상</li>";
+                }
+                else if($info_row[0]["salary_idx"] == 0){
+                  echo "<li>희망급여 : 회사내규에 따름</li>";
+                }
+              }
+              ?>
             <li>희망직종 : 건설/조선</li>
         </ul>
     </div>

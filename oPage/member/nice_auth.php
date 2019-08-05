@@ -38,3 +38,25 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+function
+  var IMP = window.IMP; // 생략해도 괜찮습니다.
+  IMP.init("imp24082824"); // 발급받은 "가맹점 식별코드"를 사용합니다.
+
+  // IMP.certification(param, callback) 호출
+  IMP.certification({ // param
+    merchant_uid: "ORD20180131-0000011"
+  }, function (rsp) { // callback
+    if (rsp.success) {
+      ...,
+      // 인증 성공 시 로직,
+      ...
+    } else {
+      ...,
+      // 인증 실패 시 로직,
+      ...
+    }
+  });
+
+</script>

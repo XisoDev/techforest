@@ -33,4 +33,18 @@ class technicianView{
       return $row;
     }
 
+    function naver_login_check(){
+      $m_id = $logged_info['m_id'];
+      $m_idx = $_SESSION['LOGGED_INFO'];
+      $m_id_str = substr($m_id,0,3);
+      if($m_id_str == 'nN_'){
+          $naver_login = 1;
+          $oDB->where("m_idx",$m_idx);
+          $row = $oDB->get("TF_member_tb",null,"m_phone, m_birthday, m_address, m_address2");
+
+          if(!$row['m_phone'] || !$row[0]['m_birthday'] || !$row[0]['m_address'] || !$row[0]['m_address2']){
+              //이력서정보등록 페이지로 이동
+          }
+       }
+    }
 }
