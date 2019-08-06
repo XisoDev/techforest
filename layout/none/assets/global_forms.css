@@ -42,6 +42,12 @@ select.form-control{
     left: -1.3rem;
 }
 
+.bigger_control label::before,
+.bigger_control label::after{
+    width:1.4rem;
+    height:1.4rem;
+}
+
 /*마이페이지용 폼*/
 .tf_underline_form label i{
     color:#aaa;

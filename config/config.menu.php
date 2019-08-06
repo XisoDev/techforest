@@ -129,7 +129,7 @@ $oMenu->company->list[] = array(
 );
 $oMenu->company->list[] = array(
     "title" => "서비스 이용현황",
-    "link" => getUrl('company','service'),
+    "link" => getUrl('company','serviceHistory'),
     "icon" => "xi-list-dot",
     "active_mid" => "company",
     "active_act" => "service",
@@ -138,41 +138,41 @@ $oMenu->company->list[] = array(
     "submenu" => array(
         array(
             "title" => "유료서비스 안내",
-            "link" => "#",
+            "link" => getUrl('company','service'),
             "active_mid" => "company",
-            "active_act" => time(),
+            "active_act" => "service",
             "new_window" => "N",
             "is_logged" => "N"),
         array(
             "title" => "서비스 이용 및 결제내역",
-            "link" => "#",
+            "link" => getUrl('company','serviceHistory'),
             "active_mid" => "company",
-            "active_act" => time(),
+            "active_act" => 'serviceHistory',
             "new_window" => "N",
             "is_logged" => "N"),
     )
 );
 $oMenu->company->list[] = array(
     "title" => "문의",
-    "link" => "#",
-    "active_mid" => "company",
+    "link" => getUrl('contact'),
     "icon" => "xi-mail-o",
-    "active_act" => time(),
+    "active_mid" => "contact",
+    "active_act" => "index",
     "new_window" => "N",
     "is_logged" => "N",
     "submenu" => array(
         array(
             "title" => "1:1 문의",
-            "link" => "#",
-            "active_mid" => "company",
-            "active_act" => time(),
+            "link" => getUrl('contact'),
+            "active_mid" => "contact",
+            "active_act" => "index",
             "new_window" => "N",
             "is_logged" => "N"),
         array(
             "title" => "자주묻는 질문",
             "link" => "#",
-            "active_mid" => "company",
-            "active_act" => time(),
+            "active_mid" => "contact",
+            "active_act" => "faq",
             "new_window" => "N",
             "is_logged" => "N"),
     )
@@ -200,30 +200,62 @@ $oMenu->technician->list[] = array(
 );
 $oMenu->technician->list[] = array(
     "title" => "서비스이용현황",
-    "link" => "#",
+    "link" => getUrl('technician','serviceHistory'),
     "icon" => "xi-list-number",
     "active_mid" => "technician",
-    "active_act" => time(),
+    "active_act" => "serviceHistory",
     "new_window" => "N",
     "is_logged" => "N",
+    "submenu" => array(
+        array(
+            "title" => "유료서비스 안내",
+            "link" => getUrl('technician','service'),
+            "active_mid" => "company",
+            "active_act" => "service",
+            "new_window" => "N",
+            "is_logged" => "N"),
+        array(
+            "title" => "서비스 이용 및 결제내역",
+            "link" => getUrl('technician','serviceHistory'),
+            "active_mid" => "company",
+            "active_act" => 'serviceHistory',
+            "new_window" => "N",
+            "is_logged" => "N"),
+    )
 );
 $oMenu->technician->list[] = array(
     "title" => "취업정보",
-    "link" => "#",
+    "link" => getUrl('technician','magazine'),
     "icon" => "xi-calendar-check",
     "active_mid" => "technician",
-    "active_act" => time(),
+    "active_act" => 'magazine',
     "new_window" => "N",
     "is_logged" => "N",
 );
 $oMenu->technician->list[] = array(
     "title" => "문의",
-    "link" => "#",
-    "icon" => "xi-message-o",
-    "active_mid" => "technician",
-    "active_act" => time(),
+    "link" => getUrl('contact'),
+    "icon" => "xi-mail-o",
+    "active_mid" => "contact",
+    "active_act" => "index",
     "new_window" => "N",
     "is_logged" => "N",
+    "submenu" => array(
+        array(
+            "title" => "1:1 문의",
+            "link" => getUrl('contact'),
+            "active_mid" => "contact",
+            "active_act" => "index",
+            "new_window" => "N",
+            "is_logged" => "N"),
+        array(
+            "title" => "자주묻는 질문",
+            "link" => "#",
+            "active_mid" => "contact",
+            "active_act" => "faq",
+            "new_window" => "N",
+            "is_logged" => "N"),
+    )
 );
 
 function arrangeMenuItem($menu_item){

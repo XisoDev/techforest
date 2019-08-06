@@ -34,7 +34,42 @@ class companyView{
         $add_body_class[] = "shrink";
 
         global $set_template_file;
-        $set_template_file = "company/service.list.php";
+        if($args->document_srl){
+            $set_template_file = "company/service.view.php";
+        }else {
+            $set_template_file = "company/service.list.php";
+        }
+
+        $output = new Object();
+        return $output;
+
+    }
+
+
+    function serviceHistory($args){
+        global $site_info;
+        $site_info->layout = "company";
+
+        global $add_body_class;
+        $add_body_class[] = "shrink";
+
+        global $set_template_file;
+        $set_template_file = "company/service.history.php";
+
+        $output = new Object();
+        return $output;
+
+    }
+
+    function servicePayment($args){
+        global $site_info;
+        $site_info->layout = "company";
+
+        global $add_body_class;
+        $add_body_class[] = "shrink";
+
+        global $set_template_file;
+        $set_template_file = "company/service.payment.php";
 
         $output = new Object();
         return $output;

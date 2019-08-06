@@ -78,7 +78,7 @@
                     echo "<ul class=\"nav submenu\">";
                     echo "<li class=\"nav-item\">";
                     foreach($item["submenu"] as $sub_item){
-                        echo sprintf("<a class=\"nav-link disabled\" href=\"%s\" %s>- %s</a>",$sub_item["link"], $sub_item["new_window"], $sub_item["title"]);
+                        echo sprintf("<a class=\"nav-link  text-secondary\" href=\"%s\" %s>- %s</a>",$sub_item["link"], $sub_item["new_window"], $sub_item["title"]);
                     }
                     echo "</li>";
                     echo "</ul>";

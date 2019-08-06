@@ -22,6 +22,76 @@ class technicianView{
     }
 
 
+    function magazine($args){
+        global $site_info;
+        $site_info->layout = "technician";
+
+        global $add_body_class;
+        $add_body_class[] = "shrink";
+
+        global $set_template_file;
+        if($args->document_srl){
+            $set_template_file = "technician/magazine.view.php";
+        }else {
+            $set_template_file = "technician/magazine.list.php";
+        }
+
+        $output = new Object();
+        return $output;
+
+    }
+
+
+    function service($args){
+        global $site_info;
+        $site_info->layout = "technician";
+
+        global $add_body_class;
+        $add_body_class[] = "shrink";
+
+        global $set_template_file;
+        if($args->document_srl){
+            $set_template_file = "technician/service.view.php";
+        }else {
+            $set_template_file = "technician/service.list.php";
+        }
+
+        $output = new Object();
+        return $output;
+
+    }
+
+
+    function serviceHistory($args){
+        global $site_info;
+        $site_info->layout = "technician";
+
+        global $add_body_class;
+        $add_body_class[] = "shrink";
+
+        global $set_template_file;
+        $set_template_file = "technician/service.history.php";
+
+        $output = new Object();
+        return $output;
+
+    }
+
+    function servicePayment($args){
+        global $site_info;
+        $site_info->layout = "technician";
+
+        global $add_body_class;
+        $add_body_class[] = "shrink";
+
+        global $set_template_file;
+        $set_template_file = "technician/service.payment.php";
+
+        $output = new Object();
+        return $output;
+
+    }
+
     function  now_application(){
       global $oDB;
 
