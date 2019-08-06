@@ -57,7 +57,7 @@ function company_id_check(){
             </div>
         </div>
         <div class="col-12 mx-0 px-0 pl-1 mb-2">
-          <input type="text" class="form-control mb-2" name="select7" id="select7" value="<?=$_SESSION['signup']['select7']?>" placeholder="담당자 이름" required>
+          <input type="text" class="form-control mb-2" name="select7" id="select7" placeholder="담당자 이름" required>
         </div>
         <div class="col-12 mx-0 px-0 pl-1 mb-2">
             <div class="input-group">

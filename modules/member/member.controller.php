@@ -50,23 +50,23 @@ class memberController{
         return $output;
     }
 
-    function procMemberNiceAuth($args){
-
-        $args->receive_sex = 1;
-
-        $_SESSION['nice_auth'] = array();
-        $_SESSION['nice_auth']["CI"] = "asdklzxASDFMCMcvjnrek433#@CBKMDFalkl";
-        $_SESSION['nice_auth']["DI"] = "AJKDJEKMCLXE";
-        $_SESSION['nice_auth']["user_name"] = "이우진";
-        $_SESSION['nice_auth']["birthday"] = "19900325";
-        $_SESSION['nice_auth']["gender"] = ($args->receive_sex == 1) ? "M" : "F";
-
-        //핸드폰일때만 들어오는것
-        $_SESSION['nice_auth']["agent"] = "SKT";
-        $_SESSION['nice_auth']["mobile"] = "01057595999";
-
-        return new Object(0,sprintf("%s님의 본인인증에 성공하였습니다.",$_SESSION['nice_auth']["user_name"]));
-    }
+    // function procMemberNiceAuth($args){
+    //
+    //     $args->receive_sex = 1;
+    //
+    //     $_SESSION['nice_auth'] = array();
+    //     $_SESSION['nice_auth']["CI"] = "asdklzxASDFMCMcvjnrek433#@CBKMDFalkl";
+    //     $_SESSION['nice_auth']["DI"] = "AJKDJEKMCLXE";
+    //     $_SESSION['nice_auth']["user_name"] = "이우진";
+    //     $_SESSION['nice_auth']["birthday"] = "19900325";
+    //     $_SESSION['nice_auth']["gender"] = ($args->receive_sex == 1) ? "M" : "F";
+    //
+    //     //핸드폰일때만 들어오는것
+    //     $_SESSION['nice_auth']["agent"] = "SKT";
+    //     $_SESSION['nice_auth']["mobile"] = "01057595999";
+    //
+    //     return new Object(0,sprintf("%s님의 본인인증에 성공하였습니다.",$_SESSION['nice_auth']["user_name"]));
+    // }
 
     function procLogout(){
         //객체를 먼저생성하고
@@ -86,23 +86,13 @@ class memberController{
 
         $id = $args->m_id;
 
-        if(!$id){
-          return new Object(-1,"아이디를 입력해 주세요.");
-        }
-
-        if(mb_strlen($id, "UTF-8") < 2 || mb_strlen($id, "UTF-8") > 16){
-          return new Object(-1, "아이디는 2 ~ 16자 내로 입력해주세요.");
-        }
-
         global $oDB;
         $oDB->where("m_id","$id");
         $row = $oDB->getOne("TF_member_tb",null,"m_id");
 
         if($row){
           return new Object(-1,"중복된 아이디가 있습니다.");
-
         }else{
-          $_SESSION['id_check'] = 1;
           return new Object(0,"사용가능한 아이디 입니다.");
         }
     }
@@ -111,52 +101,22 @@ class memberController{
 //        $output->add('abcd',"이런게있을때만");
 //        return $output;
         global $oDB;
-        //$row = 0;
 
-        //쿼리
-        //if(count($row)) return new Object(-1, "이미 존재하는 계정입니다.");
-        $_SESSION['signup'] = array();
-        $_SESSION['signup']['m_id'] = $args->m_id;
-        $_SESSION['signup']['m_pw1'] = $args->m_pw1;
-        $_SESSION['signup']['m_pw2'] = $args->m_pw2;
-        $_SESSION['signup']['select7'] = $args->select7;
-        $_SESSION['signup']['m_email1'] = $args->m_email1;
-        $_SESSION['signup']['m_email2'] = $args->m_email2;
-
-        //비밀번호 일치하는지 확인
-        if($args->m_pw1 && $args->m_pw1 != $args->m_pw2){
-          return new Object(-1,"비밀번호를 확인해주세요.");
-        }
-        if($_SESSION['id_check'] != 1){
-          return new Object(-1,"아이디 중복확인을 해주세요.");
-        }
-        if(!$args->m_id){
-          return new Object(-1,"아이디를 입력해주세요.");
-        }
-        if(!$args->m_pw1){
-          return new Object(-1,"비밀번호를 입력해주세요.");
-        }
-        if(!$args->m_pw2){
-          return new Object(-1,"비밀번호를 확인해주세요.");
-        }
-        if(mb_strlen($args->m_pw1, "UTF-8") < 6){
-          return new Object(-1,"비밀번호는 6자리 이상으로 지정해주세요.");
-        }
-
-        date_default_timezone_set('Asia/Seoul');
         $now_date = date(YmdHis);
-        $m_email = $args->m_email1."@".$args->m_email2;
+
+        if($args->m_email == "@"){
+          $args->m_email = "";
+        }
 
         //insert
         $data = array(
           "m_id" => $args->m_id,
           "m_pw" => $args->m_pw1,
-          "m_name" => "김다현",
-          "m_human" => "F",
-          "m_birthday" => "19930712",
-          "m_phone" => "010-2292-7916",
-          "m_email" => $m_email,
-          "select7" => $args->$select7,
+          "m_name" => $args->m_name,
+          "m_human" => "M",
+          "m_birthday" => $args->birth_year."0101",
+          "m_phone" => $args->m_phone,
+          "m_email" => $args->m_email,
           "is_commerce" => "N",
           "is_device" => "W",
           "is_external" => "A",
@@ -168,10 +128,9 @@ class memberController{
         if($row){
             $m_id = $args->m_id;
             //회원가입 후 바로 로그인
-            $oDB->where("m_id","$m_id");
+            $oDB->where("m_id",$m_id);
             $m_row = $oDB->getOne("TF_member_tb",null,"m_idx");
             $_SESSION['LOGGED_INFO'] = $m_row['m_idx'];
-            unset($_SESSION['signup']);
             return new Object(0,"가입에 성공하였습니다.");
 
         }else{
