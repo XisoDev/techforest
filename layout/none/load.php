@@ -18,6 +18,7 @@ $add_html_header[] = "<link rel=\"stylesheet\" href=\"/layout/none/assets/global
 //    폼 커스텀
 $add_html_header[] = "<link rel=\"stylesheet\" href=\"/layout/none/assets/global_forms.css?nocache=".time()."\">";
 $add_html_header[] = '<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>';
+//결제 라이브러리
 $add_body_class[] = '';
 //boostrap script & jquery
 $add_html_footer[] = '<script src="/layout/none/vendor/toastr/toastr.min.js"></script>';

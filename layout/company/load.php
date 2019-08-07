@@ -23,7 +23,7 @@ $add_html_header[] = "<link rel=\"stylesheet\" href=\"/layout/none/assets/global
 
 $add_html_header[] = "<script src=\"https://code.jquery.com/ui/1.12.1/jquery-ui.js\"></script>";
 $add_html_header[] = "<link rel=\"stylesheet\" href=\"//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css\">";
-
+$add_html_header[] = '<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>';
 
 
 

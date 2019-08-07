@@ -339,4 +339,10 @@ class companyController{
     }
   }
 
+  function service_order_success($args){
+    
+  }
+
+
+
 }

@@ -28,6 +28,7 @@ class companyView{
 
     function service($args){
         global $site_info;
+        global $oDB;
         $site_info->layout = "company";
 
         global $add_body_class;
@@ -41,6 +42,7 @@ class companyView{
         }
 
         $output = new Object();
+
         return $output;
 
     }
@@ -62,16 +64,25 @@ class companyView{
     }
 
     function servicePayment($args){
+
         global $site_info;
-        $site_info->layout = "company";
-
-        global $add_body_class;
-        $add_body_class[] = "shrink";
-
         global $set_template_file;
-        $set_template_file = "company/service.payment.php";
+        global $add_body_class;
+        global $oDB;
 
         $output = new Object();
+        $site_info->layout = "company";
+        $add_body_class[] = "shrink";
+        $service_option = explode(",",$args->service_option);
+
+        $oDB->where("ps_idx",$service_option[0]);
+        $pay_row = $oDB->getOne("TF_pay_service");
+
+        $output->add('pay_row',$pay_row);
+        $output->add('discount',$args->discount);
+
+        $set_template_file = "company/service.payment.php";
+
         return $output;
 
     }
@@ -93,13 +104,21 @@ class companyView{
             $set_template_file = "company/application.view.php";
             //여기 array 에는 해당 document_srl 로 조회한 job 정보를 넣으면됨.
             //$output->add('oJob',array());
+
+            //상세이력서보기 select
             $m_idx = $args->document_srl;
             $oDB->where("m.m_idx",$m_idx);
             $oDB->join("TF_member_order mo","m.m_idx = mo.m_idx", "LEFT");
             $oDB->join("TF_salary s","mo.salary_idx = s.salary_idx", "LEFT");
             $app_info_row = $oDB->get("TF_member_tb m");
 
+            //면접제안권있는지 확인
+            $oDB->where("m_idx",$m_idx);
+            $check_voucher = $oDB->get("TF_member_voucher");
+
             $output->add('app_info_row',$app_info_row);
+            $output->add('check_voucher',$check_voucher);
+
 
         }else{
             $set_template_file = "404.html";
@@ -283,19 +302,6 @@ class companyView{
         $oDB->join("TF_city_tb AS c", "m.m_city_idx = c.city_idx", "LEFT");
         $oDB->join("TF_district_tb AS d", "m.m_district_idx = d.district_idx", "LEFT");
         $row = $oDB->get("TF_member_tb AS m",null,$columns);
-
-        // $sql = "SELECT distinct m.m_idx, group_concat(distinct(mc.duty_name)) as duty_name,
-        //         concat(concat(substr(m.m_name,1,1),'*'),substr(m.m_name,3,10)) as m_name,
-        //         YEAR(CURRENT_TIMESTAMP) - YEAR(m_birthday) - (RIGHT(CURRENT_TIMESTAMP, 5) < RIGHT(m_birthday, 5)) as m_birthday,
-        //         m_phone, m_address, local_name, city_name, district_name, m_city_idx, m_district_idx
-        //         FROM TF_member_tb m
-        //         LEFT JOIN TF_member_career_tb mc ON m.m_idx = mc.m_idx
-        //         LEFT JOIN TF_local_tb l ON m.m_local_idx = l.local_idx
-        //         LEFT JOIN TF_city_tb c ON m.m_city_idx = c.city_idx
-        //         LEFT JOIN TF_district_tb d ON m.m_district_idx = d.district_idx
-        //         WHERE (m.m_idx = $num1 or m.m_idx = $num2 or m.m_idx = $num3 or m.m_idx = $num4) and
-        //               duty_name != ''
-        //         GROUP BY m.m_idx";
 
         return $row;
     }

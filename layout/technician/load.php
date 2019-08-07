@@ -20,6 +20,8 @@ $add_html_header[] = "<link rel=\"stylesheet\" href=\"/layout/none/assets/global
 $add_html_header[] = "<link rel=\"stylesheet\" href=\"/layout/technician/assets/tech_layout.css?nocache=".time()."\">";
 //    폼 커스텀
 $add_html_header[] = "<link rel=\"stylesheet\" href=\"/layout/none/assets/global_forms.css?nocache=".time()."\">";
+//결제 라이브러리
+$add_html_header[] = "<script type=\"text/javascript\" src=\"https://cdn.iamport.kr/js/iamport.payment-1.1.5.js\"></script>";
 
 $add_body_class[] = 'for_technician';
 

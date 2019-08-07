@@ -19,16 +19,21 @@
                     </div>
                 </div>
                 <div class="col-8 pt-3">
-                    <h5>프리미엄 회원 이용권</h5>
-                    <h6>상품 금액 : 50,000원</h6>
+                    <h5>면접제안권</h5>
+                    <!-- <h6>상품 금액 : 50,000원</h6> -->
                 </div>
             </div>
             <div class="toggleBox mt-3">
-                <label class="xs_content mb-0 pb-1">이용기간</label>
-                <select class="form-control"><option value="">이용기간 선택</option></select>
-                <label class="xs_content mb-0 pb-1">쿠폰할인</label>
-                <select class="form-control"><option value="">첫회원가입 기념 10%할인쿠폰</option></select>
-                <h6 class="weight_normal pt-2 text-right">총 결제 금액 <span class="red">27,000원</span></h6>
+                <label class="xs_content mb-0 pb-1">상품선택</label>
+                <select class="form-control" id="service_option" name="service_option" onchange="javascript:service_list(this)">
+                  <option value="">상품을 선택해주세요</option>
+                  <option value="2,5000">면접제안권 5회</option>
+                  <option value="3,10000">면접제안권 10회</option>
+                </select>
+                <!-- <label class="xs_content mb-0 pb-1">쿠폰할인</label>
+                <select class="form-control"><option value="">첫회원가입 기념 10%할인쿠폰</option></select> -->
+                <h6 class="weight_normal pt-2 text-right">할인 금액 <span class="red" name="discount" id="discount">0</span><span class="red">원</span></h6>
+                <h6 class="weight_normal pt-2 text-right">총 결제 금액 <span class="red" name="amount" id="amount">0</span><span class="red">원</span></h6>
                 <a href="#" class="btn btn-block btn-light">견적서보기</a>
             </div>
         </div>
@@ -36,7 +41,13 @@
     </form>
 </div>
 
+<script type="text/javascript">
+ function service_list(obj){
+   var getObj = obj.options[obj.selectedIndex].value.split(",");
+   document.getElementById("amount").innerHTML = getObj[1];
+ }
 
+</script>
 
 <?php
 $footer_false = true;

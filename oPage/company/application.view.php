@@ -1,5 +1,6 @@
 <?php
   $info_row = $output->get('app_info_row');
+  $check_voucher = $output->get('check_voucher');
 ?>
 <section class="content_padding mt-4 pt-5 bg-white">
     <a href="#" onclick="history.back();"><i class="xi-arrow-left xi-2x"></i></a>
@@ -134,8 +135,11 @@
 
 </div>
 
+<?php if(!$check_voucher){?>
+  <button data-toggle="modal" data-target="#buy_voucher" class="btn btn-block btn-warning btn-lg rounded-0 fixed-bottom">면접 제안하기</button>
+<?php }else{?>
 <button data-toggle="modal" data-target="#interview_suggestion" class="btn btn-block btn-warning btn-lg rounded-0 fixed-bottom">면접 제안하기</button>
-
+<?php } ?>
 
 <div class="modal fade" id="interview_suggestion" tabindex="-1" role="dialog" aria-labelledby="tech_forest_modal_window" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -153,6 +157,28 @@
                 </div>
             </div>
             <button class="mt-2 btn btn-block btn-light" onclick="jQuery('#interview_suggestion').modal('hide');" style="border-radius:10px;">닫기</button>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="buy_voucher" tabindex="-1" role="dialog" aria-labelledby="tech_forest_modal_window" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content text-center" style="border-radius:10px">
+            <a href="#" class="text-white pull-right text-right" style="margin-top:-40px;" onclick="jQuery('#buy_voucher').modal('hide');" ><i class="xi-close xi-2x"></i></a>
+            <div class="square avatar bg-red mx-auto" style="width:120px; margin-top:-60px; background-image:url('/oPage/ncenter/images/header_icon.png');"></div>
+            <div class="content_padding">
+                <p>
+                  면접제안권 구매 후 해당 지원자에게<br>
+                  <b>면접 요청</b>을 하실 수 있습니다.<br>
+                </p>
+                <h5 class="weight_lighter"><span class="red">면접제안권을 구매</span>하시겠습니까?</h5>
+                <div class="px-3">
+                <button onclick="jQuery('#buy_voucher').modal('hide');document.location.href='<?=getUrl('company','service',10)?>'" class="btn btn-block btn-danger btn-round mt-3">구매하기</button>
+                <button class="btn btn-block border-danger text-danger btn-round mt-3" onclick="jQuery('#buy_voucher').modal('hide');">아니오</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
