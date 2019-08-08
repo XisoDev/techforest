@@ -1,6 +1,6 @@
 <?php
     $row = $output->get('pay_row');
-    $discount = $output->get('discount');
+    // $discount = $output->get('discount');
 ?>
 
 <style>
@@ -14,7 +14,7 @@
     <div class="content_padding">
     <form>
         <div class="custom-control custom-radio border rounded content_padding mb-3 pl-5 bigger_control">
-            <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+            <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" checked>
             <label class="custom-control-label weight_lighter" for="customRadio1">
                 <i class="ml-3 xi-credit-card xi-2x" style="vertical-align: -7px;"></i>
                 신용카드・체크카드
@@ -42,7 +42,7 @@
     var m_phone = "<?=$logged_info['m_phone']?>";
     var pay_service = "<?=$row['pay_service']?>";
     var price = "<?=$row['price']?>";
-    var discount = "<?=$row['discount']?>";
+    var discount = 0;
 
 
     if(radio1 == true){
@@ -66,9 +66,10 @@
             params["ps_idx"] = <?=$row['ps_idx']?>;
             params['merchant_uid'] = 'merchant_' + new Date().getTime();
             params["amount"] = price;
+            params["discount"] = discount;
 
             exec_json("company.service_order_success",params,function(ret_obj){
-                toastr.success(ret_obj.message);
+                alert("결제성공!!!");
             });
 
         } else {

@@ -79,7 +79,7 @@ class companyView{
         $pay_row = $oDB->getOne("TF_pay_service");
 
         $output->add('pay_row',$pay_row);
-        $output->add('discount',$args->discount);
+        $output->add('discount',array($args->discount));
 
         $set_template_file = "company/service.payment.php";
 
@@ -106,14 +106,16 @@ class companyView{
             //$output->add('oJob',array());
 
             //상세이력서보기 select
-            $m_idx = $args->document_srl;
-            $oDB->where("m.m_idx",$m_idx);
+            $m_idx1 = $args->document_srl;
+            $oDB->where("m.m_idx",$m_idx1);
             $oDB->join("TF_member_order mo","m.m_idx = mo.m_idx", "LEFT");
             $oDB->join("TF_salary s","mo.salary_idx = s.salary_idx", "LEFT");
             $app_info_row = $oDB->get("TF_member_tb m");
 
-            //면접제안권있는지 확인
-            $oDB->where("m_idx",$m_idx);
+            //면접제안권있는지 확인&잔여횟수 확인
+            $m_idx2 = $_SESSION['LOGGED_INFO'];
+
+            $oDB->where("m_idx",$m_idx2);
             $check_voucher = $oDB->get("TF_member_voucher");
 
             $output->add('app_info_row',$app_info_row);
