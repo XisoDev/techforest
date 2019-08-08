@@ -10,7 +10,7 @@
 
 <div class="fixed-bottom bg-white purchaseBox">
     <a class="toggleTip xxs_content" href="#" onclick="jQuery(this).parent('div').toggleClass('active');"><i class="xi-angle-up"></i><i class="xi-angle-down"></i></a>
-    <form method="post" action="<?=getUrl('company','servicePayment')?>">
+    <form method="post" action="<?=getUrl('company','servicePayment')?>" onsubmit="return forhidden()">
         <div class="content_padding">
             <div class="row">
                 <div class="col-4">
@@ -32,6 +32,8 @@
                 </select>
                 <!-- <label class="xs_content mb-0 pb-1">쿠폰할인</label>
                 <select class="form-control"><option value="">첫회원가입 기념 10%할인쿠폰</option></select> -->
+                <input type="hidden" name="hidden_discount" id="hidden_discount" value="">
+                <input type="hidden" name="hidden_amount" id="hidden_amount" value="">
                 <h6 class="weight_normal pt-2 text-right">할인 금액 <span class="red" name="discount" id="discount">0</span><span class="red">원</span></h6>
                 <h6 class="weight_normal pt-2 text-right">총 결제 금액 <span class="red" name="amount" id="amount">0</span><span class="red">원</span></h6>
                 <a href="#" class="btn btn-block btn-light">견적서보기</a>
@@ -46,7 +48,13 @@
    var getObj = obj.options[obj.selectedIndex].value.split(",");
    document.getElementById("amount").innerHTML = getObj[1];
  }
+ function forhidden(){
+   var discount = $('#discount').text();
+   var amount = $('#amount').text();
 
+   $('#hidden_discount').val(discount);
+   $('#hidden_amount').val(amount);
+ }
 </script>
 
 <?php

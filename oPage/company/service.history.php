@@ -5,9 +5,9 @@
     </div>
 </section>
 <div class="content_padding">
-    <h6 class="weight_normal">사용가능한 쿠폰 <span class="red">3개</span></h6>
+    <h6 class="weight_normal">사용가능한 쿠폰 <span class="red">0개</span></h6>
 
-    <?php
+    <!-- <?php
         for($i=1; $i <= 3; $i++){
             ?>
             <div class="coupon rounded bg-white py-2 px-2 my-2">
@@ -23,11 +23,13 @@
             </div>
             <?php
         }
-    ?>
+    ?> -->
+     <p>사용가능한 쿠폰이 없습니다.</p>
+
     <form>
     <div class="input-group rounded overflow-hidden">
         <input type="text" class="form-control" placeholder="쿠폰 코드를 입력하세요." />
-        <button class="rounded-0 btn btn-danger">적용</button>
+        <button class="rounded-0 btn btn-danger" onclick="add_coupon()">적용</button>
     </div>
     </form>
 </div>
@@ -60,11 +62,15 @@
             <h6 class="xs_content weight_bold"><span class="xxs_content text-secondary">결제금액</span> 50,000원</h6>
             <h6 class="xs_content weight_lighter"><span class="xxs_content text-secondary">결제상태</span> 완료</h6>
         </div>
-        <a href="#" class="btn btn-primary btn-block rounded-0">전자 세금계산서 발행하기</a>
+        <!-- <a href="#" class="btn btn-primary btn-block rounded-0">전자 세금계산서 발행하기</a> -->
     </div>
 </div>
 
-
+<script type="text/javascript">
+  function add_coupon(){
+    alert("올바른 쿠폰코드를 입력해주세요.");
+  }
+</script>
 <?php
 $footer_false = true;
 ?>

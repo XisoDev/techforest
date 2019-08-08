@@ -342,24 +342,44 @@ class companyController{
   function service_order_success($args){
     global $oDB;
     $now_date = date(YmdHis);
-    alert("들어오긴옴");
-    // $data = array(
-    //   "m_idx" => $args->m_idx,
-    //   "ps_idx" => $args->ps_idx,
-    //   "dicount" => $args->discount,
-    //   "amount" => $args->amount,
-    //   "merchant_uid" => $args->merchant_uid,
-    //   "reg_date" => $now_date
-    // );
-    // $row = $oDB->insert("TF_payment",$data);
-    //
-    // if($row){
-    //   return new Object(0,"결제가 완료되었습니다.");
-    // }else{
-    //   return new Object(-1,"네트워크 오류가 발생했습니다.");
-    // }
-  }
 
+    $data = array(
+      "m_idx" => $args->m_idx,
+      "ps_idx" => $args->ps_idx,
+      "discount" => $args->discount,
+      "amount" => $args->amount,
+      "merchant_uid" => $args->merchant_uid,
+      "reg_date" => $now_date
+    );
+
+    $row = $oDB->insert("TF_payment",$data);
+
+    if($row){
+      return new Object(0,"결제가 완료되었습니다.");
+    }else{
+      return new Object(-1,"네트워크 오류가 발생했습니다.");
+    }
+  }
+   function add_voucher($args){
+     global $oDB;
+     $now_date = date(YmdHis);
+
+     $data = array(
+       "m_idx" => $args->m_idx,
+       "ps_idx" => $args->ps_idx,
+       "all_count" => $args->all_count,
+       "remain_count" => $args->remain_count,
+       "reg_date" => $now_date
+     );
+
+     $row = $oDB->insert("TF_member_voucher",$data);
+
+     if($row){
+       return new Object(0,"결제가 완료되었습니다.");
+     }else{
+       return new Object(-1,"네트워크 오류가 발생했습니다.");
+     }
+   }
 
 
 }

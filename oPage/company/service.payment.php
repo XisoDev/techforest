@@ -1,6 +1,7 @@
 <?php
     $row = $output->get('pay_row');
-    // $discount = $output->get('discount');
+    $discount = $output->get('discount');
+    $amount = $output->get('amount');
 ?>
 
 <style>
@@ -27,13 +28,14 @@
                 무통장 입금
             </label>
         </div>
-          <input type="button" onclick="pay()" class="btn btn-block btn-primary" value="결제하기" />
+          <input type="button" onclick="doPay()" class="btn btn-block btn-primary" value="결제하기" />
     </form>
     </div>
 </section>
 
 <script type="text/javascript">
-  function pay(){
+
+  function doPay(){
     var radio1 = $('#customRadio1').is(':checked');
     var radio2 = $('#customRadio2').is(':checked');
     var m_idx = "<?=$logged_info['m_idx']?>";
@@ -41,9 +43,8 @@
     var m_name = "<?=$logged_info['m_name']?>";
     var m_phone = "<?=$logged_info['m_phone']?>";
     var pay_service = "<?=$row['pay_service']?>";
-    var price = "<?=$row['price']?>";
-    var discount = 0;
-
+    var amount = "<?=$amount?>";
+    var discount = "<?=$discount?>";
 
     if(radio1 == true){
       var IMP = window.IMP; // 생략해도 괜찮습니다.
@@ -54,7 +55,7 @@
         pay_method: "card",
         merchant_uid : 'merchant_' + new Date().getTime(),
         name: pay_service,
-        amount: price,
+        amount: amount,
         buyer_email: m_email,
         buyer_name: m_name,
         buyer_tel: m_phone
@@ -65,13 +66,20 @@
             params["m_idx"] = m_idx;
             params["ps_idx"] = <?=$row['ps_idx']?>;
             params['merchant_uid'] = 'merchant_' + new Date().getTime();
-            params["amount"] = price;
+            params["amount"] = amount;
             params["discount"] = discount;
 
             exec_json("company.service_order_success",params,function(ret_obj){
-                alert("결제성공!!!");
-            });
+              var params = {};
+              params["m_idx"] = m_idx;
+              params["ps_idx"] = <?=$row['ps_idx']?>;
+              params["all_count"] = <?=$row['count']?>;
+              params['remain_count'] = <?=$row['count']?>;
 
+              exec_json("company.add_voucher",params,function(ret_obj){
+
+              });
+            });
         } else {
           // 결제 실패 시 로직,
           alert("결제에 실패하였습니다." +  rsp.error_msg);

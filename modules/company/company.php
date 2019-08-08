@@ -50,13 +50,15 @@ class companyView{
 
     function serviceHistory($args){
         global $site_info;
-        $site_info->layout = "company";
-
         global $add_body_class;
-        $add_body_class[] = "shrink";
-
         global $set_template_file;
+        global $oDB;
+
+        $site_info->layout = "company";
+        $add_body_class[] = "shrink";
         $set_template_file = "company/service.history.php";
+
+
 
         $output = new Object();
         return $output;
@@ -79,7 +81,8 @@ class companyView{
         $pay_row = $oDB->getOne("TF_pay_service");
 
         $output->add('pay_row',$pay_row);
-        $output->add('discount',array($args->discount));
+        $output->add('discount',$args->hidden_discount);
+        $output->add('amount',$args->hidden_amount);
 
         $set_template_file = "company/service.payment.php";
 
