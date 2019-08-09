@@ -28,6 +28,14 @@
                 무통장 입금
             </label>
         </div>
+        <div class="" id="" style="display:none">
+          IBK 기업은행 312-092320-01-016 <br>
+          예금주 : 기술자숲 주식회사
+          <input type="checkbox" name="" value="현금영수증 신청">
+            <input type="text" name="" value="" style="display:none">
+          <input type="checkbox" name="" value="세금계산서 신청">
+          <input type="checkbox" name="" value="신청안함" checked>
+        </div>
           <input type="button" onclick="doPay()" class="btn btn-block btn-primary" value="결제하기" />
     </form>
     </div>

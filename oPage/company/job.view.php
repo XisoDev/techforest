@@ -45,7 +45,7 @@
                   </div>
               </div>
               <p class="xxs_content text-right"><i class="xi-clock-o"></i> 지원일자 <?=$val['reg_date']?></p>
-              <a href="<?=getUrl('company','application',$val['m_idx'])?>" class="btn btn-block btn-warning mt-3 rounded-0">지원자 정보 상세보기</a>
+              <a href="<?=getUrl('company','application',$val['m_idx'],array(h_idx=>$val['h_idx']))?>" class="btn btn-block btn-warning mt-3 rounded-0">지원자 정보 상세보기</a>
           </div>
           <?php } ?>
     <?php } ?>

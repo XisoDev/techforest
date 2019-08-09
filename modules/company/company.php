@@ -54,13 +54,24 @@ class companyView{
         global $set_template_file;
         global $oDB;
 
+        $output = new Object();
         $site_info->layout = "company";
         $add_body_class[] = "shrink";
         $set_template_file = "company/service.history.php";
 
+        $m_idx = $_SESSION['LOGGED_INFO'];
 
+        $oDB->where("m_idx",$m_idx);
+        $oDB->join("TF_pay_service ps","ps.ps_idx = v.ps_idx","LEFT");
+        $voucher_list = $oDB->get("TF_member_voucher v");
 
-        $output = new Object();
+        $oDB->where("m_idx",$m_idx);
+        $oDB->join("TF_pay_service ps","ps.ps_idx = p.ps_idx","LEFT");
+        $payment_list = $oDB->get("TF_payment p");
+
+        $output->add('voucher_list',$voucher_list);
+        $output->add('payment_list',$payment_list);
+
         return $output;
 
     }
@@ -167,7 +178,7 @@ class companyView{
           $oDB->join("TF_hire_tb h","al.h_idx = h.h_idx","LEFT");
           $oDB->join("TF_member_tb m","al.m_idx = m.m_idx","LEFT");
           $oDB->join("TF_member_career_tb AS mc", "m.m_idx = mc.m_idx", "LEFT");
-          $application_row = $oDB->get("TF_application_letter al",null,"group_concat(distinct(mc.duty_name)) as duty_name, m.m_idx, m.m_name, m.m_human, m.m_birthday, m.m_phone, m.m_email, al.reg_date, a_line_self");
+          $application_row = $oDB->get("TF_application_letter al",null,"group_concat(distinct(mc.duty_name)) as duty_name,h.h_idx, m.m_idx, m.m_name, m.m_human, m.m_birthday, m.m_phone, m.m_email, al.reg_date, a_line_self");
 
           $output->add('application_row',$application_row);
 

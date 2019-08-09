@@ -1,3 +1,8 @@
+<?php
+  $voucher_list = $output->get('voucher_list');
+  $payment_list = $output->get('payment_list');
+?>
+
 <section class="bg-white">
     <div class="content_padding mt-4 pt-5 mb-0 pb-2">
         <a href="#" onclick="history.back();"><i class="xi-arrow-left xi-2x"></i></a>
@@ -39,15 +44,18 @@
     <h6 class="weight_normal">이용중인 서비스 내역</h6>
     <div class="tech_card text-left">
         <h6 class="bg-light weight_normal px-2 py-2 text-left my-0">이용상품</h6>
-        <div class="bg-white content_padding">
-            <h5 class="weight_normal my-0">바로검색서비스 선면접 제안권</h5>
-            <p class="xs_content px-0 weight_lighter">
-                잔여횟수 : <span class="red">7회</span> / 총 10회
-            </p>
-            <p class="xxs_content px-0 weight_lighter">
-                이용기한 : 19.06.21 ~ 19.07.31
-            </p>
-        </div>
+        <?php foreach($voucher_list as $val){ ?>
+          <div class="bg-white content_padding">
+              <h5 class="weight_normal my-0"><?=$val['pay_service']?></h5>
+              <p class="xs_content px-0 weight_lighter">
+                  잔여횟수 : <span class="red"><?=$val['remain_count']?>회</span> / 총 <?=$val['all_count']?>회
+              </p>
+              <p class="xxs_content px-0 weight_lighter">
+
+                  이용기한 : <?=date("Y-m-d", strtotime($val["reg_date"]))?> ~ <?=date("Y-m-d", strtotime($val["expire_date"]))?>
+              </p>
+          </div>
+        <?php } ?>
     </div>
 </div>
 
@@ -55,13 +63,15 @@
 <div class="content_padding">
     <h6 class="weight_normal">결제내역</h6>
     <div class="tech_card text-left bg-white">
-        <div class="xxs_content text-right py-2">주문일시 : 2019.06.21</div>
+      <?php foreach($payment_list as $val){ ?>
+        <div class="xxs_content text-right py-2">주문일시 : <?=date("Y-m-d", strtotime($val["reg_date"]))?></div>
         <div class="px-2 pb-1">
-            <h6 class="xs_content weight_lighter"><span class="xxs_content text-secondary">결제번호</span> 190626001</h6>
-            <h6 class="xs_content weight_bold red"><span class="xxs_content text-secondary">이용상품</span> 바로검색 서비스 선면접 제안권</h6>
-            <h6 class="xs_content weight_bold"><span class="xxs_content text-secondary">결제금액</span> 50,000원</h6>
-            <h6 class="xs_content weight_lighter"><span class="xxs_content text-secondary">결제상태</span> 완료</h6>
+            <h6 class="xs_content weight_lighter"><span class="xxs_content text-secondary">결제번호</span> <?=substr($val['merchant_uid'],9)?></h6>
+            <h6 class="xs_content weight_bold red"><span class="xxs_content text-secondary">이용상품</span> <?=$val['pay_service']?></h6>
+            <h6 class="xs_content weight_bold"><span class="xxs_content text-secondary">결제금액</span> <?=$val['amount']?>원</h6>
+            <h6 class="xs_content weight_lighter"><span class="xxs_content text-secondary">결제상태</span> <?=$val['state']?></h6>
         </div>
+      <?php } ?>
         <!-- <a href="#" class="btn btn-primary btn-block rounded-0">전자 세금계산서 발행하기</a> -->
     </div>
 </div>

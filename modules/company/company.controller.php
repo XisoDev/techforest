@@ -349,7 +349,10 @@ class companyController{
       "discount" => $args->discount,
       "amount" => $args->amount,
       "merchant_uid" => $args->merchant_uid,
-      "reg_date" => $now_date
+      "reg_date" => $now_date,
+      "payment_method" => "카드",
+      "state" => "완료",
+      "edit_date" => $now_date
     );
 
     $row = $oDB->insert("TF_payment",$data);
@@ -380,6 +383,38 @@ class companyController{
        return new Object(-1,"네트워크 오류가 발생했습니다.");
      }
    }
+
+   function use_voucher($args){
+     global $oDB;
+     $now_date = date(YmdHis);
+     $m_idx = $_SESSION['LOGGED_INFO'];
+
+     $oDB->where("m_idx",$m_idx);
+     $sel_row = $oDB->get("TF_member_voucher");
+
+     $use_data = array(
+       "remain_count" => $sel_row[0]['remain_count']-1
+     );
+     $oDB->where("v_idx",$sel_row[0][v_idx]);
+     $use_row = $oDB->update("TF_member_voucher",$use_data);
+   }
+
+   function insert_interview_info($args){
+     global $oDB;
+     $now_date = date(YmdHis);
+
+     $use_data = array(
+       "c_idx" => $args->c_idx,
+       "h_idx" => $args->h_idx,
+       "m_idx" => $args->m_idx,
+       "way" => "직접 전화",
+       "reg_date" => $now_date
+     );
+     $insert_row = $oDB->insert("TF_suggest_interview",$data);
+
+   }
+
+
 
 
 }

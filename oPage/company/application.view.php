@@ -1,6 +1,8 @@
 <?php
   $info_row = $output->get('app_info_row');
   $check_voucher = $output->get('check_voucher');
+
+  $h_idx = $_REQUEST['h_idx'];
 ?>
 <section class="content_padding mt-4 pt-5 bg-white">
     <a href="#" onclick="history.back();"><i class="xi-arrow-left xi-2x"></i></a>
@@ -155,9 +157,9 @@
 <!--                    이렇게 쓰시면 미리 내용을 채워서 공고등록자 휴대전화로 바로 문자전송가능-->
 <!--                <a class="btn btn-block btn-danger btn-round mt-3" href="sms:+821057595999&amp;body=%EA%B8%B0%EC%88%A0%EC%9E%90%EC%88%B2%20%EC%A7%80%EC%9B%90%EC%9E%90%EB%8B%98%EA%BB%98%20%EB%A9%B4%EC%A0%91%EC%9A%94%EC%B2%AD%20%EB%93%9C%EB%A6%BD%EB%8B%88%EB%8B%A4.">문자메세지 발송</a>-->
                 <?if($isMobile == true){?>
-                  <a class="btn btn-block border-danger text-danger btn-round mt-3" href="tel:+821057595999">지원자에게 직접 전화</a>
+                  <a class="btn btn-block border-danger text-danger btn-round mt-3" onclick="suggestion_call_mobile()" href="tel:+821057595999">지원자에게 직접 전화</a>
                 <?}else{?>
-                  <button onclick="jQuery('#suggestion_way').modal('hide');jQuery('#application_phone').modal('show');" class="btn btn-block border-danger text-danger btn-round mt-3">지원자에게 직접 전화</button>
+                  <button onclick="suggestion_call_web()" class="btn btn-block border-danger text-danger btn-round mt-3">지원자에게 직접 전화</button>
                 <?}?>
                 </div>
             </div>
@@ -222,7 +224,7 @@
                   <b>해당 지원자에게 면접제안을 하시겠어요?</b>
                 </p>
                 <div class="px-3">
-                <button onclick="jQuery('#interview_suggestion').modal('hide');jQuery('#suggestion_way').modal('show');suggestion_yes();" class="btn btn-block btn-danger btn-round mt-3">네</button>
+                <button onclick="suggestion_yes()" class="btn btn-block btn-danger btn-round mt-3">네</button>
                 <button class="btn btn-block border-danger text-danger btn-round mt-3" onclick="jQuery('#interview_suggestion').modal('hide');">아니오</button>
                 </div>
             </div>
@@ -305,17 +307,29 @@
   }
 
   function suggestion_yes(){
-    var params = {};
-    params["m_idx"] = m_idx;
-    params["ps_idx"] = <?=$row['ps_idx']?>;
-    params['merchant_uid'] = 'merchant_' + new Date().getTime();
-    params["amount"] = price;
-    params["discount"] = discount;
+    $('#interview_suggestion').modal('hide');
+    $('#suggestion_way').modal('show');
 
-    exec_json("company.service_order_success",params,function(ret_obj){
-        alert("결제성공!!!");
+    var params = {};
+    exec_json("company.use_voucher",params,function(ret_obj){
+
     });
   }
+
+  function suggestion_call_mobile(){
+    $('#suggestion_way').modal('hide');
+    $('#application_phone').modal('show');
+
+    var params = {};
+    params["m_idx"] = <?=$info_row[0]["m_idx"]?>;
+    params["c_idx"] = <?=$logged_info['c_idx']?>;
+    params['h_idx'] = <?=$h_idx?>;
+
+    exec_json("company.use_voucher",params,function(ret_obj){
+
+    });
+  }
+
 </script>
 <?php
 //$footer_false = true;
