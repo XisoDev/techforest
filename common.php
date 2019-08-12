@@ -52,10 +52,10 @@ $userAgent = $_SERVER["HTTP_USER_AGENT"];
 //Check Mobile
 $mAgent = array("iPhone","iPod","Android","Blackberry",
     "Opera Mini", "Windows ce", "Nokia", "sony" );
-$isMobile = false;
+$isMobile = 0;
 for($i=0; $i<sizeof($mAgent); $i++){
     if(stripos( $userAgent, $mAgent[$i] )){
-        $isMobile = true;
+        $isMobile = 1;
         break;
     }
 }

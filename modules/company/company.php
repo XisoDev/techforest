@@ -94,6 +94,8 @@ class companyView{
         $output->add('pay_row',$pay_row);
         $output->add('discount',$args->hidden_discount);
         $output->add('amount',$args->hidden_amount);
+        $output->add('hidden_m_idx',$args->hidden_m_idx);
+        $output->add('hidden_h_idx',$args->hidden_h_idx);
 
         $set_template_file = "company/service.payment.php";
 
@@ -128,13 +130,17 @@ class companyView{
 
             //면접제안권있는지 확인&잔여횟수 확인
             $m_idx2 = $_SESSION['LOGGED_INFO'];
-
             $oDB->where("m_idx",$m_idx2);
-            $check_voucher = $oDB->get("TF_member_voucher");
+            $check_voucher = $oDB->get("TF_member_voucher",null,"v_idx,m_idx,ps_idx,remain_count,SUM(remain_count) AS sum_remain_count, MAX(remain_count) AS max_remain_count,reg_date,expire_date");
+
+            //면접제안한 회원인지 확인
+            $oDB->where("applicant_idx",$m_idx1);
+            $oDB->where("h_idx",$args->h_idx);
+            $check_applicant = $oDB->get("TF_suggest_interview");
 
             $output->add('app_info_row',$app_info_row);
             $output->add('check_voucher',$check_voucher);
-
+            $output->add('check_applicant',$check_applicant);
 
         }else{
             $set_template_file = "404.html";
@@ -169,6 +175,7 @@ class companyView{
           $h_idx = $args->document_srl;
           $c_idx = $_SESSION['c_idx'];
 
+          //지원자현황
           $oDB->orderBy("al.seq","DESC");
           $oDB->groupBy("al.m_idx");
           $oDB->where("al.isVisible","Y");
@@ -180,7 +187,14 @@ class companyView{
           $oDB->join("TF_member_career_tb AS mc", "m.m_idx = mc.m_idx", "LEFT");
           $application_row = $oDB->get("TF_application_letter al",null,"group_concat(distinct(mc.duty_name)) as duty_name,h.h_idx, m.m_idx, m.m_name, m.m_human, m.m_birthday, m.m_phone, m.m_email, al.reg_date, a_line_self");
 
+          //면접자현황
+          $oDB->where("si.h_idx",$h_idx);
+          $oDB->join("TF_hire_tb h","h.h_idx = si.h_idx","LEFT");
+          $oDB->join("TF_member_tb m","m.m_idx = si.applicant_idx","LEFT");
+          $interview_list = $oDB->get("TF_suggest_interview si",null,"h_title,m.m_name,way,m.m_phone,si.reg_date");
+
           $output->add('application_row',$application_row);
+          $output->add('interview_list',$interview_list);
 
         }else{
             $set_template_file = "company/job.list.php";

@@ -2,6 +2,8 @@
     $row = $output->get('pay_row');
     $discount = $output->get('discount');
     $amount = $output->get('amount');
+    $hidden_m_idx = $output->get('hidden_m_idx');
+    $hidden_h_idx = $output->get('hidden_h_idx');
 ?>
 
 <style>
@@ -29,8 +31,9 @@
             </label>
         </div>
         <div class="" id="" style="display:none">
-          IBK 기업은행 312-092320-01-016 <br>
-          예금주 : 기술자숲 주식회사
+          입금은행 : IBK 기업은행 <br>
+          입금게좌 : 312-092320-01-016 <br>
+          입금자명 : 기술자숲(주) <br>
           <input type="checkbox" name="" value="현금영수증 신청">
             <input type="text" name="" value="" style="display:none">
           <input type="checkbox" name="" value="세금계산서 신청">
@@ -53,6 +56,7 @@
     var pay_service = "<?=$row['pay_service']?>";
     var amount = "<?=$amount?>";
     var discount = "<?=$discount?>";
+    var hidden_m_idx = <?=$hidden_m_idx?>;
 
     if(radio1 == true){
       var IMP = window.IMP; // 생략해도 괜찮습니다.
@@ -85,7 +89,9 @@
               params['remain_count'] = <?=$row['count']?>;
 
               exec_json("company.add_voucher",params,function(ret_obj){
-
+                if(hidden_m_idx > 1){
+                  document.location.href="<?=getUrl('company','application',$hidden_m_idx,array(h_idx=>$hidden_h_idx))?>";
+                }
               });
             });
         } else {

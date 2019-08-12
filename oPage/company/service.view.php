@@ -1,3 +1,11 @@
+<?php
+//면접제안권없을때, 구매하고 다시 그 지원자 상세보기로 돌아가기 위함
+$m_num = $_REQUEST['num'];
+$h_num = $_REQUEST['h_idx'];
+if(!$m_num){
+  $m_num = 0 ;
+}
+?>
 <section class="bg-white">
     <div class="content_padding mt-4 pt-5 mb-0 pb-2">
         <a href="#" onclick="history.back();"><i class="xi-arrow-left xi-2x"></i></a>
@@ -34,6 +42,8 @@
                 <select class="form-control"><option value="">첫회원가입 기념 10%할인쿠폰</option></select> -->
                 <input type="hidden" name="hidden_discount" id="hidden_discount" value="">
                 <input type="hidden" name="hidden_amount" id="hidden_amount" value="">
+                <input type="hidden" name="hidden_m_idx" value="<?=$m_num?>">
+                <input type="hidden" name="hidden_h_idx" value="<?=$h_num?>">
                 <h6 class="weight_normal pt-2 text-right">할인 금액 <span class="red" name="discount" id="discount">0</span><span class="red">원</span></h6>
                 <h6 class="weight_normal pt-2 text-right">총 결제 금액 <span class="red" name="amount" id="amount">0</span><span class="red">원</span></h6>
                 <a href="#" class="btn btn-block btn-light">견적서보기</a>

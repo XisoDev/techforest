@@ -1,6 +1,7 @@
 <?php
   $info_row = $output->get('app_info_row');
   $check_voucher = $output->get('check_voucher');
+  $check_applicant = $output->get('check_applicant');
 
   $h_idx = $_REQUEST['h_idx'];
 ?>
@@ -14,8 +15,11 @@
         <h6>기본정보</h6>
         <div class="row">
             <div class="col-5 pt-4 pb-0 my-0 pl-4 mx-auto">
-                <div class="avatar square" style="background-image:url('/layout/none/assets/images/no_avatar.png');">
-                </div>
+              <?if(!$info_row[0]['m_picture']){?>
+                <div class="avatar square" style="background-image:url('/layout/none/assets/images/no_avatar.png');"></div>
+              <?}else{?>
+                <img src="../../../img/<?=$info_row[0]['m_picture']?>" class="avatar" id="my_picture" alt="picture">
+              <?}?>
             </div>
         </div>
     </div>
@@ -137,8 +141,10 @@
 
 </div>
 
-<?php if(!$check_voucher){?>
+<?php if(!$check_voucher || $check_voucher[0]['sum_remain_count'] < 1){?>
   <button data-toggle="modal" data-target="#buy_voucher" class="btn btn-block btn-warning btn-lg rounded-0 fixed-bottom">면접 제안하기</button>
+<?php }else if($check_applicant){?>
+  <button class="btn btn-block btn-warning btn-lg rounded-0 fixed-bottom disabled">면접제안 완료</button>
 <?php }else{?>
   <button data-toggle="modal" data-target="#interview_suggestion" class="btn btn-block btn-warning btn-lg rounded-0 fixed-bottom">면접 제안하기</button>
 <?php } ?>
@@ -157,9 +163,9 @@
 <!--                    이렇게 쓰시면 미리 내용을 채워서 공고등록자 휴대전화로 바로 문자전송가능-->
 <!--                <a class="btn btn-block btn-danger btn-round mt-3" href="sms:+821057595999&amp;body=%EA%B8%B0%EC%88%A0%EC%9E%90%EC%88%B2%20%EC%A7%80%EC%9B%90%EC%9E%90%EB%8B%98%EA%BB%98%20%EB%A9%B4%EC%A0%91%EC%9A%94%EC%B2%AD%20%EB%93%9C%EB%A6%BD%EB%8B%88%EB%8B%A4.">문자메세지 발송</a>-->
                 <?if($isMobile == true){?>
-                  <a class="btn btn-block border-danger text-danger btn-round mt-3" onclick="suggestion_call_mobile()" href="tel:+821057595999">지원자에게 직접 전화</a>
+                  <a class="btn btn-block border-danger text-danger btn-round mt-3" onclick="suggestion_call()" href="tel:+821057595999">지원자에게 직접 전화</a>
                 <?}else{?>
-                  <button onclick="suggestion_call_web()" class="btn btn-block border-danger text-danger btn-round mt-3">지원자에게 직접 전화</button>
+                  <button onclick="suggestion_call()" class="btn btn-block border-danger text-danger btn-round mt-3">지원자에게 직접 전화</button>
                 <?}?>
                 </div>
             </div>
@@ -204,7 +210,7 @@
                 </p>
                 <h5 class="weight_lighter"><span class="red">면접제안권을 구매</span>하시겠습니까?</h5>
                 <div class="px-3">
-                <button onclick="jQuery('#buy_voucher').modal('hide');document.location.href='<?=getUrl('company','service',10)?>'" class="btn btn-block btn-danger btn-round mt-3">구매하기</button>
+                <button onclick="jQuery('#buy_voucher').modal('hide');document.location.href='<?=getUrl('company','service',10,array(num=>$document_srl,h_idx=>$h_idx))?>'" class="btn btn-block btn-danger btn-round mt-3">구매하기</button>
                 <button class="btn btn-block border-danger text-danger btn-round mt-3" onclick="jQuery('#buy_voucher').modal('hide');">아니오</button>
                 </div>
             </div>
@@ -220,7 +226,7 @@
             <div class="square avatar bg-red mx-auto" style="width:120px; margin-top:-60px; background-image:url('/oPage/ncenter/images/header_icon.png');"></div>
             <div class="content_padding">
                 <p>
-                  잔여 면접제안권 <span class="red"><?=$check_voucher[0]['remain_count']?>회</span><br>
+                  잔여 면접제안권 <span class="red"><?=$check_voucher[0]['max_remain_count']?>회</span><br>
                   <b>해당 지원자에게 면접제안을 하시겠어요?</b>
                 </p>
                 <div class="px-3">
@@ -316,16 +322,20 @@
     });
   }
 
-  function suggestion_call_mobile(){
-    $('#suggestion_way').modal('hide');
-    $('#application_phone').modal('show');
+  function suggestion_call(){
+
+    //모바일버전이 아닐때, 전화번호 표시 모달창 열기
+    if(<?=$isMobile?> == 0){
+      $('#suggestion_way').modal('hide');
+      $('#application_phone').modal('show');
+    }
 
     var params = {};
-    params["m_idx"] = <?=$info_row[0]["m_idx"]?>;
+    params["applicant_idx"] = <?=$info_row[0]["m_idx"]?>;
     params["c_idx"] = <?=$logged_info['c_idx']?>;
     params['h_idx'] = <?=$h_idx?>;
 
-    exec_json("company.use_voucher",params,function(ret_obj){
+    exec_json("company.insert_interview_info",params,function(ret_obj){
 
     });
   }

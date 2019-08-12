@@ -1,5 +1,6 @@
 <?php
   $row = $output->get('application_row');
+  $interview_list = $output->get('interview_list');
 ?>
 
 <section class="content_padding mt-4 pt-5 bg-white">
@@ -74,15 +75,19 @@
         <h6>면접자 현황</h6>
     </div>
     <div class="tech-card-slick slick-white-dots">
-        <?php for($i=1; $i<=4; $i++){?>
+        <?php foreach($interview_list as $val){?>
             <div class="tech_card bg-white overflow-hidden">
-                <h6 class="color_primary pt-2 pb-0 my-0 mt-2">Co2용접/tig/배관 가능 하신 분 모집</h6>
+                <h6 class="color_primary pt-2 pb-0 my-0 mt-2"><?=$val['h_title']?></h6>
                 <hr class="mx-2" />
                 <ul class="text-left ml-3 sm_content">
-                    <li class="weight_lighter xs_content">지원자명 : 이학남</li>
-                    <li class="weight_lighter xs_content">면접요청 : 문자</li>
-                    <li class="weight_lighter xs_content">요청일시 : 19.07.18 19:22</li>
+                    <li class="weight_lighter xs_content">지원자명 : <?=$val['m_name']?></li>
+                    <li class="weight_lighter xs_content">면접요청 : <?=$val['way']?></li>
+                    <li class="weight_lighter xs_content">전화번호 : <?=$val['m_phone']?></li>
+                    <li class="weight_lighter xs_content">요청일시 : <?=$val['reg_date']?></li>
+
+                  <? if($val['way'] == "문자"){ ?>
                     <li class="weight_lighter xs_content">면접일 : 19.08.01 12:00</li>
+                  <? } ?>
                 </ul>
             </div>
         <?php } ?>
