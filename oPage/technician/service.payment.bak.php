@@ -1,3 +1,4 @@
+<!--이것이 사실 모달창이었다는 사실을 알게되면서 쓰지않게됨.-->
 <style>
     body{background:#FFF;}
 </style>

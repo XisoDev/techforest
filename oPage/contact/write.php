@@ -1,8 +1,9 @@
 <section class="bg-white">
-    <div class="content_padding mt-4 pt-5">
+    <div class="content_padding mt-4 pt-5 d-lg-none">
         <a href="#" onclick="history.back();"><i class="xi-arrow-left xi-2x"></i></a>
         <h5 class="weight_normal">문의하기</h5>
     </div>
+    <div class="container pt-lg-5 col-md-10 col-lg-8 mx-auto">
     <ul class="nav nav-tabs nav-justified mt-0 pt-0 mb-5 mx-0 px-0" role="tablist">
         <li class="nav-item active py-3 position-relative">
             <a class="nav-link weight_bold" href="<?=getUrl('contact')?>">
@@ -17,7 +18,7 @@
         </li>
     </ul>
     <div class="content_padding mt-0 pt-0">
-        <div class="col-5 mx-auto">
+        <div class="col-5 mx-auto d-lg-none">
             <div class="avatar square" style="background-image:url('/oPage/contact/images/contact_icon.png'); background-size:60%;"></div>
         </div>
         <div class="container">
@@ -59,9 +60,10 @@
                     <textarea rows="3" placeholder="내용을 입력해 주세요." class="form-control"></textarea>
                 </div>
                 <button type="button" class="btn btn-primary btn-block btn-round">문의하기</button>
-                <a class="btn btn-light border-primary btn-block btn-round" href="tel:+821057595999"><i class="xi-call"></i> 전화로 문의하기</a>
+                <a class="d-lg-none btn btn-light border-primary btn-block btn-round" href="tel:+821057595999"><i class="xi-call"></i> 전화로 문의하기</a>
             </div>
         </div>
+    </div>
     </div>
 </section>
 <?php

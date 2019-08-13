@@ -160,7 +160,8 @@ function setSEO($title, $description = false){
     global $site_info;
 
     //SET SEO
-    $site_info->title = $title . " - " . $site_info->title;
+    $site_info->title_for_browser = $title . " - " . $site_info->title;
+    $site_info->title = $title;
     $site_info->desc = ($description) ? $description : $site_info->desc;
 }
 

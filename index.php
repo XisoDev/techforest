@@ -69,7 +69,7 @@ loadLayout($site_info->layout);
     <meta name="Generator" content="XISO" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <title><?=$site_info->title?></title>
+    <title><?=$site_info->title_for_browser?></title>
     <link rel="alternate" type="application/rss+xml" title="Site RSS" href="//<?=$site_info->domain?>/rss" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     <link rel="canonical" href="<?=$site_info->domain?>" />

@@ -1,5 +1,6 @@
 <div class="bg-dark py-2 text-right fixed-top px-3 text-white"><a href="#" class="text-white" onclick="window.close();"><i class="xi-close"></i> 닫기</a></div>
 <section class="bg-white container">
+
     <h2 class="weight_bold px-0 mx-0 mt-5">나의 이력서 전체보기</h2>
 
     <div class="content_padding">

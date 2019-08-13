@@ -130,7 +130,13 @@ $myinfo_row = $oDB->getOne("TF_member_tb AS m",$columns);
             </div>
         </div>
         <?php }else{ ?>
-            <div class="col-12">
+            <div class="col-12" style="
+                    background-image:url('/oPage/technician/images/main_1section_bg.png');
+                    background-size:contain;
+                    background-repeat:no-repeat;
+                    background-position:center top;
+            ">
+                <div class="d-block d-md-none">
                 <h6 class="weight_lighter mt-4 mb-1">
                     <span class="red"><?=$logged_info['m_name']?></span>님의 이력서 완성도는
                     <span class="red">
@@ -147,16 +153,44 @@ $myinfo_row = $oDB->getOne("TF_member_tb AS m",$columns);
                 <h6 class="weight_lighter mt-0 mb-2">
                     상세 경력을 기입하고 취업 성공률을 높여보세요!
                 </h6>
+                </div>
 
-                <div class="tech_card overflow-hidden">
+                <div class=" col-md-10 col-lg-8 mx-auto mt-md-5">
+                    <div class="d-none d-md-block mx-auto avatar position-relative square bg-white" style="
+                                max-width:150px;
+                                margin-top:-75px;
+                                z-index:50;
+                                background-image:url('/layout/none/assets/images/no_avatar.png');
+                            ">
+                    </div>
+                <div class="tech_card overflow-hidden mt-md-n5 bg-white shadow">
                     <div class="row">
-                        <div class="col-4 mr-0 pr-0">
+                        <div class="d-none d-md-block px-5 text-center col-12 pt-5">
+                            <h5 class="mt-4 mb-1">
+                                <span class="red"><?=$logged_info['m_name']?></span>님의 이력서 완성도는
+                                <span class="red">
+                                  <?php if($count_career_row['count_career'] == $count_c_content_row['count_c_content'] && $count_myinfo_row['count_myinfo']){
+                                      echo '높음';
+                                  }else if($count_career_row['count_career'] > $count_c_content_row['count_c_content'] && $count_myinfo_row['count_myinfo']){
+                                      echo '중간';
+                                  }else{
+                                      echo '낮음';
+                                  }
+                                  ?>
+                                </span>입니다.
+                            </h5>
+                            <h5 class="mt-0 mb-2">
+                                상세 경력을 기입하고 취업 성공률을 높여보세요!
+                            </h5>
+                            <hr />
+                        </div>
+                        <div class="col-4 mr-0 pr-0 d-md-none">
                             <div class="content_padding">
                                 <div class="mx-auto avatar square bg-white" style="background-image:url('/layout/none/assets/images/no_avatar.png');">
                                 </div>
                             </div>
                         </div>
-                        <div class="col-8 ml-0 pl-0">
+                        <div class="col-8 ml-0 pl-0 col-md-12 px-md-5">
                             <div class="text-left">
                                 <h5 class="weight_bold mb-2 pt-3"><?=$logged_info['m_name']?>
                                     <span class="xs_content weight_lighter">(<?=$myinfo_row['m_birthday']?>세)</span>
@@ -164,20 +198,55 @@ $myinfo_row = $oDB->getOne("TF_member_tb AS m",$columns);
                                 <?php $desired_work_place = $myinfo_row['local_name'] . " ";
                                       if($myinfo_row['m_city_idx'] != -1){ $desired_work_place .= $myinfo_row['city_name']; }
                                       if($myinfo_row['m_district_idx'] != -1){ $desired_work_place .= $myinfo_row['district_name']; }?>
-                                <p class="xxs_content weight_lighter px-0"><span class="bg-red icon_wrap"><i class="xi-dashboard"></i></span> <b>희망직무</b> : <?=$myinfo_row['hope_duty']?></p>
-                                <p class="xxs_content weight_lighter px-0"><span class="bg-red icon_wrap"><i class="xi-wrench"></i></span> <b>주요경력</b> : <?=$myinfo_row['duty_name']?></p>
-                                <p class="xxs_content weight_lighter px-0"><span class="bg-red icon_wrap"><i class="xi-map-marker"></i></span> <b>희망지역</b> : <?=$desired_work_place?></p>
+                                <div class="row px-3 py-sm-2 py-md-3">
+                                <p class="col-12 col-md-6 xxs_content weight_lighter px-0"><span class="bg-red icon_wrap"><i class="xi-dashboard"></i></span> <b>희망직무</b> : <?=$myinfo_row['hope_duty']?></p>
+                                <p class="col-12 col-md-6 xxs_content weight_lighter px-0"><span class="bg-red icon_wrap"><i class="xi-wrench"></i></span> <b>주요경력</b> : <?=$myinfo_row['duty_name']?></p>
+                                <p class="col-12 col-md-6 xxs_content weight_lighter px-0"><span class="bg-red icon_wrap"><i class="xi-map-marker"></i></span> <b>희망지역</b> : <?=$desired_work_place?></p>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <a href="#" class="btn btn-block btn-primary mt-0 rounded-0">이력서 수정하기</a>
+                    <a href="#" class="btn btn-block btn-danger mt-0 rounded-0">이력서 수정하기</a>
+                </div>
                 </div>
             </div>
+<?php } ?>
+    </div>
+</div>
+    <!--    배너슬라이드 섹션-->
+    <br>
+    <div id="demo" class="carousel slide standard" data-ride="carousel">
+        <!-- The slideshow -->
+        <div class="carousel-inner slick_wrap affix_middle">
+            <?php for($i=1; $i<=5; $i++){ ?>
+                <div class="carousel-item bg-primary<?php print ($i==1) ? " active" : ""?> text-center">
+                    <img src="/layout/none/assets/images/no_banner.png" alt="banner1" width="100%" style="width:auto; max-height:120px;">
+                </div>
+            <?php } ?>
+        </div>
 
+        <!-- Left and right controls -->
+        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#demo" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+    </div>
+
+<?php if($logged_info) { ?>
+<div class="container">
+    <div class="row">
             <div class="col-12 mt-2">
+                <div class="d-block d-lg-none">
                 <h5 class="weight_bold mt-3"><span class="red"><?=$logged_info['m_name']?></span>님 께서,</h5>
                 <h6 class="weight_lighter mt-1 mb-2">지원하실 확률이 높은 공고를 찾아왔어요!</h6>
+                </div>
+                <div class="d-none d-lg-block text-center pt-5 pb-3">
+                    <h3 class="weight_bold mt-3">AI 추천 공고</h3>
+                    <h6 class="weight_lighter mt-1 mb-2">지원하실 확률이 높은 공고를 찾아왔어요!</h6>
+                </div>
 
                 <div class="flex-card-slick">
                     <?php for($i=1; $i<=3; $i++){ ?>
@@ -203,44 +272,11 @@ $myinfo_row = $oDB->getOne("TF_member_tb AS m",$columns);
                     <?php } ?>
                 </div>
             </div>
-        <?php } ?>
     </div>
 </div>
+<?php } ?>
 
-<!--    배너슬라이드 섹션-->
-<br>
-<div id="demo" class="carousel slide standard d-sm-none" data-ride="carousel">
-
-  <!-- The slideshow -->
-  <div class="carousel-inner slick_wrap affix_middle">
-    <div class="carousel-item bg-primary active">
-      <img src="/layout/none/assets/images/no_banner.png" alt="banner1" width="100%">
-    </div>
-    <div class="carousel-item bg-primary">
-      <img src="/layout/none/assets/images/no_banner.png" alt="banner2" width="100%">
-    </div>
-    <div class="carousel-item bg-primary">
-      <img src="/layout/none/assets/images/no_banner.png" alt="banner3" width="100%">
-    </div>
-    <div class="carousel-item bg-primary">
-      <img src="/layout/none/assets/images/no_banner.png" alt="banner4" width="100%">
-    </div>
-    <div class="carousel-item bg-primary">
-      <img src="/layout/none/assets/images/no_banner.png" alt="banner5" width="100%">
-    </div>
-  </div>
-
-  <!-- Left and right controls -->
-  <a class="carousel-control-prev" href="#demo" data-slide="prev">
-    <span class="carousel-control-prev-icon"></span>
-  </a>
-  <a class="carousel-control-next" href="#demo" data-slide="next">
-    <span class="carousel-control-next-icon"></span>
-  </a>
-</div>
-
-
-<div class="container">
+<div class="container d-lg-none">
     <div class="row">
         <div class="col-12">
             <h5 class="weight_lighter mt-4">
@@ -270,3 +306,52 @@ $myinfo_row = $oDB->getOne("TF_member_tb AS m",$columns);
         </div>
     </div>
 </div>
+
+
+<div class="d-none d-lg-block container-fluid mt-5 text-white sub_visual" style="background-image:url('<?=$no_auto_bg_url?>')">
+    <div class="container py-5 text-left">
+    <h5>국내1위 기술인력 전문 구인구직 매칭서비스</h5>
+    <h4>지금까지 <span class="text-warning">기술자숲</span>을 통해</h4>
+    <h3>전달된 일자리 <span class="weight_bold" style="font-size:40px;">총 <b class="weight_super">27,567</b>개</span></h3>
+    </div>
+</div>
+
+<div class="d-none d-lg-block container">
+    <div class="text-center pt-5 pb-3">
+        <h3 class="weight_bold mt-3">언론보도</h3>
+        <h6 class="weight_lighter mt-1 mb-2">기술자숲의 언론보도 및 소식을 확인해보세요.</h6>
+    </div>
+    <div class="row">
+        <?php for($i=1; $i<=3; $i++){ ?>
+        <div class="col-4 mt-2">
+            <div class="shadow">
+            <div style="background-color:#EEE; min-height:150px;">
+
+            </div>
+            <div class="px-md-2">
+                <div class="content_padding">
+                    <h6 class="weight_normal">휴대폰으로 딱 10초!, 기술자 일자리 매칭 서비...</h6>
+                    <p class="xs_content px-0">
+                        30대 소셜 벤처 기업가가 조선산업 불황 여파로 일자리를 잃은 숙련 기...
+                    </p>
+                    <hr />
+                    <a class="btn btn-primary pull-right" href="#">자세히 보기</a>
+                    <p class="text-secondary my-0 py-0 px-0">2019.05.30</p>
+                </div>
+            </div>
+            </div>
+        </div>
+        <?php } ?>
+    </div>
+
+</div>
+
+<div class="d-none py-5 d-lg-block container-fluid mt-5 bg-light">
+    <div class="d-flex justify-content-between container">
+    <a href="#" target="_blank"><img src="/oPage/technician/images/supports_01.jpg" height="59" /></a>
+    <a href="#" target="_blank"><img src="/oPage/technician/images/supports_03.jpg" height="59" /></a>
+    <a href="#" target="_blank"><img src="/oPage/technician/images/supports_05.jpg" height="59" /></a>
+    <a href="#" target="_blank"><img src="/oPage/technician/images/supports_07.png" height="59" /></a>
+    </div>
+</div>
+<?php $footer_false = true; ?>

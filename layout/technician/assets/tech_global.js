@@ -29,12 +29,35 @@ jQuery(document).ready(function($){
         dots: false,
         speed: 300,
         slidesToShow: 1.6,
+        rows:1,
+        slidesPerRow: 1,
         slidesToScroll: 1,
+        mobileFirst: true,
         centerMode: false,
         infinite:false,
         arrows: false,
         variableWidth: false,
-        centerPadding: '0'
+        centerPadding: '0',
+        responsive: [{
+            breakpoint: 576,
+            settings: {
+                slidesToShow: 1.6,
+                rows:1,
+                slidesPerRow: 1
+            }
+        },{
+            breakpoint: 768,
+            settings: {
+                slidesToShow: 2.5,
+                rows:1,
+                slidesPerRow: 1
+            }
+        },{
+            breakpoint: 992,
+            settings: {
+                slidesToShow: 3
+            }
+        }]
     });
     $('.banners_slick').slick({
         dots: true,
