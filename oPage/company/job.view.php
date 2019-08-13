@@ -29,7 +29,8 @@
                           <span class="badge-warning btn-round xxs_content">적합도 높음</span>
                           <i class="text-warning xi-star"></i>
                           <i class="text-warning xi-star"></i>
-                          <i class="text-warning xi-star-o"></i>
+                          <i class="text-warning xi-star"></i>
+                          <!-- <i class="text-warning xi-star-o"></i> -->
                       </div>
                       <div class="clearfix"></div>
                       <p class="m-0 text-left weight_lighter xs_content"><?=$val['a_line_self']?></p>

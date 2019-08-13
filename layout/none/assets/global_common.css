@@ -351,3 +351,11 @@ img{
 .nav-tabs .nav-item a{
     border:none;
 }
+
+#cut1 {
+white-space:nowrap;
+display:block;
+-webkit-line-clamp:1;
+overflow:hidden;
+text-overflow:ellipsis;
+}

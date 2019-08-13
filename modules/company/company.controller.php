@@ -350,8 +350,9 @@ class companyController{
       "amount" => $args->amount,
       "merchant_uid" => $args->merchant_uid,
       "reg_date" => $now_date,
-      "payment_method" => "카드",
-      "state" => "완료",
+      "payment_method" => "CARD",
+      "account_holder" => $args->account_holder,
+      "state" => "Y",
       "edit_date" => $now_date
     );
 
@@ -363,6 +364,55 @@ class companyController{
       return new Object(-1,"네트워크 오류가 발생했습니다.");
     }
   }
+
+  function service_order_success2($args){
+    global $oDB;
+    $now_date = date(YmdHis);
+
+    $data = array(
+      "m_idx" => $args->m_idx,
+      "ps_idx" => $args->ps_idx,
+      "discount" => $args->discount,
+      "amount" => $args->amount,
+      "merchant_uid" => $args->merchant_uid,
+      "reg_date" => $now_date,
+      "payment_method" => "CASH",
+      "account_holder" => $args->account_holder,
+      "state" => "N",
+      "edit_date" => $now_date
+    );
+
+    $row = $oDB->insert("TF_payment",$data);
+
+    if($row){
+
+      $oDB->where("reg_date",$now_date);
+      $search_p_idx = $oDB->get("TF_payment",null,"p_idx");
+
+      if($args->receipt_phone){
+        $cash_data = array(
+          "p_idx" => $search_p_idx[0]['p_idx'],
+          "num_option" => "소득공제용",
+          "num" => $args->receipt_phone,
+          "reg_date" => $now_date
+        );
+        $row2 = $oDB->insert("TF_cash_receipt",$cash_data);
+        
+      }else if($args->receipt_registration){
+        $cash_data = array(
+          "p_idx" => $search_p_idx[0]['p_idx'],
+          "num_option" => "지출증빙용",
+          "num" => $args->receipt_registration,
+          "reg_date" => $now_date
+        );
+        $row2 = $oDB->insert("TF_cash_receipt",$cash_data);
+      }
+    }else{
+      return new Object(-1,"네트워크 오류가 발생했습니다.");
+    }
+  }
+
+
    function add_voucher($args){
      global $oDB;
      $now_date = date(YmdHis);

@@ -145,7 +145,7 @@
                         <div class="avatar square" style="margin: 10px 25px; background-image:url('/layout/none/assets/images/no_avatar.png');">
                         </div>
                         <h6 class="weight_normal mb-3"><?=$val['m_name']?> (<?=$val['m_birthday']?>세)</h6>
-                        <p class="text-left xxs_content"><span class="bg-red icon_wrap"><i class="xi-wrench"></i></span>주요경력 : <?=$val['duty_name']?></p>
+                        <p class="text-left xxs_content" id="cut1"><span class="bg-red icon_wrap"><i class="xi-wrench"></i></span>주요경력 : <?=$val['duty_name']?></p>
                         <p class="text-left xxs_content"><span class="bg-red icon_wrap"><i class="xi-map-marker"></i></span>희망지역 : <?=$desired_work_place?></p>
                         <a href="#" class="btn btn-block btn-warning mt-3 rounded-0">이력서 보기</a>
                     </div>
@@ -209,7 +209,7 @@
                           $application_time= $diff.'초 전';
                         }
                     ?>
-                      <p>
+                      <p id="cut1">
                         <span class="btn btn-round btn-xxs btn-danger"><?=$application_time?></span>
                         <?=$val['c_name']?> 에 지원자가 발생했습니다.
                       </p>
