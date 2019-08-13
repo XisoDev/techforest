@@ -21,6 +21,67 @@ class technicianView{
         return $output;
     }
 
+    function resume($args){
+        global $site_info;
+
+        global $add_body_class;
+
+        global $set_template_file;
+        if($args->document_srl) {
+            $site_info->layout = "none";
+            $add_body_class[] = "";
+            $set_template_file = "technician/resume.view.php";
+        }else{
+            $site_info->layout = "technician";
+            $add_body_class[] = "shrink";
+            $set_template_file = "technician/resume.list.php";
+        }
+
+        $output = new Object();
+        return $output;
+    }
+
+    function resumeWrite($args){
+        global $site_info;
+        $site_info->layout = "technician";
+
+        global $add_body_class;
+        $add_body_class[] = "shrink";
+
+        global $set_template_file;
+        $set_template_file = "technician/resume.write.php";
+
+        $output = new Object();
+        return $output;
+    }
+
+    function findJob($args){
+        global $site_info;
+        $site_info->layout = "technician";
+
+        global $add_body_class;
+        $add_body_class[] = "shrink";
+
+        global $set_template_file;
+        $set_template_file = "technician/findjob.php";
+
+        $output = new Object();
+        return $output;
+    }
+
+    function findJobList($args){
+        global $site_info;
+        $site_info->layout = "technician";
+
+        global $add_body_class;
+        $add_body_class[] = "shrink";
+
+        global $set_template_file;
+        $set_template_file = "technician/findjob.list.php";
+
+        $output = new Object();
+        return $output;
+    }
 
     function magazine($args){
         global $site_info;

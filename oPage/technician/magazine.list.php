@@ -10,10 +10,10 @@
     <?php for($i=1; $i<=3; $i++) { ?>
     <div class="magazine tech_card mb-3 bg-white text-left">
         <div class="row">
-            <div class="col-4 pr-0" style="background-color:#EEE;">
+            <div class="col-5 pr-0" style="background-color:#EEE;">
 
             </div>
-            <div class="col-8 pl-0">
+            <div class="col-7 pl-0">
                 <div class="content_padding">
                     <h6 class="red">[취업정보]</h6>
                     <h6 class="weight_normal">2019년 7월 전국...</h6>

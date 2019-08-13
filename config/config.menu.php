@@ -182,19 +182,19 @@ $oMenu->technician = new stdClass();
 $oMenu->technician->list = array();
 $oMenu->technician->list[] = array(
     "title" => "이력서등록",
-    "link" => "#",
+    "link" => getUrl('technician','resume'),
     "icon" => "xi-library-books-o",
     "active_mid" => "technician",
-    "active_act" => time(),
+    "active_act" => "resume",
     "new_window" => "N",
     "is_logged" => "N",
 );
 $oMenu->technician->list[] = array(
     "title" => "일자리찾기",
-    "link" => "#",
+    "link" => getUrl('technician','findJob'),
     "icon" => "xi-zoom-in",
     "active_mid" => "technician",
-    "active_act" => time(),
+    "active_act" => "findJob",
     "new_window" => "N",
     "is_logged" => "N",
 );
