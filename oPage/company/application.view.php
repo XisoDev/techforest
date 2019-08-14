@@ -5,13 +5,16 @@
 
   $h_idx = $_REQUEST['h_idx'];
 ?>
-<section class="content_padding mt-4 pt-5 bg-white">
+<section class="content_padding mt-4 pt-5 bg-white d-lg-none">
     <a href="#" onclick="history.back();"><i class="xi-arrow-left xi-2x"></i></a>
     <h5 class="weight_normal">지원자정보 상세보기</h5>
 </section>
 
 <div class="container" style="position:relative; z-index:1;">
-    <div class="content_padding px-0 pb-1">
+
+    <div class="col-lg-8 mx-lg-auto">
+    <h4 class="d-none d-lg-block py-4 mt-5">기본정보</h4>
+    <div class="content_padding px-0 pb-1 d-md-none">
         <h6>기본정보</h6>
         <div class="row">
             <div class="col-5 pt-4 pb-0 my-0 pl-4 mx-auto">
@@ -23,11 +26,20 @@
             </div>
         </div>
     </div>
-
-
-    <div class="tech_card bg-white overflow-hidden pt-0 my-3">
+    <div class="tech_card bg-white overflow-hidden pt-0 my-3 shadow">
         <span class="btn btn-block btn-warning mt-0 rounded-0 mb-3">책임감있는 열정적인 10년차 용접사!</span>
-        <ul class="xs_content text-left">
+        <div class="row">
+            <div class="d-none d-md-block col-md-1">
+            </div>
+            <div class="d-none d-md-block col-md-3">
+                <?if(!$info_row[0]['m_picture']){?>
+                    <div class="avatar square" style="background-image:url('/layout/none/assets/images/no_avatar.png');"></div>
+                <?}else{?>
+                    <img src="../../../img/<?=$info_row[0]['m_picture']?>" class="avatar" id="my_picture" alt="picture">
+                <?}?>
+            </div>
+            <div class="col-12 col-md-7 col-lg-8">
+        <ul class="xs_content text-left py-md-4">
             <li>이름 : <?=$info_row[0]['m_name']?>
               <?php
                 if($info_row[0]["m_human"] == "M") {
@@ -56,16 +68,19 @@
               ?>
             <li>희망직종 : 건설/조선</li>
         </ul>
+            </div>
+        </div>
     </div>
 
-
-    <div class="tech_card bg-white overflow-hidden pt-0 my-3">
-        <span class="btn btn-block btn-light mt-0 rounded-0 mb-3">경력간단요약</span>
+    <div class="tech_card bg-white overflow-hidden pt-0 my-3 pt-md-4">
+        <h5 class="p-2 d-none d-md-block bg-light">경력간단요약</h5>
+        <span class=" d-md-none btn btn-block btn-light mt-0 rounded-0 mb-3">경력간단요약</span>
         <p>성실한 10년차 용접사</p>
     </div>
 
-    <div class="tech_card bg-white overflow-hidden pt-0 my-3">
-        <span class="btn btn-block btn-light mt-0 rounded-0 mb-3">학력</span>
+    <div class="tech_card bg-white overflow-hidden pt-0 my-3 pt-md-4">
+        <h5 class="p-2 d-none d-md-block bg-light">학력</h5>
+        <span class=" d-md-none btn btn-block btn-light mt-0 rounded-0 mb-3">학력</span>
         <ul class="xs_content text-left my-3">
             <li>학교 : ABCD 학교</li>
             <li>졸업연도 : 1999.02</li>
@@ -74,8 +89,9 @@
         </ul>
     </div>
 
-    <div class="tech_card bg-white overflow-hidden pt-0 my-3">
-        <span class="btn btn-block btn-light mt-0 rounded-0 mb-3">경력</span>
+    <div class="tech_card bg-white overflow-hidden pt-0 my-3 pt-md-4">
+        <h5 class="p-2 d-none d-md-block bg-light">경력</h5>
+        <span class=" d-md-none btn btn-block btn-light mt-0 rounded-0 mb-3">경력</span>
         <ul class="xs_content text-left my-3">
             <li>학교 : ABCD 학교</li>
             <li>졸업연도 : 1999.02</li>
@@ -84,21 +100,9 @@
         </ul>
     </div>
 
-    <div class="tech_card bg-white overflow-hidden pt-0 my-3">
-        <span class="btn btn-block btn-light mt-0 rounded-0 mb-3">자격증</span>
-        <ul class="xs_content text-left my-3">
-            <li>학교 : ABCD 학교</li>
-            <li>졸업연도 : 1999.02</li>
-        </ul>
-        <hr class="mx-4" />
-        <ul class="xs_content text-left my-3">
-            <li>전공 : 금형,기계제조</li>
-            <li>학점 : 4.21/4.5</li>
-        </ul>
-    </div>
-
-    <div class="tech_card bg-white overflow-hidden pt-0 my-3">
-        <span class="btn btn-block btn-light mt-0 rounded-0 mb-3">어학</span>
+    <div class="tech_card bg-white overflow-hidden pt-0 my-3 pt-md-4">
+        <h5 class="p-2 d-none d-md-block bg-light">자격증</h5>
+        <span class=" d-md-none btn btn-block btn-light mt-0 rounded-0 mb-3">자격증</span>
         <ul class="xs_content text-left my-3">
             <li>학교 : ABCD 학교</li>
             <li>졸업연도 : 1999.02</li>
@@ -110,8 +114,23 @@
         </ul>
     </div>
 
-    <div class="tech_card bg-white overflow-hidden pt-0 my-3">
-        <span class="btn btn-block btn-light mt-0 rounded-0 mb-3">관련서류보기</span>
+    <div class="tech_card bg-white overflow-hidden pt-0 my-3 pt-md-4">
+        <h5 class="p-2 d-none d-md-block bg-light">어학</h5>
+        <span class=" d-md-none btn btn-block btn-light mt-0 rounded-0 mb-3">어학</span>
+        <ul class="xs_content text-left my-3">
+            <li>학교 : ABCD 학교</li>
+            <li>졸업연도 : 1999.02</li>
+        </ul>
+        <hr class="mx-4" />
+        <ul class="xs_content text-left my-3">
+            <li>전공 : 금형,기계제조</li>
+            <li>학점 : 4.21/4.5</li>
+        </ul>
+    </div>
+
+    <div class="tech_card bg-white overflow-hidden pt-0 my-3 pt-md-4">
+        <h5 class="p-2 d-none d-md-block bg-light">관련서류보기</h5>
+        <span class=" d-md-none btn btn-block btn-light mt-0 rounded-0 mb-3">관련서류보기</span>
         <ul class="xs_content text-left my-3">
             <li>
 <!--                다운로드 링크-->
@@ -137,10 +156,24 @@
         </ul>
     </div>
 
-    <a href="#" class="btn btn-block btn-primary">이력서 전체보기</a>
+        <a href="#" class="btn btn-block btn-primary d-md-none">이력서 전체보기</a>
 
+        <div class="d-none d-md-block text-center">
+            <a href="#" class="btn btn-primary px-4 rounded-0">이력서 전체보기</a>
+
+            <?php if(!$check_voucher || $check_voucher[0]['sum_remain_count'] < 1){?>
+                <button data-toggle="modal" data-target="#buy_voucher" class="btn btn-warning px-4 rounded-0">면접 제안하기</button>
+            <?php }else if($check_applicant){?>
+                <button class="btn btn-warning disabled px-4 rounded-0">면접제안 완료</button>
+            <?php }else{?>
+                <button data-toggle="modal" data-target="#interview_suggestion" class="btn btn-warning px-4 rounded-0">면접 제안하기</button>
+            <?php } ?>
+        </div>
+
+    </div>
 </div>
 
+<div class="d-md-none">
 <?php if(!$check_voucher || $check_voucher[0]['sum_remain_count'] < 1){?>
   <button data-toggle="modal" data-target="#buy_voucher" class="btn btn-block btn-warning btn-lg rounded-0 fixed-bottom">면접 제안하기</button>
 <?php }else if($check_applicant){?>
@@ -148,6 +181,7 @@
 <?php }else{?>
   <button data-toggle="modal" data-target="#interview_suggestion" class="btn btn-block btn-warning btn-lg rounded-0 fixed-bottom">면접 제안하기</button>
 <?php } ?>
+</div>
 
 <div class="modal fade" id="suggestion_way" tabindex="-1" role="dialog" aria-labelledby="tech_forest_modal_window" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">

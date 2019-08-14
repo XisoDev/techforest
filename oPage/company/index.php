@@ -41,7 +41,7 @@
         <div class="col-12 mt-2">
             <div class="flex-card-slick">
                 <?php for($i=1; $i<=3; $i++){ ?>
-                    <div class="tech_card">
+                    <div class="tech_card text-center">
                         <div class="thumbnail">
                             <div class="icon_wrap">
                                 <i class="xi-plus-circle xi-2x color_primary"></i>
@@ -64,16 +64,20 @@
              $oDB->join("TF_member_commerce_tb co","h.c_idx = co.c_idx","LEFT");
              $row = $oDB->getOne("TF_hire_tb h","count(h.h_idx) as count_hire");
             ?>
-            <h6 class="weight_lighter mt-4">총 <span class="red"><?=$row['count_hire']?></span>의 진행중인 공고가 있어요.</h6>
+            <h6 class="d-md-none weight_lighter mt-4">총 <span class="red"><?=$row['count_hire']?></span>의 진행중인 공고가 있어요.</h6>
+            <h5 class="d-none d-md-block weight_lighter mt-4">최근 등록하신 <span class="red"><?=$row['count_hire']?>건</span>의 채용공고가 있어요.</h5>
         </div>
-        <div class="col-3 ml-0 pl-0">
-            <a href="<?=getUrl('company','job_register')?>" class="mt-3 btn btn-block btn-primary btn-xxs btn-round">추가등록<i class="xi-plus"></i></a>
+        <div class="col-3 ml-0 pl-0 text-right">
+            <a href="<?=getUrl('company','job_register')?>" class="d-md-none mt-3 btn btn-block btn-primary btn-xxs btn-round">추가등록<i class="xi-plus"></i></a>
+            <a href="<?=getUrl('company','job_register')?>" class="d-md-inline-block mt-3 btn btn-primary btn-round">추가등록<i class="xi-plus"></i></a>
         </div>
+
+
         <?php if($row['count_hire'] == 0){?>
           <div class="col-12 mt-2">
               <div class="flex-card-slick">
                   <?php for($i=1; $i<=3; $i++){ ?>
-                      <div class="tech_card">
+                      <div class="tech_card text-center">
                           <div class="thumbnail">
                               <div class="icon_wrap">
                                   <i class="xi-plus-circle xi-2x color_primary"></i>
@@ -88,7 +92,7 @@
         <div class="col-12 mt-2">
             <div class="flex-card-slick">
                 <?php foreach($output->get("hire_ing") as $val){ ?>
-                    <div class="tech_card bg-white">
+                    <div class="tech_card bg-white shadow">
                         <div class="thumbnail mx-0 px-0" style="background-image:url('http://www.planttech.co.kr/wp-content/uploads/2018/07/%EC%82%BC%EC%84%B1%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%811-820x457.png')">
                         </div>
                         <div class="content_padding text-left pb-1">
@@ -128,55 +132,23 @@
         </div>
         <?php } ?>
         <?php } ?>
-
-        <div class="col-12">
-        <h5 class="weight_lighter mt-4">
-            <span class="btn btn-round btn-xxs btn-primary">NEW</span>
-            새로운 기술자가 등록됐어요!
-        </h5>
-        </div>
-        <div class="col-12 mt-2">
-            <div class="flex-card-slick">
-                <?php foreach($output->get("new_member2") as $val){ ?>
-                  <?php $desired_work_place = $val['local_name'] . " ";
-                        if($val['m_city_idx'] != -1){ $desired_work_place .= $val['city_name']; }
-                        if($val['m_district_idx'] != -1){ $desired_work_place .= $val['district_name']; }?>
-                    <div class="tech_card bg-white overflow-hidden">
-                        <div class="avatar square" style="margin: 10px 25px; background-image:url('/layout/none/assets/images/no_avatar.png');">
-                        </div>
-                        <h6 class="weight_normal mb-3"><?=$val['m_name']?> (<?=$val['m_birthday']?>세)</h6>
-                        <p class="text-left xxs_content" id="cut1"><span class="bg-red icon_wrap"><i class="xi-wrench"></i></span>주요경력 : <?=$val['duty_name']?></p>
-                        <p class="text-left xxs_content"><span class="bg-red icon_wrap"><i class="xi-map-marker"></i></span>희망지역 : <?=$desired_work_place?></p>
-                        <a href="#" class="btn btn-block btn-warning mt-3 rounded-0">이력서 보기</a>
-                    </div>
-                <?php } ?>
-            </div>
-        </div>
     </div>
+<!--    endrow-->
 </div>
+<!-- end section -->
 
 
 <!--    배너슬라이드 섹션-->
 <br>
-<div id="demo" class="carousel slide standard d-sm-none" data-ride="carousel">
+<div id="demo" class="carousel slide standard" data-ride="carousel">
 
   <!-- The slideshow -->
   <div class="carousel-inner slick_wrap affix_middle">
-    <div class="carousel-item bg-primary active">
-      <img src="/layout/none/assets/images/no_banner.png" alt="banner1" width="100%">
-    </div>
-    <div class="carousel-item bg-primary">
-      <img src="/layout/none/assets/images/no_banner.png" alt="banner2" width="100%">
-    </div>
-    <div class="carousel-item bg-primary">
-      <img src="/layout/none/assets/images/no_banner.png" alt="banner3" width="100%">
-    </div>
-    <div class="carousel-item bg-primary">
-      <img src="/layout/none/assets/images/no_banner.png" alt="banner4" width="100%">
-    </div>
-    <div class="carousel-item bg-primary">
-      <img src="/layout/none/assets/images/no_banner.png" alt="banner5" width="100%">
-    </div>
+      <?php for($i=1; $i<=5; $i++){ ?>
+          <div class="carousel-item bg-primary<?php print ($i==1) ? " active" : ""?> text-center">
+              <img src="/layout/none/assets/images/no_banner.png" alt="banner1" width="100%" style="width:auto; max-height:120px;">
+          </div>
+      <?php } ?>
   </div>
 
   <!-- Left and right controls -->
@@ -192,9 +164,54 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <h5 class="weight_lighter mt-4">
-                실시간 지원현황
-            </h5>
+            <div class="d-block d-lg-none">
+                <h5 class="weight_lighter mt-4">
+                    <span class="btn btn-round btn-xxs btn-primary">NEW</span>
+                    새로운 기술자가 등록됐어요!
+                </h5>
+            </div>
+            <div class="d-none d-lg-block text-center pt-5 pb-3">
+                <h3 class="weight_bold mt-3">AI 추천 기술자</h3>
+                <h6 class="weight_lighter mt-1 mb-2">ABC기업과 맞는 기술자를 추천 해 드립니다! 지금 확인해보세요!</h6>
+            </div>
+        </div>
+        <div class="col-12 mt-2">
+            <div class="flex-card-slick">
+                <?php foreach($output->get("new_member2") as $val){ ?>
+                    <?php $desired_work_place = $val['local_name'] . " ";
+                    if($val['m_city_idx'] != -1){ $desired_work_place .= $val['city_name']; }
+                    if($val['m_district_idx'] != -1){ $desired_work_place .= $val['district_name']; }?>
+                    <div class="tech_card bg-white overflow-hidden mx-md-3 mb-md-3 shadow">
+                        <div class="avatar square mx-3 mx-sm-4 mx-md-5 my-2 my-sm-3 my-md-4" style="background-image:url('/layout/none/assets/images/no_avatar.png');">
+                        </div>
+                        <h6 class="weight_normal mb-3 px-2 text-center"><?=$val['m_name']?> (<?=$val['m_birthday']?>세)</h6>
+                        <p class="text-left xxs_content" id="cut1"><span class="bg-red icon_wrap"><i class="xi-wrench"></i></span>주요경력 : <?=$val['duty_name']?></p>
+                        <p class="text-left xxs_content"><span class="bg-red icon_wrap"><i class="xi-map-marker"></i></span>희망지역 : <?=$desired_work_place?></p>
+                        <a href="#" class="btn btn-block btn-warning mt-3 rounded-0">이력서 보기</a>
+                    </div>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <a href="#" class="d-md-inline-block mt-3 btn btn-primary btn-round">더 많은 기술자보기</a>
+    </div>
+</div>
+
+<div class="container-fluid bg-light pb-5 pt-5 pt-lg-2 mt-5">
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="col-12">
+                <div class="d-block d-lg-none">
+                    <h5 class="weight_lighter">
+                        실시간 지원현황
+                    </h5>
+                </div>
+                <div class="d-none d-lg-block text-center pt-5 pb-3">
+                    <h3 class="weight_bold mt-3">실시간 지원현황</h3>
+                </div>
+            </div>
             <div class="tech_card bg-white text-left">
                 <div class="content_padding weight_lighter">
                   <?php foreach($output->get("now_application") as $val){
@@ -219,7 +236,54 @@
         </div>
     </div>
 </div>
+</div>
 
+<div class="d-none d-lg-block container-fluid text-white sub_visual" style="background-image:url('<?=$no_auto_bg_url?>')">
+    <div class="container py-5 text-left">
+        <h5>국내1위 기술인력 전문 구인구직 매칭서비스</h5>
+        <h4>지금까지 <span class="text-warning">기술자숲</span>을 통해</h4>
+        <h3>전달된 일자리 <span class="weight_bold" style="font-size:40px;">총 <b class="weight_super">27,567</b>개</span></h3>
+    </div>
+</div>
+
+<div class="d-none d-lg-block container">
+    <div class="text-center pt-5 pb-3">
+        <h3 class="weight_bold mt-3">언론보도</h3>
+        <h6 class="weight_lighter mt-1 mb-2">기술자숲의 언론보도 및 소식을 확인해보세요.</h6>
+    </div>
+    <div class="row">
+        <?php for($i=1; $i<=3; $i++){ ?>
+            <div class="col-4 mt-2">
+                <div class="shadow">
+                    <div style="background-color:#EEE; min-height:150px;">
+
+                    </div>
+                    <div class="px-md-2">
+                        <div class="content_padding">
+                            <h6 class="weight_normal">휴대폰으로 딱 10초!, 기술자 일자리 매칭 서비...</h6>
+                            <p class="xs_content px-0">
+                                30대 소셜 벤처 기업가가 조선산업 불황 여파로 일자리를 잃은 숙련 기...
+                            </p>
+                            <hr />
+                            <a class="btn btn-primary pull-right" href="#">자세히 보기</a>
+                            <p class="text-secondary my-0 py-0 px-0">2019.05.30</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+    </div>
+
+</div>
+
+<div class="d-none py-5 d-lg-block container-fluid mt-5 bg-light">
+    <div class="d-flex justify-content-between container">
+        <a href="#" target="_blank"><img src="/oPage/technician/images/supports_01.jpg" height="59" /></a>
+        <a href="#" target="_blank"><img src="/oPage/technician/images/supports_03.jpg" height="59" /></a>
+        <a href="#" target="_blank"><img src="/oPage/technician/images/supports_05.jpg" height="59" /></a>
+        <a href="#" target="_blank"><img src="/oPage/technician/images/supports_07.png" height="59" /></a>
+    </div>
+</div>
 <!-- 메인에 뜨는 공고등록 유도 팝업 -->
 <div class="modal fade" id="tech_modal_example" tabindex="-1" role="dialog" aria-labelledby="tech_forest_modal_window" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -236,6 +300,8 @@
     </div>
 </div>
 
+
+<?php $footer_false = true; ?>
 
 <script type="text/javascript">
   if(<?=$_SESSION['LOGGED_INFO']?> > 0 && <?=$row['count_hire']?> < 0 || "<?=$logged_info['registration']?>" == "" || "<?=$logged_info['address']?>" == ""){

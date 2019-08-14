@@ -32,21 +32,67 @@ jQuery(document).ready(function($){
         slidesToScroll: 1,
         centerMode: false,
         infinite:false,
+        mobileFirst: true,
         arrows: false,
         variableWidth: false,
-        centerPadding: '0'
+        centerPadding: '0',
+        responsive: [{
+            breakpoint: 576,
+            settings: {
+                slidesToShow: 1.6,
+                rows:1,
+                slidesPerRow: 1
+            }
+        },{
+            breakpoint: 768,
+            settings: {
+                slidesToShow: 2,
+                rows:1,
+                slidesPerRow: 1
+            }
+        },{
+            breakpoint: 992,
+            settings: {
+                slidesToShow: 2,
+                rows:1,
+                slidesPerRow: 1
+            }
+        }]
     });
     //홈
     $('.flex-card-slick').slick({
-        dots: false,
+        dots: true,
         speed: 300,
-        slidesToShow: 1.6,
+        slidesToShow: 1.4,
         slidesToScroll: 1,
         centerMode: false,
         infinite:false,
+        mobileFirst: true,
         arrows: false,
         variableWidth: false,
-        centerPadding: '0'
+        centerPadding: '0',
+        responsive: [{
+            breakpoint: 576,
+            settings: {
+                slidesToShow: 1.6,
+                rows:1,
+                slidesPerRow: 1
+            }
+        },{
+            breakpoint: 768,
+            settings: {
+                slidesToShow: 2,
+                rows:1,
+                slidesPerRow: 1
+            }
+        },{
+            breakpoint: 992,
+            settings: {
+                slidesToShow: 3,
+                rows:1,
+                slidesPerRow: 1
+            }
+        }]
     });
     $('.banners_slick').slick({
         dots: true,

@@ -29,8 +29,6 @@ jQuery(document).ready(function($){
         dots: false,
         speed: 300,
         slidesToShow: 1.6,
-        rows:1,
-        slidesPerRow: 1,
         slidesToScroll: 1,
         mobileFirst: true,
         centerMode: false,
@@ -42,20 +40,19 @@ jQuery(document).ready(function($){
             breakpoint: 576,
             settings: {
                 slidesToShow: 1.6,
-                rows:1,
-                slidesPerRow: 1
+                arrows: true,
             }
         },{
             breakpoint: 768,
             settings: {
                 slidesToShow: 2.5,
-                rows:1,
-                slidesPerRow: 1
+                arrows: true,
             }
         },{
             breakpoint: 992,
             settings: {
-                slidesToShow: 3
+                slidesToShow: 3,
+                arrows: true,
             }
         }]
     });

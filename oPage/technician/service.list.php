@@ -1,13 +1,13 @@
 <section class="bg-white d-lg-none">
     <div class="content_padding mt-4 pt-5 mb-0 pb-2">
         <a href="#" onclick="history.back();"><i class="xi-arrow-left xi-2x"></i></a>
-        <h5 class="weight_normal">일자리 찾기</h5>
+        <h5 class="weight_normal">유료서비스 안내</h5>
     </div>
 </section>
 <div class="container pt-lg-5">
     <div class="mx-lg-auto col-lg-10 py-lg-5 pt-lg-3">
         <h4 class="d-none d-lg-block mb-4"><i class="xi-lightbulb-o text-warning"></i> 유료서비스 소개</h4>
-    <a class="service_card mb-3 bg-white shadow" href="<?=getUrl('technician','service',10)?>">
+    <a class="service_card mb-5 bg-white shadow" href="<?=getUrl('technician','service',10)?>">
         <div class="row">
             <div class="col-12 col-lg-7">
                 <div class="thumbnail" style="height:100%; background-image:url('/oPage/technician/images/tech_service.jpg"></div>

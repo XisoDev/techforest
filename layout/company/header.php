@@ -104,3 +104,19 @@
         <?php } ?>
     </div>
 </header>
+
+<?php
+$file_name = ($act != "index") ? $act : $module;
+$bg_url = "/oPage/company/visual/" . $file_name . ".jpg";
+$no_auto_bg_url = "/oPage/company/visual/" . $file_name . ".noauto.jpg";
+
+if(file_exists(_XISO_PATH_ . $bg_url) && !$output->get('false_sub_visual')) {
+    ?>
+    <section class="sub_visual d-none d-lg-block" style="background-image:url('<?=$bg_url?>');">
+        <h4><?=$site_info->title?></h4>
+        <hr style="width:50px;" class="mx-auto border-white" />
+        <p class="weight_lighter"><?=$site_info->desc?></h4></p>
+    </section>
+    <?php
+}
+?>

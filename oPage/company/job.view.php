@@ -3,25 +3,30 @@
   $interview_list = $output->get('interview_list');
 ?>
 
-<section class="content_padding mt-4 pt-5 bg-white">
+<section class="content_padding mt-4 pt-5 bg-white d-lg-none">
     <a href="#" onclick="history.back();"><i class="xi-arrow-left xi-2x"></i></a>
     <h5 class="weight_normal">지원자 현황</h5>
 </section>
 
-<div class="container" style="position:relative; z-index:1;">
-    <div class="content_padding px-0 pb-1">
+<div class="container pb-md-3" style="position:relative; z-index:1;">
+    <h4 class="text-center d-none d-lg-block py-4 mt-5">지원자 현황</h4>
+    <div class="content_padding px-0 pb-1 d-md-none">
         <a href="#" class="pull-right btn btn-primary btn-xxs btn-round">더보기 +</a>
         <h6>지원자 관리</h6>
+    </div>
+    <div class="content_padding px-0 pb-1 d-none d-lg-block">
+        <a href="#" class="pull-right btn btn-primary btn-round">더보기 +</a>
+        <h5 class="py-2">지원자 관리</h5>
     </div>
     <div class="tech-card-slick">
     <?php if(count($row) == 0){ ?>
       지원자가 없습니다.
     <?php }else{ ?>
       <?php foreach($row as $val){ ?>
-          <div class="tech_card bg-white overflow-hidden">
+          <div class="tech_card bg-white overflow-hidden mx-3 mb-3 shadow">
               <div class="row">
                   <div class="col-5 pt-4 pb-0 my-0 pl-4">
-                      <div class="avatar square" style="background-image:url('/layout/none/assets/images/no_avatar.png');">
+                      <div class="avatar square mx-md-2 mx-lg-4" style="background-image:url('/layout/none/assets/images/no_avatar.png');">
                       </div>
                   </div>
                   <div class="col-7 pl-0 ml-0">
@@ -53,29 +58,38 @@
     <?php } ?>
 
     </div>
-
-
-    <div class="content_padding px-0 pb-1">
-        <h6>추천 기술자</h6>
-    </div>
+</div>
+<div class="container-fluid bg-light py-md-5">
+    <div class="container">
+        <div class="content_padding px-0 pb-1 d-md-none">
+            <h6>추천 기술자</h6>
+        </div>
+        <div class="content_padding px-0 pb-1 d-none d-lg-block">
+            <a href="#" class="pull-right btn btn-primary btn-round">더보기 +</a>
+            <h5 class="py-2">추천 기술자</h5>
+        </div>
     <div class="flex-card-slick">
         <?php for($i=1; $i<=4; $i++){?>
-        <div class="tech_card bg-white overflow-hidden">
-            <div class="avatar square" style="margin: 10px 25px; background-image:url('/layout/none/assets/images/no_avatar.png');">
+        <div class="tech_card bg-white overflow-hidden mx-md-3 mb-md-3 shadow">
+            <div class="avatar square mx-3 mx-sm-4 mx-md-5 my-2 my-sm-3 my-md-4" style="background-image:url('/layout/none/assets/images/no_avatar.png');">
             </div>
-            <h6 class="weight_normal mb-3">나상호 (56세)</h6>
+            <h6 class="weight_normal mb-3 px-2">나상호 (56세)</h6>
             <p class="text-left xxs_content"><span class="bg-red icon_wrap"><i class="xi-wrench"></i></span> 주요경력 : 기계 | 연구직</p>
             <p class="text-left xxs_content"><span class="bg-red icon_wrap"><i class="xi-map-marker"></i></span> 희망지역 : 부산</p>
             <a href="<?=getUrl('company','application',100)?>" class="btn btn-block btn-warning mt-3 rounded-0">이력서 보기</a>
         </div>
         <?php } ?>
     </div>
-
-
-    <div class="content_padding px-0 pb-1">
+    </div>
+</div>
+<div class="container py-md-3 py-lg-5">
+    <div class="content_padding px-0 pb-1 d-md-none">
         <h6>면접자 현황</h6>
     </div>
-    <div class="tech-card-slick slick-white-dots">
+    <div class="content_padding px-0 pb-1 d-none d-lg-block">
+        <h5 class="py-2">면접자 현황</h5>
+    </div>
+    <div class="tech-card-slick slick-white-dots d-md-none">
         <?php foreach($interview_list as $val){?>
             <div class="tech_card bg-white overflow-hidden">
                 <h6 class="color_primary pt-2 pb-0 my-0 mt-2"><?=$val['h_title']?></h6>
@@ -93,8 +107,27 @@
             </div>
         <?php } ?>
     </div>
+    <div class="d-none d-md-block pb-5">
+        <table class="table table-light table-bordered mt-4  text-center" width="100%">
+            <thead class="bg-light">
+            <tr><th>공고제목</th><th>지원자 명</th><th>면접요청발송</th><th>요청일시</th><th>면접일</th></tr>
+            </thead>
+            <tbody>
+            <?php foreach($interview_list as $val){?>
+            <tr>
+                <td><?=$val['h_title']?></td>
+                <td><?=$val['m_name']?></td>
+                <td><?=$val['way']?></td>
+                <td><?=$val['reg_date']?></td>
+                <td><?=($val['way'] == "문자") ? "19.08.01 12:00" : "-"?></td>
+            </tr>
+            <?php } ?>
+            </tbody>
+        </table>
+        <a class="btn pull-right btn-primary text-white"><i class="xi-file-download"></i> 엑셀 다운로드</a>
+    </div>
 </div>
-<div class="bg-primary" style="height:130px; margin-top:-105px; position:relative; z-index:0;"></div>
+<div class="bg-primary d-sm-none" style="height:130px; margin-top:-105px; position:relative; z-index:0;"></div>
 
 <?php
 $footer_false = true;

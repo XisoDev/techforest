@@ -76,10 +76,11 @@ $salary_list = $oDB->get("TF_salary",null,"salary_idx, salary_name, salary_is_sh
 ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <section class="bg-white">
-    <div class="content_padding mt-4 pt-5">
+    <div class="content_padding mt-4 pt-5 d-lg-none">
         <a href="#" onclick="history.back();"><i class="xi-arrow-left xi-2x"></i></a>
         <h5 class="weight_normal">공고등록</h5>
     </div>
+    <div class="container pt-lg-5 col-md-10 col-lg-8 mx-auto">
     <ul class="nav nav-tabs nav-justified mt-0 pt-0 mb-5 mx-0 px-0" role="tablist">
         <li class="nav-item">
             <a class="nav-link weight_bold" href="<?=getUrl('company','job_register')?>">
@@ -92,7 +93,7 @@ $salary_list = $oDB->get("TF_salary",null,"salary_idx, salary_name, salary_is_sh
             </a>
         </li>
     </ul>
-    <div class="content_padding mt-0 pt-0">
+        <div class="content_padding mt-0 pt-0 mb-5">
             <div class="container">
                 <div class="row">
                     <div class="col-10 mx-0 px-0 mb-2">
@@ -104,12 +105,12 @@ $salary_list = $oDB->get("TF_salary",null,"salary_idx, salary_name, salary_is_sh
                         </select>
                     </div>
                     <div class="col-2 mx-0 px-0 mb-2 pl-1">
-                        <button class="btn btn-primary btn-block" style="height:45px;" onclick="hire_call()"></button>
+                        <button class="btn btn-primary btn-block" style="height:45px;" onclick="hire_call()">불러오기</button>
                     </div>
-                    <div class="col-12 mt-3 mx-0 px-0">
+                    <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
                         <h6>공고제목</h6>
                     </div>
-                    <div class="col-12 mx-0 px-0 mb-2">
+                    <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
                         <input type="text" class="form-control" id="h_title" value="<?=$edit_row[0]['h_title']?>" placeholder="공고제목을 입력해주세요." required>
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" class="custom-control-input" id="short_term_check">
@@ -117,10 +118,10 @@ $salary_list = $oDB->get("TF_salary",null,"salary_idx, salary_name, salary_is_sh
                         </div>
                     </div>
 
-                    <div class="col-12 mt-3 mx-0 px-0">
+                    <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
                         <h6>직종</h6>
                     </div>
-                    <div class="col-12 mx-0 px-0 mb-2">
+                    <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
                         <select class="form-control" id="o_idx" onchange="occupation(this)">
                           <?php
                             foreach($occupation_row as $val){
@@ -133,23 +134,29 @@ $salary_list = $oDB->get("TF_salary",null,"salary_idx, salary_name, salary_is_sh
                         </select>
                     </div>
 
-                    <div class="col-12 mt-3 mx-0 px-0">
+                    <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
                         <h6>직무</h6>
                     </div>
-                    <div class="col-12 mx-0 px-0 mb-2">
+                    <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
                         <select class="form-control" id="select_duty"></select>
                     </div>
 
-                    <div class="col-12 mt-3 mx-0 px-0">
+                    <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
                         <h6>직무 상세내용</h6>
                     </div>
-                    <div class="col-12 mx-0 px-0 mb-2">
+                    <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
                         <textarea class="form-control" id="job_description"><?=$edit_row[0]['job_description']?></textarea>
                     </div>
 
-                    <div class="col-12 mt-3 mx-0 px-0">
-                        <h6 class="pull-left pt-1">필요자격증</h6>
-                        <button class="btn btn-primary btn-xs ml-2" onclick="add_item()">추가하기</button>
+                    <div class="d-none d-sm-block col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
+                        <h6>필요자격증</h6>
+                    </div>
+                    <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
+                        <div class="d-sm-none">
+                            <h6 class="pull-left pt-1">필요자격증</h6>
+                            <button class="btn btn-primary btn-xs ml-2" onclick="add_item()">추가하기</button>
+                        </div>
+                        <button class="d-none d-sm-inline-block btn btn-primary ml-2" onclick="add_item()">추가하기</button>
                         <div id="field" class="mt-2">
                           <?php
                             foreach ($edit_certificate as $val) { ?>
@@ -161,37 +168,36 @@ $salary_list = $oDB->get("TF_salary",null,"salary_idx, salary_name, salary_is_sh
                         </div>
                     </div>
 
-                    <div class="col-12 mt-3 mx-0 px-0">
+                    <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
                         <h6>급여</h6>
                     </div>
-                    <div class="col-12 mx-0 px-0 mb-2">
-                        <div class="col-12 mx-0 px-0 pl-1 mb-2">
-                            <div class="input-group">
-                                <select class="form-control" id="job_salary" onchange="salary_select_change(this)">
-                                  <?php
-                                    foreach($salary_list as $val) {
-                                      if($val["salary_idx"] == $edit_row[0]["salary_idx"]) {
-                                        echo "<option value=\"" . $val["salary_idx"] . "\" selected=\"selected\">" . $val["salary_name"] . "</option>";
-                                      } else {
-                                        echo "<option value=\"" . $val["salary_idx"] . "\">" . $val["salary_name"] . "</option>";
-                                      }
-                                    }
-                                  ?>
-                                </select>
+                    <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
+                        <div class="input-group">
+                            <select class="form-control" id="job_salary" onchange="salary_select_change(this)">
+                              <?php
+                                foreach($salary_list as $val) {
+                                  if($val["salary_idx"] == $edit_row[0]["salary_idx"]) {
+                                    echo "<option value=\"" . $val["salary_idx"] . "\" selected=\"selected\">" . $val["salary_name"] . "</option>";
+                                  } else {
+                                    echo "<option value=\"" . $val["salary_idx"] . "\">" . $val["salary_name"] . "</option>";
+                                  }
+                                }
+                              ?>
+                            </select>
 
-                                <input type="text" class="form-control" id="salary" style="width:50px;" maxlength="10" value="<?=$edit_row[0]["job_salary"]?>" onkeyup="onlyNumber(this)">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="salary_text" style="font-size:12px;">만원 이상</span>
-                                </div>
+                            <input type="text" class="form-control" id="salary" style="width:50px;" maxlength="10" value="<?=$edit_row[0]["job_salary"]?>" onkeyup="onlyNumber(this)" />
+
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="salary_text" style="font-size:12px;">만원 이상</span>
                             </div>
                         </div>
                     </div>
 
 
-                    <div class="col-12 mt-3 mx-0 px-0">
+                    <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
                         <h6>신입/경력</h6>
                     </div>
-                    <div class="col-12 mx-0 px-0 mb-2">
+                    <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
                         <select class="form-control" id="job_is_career">
                           <?php
                             $job_is_career_arr = array("무관", "신입", "경력 최소 1년", "경력 최소 2년", "경력 최소 3년", "경력 최소 5년", "경력 최소 7년", "경력 최소 10년", "경력 최소 15년");
@@ -208,10 +214,10 @@ $salary_list = $oDB->get("TF_salary",null,"salary_idx, salary_name, salary_is_sh
                         </select>
                     </div>
 
-                    <div class="col-12 mt-3 mx-0 px-0">
+                    <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
                         <h6>학력</h6>
                     </div>
-                    <div class="col-12 mx-0 px-0 mb-2">
+                    <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
                         <select class="form-control" id="job_achievement">
                           <?php
                             $job_achievement_arr = array("무관", "고졸", "초대졸", "대졸", "석사", "박사");
@@ -229,10 +235,10 @@ $salary_list = $oDB->get("TF_salary",null,"salary_idx, salary_name, salary_is_sh
                     </div>
 
 
-                    <div class="col-12 mt-3 mx-0 px-0">
+                    <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
                         <h6>근무형태</h6>
                     </div>
-                    <div class="col-12 mx-0 px-0 mb-2">
+                    <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
                         <select class="form-control" id="w_idx">
                           <?php
       											foreach($w_list as $val) {
@@ -246,10 +252,10 @@ $salary_list = $oDB->get("TF_salary",null,"salary_idx, salary_name, salary_is_sh
                         </select>
                     </div>
 
-                    <div class="col-12 mt-3 mx-0 px-0">
+                    <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
                         <h6>근무지역</h6>
                     </div>
-                    <div class="col-12 mx-0 px-0 pl-1 mb-2">
+                    <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
                         <div class="input-group">
                             <select class="form-control" id="local_select" onchange="workPlace(this)">
                               <?php
@@ -288,38 +294,47 @@ $salary_list = $oDB->get("TF_salary",null,"salary_idx, salary_name, salary_is_sh
                         </div>
                     </div>
 
-                    <div class="col-12 mt-3 mx-0 px-0">
+                    <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
                         <h6>공고시작</h6>
                     </div>
-                    <div class="col-12 mx-0 px-0 mb-2 pr-1 position-relative">
+                    <div class="col-12 col-sm-9 mx-0 px-0 mb-2 pr-1 position-relative">
                         <input type="text" class="form-control xiso_date" id="job_start_date" value="<?=substr($edit_row[0]["job_start_date"], 0, 10)?>" />
                         <i class="xi-calendar-check right-icon"></i>
                     </div>
 
-                    <div class="col-12 mt-3 mx-0 px-0">
+                    <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
                         <h6>공고종료</h6>
                     </div>
-                    <div class="col-12 mx-0 px-0 mb-2 pr-1 position-relative">
+                    <div class="col-12 col-sm-9 mx-0 px-0 mb-2 pr-1 position-relative">
                         <input type="text" class="form-control xiso_date" id="job_end_date" value="<?=substr($edit_row[0]["job_start_date"], 0, 10)?>"/>
                         <i class="xi-calendar-check right-icon"></i>
                     </div>
 
-                    <div class="col-12 mt-3 mx-0 px-0">
+                    <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
                         <h6>기타정보</h6>
                     </div>
-                    <div class="col-12 mx-0 px-0 mb-2">
+                    <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
                         <textarea class="form-control"><?=$edit_row[0]['job_manager']?></textarea>
                     </div>
 
-                    <div class="col-12 mt-3 mx-0 px-0">
+                    <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0 d-sm-none">
                         <h6>담당자 정보</h6>
                     </div>
-                    <div class="col-12 mx-0 px-0 pl-1 mb-2">
-                        <label style="font-size:13px;">담당자 이름</label>
+
+                    <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0 d-none d-sm-block">
+                        <h6>담당자이름</h6>
+                    </div>
+                    <div class="col-12 col-sm-9 mx-0 px-0 pl-1 mb-2">
+                        <label style="font-size:13px;" class="d-sm-none">담당자 이름</label>
                         <input type="text" class="form-control" id="job_manager" placeholder="담당자명을 입력합니다." value="<?=$logged_info['select7']?>">
                     </div>
-                    <div class="col-12 mx-0 px-0 pl-1 mb-2">
-                      <label style="font-size:13px;">담당자 연락처</label>
+
+
+                    <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0 d-none d-sm-block">
+                        <h6>담당자 연락처</h6>
+                    </div>
+                    <div class="col-12 col-sm-9 mx-0 px-0 pl-1 mb-2">
+                      <label style="font-size:13px;" class="d-sm-none">담당자 연락처</label>
                         <div class="input-group">
                             <select class="form-control" id="c_phone1">
                               <?
@@ -345,8 +360,12 @@ $salary_list = $oDB->get("TF_salary",null,"salary_idx, salary_name, salary_is_sh
                             <input type="text" class="form-control" id="c_phone3" value="<?=$phonenumber[2]?>" maxlength="4" placeholder="0000" onkeyup="onlyNumber(this)">
                         </div>
                     </div>
-                    <div class="col-12 mx-0 px-0 mb-2">
-                      <label style="font-size:13px;">담당자 이메일</label>
+
+                    <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0 d-none d-sm-block">
+                        <h6>담당자 이메일</h6>
+                    </div>
+                    <div class="col-12 col-sm-9 mx-0 px-0 pl-1 mb-2">
+                      <label style="font-size:13px;" class="d-sm-none">담당자 이메일</label>
                         <?php $email = explode("@", $logged_info['select6']); ?>
                         <div class="input-group">
                             <input type="text" class="form-control" value="<?=$email[0]?>" placeholder="이메일 주소 입력">
@@ -373,14 +392,16 @@ $salary_list = $oDB->get("TF_salary",null,"salary_idx, salary_name, salary_is_sh
 
                     </div>
 
-                    <div class="col-6 mt-4 px-0 mx-0 pr-1">
+                    <div class="d-none d-md-block col-md-2"></div>
+                    <div class="col-6 col-md-4 mt-4 px-0 mx-0 pr-1">
                         <button type="submit" class="btn border-primary btn-block btn-round">임시저장</button>
                     </div>
-                    <div class="col-6 mt-4 px-0 mx-0 pl-1">
+                    <div class="col-6 col-md-4 mt-4 px-0 mx-0 pr-1">
                        <button type="button" class="btn btn-primary btn-block btn-round" onclick="hire_ok()">등록완료</button>
                     </div>
                 </div>
             </div>
+        </div>
     </div>
 </section>
 

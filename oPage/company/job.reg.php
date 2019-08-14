@@ -2,10 +2,11 @@
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 
 <section class="bg-white">
-    <div class="content_padding mt-4 pt-5">
+    <div class="content_padding mt-4 pt-5 d-lg-none">
         <a href="#" onclick="history.back();"><i class="xi-arrow-left xi-2x"></i></a>
         <h5 class="weight_normal">공고등록</h5>
     </div>
+    <div class="container pt-lg-5 col-md-10 col-lg-8 mx-auto">
     <ul class="nav nav-tabs nav-justified mt-0 pt-0 mb-5 mx-0 px-0" role="tablist">
         <li class="nav-item active">
             <a class="nav-link weight_bold" href="<?=getUrl('company','job_register')?>">
@@ -24,9 +25,9 @@
             <?}?>
         </li>
     </ul>
-    <div class="content_padding mt-0 pt-0">
+    <div class="content_padding mt-0 pt-0 mb-5">
         <div class="row">
-            <div class="col-5 mx-auto px-auto">
+            <div class="col-5 mx-auto px-auto col-md-4 col-lg-3 pb-sm-3 pb-md-5">
                 <div class="position-relative">
                     <div class="avatar square mb-2" style="background-image:url('/layout/none/assets/images/no_company.png');">
                     </div>
@@ -39,20 +40,20 @@
             <!--성공하면 자동으로 2단계로 보낼수있음.-->
             <div class="container">
                 <div class="row">
-                    <div class="col-12 mt-3 mx-0 px-0">
+                    <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
                         <h6>회사명</h6>
                     </div>
-                    <div class="col-12 mx-0 px-0 mb-2">
+                    <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
                         <input type="text" class="form-control" id="c_name" value="<?=$logged_info['c_name']?>" placeholder="회사명" required>
                     </div>
-                    <div class="col-12 mt-3 mx-0 px-0">
+                    <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
                         <h6>사업자등록번호</h6>
                     </div>
                     <?php
                       $registration = explode("-", $logged_info["registration"]);
 
                     ?>
-                    <div class="col-12 mx-0 px-0 mb-2">
+                    <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
                         <div class="input-group">
                             <input type="text" class="form-control" id="registration1" value="<?=$registration[0]?>" placeholder="000" maxlength="3" required>
                             <div class="input-group-prepend">
@@ -65,10 +66,10 @@
                             <input type="text" class="form-control" id="registration3" value="<?=$registration[2]?>" placeholder="00000" maxlength="5" required>
                         </div>
                     </div>
-                    <div class="col-12 mt-3 mx-0 px-0">
+                    <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
                         <h6>주소</h6>
                     </div>
-                    <div class="col-12 mx-0 px-0 mb-2">
+                    <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
                         <div class="input-group mb-2">
                             <input type="text" class="form-control" id="address"  value="<?=$logged_info['address']?>" placeholder="주소검색" readonly>
                             <button type="button" class="btn btn-primary rounded-0" onclick="search_address()">검색</button>
@@ -78,10 +79,11 @@
                     <div id="wrap" style="display:none;border:1px solid;width:100%;height:50%;margin:5px 0;position:relative">
                       <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
                     </div>
-                    <div class="col-12 mt-3 mx-0 px-0">
-                        <h6>담당자 정보</h6>
+                    <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
+                        <h6 class="d-sm-none">담당자 정보</h6>
+                        <h6 class="d-none d-sm-block">담당자 연락처</h6>
                     </div>
-                    <div class="col-12 mx-0 px-0 pl-1 mb-2">
+                    <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
 
                         <div class="input-group">
                             <select class="form-control" id="c_phone1" required>
@@ -109,7 +111,10 @@
                         </div>
                     </div>
 
-                    <div class="col-12 mx-0 px-0 pl-1 mb-2">
+                    <div class="d-none d-sm-block col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
+                        <h6>담당자 이메일</h6>
+                    </div>
+                    <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
                         <div class="input-group">
                             <? $email = explode("@", $logged_info['select6']); ?>
                             <input type="text" class="form-control" id="c_email1" value="<?=$email[0]?>" placeholder="이메일 주소 입력" required>
@@ -136,20 +141,23 @@
 
                     </div>
 
-                    <div class="col-12 text-left mt-0 mx-0 px-0 mt-4">
+                    <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
                         <h6>회사 간단소개</h6>
+                    </div>
+                    <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
                         <textarea class="form-control" id="c_introduction"><?=$logged_info['c_introduction']?></textarea>
                     </div>
-
-                    <div class="col-6 mt-4 px-0 mx-0 pr-1">
+                    <div class="d-none d-md-block col-md-2"></div>
+                    <div class="col-6 col-md-4 mt-4 px-0 mx-0 pr-1">
                         <button type="button" onclick="temporary_save()" class="btn border-primary btn-block btn-round">임시저장</button>
                     </div>
-                    <div class="col-6 mt-4 px-0 mx-0 pl-1">
+                    <div class="col-6 col-md-4 mt-4 px-0 mx-0 pl-1">
                         <button type="button" onclick="company_info_ok()" class="btn btn-primary btn-block btn-round">등록완료</button>
                     </div>
                 </div>
             </div>
         </form>
+    </div>
     </div>
 </section>
 

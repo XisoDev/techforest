@@ -27,6 +27,7 @@ class companyView{
     }
 
     function service($args){
+        setSEO("서비스 이용현황","기술자를 쉽게 찾을 수 있는 유료서비스를 이용해보세요.");
         global $site_info;
         global $oDB;
         $site_info->layout = "company";
@@ -35,16 +36,16 @@ class companyView{
         $add_body_class[] = "shrink";
 
         global $set_template_file;
-        if($args->document_srl){
-            $set_template_file = "company/service.view.php";
-        }else {
-            $set_template_file = "company/service.list.php";
-        }
 
         $output = new Object();
 
+        if($args->document_srl){
+            $set_template_file = "company/service.view.php";
+            $output->add('false_sub_visual',true);
+        }else {
+            $set_template_file = "company/service.list.php";
+        }
         return $output;
-
     }
 
 
@@ -105,6 +106,7 @@ class companyView{
 
     //이력서보기
     function application($args){
+        setSEO("지원자 상세보기","채용담당자님의 기업에 지원한 기술자를 자세히 살펴보세요");
         // $args->document_srl 여기로 이력서번호가 들어옴.
         global $set_template_file;
         global $site_info;
@@ -152,6 +154,7 @@ class companyView{
 
     //공고 및 지원자관리의 목록과 상세보기를 컨트롤
     function job($args){
+        setSEO("공고·지원자관리","채용담당자님이 등록한 공고 및 지원자를 확인하세요.");
         global $site_info;
         $site_info->layout = "company";
 
@@ -238,6 +241,7 @@ class companyView{
     }
 
     function job_register($args){
+        setSEO("공고등록","공고등록 하시고 알맞는 기술자를 찾아보세요.");
         global $set_template_file;
         $set_template_file = "company/job.reg.php";
 
@@ -254,6 +258,7 @@ class companyView{
     }
 
     function job_appRegister($args){
+        setSEO("공고등록","공고등록 하시고 알맞는 기술자를 찾아보세요.");
         global $set_template_file;
         $set_template_file = "company/job.reg.app.php";
 

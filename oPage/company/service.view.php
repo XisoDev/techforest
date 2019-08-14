@@ -6,27 +6,27 @@ if(!$m_num){
   $m_num = 0 ;
 }
 ?>
-<section class="bg-white">
+<section class="bg-white d-lg-none">
     <div class="content_padding mt-4 pt-5 mb-0 pb-2">
         <a href="#" onclick="history.back();"><i class="xi-arrow-left xi-2x"></i></a>
         <h5 class="weight_normal">유료서비스 안내</h5>
     </div>
 </section>
-<div class="content_padding">
+<div class="container pt-lg-5 bg-secondary" style="min-height:1000px;">
     랜딩페이지 들어갈 공간
 </div>
 
 <div class="fixed-bottom bg-white purchaseBox">
-    <a class="toggleTip xxs_content" href="#" onclick="jQuery(this).parent('div').toggleClass('active');"><i class="xi-angle-up"></i><i class="xi-angle-down"></i></a>
+    <a class="toggleTip d-lg-none xxs_content" href="#" onclick="jQuery(this).parent('div').toggleClass('active');"><i class="xi-angle-up"></i><i class="xi-angle-down"></i></a>
     <form method="post" action="<?=getUrl('company','servicePayment')?>" onsubmit="return forhidden()">
         <div class="content_padding">
-            <div class="row">
-                <div class="col-4">
+            <div class="row flex-lg-column-reverse">
+                <div class="col-4 col-lg-12">
                     <div class="thumbnail bg-secondary square" style="background-image:url('/oPage/technician/images/tech_service.jpg'); background-size:cover;">
 
                     </div>
                 </div>
-                <div class="col-8 pt-3">
+                <div class="col-8 pt-3 col-lg-12 text-lg-center">
                     <h5>면접제안권</h5>
                     <!-- <h6>상품 금액 : 50,000원</h6> -->
                 </div>
@@ -49,9 +49,44 @@ if(!$m_num){
                 <a href="#" class="btn btn-block btn-light">견적서보기</a>
             </div>
         </div>
-        <input type="submit" class="btn btn-block btn-danger rounded-0" value="결제하기" />
+        <a href="#" class="btn btn-block btn-danger rounded-0" data-toggle="modal" data-target="#paymentModal">결제하기</a>
     </form>
 </div>
+
+
+<!-- payment Modal -->
+<div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="techforestPaymentModalWindow" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">결제수단 선택</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="xi-close"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="custom-control custom-radio border rounded content_padding mb-3 pl-5 bigger_control">
+                        <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                        <label class="custom-control-label weight_lighter" for="customRadio1">
+                            <i class="ml-3 xi-credit-card xi-2x" style="vertical-align: -7px;"></i>
+                            신용카드・체크카드
+                        </label>
+                    </div>
+                    <div class="custom-control custom-radio border rounded content_padding mb-3 pl-5 bigger_control">
+                        <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                        <label class="custom-control-label weight_lighter" for="customRadio2">
+                            <i class="ml-3 xi-bank xi-2x" style="vertical-align: -7px;"></i>
+                            무통장 입금
+                        </label>
+                    </div>
+                    <input type="button" class="btn btn-block btn-primary" value="결제하기" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script type="text/javascript">
  function service_list(obj){
