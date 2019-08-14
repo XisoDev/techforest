@@ -188,8 +188,8 @@
               var params = {};
               params["m_idx"] = m_idx;
               params["ps_idx"] = <?=$row['ps_idx']?>;
-              params["all_count"] = <?=$row['count']?>;
-              params['remain_count'] = <?=$row['count']?>;
+              params["all_count"] = <?=$row['service_count']?>;
+              params['remain_count'] = <?=$row['service_count']?>;
 
               exec_json("company.add_voucher",params,function(ret_obj){
                 if(hidden_m_idx > 1){
