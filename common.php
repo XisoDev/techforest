@@ -35,6 +35,8 @@ if (!defined('_XISO_PATH_')){
 
 $domain = $_SERVER['HTTP_HOST'];
 
+$m_idx = $_SESSION['LOGGED_INFO'];
+
 if($_SESSION['_XISO_MESSAGE_TYPE_']){
     $_XISO_ERROR_ = $_SESSION['_XISO_MESSAGE_TYPE_'];
     unset($_SESSION['_XISO_MESSAGE_TYPE_']);

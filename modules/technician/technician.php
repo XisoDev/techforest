@@ -14,7 +14,12 @@ class technicianView{
         $site_info->layout = "technician";
 
         $output = new Object();
+
+        $output->add('myinfo_row',$this->resume_info());
         $output->add('now_application',$this->now_application());
+        $output->add('count_career_row',$this->resume_completeness1());
+        $output->add('count_c_content_row',$this->resume_completeness2());
+        $output->add('count_myinfo_row',$this->resume_completeness3());
 
         $set_template_file = "technician/index.php";
 
@@ -24,36 +29,52 @@ class technicianView{
     function resume($args){
         setSEO("이력서 등록","기술자숲 회원이라면 누구나 작성할 수 있습니다.");
         global $site_info;
-
         global $add_body_class;
-
         global $set_template_file;
+        global $oDB;
+        $output = new Object();
+
         if($args->document_srl) {
             $site_info->layout = "none";
             $add_body_class[] = "";
-            $set_template_file = "technician/resume.view.php";
+
         }else{
             $site_info->layout = "technician";
             $add_body_class[] = "shrink";
             $set_template_file = "technician/resume.list.php";
         }
 
-        $output = new Object();
         return $output;
     }
 
     function resumeWrite($args){
         setSEO("온라인 이력서 작성이 어렵다면?","종이이력서를 사진으로 찍거나 이력서파일을 올려주세요.");
         global $site_info;
-        $site_info->layout = "technician";
-
         global $add_body_class;
-        $add_body_class[] = "shrink";
-
         global $set_template_file;
-        $set_template_file = "technician/resume.write.php";
+        global $oDB;
 
         $output = new Object();
+        $site_info->layout = "technician";
+        $add_body_class[] = "shrink";
+        $set_template_file = "technician/resume.write.php";
+
+        $m_idx = $_SESSION['LOGGED_INFO'];
+
+        $oDB->where("m_idx",$m_idx);
+        $a_line_row = $oDB->get("TF_a_line_self",null,"a_line_self");
+
+        $oDB->orderBy("m.m_idx","ASC");
+        $oDB->where("m.m_idx",$m_idx);
+        $oDB->join("TF_district_tb d","m.m_district_idx = d.district_idx","LEFT");
+        $oDB->join("TF_city_tb c","m.m_city_idx = c.city_idx","LEFT");
+        $oDB->join("TF_local_tb l","m.m_local_idx = l.local_idx","LEFT");
+        $resume_row = $oDB->get("TF_member_tb m",null,"m_id, m_name, m_human, m_birthday, m_phone, m_email,
+         m_address, m_address2, m_picture, local_name, city_name, district_name");
+
+        $output->add('a_line_row',$a_line_row);
+        $output->add('resume_row',$resume_row);
+
         return $output;
     }
 
@@ -176,19 +197,90 @@ class technicianView{
     }
 
     function naver_login_check(){
-        global $logged_info;
-        global $oDB;
+      global $logged_info;
+      global $oDB;
       $m_id = $logged_info['m_id'];
       $m_idx = $_SESSION['LOGGED_INFO'];
       $m_id_str = substr($m_id,0,3);
       if($m_id_str == 'nN_'){
-          $naver_login = 1;
-          $oDB->where("m_idx",$m_idx);
-          $row = $oDB->get("TF_member_tb",null,"m_phone, m_birthday, m_address, m_address2");
+        $naver_login = 1;
+        $oDB->where("m_idx",$m_idx);
+        $row = $oDB->get("TF_member_tb",null,"m_phone, m_birthday, m_address, m_address2");
 
-          if(!$row['m_phone'] || !$row[0]['m_birthday'] || !$row[0]['m_address'] || !$row[0]['m_address2']){
+        if(!$row['m_phone'] || !$row[0]['m_birthday'] || !$row[0]['m_address'] || !$row[0]['m_address2']){
               //이력서정보등록 페이지로 이동
-          }
-       }
+        }
+      }
     }
-}
+
+    function resume_completeness1(){
+      global $oDB;
+
+      $m_idx = $_SESSION['LOGGED_INFO'];
+
+      //이력서완성도(경력 개수)
+      $oDB->where("m_idx",$m_idx);
+      $count_career_row = $oDB->getOne("TF_member_career_tb","count(m_idx) as count_career");
+
+      return $count_career_row;
+    }
+
+    function resume_completeness2(){
+      global $oDB;
+
+      $m_idx = $_SESSION['LOGGED_INFO'];
+
+      //이력서완성도(경력 직무상세내용 개수)
+      $oDB->where("m_idx",$m_idx);
+      $oDB->where("c_content","","!=");
+      $oDB->where("c_content",NULL, 'IS NOT');
+      $count_c_content_row = $oDB->getOne("TF_member_career_tb","count(c_content) as count_c_content");
+
+      return $count_c_content_row;
+    }
+
+    function resume_completeness3(){
+      global $oDB;
+
+      $m_idx = $_SESSION['LOGGED_INFO'];
+
+      //이력서완성도(기본정보+희망4종 입력 여부)
+      $oDB->where("m.m_idx",$m_idx);
+      $oDB->where("d.m_idx",NULL,"IS NOT");
+      $oDB->where("m.m_address2",NULL,"IS NOT");
+      $oDB->where("m.m_address2","","!=");
+      $oDB->where("m.m_address","","!=");
+      $oDB->where("m.m_phone","","!=");
+      $oDB->where("m.m_birthday","","!=");
+      $oDB->where("m.m_email","","!=");
+      $oDB->join("TF_member_duty d","m.m_idx = d.m_idx", "LEFT");
+      $oDB->join("TF_member_occupation o","m.m_idx = o.m_idx", "LEFT");
+      $oDB->join("TF_member_order mo","m.m_idx = mo.m_idx", "LEFT");
+      $count_myinfo_row = $oDB->getOne("TF_member_tb m","count(m.m_idx) as count_myinfo");
+
+      return $count_myinfo_row;
+    }
+
+    function resume_info(){
+      global $oDB;
+
+      $m_idx = $_SESSION['LOGGED_INFO'];
+
+      //이력서 정보
+      $columns = "distinct m.m_idx, group_concat(distinct(mc.duty_name)) as duty_name, group_concat(md.duty_name) as hope_duty,";
+      $columns .= "YEAR(CURRENT_TIMESTAMP) - YEAR(m_birthday) - (RIGHT(CURRENT_TIMESTAMP, 5) < RIGHT(m_birthday, 5))+1 as m_birthday,";
+      $columns .= "local_name, city_name, district_name, m_city_idx, m_district_idx";
+
+      $oDB->where("m.m_idx",$m_idx);
+      $oDB->where("mc.duty_name","",'!=');
+      $oDB->groupBy("m.m_idx");
+      $oDB->join("TF_member_career_tb AS mc", "m.m_idx = mc.m_idx", "LEFT");
+      $oDB->join("TF_member_duty AS md", "m.m_idx = md.m_idx", "LEFT");
+      $oDB->join("TF_local_tb AS l", "m.m_local_idx = l.local_idx", "LEFT");
+      $oDB->join("TF_city_tb AS c", "m.m_city_idx = c.city_idx", "LEFT");
+      $oDB->join("TF_district_tb AS d", "m.m_district_idx = d.district_idx", "LEFT");
+      $myinfo_row = $oDB->getOne("TF_member_tb AS m",$columns);
+
+      return $myinfo_row;
+    }
+  }

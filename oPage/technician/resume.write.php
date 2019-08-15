@@ -1,3 +1,38 @@
+<?php
+//한줄자기소개
+$a_line_self = $output->get('a_line_row');
+//이력서 정보
+$resume_row = $output->get('resume_row');
+
+//한줄자기소개 랜덤 힌트
+$rand_array = array(
+  "최고를 위해 늘 최선을 다하는 기술자",
+  "함께 달리고 싶은 열정 지원자 입니다.",
+  "새로운 도전을 준비하는 열혈 기술자",
+  "최상의 결과를 이끌어 낼 준비된 인재입니다.",
+  "적극적인 마인드로 업무를 해내겠습니다",
+  "책임감을 가지고 성실히 일하는 지원자입니다.",
+  "풍부한 실무경험을 갖고 있는 준비된 인재입니다.",
+  "열심히 땀흘리는 성실한 기술자",
+  "성실과 열정으로 내일의 가능성을 열겠습니다.",
+  "책임감을 갖고 맡은 바 최선을 다하겠습니다.",
+  "많은 현장경험으로 최고의 성과를 내겠습니다.",
+  "시간약속을 잘 지키는 성실한 기술자입니다.",
+  "주인의식을 가지고 성실히 일 할 자신있습니다.",
+  "오랜 경력을 바탕으로 열심히 일하겠습니다.",
+  "늘 한 길만 묵묵히 걸어온 노력파 인재",
+  "오랜 경력으로 쌓은 전문성을 발휘하겠습니다.",
+  "모든 일을 책임감있게 할 수 있습니다.",
+  "손발이 빠르고 성실한 프로입니다.",
+  "오랜 현장경험으로 쌓은 눈썰미로 제 몫을 해내겠습니다.",
+  "오랜 현장경험으로 바로 업무투입이 가능합니다.",
+  "적극적인 사고와 소통이 특기인 숙련 기술자입니다.",
+  "목표를 향해 달리는 마라토너 같은 기술자");
+shuffle($rand_array);
+
+
+?>
+
 <section class="sub_visual d-none d-lg-block pb-2" style="background-image:url('<?=$no_auto_bg_url?>');">
     <h4 class="red"><?=$site_info->title?></h4>
     <p class="weight_normal text-secondary pb-0 my-0"><?=$site_info->desc?></h4></p>
@@ -36,19 +71,22 @@
                     <h6>한줄자기소개</h6>
                 </div>
                 <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
-                    <input type="text" class="form-control" value="" placeholder="입력 칸(책임감 있는 열정적인 10년차 용접사!)" />
+                    <input type="text" class="form-control" value="<?=$a_line_self[0]['a_line_self']?>" placeholder="<?=$rand_array[0]?>" />
                 </div>
                 <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
                     <h6>이름</h6>
                 </div>
                 <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
-                    <input type="text" class="form-control" value="" placeholder="" />
+                    <input type="text" class="form-control" value="<?=$resume_row[0]['m_name']?>" placeholder="" />
                 </div>
                 <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
                     <h6>성별</h6>
                 </div>
                 <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
-                    <select class="form-control"><option>남자</option></select>
+                    <select class="form-control">
+                      <option value="M" <?if($resume_row[0]["m_human"] == "M") { echo "selected=\"selected\"";}?>>남자</option>
+                      <option value="F" <?if($resume_row[0]["m_human"] == "F") { echo "selected=\"selected\"";}?>>여자</option>
+                    </select>
                 </div>
                 <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
                     <h6>생년월일</h6>

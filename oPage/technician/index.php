@@ -1,44 +1,12 @@
 <?php
-$m_idx = $_SESSION['LOGGED_INFO'];
-
 //이력서완성도(경력 개수)
-$oDB->where("m_idx",$m_idx);
-$count_career_row = $oDB->getOne("TF_member_career_tb","count(m_idx) as count_career");
-
+$count_career_row = $output->get('count_career_row');
 //이력서완성도(경력 직무상세내용 개수)
-$oDB->where("m_idx",$m_idx);
-$oDB->where("c_content","","!=");
-$oDB->where("c_content",NULL, 'IS NOT');
-$count_c_content_row = $oDB->getOne("TF_member_career_tb","count(c_content) as count_c_content");
-
+$count_c_content_row = $output->get('count_c_content_row');
 //이력서완성도(기본정보+희망4종 입력 여부)
-$oDB->where("m.m_idx",$m_idx);
-$oDB->where("d.m_idx",NULL,"IS NOT");
-$oDB->where("m.m_address2",NULL,"IS NOT");
-$oDB->where("m.m_address2","","!=");
-$oDB->where("m.m_address","","!=");
-$oDB->where("m.m_phone","","!=");
-$oDB->where("m.m_birthday","","!=");
-$oDB->where("m.m_email","","!=");
-$oDB->join("TF_member_duty d","m.m_idx = d.m_idx", "LEFT");
-$oDB->join("TF_member_occupation o","m.m_idx = o.m_idx", "LEFT");
-$oDB->join("TF_member_order mo","m.m_idx = mo.m_idx", "LEFT");
-$count_myinfo_row = $oDB->getOne("TF_member_tb m","count(m.m_idx) as count_myinfo");
-
+$count_myinfo_row = $output->get('count_myinfo_row');
 //이력서 정보
-$columns = "distinct m.m_idx, group_concat(distinct(mc.duty_name)) as duty_name, group_concat(md.duty_name) as hope_duty,";
-$columns .= "YEAR(CURRENT_TIMESTAMP) - YEAR(m_birthday) - (RIGHT(CURRENT_TIMESTAMP, 5) < RIGHT(m_birthday, 5))+1 as m_birthday,";
-$columns .= "local_name, city_name, district_name, m_city_idx, m_district_idx";
-
-$oDB->where("m.m_idx",$m_idx);
-$oDB->where("mc.duty_name","",'!=');
-$oDB->groupBy("m.m_idx");
-$oDB->join("TF_member_career_tb AS mc", "m.m_idx = mc.m_idx", "LEFT");
-$oDB->join("TF_member_duty AS md", "m.m_idx = md.m_idx", "LEFT");
-$oDB->join("TF_local_tb AS l", "m.m_local_idx = l.local_idx", "LEFT");
-$oDB->join("TF_city_tb AS c", "m.m_city_idx = c.city_idx", "LEFT");
-$oDB->join("TF_district_tb AS d", "m.m_district_idx = d.district_idx", "LEFT");
-$myinfo_row = $oDB->getOne("TF_member_tb AS m",$columns);
+$myinfo_row = $output->get('myinfo_row');
 
 ?>
 
@@ -94,7 +62,7 @@ $myinfo_row = $oDB->getOne("TF_member_tb AS m",$columns);
             <a href="#" class="mt-3 btn btn-block btn-primary btn-xxs btn-round">더보기<i class="xi-plus"></i></a>
         </div>
 
-        <div class="col-4 mr-0 pr-1">
+        <!-- <div class="col-4 mr-0 pr-1">
             <select class="form-control"><option>기계/제조</option></select>
         </div>
         <div class="col-4 mx-0 px-0">
@@ -102,7 +70,7 @@ $myinfo_row = $oDB->getOne("TF_member_tb AS m",$columns);
         </div>
         <div class="col-4 ml-0 pl-1">
             <select class="form-control"><option>부산</option></select>
-        </div>
+        </div> -->
 
         <div class="col-12 mt-2">
             <div class="flex-card-slick">
@@ -207,7 +175,7 @@ $myinfo_row = $oDB->getOne("TF_member_tb AS m",$columns);
                         </div>
                     </div>
 
-                    <a href="#" class="btn btn-block btn-danger mt-0 rounded-0">이력서 수정하기</a>
+                    <a href="<?=getUrl('technician','resumeWrite',$m_idx)?>" class="btn btn-block btn-danger mt-0 rounded-0">이력서 수정하기</a>
                 </div>
                 </div>
             </div>
