@@ -69,7 +69,7 @@
         </div>
         <div class="col-3 ml-0 pl-0 text-right">
             <a href="<?=getUrl('company','job_register')?>" class="d-md-none mt-3 btn btn-block btn-primary btn-xxs btn-round">추가등록<i class="xi-plus"></i></a>
-            <a href="<?=getUrl('company','job_register')?>" class="d-md-inline-block mt-3 btn btn-primary btn-round">추가등록<i class="xi-plus"></i></a>
+            <a href="<?=getUrl('company','job_register')?>" class="d-none d-md-inline-block mt-3 btn btn-primary btn-round">추가등록<i class="xi-plus"></i></a>
         </div>
 
 

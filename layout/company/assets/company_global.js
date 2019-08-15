@@ -130,9 +130,9 @@ jQuery(document).ready(function($){
 
         if(!$("body").hasClass("shrink")){
             if($(document).scrollTop() > 50){
-                $("#header").addClass('shrink');
+                $("#header_mobile").addClass('shrink');
             }else{
-                $("#header").removeClass('shrink');
+                $("#header_mobile").removeClass('shrink');
             }
         }
     });

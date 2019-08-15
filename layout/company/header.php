@@ -88,8 +88,8 @@
         </aside>
     </div>
     <div id="page-content-wrapper">
-        <nav class="navbar navbar-expand-lg bg-primary">
-            <a class="navbar-brand text-white mx-auto" href="<?=getUrl('company')?>">기술자숲</a>
+        <nav class="navbar navbar-expand-lg bg-white">
+            <a class="navbar-brand mx-auto" href="<?=getUrl('company')?>">기술자숲</a>
         </nav>
         <button type="button" class="hamburger animated fadeInLeft is-closed" data-toggle="offcanvas">
             <span class="hamb-top"></span>
@@ -106,6 +106,7 @@
 </header>
 
 <?php
+// 액트가 index이면 모듈명을 참조
 $file_name = ($act != "index") ? $act : $module;
 $bg_url = "/oPage/company/visual/" . $file_name . ".jpg";
 $no_auto_bg_url = "/oPage/company/visual/" . $file_name . ".noauto.jpg";

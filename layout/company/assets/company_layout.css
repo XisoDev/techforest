@@ -248,7 +248,12 @@ body.toggled{
 }
 
 .hamb-bottom, .hamb-middle, .hamb-top {
-    background-color: white;
+    background-color: #fff;
+}
+.shrink .hamb-bottom,
+.shrink .hamb-middle,
+.shrink .hamb-top {
+    background-color: #333;
 }
 
 
@@ -326,7 +331,7 @@ body.shrink #header_mobile nav.navbar,
 
 /* 알람관련 */
 .toggle_alert{
-    color:#FFF;
+    color:#fff;
     background: transparent;
     border: none;
     display: block;
@@ -338,6 +343,9 @@ body.shrink #header_mobile nav.navbar,
     text-align:Center;
     width: 32px;
     z-index: 999;
+}
+.shrink .toggle_alert{
+    color:#333;
 }
 .toggle_alert .badge{
     border-radius:50%;

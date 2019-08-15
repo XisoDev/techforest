@@ -23,6 +23,10 @@ class memberView{
         $set_template_file = "member/mypage.php";
         createToken();
 
+        if(!$args->is_seo){
+            setSEO("내 정보 관리", $logged_info['m_name']."님의 개인정보를 관리할 수 있습니다.");
+        }
+
         $output = new Object();
         $output->add('page_title',"마이페이지");
         $output->add('act',$args->act);
@@ -31,6 +35,10 @@ class memberView{
 
 //    마이페이지 Alias
     function myprofile($args){
+        global $logged_info;
+        setSEO("내 정보 관리", $logged_info['m_name']."님의 정보를 업데이트 할 수 있습니다.");
+        $args->is_seo = "Y";
+
         $args->act = "myprofile";
         return $this->index($args);
     }
