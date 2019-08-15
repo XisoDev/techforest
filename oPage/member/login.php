@@ -1,5 +1,6 @@
-<div class="container">
-    <div class="bigger_logo">
+
+<div class="container pt-lg-5">
+    <div class="bigger_logo d-lg-none">
     <div class="row">
         <div class="col-3"></div>
         <div class="col-6">
@@ -10,6 +11,7 @@
     </div>
 
     <!-- 모듈명.액션명(함수명) -->
+    <div class="mx-auto col-sm-10 col-md-8 col-lg-6 p-4 p-md-5 ">
     <form action="/proc.php?act=member.procMemberLogin" method="post">
     <div class="row">
         <div class="col-12">
@@ -63,7 +65,7 @@
         </div>
     </div>
     </form>
-
+    </div>
 </div>
 
 <!-- Signup Modal -->
