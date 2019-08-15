@@ -32,6 +32,8 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <?php
+
+                    //유저타입읽어서 메뉴변경
                     if($_SESSION["USER_TYPE"] == "company"){
                         $main_menu = $oMenu->company->list;
                     }else{
