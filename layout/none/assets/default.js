@@ -52,6 +52,7 @@ function getCookie(cookieName) {
 	return unescape(cookieValue);
 }
 
+//숫자만 입력가능하게
 function onlyNumber(obj){
 	regNumber = /^[0-9]*$/;
 
@@ -59,4 +60,68 @@ function onlyNumber(obj){
 		$(obj).val($(obj).val().replace(/[^0-9]/g,""));
 		return toastr.error("숫자만 입력해주세요.");
 	}
+}
+
+//희망급여
+function salary_select_change(obj){
+  $("#salary_text").show();
+  switch (obj.value) {
+    case '1':
+    case '2':
+    document.getElementById('salary_text').innerHTML = "만원 이상";
+    break;
+    case '3':
+    case '4':
+    document.getElementById('salary_text').innerHTML = "원 이상";
+    break;
+    default:
+    $("#salary_text").hide();
+  }
+}
+
+//희망근무지
+function workPlace(obj){
+  if(obj.value > 0 && obj.value < 8){
+    $("#city_select").prop('disabled', true);
+    $("#city_select").empty();
+    $("#district_select").prop('disabled', false);
+    $("#district_select").empty();
+
+    for(var i = 0; i < district_arr.length; i++){
+      if(obj.value == district_arr[i]["local_idx"]){
+        var option = $('<option value="' +district_arr[i]["district_idx"]+ '">' +district_arr[i]["district_name"]+ '</option>');
+        $("#district_select").append(option);
+      }
+    }
+
+  }else if(obj.value > 8 && obj.value < 18){
+    $("#city_select").prop('disabled', false);
+    $("#city_select").empty();
+    $("#district_select").prop('disabled', true);
+    $("#district_select").empty();
+
+    for(var i = 0; i < city_arr.length; i++){
+      if(obj.value == city_arr[i]["local_idx"]){
+        var option = $('<option value="' +city_arr[i]["city_idx"]+ '">' +city_arr[i]["city_name"]+ '</option>');
+        $("#city_select").append(option);
+      }
+    }
+  }else if(obj.value != -1) {
+    $("#city_select").prop('disabled', true);
+    $("#city_select").empty();
+    $("#district_select").prop('disabled', true);
+    $("#district_select").empty();
+
+    for(var i = 0; i < local_arr.length; i++){
+      if(obj.value == local_arr[i]["local_idx"]){
+        var option = $('<option value="' +local_arr[i]["local_idx"]+ '">' +local_arr[i]["local_idx"]+ '</option>');
+        $("#local_select").append(option);
+      }
+    }
+  }else if(obj.value == -1 || obj.value == ""){
+    $("#city_select").prop('disabled', true);
+    $("#city_select").empty();
+    $("#district_select").prop('disabled', true);
+    $("#district_select").empty();
+  }
 }

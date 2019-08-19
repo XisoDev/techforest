@@ -61,7 +61,6 @@ $oDB->orderBy("local_idx","ASC");
 $oDB->where("city_visible","Y");
 $city_arr = $oDB->get("TF_city_tb",null,"city_idx, city_name, local_idx");
 
-
 //근무지역 distinct
 $oDB->orderBy("district_idx","ASC");
 $oDB->orderBy("local_idx","ASC");
@@ -417,6 +416,9 @@ $salary_list = $oDB->get("TF_salary",null,"salary_idx, salary_name, salary_is_sh
 
 <script type="text/javascript">
 var duty_arr = <? echo json_encode($duty_row); ?>;
+var local_arr = <? echo json_encode($local_arr); ?>;
+var city_arr = <? echo json_encode($city_arr); ?>;
+var district_arr = <? echo json_encode($district_arr); ?>;
 
 function occupation(obj){
   $("#select_duty").empty();
@@ -459,72 +461,6 @@ function certificateAutocomplete() {
   $("input[name=h_certificate]").autocomplete({
     source: certificate_list
   });
-}
-
-function salary_select_change(obj){
-  $("#salary_text").show();
-  switch (obj.value) {
-    case '1':
-    case '2':
-    document.getElementById('salary_text').innerHTML = "만원 이상";
-    break;
-    case '3':
-    case '4':
-    document.getElementById('salary_text').innerHTML = "원 이상";
-    break;
-    default:
-    $("#salary_text").hide();
-  }
-}
-
-var local_arr = <? echo json_encode($local_arr); ?>;
-var city_arr = <? echo json_encode($city_arr); ?>;
-var district_arr = <? echo json_encode($district_arr); ?>;
-
-function workPlace(obj){
-  if(obj.value > 0 && obj.value < 8){
-    $("#city_select").prop('disabled', true);
-    $("#city_select").empty();
-    $("#district_select").prop('disabled', false);
-    $("#district_select").empty();
-
-    for(var i = 0; i < district_arr.length; i++){
-      if(obj.value == district_arr[i]["local_idx"]){
-        var option = $('<option value="' +district_arr[i]["district_idx"]+ '">' +district_arr[i]["district_name"]+ '</option>');
-        $("#district_select").append(option);
-      }
-    }
-
-  }else if(obj.value > 8 && obj.value < 18){
-    $("#city_select").prop('disabled', false);
-    $("#city_select").empty();
-    $("#district_select").prop('disabled', true);
-    $("#district_select").empty();
-
-    for(var i = 0; i < city_arr.length; i++){
-      if(obj.value == city_arr[i]["local_idx"]){
-        var option = $('<option value="' +city_arr[i]["city_idx"]+ '">' +city_arr[i]["city_name"]+ '</option>');
-        $("#city_select").append(option);
-      }
-    }
-  }else if(obj.value != -1) {
-    $("#city_select").prop('disabled', true);
-    $("#city_select").empty();
-    $("#district_select").prop('disabled', true);
-    $("#district_select").empty();
-
-    for(var i = 0; i < local_arr.length; i++){
-      if(obj.value == local_arr[i]["local_idx"]){
-        var option = $('<option value="' +local_arr[i]["local_idx"]+ '">' +local_arr[i]["local_idx"]+ '</option>');
-        $("#local_select").append(option);
-      }
-    }
-  }else if(obj.value == -1 || obj.value == ""){
-    $("#city_select").prop('disabled', true);
-    $("#city_select").empty();
-    $("#district_select").prop('disabled', true);
-    $("#district_select").empty();
-  }
 }
 
 function click_email(email) {
