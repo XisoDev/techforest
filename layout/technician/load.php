@@ -22,6 +22,12 @@ $add_html_header[] = "<link rel=\"stylesheet\" href=\"/layout/technician/assets/
 $add_html_header[] = "<link rel=\"stylesheet\" href=\"/layout/none/assets/global_forms.css?nocache=".time()."\">";
 //결제 라이브러리
 $add_html_header[] = "<script type=\"text/javascript\" src=\"https://cdn.iamport.kr/js/iamport.payment-1.1.5.js\"></script>";
+//다음 주소 api
+$add_html_header[] = '<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>';
+//monthpicker
+$add_html_header[] = "<link rel=\stylesheet\" href=\"//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css\">";
+$add_html_header[] = "<link rel=\"stylesheet\" href=\"/layout/none/assets/jquery.mtz.monthpicker.js\">";
+$add_html_header[] = "<link rel=\"stylesheet\" href=\"//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css\">";
 
 $add_body_class[] = 'for_technician';
 

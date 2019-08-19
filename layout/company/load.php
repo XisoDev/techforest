@@ -25,6 +25,9 @@ $add_html_header[] = "<script src=\"https://code.jquery.com/ui/1.12.1/jquery-ui.
 $add_html_header[] = "<link rel=\"stylesheet\" href=\"//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css\">";
 $add_html_header[] = '<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>';
 
+//다음 주소 api
+$add_html_header[] = '<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>';
+
 
 
 $add_body_class[] = 'for_company';

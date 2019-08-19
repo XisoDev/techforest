@@ -68,11 +68,12 @@ class technicianView{
         //나의 이력서 정보 조회
         $oDB->orderBy("m.m_idx","ASC");
         $oDB->where("m.m_idx",$m_idx);
+        $oDB->join("TF_member_occupation mo","mo.m_idx = m.m_idx","LEFT");
         $oDB->join("TF_district_tb d","m.m_district_idx = d.district_idx","LEFT");
         $oDB->join("TF_city_tb c","m.m_city_idx = c.city_idx","LEFT");
         $oDB->join("TF_local_tb l","m.m_local_idx = l.local_idx","LEFT");
         $resume_row = $oDB->get("TF_member_tb m",null,"m_id, m_name, m_human, m_birthday, m_phone, m_email,
-         m_address, m_address2, m_picture, local_name, city_name, district_name");
+         m_address, m_address2, m_picture, local_name, city_name, district_name, m_local_idx, m_city_idx, m_district_idx, mo.o_idx");
 
         //나의 이력서 정보 조회 - 학력
         $oDB->orderBy("e.seq","ASC");
@@ -80,54 +81,59 @@ class technicianView{
         $oDB->join("TF_school s","e.s_idx = s.s_idx","LEFT");
         $my_info3 = $oDB->get("TF_member_education_tb e",null,"e.seq, e.s_idx, s_name, school_name, school_major, school_grade, max_grade, school_graduated, is_ged, school_idx");
 
-         //급여 리스트
-         $oDB->orderBy("salary_idx","ASC");
-         $oDB->where("salary_is_show","Y");
-         $salary_list = $oDB->get("TF_salary",null,"salary_idx, salary_name, salary_is_show");
+        //나의 이력서 정보 조회 - 희망직무
+        $oDB->where("m_idx",$m_idx);
+        $my_duty = $oDB->get("TF_member_duty",null,"o_idx, duty_name");
 
-         //지역리스트
-         //근무지역 local
-         $oDB->orderBy("visible_idx","ASC");
-         $oDB->where("local_visible","Y");
-         $local_arr = $oDB->get("TF_local_tb",null,"local_idx, local_name");
+        //급여 리스트
+        $oDB->orderBy("salary_idx","ASC");
+        $oDB->where("salary_is_show","Y");
+        $salary_list = $oDB->get("TF_salary",null,"salary_idx, salary_name");
 
-         //근무지역 city
-         $oDB->orderBy("city_idx","ASC");
-         $oDB->orderBy("local_idx","ASC");
-         $oDB->where("city_visible","Y");
-         $city_arr = $oDB->get("TF_city_tb",null,"city_idx, city_name, local_idx");
+        //지역리스트
+        //근무지역 local
+        $oDB->orderBy("visible_idx","ASC");
+        $oDB->where("local_visible","Y");
+        $local_arr = $oDB->get("TF_local_tb",null,"local_idx, local_name");
 
-         //근무지역 distinct
-         $oDB->orderBy("district_idx","ASC");
-         $oDB->orderBy("local_idx","ASC");
-         $oDB->where("district_visible","Y");
-         $district_arr = $oDB->get("TF_district_tb",null,"district_idx, district_name, local_idx");
+        //근무지역 city
+        $oDB->orderBy("city_idx","ASC");
+        $oDB->orderBy("local_idx","ASC");
+        $oDB->where("city_visible","Y");
+        $city_arr = $oDB->get("TF_city_tb",null,"city_idx, city_name, local_idx");
 
-         // 직종 리스트
-         $oDB->where("o_is_show","Y");
-         $occupation_arr = $oDB->get("TF_occupation",null,"o_idx, o_name");
+        //근무지역 distinct
+        $oDB->orderBy("district_idx","ASC");
+        $oDB->orderBy("local_idx","ASC");
+        $oDB->where("district_visible","Y");
+        $district_arr = $oDB->get("TF_district_tb",null,"district_idx, district_name, local_idx");
 
-         // 직무 리스트
-         $oDB->orderBy("duty_name","ASC");
-         $oDB->orderBy("visible_idx","ASC");
-         $oDB->orderBy("o_idx","ASC");
-         $duty_arr = $oDB->get("TF_duty");
+        // 직종 리스트
+        $oDB->where("o_is_show","Y");
+        $occupation_arr = $oDB->get("TF_occupation",null,"o_idx, o_name");
 
-         //학력리스트
-         $oDB->orderBy("s_idx","ASC");
-         $school_arr = $oDB->get("TF_school",null,"s_idx, s_name");
+        // 직무 리스트
+        $oDB->orderBy("duty_name","ASC");
+        $oDB->orderBy("visible_idx","ASC");
+        $oDB->orderBy("o_idx","ASC");
+        $duty_arr = $oDB->get("TF_duty");
+
+        //학력리스트
+        $oDB->orderBy("s_idx","ASC");
+        $school_arr = $oDB->get("TF_school",null,"s_idx, s_name");
 
 
-         $output->add('a_line_row',$a_line_row);
-         $output->add('resume_row',$resume_row);
-         $output->add('salary_list',$salary_list);
-         $output->add('local_arr',$local_arr);
-         $output->add('city_arr',$city_arr);
-         $output->add('district_arr',$district_arr);
-         $output->add('occupation_arr',$occupation_arr);
-         $output->add('duty_arr',$duty_arr);
-         $output->add('school_arr',$school_arr);
-         $output->add('my_info3',$my_info3);
+        $output->add('a_line_row',$a_line_row);
+        $output->add('resume_row',$resume_row);
+        $output->add('salary_list',$salary_list);
+        $output->add('local_arr',$local_arr);
+        $output->add('city_arr',$city_arr);
+        $output->add('district_arr',$district_arr);
+        $output->add('occupation_arr',$occupation_arr);
+        $output->add('duty_arr',$duty_arr);
+        $output->add('school_arr',$school_arr);
+        $output->add('my_info3',$my_info3);
+        $output->add('my_duty',$my_duty);
 
         return $output;
     }
