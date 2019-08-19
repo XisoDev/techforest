@@ -295,8 +295,39 @@ class companyView{
         return $row;
     }
 
+    function h_duty_name(){
+      global $oDB;
+
+      $now_date = date(YmdHis);
+
+      $m_idx = $_SESSION['LOGGED_INFO'];
+
+      $oDB->where("co.m_idx",$m_idx);
+      $oDB->where("h.job_end_date",$now_date,">");
+      // $oDB->where("h.h_idx",6917,'<=');
+      $oDB->join("TF_member_commerce_tb co","h.c_idx = co.c_idx","LEFT");
+      $oDB->groupBy("h.h_idx");
+
+      $row = $oDB->get("TF_hire_tb AS h",null,"h.h_idx, h.o_idx, h.duty_name");
+
+      return $row;
+    }
+
     function new_member(){
         global $oDB;
+
+        $member_duty = $this->h_duty_name();
+        $h_duty_name = array();
+        foreach($member_duty as $val){
+          if($val['duty_name'] == ''){}else{$h_duty_name[] = $val['duty_name'];}
+        }
+        if(count($h_duty_name) == 0){
+          // echo "duty_name 없음";
+          $oDB->where("duty_name",'','!=');
+        }else{
+          // echo "duty_name 있음";
+          $oDB->where("duty_name",$h_duty_name,"IN");
+        }
 
         $oDB->where("m_birthday",NULL, 'IS NOT');
         $oDB->where("m_address", NULL, 'IS NOT');
@@ -304,7 +335,7 @@ class companyView{
         $oDB->where("mc.m_idx", NULL, 'IS NOT');
         $oDB->where("m_address",'','!=');
         $oDB->where("m_birthday",'','!=');
-        $oDB->where("duty_name",'','!=');
+
         $oDB->where("substr(m_birthday,1,4) != 0000");
         $oDB->where("substr(m_phone,1,3) != 000");
         $oDB->where("substr(m_phone,5,4) != 0000");
