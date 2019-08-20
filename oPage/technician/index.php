@@ -74,22 +74,34 @@ $myinfo_row = $output->get('myinfo_row');
 
         <div class="col-12 mt-2">
             <div class="flex-card-slick">
-                <?php for($i=1; $i<=3; $i++){ ?>
+                <?php foreach($output->get("new_hire3") as $val){ ?>
+                  <?php $desired_work_place = $val['local_name'] . " ";if($val['city_name'] != '전체'){ $desired_work_place .= $val['city_name']; }if($val['district_name'] != '전체'){ $desired_work_place .= $val['district_name']; }?>
                     <div class="tech_card bg-white">
                         <div class="thumbnail mx-0 px-0" style="background-image:url('http://www.planttech.co.kr/wp-content/uploads/2018/07/%EC%82%BC%EC%84%B1%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%811-820x457.png')">
                         </div>
                         <div class="content_padding text-left pb-1">
-                            <h6><?=$logged_info->company?></h6>
-                            <h6 class="red">CATIA 프로그램 경력자 모집</h6>
+                            <h6><?=$val['c_name']?></h6>
+                            <h6 class="red" style="height: 38px;"><?=$val['h_title']?></h6>
                             <p class="weight_lighter xxs_content mx-0 px-0">
                                 <span class="badge badge-danger weight_lighter">위치</span>
-                                경남 김해시
-                                <span class="badge badge-danger weight_lighter">연</span>
-                                <b>4,500 만원</b>
+                                <?=$desired_work_place?>
+                                <? if($val['salary_idx']==4){?>
+                                  <span class="badge badge-danger weight_lighter">시</span>
+                                  <b><?=$val['job_salary']?>원</b>
+                                <? }else{ ?>
+                                  <? if($val['salary_idx']==1){ ?>
+                                    <span class="badge badge-danger weight_lighter">연</span>
+                                  <? }else if($val['salary_idx']==2){ ?>
+                                    <span class="badge badge-danger weight_lighter">월</span>
+                                  <? }else if($val['salary_idx']==3){ ?>
+                                    <span class="badge badge-danger weight_lighter">일</span>
+                                  <? } ?>
+                                    <b><?=$val['job_salary']?>만원</b>
+                                <? } ?>
                             </p>
                             <p class="text-secondary xxs_content mx-0 px-0">
-                                <i class="xi-clock-o"></i> 마감 13일 전
-                                <i class="xi-eye-o"></i> 114
+                                <i class="xi-clock-o"></i> 마감 <?=$val['hire_end_date']?>일 전
+                                <i class="xi-eye-o"></i> 142
                             </p>
                         </div>
                         <a href="#" class="btn btn-block btn-warning mt-3 rounded-0">자세히 보기</a>
@@ -217,27 +229,39 @@ $myinfo_row = $output->get('myinfo_row');
                 </div>
 
                 <div class="flex-card-slick">
-                    <?php for($i=1; $i<=3; $i++){ ?>
-                        <div class="tech_card bg-white">
-                            <div class="thumbnail mx-0 px-0" style="background-image:url('http://www.planttech.co.kr/wp-content/uploads/2018/07/%EC%82%BC%EC%84%B1%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%811-820x457.png')">
-                            </div>
-                            <div class="content_padding text-left pb-1">
-                                <h6><?=$logged_info->company?></h6>
-                                <h6 class="red">CATIA 프로그램 경력자 모집</h6>
-                                <p class="weight_lighter xxs_content mx-0 px-0">
-                                    <span class="badge badge-danger weight_lighter">위치</span>
-                                    경남 김해시
-                                    <span class="badge badge-danger weight_lighter">연</span>
-                                    <b>4,500 만원</b>
-                                </p>
-                                <p class="text-secondary xxs_content mx-0 px-0">
-                                    <i class="xi-clock-o"></i> 마감 13일 전
-                                    <i class="xi-eye-o"></i> 114
-                                </p>
-                            </div>
-                            <a href="#" class="btn btn-block btn-warning mt-3 rounded-0">자세히 보기</a>
-                        </div>
-                    <?php } ?>
+                  <?php foreach($output->get("new_hire2") as $val){ ?>
+                    <?php $desired_work_place = $val['local_name'] . " ";if($val['city_name'] != '전체'){ $desired_work_place .= $val['city_name']; }if($val['district_name'] != '전체'){ $desired_work_place .= $val['district_name']; }?>
+                      <div class="tech_card bg-white">
+                          <div class="thumbnail mx-0 px-0" style="background-image:url('http://www.planttech.co.kr/wp-content/uploads/2018/07/%EC%82%BC%EC%84%B1%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%811-820x457.png')">
+                          </div>
+                          <div class="content_padding text-left pb-1">
+                              <h6><?=$val['c_name']?></h6>
+                              <h6 class="red" style="height:38px"><?=$val['h_title']?></h6>
+                              <p class="weight_lighter xxs_content mx-0 px-0">
+                                  <span class="badge badge-danger weight_lighter">위치</span>
+                                  <?=$desired_work_place?>
+                                  <? if($val['salary_idx']==4){?>
+                                    <span class="badge badge-danger weight_lighter">시</span>
+                                    <b><?=$val['job_salary']?>원</b>
+                                  <? }else{ ?>
+                                    <? if($val['salary_idx']==1){ ?>
+                                      <span class="badge badge-danger weight_lighter">연</span>
+                                    <? }else if($val['salary_idx']==2){ ?>
+                                      <span class="badge badge-danger weight_lighter">월</span>
+                                    <? }else if($val['salary_idx']==3){ ?>
+                                      <span class="badge badge-danger weight_lighter">일</span>
+                                    <? } ?>
+                                      <b><?=$val['job_salary']?>만원</b>
+                                  <? } ?>
+                              </p>
+                              <p class="text-secondary xxs_content mx-0 px-0">
+                                  <i class="xi-clock-o"></i> 마감 <?=$val['hire_end_date']?>일 전
+                                  <i class="xi-eye-o"></i> 142
+                              </p>
+                          </div>
+                          <a href="#" class="btn btn-block btn-warning mt-3 rounded-0">자세히 보기</a>
+                      </div>
+                  <?php } ?>
                 </div>
             </div>
     </div>
