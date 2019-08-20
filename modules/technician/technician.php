@@ -122,6 +122,10 @@ class technicianView{
         $oDB->orderBy("s_idx","ASC");
         $school_arr = $oDB->get("TF_school",null,"s_idx, s_name");
 
+        // 자격증리스트
+        $oDB->orderBy("seq","ASC");
+        $certificate_row = $oDB->get("TF_certificate",null,"certificate_name");
+
 
         $output->add('a_line_row',$a_line_row);
         $output->add('resume_row',$resume_row);
@@ -134,6 +138,7 @@ class technicianView{
         $output->add('school_arr',$school_arr);
         $output->add('my_info3',$my_info3);
         $output->add('my_duty',$my_duty);
+        $output->add('certificate_row',$certificate_row);
 
         return $output;
     }
@@ -343,4 +348,3 @@ class technicianView{
 
       return $myinfo_row;
     }
-  }

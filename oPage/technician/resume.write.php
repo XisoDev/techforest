@@ -25,18 +25,28 @@ $duty_arr = $output->get('duty_arr');
 //학력리스트
 $school_arr = $output->get('school_arr');
 
-//나의 이력서 정보 조회 - 학력
-$my_info3 = $output->get('my_info3');
-
-//나의 이력서 정보 조회 - 희망직무
-$my_duty = $output->get('my_duty');
-
 // 학교리스트 기본HTML
 for($i = 0; $i < count($school_arr); $i++) {
 	$s_idx	= $school_arr[$i]["s_idx"];
 	$s_name	= $school_arr[$i]["s_name"];
 	$school_select_tag .= "<option value=\\\"" . $s_idx . "\\\">" . $s_name . "</option>";
 }
+
+//나의 이력서 정보 조회 - 학력
+$my_info3 = $output->get('my_info3');
+
+//나의 이력서 정보 조회 - 희망직무
+$my_duty = $output->get('my_duty');
+
+//자격증리스트
+$certificate_row = $output->get('certificate_row');
+$certificate_list = array();
+foreach($certificate_row as $val){
+  array_push($certificate_list, $val['certificate_name']);
+}
+
+
+
 
 //한줄자기소개 랜덤 힌트
 $rand_array = array(
@@ -192,10 +202,10 @@ shuffle($rand_array);
                 </div>
                 <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
                     <div class="input-group mb-2 overflow-hidden rounded">
-                        <input type="text" class="form-control" id="address"  value="<?=$resume_row[0]['address']?>" placeholder="주소검색" readonly>
+                        <input type="text" class="form-control" id="address"  value="<?=$resume_row[0]['m_address']?>" placeholder="주소검색" readonly>
                         <button type="button" class="btn btn-primary rounded-0" onclick="search_address()">검색</button>
                     </div>
-                    <input type="text" class="form-control" id="address2" value="<?=$resume_row[0]['address2']?>" placeholder="상세주소">
+                    <input type="text" class="form-control" id="address2" value="<?=$resume_row[0]['m_address2']?>" placeholder="상세주소">
                 </div>
 
 								<div id="wrap" style="display:none;border:1px solid;width:100%;height:50%;margin:5px 0;position:relative">
@@ -320,7 +330,7 @@ shuffle($rand_array);
                     <div class="row content_padding" id="my_info3_2">
 											<?php
 												if(count($my_info3) == 0){?>
-													<a class="position-absolute" style="right:10px; top:10px;"><i class="xi-close"></i></a>
+													<!-- <a class="" style="right:10px; top:10px;" ><i class="xi-close"></i></a> -->
 													<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학교구분</h6>
 													<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
 															<select class="form-control">
@@ -347,14 +357,14 @@ shuffle($rand_array);
 													<input type="text" class="form-control col-12 col-sm-9 mx-0 mb-2 mb-sm-0" placeholder="기계전공"/>
 
 												<? }else{
-													for($i = 0; $i < count($my_info3); $i++){?>
-														<a class="position-absolute" style="right:10px; top:10px;"><i class="xi-close"></i></a>
+													foreach($my_info3 as $idx => $val){?>
+														<a class="" style="right:10px; top:10px;"><i class="xi-close"></i></a>
 														<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학교구분</h6>
 														<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
-																<select class="form-control">
+																<select class="form-control" id="s_idx<?=$idx?>" name="s_idx<?=$idx?>" onchange="school_changed(<?=$idx?>)">
 																	<?
 																	for($j = 0; $j < count($school_arr); $j++) {
-																		if($my_info3[$i]["s_idx"] == $school_arr[$j]["s_idx"]) {
+																		if($val["s_idx"] == $school_arr[$j]["s_idx"]) {
 																			echo "<option value=\"" . $school_arr[$j]["s_idx"] . "\" selected=\"selected\">" . $school_arr[$j]["s_name"] . "</option>";
 																		} else {
 																			echo "<option value=\"" . $school_arr[$j]["s_idx"] . "\">" . $school_arr[$j]["s_name"] . "</option>";
@@ -363,16 +373,48 @@ shuffle($rand_array);
 																	?>
 																</select>
 																<div class="input-group-append">
-																		<span class="input-group-text">검정고시 <i class="xi-check-circle-o" onclick="jQuery(this).toggleClass('xi-check-circle-o'); jQuery(this).toggleClass('xi-check-circle')"></i></span>
+																	<? //검정고시면
+																		if($val["s_idx"] == 1 && $val['is_ged'] == 1){?>
+																			<span class="input-group-text">검정고시 <i class="xi-check-circle" onclick="jQuery(this).toggleClass('xi-check-circle-o');jQuery(this).toggleClass('xi-check-circle')"></i></span>
+																	<? }else if($val["s_idx"] == 1 && $val['is_ged'] == 0){ ?>
+																			<span class="input-group-text">검정고시 <i class="xi-check-circle-o" onclick="jQuery(this).toggleClass('xi-check-circle-o');jQuery(this).toggleClass('xi-check-circle')"></i></span>
+																 	<? } ?>
 																</div>
 														</div>
-														<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학교명</h6>
-														<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
-																<input type="text" class="form-control" placeholder="기술 고등학교"/>
-																<input type="text" class="form-control monthpicker" placeholder="졸업일자"/>
+														<h6 class="col-6 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학교명</h6>
+														<h6 class="col-6 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">졸업연도</h6>
+
+														<!-- 학교명 -->
+														<div class="input-group col-6 col-sm-9 mx-0 px-0 mb-2">
+															<input type="text" class="form-control" id="school_name<?=$idx?>"  value="<?=$val['school_name']?>" placeholder="학교명"/>
 														</div>
-														<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">전공</h6>
-														<input type="text" class="form-control col-12 col-sm-9 mx-0 mb-2 mb-sm-0" placeholder="기계전공"/>
+
+														<!-- 졸업연도 -->
+														<div class="input-group col-6 col-sm-9 mx-0 px-0 mb-2">
+															<input type="text" class="form-control monthpicker" id="school_name<?=$idx?>" value="<?=$val['school_graduated']?>" placeholder="졸업연도"/>
+														</div>
+
+														<? if($val["s_idx"] != 1){?>
+															<h6 class="col-6 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">전공</h6>
+															<h6 class="col-6 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학점</h6>
+														<? }else{ ?>
+															<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">전공</h6>
+														<? } ?>
+
+														<div class="input-group col-6 col-sm-9 mx-0 px-0 mb-2">
+															<input type="text" class="form-control" id="school_major<?=$idx?>" value="<?=$val['school_major']?>" placeholder="전공"/>
+														</div>
+														<? if($val["s_idx"] != 1){?>
+																<div class="input-group col-6 col-sm-9 mx-0 px-0 mb-2">
+																	<input type="text" class="form-control text-center" id="school_grade<?=$idx?>" value="<?=$val['school_grade']?>" placeholder="학점"/>
+																	<div class="input-group-prepend">
+																			<span class="input-group-text">/</span>
+																	</div>
+																	<input type="text" class="form-control text-center" id="max_grade<?=$idx?>" value="<?=$val['max_grade']?>" placeholder="최대학점"/>
+																</div>
+															<? } ?>
+
+
 
 													<?}
 												}
@@ -441,13 +483,13 @@ shuffle($rand_array);
                         자격증
                     </h5>
                 </div>
-                <div class="col-12 mx-0 px-0 mb-2" id="my_info5_2">
-                    <div class="added_card border rounded position-relative rounded-0 rounded-top container py-3 pb-sm-0">
+                <div class="col-12 mx-0 px-0 mb-2" >
+                    <div class="added_card border rounded position-relative rounded-0 rounded-top container py-3 pb-sm-0" id="my_info5_2">
                         <a href="#" class="position-absolute" style="right:10px; top:10px;"><i class="xi-close"></i></a>
                         <div class="row content_padding">
                             <h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">자격증명</h6>
                             <div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
-                                <input type="text" class="form-control" placeholder=""/>
+                                <input type="text" class="form-control" name="certificate_name" placeholder="자격증명"/>
                                 <input type="text" class="form-control" placeholder="취득일자"/>
                             </div>
                         </div>
@@ -690,7 +732,6 @@ function occupation(obj){
   	span.innerHTML = new_value + '<img class="duty-btn-delete" src="../../img/close.png" alt="삭제" style="width:12px;margin:5px;" onclick="remove_item(this)" />';
   	document.getElementById('duty_field').appendChild(span);
 
-  	//certificateAutocomplete();
   }
 
   function remove_item(obj){
@@ -719,28 +760,16 @@ function occupation(obj){
   	}
   }
 
-  /*
-  * @brief 자격증리스트 자동완성 기능
-  */
-  var certificate_list = <?= json_encode($certificate_list) ?>;
-  function certificateAutocomplete() {
-  	$("input[name=certificate_name]").autocomplete({
-  		source: certificate_list
-  	});
-  }
 
   var my_info3_count = "<?if($my_info3){if(count($my_info3) == 0) { echo "0"; } else { echo count($my_info3); }} else { echo "0"; } ?>";
   var my_info5_count = "<?if($my_info5){if(count($my_info5) == 0) { echo "0"; } else { echo count($my_info5); }} else { echo "0"; } ?>";
   var my_info6_count = "<?if($my_info6){if(count($my_info6) == 0) { echo "0"; } else { echo count($my_info6); }} else { echo "0"; } ?>";
 
+
+	//학력추가하기
   function my_info3_add() {
-    //$('#my_info3_2').css('display', 'block');
-    // $('#my_info3_3').css('display', 'none');
-
     var html = "";
-
     if(my_info3_count != 0) {
-
       var is_ged = $("#is_ged" + (my_info3_count - 1)).is(":checked");
       var school_name = $("#school_name" + (my_info3_count - 1)).val();
 
@@ -750,26 +779,38 @@ function occupation(obj){
       //   return;
       // }
 
-      //html += "<hr id=\"school_hr" + my_info3_count + "\" style=\"border: 0px solid white; border-top: 1px solid #ddd;\"/>";
+      // html += "<hr id=\"school_hr" + my_info3_count + "\" />";
 
-			html += '<a href="#" class="position-absolute" style="right:10px; top:10px;"><i class="xi-close"></i></a>';
+			html += '<a class="" style="right:10px; top:10px;" onclick="javascript:my_info3_del1(' + my_info3_count + ')"><i class="xi-close"></i></a>';
 			html += '<div class="row content_padding" id="my_info3_2">';
 			html += '<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학교구분</h6>';
 			html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">';
-			html += '<select class="form-control">';
-			html += '<option>고등학교</option>';
+			html += '<select class="form-control" id="s_idx'+ my_info3_count + '"name="s_idx'+ my_info3_count + '"onchange="school_changed(' +my_info3_count+ ')">';
+			html += '<?= $school_select_tag ?>';
 			html += '</select>';
-			html += '<div class="input-group-append">';
+			html += '<div class="input-group-append" id="ged'+ my_info3_count + '">';
 			html += '<span class="input-group-text">검정고시 <i class="xi-check-circle-o"></i></span>';
 			html += '</div>';
 			html += '</div>';
-			html += '<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학교명</h6>';
-			html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">';
-			html += '<input type="text" class="form-control" placeholder="기술 고등학교"/>';
-			html += '<input type="text" class="form-control" placeholder="졸업일자"/>';
+			html += '<h6 class="col-6 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학교명</h6>';
+			html += '<h6 class="col-6 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">졸업연도</h6>';
+			html += '<div class="input-group col-6 col-sm-9 mx-0 px-0 mb-2">';
+			html += '<input type="text" id="school_name'+ my_info3_count + '"class="form-control" placeholder="학교명"/>';
 			html += '</div>';
-			html += '<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">전공</h6>';
-			html += '<input type="text" class="form-control col-12 col-sm-9 mx-0 mb-2 mb-sm-0" placeholder="기계전공"/>';
+			html += '<div class="input-group col-6 col-sm-9 mx-0 px-0 mb-2">';
+			html += '<input type="text" id="school_graduated'+ my_info3_count + '"class="form-control" onclick="javascript:click_datepicker("#school_graduated' + my_info3_count + ')" placeholder="졸업연도"/>';
+			html += '</div>';
+			html += '<h6 class="col-6 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">전공</h6>';
+			html += '<h6 class="col-6 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학점</h6>';
+			html += '<div class="input-group col-6 col-sm-9 mx-0 px-0 mb-2">';
+			html += '<input type="text" id="school_major'+ my_info3_count + '"class="form-control" placeholder="전공"/>';
+			html += '</div>';
+			html += '<div class="input-group col-6 col-sm-9 mx-0 px-0 mb-2" id="grade'+ my_info3_count +'" style="visibility:hidden;">';
+			html += '<input type="text" class="form-control text-center" id="school_grade'+ my_info3_count + '" placeholder="학점"/>';
+			html += '<div class="input-group-prepend">';
+			html += '<span class="input-group-text">/</span>';
+			html += '</div>';
+			html += '<input type="text" class="form-control text-center" id="max_grade'+ my_info3_count + '" placeholder="최대학점"/>';
 			html += '</div>';
 
       $("#my_info3_2").append(html);
@@ -782,14 +823,12 @@ function occupation(obj){
 	function my_info5_add(){
 		var html = "";
 
-		html += '<div class="added_card border rounded position-relative rounded-0 rounded-top container py-3 pb-sm-0">';
-		html += '<a href="#" class="position-absolute" id="certificate_del"' + my_info5_count + 'style="right:10px; top:10px;"><i class="xi-close"></i></a>';
+		html += '<a href="#" class="" id="certificate_del' + my_info5_count + '"style="right:10px; top:10px;"><i class="xi-close"></i></a>';
 		html += '<div class="row content_padding">';
-		html += '<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">자격증 명</h6>';
+		html += '<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">자격증명</h6>';
 		html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">';
-		html += '<input type="text" class="form-control" placeholder=""/>';
+		html += '<input type="text" name="certificate_name" class="form-control" placeholder="자격증명"/>';
 		html += '<input type="text" class="form-control" placeholder="취득일자"/>';
-		html += '</div>';
 		html += '</div>';
 		html += '</div>';
 
@@ -826,5 +865,26 @@ function occupation(obj){
 			$("#salary").val("");
 		}
 }
+
+	// 자격증리스트 자동완성 기능
+	var certificate_list = <?= json_encode($certificate_list) ?>;
+	function certificateAutocomplete() {
+		$("input[name=certificate_name]").autocomplete({
+			source: certificate_list
+		});
+	}
+
+	//고등학교 선택시 학점 숨김
+	//고등학교 제외, 검정고시 숨김
+	function school_changed(index){
+		if($('#s_idx'+index).val() == 1){
+			$('#grade'+index).css("visibility","hidden");
+			$('#ged'+index).css("visibility","visible");
+		}
+		else{
+			$('#grade'+index).css("visibility","visible");
+			$('#ged'+index).css("visibility","hidden");
+		}
+	}
 </script>
 <?php $footer_false = true; ?>

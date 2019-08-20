@@ -390,7 +390,7 @@ img{
     border:none;
 }
 
-#cut1 {
+.cut1 {
 white-space:nowrap;
 display:block;
 -webkit-line-clamp:1;
