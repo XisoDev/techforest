@@ -445,19 +445,18 @@ shuffle($rand_array);
                     <div class="added_card border rounded position-relative rounded-0 rounded-top container py-3 pb-sm-0">
                         <a href="#" class="position-absolute" style="right:10px; top:10px;"><i class="xi-close"></i></a>
                         <div class="row content_padding">
-                            <h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">자격증 명</h6>
+                            <h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">자격증명</h6>
                             <div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
-                                <input type="text" class="form-control" placeholder="용접기술사"/>
-    <!--                            datepicker-->
+                                <input type="text" class="form-control" placeholder=""/>
                                 <input type="text" class="form-control" placeholder="취득일자"/>
                             </div>
                         </div>
                     </div>
 
                     <div class="text-center">
-                      <button class="my-3 d-sm-inline-block d-none btn btn-warning">자격증 추가하기</button>
+                      <button class="my-3 d-sm-inline-block d-none btn btn-warning" onclick="my_info5_add()">자격증 추가하기</button>
                     </div>
-                    <button class="d-sm-none d-inline-block btn btn-warning btn-block rounded-0 rounded-bottom">자격증 추가하기</button>
+                    <button class="d-sm-none d-inline-block btn btn-warning btn-block rounded-0 rounded-bottom" onclick="my_info5_add()">자격증 추가하기</button>
 
                 </div>
 
@@ -780,11 +779,11 @@ function occupation(obj){
     }
   }
 
-	function aa(){
+	function my_info5_add(){
 		var html = "";
 
 		html += '<div class="added_card border rounded position-relative rounded-0 rounded-top container py-3 pb-sm-0">';
-		html += '<a href="#" class="position-absolute" id="certificate_del"' + my_info5_count 'style="right:10px; top:10px;"><i class="xi-close"></i></a>';
+		html += '<a href="#" class="position-absolute" id="certificate_del"' + my_info5_count + 'style="right:10px; top:10px;"><i class="xi-close"></i></a>';
 		html += '<div class="row content_padding">';
 		html += '<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">자격증 명</h6>';
 		html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">';
