@@ -16,7 +16,7 @@ class technicianView{
         $output = new Object();
         $output->add('new_hire2',$this->new_hire2());
         $output->add('new_hire3',$this->new_hire3());
-        
+
         $output->add('myinfo_row',$this->resume_info());
         $output->add('now_application',$this->now_application());
         $output->add('count_career_row',$this->resume_completeness1());
@@ -350,8 +350,6 @@ class technicianView{
 
       return $myinfo_row;
     }
-<<<<<<< HEAD
-=======
 
     function m_duty_name(){
       global $oDB;
@@ -444,4 +442,3 @@ class technicianView{
         return $row;
     }
   }
->>>>>>> 2fa0fc657884fd28597cdab1bfafde9a02bd7cf6
