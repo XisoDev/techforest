@@ -14,7 +14,9 @@ class technicianView{
         $site_info->layout = "technician";
 
         $output = new Object();
-
+        $output->add('new_hire2',$this->new_hire2());
+        $output->add('new_hire3',$this->new_hire3());
+        
         $output->add('myinfo_row',$this->resume_info());
         $output->add('now_application',$this->now_application());
         $output->add('count_career_row',$this->resume_completeness1());
@@ -342,5 +344,96 @@ class technicianView{
       $myinfo_row = $oDB->getOne("TF_member_tb AS m",$columns);
 
       return $myinfo_row;
+    }
+
+    function m_duty_name(){
+      global $oDB;
+
+      $m_idx = $_SESSION['LOGGED_INFO'];
+
+      $columns = "m.m_idx, mc.duty_name as mc, md.duty_name as md";
+
+      $oDB->where("(mc.duty_name != ? or md.duty_name != ? )",ARRAY('',''));
+      $oDB->where("m.m_idx",$m_idx);
+      // $oDB->where("h.h_idx",6917,'<=');
+      $oDB->join("TF_member_career_tb AS mc","mc.m_idx = m.m_idx","LEFT");
+      $oDB->join("TF_member_duty AS md","md.m_idx = m.m_idx","LEFT");
+
+      $row = $oDB->get("TF_member_tb AS m",null,$columns);
+
+      return $row;
+    }
+
+    function new_hire(){
+        global $oDB;
+
+        $m_idx = $_SESSION['LOGGED_INFO'];
+        $member_duty = $this->m_duty_name();
+        $m_duty_name = array();
+
+        foreach($member_duty as $val){
+          if($val['md'] != '' && $val['mc'] != ''){
+            $m_duty_name[] = $val['md'];
+            $m_duty_name[] = $val['mc'];
+          }else if($val['md'] != ''){
+            $m_duty_name[] = $val['md'];
+          }else if($val['mc'] != ''){
+            $m_duty_name[] = $val['mc'];
+          }
+        }
+
+        if(count($m_duty_name) == 0){
+          $oDB->where("duty_name",'','!=');
+        }else{
+          $oDB->where("duty_name",$m_duty_name,"IN");
+        }
+        $oDB->orderBy("rand()");
+        $row = $oDB->get("TF_hire_tb h",null,"h.h_idx");
+
+        return $row;
+    }
+
+    function new_hire2(){
+        global $oDB;
+
+        $columns = "h_idx, c_name, h_title, TO_DAYS( job_end_date ) - TO_DAYS( NOW( ) ) AS hire_end_date, local_name, city_name, district_name, salary_idx, job_salary";
+
+        $now_date = date(YmdHis);
+        // $rand_new_member = $this->new_member();
+        // $oDB->where(sprintf("(m.m_idx = %s or m.m_idx = %s or m.m_idx = %s or m.m_idx = %s)",$rand_new_member[0]['m_idx'],$rand_new_member[1]['m_idx'],$rand_new_member[2]['m_idx'],$rand_new_member[3]['m_idx']));
+        $rand_new_hire = $this->new_hire();
+        $h_idxs = array();
+        foreach($rand_new_hire as $val) $h_idxs[] = $val['h_idx'];
+        $oDB->where("h.h_idx",$h_idxs,"IN");
+        $oDB->where("duty_name","",'!=');
+        $oDB->where("job_end_date",$now_date,'>');
+
+        $oDB->join("TF_member_commerce_tb AS co", "co.c_idx = h.c_idx", "LEFT");
+        $oDB->join("TF_member_tb AS m", "m.m_idx = co.m_idx", "LEFT");
+        $oDB->join("TF_local_tb AS l", "h.local_idx = l.local_idx", "LEFT");
+        $oDB->join("TF_city_tb AS c", "h.city_idx = c.city_idx", "LEFT");
+        $oDB->join("TF_district_tb AS d", "h.district_idx = d.district_idx", "LEFT");
+        $row = $oDB->get("TF_hire_tb AS h",null,$columns);
+
+        return $row;
+    }
+
+    function new_hire3(){
+        global $oDB;
+
+        $columns = "h_idx, c_name, h_title, TO_DAYS( job_end_date ) - TO_DAYS( NOW( ) ) AS hire_end_date, local_name, city_name, district_name, salary_idx, job_salary";
+
+        $now_date = date(YmdHis);
+
+        $oDB->where("job_end_date",$now_date,'>');
+        $oDB->orderby("h.h_idx","DESC");
+        $oDB->join("TF_member_commerce_tb AS co", "co.c_idx = h.c_idx", "LEFT");
+        $oDB->join("TF_member_tb AS m", "m.m_idx = co.m_idx", "LEFT");
+        $oDB->join("TF_local_tb AS l", "h.local_idx = l.local_idx", "LEFT");
+        $oDB->join("TF_city_tb AS c", "h.city_idx = c.city_idx", "LEFT");
+        $oDB->join("TF_district_tb AS d", "h.district_idx = d.district_idx", "LEFT");
+        $row = $oDB->get("TF_hire_tb AS h",3,$columns);
+
+        return $row;
     }
   }
