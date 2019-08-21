@@ -6,24 +6,25 @@
 </section>
 <div class="container pt-lg-5">
     <div class="px-0 pb-1 pt-3 pt-lg-0">
-        <a href="#" class="d-lg-none pull-right btn btn-xxs btn-round border-primary py-2 px-3">전체공고</a>
-        <a href="#" class="d-lg-none pull-right btn btn-primary btn-xxs btn-round py-2 px-3 mr-1">맞춤공고</a>
+        <!-- 모바일버전 버튼 -->
+        <a href="<?=getUrl('technician','findJobListAll')?>" class="d-lg-none pull-right btn btn-xxs border-primary btn-round  py-2 px-3">전체공고</a>
+        <a href="<?=getUrl('technician','findJobList')?>" class="d-lg-none pull-right btn btn-primary btn-xxs btn-round py-2 px-3 mr-1">맞춤공고</a>
         <h6>일자리 정보</h6>
     </div>
 
     <div class="content_padding px-0 pb-1 pt-0 mt-0 mb-4">
         <div class="row">
-            <div class="col-6 pr-1 col-lg-4">
+            <!-- <div class="col-6 pr-1 col-lg-4">
                 <select class="form-control"><option>지역설정</option></select>
             </div>
             <div class="col-6 pl-1 col-lg-4">
                 <select class="form-control"><option>직종</option></select>
-            </div>
+            </div> -->
             <div class="col-lg-2 pr-1">
-                <a href="#" class="d-lg-block btn-block d-none btn btn-round border-primary py-2 px-3">전체공고</a>
+                <a href="<?=getUrl('technician','findJobList')?>" class="d-lg-block btn-block d-none btn btn-round btn-primary py-2 px-3">맞춤공고</a>
             </div>
             <div class="col-lg-2 pl-1">
-                <a href="#" class="d-lg-block btn-block d-none btn btn-primary btn-round py-2 px-3 mr-1">맞춤공고</a>
+                <a href="<?=getUrl('technician','findJobListAll')?>" class="d-lg-block btn-block d-none btn border-primary btn-round py-2 px-3 mr-1">전체공고</a>
             </div>
         </div>
     </div>
@@ -71,8 +72,14 @@
             </div>
         <?php } ?>
     </div>
-
 </div>
+
+<script type="text/javascript">
+  // function all_show(num){
+  //   $(".choose1").toggleClass("btn-primary");
+  //   $(".choose2").toggleClass("border-primary");
+  // }
+</script>
 
 <?php
 $footer_false = true;

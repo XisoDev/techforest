@@ -191,24 +191,24 @@ function workPlace(obj){
 		 element_wrap.style.display = 'block';
  }
 
-	 var currentYear = (new Date()).getFullYear();
-	 var startYear = currentYear-80;
+ function interest_add(h_idx){
+	 var add_confirm = confirm("관심공고로 등록하시겠습니까?");
+	 if(add_confirm == true){
+		 $("#no_interest").toggleClass('red');
+	 }
+ }
 
-	 $('.monthpicker').monthpicker({
-		 pattern : 'yyyy-mm',
-		 startYear: startYear,
-		 finalYear: currentYear,
-		 showAnimation: "slide",
-		 showOtherMonths: true,
-		 selectOtherMonths: true,
-		 currentText: '오늘 날짜',
-		 changeMonth: true,
-		 changeYear: true,
-		 showMonthAfterYear: true,
-		 nextText: '다음 달',
-		 prevText: '이전 달',
-		 monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
-		 monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-		 setDate: new Date(),
-		 dateFormat: "yy-mm"
-	});
+ function interest_remove(h_idx){
+	 var remove_confirm = confirm("관심공고를 해지하시겠습니까?");
+	 var m_idx = $('#hidden_m_idx').val();
+	 if(remove_confirm == true){
+		 var params = {};
+		 params["h_idx"] = h_idx;
+		 params["m_idx"] = m_idx;
+
+		 exec_json("technician.interest_remove",params,function(ret_obj){
+				 toastr.success(ret_obj.message);
+				 location.reload();
+		 });
+	 }
+ }

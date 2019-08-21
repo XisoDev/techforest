@@ -1,3 +1,8 @@
+<?php
+  $m_idx = $_SESSION['LOGGED_INFO'];
+  $interest_rows = $output->get('interest_rows');
+?>
+
 <section class="bg-white d-lg-none">
     <div class="content_padding mt-4 pt-5 mb-0 pb-2">
         <a href="#" onclick="history.back();"><i class="xi-arrow-left xi-2x"></i></a>
@@ -110,27 +115,54 @@
     </div>
 
     <div class="flex-card-slick">
-        <?php for($i=1; $i<=3; $i++){ ?>
+      <input type="hidden" id="hidden_m_idx" value="<?=$m_idx?>">
+        <?php if(count($interest_rows) != 0){ ?>
+          <?php foreach($interest_rows as $val){ ?>
             <div class="tech_card bg-white shadow">
                 <div class="thumbnail mx-0 px-0" style="background-image:url('http://www.planttech.co.kr/wp-content/uploads/2018/07/%EC%82%BC%EC%84%B1%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%811-820x457.png')">
                     <span class="overlay">
-                    <a href="#" class="btn-xxs btn btn-round border-white text-white py-1 px-2 position-absolute mr-lg-3" style="right:10px; top:10px;">
-                        관심공고
-                        <i class="xi-heart red"></i>
-                    </a>
+                      <?
+                        if($m_idx > 0) {
+                          if(count($interest_rows) == 0) {
+                            $interest_html = '<a class="btn-xxs btn btn-round border-white text-white py-1 px-2 position-absolute mr-lg-3" onclick="interest_add('. $val['h_idx'] .')" style="right:10px; top:10px;">관심공고<i class="xi-heart" id="no_interest"></i></a>';
+                          } else {
+                            if(count($interest_rows) > 0) {
+                              $interest_html = '<a class="btn-xxs btn btn-round border-white text-white py-1 px-2 position-absolute mr-lg-3" onclick="interest_remove('. $val['h_idx'] .')" style="right:10px; top:10px;">관심공고<i class="xi-heart red" id="yes_interest"></i></a>';
+                            } else {
+                              $interest_html = '<a class="btn-xxs btn btn-round border-white text-white py-1 px-2 position-absolute mr-lg-3" onclick="interest_add('. $val['h_idx'] .')" style="right:10px; top:10px;">관심공고<i class="xi-heart" id="no_interest"></i></a>';
+                            }
+                          }
+                        }else {
+
+                      }
+                    ?>
+                    <?= $interest_html ?>
                     </span>
                 </div>
+                <? if ($val['city_name'] == "전체") { $val['city_name'] = "";} ?>
+                <? if ($val['district_name'] == "전체") { $val['district_name'] = ""; }?>
+                <? if ($val['salary_idx'] < 3) { $hire_salary_text = "만원"; } else { $hire_salary_text = "원"; } ?>
                 <div class="content_padding text-left pb-1">
-                    <h6>(주)일진</h6>
-                    <h6 class="red">CATIA 프로그램 경력자 모집</h6>
+                    <h6 class="cut1"><?=$val['c_name']?></h6>
+                    <h6 class="red cut1"><?=$val['h_title']?></h6>
                     <p class="weight_lighter xxs_content mx-0 px-0">
-                        <span class="badge badge-danger weight_lighter">위치</span>
-                        경남 김해시
-                        <span class="badge badge-danger weight_lighter">시</span>
-                        <b>7,350 원</b>
+                    <span class="badge badge-danger weight_lighter">위치</span>
+                      <?= $val['local_name'] . " " . $val['city_name'].$val['district_name']?>
+                    <span class="badge badge-danger weight_lighter">
+                      <?if($val['salary_idx'] == "1"){
+                          echo "연봉";
+                        }else if($val['salary_idx'] == "2"){
+                          echo "월급";
+                        }else if($val['salary_idx'] == "3"){
+                          echo "일급";
+                        }else{
+                          echo "시급";
+                        }?>
+                    </span>
+                      <b><?= number_format($val['job_salary']) . $hire_salary_text?></b>
                     </p>
                     <p class="text-secondary xxs_content mx-0 px-0 pb-2">
-                        <span class="bg-red icon_wrap"><i class="xi-wrench"></i></span>경력 최소 10년
+                        <span class="bg-red icon_wrap"><i class="xi-wrench"></i></span><?=$val['job_is_career']?>
                     </p>
                 </div>
 
@@ -143,9 +175,18 @@
                     </div>
                 </div>
             </div>
-        <?php } ?>
+        <?php
+            }
+          }else{ ?>
+            등록된 관심공고가 없습니다.
+       <? } ?>
     </div>
 </div>
+
+
+<script type="text/javascript">
+
+</script>
 <?php
 $footer_false = true;
 ?>

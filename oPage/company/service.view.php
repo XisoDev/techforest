@@ -34,7 +34,7 @@ if(!$m_num){
             <div class="toggleBox mt-3">
                 <label class="xs_content mb-0 pb-1">상품선택</label>
                 <select class="form-control" id="service_option" name="service_option" onchange="javascript:service_list(this)">
-                  <option value="">상품을 선택해주세요</option>
+                  <option value="0,0">상품을 선택해주세요</option>
                   <option value="2,5000">면접제안권 5회</option>
                   <option value="3,10000">면접제안권 10회</option>
                 </select>

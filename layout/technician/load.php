@@ -26,8 +26,8 @@ $add_html_header[] = "<script type=\"text/javascript\" src=\"https://cdn.iamport
 $add_html_header[] = '<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>';
 //monthpicker
 $add_html_header[] = "<link rel=\stylesheet\" href=\"//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css\">";
+$add_html_header[] = "<script src=\"https://code.jquery.com/ui/1.12.1/jquery-ui.js\"></script>";
 $add_html_header[] = "<link rel=\"stylesheet\" href=\"/layout/none/assets/jquery.mtz.monthpicker.js\">";
-$add_html_header[] = "<link rel=\"stylesheet\" href=\"//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css\">";
 
 $add_body_class[] = 'for_technician';
 

@@ -156,7 +156,12 @@ class technicianView{
         global $set_template_file;
         $set_template_file = "technician/findjob.php";
 
+        global $oDB;
+
         $output = new Object();
+
+        $output->add('interest_rows',$this->interest_hire());
+
         return $output;
     }
 
@@ -172,6 +177,43 @@ class technicianView{
         $set_template_file = "technician/findjob.list.php";
 
         $output = new Object();
+        return $output;
+    }
+
+    function findJobListAll($args){
+        setSEO("일자리 찾기","기술자님께 딱!맞는 일자리와 관심공고를 살펴보세요");
+        global $site_info;
+        $site_info->layout = "technician";
+
+        global $add_body_class;
+        $add_body_class[] = "shrink";
+
+        global $set_template_file;
+        $set_template_file = "technician/findjob.listAll.php";
+
+        global $oDB;
+
+        $m_idx = $_SESSION['LOGGED_INFO'];
+        $now_date = date(YmdHis);
+
+        $oDB->orderBy("vip","DESC");
+        $oDB->orderBy("h.h_idx","DESC");
+        $oDB->where("hire_is_show","Y");
+        $oDB->where("job_end_date",$now_date,">=");
+        //$oDB->where($sql_1);
+        $oDB->join("TF_member_commerce_tb co","h.c_idx = co.c_idx","LEFT");
+        $oDB->join("TF_local_tb l","h.local_idx = l.local_idx","LEFT");
+        $oDB->join("TF_city_tb c","h.city_idx = c.city_idx","LEFT");
+        $oDB->join("TF_district_tb d","h.district_idx = d.district_idx","LEFT");
+        $oDB->join("TF_hire_certificate hce","hce.h_idx = h.h_idx","LEFT");
+        $hire_rows = $oDB->get("TF_hire_tb h",12,"c_name, h_title, local_name, city_name, district_name,
+                                                  h.local_idx, h.city_idx, h.district_idx, job_achievement,
+                                                  salary_idx, job_salary, job_is_career, h.h_idx, h.o_idx");
+
+        $output = new Object();
+
+        $output->add('hire_rows',$hire_rows);
+        $output->add('interest_rows',$this->interest_hire());
         return $output;
     }
 
@@ -440,5 +482,22 @@ class technicianView{
         $row = $oDB->get("TF_hire_tb AS h",3,$columns);
 
         return $row;
+    }
+
+    function interest_hire(){
+      global $oDB;
+      $m_idx = $_SESSION['LOGGED_INFO'];
+
+      //관심공고
+      $oDB->orderBy("ic.reg_date","DESC");
+      $oDB->where("ic.m_idx",$m_idx);
+      $oDB->join("TF_hire_tb h","h.h_idx = ic.h_idx","LEFT");
+      $oDB->join("TF_district_tb d","h.district_idx = d.district_idx","LEFT");
+      $oDB->join("TF_city_tb c","h.city_idx = c.city_idx","LEFT");
+      $oDB->join("TF_local_tb l","h.local_idx = l.local_idx","LEFT");
+      $oDB->join("TF_member_commerce_tb mc","mc.c_idx = h.c_idx","LEFT");
+      $interest_rows = $oDB->get("TF_interest_career_tb ic");
+
+      return $interest_rows;
     }
   }
