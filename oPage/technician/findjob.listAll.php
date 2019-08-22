@@ -1,7 +1,15 @@
 <?php
   $hire_rows = $output->get('hire_rows');
   $interest_rows = $output->get('interest_rows');
+  $local_list = $output->get('local_list');
+  $occupation_list = $output->get('occupation_list');
 
+  if($_GET['local_idx']){
+    $search_local_idx = $_GET['local_idx'];
+  }
+  if($_GET['o_idx']){
+    $search_o_idx = $_GET['o_idx'];
+  }
 ?>
 <section class="bg-white d-lg-none">
     <div class="content_padding mt-4 pt-5 mb-0 pb-2">
@@ -20,10 +28,26 @@
     <div class="content_padding px-0 pb-1 pt-0 mt-0 mb-4">
         <div class="row">
             <div class="col-6 pr-1 col-lg-4">
-                <select class="form-control"><option>지역설정</option></select>
+                <select class="form-control" id="local_select" onchange="location.href=(this.value)">
+                  <? foreach ($local_list as $val) { ?>
+                      <? if($val["local_idx"] == $search_local_idx){?>
+                        <option value="<?=getUrl('technician','findJobListAll',false,array('local_idx' => $val['local_idx'],'o_idx' => $search_o_idx))?>" selected><?=$val['local_name']?></option>
+                      <? }else{ ?>
+                        <option value="<?=getUrl('technician','findJobListAll',false,array('local_idx' => $val['local_idx'],'o_idx' => $search_o_idx))?>"><?=$val['local_name']?></option>
+                      <? }
+                    } ?>
+                </select>
             </div>
             <div class="col-6 pl-1 col-lg-4">
-                <select class="form-control"><option>직종</option></select>
+                <select class="form-control" id="occupation_select" onchange="location.href=(this.value)">
+                  <? foreach ($occupation_list as $val) { ?>
+                    <? if($val["o_idx"] == $search_o_idx){?>
+                      <option value="<?=getUrl('technician','findJobListAll',false,array('local_idx' => $search_local_idx,'o_idx' => $val['o_idx']))?>" selected><?=$val['o_name']?></option>
+                    <? }else{ ?>
+                        <option value="<?=getUrl('technician','findJobListAll',false,array('local_idx' => $search_local_idx,'o_idx' => $val['o_idx']))?>"><?=$val['o_name']?></option>
+                    <? }
+                  } ?>
+                </select>
             </div>
             <div class="col-lg-2 pr-1">
                 <a href="<?=getUrl('technician','findJobList')?>" class="d-lg-block btn-block d-none btn btn-round border-primary py-2 px-3">맞춤공고</a>
@@ -91,7 +115,7 @@
                                     <a href="#" class="btn btn-light btn-block rounded-0">상세보기</a>
                                 </div>
                                 <div class="col-6 mx-0 px-0">
-                                    <button class="btn btn-danger btn-block rounded-0">지원하기</button>
+                                    <button class="btn btn-danger btn-block rounded-0" data-toggle="modal" data-target="#check_phonenumber">지원하기</button>
                                 </div>
                             </div>
                         </div>
@@ -102,8 +126,39 @@
     </div>
 </div>
 
-<script type="text/javascript">
+<div class="modal fade" id="check_phonenumber" tabindex="-1" role="dialog" aria-labelledby="tech_forest_modal_window" aria-hidden="true" style="">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content text-center" style="border-radius:10px">
+            <a href="#" class="text-white pull-right text-right" style="margin-top:-40px;" onclick="jQuery('#check_phonenumber').modal('hide');" ><i class="xi-close xi-2x"></i></a>
+            <div class="square avatar bg-red mx-auto" style="width:120px; margin-top:-60px; background-image:url('/oPage/ncenter/images/header_icon.png');"></div>
+            <div class="content_padding">
+                <h5 class="weight_lighter">기업측의 면접요청을 위해 <br> <span class="red">본인의 연락처가 맞는지</span><br>다시 한번 확인해주세요.</h5>
+                <span class="red">─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─</span>
+                <h5 class="weight_normal mb-2 mt-4 mb-3 red">☎ <?=$logged_info['m_phone']?></h5>
+                <a class="btn btn-block btn-danger btn-round btn-lg mb-3" href="#">네 맞습니다</a>
+                <a class="btn btn-block border-danger btn-round btn-lg mb-3 red" href="#">연락처 수정하기</a>
+            </div>
+            <button class="mt-2 btn btn-block btn-light" onclick="jQuery('#check_phonenumber').modal('hide');" style="border-radius:10px;">닫기</button>
+        </div>
+    </div>
+</div>
 
+
+<script type="text/javascript">
+ function search_hire(){
+   var local_idx = $("#local_select option:selected").val();
+   var o_idx = $("#occupation_select option:selected").val();
+
+   var params = {};
+   params["local_idx"] = local_idx;
+   params["o_idx"] = o_idx;
+
+   exec_json("technician.search",params,function(ret_obj){
+       toastr.success(ret_obj.message);
+       //location.reload();
+   });
+
+ }
 </script>
 
 <?php

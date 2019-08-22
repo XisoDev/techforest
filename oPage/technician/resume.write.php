@@ -322,116 +322,117 @@ shuffle($rand_array);
                     </h5>
                 </div>
                 <div class="col-12 mx-0 px-0 mb-2">
-                  <div class="added_card border rounded position-relative rounded-0 rounded-top container py-3 pt-sm-3 pb-sm-0" >
+									<div id="my_info3_2">
+										<?php
+											if(count($my_info3) == 0){?>
+												<!-- <a class="" style="right:10px; top:10px;" ><i class="xi-close"></i></a> -->
+												<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학교구분</h6>
+												<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
+														<select class="form-control" id="s_idx0" name="s_idx0" onchange="school_changed(0)">
+															<?
+															for($j = 0; $j < count($school_arr); $j++) {
+																if($my_info3[$i]["s_idx"] == $school_arr[$j]["s_idx"]) {
+																	echo "<option value=\"" . $school_arr[$j]["s_idx"] . "\" selected=\"selected\">" . $school_arr[$j]["s_name"] . "</option>";
+																} else {
+																	echo "<option value=\"" . $school_arr[$j]["s_idx"] . "\">" . $school_arr[$j]["s_name"] . "</option>";
+																}
+															}
+															?>
+														</select>
+														<div class="input-group-append" id="ged0">
+																<span class="input-group-text">검정고시 <i class="xi-check-circle-o" onclick="jQuery(this).toggleClass('xi-check-circle-o'); jQuery(this).toggleClass('xi-check-circle')"></i></span>
+														</div>
+												</div>
+												<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학교명</h6>
+												<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
+													<input type="text" id="school_name"<?=$i?> class="form-control" placeholder="기술 고등학교"/>
+													<input type="text" class="form-control" onclick="month_picker()" placeholder="졸업일자"/>
+												</div>
+												<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">전공</h6>
+												<input type="text" class="form-control col-12 col-sm-9 mx-0 mb-2 mb-sm-0" placeholder="기계전공"/>
+												<div class="input-group col-6 col-sm-9 mx-0 px-0 mb-2" id="grade0" style="visibility:hidden;">
+													<input type="text" class="form-control text-center" id="school_grade<?=$idx?>" value="<?=$val['school_grade']?>" placeholder="학점"/>
+													<div class="input-group-prepend">
+														<span class="input-group-text">/</span>
+													</div>
+													<input type="text" class="form-control text-center" id="max_grade<?=$idx?>" value="<?=$val['max_grade']?>" placeholder="최대학점"/>
+												</div>
 
-                    <div class="row content_padding" id="my_info3_2">
-											<?php
-												if(count($my_info3) == 0){?>
-													<!-- <a class="" style="right:10px; top:10px;" ><i class="xi-close"></i></a> -->
+											<? }else{
+												foreach($my_info3 as $idx => $val){?>
+												<div class="added_card border rounded position-relative rounded-0 rounded-top container py-3 pt-sm-3 pb-sm-0" id="my_info3_2">
+												<div class="row content_padding">
+													<a class="position-absolute" style="right:10px; top:10px;"><i class="xi-close"></i></a>
 													<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학교구분</h6>
 													<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
-															<select class="form-control" id="s_idx0" name="s_idx0" onchange="school_changed(0)">
+															<select class="form-control" id="s_idx<?=$idx?>" name="s_idx<?=$idx?>" onchange="school_changed(<?=$idx?>)">
 																<?
-																for($j = 0; $j < count($school_arr); $j++) {
-																	if($my_info3[$i]["s_idx"] == $school_arr[$j]["s_idx"]) {
-																		echo "<option value=\"" . $school_arr[$j]["s_idx"] . "\" selected=\"selected\">" . $school_arr[$j]["s_name"] . "</option>";
-																	} else {
-																		echo "<option value=\"" . $school_arr[$j]["s_idx"] . "\">" . $school_arr[$j]["s_name"] . "</option>";
+																	for($j = 0; $j < count($school_arr); $j++) {
+																		if($val["s_idx"] == $school_arr[$j]["s_idx"]) {
+																			echo "<option value=\"" . $school_arr[$j]["s_idx"] . "\" selected=\"selected\">" . $school_arr[$j]["s_name"] . "</option>";
+																		} else {
+																			echo "<option value=\"" . $school_arr[$j]["s_idx"] . "\">" . $school_arr[$j]["s_name"] . "</option>";
+																		}
 																	}
-																}
 																?>
 															</select>
-															<div class="input-group-append" id="ged0">
-																	<span class="input-group-text">검정고시 <i class="xi-check-circle-o" onclick="jQuery(this).toggleClass('xi-check-circle-o'); jQuery(this).toggleClass('xi-check-circle')"></i></span>
+															<?
+																$is_ged_visible = "hidden";
+																if($val["s_idx"] == 1){
+																	$is_ged_visible = "visible";
+																}
+															?>
+															<div class="input-group-append" id="ged<?=$idx?>" style="visibility:<?=$is_ged_visible?>">
+																<? //검정고시면
+																	if($val["s_idx"] == 1 || $val['is_ged'] == 1){?>
+																		<span class="input-group-text">검정고시 <i class="xi-check-circle" onclick="jQuery(this).toggleClass('xi-check-circle-o');jQuery(this).toggleClass('xi-check-circle')"></i></span>
+																<? }else if($val["s_idx"] == 1 || $val['is_ged'] == 0){ ?>
+																		<span class="input-group-text">검정고시 <i class="xi-check-circle-o" onclick="jQuery(this).toggleClass('xi-check-circle-o');jQuery(this).toggleClass('xi-check-circle')"></i></span>
+																<? } ?>
 															</div>
 													</div>
-													<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학교명</h6>
+													<h6 class="col-6 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학교명</h6>
 													<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
-														<input type="text" id="school_name"<?=$i?> class="form-control" placeholder="기술 고등학교"/>
-														<input type="text" class="form-control" onclick="month_picker()" placeholder="졸업일자"/>
+														<input type="text" class="form-control" id="school_name<?=$idx?>"  value="<?=$val['school_name']?>" placeholder="학교명"/>
 													</div>
-													<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">전공</h6>
-													<input type="text" class="form-control col-12 col-sm-9 mx-0 mb-2 mb-sm-0" placeholder="기계전공"/>
-													<div class="input-group col-6 col-sm-9 mx-0 px-0 mb-2" id="grade0" style="visibility:hidden;">
+													<h6 class="col-6 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">졸업연도</h6>
+													<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
+														<input type="text" class="form-control" id="school_name<?=$idx?>" value="<?=$val['school_graduated']?>" placeholder="졸업연도"/>
+													</div>
+
+														<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">전공</h6>
+														<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
+															<input type="text" class="form-control" id="school_major<?=$idx?>" value="<?=$val['school_major']?>" placeholder="전공"/>
+														</div>
+														<?
+															$is_grade_visible = "hidden";
+															if($val["s_idx"] != 1){
+																$is_grade_visible = "visible";
+															}
+														?>
+													<h6 class="col-6 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0" id="school_grade_title" style="visibility:<?=$is_grade_visible?>;">학점</h6>
+
+													<div class="input-group col-6 col-sm-9 mx-0 px-0 mb-2" id="grade<?=$idx?>" style="visibility:<?=$is_grade_visible?>;">
 														<input type="text" class="form-control text-center" id="school_grade<?=$idx?>" value="<?=$val['school_grade']?>" placeholder="학점"/>
 														<div class="input-group-prepend">
 															<span class="input-group-text">/</span>
 														</div>
-														<input type="text" class="form-control text-center" id="max_grade<?=$idx?>" value="<?=$val['max_grade']?>" placeholder="최대학점"/>
+															<input type="text" class="form-control text-center" id="max_grade<?=$idx?>" value="<?=$val['max_grade']?>" placeholder="최대학점"/>
 													</div>
+												</div>
+											</div>
+													<?}
+													}
+													?>
+									</div>
 
-												<? }else{
-													foreach($my_info3 as $idx => $val){?>
-														<a class="position-absolute" style="right:10px; top:10px;"><i class="xi-close"></i></a>
-														<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학교구분</h6>
-														<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
-																<select class="form-control" id="s_idx<?=$idx?>" name="s_idx<?=$idx?>" onchange="school_changed(<?=$idx?>)">
-																	<?
-																		for($j = 0; $j < count($school_arr); $j++) {
-																			if($val["s_idx"] == $school_arr[$j]["s_idx"]) {
-																				echo "<option value=\"" . $school_arr[$j]["s_idx"] . "\" selected=\"selected\">" . $school_arr[$j]["s_name"] . "</option>";
-																			} else {
-																				echo "<option value=\"" . $school_arr[$j]["s_idx"] . "\">" . $school_arr[$j]["s_name"] . "</option>";
-																			}
-																		}
-																	?>
-																</select>
-																<?
-																	$is_ged_visible = "hidden";
-																	if($val["s_idx"] == 1){
-																		$is_ged_visible = "visible";
-																	}
-																?>
-																<div class="input-group-append" id="ged<?=$idx?>" style="visibility:<?=$is_ged_visible?>">
-																	<? //검정고시면
-																		if($val["s_idx"] == 1 || $val['is_ged'] == 1){?>
-																			<span class="input-group-text">검정고시 <i class="xi-check-circle" onclick="jQuery(this).toggleClass('xi-check-circle-o');jQuery(this).toggleClass('xi-check-circle')"></i></span>
-																	<? }else if($val["s_idx"] == 1 || $val['is_ged'] == 0){ ?>
-																			<span class="input-group-text">검정고시 <i class="xi-check-circle-o" onclick="jQuery(this).toggleClass('xi-check-circle-o');jQuery(this).toggleClass('xi-check-circle')"></i></span>
-																 	<? } ?>
-																</div>
-														</div>
-														<h6 class="col-6 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학교명</h6>
-														<h6 class="col-6 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">졸업연도</h6>
 
-														<!-- 학교명 -->
-														<div class="input-group col-6 col-sm-9 mx-0 px-0 mb-2">
-															<input type="text" class="form-control" id="school_name<?=$idx?>"  value="<?=$val['school_name']?>" placeholder="학교명"/>
-														</div>
 
-														<!-- 졸업연도 -->
-														<div class="input-group col-6 col-sm-9 mx-0 px-0 mb-2">
-															<input type="text" class="form-control" id="school_name<?=$idx?>" value="<?=$val['school_graduated']?>" placeholder="졸업연도"/>
-														</div>
-
-															<h6 class="col-6 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">전공</h6>
-															<?
-																$is_grade_visible = "hidden";
-																if($val["s_idx"] != 1){
-																	$is_grade_visible = "visible";
-																}
-															?>
-														<h6 class="col-6 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0" id="school_grade_title" style="visibility:<?=$is_grade_visible?>;">학점</h6>
-														<div class="input-group col-6 col-sm-9 mx-0 px-0 mb-2">
-															<input type="text" class="form-control" id="school_major<?=$idx?>" value="<?=$val['school_major']?>" placeholder="전공"/>
-														</div>
-														<div class="input-group col-6 col-sm-9 mx-0 px-0 mb-2" id="grade<?=$idx?>" style="visibility:<?=$is_grade_visible?>;">
-															<input type="text" class="form-control text-center" id="school_grade<?=$idx?>" value="<?=$val['school_grade']?>" placeholder="학점"/>
-															<div class="input-group-prepend">
-																<span class="input-group-text">/</span>
-															</div>
-																<input type="text" class="form-control text-center" id="max_grade<?=$idx?>" value="<?=$val['max_grade']?>" placeholder="최대학점"/>
-														</div>
-														<?}
-														}
-														?>
-
-										</div>
                     <div class="text-center">
                         <button class="my-3 d-sm-inline-block d-none btn btn-warning" onclick="javascript:my_info3_add();">학력 추가하기</button>
                     </div>
                     <button class="d-sm-none d-inline-block btn btn-warning btn-block rounded-0 rounded-bottom" onclick="javascript:my_info3_add();">학력 추가하기</button>
-                </div>
+
 
                 <div class="col-12 px-sm-0">
                     <h6 class="d-block d-sm-none mt-3">경력</h6>
@@ -785,7 +786,9 @@ function occupation(obj){
       // }
 
       // html += "<hr id=\"school_hr" + my_info3_count + "\" />";
+			html += '<div class="added_card border rounded position-relative rounded-0 rounded-top container py-3 pt-sm-3 pb-sm-0">';
 
+				html += '<div class="row content_padding">';
 			html += '<a class="position-absolute" style="right:10px; top:10px;" onclick="javascript:my_info3_del1(' + my_info3_count + ')"><i class="xi-close"></i></a>';
 			html += '<div class="row content_padding" id="my_info3_2">';
 			html += '<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학교구분</h6>';
@@ -816,7 +819,7 @@ function occupation(obj){
 			html += '<span class="input-group-text">/</span>';
 			html += '</div>';
 			html += '<input type="text" class="form-control text-center" id="max_grade'+ my_info3_count + '" placeholder="최대학점"/>';
-			html += '</div>';
+			html += '</div></div></div>';
 
       $("#my_info3_2").append(html);
       my_info3_count++;

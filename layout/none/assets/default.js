@@ -193,8 +193,16 @@ function workPlace(obj){
 
  function interest_add(h_idx){
 	 var add_confirm = confirm("관심공고로 등록하시겠습니까?");
+	 var m_idx = $('#hidden_m_idx').val();
 	 if(add_confirm == true){
-		 $("#no_interest").toggleClass('red');
+		 var params = {};
+		 params["h_idx"] = h_idx;
+		 params["m_idx"] = m_idx;
+
+		 exec_json("technician.interest_add",params,function(ret_obj){
+				 toastr.success(ret_obj.message);
+				 location.reload();
+		 });
 	 }
  }
 

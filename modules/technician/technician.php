@@ -158,6 +158,7 @@ class technicianView{
 
         global $oDB;
 
+
         $output = new Object();
 
         $output->add('interest_rows',$this->interest_hire());
@@ -196,11 +197,28 @@ class technicianView{
         $m_idx = $_SESSION['LOGGED_INFO'];
         $now_date = date(YmdHis);
 
+        $local_idx = $args->local_idx;
+        $o_idx = $args->o_idx;
+
+        if(!$local_idx) {
+        	$local_idx = -1;
+        }
+
+        if($o_idx == 'undefined' || !$o_idx || $o_idx == 1){
+        	$o_idx = -1;
+        }
+
+        //전체 일자리 조회
         $oDB->orderBy("vip","DESC");
         $oDB->orderBy("h.h_idx","DESC");
         $oDB->where("hire_is_show","Y");
         $oDB->where("job_end_date",$now_date,">=");
-        //$oDB->where($sql_1);
+        if($local_idx > 0){
+          $oDB->where("l.local_idx",$local_idx);
+        }
+        if($o_idx > 0){
+          $oDB->where("h.o_idx",$o_idx);
+        }
         $oDB->join("TF_member_commerce_tb co","h.c_idx = co.c_idx","LEFT");
         $oDB->join("TF_local_tb l","h.local_idx = l.local_idx","LEFT");
         $oDB->join("TF_city_tb c","h.city_idx = c.city_idx","LEFT");
@@ -209,10 +227,19 @@ class technicianView{
         $hire_rows = $oDB->get("TF_hire_tb h",12,"c_name, h_title, local_name, city_name, district_name,
                                                   h.local_idx, h.city_idx, h.district_idx, job_achievement,
                                                   salary_idx, job_salary, job_is_career, h.h_idx, h.o_idx");
+        //지역 리스트
+        $oDB->orderBy("visible_idx","ASC");
+        $oDB->where("local_visible","Y");
+        $local_list = $oDB->get("TF_local_tb");
+
+        //직종 리스트
+        $oDB->where("o_is_show","Y");
+        $occupation_list = $oDB->get("TF_occupation",null,"o_idx, o_name");
 
         $output = new Object();
-
         $output->add('hire_rows',$hire_rows);
+        $output->add('local_list',$local_list);
+        $output->add('occupation_list',$occupation_list);
         $output->add('interest_rows',$this->interest_hire());
         return $output;
     }
@@ -500,4 +527,5 @@ class technicianView{
 
       return $interest_rows;
     }
+
   }
