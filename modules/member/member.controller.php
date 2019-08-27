@@ -261,4 +261,52 @@ class memberController{
         return new Object(-1,"네트워크 오류가 발생했습니다.");
       }
     }
+
+    function notice_set($args){
+      global $oDB;
+      $count = $args->count;
+      $check = array();
+      $check[0] = $args->check_0;
+      $check[1] = $args->check_1;
+      $check[2] = $args->check_2;
+      $check[3] = $args->check_3;
+      if($count>4){
+        $check[5] = $args->check_0;
+        $check[6] = $args->check_1;
+        $check[7] = $args->check_2;
+        $check[8] = $args->check_3;
+        $check[9] = $args->check_4;
+      }
+
+      $m_idx = $_SESSION['LOGGED_INFO'];
+      if($count>4){
+          $iset=5;
+      }else{
+        $iset=0;
+      }
+      for($i=$iset;$i<($iset+$count);$i++){
+        if($check[$i] == 0){
+          $data = Array ("m_idx" => $m_idx,
+                 "n_idx" => $i,
+                 "agree" => 'N'
+                  );
+        }else{
+          $data = Array ("m_idx" => $m_idx,
+                 "n_idx" => $i,
+                 "agree" => 'Y'
+                  );
+        }
+
+        $updateColumns = Array ("agree");
+        $lastInsertId = 'm_idx';
+        $oDB->onDuplicate($updateColumns, $lastInsertId);
+        $row = $oDB->insert ('TF_notice_setting', $data);
+      }
+
+      if($row){
+        return new Object(0,"알림이 설정되었습니다.");
+      }else{
+        return new Object(-1,"네트워크 오류가 발생했습니다.");
+      }
+    }
 }

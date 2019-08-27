@@ -28,6 +28,7 @@ class memberView{
         }
 
         $output = new Object();
+        $output->add('notice_setting',$this->notice_setting());
         $output->add('page_title',"마이페이지");
         $output->add('act',$args->act);
         return $output;
@@ -124,5 +125,19 @@ class memberView{
             $output->add('page_title',"본인인증에 성공하였습니다.");
         }
         return $output;
+    }
+
+    function notice_setting(){
+      global $oDB;
+
+      $m_idx = $_SESSION['LOGGED_INFO'];
+
+      $oDB->where("m_idx",$m_idx);
+
+      $oDB->orderby("n_idx","ASC");
+
+      $row = $oDB->get("TF_notice_setting AS ns",null,"m_idx, n_idx, agree");
+
+      return $row;
     }
 }

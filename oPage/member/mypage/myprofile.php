@@ -16,7 +16,7 @@
 
 <div class="container pt-lg-5">
     <div class="content_padding px-0 d-lg-none">
-        <a onclick="history.back();"><i class="xi-arrow-left xi-2x"></i></a>
+        <a href="#" onclick="history.back();"><i class="xi-arrow-left xi-2x"></i></a>
         <h5 class="weight_normal">내 정보 설정</h5>
     </div>
 
@@ -126,14 +126,14 @@
       </form>
     <?}?>
 
-        <!-- <div class="row mt-4 col-md-7 col-lg-6 mx-auto">
+        <div class="row mt-4 col-md-7 col-lg-6 mx-auto">
             <div class="col-6 mx-0 px-0 pr-1">
                 <a href="#" class="btn btn-block btn-round border-primary">취소</a>
             </div>
             <div class="col-6 mx-0 px-0 pl-1">
                 <a href="#" class="btn btn-block btn-round btn-primary">수정완료</a>
             </div>
-        </div> -->
+        </div>
     </div>
 </div>
 
@@ -164,10 +164,8 @@ function phonenumber(){
       return toastr.error("휴대폰번호를 입력해주세요.");
     }
 
-    var params = {
-      "m_phone" : phonenumber
-    };
-    //params["m_phone"] = phonenumber;
+    var params = {};
+    params["m_phone"] = phonenumber;
     exec_json("member.edit_phone",params,function(ret_obj){
        //통신에러나 모듈내부에서 에러가있을땐 알아서 처리해주므로 성공시만 처리하면됨.
        // alert(ret_obj.message); // alert 해도되지만 toastr 권장

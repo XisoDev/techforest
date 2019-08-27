@@ -419,6 +419,10 @@ h6, .h6 {
   line-height: 1.2;
 }
 
+#echo_check{
+  color: #fff!important;
+}
+
 hr {
   margin-top: 1rem;
   margin-bottom: 1rem;
