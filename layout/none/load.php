@@ -19,7 +19,7 @@ $add_html_header[] = "<link rel=\"stylesheet\" href=\"/layout/none/assets/global
 $add_html_header[] = "<link rel=\"stylesheet\" href=\"/layout/none/assets/global_forms.css?nocache=".time()."\">";
 $add_html_header[] = '<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>';
 //monthpicker
-$add_html_header[] = "<link rel=\"stylesheet\" href=\"/layout/none/assets/jquery.mtz.monthpicker.js\">";
+// $add_html_header[] = "<link rel=\"stylesheet\" href=\"/layout/none/assets/jquery.mtz.monthpicker.js\">";
 $add_html_header[] = "<link rel=\"stylesheet\" href=\"//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css\">";
 //결제 라이브러리
 $add_body_class[] = '';

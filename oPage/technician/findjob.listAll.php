@@ -78,9 +78,7 @@
                                 ?>
                                 <?= $interest_html2 ?>
                                 </span>
-
                             </div>
-
                         </div>
                         <? if ($val['city_name'] == "전체") { $val['city_name'] = "";} ?>
                         <? if ($val['district_name'] == "전체") { $val['district_name'] = ""; }?>

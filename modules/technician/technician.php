@@ -39,6 +39,7 @@ class technicianView{
         if($args->document_srl) {
             $site_info->layout = "none";
             $add_body_class[] = "";
+            $set_template_file = "technician/resume.view.php";
 
         }else{
             $site_info->layout = "technician";
@@ -82,6 +83,22 @@ class technicianView{
         $oDB->where("m_idx",$m_idx);
         $oDB->join("TF_school s","e.s_idx = s.s_idx","LEFT");
         $my_info3 = $oDB->get("TF_member_education_tb e",null,"e.seq, e.s_idx, s_name, school_name, school_major, school_grade, max_grade, school_graduated, is_ged, school_idx");
+
+        //나의 이력서 정보 조회 - 경력
+        $oDB->orderBy("seq","ASC");
+        $oDB->where("m_idx",$m_idx);
+        $my_info4 = $oDB->get("TF_member_career_tb",null,"seq, c_name, c_position, c_content, o_idx, duty_name, c_start_date, c_end_date, is_newcommer, career_idx");
+
+        //나의 이력서 정보 조회 - 자격증
+        $oDB->orderBy("seq","ASC");
+        $oDB->where("m_idx",$m_idx);
+        $my_info5 = $oDB->get("TF_member_certificate_tb",null,"seq, certificate_name, certificate_date, is_certificate, certificate_idx");
+
+        //나의 이력서 정보 조회 - 어학
+        $oDB->orderBy("seq","ASC");
+        $oDB->where("m_idx",$m_idx);
+        $my_info6 = $oDB->get("TF_member_language_tb",null,"seq, lc_idx, lc_d_idx, score, language_date");
+
 
         //나의 이력서 정보 조회 - 희망직무
         $oDB->where("m_idx",$m_idx);
@@ -128,6 +145,15 @@ class technicianView{
         $oDB->orderBy("seq","ASC");
         $certificate_row = $oDB->get("TF_certificate",null,"certificate_name");
 
+        //언어리스트
+        $oDB->orderBy("lc_idx","ASC");
+        $language_arr = $oDB->get("TF_language_cate",null,"lc_idx, lc_name");
+
+        //시험명 리스트
+        $oDB->orderBy("lcd.lc_d_idx","ASC");
+        $oDB->orderBy("lcd.lc_idx","ASC");
+        $oDB->join("TF_language_cate lc","lcd.lc_idx = lc.lc_idx","LEFT");
+        $d_language_arr = $oDB->get("TF_language_cate_detail lcd",null,"lcd.lc_d_idx, lcd.lc_idx, lcd.lc_d_name, lc.lc_name");
 
         $output->add('a_line_row',$a_line_row);
         $output->add('resume_row',$resume_row);
@@ -139,8 +165,14 @@ class technicianView{
         $output->add('duty_arr',$duty_arr);
         $output->add('school_arr',$school_arr);
         $output->add('my_info3',$my_info3);
+        $output->add('my_info4',$my_info4);
+        $output->add('my_info5',$my_info5);
+        $output->add('my_info6',$my_info6);
         $output->add('my_duty',$my_duty);
         $output->add('certificate_row',$certificate_row);
+        $output->add('language_arr',$language_arr);
+        $output->add('d_language_arr',$d_language_arr);
+
 
         return $output;
     }
