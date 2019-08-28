@@ -22,6 +22,19 @@ Number.prototype.number_format = function(round_decimal) {
 
 jQuery(document).ready(function($){
     /**
+     * @brief 서브메뉴 접고펴고하는거 넣어줌.
+     * by xiso
+     */
+    $(".nav-link").click(function(){
+        console.log('click');
+       if($(this).find(".has_submenu").length > 0){
+           $(".submenu").hide();
+           $(this).next('.submenu').show();
+           return false;
+       }
+    });
+
+    /**
      * @brief 카운팅애니메이션 정의
      * by xiso
      */

@@ -10,8 +10,8 @@
     .welcome_seciton{
         position:relative;
         height:50%;
-        background-size: 110%;
-        background-position: -100% 100%;
+        background-size: 126%;
+        background-position: -25% 100%;
         background-repeat: no-repeat;
         padding: 40px 15px 20px;
     }

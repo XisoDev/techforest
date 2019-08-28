@@ -26,7 +26,7 @@ jQuery(document).ready(function($){
 
     //지원자관리
     $('.tech-card-slick').slick({
-        dots: true,
+        dots: false,
         speed: 300,
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -61,7 +61,7 @@ jQuery(document).ready(function($){
     });
     //홈
     $('.flex-card-slick').slick({
-        dots: true,
+        dots: false,
         speed: 300,
         slidesToShow: 1.4,
         slidesToScroll: 1,

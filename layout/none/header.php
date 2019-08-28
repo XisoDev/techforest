@@ -17,7 +17,7 @@
                     }
                 }
                 ?>
-                <li class="nav-item xs_content active weight_normal"><a class="nav-link" href="#"><i class="xi-bell"></i></a></li>
+                <li class="nav-item xs_content active weight_normal"><a class="nav-link" href="#"><img src="/oPage/images/imgicons/bell.png" class="imgicon pt-1" height="18" /></a></li>
             </ul>
         </nav>
     </div>

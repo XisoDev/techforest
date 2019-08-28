@@ -15,24 +15,25 @@
 
 
 <div class="container pt-lg-5">
-    <div class="content_padding px-0 d-lg-none">
-        <a href="#" onclick="history.back();"><i class="xi-arrow-left xi-2x"></i></a>
-        <h5 class="weight_normal">내 정보 설정</h5>
+    <div class="p-3 px-0 d-lg-none">
+<!--        <a href="#" onclick="history.back();"><i class="xi-arrow-left xi-2x"></i></a>-->
+        <a href="#" onclick="history.back();" class="mb-3"><img src="/oPage/images/imgicons/arrow_left.png" height="25" /></a>
+        <h4 class="weight_normal">내 정보 설정</h4>
     </div>
 
     <div class="pt-lg-5 pt-lg-3 position-relative mx-auto col-sm-10 col-md-9 col-lg-8">
         <h4 class="d-none d-lg-block mb-4"><i class="xi-user-o text-secondary"></i> 내 정보 설정</h4>
     </div>
 
-    <div class="mx-auto col-sm-10 col-md-9 col-lg-8 rounded border p-4 p-md-5 ">
+    <div class="mx-auto col-sm-10 col-md-9 col-lg-8 rounded border mobile-border-0 p-3 p-md-5 ">
     <?if($logged_info['is_commerce'] == 'Y'){?>
     <form class="tf_underline_form">
         <div class="form-group">
-            <label for=""><i class="xi-building"></i> 기업명</label>
+            <label for=""><i class="xi-building"></i> <span class="weight_bold">기업명</span></label>
             <input type="text" class="form-control" id="" value="<?=$logged_info['c_name']?>" readonly="readonly">
         </div>
         <div class="form-group">
-            <label for=""><i class="xi-call"></i> 휴대폰번호</label>
+            <label for=""><i class="xi-call"></i> <span class="weight_bold">휴대폰번호</span></label>
               <div class="form-control" style="border:none;">
                 <select id="change_phone" style="display:none;float:left;width: 50px;">
                   <?
@@ -56,7 +57,7 @@
             <button type="button" id="change_phone_btn_ok" class="bg-red btn btn-xs btn-round" style="display:none;">수정완료</button>
         </div>
         <div class="form-group">
-            <label for=""><i class="xi-mail"></i> 이메일</label>
+            <label for=""><i class="xi-mail"></i> <span class="weight_bold">이메일</span></label>
             <div class="form-control" style="border:none;">
               <? $email = explode("@", $logged_info['m_email']); ?>
               <input type="email" class="border_none" id="m_email1" placeholder="이메일 주소를 입력하세요" value="<?=$email[0]?>" readonly="readonly">@
@@ -72,7 +73,7 @@
         </div>
       </div>
         <div class="form-group">
-            <label for=""><i class="xi-user"></i> 채용담당자</label>
+            <label for=""><i class="xi-user"></i> <span class="weight_bold">채용담당자</span></label>
             <input type="text" class="form-control" id="InCharge_name" placeholder="담당자명을 입력합니다." value="<?=$logged_info['select7']?>" readonly>
             <button type="button" id="change_name_btn" onclick="ThePersonInCharge()" class="bg-red btn btn-xs btn-round">변경</button>
             <button type="button" id="change_name_btn_ok" class="bg-red btn btn-xs btn-round" style="display:none;">수정완료</button>
@@ -126,7 +127,7 @@
       </form>
     <?}?>
 
-        <div class="row mt-4 col-md-7 col-lg-6 mx-auto">
+        <div class="row mt-4 col-md-7 col-lg-6 mx-auto d-none d-md-block">
             <div class="col-6 mx-0 px-0 pr-1">
                 <a href="#" class="btn btn-block btn-round border-primary">취소</a>
             </div>

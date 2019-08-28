@@ -3,6 +3,9 @@
     font-family: 'Noto Sans KR', sans-serif;
     font-weight:400;
 }
+.imgicon{
+    vertical-align:0px;
+}
 .weight_lighter{
     font-weight:300 !important;
 }
@@ -26,6 +29,14 @@
 /*부트스트랩 손보기*/
 .btn-round{
     border-radius:200px;
+}
+.rounded-0-left{
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+.rounded-0-right{
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
 }
 .btn-group-xs > .btn, .btn-xs {
     padding: .55rem 1rem;
@@ -52,6 +63,9 @@ table.table-bordered{
         background: rgb(244, 246, 251);
         color: #333;
     }
+    .mobile-border-0{
+        border:none !important;
+    }
 }
 .red{
     color:rgb(245,112,102);
@@ -74,7 +88,7 @@ img{
     max-width:100%;
 }
 .content_padding{
-    padding:20px 15px;
+    padding:50px 15px 0 30px;
 }
 .welcome_seciton{
     background-size: 76%;
@@ -221,7 +235,7 @@ img{
     max-width:100%;
 }
 .tech_card .thumbnail .icon_wrap{
-    padding:40px 0 20px;
+    padding:60px 0 20px;
 }
 .thumbnail{
     position:relative;
@@ -248,6 +262,10 @@ img{
     font-weight:400;
 }
 
+.lg_content{
+    font-size:22px;
+    font-weight:300;
+}
 .sm_content{
     font-size:16px;
     font-weight:300;
@@ -267,8 +285,11 @@ img{
 .xxs_content{
     padding:0 10px;
     margin:5px 0 0;
-    line-height:14px;
     font-size:12px;
+    font-weight:300;
+}
+.xxx_content{
+    font-size:10px;
     font-weight:300;
 }
 .xxs_content .icon_wrap{

@@ -3,9 +3,9 @@
   $interview_list = $output->get('interview_list');
 ?>
 
-<section class="content_padding mt-4 pt-5 bg-white d-lg-none">
-    <a href="#" onclick="history.back();"><i class="xi-arrow-left xi-2x"></i></a>
-    <h5 class="weight_normal">지원자 현황</h5>
+<section class="p-3 mt-4 pt-5 bg-white d-lg-none">
+    <a href="#" onclick="history.back();" class="mb-3"><img src="/oPage/images/imgicons/arrow_left.png" height="25" /></a>
+    <h4 class="weight_normal">지원자 현황</h4>
 </section>
 
 <div class="container pb-md-3" style="position:relative; z-index:1;">
@@ -40,7 +40,7 @@
                       <div class="clearfix"></div>
                       <p class="m-0 text-left weight_lighter xs_content"><?=$val['a_line_self']?></p>
                       <h6 class="weight_normal my-1 text-left"><?=$val['m_name']?></h6>
-                      <p class="text-left xs_content p-0 m-0"><span class="bg-red icon_wrap"><i class="xi-wrench"></i></span> 경력 :
+                      <p class="text-left xxx_content px-3 py-0 m-0 mb-1" class="cut1"> <img class="d-inline imgicon" src="/oPage/images/imgicons/wrench_bg_red.png" height="10" /> 경력 :
                        <?php
                         if(!$val['duty_name']){
                           echo "신입";
@@ -74,8 +74,8 @@
             <div class="avatar square mx-3 mx-sm-4 mx-md-5 my-2 my-sm-3 my-md-4" style="background-image:url('/layout/none/assets/images/no_avatar.png');">
             </div>
             <h6 class="weight_normal mb-3 px-2">나상호 (56세)</h6>
-            <p class="text-left xxs_content"><span class="bg-red icon_wrap"><i class="xi-wrench"></i></span> 주요경력 : 기계 | 연구직</p>
-            <p class="text-left xxs_content"><span class="bg-red icon_wrap"><i class="xi-map-marker"></i></span> 희망지역 : 부산</p>
+            <p class="text-left xxx_content px-3 py-0 m-0 mb-1" class="cut1"> <img class="d-inline imgicon" src="/oPage/images/imgicons/wrench_bg_red.png" height="10" /> 주요경력 : <?=$val['duty_name']?></p>
+            <p class="text-left xxx_content px-3 py-0 m-0 mb-1">  <img class="d-inline imgicon" src="/oPage/images/imgicons/location_bg_red.png" height="10" /> 희망지역 : <?=$desired_work_place?></p>
             <a href="<?=getUrl('company','application',100)?>" class="btn btn-block btn-warning mt-3 rounded-0">이력서 보기</a>
         </div>
         <?php } ?>

@@ -43,7 +43,8 @@ $self_introduction = str_replace("\n", "<br />", $my_info2[0]["self_introduction
 <div class="bg-dark py-2 text-right fixed-top px-3 text-white"><a class="text-white" onclick="window.close();"><i class="xi-close"></i> 닫기</a></div>
 <section class="bg-white container" style="margin-bottom: 100px;">
 
-    <h2 class="weight_bold px-0 mx-0 mt-5">나의 이력서 전체보기</h2>
+    <h2 class="weight_bold px-0 mx-0 mt-5 d-none d-md-block">나의 이력서 전체보기</h2>
+    <h5 class="weight_bold px-0 mx-0 mt-5 d-md-none">나의 이력서 전체보기</h5>
 
     <div class="content_padding">
     <div class="row rounded overflow-hidden">
