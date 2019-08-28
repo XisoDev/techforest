@@ -423,4 +423,24 @@ class technicianController{
       return new Object(1,"네트워크 오류가 발생했습니다.");
     }
   }
+
+  function suggestion_join($args){
+    global $oDB;
+    $now_date = date(YmdHis);
+
+    $sj_data = array(
+      "c_idx" => $args->c_idx,
+      "h_idx" => $args->h_idx,
+      "m_idx" => $args->m_idx,
+      "reg_date" => $now_date
+    );
+    $sj_row = $oDB->insert("TF_suggest_join",$sj_data);
+
+    if($sj_row){
+      return new Object(0,"입사제안이 완료되었습니다.");
+    }else{
+      return new Object(1,"네트워크 오류가 발생했습니다.");
+    }
+
+  }
 }

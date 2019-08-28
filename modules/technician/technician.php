@@ -35,6 +35,7 @@ class technicianView{
         global $add_body_class;
         global $set_template_file;
         global $oDB;
+
         $output = new Object();
 
         if($args->document_srl) {
@@ -44,6 +45,11 @@ class technicianView{
 
             $m_idx = $args->document_srl;
 
+            $resume_columns = "concat(concat(substr(m.m_name,1,1),'*'),substr(m.m_name,3,10)) as hidden_m_name,";
+            $resume_columns .= "YEAR(CURRENT_TIMESTAMP) - YEAR(m_birthday) - (RIGHT(CURRENT_TIMESTAMP, 5) < RIGHT(m_birthday, 5))+1 as m_age,";
+            $resume_columns .= "m.m_idx,m_name, m_human, m_birthday, m_phone, m_email, m_address, m_address2, m_picture, local_name, city_name, district_name";
+
+
             //나의 이력서 정보 조회 - 기본정보
             $oDB->orderBy("m.m_idx","ASC");
             $oDB->where("m.m_idx",$m_idx);
@@ -51,7 +57,7 @@ class technicianView{
             $oDB->join("TF_district_tb d","m.m_district_idx = d.district_idx","LEFT");
             $oDB->join("TF_city_tb c","m.m_city_idx = c.city_idx","LEFT");
             $oDB->join("TF_local_tb l","m.m_local_idx = l.local_idx","LEFT");
-            $my_info1 = $oDB->get("TF_member_tb m",null,"m_name, m_human, m_birthday, m_phone, m_email, m_address, m_address2, m_picture, local_name, city_name, district_name");
+            $my_info1 = $oDB->get("TF_member_tb m",null,$resume_columns);
 
             //나의 이력서 정보 조회 - 자기소개
             $oDB->where("m_idx",$m_idx);
@@ -108,7 +114,7 @@ class technicianView{
             $output->add('my_info8',$my_info8);
             $output->add('my_info9',$my_info9);
             $output->add('my_info10',$my_info10);
-
+            $output->add('suggestion_join_hire',$this->suggestion_join_hire());
 
         }else{
             $site_info->layout = "technician";
@@ -642,6 +648,21 @@ class technicianView{
 
       return $rt_row;
 
+    }
+
+    function suggestion_join_hire(){
+      global $oDB;
+      global $logged_info;
+
+      $c_idx = $logged_info['c_idx'];
+      $now_date = date(YmdHis);
+      //
+      //진행중인 공고 불러오기
+      $oDB->where("c_idx",$c_idx);
+      $oDB->where("job_end_date",$now_date,">");
+      $suggestion_join_hire = $oDB->get("TF_hire_tb");
+
+      return $suggestion_join_hire;
     }
 
   }
