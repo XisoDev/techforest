@@ -5,6 +5,9 @@ $m_idx = $_SESSION['LOGGED_INFO'];
 //한줄자기소개
 $a_line_self = $output->get('a_line_row');
 
+//경력간단요약 및 자기소개
+$self_row = $output->get('self_row');
+
 //이력서 정보
 $resume_row = $output->get('resume_row');
 
@@ -111,7 +114,7 @@ shuffle($rand_array);
 <section class="bg-white">
     <div class="d-block d-lg-none">
         <div class="content_padding mt-4 pt-5 mb-0 pb-2">
-            <a href="#" onclick="history.back();"><i class="xi-arrow-left xi-2x"></i></a>
+            <a onclick="history.back();" style="cursor:pointer;"><i class="xi-arrow-left xi-2x"></i></a>
             <h5 class="weight_normal">이력서 등록</h5>
         </div>
         <hr />
@@ -340,7 +343,7 @@ shuffle($rand_array);
                     <h6 class="d-block d-sm-none bg-primary text-white text-center py-2">경력간단요약 및 자기소개</h6>
                 </div>
                 <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
-                    <textarea rows="3" class="form-control"></textarea>
+                    <textarea rows="3" class="form-control" id="about_me"><?=$self_row[0]['self_introduction']?></textarea>
                 </div>
 
             </div>
@@ -368,7 +371,7 @@ shuffle($rand_array);
 																?>
 															</select>
 															<div class="input-group-append" id="ged0">
-																<span class="input-group-text">검정고시 <i class="xi-check-circle" onclick="jQuery(this).toggleClass('xi-check-circle-o');jQuery(this).toggleClass('xi-check-circle')"></i></span>
+																<span class="input-group-text">검정고시 <i class="xi-check-circle-o" onclick="jQuery(this).toggleClass('xi-check-circle-o');jQuery(this).toggleClass('xi-check-circle')"></i></span>
 															</div>
 													</div>
 													<h6 class="col-6 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학교명</h6>
@@ -419,9 +422,9 @@ shuffle($rand_array);
 															?>
 															<div class="input-group-append" id="ged<?=$idx?>" style="display:<?=$is_ged_visible?>">
 																<? //검정고시면
-																	if($val["s_idx"] == 1 || $val['is_ged'] == 1){?>
+																	if($val["s_idx"] == 1 && $val['is_ged'] == 1){?>
 																		<span class="input-group-text">검정고시 <i class="xi-check-circle" onclick="jQuery(this).toggleClass('xi-check-circle-o');jQuery(this).toggleClass('xi-check-circle')"></i></span>
-																<? }else if($val["s_idx"] == 1 || $val['is_ged'] == 0){ ?>
+																<? }else if($val["s_idx"] == 1 && $val['is_ged'] == 0){ ?>
 																		<span class="input-group-text">검정고시 <i class="xi-check-circle-o" onclick="jQuery(this).toggleClass('xi-check-circle-o');jQuery(this).toggleClass('xi-check-circle')"></i></span>
 																<? } ?>
 															</div>
@@ -459,14 +462,11 @@ shuffle($rand_array);
 													}
 													?>
 									</div>
-
-
-
                     <div class="text-center">
                         <button class="my-3 d-sm-inline-block d-none btn btn-warning" onclick="javascript:my_info3_add();">학력 추가하기</button>
                     </div>
                     <button class="d-sm-none d-inline-block btn btn-warning btn-block rounded-0 rounded-bottom" onclick="javascript:my_info3_add();">학력 추가하기</button>
-
+								</div>
 
                 <div class="col-12 px-sm-0">
                     <h6 class="d-block d-sm-none mt-3">경력</h6>
@@ -481,7 +481,6 @@ shuffle($rand_array);
                         <a class="my-3 d-sm-inline-block d-none btn btn-warning" onclick="javascript:addViewMemberCareer();">경력 추가하기</a>
                     </div>
                     <a class="d-sm-none d-inline-block btn btn-warning btn-block rounded-0 rounded-bottom" onclick="javascript:addViewMemberCareer();">경력 추가하기</a>
-
                 </div>
 
                 <div class="col-12 px-sm-0">
@@ -507,7 +506,7 @@ shuffle($rand_array);
 									<?}else{?>
 										<?foreach ($my_info5 as $idx => $val) { ?>
 											<div class="added_card border rounded position-relative rounded-0 rounded-top container py-3 pb-sm-0" id="certificate_div<?=$idx?>">
-													<a class="position-absolute" style="right:10px; top:10px;" id="certificate_del<?=$idx?>" onclick="my_info5_del1(<?=$idx?>)"><i class="xi-close"></i></a>
+													<a class="position-absolute" style="right:10px; top:10px;" id="certificate_del<?=$idx?>" onclick="javascript:my_info5_del1(<?=$idx?>)"><i class="xi-close"></i></a>
 													<input type="hidden" id="is_certificate<?=$idx?>" value="<?=$val['is_certificate']?>">
 													<div class="row content_padding">
 															<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">자격증명</h6>
@@ -521,9 +520,9 @@ shuffle($rand_array);
 									<? } ?>
 									</div>
                     <div class="text-center">
-                      <button class="my-3 d-sm-inline-block d-none btn btn-warning" onclick="my_info5_add()">자격증 추가하기</button>
+                      <button class="my-3 d-sm-inline-block d-none btn btn-warning" onclick="javascript:my_info5_add()">자격증 추가하기</button>
                     </div>
-                    <button class="d-sm-none d-inline-block btn btn-warning btn-block rounded-0 rounded-bottom" onclick="my_info5_add()">자격증 추가하기</button>
+                    <button class="d-sm-none d-inline-block btn btn-warning btn-block rounded-0 rounded-bottom" onclick="javascript:my_info5_add()">자격증 추가하기</button>
                 </div>
 
 
@@ -538,7 +537,6 @@ shuffle($rand_array);
 									<div id="my_info6_2">
 										<?if(count($my_info6) == 0){?>
 											<div class="added_card border rounded position-relative rounded-0 rounded-top container py-3 pb-sm-0" id="language_div0">
-	                        <!-- <a class="position-absolute" style="right:10px; top:10px;" onclick="javascript:my_info6_del1(0)"><i class="xi-close"></i></a> -->
 	                        <div class="row content_padding">
 	                            <h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">언어</h6>
 	                            <div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
@@ -594,7 +592,7 @@ shuffle($rand_array);
 									  <?}else{?>
 											<?foreach ($my_info6 as $idx => $val) {?>
 												<div class="added_card border rounded position-relative rounded-0 rounded-top container py-3 pb-sm-0" id="language_div<?=$idx?>">
-		                        <a class="position-absolute" style="right:10px; top:10px;" id="language_del<?=$idx?>" onclick="my_info6_del1(<?=$idx?>)"><i class="xi-close"></i></a>
+		                        <a class="position-absolute" style="right:10px; top:10px;" id="language_del<?=$idx?>" onclick="javascript:my_info6_del1(<?=$idx?>)"><i class="xi-close"></i></a>
 		                        <div class="row content_padding">
 		                            <h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">언어</h6>
 		                            <div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
@@ -651,9 +649,9 @@ shuffle($rand_array);
 										<?}?>
 									</div>
                     <div class="text-center">
-                      <a class="my-3 d-sm-inline-block d-none btn btn-warning" onclick="my_info6_add()">어학 추가하기</a>
+                      <a class="my-3 d-sm-inline-block d-none btn btn-warning" onclick="javascript:my_info6_add()">어학 추가하기</a>
                     </div>
-                    <a class="d-sm-none d-inline-block btn btn-warning btn-block rounded-0 rounded-bottom" onclick="my_info6_add()">어학 추가하기</a>
+                    <a class="d-sm-none d-inline-block btn btn-warning btn-block rounded-0 rounded-bottom" onclick="javascript:my_info6_add()">어학 추가하기</a>
                 </div>
 
                 <div class="col-12 px-sm-0">
@@ -1389,7 +1387,7 @@ function my_info6_del1(idx) {
 
 			// 학점입력확인
 			if($("#s_idx"+i).val() == 1){
-				if($("#is_ged" + i).is(":checked") == true) {
+				if($("#is_ged" + i).hasClass("xi-check-circle") == true) {
 					is_ged = 1;
 				}
 			}

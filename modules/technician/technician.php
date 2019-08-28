@@ -41,6 +41,74 @@ class technicianView{
             $add_body_class[] = "";
             $set_template_file = "technician/resume.view.php";
 
+            $m_idx = $args->document_srl;
+
+            //나의 이력서 정보 조회 - 기본정보
+            $oDB->orderBy("m.m_idx","ASC");
+            $oDB->where("m.m_idx",$m_idx);
+            $oDB->join("TF_member_occupation mo","mo.m_idx = m.m_idx","LEFT");
+            $oDB->join("TF_district_tb d","m.m_district_idx = d.district_idx","LEFT");
+            $oDB->join("TF_city_tb c","m.m_city_idx = c.city_idx","LEFT");
+            $oDB->join("TF_local_tb l","m.m_local_idx = l.local_idx","LEFT");
+            $my_info1 = $oDB->get("TF_member_tb m",null,"m_name, m_human, m_birthday, m_phone, m_email, m_address, m_address2, m_picture, local_name, city_name, district_name");
+
+            //나의 이력서 정보 조회 - 자기소개
+            $oDB->where("m_idx",$m_idx);
+            $my_info2 = $oDB->get("TF_member_self_tb",null,"self_introduction");
+
+            //나의 이력서 정보 조회 - 학력
+            $oDB->orderBy("e.seq","ASC");
+            $oDB->where("m_idx",$m_idx);
+            $oDB->join("TF_school s","e.s_idx = s.s_idx","LEFT");
+            $my_info3 = $oDB->get("TF_member_education_tb e",null,"school_name, school_major, school_grade, max_grade, school_graduated, is_ged, e.s_idx");
+
+            //나의 이력서 정보 조회 - 경력
+            $oDB->orderBy("career_idx","DESC");
+            $oDB->orderBy("is_newcommer","ASC");
+            $oDB->where("m_idx",$m_idx);
+            $my_info4 = $oDB->get("TF_member_career_tb",null,"c_name, c_position, c_content, c_start_date, c_end_date, is_newcommer, career_idx");
+
+            //나의 이력서 정보 조회 - 자격증
+            $oDB->orderBy("certificate_idx","DESC");
+            $oDB->orderBy("is_certificate","DESC");
+            $oDB->where("m_idx",$m_idx);
+            $my_info5 = $oDB->get("TF_member_certificate_tb",null,"certificate_name, certificate_date, is_certificate");
+
+            //나의 이력서 정보 조회 - 어학
+            $oDB->orderBy("language_idx","DESC");
+            $oDB->where("m_idx",$m_idx);
+            $my_info6 = $oDB->get("TF_member_language_tb",null,"lc_d_idx, score, language_date");
+
+            //나의 이력서 정보 조회 - 희망급여
+            $oDB->where("m_idx",$m_idx);
+            $oDB->join("TF_salary s","o.salary_idx = s.salary_idx","LEFT");
+            $my_info7 = $oDB->get("TF_member_order o",null,"o.salary_idx, salary_name, desired_salary");
+
+            //나의 이력서 정보 조회 - 희망직종
+            $oDB->where("m_idx",$m_idx);
+            $oDB->join("TF_occupation oc","mo.o_idx = oc.o_idx","LEFT");
+            $my_info8 = $oDB->get("TF_member_occupation mo",null,"o_name");
+
+            //나의 이력서 정보 조회 - 희망직무
+            $oDB->where("m_idx",$m_idx);
+            $my_info9 = $oDB->get("TF_member_duty",null,"duty_name");
+
+            //한줄자기소개
+            $oDB->where("m_idx",$m_idx);
+            $my_info10 = $oDB->get("TF_a_line_self",null,"a_line_self");
+
+            $output->add('my_info1',$my_info1);
+            $output->add('my_info2',$my_info2);
+            $output->add('my_info3',$my_info3);
+            $output->add('my_info4',$my_info4);
+            $output->add('my_info5',$my_info5);
+            $output->add('my_info6',$my_info6);
+            $output->add('my_info7',$my_info7);
+            $output->add('my_info8',$my_info8);
+            $output->add('my_info9',$my_info9);
+            $output->add('my_info10',$my_info10);
+
+
         }else{
             $site_info->layout = "technician";
             $add_body_class[] = "shrink";
@@ -78,6 +146,10 @@ class technicianView{
         $resume_row = $oDB->get("TF_member_tb m",null,"m_id, m_name, m_human, m_birthday, m_phone, m_email,
          m_address, m_address2, m_picture, local_name, city_name, district_name, m_local_idx, m_city_idx, m_district_idx, mo.o_idx");
 
+         //나의 이력서 정보 조회 - 자기소개
+         $oDB->where("m_idx",$m_idx);
+         $self_row = $oDB->get("TF_member_self_tb",null,"self_introduction");
+
         //나의 이력서 정보 조회 - 학력
         $oDB->orderBy("e.seq","ASC");
         $oDB->where("m_idx",$m_idx);
@@ -98,7 +170,6 @@ class technicianView{
         $oDB->orderBy("seq","ASC");
         $oDB->where("m_idx",$m_idx);
         $my_info6 = $oDB->get("TF_member_language_tb",null,"seq, lc_idx, lc_d_idx, score, language_date");
-
 
         //나의 이력서 정보 조회 - 희망직무
         $oDB->where("m_idx",$m_idx);
@@ -156,6 +227,7 @@ class technicianView{
         $d_language_arr = $oDB->get("TF_language_cate_detail lcd",null,"lcd.lc_d_idx, lcd.lc_idx, lcd.lc_d_name, lc.lc_name");
 
         $output->add('a_line_row',$a_line_row);
+        $output->add('self_row',$self_row);
         $output->add('resume_row',$resume_row);
         $output->add('salary_list',$salary_list);
         $output->add('local_arr',$local_arr);

@@ -1,3 +1,8 @@
+<?php
+$m_idx = $_SESSION['LOGGED_INFO'];
+
+?>
+
 <section class="bg-white d-lg-none">
     <div class="content_padding mt-4 pt-5 mb-0 pb-2">
         <a href="#" onclick="history.back();"><i class="xi-arrow-left xi-2x"></i></a>
@@ -40,7 +45,7 @@
 
                 <div class="row m-0 p-0 pt-0 mt-0">
                     <div class="col-6 mx-0 px-0 border-right">
-                        <a href="<?=getUrl('technician','resume',1)?>" target="_blank" class="btn btn-light btn-block rounded-0">전체보기</a>
+                        <a href="<?=getUrl('technician','resume',$m_idx)?>" target="_blank" class="btn btn-light btn-block rounded-0">전체보기</a>
                     </div>
                     <div class="col-6 mx-0 px-0">
                         <a href="<?=getUrl('technician','resumeWrite')?>" class="btn btn-light btn-block rounded-0">수정하기</a>

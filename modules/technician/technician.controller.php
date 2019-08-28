@@ -145,11 +145,15 @@ class technicianController{
     }
 
     //1.학력 삭제
-    $oDB->where("m_idx",$m_idx);
-    $result5_1 = $oDB->delete("TF_member_education_tb");
+    // global $_db_config;
+    // $oDBDelete = new MysqliDb($_db_config['host'], $_db_config['user_name'],$_db_config['password'],$_db_config['db'],$_db_config['port']);
+    if($my_info3_count != 0){
+      $oDB->where("m_idx",$m_idx);
+      $result5_1 = $oDB->delete("TF_member_education_tb");
 
-    if(!$result5_1){
-      return new Object(1,"네트워크 오류가 발생했습니다.(-5_1)");
+      if(!$result5_1){
+        return new Object(1,"네트워크 오류가 발생했습니다.(-5_1)");
+      }
     }
 
     if(!$my_info3_count || $my_info3_count == 0){
@@ -192,14 +196,15 @@ class technicianController{
     }
 
     //1.경력 삭제
-    $oDB->where("m_idx",$m_idx);
-    $result6_1 = $oDB->delete("TF_member_career_tb");
-
-    if(!$result6_1){
-      return new Object(1,"네트워크 오류가 발생했습니다.(-6_1)");
-    }
-
     $career_json = $args->career_json;
+    if(count($career_json) != 0){
+      $oDB->where("m_idx",$m_idx);
+      $result6_1 = $oDB->delete("TF_member_career_tb");
+
+      if(!$result6_1){
+        return new Object(1,"네트워크 오류가 발생했습니다.(-6_1)");
+      }
+    }
 
     for($i = 0, $len = count($career_json); $i < $len; $i++){
       $c_name = $career_json[$i]['c_name'];
@@ -254,11 +259,13 @@ class technicianController{
 
 
       //1.자격증 삭제
-      $oDB->where("m_idx",$m_idx);
-      $result7_1 = $oDB->delete("TF_member_certificate_tb");
+      if($my_info5_count != 0){
+        $oDB->where("m_idx",$m_idx);
+        $result7_1 = $oDB->delete("TF_member_certificate_tb");
 
-      if(!$result7_1){
-        return new Object(1,"네트워크 오류가 발생했습니다.(-7_1)");
+        if(!$result7_1){
+          return new Object(1,"네트워크 오류가 발생했습니다.(-7_1)");
+        }
       }
 
       if(!$my_info5_count || $my_info5_count == 0){
@@ -283,6 +290,7 @@ class technicianController{
             "reg_date" => $now_date,
             "edit_date" => $now_date
           );
+
           $result7_2 = $oDB->insert("TF_member_certificate_tb",$data7_2);
 
           if(!$result7_2){
@@ -292,11 +300,13 @@ class technicianController{
       }
 
       //1.어학 삭제
-      $oDB->where("m_idx",$m_idx);
-      $result8_1 = $oDB->delete("TF_member_language_tb");
+      if($my_info6_count != 0){
+        $oDB->where("m_idx",$m_idx);
+        $result8_1 = $oDB->delete("TF_member_language_tb");
 
-      if(!$result8_1){
-        return new Object(1,"네트워크 오류가 발생했습니다.(-8_1)");
+        if(!$result8_1){
+          return new Object(1,"네트워크 오류가 발생했습니다.(-8_1)");
+        }
       }
 
       if(!$my_info6_count || $my_info6_count == 0){
@@ -332,11 +342,16 @@ class technicianController{
       }
 
       //1.직무 삭제
-      $oDB->where("m_idx",$m_idx);
-      $result9_1 = $oDB->delete("TF_member_duty");
+      $duty_name_arr = $args->duty_name_arr;
+      $duty_o_arr = $args->duty_o_arr;
 
-      if(!$result9_1){
-        return new Object(1,"네트워크 오류가 발생했습니다.(-9_1)");
+      if(count($duty_name_arr) != 0){
+        $oDB->where("m_idx",$m_idx);
+        $result9_1 = $oDB->delete("TF_member_duty");
+
+        if(!$result9_1){
+          return new Object(1,"네트워크 오류가 발생했습니다.(-9_1)");
+        }
       }
 
       for($i=0; $i < count($duty_name_arr); $i++) {
@@ -370,6 +385,6 @@ class technicianController{
       if(!$result10){
         return new Object(1,"네트워크 오류가 발생했습니다.(-10)");
       }
-
+      return new Object(0,"등록 및 수정이 완료되었습니다.");
   }
 }
