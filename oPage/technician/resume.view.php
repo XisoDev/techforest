@@ -85,7 +85,12 @@ $self_introduction = str_replace("\n", "<br />", $my_info2[0]["self_introduction
         <div class="col-4 px-0">
             <div class=" py-3 my-2">
                 <h6 class="text-secondary">희망직무</h6>
-                <p><br /><?=$my_info9[0]['duty_name']?></p>
+                <?if(count($my_info9) < 2){?>
+                  <p><br /><?=$my_info9[0]['duty_name']?></p>
+                <?}?>
+                <?foreach($my_info9 as $val){?>
+                  <p style="margin-bottom:0;"><?=$val['duty_name']?></p>
+                <?}?>
             </div>
         </div>
     </div>

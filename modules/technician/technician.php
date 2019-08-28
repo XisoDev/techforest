@@ -22,6 +22,7 @@ class technicianView{
         $output->add('count_career_row',$this->resume_completeness1());
         $output->add('count_c_content_row',$this->resume_completeness2());
         $output->add('count_myinfo_row',$this->resume_completeness3());
+        $output->add('rt_row',$this->recommend_technician_check());
 
         $set_template_file = "technician/index.php";
 
@@ -514,12 +515,12 @@ class technicianView{
       $oDB->where("m.m_idx",$m_idx);
       $oDB->where("mc.duty_name","",'!=');
       $oDB->groupBy("m.m_idx");
-      $oDB->join("TF_member_career_tb AS mc", "m.m_idx = mc.m_idx", "LEFT");
-      $oDB->join("TF_member_duty AS md", "m.m_idx = md.m_idx", "LEFT");
-      $oDB->join("TF_local_tb AS l", "m.m_local_idx = l.local_idx", "LEFT");
-      $oDB->join("TF_city_tb AS c", "m.m_city_idx = c.city_idx", "LEFT");
-      $oDB->join("TF_district_tb AS d", "m.m_district_idx = d.district_idx", "LEFT");
-      $myinfo_row = $oDB->getOne("TF_member_tb AS m",$columns);
+      $oDB->join("TF_member_career_tb mc", "m.m_idx = mc.m_idx", "LEFT");
+      $oDB->join("TF_member_duty md", "m.m_idx = md.m_idx", "LEFT");
+      $oDB->join("TF_local_tb l", "m.m_local_idx = l.local_idx", "LEFT");
+      $oDB->join("TF_city_tb c", "m.m_city_idx = c.city_idx", "LEFT");
+      $oDB->join("TF_district_tb d", "m.m_district_idx = d.district_idx", "LEFT");
+      $myinfo_row = $oDB->getOne("TF_member_tb m",$columns);
 
       return $myinfo_row;
     }
@@ -630,6 +631,17 @@ class technicianView{
       $interest_rows = $oDB->get("TF_interest_career_tb ic");
 
       return $interest_rows;
+    }
+
+    function recommend_technician_check(){
+      global $oDB;
+      $m_idx = $_SESSION['LOGGED_INFO'];
+
+      $oDB->where("m_idx",$m_idx);
+      $rt_row = $oDB->get("TF_recommend_technician");
+
+      return $rt_row;
+
     }
 
   }

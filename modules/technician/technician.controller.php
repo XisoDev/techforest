@@ -387,4 +387,40 @@ class technicianController{
       }
       return new Object(0,"등록 및 수정이 완료되었습니다.");
   }
+
+  function recommend_technician_yes($args){
+    global $oDB;
+    $now_date = date(YmdHis);
+
+    $yes_data = array(
+      "m_idx" => $args->m_idx,
+      "YN" => "Y",
+      "reg_date" => $now_date
+    );
+    $yes_row = $oDB->insert("TF_recommend_technician",$yes_data);
+
+    if($yes_row){
+      return new Object(0);
+    }else{
+      return new Object(1,"네트워크 오류가 발생했습니다.");
+    }
+  }
+
+  function recommend_technician_no($args){
+    global $oDB;
+    $now_date = date(YmdHis);
+
+    $no_data = array(
+      "m_idx" => $args->m_idx,
+      "YN" => "N",
+      "reg_date" => $now_date
+    );
+    $no_row = $oDB->insert("TF_recommend_technician",$no_data);
+
+    if($no_row){
+      return new Object(0);
+    }else{
+      return new Object(1,"네트워크 오류가 발생했습니다.");
+    }
+  }
 }

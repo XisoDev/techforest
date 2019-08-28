@@ -7,6 +7,8 @@ $count_c_content_row = $output->get('count_c_content_row');
 $count_myinfo_row = $output->get('count_myinfo_row');
 //이력서 정보
 $myinfo_row = $output->get('myinfo_row');
+//추천기술자 허용여부 팝업
+$rt_row = $output->get('rt_row');
 
 ?>
 
@@ -179,7 +181,7 @@ $myinfo_row = $output->get('myinfo_row');
                                       if($myinfo_row['m_city_idx'] != -1){ $desired_work_place .= $myinfo_row['city_name']; }
                                       if($myinfo_row['m_district_idx'] != -1){ $desired_work_place .= $myinfo_row['district_name']; }?>
                                 <div class="row px-3 py-sm-2 py-md-3">
-                                <p class="col-12 col-md-6 xxs_content weight_lighter px-0"><span class="bg-red icon_wrap"><i class="xi-dashboard"></i></span> <b>희망직무</b> : <?=$myinfo_row['hope_duty']?></p>
+                                <p class="col-12 col-md-6 xxs_content weight_lighter px-0 cut1"><span class="bg-red icon_wrap"><i class="xi-dashboard"></i></span> <b>희망직무</b> : <?=$myinfo_row['hope_duty']?></p>
                                 <p class="col-12 col-md-6 xxs_content weight_lighter px-0"><span class="bg-red icon_wrap"><i class="xi-wrench"></i></span> <b>주요경력</b> : <?=$myinfo_row['duty_name']?></p>
                                 <p class="col-12 col-md-6 xxs_content weight_lighter px-0"><span class="bg-red icon_wrap"><i class="xi-map-marker"></i></span> <b>희망지역</b> : <?=$desired_work_place?></p>
                                 </div>
@@ -346,4 +348,59 @@ $myinfo_row = $output->get('myinfo_row');
     <a href="#" target="_blank"><img src="/oPage/technician/images/supports_07.png" height="59" /></a>
     </div>
 </div>
+
+<!-- 이름,생년,전화번호,주소,경력이 있는 개인회원에게 추천기술자 알림 팝업 -->
+<div class="modal fade" id="recommend_technician_modal" tabindex="-1" role="dialog" aria-labelledby="tech_forest_modal_window" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content text-center" style="border-radius:10px">
+            <a class="text-white pull-right text-right" style="margin-top:-40px;" onclick="jQuery('#recommend_technician_modal').modal('hide');" ><i class="xi-close xi-2x"></i></a>
+            <div class="square avatar bg-red mx-auto" style="width:120px; margin-top:-60px; background-image:url('/oPage/ncenter/images/header_icon.png');"></div>
+            <div class="content_padding">
+                <h5 class="weight_normal mb-1">기업이 먼저 입사제안을</h5>
+                <h5 class="weight_normal mb-1">할 수 있도록 <span class="red">회원님의 이력서를 </span></h5>
+                <h5 class="weight_normal mb-3"><span class="red">추천해도 될까요?</span></h5>
+                <a class="btn btn-block btn-danger btn-round btn-lg mb-3" style="width: 63%;margin: auto;" onclick="rt_click_yes()">네 추천해주세요</a>
+                <a class="btn btn-block border-danger text-danger btn-round btn-lg mt-3" style="width: 63%;margin: auto;" onclick="rt_click_no()">아니오</a>
+            </div>
+            <button class="mt-2 btn btn-block btn-light" onclick="jQuery('#recommend_technician_modal').modal('hide');" style="border-radius:10px;">닫기</button>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+  function rt_click_yes(){
+    var m_idx = <?=$m_idx?>;
+    var params = {
+      "m_idx" : m_idx
+    };
+    exec_json("technician.recommend_technician_yes",params,function(ret_obj){
+      ///toastr.success(ret_obj.message);
+      $('#recommend_technician_modal').modal('hide');
+    });
+  }
+
+  function rt_click_no(){
+    var m_idx = <?=$m_idx?>;
+    var params = {
+      "m_idx" : m_idx
+    };
+    exec_json("technician.recommend_technician_no",params,function(ret_obj){
+      //toastr.success(ret_obj.message);
+      document.location.href = "<?=getUrl('member','settingAlert')?>"
+    });
+  }
+  //이름,생년,전화번호,주소,경력이 있는 개인회원에게 추천기술자 알림 팝업
+  //yes or no 클릭 시, TF_recommend_technician에 입력 (닫기는 해당안됨)
+  //no 클릭 시, 알림페이지로 이동
+  //테이블에 입력된 회원은 안뜸.
+  if(<?=$_SESSION['LOGGED_INFO']?> > 0 && <?=count($count_career_row)?> > 0 && "<?=$logged_info['m_name']?>" != "" && "<?=$logged_info['m_birthday']?>" != ""
+    && "<?=$logged_info['m_phone']?>" != "" && "<?=$logged_info['m_address']?>" != "" && <?=count($rt_row)?> == 0){
+    jQuery(window).on('load',function(){
+        $('#recommend_technician_modal').modal('show');
+    });
+  }
+
+</script>
+
 <?php $footer_false = true; ?>
