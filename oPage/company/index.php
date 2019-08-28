@@ -185,9 +185,13 @@
                         <div class="avatar square mx-3 mx-sm-4 mx-md-5 my-2 my-sm-3 my-md-4" style="background-image:url('/layout/none/assets/images/no_avatar.png');">
                         </div>
                         <h6 class="weight_normal mb-3 px-2 text-center"><?=$val['m_name']?> (<?=$val['m_birthday']?>세)</h6>
-                        <p class="text-left xxs_content" id="cut1"><span class="bg-red icon_wrap"><i class="xi-wrench"></i></span>주요경력 : <?=$val['duty_name']?></p>
+                        <p class="text-left xxs_content" class="cut1"><span class="bg-red icon_wrap"><i class="xi-wrench"></i></span>주요경력 : <?=$val['duty_name']?></p>
                         <p class="text-left xxs_content"><span class="bg-red icon_wrap"><i class="xi-map-marker"></i></span>희망지역 : <?=$desired_work_place?></p>
-                        <a href="#" class="btn btn-block btn-warning mt-3 rounded-0">이력서 보기</a>
+                        <div class="row mt-1 mx-0 px-0">
+                            <div class="col-12 mx-0 px-0">
+                              <a href="<?=getUrl('technician','resume',$val['m_idx'],array("from"=>"index"))?>" class="btn btn-block btn-warning mt-3 rounded-0">이력서보기</a>
+                            </div>
+                        </div>
                     </div>
                 <?php } ?>
             </div>

@@ -156,11 +156,10 @@
         </ul>
     </div>
 
-        <a href="#" class="btn btn-block btn-primary d-md-none">이력서 전체보기</a>
+        <a href="<?=getUrl('technician','resume',$m_idx)?>" class="btn btn-block btn-primary d-md-none">이력서 전체보기</a>
 
         <div class="d-none d-md-block text-center">
-            <a href="#" class="btn btn-primary px-4 rounded-0">이력서 전체보기</a>
-
+            <a href="<?=getUrl('technician','resume',$m_idx)?>" class="btn btn-primary px-4 rounded-0">이력서 전체보기</a>
             <?php if(!$check_voucher || $check_voucher[0]['sum_remain_count'] < 1){?>
                 <button data-toggle="modal" data-target="#buy_voucher" class="btn btn-warning px-4 rounded-0">면접 제안하기</button>
             <?php }else if($check_applicant){?>
@@ -169,7 +168,6 @@
                 <button data-toggle="modal" data-target="#interview_suggestion" class="btn btn-warning px-4 rounded-0">면접 제안하기</button>
             <?php } ?>
         </div>
-
     </div>
 </div>
 

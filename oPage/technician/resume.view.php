@@ -1,4 +1,5 @@
 <?php
+$from_index = $_GET['from'];
 
 $my_info1 = $output->get('my_info1');
 $my_info2 = $output->get('my_info2');
@@ -10,6 +11,8 @@ $my_info7 = $output->get('my_info7');
 $my_info8 = $output->get('my_info8');
 $my_info9 = $output->get('my_info9');
 $my_info10 = $output->get('my_info10');
+$my_info11 = $output->get('my_info11');
+$suggestion_join_hire = $output->get('suggestion_join_hire');
 
 if($my_info1[0]["m_human"] == "M") {
 	$m_human = "남자";
@@ -37,7 +40,7 @@ $self_introduction = str_replace("\n", "<br />", $my_info2[0]["self_introduction
 
 ?>
 
-<div class="bg-dark py-2 text-right fixed-top px-3 text-white"><a href="#" class="text-white" onclick="window.close();"><i class="xi-close"></i> 닫기</a></div>
+<div class="bg-dark py-2 text-right fixed-top px-3 text-white"><a class="text-white" onclick="window.close();"><i class="xi-close"></i> 닫기</a></div>
 <section class="bg-white container" style="margin-bottom: 100px;">
 
     <h2 class="weight_bold px-0 mx-0 mt-5">나의 이력서 전체보기</h2>
@@ -54,16 +57,22 @@ $self_introduction = str_replace("\n", "<br />", $my_info2[0]["self_introduction
             <div class="avatar square" style="background-image:url('/layout/none/assets/images/no_avatar.png');"></div>
         </div>
         <div class="col-sm-8 col-md-9 col-lg-10 ">
-            <h3 class="px-2"><?=$my_info1[0]['m_name']?> <span class="sm_content">| <?=$m_human?></span></h3>
+            <h3 class="px-2">
+              <?if($from_index == 'index'){?>
+                <?=$my_info1[0]['hidden_m_name']?>
+              <?}else{?>
+                <?=$my_info1[0]['m_name']?>
+              <?}?>
+              <span class="sm_content">| <?=$m_human?></span></h3>
             <table class="table table-borderless">
                 <cols>
                     <col width="120" />
                     <col width="*" />
                 </cols>
-                <tr><th>생년월일</th><td><?=$member_birthday?> (40세)</td></tr>
+                <tr><th>생년월일</th><td><?=$member_birthday?> (<?=$my_info1[0]['m_age']?>세)</td></tr>
                 <tr><th>연 락 처</th><td><?=$my_info1[0]['m_phone']?></td></tr>
                 <tr><th>이 메 일</th><td><?=$my_info1[0]['m_email']?></td></tr>
-                <tr><th>주&nbsp;&nbsp;&nbsp;&nbsp;소</th><td><?=$my_info1[0]['m_address']?> <?=$my_info1[0]['m_address2']?></td></tr>
+                <tr><th>주&nbsp;&nbsp;&nbsp;&nbsp;소</th><td><?=$my_info1[0]['m_address']?></td></tr>
             </table>
         </div>
     </div>
@@ -135,8 +144,8 @@ $self_introduction = str_replace("\n", "<br />", $my_info2[0]["self_introduction
             </cols>
         <?foreach ($my_info5 as $val) {?>
             <tr><th><?=substr($val['certificate_date'], 0, 7)?></th><td><?=$val['certificate_name']?></td></tr>
-        </table>
       <? } ?>
+      </table>
     <? } ?>
 
     <? if(count($my_info6) > 0){?>
@@ -153,3 +162,60 @@ $self_introduction = str_replace("\n", "<br />", $my_info2[0]["self_introduction
     <? } ?>
 
 </section>
+<?if($from_index == 'index'){?>
+  <?if($my_info11[])?>
+<div class="d-md-none">
+    <button data-toggle="modal" data-target="#suggestion_join" class="btn btn-block btn-warning btn-lg rounded-0 fixed-bottom">입사 제안하기</button>
+</div>
+<div class="d-none d-md-block text-center">
+  <button data-toggle="modal" data-target="#suggestion_join" class="btn btn-warning px-4 rounded-0">입사 제안하기</button>
+</div>
+<?}?>
+
+<div class="modal fade" id="suggestion_join" tabindex="-1" role="dialog" aria-labelledby="tech_forest_modal_window" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content text-center" style="border-radius:10px">
+            <a href="#" class="text-white pull-right text-right" style="margin-top:-40px;" onclick="jQuery('#suggestion_join').modal('hide');" ><i class="xi-close xi-2x"></i></a>
+            <img src='/oPage/company/images/popup_img2.png';>
+            <div class="mt-4 mb-3">
+              <select class="red border-danger" id="hire_sel">
+                <option value="">입사제안 할 공고를 선택해주세요</option>
+                <?foreach ($suggestion_join_hire as $val) {?>
+                  <option value="<?=$val['h_idx']?>"><?=$val['h_title']?></option>
+                <?}?>
+              </select>
+            </div>
+            <div class="content_padding">
+              <h5 class="weight_bold">해당 기술자에게 입사제안 하시겠어요?</h5>
+              <div class="px-3 mt-4">
+                <button onclick="suggestion_join_yes()" class="btn btn-block btn-danger btn-round mt-3">네</button>
+                <button class="btn btn-block border-danger text-danger btn-round mt-3" onclick="jQuery('#suggestion_join').modal('hide');">아니오</button>
+              </div>
+            </div>
+          </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+function suggestion_join_yes(){
+  var m_idx = <?=$my_info1[0]['m_idx']?>;
+  var c_idx = <?=$suggestion_join_hire[0]['c_idx']?>;
+  var h_idx =  $("#hire_sel option:selected").val();
+
+  if(h_idx == ""){
+    alert("공고를 선택해주세요.");
+    return;
+  }
+  var params = {
+    "m_idx" : m_idx,
+    "c_idx" : c_idx,
+    "h_idx" : h_idx
+  };
+  exec_json("technician.suggestion_join",params,function(ret_obj){
+    toastr.success(ret_obj.message);
+    jQuery('#suggestion_join').modal('hide');
+  });
+
+}
+</script>
