@@ -310,6 +310,7 @@ class technicianView{
 
         $local_idx = $args->local_idx;
         $o_idx = $args->o_idx;
+        $short_term = $args->short;
 
         if(!$local_idx) {
         	$local_idx = -1;
@@ -317,6 +318,10 @@ class technicianView{
 
         if($o_idx == 'undefined' || !$o_idx || $o_idx == 1){
         	$o_idx = -1;
+        }
+
+        if(!$short_term) {
+          $local_idx = -1;
         }
 
         //전체 일자리 조회
@@ -329,6 +334,9 @@ class technicianView{
         }
         if($o_idx > 0){
           $oDB->where("h.o_idx",$o_idx);
+        }
+        if($short_term > 0){
+          $oDB->where("h_title","[단기]%","like");
         }
         $oDB->join("TF_member_commerce_tb co","h.c_idx = co.c_idx","LEFT");
         $oDB->join("TF_local_tb l","h.local_idx = l.local_idx","LEFT");
@@ -347,10 +355,17 @@ class technicianView{
         $oDB->where("o_is_show","Y");
         $occupation_list = $oDB->get("TF_occupation",null,"o_idx, o_name");
 
+        // 직무 리스트
+        $oDB->orderBy("duty_name","ASC");
+        $oDB->orderBy("visible_idx","ASC");
+        $oDB->orderBy("o_idx","ASC");
+        $duty_list = $oDB->get("TF_duty");
+
         $output = new Object();
         $output->add('hire_rows',$hire_rows);
         $output->add('local_list',$local_list);
         $output->add('occupation_list',$occupation_list);
+        $output->add('duty_list',$duty_list);
         $output->add('interest_rows',$this->interest_hire());
         return $output;
     }

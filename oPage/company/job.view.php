@@ -4,7 +4,7 @@
 ?>
 
 <section class="p-3 mt-4 pt-5 bg-white d-lg-none">
-    <a href="#" onclick="history.back();" class="mb-3"><img src="/oPage/images/imgicons/arrow_left.png" height="25" /></a>
+    <a onclick="history.back();" class="mb-3"><img src="/oPage/images/imgicons/arrow_left.png" height="25" /></a>
     <h4 class="weight_normal">지원자 현황</h4>
 </section>
 
@@ -31,11 +31,20 @@
                   </div>
                   <div class="col-7 pl-0 ml-0">
                       <div class="star_rating pull-right p-2 xxs_content">
+                        <?if($val['fitness'] == 3){?>
                           <span class="badge-warning btn-round xxs_content">적합도 높음</span>
                           <i class="text-warning xi-star"></i>
                           <i class="text-warning xi-star"></i>
                           <i class="text-warning xi-star"></i>
                           <!-- <i class="text-warning xi-star-o"></i> -->
+                        <?}else if($val['fitness'] == 2){?>
+                          <span class="badge-warning btn-round xxs_content">적합도 중간</span>
+                          <i class="text-warning xi-star"></i>
+                          <i class="text-warning xi-star"></i>
+                        <?}else{?>
+                          <span class="badge-warning btn-round xxs_content">적합도 낮음</span>
+                          <i class="text-warning xi-star"></i>
+                        <?}?>
                       </div>
                       <div class="clearfix"></div>
                       <p class="m-0 text-left weight_lighter xs_content"><?=$val['a_line_self']?></p>

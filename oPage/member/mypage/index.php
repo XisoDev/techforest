@@ -16,6 +16,7 @@
             <div class="py-0 text-right mr-4 d-none d-lg-block">
                 <a href="/proc.php?act=member.procLogout" class="btn btn-light border-secondary btn-round btn-xs">로그아웃</a>
             </div>
+      <form id="my_picture_upload" method="post" enctype="multipart/form-data" action="">
         <div class="col-5 mx-auto px-auto col-md-4 col-lg-3">
           <div class="position-relative">
               <?
@@ -25,14 +26,14 @@
                   $img_url = "../../img/" . $logged_info['m_picture'];
               }
               ?>
-              <div class="avatar square" style="background-image:url('<?=$img_url?>');">
-              </div>
+              <div class="avatar square" id="my_picture" style="background-image:url('<?=$img_url?>');"></div>
               <label for="picture_upload" class="position-absolute mb-0 pb-0" style="right:0;bottom:0;">
                 <img src="/oPage/images/imgicons/camera_gray.png" height="16" />
               </label>
               <input type="file" id="picture_upload" style="display:none;">
           </div>
         </div>
+      </form>
 
         <div class="content_padding text-center weight_lighter">
             <span class="btn-round btn-xs btn-primary"><?=$logged_info['m_id']?></span>
@@ -89,19 +90,34 @@
 
 <script type="text/javascript">
 
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-              $('#my_picture').attr('src', e.target.result);
-            }
-            reader.readAsDataURL(input.files[0]);
-        }
+  $("#picture_upload").change(function(){
+    readURL(this);
+  });
+
+  function readURL(input) {
+    if(input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $('#my_picture').css('background-image','url('+e.target.result+')');
+
+        var formData = new FormData();
+        formData.append("uploadFile", $("#picture_upload")[0].files[0]);
+
+        var params = {};
+        params["m_idx"] = <?=$logged_info['m_idx']?>;
+        params["formData"] = formData;
+
+        exec_json("member.my_picture_upload",params,function(ret_obj){
+            toastr.success(ret_obj.message);
+            document.location.reload();
+        });
+
+      }
+      reader.readAsDataURL(input.files[0]);
     }
+  }
 
 
-    $("#picture_upload").change(function(){
-      readURL(this);
-    });
+
 
 </script>

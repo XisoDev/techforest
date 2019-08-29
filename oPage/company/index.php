@@ -205,15 +205,10 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
-    <!-- <div class="text-center">
-        <a href="#" class="d-md-inline-block mt-3 btn btn-primary btn-round">더 많은 기술자보기</a>
-    </div> -->
-=======
+    
     <div class="text-center">
         <a href="#" class="d-none d-md-inline-block mt-3 btn btn-primary btn-round">더 많은 기술자보기</a>
     </div>
->>>>>>> refs/remotes/origin/master
 </div>
 
 <div class="container-fluid bg-light pb-5 pt-5 pt-lg-2 mt-5">

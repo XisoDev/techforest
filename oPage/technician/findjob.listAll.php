@@ -3,12 +3,15 @@
   $interest_rows = $output->get('interest_rows');
   $local_list = $output->get('local_list');
   $occupation_list = $output->get('occupation_list');
-
+  $duty_list = $output->get('duty_list');
   if($_GET['local_idx']){
     $search_local_idx = $_GET['local_idx'];
   }
   if($_GET['o_idx']){
     $search_o_idx = $_GET['o_idx'];
+  }
+  if($_GET['short']){
+    $search_short = $_GET['short'];
   }
 ?>
 <section class="bg-white d-lg-none">
@@ -56,10 +59,24 @@
                 <a href="<?=getUrl('technician','findJobListAll')?>" class="d-lg-block btn-block d-none btn btn-primary btn-round py-2 px-3 mr-1">전체공고</a>
             </div>
         </div>
+        <div class="row mt-1">
+            <div class="col-6 pr-1 col-lg-4">
+                <select class="form-control" id="duty_select" onchange="location.href=(this.value)"></select>
+            </div>
+            <div class="col-6 pl-1 col-lg-4">
+              단기공고
+              <?if($search_short > 0){?>
+                <input type="checkbox" id="short_term" checked>
+              <?}else{?>
+                <input type="checkbox" id="short_term">
+              <?}?>
+            </div>
+        </div>
     </div>
     <div class="row">
       <input type="hidden" id="hidden_m_idx" value="<?=$m_idx?>">
         <?php foreach($hire_rows as $val) { ?>
+          <input type="hidden" id="hidden_h_idx" value="<?=$val['h_idx']?>">
             <div class="col-12 col-md-4 px-md-2 pb-md-4">
                 <div class="magazine tech_card mb-3 bg-white text-left shadow">
                     <div class="row">
@@ -113,7 +130,7 @@
                                     <a href="#" class="btn btn-light btn-block rounded-0">상세보기</a>
                                 </div>
                                 <div class="col-6 mx-0 px-0">
-                                    <button class="btn btn-danger btn-block rounded-0" data-toggle="modal" data-target="#check_phonenumber" data-id="<?=$val['h_idx']?>">지원하기</button>
+                                    <button class="btn btn-danger btn-block rounded-0" onclick="application_ok(<?=$val['h_idx']?>)">지원하기</button>
                                 </div>
                             </div>
                         </div>
@@ -133,7 +150,7 @@
                 <h5 class="weight_lighter">기업측의 면접요청을 위해 <br> <span class="red">본인의 연락처가 맞는지</span><br>다시 한번 확인해주세요.</h5>
                 <span class="red">─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─</span>
                 <h5 class="weight_normal mb-2 mt-4 mb-3 red">☎ <?=$logged_info['m_phone']?></h5>
-                <a class="btn btn-block btn-danger btn-round btn-lg mb-3" onclick="application_ok()">네 맞습니다</a>
+                <a class="btn btn-block btn-danger btn-round btn-lg mb-3" id="applicant_ok">네 맞습니다</a>
                 <a class="btn btn-block border-danger btn-round btn-lg mb-3 red" href="#">연락처 수정하기</a>
             </div>
             <button class="mt-2 btn btn-block btn-light" onclick="jQuery('#check_phonenumber').modal('hide');" style="border-radius:10px;">닫기</button>
@@ -158,21 +175,44 @@
 
  }
 
- function application_ok(event){
-   var button = $(event.relatedTarget);
-   var h_idx = button.data('id');
-   var m_idx = <?=$m_idx?>;
+ function application_ok(h_idx){
+   $('#check_phonenumber').modal('show');
 
-  console.log(h_idx);
-   var params = {};
-   params["h_idx"] = h_idx;
-   params["m_idx"] = m_idx;
+   $('#applicant_ok').click(function(e) {
+     var m_idx = <?=$m_idx?>;
 
-   exec_json("technician.application_letter_register",params,function(ret_obj){
-       toastr.success(ret_obj.message);
-       //location.reload();
-   });
+     var params = {};
+     params["h_idx"] = h_idx;
+     params["m_idx"] = m_idx;
+
+     exec_json("technician.application_letter_register",params,function(ret_obj){
+         toastr.success(ret_obj.message);
+         $('#check_phonenumber').modal('hide');
+     });
+  });
  }
+
+ /*
+ * @brief 희망직무
+ */
+ var duty_arr = <?= json_encode($duty_list); ?>;
+
+ function occupation(obj){
+ 	$("#duty_select").empty();
+
+ 	for(var i = 0; i < duty_arr.length; i++) {
+ 		if(obj.value == duty_arr[i]["o_idx"]) {
+ 			var option = $('<option value="' +duty_arr[i]["duty_name"]+ '">' +duty_arr[i]["duty_name"]+ '</option>');
+ 			$("#duty_select").append(option);
+ 		}
+ 	}
+}
+
+$("#short_term").change(function(){
+    if($("#short_term").is(":checked")){
+      location.href="<?=getUrl('technician','findJobListAll',false,array('local_idx' => $search_local_idx,$search_o_idx,'short'=>1))?>";
+    }
+});
 </script>
 
 <?php

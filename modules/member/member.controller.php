@@ -310,4 +310,24 @@ class memberController{
         return new Object(-1,"네트워크 오류가 발생했습니다.");
       }
     }
+
+    function my_picture_upload($args){
+      global $oDB;
+      $now_date = date(YmdHis);
+
+      $data = array (
+        "m_idx" => $args->m_idx,
+        "m_picture" => $args->formData,
+        "edit_date" => $now_date
+      );
+
+      $oDB->where("m_idx",$args->m_idx);
+      $row = $oDB->insert ('TF_member_tb', $data);
+
+      if($row){
+        return new Object(0,"증명사진이 수정되었습니다.");
+      }else{
+        return new Object(-1,"네트워크 오류가 발생했습니다.");
+      }
+    }
 }

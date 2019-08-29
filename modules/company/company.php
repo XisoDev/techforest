@@ -188,7 +188,8 @@ class companyView{
           $oDB->join("TF_hire_tb h","al.h_idx = h.h_idx","LEFT");
           $oDB->join("TF_member_tb m","al.m_idx = m.m_idx","LEFT");
           $oDB->join("TF_member_career_tb AS mc", "m.m_idx = mc.m_idx", "LEFT");
-          $application_row = $oDB->get("TF_application_letter al",null,"group_concat(distinct(mc.duty_name)) as duty_name,h.h_idx, m.m_idx, m.m_name, m.m_human, m.m_birthday, m.m_phone, m.m_email, al.reg_date, a_line_self");
+          $oDB->join("TF_application_fitness af", "m.m_idx = af.m_idx", "LEFT");
+          $application_row = $oDB->get("TF_application_letter al",null,"group_concat(distinct(mc.duty_name)) as duty_name,h.h_idx, m.m_idx, m.m_name, m.m_human, m.m_birthday, m.m_phone, m.m_email, al.reg_date, a_line_self, fitness");
 
           //면접자현황
           $oDB->where("si.h_idx",$h_idx);
