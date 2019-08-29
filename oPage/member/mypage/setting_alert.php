@@ -10,7 +10,7 @@
     <?if(count($output->get("notice_setting")) > 0){
       $checked = array(); // 빈 배열인 경우
       $val = $output->get("notice_setting");
-        for($i=0;$i<5;$i++){
+        for($i=0;$i<6;$i++){
           if($val[$i][agree]=='N'){
 
           }else{
@@ -18,7 +18,7 @@
           }
         }
       }else{
-        for($i=0;$i<5;$i++){
+        for($i=0;$i<6;$i++){
           $checked[$i] = 'checked="checked"';
         }
       } ?>
@@ -63,6 +63,10 @@
             <label class="just_label">지원/관심 공고 마감 알림</label>
             <input id='m_check_5' type="checkbox" data-toggle="toggle" data-style="tech_forest" data-onstyle="danger" <?=$checked[4]?> data-size="sm" />
         </div>
+        <div class="form-group">
+            <label class="just_label">추천기술자 허용</label>
+            <input id='m_check_6' type="checkbox" data-toggle="toggle" data-style="tech_forest" data-onstyle="danger" <?=$checked[5]?> data-size="sm" />
+        </div>
       <? } ?>
         <!-- <div class="form-group">
             <label class="just_label">야간수신 동의</label>
@@ -70,6 +74,14 @@
         </div> -->
         <h6 class="weight_lighter"><i class="xi-clock-o"></i> 알림 수신시간 : 09:00 - 21:00</h6>
     </form>
+        <div class="row mt-4 col-md-7 col-lg-6 mx-auto">
+            <div class="col-6 mx-0 px-0 pr-1">
+                <a href="#" onclick="history.back();" class="btn btn-block btn-round border-primary">취소</a>
+            </div>
+            <div class="col-6 mx-0 px-0 pl-1">
+                <a id='echo_check' class="btn btn-block btn-round btn-primary">수정완료</a>
+            </div>
+        </div>
     </div>
     </div>
 </div>
@@ -85,7 +97,7 @@
     var array_check = [];
     if(m_or_c == 'm'){
       // console.log('m');
-      for(var i =0; i<5;i++){
+      for(var i =0; i<6;i++){
         if($("input:checkbox[id='m_check_"+(i+1)+"']").is(":checked") == true){
           array_check[i] = i+1;
         }else{

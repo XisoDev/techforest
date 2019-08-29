@@ -266,23 +266,24 @@ class memberController{
       global $oDB;
       $count = $args->count;
       $check = array();
-      $check[0] = $args->check_0;
-      $check[1] = $args->check_1;
-      $check[2] = $args->check_2;
-      $check[3] = $args->check_3;
+      $check[1] = $args->check_0;
+      $check[2] = $args->check_1;
+      $check[3] = $args->check_2;
+      $check[4] = $args->check_3;
       if($count>4){
         $check[5] = $args->check_0;
         $check[6] = $args->check_1;
         $check[7] = $args->check_2;
         $check[8] = $args->check_3;
         $check[9] = $args->check_4;
+        $check[10] = $args->check_5;
       }
 
       $m_idx = $_SESSION['LOGGED_INFO'];
       if($count>4){
           $iset=5;
       }else{
-        $iset=0;
+        $iset=1;
       }
       for($i=$iset;$i<($iset+$count);$i++){
         if($check[$i] == 0){

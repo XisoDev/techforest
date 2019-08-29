@@ -27,7 +27,7 @@ class ncenterView
 
       $m_idx = $_SESSION['LOGGED_INFO'];
 
-      $columns = "mn_idx, mn.m_idx, mn.n_idx, mn.num, n.notice_type, n.division, n.used, ns.agree, mn.reg_date, m_name";
+      $columns = "mn_idx, mn.m_idx, mn.n_idx, mn.num, n.notice_type, n.division, n.used, ns.agree, mn.reg_date, m_name, mn.read";
 
       $oDB->where("mn.m_idx",$m_idx);
 
