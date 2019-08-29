@@ -113,7 +113,7 @@
                                     <a href="#" class="btn btn-light btn-block rounded-0">상세보기</a>
                                 </div>
                                 <div class="col-6 mx-0 px-0">
-                                    <button class="btn btn-danger btn-block rounded-0" data-toggle="modal" data-target="#check_phonenumber">지원하기</button>
+                                    <button class="btn btn-danger btn-block rounded-0" data-toggle="modal" data-target="#check_phonenumber" data-id="<?=$val['h_idx']?>">지원하기</button>
                                 </div>
                             </div>
                         </div>
@@ -133,7 +133,7 @@
                 <h5 class="weight_lighter">기업측의 면접요청을 위해 <br> <span class="red">본인의 연락처가 맞는지</span><br>다시 한번 확인해주세요.</h5>
                 <span class="red">─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─</span>
                 <h5 class="weight_normal mb-2 mt-4 mb-3 red">☎ <?=$logged_info['m_phone']?></h5>
-                <a class="btn btn-block btn-danger btn-round btn-lg mb-3" href="#">네 맞습니다</a>
+                <a class="btn btn-block btn-danger btn-round btn-lg mb-3" onclick="application_ok()">네 맞습니다</a>
                 <a class="btn btn-block border-danger btn-round btn-lg mb-3 red" href="#">연락처 수정하기</a>
             </div>
             <button class="mt-2 btn btn-block btn-light" onclick="jQuery('#check_phonenumber').modal('hide');" style="border-radius:10px;">닫기</button>
@@ -156,6 +156,22 @@
        //location.reload();
    });
 
+ }
+
+ function application_ok(event){
+   var button = $(event.relatedTarget);
+   var h_idx = button.data('id');
+   var m_idx = <?=$m_idx?>;
+
+  console.log(h_idx);
+   var params = {};
+   params["h_idx"] = h_idx;
+   params["m_idx"] = m_idx;
+
+   exec_json("technician.application_letter_register",params,function(ret_obj){
+       toastr.success(ret_obj.message);
+       //location.reload();
+   });
  }
 </script>
 

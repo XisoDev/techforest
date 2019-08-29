@@ -113,7 +113,7 @@ class technicianView{
             $output->add('my_info7',$my_info7);
             $output->add('my_info8',$my_info8);
             $output->add('my_info9',$my_info9);
-            $output->add('my_info10',$my_info10);
+            $output->add('my_info10',$my_info10);;
             $output->add('suggestion_join_hire',$this->suggestion_join_hire());
 
         }else{
@@ -335,7 +335,7 @@ class technicianView{
         $oDB->join("TF_city_tb c","h.city_idx = c.city_idx","LEFT");
         $oDB->join("TF_district_tb d","h.district_idx = d.district_idx","LEFT");
         $oDB->join("TF_hire_certificate hce","hce.h_idx = h.h_idx","LEFT");
-        $hire_rows = $oDB->get("TF_hire_tb h",12,"c_name, h_title, local_name, city_name, district_name,
+        $hire_rows = $oDB->get("TF_hire_tb h",20,"c_name, h_title, local_name, city_name, district_name,
                                                   h.local_idx, h.city_idx, h.district_idx, job_achievement,
                                                   salary_idx, job_salary, job_is_career, h.h_idx, h.o_idx");
         //지역 리스트
@@ -664,5 +664,6 @@ class technicianView{
 
       return $suggestion_join_hire;
     }
+
 
   }

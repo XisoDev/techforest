@@ -189,7 +189,7 @@
                         <p class="text-left xxs_content"><span class="bg-red icon_wrap"><i class="xi-map-marker"></i></span>희망지역 : <?=$desired_work_place?></p>
                         <div class="row mt-1 mx-0 px-0">
                             <div class="col-12 mx-0 px-0">
-                              <a href="<?=getUrl('technician','resume',$val['m_idx'],array("from"=>"index"))?>" class="btn btn-block btn-warning mt-3 rounded-0">이력서보기</a>
+                              <a href="<?=getUrl('technician','resume',$val['m_idx'],array("from"=>"index"))?>" target="_blank" class="btn btn-block btn-warning mt-3 rounded-0">이력서보기</a>
                             </div>
                         </div>
                     </div>
@@ -197,9 +197,9 @@
             </div>
         </div>
     </div>
-    <div class="text-center">
+    <!-- <div class="text-center">
         <a href="#" class="d-md-inline-block mt-3 btn btn-primary btn-round">더 많은 기술자보기</a>
-    </div>
+    </div> -->
 </div>
 
 <div class="container-fluid bg-light pb-5 pt-5 pt-lg-2 mt-5">

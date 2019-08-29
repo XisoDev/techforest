@@ -428,19 +428,72 @@ class technicianController{
     global $oDB;
     $now_date = date(YmdHis);
 
-    $sj_data = array(
-      "c_idx" => $args->c_idx,
-      "h_idx" => $args->h_idx,
-      "m_idx" => $args->m_idx,
-      "reg_date" => $now_date
-    );
-    $sj_row = $oDB->insert("TF_suggest_join",$sj_data);
+    $oDB->where("m_idx",$args->m_idx);
+    $oDB->where("h_idx",$args->h_idx);
+    $sj_check = $oDB->get("TF_suggest_join");
 
-    if($sj_row){
-      return new Object(0,"입사제안이 완료되었습니다.");
+    if($sj_check){
+      return new Object(1,"이미 해당 지원자에게 입사제안한 공고입니다.");
     }else{
-      return new Object(1,"네트워크 오류가 발생했습니다.");
+      $sj_data = array(
+        "c_idx" => $args->c_idx,
+        "h_idx" => $args->h_idx,
+        "m_idx" => $args->m_idx,
+        "reg_date" => $now_date
+      );
+      $sj_row = $oDB->insert("TF_suggest_join",$sj_data);
+
+      if($sj_row){
+        return new Object(0,"입사제안이 완료되었습니다.");
+      }else{
+        return new Object(1,"네트워크 오류가 발생했습니다.");
+      }
+    }
+  }
+
+  function application_letter_register($args){
+    global $oDB;
+    $now_date = date(YmdHis);
+
+    $h_idx = $args->h_idx;
+    $m_idx = $args->m_idx;
+
+    if(!$h_idx) {
+      return new Object(1,"잘못된 접속입니다.(0)");
+    }
+    if(!$m_idx) {
+      return new Object(1,"잘못된 접속입니다.(-1)");
     }
 
+    $oDB->where("m_idx",$m_idx);
+    $address_row = $oDB->get("TF_member_tb",null,"m_address");
+
+    if(!$address_row){
+      return new Object(1,"정보를 추가 입력 후 이용해주세요.");
+    }
+
+    $oDB->where("m_idx",$m_idx);
+    $oDB->where("h_idx",$h_idx);
+    $applicant_check = $oDB->get("TF_application_letter");
+
+    if(count($applicant_check) > 0){
+      return new Object(1,"이미 지원한 공고입니다.");
+    }else{
+      $data = array(
+        "h_idx" => $h_idx,
+        "m_idx" => $m_idx,
+        "reg_date" => $now_date,
+        "isVisible" => "N"
+      );
+      $applicant_insert= $oDB->insert("TF_application_letter",$data);
+
+      if($applicant_insert){
+        return new Object(0,"지원이 완료되었습니다.");
+      }else{
+        return new Object(1,"네트워크 오류가 발생했습니다.(-2)");
+      }
+    }
   }
+
+
 }

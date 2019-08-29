@@ -163,7 +163,6 @@ $self_introduction = str_replace("\n", "<br />", $my_info2[0]["self_introduction
 
 </section>
 <?if($from_index == 'index'){?>
-  <?if($my_info11[])?>
 <div class="d-md-none">
     <button data-toggle="modal" data-target="#suggestion_join" class="btn btn-block btn-warning btn-lg rounded-0 fixed-bottom">입사 제안하기</button>
 </div>
@@ -178,7 +177,7 @@ $self_introduction = str_replace("\n", "<br />", $my_info2[0]["self_introduction
             <a href="#" class="text-white pull-right text-right" style="margin-top:-40px;" onclick="jQuery('#suggestion_join').modal('hide');" ><i class="xi-close xi-2x"></i></a>
             <img src='/oPage/company/images/popup_img2.png';>
             <div class="mt-4 mb-3">
-              <select class="red border-danger" id="hire_sel">
+              <select class="red border-danger" style="background:white" id="hire_sel">
                 <option value="">입사제안 할 공고를 선택해주세요</option>
                 <?foreach ($suggestion_join_hire as $val) {?>
                   <option value="<?=$val['h_idx']?>"><?=$val['h_title']?></option>
