@@ -42,7 +42,7 @@
     <div class="overlay" data-toggle="offcanvas" style="display: none;"></div>
     <div id="sidebar-wrapper">
         <div class="sidebar-card">
-            <div class="content_padding">
+            <div class="px-3 py-2">
             <div class="row">
                 <?php if(!$logged_info) { ?>
                 <div class="col-12">
@@ -72,13 +72,23 @@
         <aside class="nav flex-column">
             <?php
             foreach($oMenu->technician->list as $item){
-                echo sprintf('<a class="nav-link %s" href="%s" %s><i class="%s"></i> %s',$item["active"],$item["link"],$item["new_window"],$item["icon"],$item["title"]);
+                if(is_array($item["submenu"])){
+                    $item["link"] = "#";
+                }
+                if($item["icon"]){
+                    echo sprintf('<a class="nav-link weight_normal mt-2 %s" href="%s" %s><i class="%s"></i> %s',$item["active"],$item["link"],$item["new_window"],$item["icon"],$item["title"]);
+                }else if($item['imgicon']){
+                    echo sprintf('<a class="nav-link weight_normal mt-2 %s" href="%s" %s><img src="/oPage/images/imgicons/%s.png" class="imgicon" height="16" /> %s',$item["active"],$item["link"],$item["new_window"],$item["imgicon"],$item["title"]);
+                }
+                if(is_array($item["submenu"])){
+                    echo '<span class="pull-right text-black-50 has_submenu"><i class="xi-angle-right"></i></span>';
+                }
                 echo "</a>";
                 if(is_array($item["submenu"])){
-                    echo "<ul class=\"nav submenu\">";
+                    echo "<ul class=\"nav submenu\" style='display:none;'>";
                     echo "<li class=\"nav-item\">";
                     foreach($item["submenu"] as $sub_item){
-                        echo sprintf("<a class=\"nav-link text-secondary\" href=\"%s\" %s>- %s</a>",$sub_item["link"], $sub_item["new_window"], $sub_item["title"]);
+                        echo sprintf("<a class=\"nav-link  text-secondary\" href=\"%s\" %s>- %s</a>",$sub_item["link"], $sub_item["new_window"], $sub_item["title"]);
                     }
                     echo "</li>";
                     echo "</ul>";
@@ -98,7 +108,7 @@
         </button>
         <?php if($logged_info) { ?>
             <a href="<?=getUrl('ncenter')?>" class="toggle_alert">
-                <i class="xi-bell-o"></i>
+                <img src="/oPage/images/imgicons/bell.png" class="black"/>
                 <span class="badge bg-red">9</span>
             </a>
         <?php } ?>

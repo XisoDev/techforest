@@ -1,8 +1,8 @@
 <div class="container">
-    <div class="content_padding px-0">
-        <a href="#" onclick="history.back();"><i class="xi-arrow-left xi-2x"></i></a>
-        <h5 class="pull-right pt-2"><a href="<?=getUrl('member','settingAlert')?>">설정 <i class="xi-cog"></i></a></h5>
-        <h5 class="weight_normal">알림센터</h5>
+    <div class="p-3 px-0">
+        <a href="#" onclick="history.back();" class="mb-3"><img src="/oPage/images/imgicons/arrow_left.png" height="25" /></a>
+        <h4 class="pull-right pt-2"><a href="<?=getUrl('member','settingAlert')?>">설정 <i class="xi-cog"></i></a></h4>
+        <h4 class="weight_normal">알림센터</h4>
     </div>
     <div class="col-12 mt-2">
         <?php foreach($output->get("member_notice") as $val){

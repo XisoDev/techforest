@@ -51,9 +51,9 @@ body.toggled{
     border: none;
     display: block;
     height: 32px;
-    margin-left: 15px;
+    margin-left: 33px;
     position: fixed;
-    top: 12px;
+    top: 42px;
     width: 32px;
     z-index: 999;
 }
@@ -250,7 +250,10 @@ body.toggled{
 .hamb-bottom, .hamb-middle, .hamb-top {
     background-color: #333;
 }
-
+.shrink .hamburger{
+    margin-left: 15px;
+    top: 12px;
+}
 
 
 /*사이드바*/
@@ -326,19 +329,23 @@ body.shrink #header_mobile nav.navbar,
 
 /* 알람관련 */
 .toggle_alert{
-    color:#333;
+    color:#fff;
     background: transparent;
     border: none;
     display: block;
     font-size: 32px;
     margin-right: 15px;
     position: fixed;
-    top: 2px;
+    top: 33px;
     right:0;
     text-align:Center;
     width: 32px;
     z-index: 999;
 }
+.shrink .toggle_alert{
+    top:2px;
+}
+
 .toggle_alert .badge{
     border-radius:50%;
     font-size:9px;

@@ -3,9 +3,9 @@
     body{background:#FFF;}
 </style>
 <section class="bg-white">
-    <div class="content_padding mt-4 pt-5 mb-0 pb-2">
-        <a href="#" onclick="history.back();"><i class="xi-arrow-left xi-2x"></i></a>
-        <h5 class="weight_normal">결제수단 선택</h5>
+    <div class="p-3 mt-4 pt-5 mb-0 pb-2">
+        <a href="#" onclick="history.back();" class="mb-3"><img src="/oPage/images/imgicons/arrow_left.png" height="25" /></a>
+        <h4 class="weight_normal">결제수단 선택</h4>
     </div>
     <div class="content_padding">
     <form>

@@ -9,8 +9,8 @@
             <h4 class="weight_bold mb-3">채용담당자님:)</h4>
           <?php } ?>
           <?php if($logged_info) { ?>
-            <h5 class="weight_lighter"><?=$logged_info['c_name']?> 채용담당자님:)</h5>
-            <h5 class="weight_lighter mb-3">어떤 기술자를 찾고 계신가요?</h5>
+            <h5 class="weight_bold"><?=$logged_info['c_name']?> 채용담당자님:)</h5>
+            <h5 class="weight_bold mb-3">어떤 기술자를 찾고 계신가요?</h5>
           <?php } ?>
           <ul class="nav">
               <?php if(!$logged_info) { ?>
@@ -55,7 +55,9 @@
         <?php } ?>
 
         <?php if($logged_info) { ?>
-        <div class="col-9 mr-0 pr-0">
+        <div class="col-12 mr-0 pr-0">
+            <a href="<?=getUrl('company','job_register')?>" class="pull-right mr-3 d-none d-md-inline-block mt-3 btn btn-primary btn-round">추가등록<i class="xi-plus"></i></a>
+            <a href="<?=getUrl('company','job_register')?>" class="pull-right mr-3 d-md-none mt-4 btn btn-primary py-1 btn-xxs btn-round">추가등록<i class="xi-plus"></i></a>
           <? date_default_timezone_set('Asia/Seoul');
              $now_date = date(YmdHis);
              $m_idx = $_SESSION['LOGGED_INFO'];
@@ -64,12 +66,8 @@
              $oDB->join("TF_member_commerce_tb co","h.c_idx = co.c_idx","LEFT");
              $row = $oDB->getOne("TF_hire_tb h","count(h.h_idx) as count_hire");
             ?>
-            <h6 class="d-md-none weight_lighter mt-4">총 <span class="red"><?=$row['count_hire']?></span>의 진행중인 공고가 있어요.</h6>
+            <h6 class="d-md-none weight_lighter mt-4"><span class="red">총<?=$row['count_hire']?>건</span>의 진행중인 공고가 있어요.</h6>
             <h5 class="d-none d-md-block weight_lighter mt-4">최근 등록하신 <span class="red"><?=$row['count_hire']?>건</span>의 채용공고가 있어요.</h5>
-        </div>
-        <div class="col-3 ml-0 pl-0 text-right">
-            <a href="<?=getUrl('company','job_register')?>" class="d-md-none mt-3 btn btn-block btn-primary btn-xxs btn-round">추가등록<i class="xi-plus"></i></a>
-            <a href="<?=getUrl('company','job_register')?>" class="d-none d-md-inline-block mt-3 btn btn-primary btn-round">추가등록<i class="xi-plus"></i></a>
         </div>
 
 
@@ -95,7 +93,8 @@
                     <div class="tech_card bg-white shadow">
                         <div class="thumbnail mx-0 px-0" style="background-image:url('http://www.planttech.co.kr/wp-content/uploads/2018/07/%EC%82%BC%EC%84%B1%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%811-820x457.png')">
                         </div>
-                        <div class="content_padding text-left pb-1">
+                        <div class="py-2 px-2 text-left pb-1">
+                            <p class="pb-0 mb-0">(주)에이에스티</p>
                             <h6 class="red"><?=$val['h_title']?></h6>
                             <p class="weight_lighter xxs_content mx-0 px-0">
                               <? if ($val['city_name'] == "전체") { $val['city_name'] = "";} ?>
@@ -120,10 +119,10 @@
                         </div>
                         <div class="row mt-1 mx-0 px-0">
                             <div class="col-6 mx-0 px-0">
-                                <a href="<?=getUrl('company','job_appRegister',$val['h_idx']);?>" class="btn btn-light btn-block rounded-0">수정</a>
+                                <a href="<?=getUrl('company','job_appRegister',$val['h_idx']);?>" class="btn btn-light btn-block rounded-0 xs_content">수정</a>
                             </div>
                             <div class="col-6 mx-0 px-0">
-                                <a href="<?=getUrl('company','job',$val['h_idx']);?>" class="btn btn-light btn-block rounded-0 red">지원자 (<?=$val['applicant']?>)</a>
+                                <a href="<?=getUrl('company','job',$val['h_idx']);?>" class="btn btn-light btn-block rounded-0 red xs_content">지원자 (<?=$val['applicant']?>)</a>
                             </div>
                         </div>
                     </div>
@@ -164,12 +163,21 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <div class="d-block d-lg-none">
-                <h5 class="weight_lighter mt-4">
-                    <span class="btn btn-round btn-xxs btn-primary">NEW</span>
-                    새로운 기술자가 등록됐어요!
-                </h5>
-            </div>
+
+            <?php if($logged_info) { ?>
+                <div class="d-block d-lg-none">
+                    <h5 class="weight_lighter mt-4">
+                        <span class="red">기술자숲</span>에 딱 맞는 추천기술자를 찾아왔어요!
+                    </h5>
+                </div>
+            <?php } else { ?>
+                <div class="d-block d-lg-none">
+                    <h5 class="weight_lighter mt-4">
+                        <span class="btn btn-round btn-xxs btn-primary">NEW</span>
+                        새로운 기술자가 등록됐어요!
+                    </h5>
+                </div>
+            <?php } ?>
             <div class="d-none d-lg-block text-center pt-5 pb-3">
                 <h3 class="weight_bold mt-3">AI 추천 기술자</h3>
                 <h6 class="weight_lighter mt-1 mb-2">ABC기업과 맞는 기술자를 추천 해 드립니다! 지금 확인해보세요!</h6>
@@ -182,11 +190,11 @@
                     if($val['m_city_idx'] != -1){ $desired_work_place .= $val['city_name']; }
                     if($val['m_district_idx'] != -1){ $desired_work_place .= $val['district_name']; }?>
                     <div class="tech_card bg-white overflow-hidden mx-md-3 mb-md-3 shadow">
-                        <div class="avatar square mx-3 mx-sm-4 mx-md-5 my-2 my-sm-3 my-md-4" style="background-image:url('/layout/none/assets/images/no_avatar.png');">
+                        <div class="avatar square mt-3 mx-5 mx-sm-4 mx-md-5 my-2 my-sm-3 my-md-4" style="background-image:url('/layout/none/assets/images/no_avatar.png');">
                         </div>
                         <h6 class="weight_normal mb-3 px-2 text-center"><?=$val['m_name']?> (<?=$val['m_birthday']?>세)</h6>
-                        <p class="text-left xxs_content" class="cut1"><span class="bg-red icon_wrap"><i class="xi-wrench"></i></span>주요경력 : <?=$val['duty_name']?></p>
-                        <p class="text-left xxs_content"><span class="bg-red icon_wrap"><i class="xi-map-marker"></i></span>희망지역 : <?=$desired_work_place?></p>
+                        <p class="text-left xxx_content px-3 py-0 m-0 mb-1" class="cut1"> <img class="d-inline imgicon" src="/oPage/images/imgicons/wrench_bg_red.png" height="10" /> 주요경력 : <?=$val['duty_name']?></p>
+                        <p class="text-left xxx_content px-3 py-0 m-0 mb-1">  <img class="d-inline imgicon" src="/oPage/images/imgicons/location_bg_red.png" height="10" /> 희망지역 : <?=$desired_work_place?></p>
                         <div class="row mt-1 mx-0 px-0">
                             <div class="col-12 mx-0 px-0">
                               <a href="<?=getUrl('technician','resume',$val['m_idx'],array("from"=>"index"))?>" target="_blank" class="btn btn-block btn-warning mt-3 rounded-0">이력서보기</a>
@@ -197,9 +205,15 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD
     <!-- <div class="text-center">
         <a href="#" class="d-md-inline-block mt-3 btn btn-primary btn-round">더 많은 기술자보기</a>
     </div> -->
+=======
+    <div class="text-center">
+        <a href="#" class="d-none d-md-inline-block mt-3 btn btn-primary btn-round">더 많은 기술자보기</a>
+    </div>
+>>>>>>> refs/remotes/origin/master
 </div>
 
 <div class="container-fluid bg-light pb-5 pt-5 pt-lg-2 mt-5">
@@ -217,7 +231,7 @@
                 </div>
             </div>
             <div class="tech_card bg-white text-left">
-                <div class="content_padding weight_lighter">
+                <div class="weight_lighter">
                   <?php foreach($output->get("now_application") as $val){
                       $diff = time() - strtotime($val['reg_date']);
                         if ( $diff>86400 ) {

@@ -75,9 +75,9 @@ $salary_list = $oDB->get("TF_salary",null,"salary_idx, salary_name, salary_is_sh
 ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <section class="bg-white">
-    <div class="content_padding mt-4 pt-5 d-lg-none">
-        <a href="#" onclick="history.back();"><i class="xi-arrow-left xi-2x"></i></a>
-        <h5 class="weight_normal">공고등록</h5>
+    <div class="p-3 mt-4 pt-5 d-lg-none">
+        <a href="#" onclick="history.back();" class="mb-3"><img src="/oPage/images/imgicons/arrow_left.png" height="25" /></a>
+        <h4 class="weight_normal">공고등록</h4>
     </div>
     <div class="container pt-lg-5 col-md-10 col-lg-8 mx-auto">
     <ul class="nav nav-tabs nav-justified mt-0 pt-0 mb-5 mx-0 px-0" role="tablist">

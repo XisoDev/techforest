@@ -5,9 +5,9 @@
 
   $h_idx = $_REQUEST['h_idx'];
 ?>
-<section class="content_padding mt-4 pt-5 bg-white d-lg-none">
-    <a href="#" onclick="history.back();"><i class="xi-arrow-left xi-2x"></i></a>
-    <h5 class="weight_normal">지원자정보 상세보기</h5>
+<section class="p-3 mt-4 pt-5 bg-white d-lg-none">
+    <a href="#" onclick="history.back();" class="mb-3"><img src="/oPage/images/imgicons/arrow_left.png" height="25" /></a>
+    <h4 class="weight_normal">지원자정보 상세보기</h4>
 </section>
 
 <div class="container" style="position:relative; z-index:1;">
