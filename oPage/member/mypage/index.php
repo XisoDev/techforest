@@ -100,17 +100,17 @@
       reader.onload = function (e) {
         $('#my_picture').css('background-image','url('+e.target.result+')');
 
-        var formData = new FormData();
-        formData.append("uploadFile", $("#picture_upload")[0].files[0]);
-
-        var params = {};
-        params["m_idx"] = <?=$logged_info['m_idx']?>;
-        params["formData"] = formData;
-
-        exec_json("member.my_picture_upload",params,function(ret_obj){
-            toastr.success(ret_obj.message);
-            document.location.reload();
-        });
+        // var formData = new FormData();
+        // formData.append("uploadFile", $("#picture_upload")[0].files[0]);
+        // 
+        // var params = {};
+        // params["m_idx"] = 9245;
+        // params["formData"] = formData;
+        //
+        // exec_json("member.my_picture_upload",params,function(ret_obj){
+        //     toastr.success(ret_obj.message);
+        //     document.location.reload();
+        // });
 
       }
       reader.readAsDataURL(input.files[0]);

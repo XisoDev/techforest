@@ -113,7 +113,7 @@ class technicianView{
             $output->add('my_info7',$my_info7);
             $output->add('my_info8',$my_info8);
             $output->add('my_info9',$my_info9);
-            $output->add('my_info10',$my_info10);;
+            $output->add('my_info10',$my_info10);
             $output->add('suggestion_join_hire',$this->suggestion_join_hire());
 
         }else{
@@ -233,6 +233,12 @@ class technicianView{
         $oDB->join("TF_language_cate lc","lcd.lc_idx = lc.lc_idx","LEFT");
         $d_language_arr = $oDB->get("TF_language_cate_detail lcd",null,"lcd.lc_d_idx, lcd.lc_idx, lcd.lc_d_name, lc.lc_name");
 
+        //파일 리스트
+        $oDB->orderBy("reg_date","DESC");
+        $oDB->orderBy("file_type","ASC");
+        $oDB->where("m_idx",$m_idx);
+        $file_list = $oDB->get("TF_member_file");
+
         $output->add('a_line_row',$a_line_row);
         $output->add('self_row',$self_row);
         $output->add('resume_row',$resume_row);
@@ -251,7 +257,7 @@ class technicianView{
         $output->add('certificate_row',$certificate_row);
         $output->add('language_arr',$language_arr);
         $output->add('d_language_arr',$d_language_arr);
-
+        $output->add('file_list',$file_list);
 
         return $output;
     }

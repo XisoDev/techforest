@@ -68,6 +68,9 @@ $my_info6 = $output->get('my_info6');
 //나의 이력서 정보 조회 - 희망직무
 $my_duty = $output->get('my_duty');
 
+//파일 리스트
+$file_list = $output->get('file_list');
+
 //자격증리스트
 $certificate_row = $output->get('certificate_row');
 $certificate_list = array();
@@ -131,13 +134,27 @@ shuffle($rand_array);
                     <h6 class="d-block d-lg-none">기본정보</h6>
                     <h4 class="d-none d-lg-block">기본정보</h4>
                 </div>
-                <div class="col-5 col-sm-4 col-lg-3 mx-auto px-auto">
+                <div class="col-5 col-sm-4 col-lg-3 mx-auto px-auto mb-3">
                     <div class="position-relative">
                         <a class="position-absolute text-primary" style="right:0;top:0; font-size:28px;z-index:10;"><i class="xi-close-circle"></i></a>
-                        <div class="avatar square mb-2" style="background-image:url('/layout/none/assets/images/no_avatar.png');">
-                        </div>
-                        <i class="xi-camera position-absolute text-white" style="right:0;bottom:0; font-size:28px;"></i>
-                        <i class="xi-camera position-absolute text-secondary" style="right:1px;bottom:1px; font-size:26px;"></i>
+
+												<div class="position-relative">
+														<?
+														if(!$logged_info['m_picture']) {
+																$img_url = "/layout/none/assets/images/no_avatar.png";
+														}else {
+																$img_url = "../../../img/" . $resume_row[0]['m_picture'];
+														}
+														?>
+														<div class="avatar square" id="my_picture" style="background-image:url('<?=$img_url?>');"></div>
+														<label for="picture_upload" class="position-absolute mb-0 pb-0" style="right:0;bottom:0;">
+															<img src="/oPage/images/imgicons/camera_gray.png" height="16" />
+														</label>
+														<input type="file" id="picture_upload" style="display:none;">
+												</div>
+
+                        <!-- <i class="xi-camera position-absolute text-white" style="right:0;bottom:0; font-size:28px;"></i>
+                        <i class="xi-camera position-absolute text-secondary" style="right:1px;bottom:1px; font-size:26px;"></i> -->
                     </div>
                 </div>
             </div>
@@ -380,7 +397,7 @@ shuffle($rand_array);
 													</div>
 													<h6 class="col-6 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">졸업연도</h6>
 													<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
-														<input type="text" class="form-control" id="school_graduated0" placeholder="졸업연도"/>
+														<input type="text" class="form-control monthpicker" id="school_graduated0" placeholder="졸업연도"/>
 													</div>
 													<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">전공</h6>
 													<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
@@ -435,7 +452,7 @@ shuffle($rand_array);
 													</div>
 													<h6 class="col-6 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">졸업연도</h6>
 													<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
-														<input type="text" class="form-control" id="school_graduated<?=$idx?>" value="<?=$val['school_graduated']?>" placeholder="졸업연도"/>
+														<input type="text" class="form-control monthpicker" id="school_graduated<?=$idx?>" value="<?=substr($val['school_graduated'],0,7)?>" placeholder="졸업연도"/>
 													</div>
 
 														<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">전공</h6>
@@ -444,12 +461,14 @@ shuffle($rand_array);
 														</div>
 														<?
 															$is_grade_visible = "none";
+															$is_grade_visible2 = "none";
 															if($val["s_idx"] != 1){
-																$is_grade_visible = "flex";
+																$is_grade_visible = "block";
+																$is_grade_visible2 = "fixed";
 															}
 														?>
 													<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0" id="school_grade_title<?=$idx?>" style="display:<?=$is_grade_visible?>">학점</h6>
-													<div class="input-group col-6 col-sm-3 mx-0 px-0 mb-2" id="grade<?=$idx?>" style="display:<?=$is_grade_visible?>;">
+													<div class="input-group col-6 col-sm-3 mx-0 px-0 mb-2" id="grade<?=$idx?>" style="display:<?=$is_grade_visible2?>;">
 														<input type="text" class="form-control text-center" id="school_grade<?=$idx?>" value="<?=$val['school_grade']?>" placeholder="학점"/>
 														<div class="input-group-prepend">
 															<span class="input-group-text">/</span>
@@ -512,7 +531,7 @@ shuffle($rand_array);
 															<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">자격증명</h6>
 															<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
 																<input type="text" class="form-control" id="certificate_name<?=$idx?>" name="h_certificate" value="<?=$val['certificate_name']?>" placeholder="자격증명"/>
-																<input type="text" class="form-control" id="certificate_date<?=$idx?>" value="<?=$val['certificate_date']?>" placeholder="취득일자"/>
+																<input type="text" class="form-control" id="certificate_date<?=$idx?>" value="<?=substr($val['certificate_date'],0,7)?>" placeholder="취득일자"/>
 															</div>
 													</div>
 											</div>
@@ -585,7 +604,7 @@ shuffle($rand_array);
 	                            </div>
 	                            <h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">취득날짜</h6>
 	                            <div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
-	                                <input type="text" class="form-control" id="language_date0"/>
+	                                <input type="text" class="form-control monthpicker" id="language_date0"/>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -641,7 +660,7 @@ shuffle($rand_array);
 		                            </div>
 		                            <h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">취득날짜</h6>
 		                            <div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
-		                                <input type="text" class="form-control" id="language_date<?=$idx?>" value="<?=$val['language_date']?>" />
+		                                <input type="text" class="form-control monthpicker" id="language_date<?=$idx?>" value="<?=substr($val['language_date'],0,7)?>" />
 		                            </div>
 		                        </div>
 		                    </div>
@@ -662,33 +681,19 @@ shuffle($rand_array);
                     </h5>
                 </div>
                 <div class="col-12 mx-0 px-0 mb-2">
-                    <div class="file_item border rounded py-2 px-2 mb-2">
-                        <i class="xi-trash pull-right xi-2x"></i>
-                        <i class="xi-download pull-right xi-2x"></i>
-                        [이력서] ic_launcher_1024.png
-                    </div>
-                    <div class="file_item border rounded py-2 px-2 mb-2">
-                        <i class="xi-trash pull-right xi-2x"></i>
-                        <i class="xi-download pull-right xi-2x"></i>
-                        [이력서] ic_launcher_1024.png
-                    </div>
-                    <div class="file_item border rounded py-2 px-2 mb-2">
-                        <i class="xi-trash pull-right xi-2x"></i>
-                        <i class="xi-download pull-right xi-2x"></i>
-                        [이력서] ic_launcher_1024.png
-                    </div>
-                    <div class="file_item border rounded py-2 px-2 mb-2">
-                        <i class="xi-trash pull-right xi-2x"></i>
-                        <i class="xi-download pull-right xi-2x"></i>
-                        [이력서] ic_launcher_1024.png
-                    </div>
+									<?foreach ($file_list as $val) {?>
+										<div class="file_item border rounded py-2 px-2 mb-2">
+												<a onclick="file_trash(<?=$val['file_name']?>)"><i class="xi-trash pull-right" style="font-size:1.5em;"></i></a>
+												<a href="" download="<?=$val['file_name']?>" title="<?=$val['file_name']?>"><i class="xi-download pull-right" style="font-size:1.5em;"></i></a>
+												[<?=$val['file_type']?>] <?=$val['file_name']?>
+										</div>
+									<?}?>
+
                     <div class="text-center">
-                        <a href="#" class="my-3 d-sm-inline-block d-none btn btn-warning">서류 추가하기</a>
+                        <button class="my-3 d-sm-inline-block d-none btn btn-warning" data-toggle="modal" data-target="#fileUpload">서류 추가하기</button>
                     </div>
-                    <a href="#" class="d-sm-none d-inline-block btn btn-warning btn-block rounded-0 rounded-bottom">서류 추가하기</a>
-
+                    <button class="d-sm-none d-inline-block btn btn-warning btn-block rounded-0 rounded-bottom" data-toggle="modal" data-target="#fileUpload">서류 추가하기</button>
                 </div>
-
             </div>
 
             <div class="row">
@@ -703,6 +708,40 @@ shuffle($rand_array);
         </div>
     </div>
 </section>
+
+<div class="modal fade" id="fileUpload" tabindex="-1" role="dialog" aria-labelledby="tech_forest_modal_window" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content text-center" style="border-radius:10px">
+            <a href="#" class="text-white pull-right text-right" style="margin-top:-40px;" onclick="jQuery('#fileUpload').modal('hide');" ><i class="xi-close xi-2x"></i></a>
+						<form id="fileUpload_form" method="post" enctype="multipart/form-data">
+							<div class="mt-4 mb-3">
+								<h5 class="weight_bold pb-3">관련 서류 등록</h5>
+								구분
+								<select class="red border-danger" style="background:white" id="fileUpload_select">
+									<option value="이력서">이력서</option>
+									<option value="자기소개서">자기소개서</option>
+									<option value="학력증명서">학력증명서</option>
+									<option value="경력증명서">경력증명서</option>
+									<option value="자격증">자격증</option>
+									<option value="어학">어학</option>
+								</select>
+							</div>
+							<div class="mt-4 mb-3">
+								<input type="file" id="fileUpload_file" value="">
+							</div>
+						</form>
+						<div class="row px-3 py-3">
+								<div class="col-sm-2"></div>
+								<div class="col-6 col-sm-4">
+									<input type="button" class="btn btn-block btn-danger btn-round mt-3" onclick="fileUpload_click_save()" value="저장" />
+								</div>
+								<div class="col-6 col-sm-4">
+									<input type="button" class="btn btn-block border-danger text-danger btn-round mt-3" onclick="jQuery('#fileUpload').modal('hide');" value="취소" />
+								</div>
+						</div>
+        </div>
+    </div>
+</div>
 
 <script type="text/javascript">
 
@@ -774,7 +813,7 @@ function occupation(obj){
 
   	var span = document.createElement('span');
   	span.id = new_value;
-  	span.innerHTML = new_value + '<img class="duty-btn-delete" src="../../img/close.png" alt="삭제" style="width:12px;margin:5px;" onclick="remove_item(this)" />';
+  	span.innerHTML = new_value + '<i class="xi-close-circle" onclick="remove_item(this)"></i>';
   	document.getElementById('duty_field').appendChild(span);
 
   }
@@ -841,14 +880,14 @@ function occupation(obj){
 			html += '</div>';
 			html += '<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">졸업연도</h6>';
 			html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">';
-			html += '<input type="text" id="school_graduated'+ my_info3_count + '"class="form-control" onclick="javascript:click_datepicker("#school_graduated' + my_info3_count + ')" placeholder="졸업연도"/>';
+			html += '<input type="text" id="school_graduated'+ my_info3_count + '"class="form-control monthpicker" placeholder="졸업연도"/>';
 			html += '</div>';
 			html += '<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">전공</h6>';
 			html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">';
 			html += '<input type="text" id="school_major'+ my_info3_count + '"class="form-control" placeholder="전공"/>';
 			html += '</div>';
 			html += '<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0" id="school_grade_title'+ my_info3_count +'"style="display:none">학점</h6>';
-			html += '<div class="input-group col-6 col-sm-9 mx-0 px-0 mb-2" id="grade'+ my_info3_count +'" style="display:none">';
+			html += '<div class="input-group col-6 col-sm-3 mx-0 px-0 mb-2" id="grade'+ my_info3_count +'" style="display:none">';
 			html += '<input type="text" class="form-control text-center" id="school_grade'+ my_info3_count + '" placeholder="학점"/>';
 			html += '<div class="input-group-prepend">';
 			html += '<span class="input-group-text">/</span>';
@@ -954,11 +993,11 @@ function occupation(obj){
 			html += '</select></div>';
 			html += '<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">근무기간</h6>';
 			html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">';
-			html += '<input type="text" class="form-control" autocomplete="off" name="c_start_date"  value="' +member_career_arr[i]["c_start_date"].substring(0, 7)+ '"/>';
+			html += '<input type="text" class="form-control monthpicker_from" autocomplete="off" name="c_start_date"  value="' +member_career_arr[i]["c_start_date"].substring(0, 7)+ '"/>';
 			html += '<div class="input-group-append">';
 			html += '<span class="input-group-text">~</span>';
 			html += '</div>';
-			html += '<input type="text" name="c_end_date" class="form-control" value="' +member_career_arr[i]["c_end_date"].substring(0, 7)+ '" />';
+			html += '<input type="text" name="c_end_date" class="form-control monthpicker_to" value="' +member_career_arr[i]["c_end_date"].substring(0, 7)+ '" />';
 			html += '</div>';
 			html += '<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">직무내용</h6>';
 			html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">';
@@ -1046,7 +1085,7 @@ function occupation(obj){
 		html += '<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">자격증명</h6>';
 		html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">';
 		html += '<input type="text" class="form-control" id="certificate_name'+ my_info5_count +'" name="h_certificate" placeholder="자격증명"/>';
-		html += '<input type="text" class="form-control" id="certificate_date'+ my_info5_count +'" placeholder="취득일자"/>';
+		html += '<input type="text" class="form-control monthpicker" id="certificate_date'+ my_info5_count +'" placeholder="취득일자"/>';
 		html += '</div></div></div>';
 
 		$("#my_info5_2").append(html);
@@ -1291,7 +1330,7 @@ function my_info6_del1(idx) {
 		}
 		else{
 			$('#grade'+index).css("display","flex");
-			$('#school_grade_title'+index).css("display","flex");
+			$('#school_grade_title'+index).css("display","block");
 			$('#ged'+index).css("display","none");
 		}
 	}
@@ -1459,6 +1498,49 @@ function my_info6_del1(idx) {
 				toastr.success(ret_obj.message);
 			});
 		}
+
+
+
+		$("#picture_upload").change(function(){
+			readURL(this);
+		});
+
+		function readURL(input) {
+			if(input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					$('#my_picture').css('background-image','url('+e.target.result+')');
+
+					// var formData = new FormData();
+					// formData.append("uploadFile", $("#picture_upload")[0].files[0]);
+					//
+					// var params = {};
+					// params["m_idx"] = 9245;
+					// params["formData"] = formData;
+					//
+					// exec_json("member.my_picture_upload",params,function(ret_obj){
+					//     toastr.success(ret_obj.message);
+					//     document.location.reload();
+					// });
+
+				}
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+
+		function fileUpload_click_save(){
+			var formData = new FormData();
+			formData.append("file_select", $('#fileUpload_select option:selected').val());
+
+			$.each($('#fileUpload_file')[0].files, function (i, file) {
+				formData.append("fileObj", file);
+			});
+				exec_json("technician.file_upload",formData,function(ret_obj){
+				    console.log(ret_obj.message);
+				});
+
+		}
+
 
 
 </script>

@@ -495,5 +495,15 @@ class technicianController{
     }
   }
 
+  function file_upload($args){
+    global $oDB;
+    $m_idx = $_SESSION['LOGGED_INFO'];
 
+    $oDB->where("m_idx",$m_idx);
+    $row = $oDB->get("TF_member_file");
+
+
+    return new Object(0,"파일 업로드가 완료되었습니다.");
+
+  }
 }

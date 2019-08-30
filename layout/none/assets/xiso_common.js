@@ -66,6 +66,41 @@ jQuery(document).ready(function($){
         format: "yyyy-mm-dd",
         language: "kr"
     });
+
+    var startDate = new Date();
+    var fechaFin = new Date();
+    var FromEndDate = new Date();
+    var ToEndDate = new Date();
+
+    $('.monthpicker').datepicker({
+      autoclose: true,
+      minViewMode: 1,
+      format: 'yyyy-mm',
+      language: "kr"
+    });
+
+    $('.monthpicker_from').datepicker({
+      autoclose: true,
+      minViewMode: 1,
+      format: 'yyyy-mm',
+      language: "kr"
+    }).on('changeDate', function(selected){
+        startDate = new Date(selected.date.valueOf());
+        startDate.setDate(startDate.getDate(new Date(selected.date.valueOf())));
+        $('.monthpicker_to').datepicker('setStartDate', startDate);
+    });
+
+    $('.monthpicker_to').datepicker({
+      autoclose: true,
+      minViewMode: 1,
+      format: 'yyyy-mm',
+      language: "kr"
+    }).on('changeDate', function(selected){
+        FromEndDate = new Date(selected.date.valueOf());
+        FromEndDate.setDate(FromEndDate.getDate(new Date(selected.date.valueOf())));
+        $('.monthpicker_from').datepicker('setEndDate', FromEndDate);
+    });
+
 });
 
 
