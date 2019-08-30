@@ -205,7 +205,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="text-center">
         <a href="#" class="d-none d-md-inline-block mt-3 btn btn-primary btn-round">더 많은 기술자보기</a>
     </div>
@@ -322,5 +322,8 @@
         jQuery('#tech_modal_example').modal('show');
     });
   }
+  //알림 설정 초기화
+  $('#notice_count')[0].innerText = <?=count($output->get("member_notice"));?>
+
 
 </script>

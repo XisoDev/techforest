@@ -9,7 +9,7 @@ class ncenterController{
     $num = $args->num;
 
     $data = Array (
-      "read"=>0
+      "read"=>1
             );
 
     $oDB->where ('mn_idx', $mn_idx);
@@ -17,21 +17,24 @@ class ncenterController{
 
     switch ($n_idx) {
       case 1:
-
+        $url = getUrl('company','job',$num);
         break;
+
       case 2:
 
         break;
+
       case 3:
 
         break;
-      case 4:
 
+      case 4:
+        $url = getUrl('company','job');
         break;
-      case 5:
-        $url = getUrl('technician','resumeWrite',9245);
+      case 5: //사진이력서 등록
+        $url = getUrl('technician','resumeWrite',$num);
         break;
-      case 6:
+      case 6: //맞춤 일자리 추천
         $url = getUrl('technician');
         break;
 

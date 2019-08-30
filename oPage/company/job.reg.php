@@ -165,6 +165,9 @@ $footer_false = true;
 ?>
 
 <script type="text/javascript">
+//알림 설정 초기화
+$('#notice_count')[0].innerText = <?=count($output->get("member_notice"));?>
+
   function temporary_save(){
 
   }

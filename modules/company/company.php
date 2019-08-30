@@ -15,11 +15,12 @@ class companyView{
 
 
         $output = new Object();
+
         $output->add('application_list',$this->getApplicationCompany());
         $output->add('new_member2',$this->new_member2());
         $output->add('now_application',$this->now_application());
         $output->add('hire_ing',$this->hire_ing());
-        // $output->add('hire_call',$this->hire_call());
+        $output->add('member_notice',$this->member_notice());
 
         $set_template_file = "company/index.php";
 
@@ -72,7 +73,7 @@ class companyView{
 
         $output->add('voucher_list',$voucher_list);
         $output->add('payment_list',$payment_list);
-
+        $output->add('member_notice',$this->member_notice());
         return $output;
 
     }
@@ -97,6 +98,7 @@ class companyView{
         $output->add('amount',$args->hidden_amount);
         $output->add('hidden_m_idx',$args->hidden_m_idx);
         $output->add('hidden_h_idx',$args->hidden_h_idx);
+        $output->add('member_notice',$this->member_notice());
 
         $set_template_file = "company/service.payment.php";
 
@@ -117,7 +119,7 @@ class companyView{
         $add_body_class[] = "shrink";
 
         $output = new Object();
-
+        $output->add('member_notice',$this->member_notice());
         if($args->document_srl > 0){
             $set_template_file = "company/application.view.php";
             //여기 array 에는 해당 document_srl 로 조회한 job 정보를 넣으면됨.
@@ -144,6 +146,7 @@ class companyView{
             $output->add('check_voucher',$check_voucher);
             $output->add('check_applicant',$check_applicant);
 
+
         }else{
             $set_template_file = "404.html";
             $output->setError(-1);
@@ -165,7 +168,7 @@ class companyView{
 
         //$args->document_srl을 db에서 조회해서 존재하는 글이면 view를 뿌리고 아니면 list를 뿌려주면 됩니다.
         $output = new Object();
-
+        $output->add('member_notice',$this->member_notice());
         global $oDB;
 
         $now_date = date("YmdHis");
@@ -199,6 +202,7 @@ class companyView{
 
           $output->add('application_row',$application_row);
           $output->add('interview_list',$interview_list);
+
 
         }else{
             $set_template_file = "company/job.list.php";
@@ -254,7 +258,7 @@ class companyView{
 
         $output = new Object();
 
-
+        $output->add('member_notice',$this->member_notice());
         return $output;
     }
 
@@ -271,7 +275,7 @@ class companyView{
 
         $output = new Object();
 
-
+        $output->add('member_notice',$this->member_notice());
         return $output;
     }
 
@@ -280,7 +284,7 @@ class companyView{
         $set_template_file = "company/job.reg.complete.php";
 
         $output = new Object();
-
+        $output->add('member_notice',$this->member_notice());
         return $output;
     }
 
@@ -384,27 +388,49 @@ class companyView{
       return $row;
     }
 
-        function hire_ing(){
-          global $oDB;
+    function hire_ing(){
+      global $oDB;
 
-          $now_date = date(YmdHis);
+      $now_date = date(YmdHis);
 
-          $m_idx = $_SESSION['LOGGED_INFO'];
+      $m_idx = $_SESSION['LOGGED_INFO'];
 
-          $oDB->orderby("h.h_idx","DESC");
-          $oDB->groupBy("h.h_idx");
-          $oDB->where("co.m_idx",$m_idx);
-          $oDB->where("h.job_end_date",$now_date,">");
-          $oDB->joinwhere("TF_application_letter al","al.isVisible","Y");
-          $oDB->join("TF_application_letter al","al.h_idx = h.h_idx","LEFT");
-          $oDB->join("TF_district_tb d","d.district_idx = h.district_idx","LEFT");
-          $oDB->join("TF_city_tb c","c.city_idx = h.city_idx","LEFT");
-          $oDB->join("TF_local_tb l","l.local_idx = h.local_idx","LEFT");
-          $oDB->join("TF_member_commerce_tb co","h.c_idx = co.c_idx","LEFT");
-          $row = $oDB->get("TF_hire_tb h",null,"local_name,city_name,district_name,h.h_idx,h_title,salary_idx,job_salary,count(al.m_idx) AS applicant,TO_DAYS(h.job_end_date )-TO_DAYS(NOW( )) AS job_end_day");
+      $oDB->orderby("h.h_idx","DESC");
+      $oDB->groupBy("h.h_idx");
+      $oDB->where("co.m_idx",$m_idx);
+      $oDB->where("h.job_end_date",$now_date,">");
+      $oDB->joinwhere("TF_application_letter al","al.isVisible","Y");
+      $oDB->join("TF_application_letter al","al.h_idx = h.h_idx","LEFT");
+      $oDB->join("TF_district_tb d","d.district_idx = h.district_idx","LEFT");
+      $oDB->join("TF_city_tb c","c.city_idx = h.city_idx","LEFT");
+      $oDB->join("TF_local_tb l","l.local_idx = h.local_idx","LEFT");
+      $oDB->join("TF_member_commerce_tb co","h.c_idx = co.c_idx","LEFT");
+      $row = $oDB->get("TF_hire_tb h",null,"local_name,city_name,district_name,h.h_idx,h_title,salary_idx,job_salary,count(al.m_idx) AS applicant,TO_DAYS(h.job_end_date )-TO_DAYS(NOW( )) AS job_end_day");
 
-          return $row;
+      return $row;
 
-        }
+    }
+
+    function member_notice(){
+      global $oDB;
+
+      $m_idx = $_SESSION['LOGGED_INFO'];
+
+      $columns = "mn_idx, mn.m_idx, mn.n_idx, mn.num, n.notice_type, n.division, n.used, ns.agree, mn.reg_date, m_name, mn.read";
+
+      $oDB->where("mn.m_idx",$m_idx);
+      $oDB->where("mn.read",0);
+
+      $oDB->join("TF_notice AS n", "n.n_idx = mn.n_idx", "LEFT");
+      $oDB->join("TF_notice_setting AS ns", "ns.n_idx = mn.n_idx", "LEFT");
+      $oDB->join("TF_member_tb AS m", "mn.m_idx = m.m_idx", "LEFT");
+
+      $oDB->orderby("n_idx","ASC");
+
+      $row = $oDB->get("TF_member_notice AS mn",null,$columns);
+
+      return $row;
+
+    }
 
 }

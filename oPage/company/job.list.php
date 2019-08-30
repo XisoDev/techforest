@@ -134,6 +134,8 @@
     }
   }
 
+  //알림 숫자 설정
+  $('#notice_count')[0].innerText = <?=count($output->get("member_notice"));?>
 
 
 </script>

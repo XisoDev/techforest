@@ -12,7 +12,7 @@
                     }
                 }
                 ?>
-                <li class="nav-item xs_content active weight_normal"><a class="nav-link" href="#"><img src="/oPage/images/imgicons/bell.png" class="imgicon pt-1" height="18" /></a></li>
+                <li class="nav-item xs_content active weight_normal"><a id="open_notice" class="nav-link" href="#"><img src="/oPage/images/imgicons/bell.png" class="imgicon pt-1" height="18" /></a></li>
             </ul>
         </nav>
     </div>
@@ -111,7 +111,7 @@
         <a href="<?=getUrl('ncenter')?>" class="toggle_alert">
             <img src="/oPage/images/imgicons/bell_white.png" class="white"/>
             <img src="/oPage/images/imgicons/bell.png" class="black"/>
-            <span class="badge bg-red">9</span>
+            <span id="notice_count" class="badge bg-red">0</span>
         </a>
         <?php } ?>
     </div>

@@ -415,6 +415,9 @@ $salary_list = $oDB->get("TF_salary",null,"salary_idx, salary_name, salary_is_sh
 </div>
 
 <script type="text/javascript">
+//알림 설정 초기화
+$('#notice_count')[0].innerText = <?=count($output->get("member_notice"));?>
+
 var duty_arr = <? echo json_encode($duty_row); ?>;
 var local_arr = <? echo json_encode($local_arr); ?>;
 var city_arr = <? echo json_encode($city_arr); ?>;

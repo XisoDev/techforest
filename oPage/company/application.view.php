@@ -340,6 +340,9 @@
 </div> -->
 
 <script type="text/javascript">
+  //알림 숫자 초기화
+  $('#notice_count')[0].innerText = <?=count($output->get("member_notice"));?>
+
   function prepare(){
     alert("죄송합니다. 서비스 준비중입니다.");
   }
