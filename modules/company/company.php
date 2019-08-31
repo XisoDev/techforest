@@ -31,6 +31,7 @@ class companyView{
         setSEO("서비스 이용현황","기술자를 쉽게 찾을 수 있는 유료서비스를 이용해보세요.");
         global $site_info;
         global $oDB;
+        global $logged_info;
         $site_info->layout = "company";
 
         global $add_body_class;
@@ -42,6 +43,24 @@ class companyView{
 
         if($args->document_srl){
             $set_template_file = "company/service.view.php";
+
+
+            $c_idx = $logged_info['c_idx'];
+            $now_date = date(YmdHis);
+
+            //선택한 유료서비스 조회
+            $oDB->where("ps_idx",$args->document_srl);
+            $pay_row = $oDB->getOne("TF_pay_service");
+
+            //진행중인 공고 불러오기
+            $oDB->where("c_idx",$c_idx);
+            $oDB->where("job_end_date",$now_date,">");
+            $choose_hire = $oDB->get("TF_hire_tb");
+
+            $output->add('pay_row',$pay_row);
+            $output->add('member_notice',$this->member_notice());
+
+            $output->add('choose_hire',$choose_hire);
             $output->add('false_sub_visual',true);
         }else {
             $set_template_file = "company/service.list.php";
@@ -90,16 +109,6 @@ class companyView{
         $add_body_class[] = "shrink";
         $service_option = explode(",",$args->service_option);
 
-        $oDB->where("ps_idx",$service_option[0]);
-        $pay_row = $oDB->getOne("TF_pay_service");
-
-        $output->add('pay_row',$pay_row);
-        $output->add('discount',$args->hidden_discount);
-        $output->add('amount',$args->hidden_amount);
-        $output->add('hidden_m_idx',$args->hidden_m_idx);
-        $output->add('hidden_h_idx',$args->hidden_h_idx);
-        $output->add('member_notice',$this->member_notice());
-
         $set_template_file = "company/service.payment.php";
 
         return $output;
@@ -124,7 +133,7 @@ class companyView{
             $set_template_file = "company/application.view.php";
             //여기 array 에는 해당 document_srl 로 조회한 job 정보를 넣으면됨.
             //$output->add('oJob',array());
-
+            $now_date = date("YmdHis");
             //상세이력서보기 select
             $m_idx1 = $args->document_srl;
             $oDB->where("m.m_idx",$m_idx1);
@@ -132,10 +141,10 @@ class companyView{
             $oDB->join("TF_salary s","mo.salary_idx = s.salary_idx", "LEFT");
             $app_info_row = $oDB->get("TF_member_tb m");
 
-            //면접제안권있는지 확인&잔여횟수 확인
-            $m_idx2 = $_SESSION['LOGGED_INFO'];
-            $oDB->where("m_idx",$m_idx2);
-            $check_voucher = $oDB->get("TF_member_voucher",null,"v_idx,m_idx,ps_idx,remain_count,SUM(remain_count) AS sum_remain_count, MAX(remain_count) AS max_remain_count,reg_date,expire_date");
+            //공고등록권 구매했는지 확인
+            $oDB->where("expire_date",$now_date,">");
+            $oDB->where("h_idx",$args->h_idx);
+            $check_voucher = $oDB->get("TF_member_voucher",null,"v_idx,m_idx,h_idx,ps_idx,reg_date,expire_date");
 
             //면접제안한 회원인지 확인
             $oDB->where("applicant_idx",$m_idx1);

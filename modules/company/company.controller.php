@@ -397,7 +397,7 @@ class companyController{
           "reg_date" => $now_date
         );
         $row2 = $oDB->insert("TF_cash_receipt",$cash_data);
-        
+
       }else if($args->receipt_registration){
         $cash_data = array(
           "p_idx" => $search_p_idx[0]['p_idx'],
@@ -419,6 +419,7 @@ class companyController{
 
      $data = array(
        "m_idx" => $args->m_idx,
+       "h_idx" => $args->h_idx,
        "ps_idx" => $args->ps_idx,
        "all_count" => $args->all_count,
        "remain_count" => $args->remain_count,
