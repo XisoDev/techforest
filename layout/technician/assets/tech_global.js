@@ -28,7 +28,7 @@ jQuery(document).ready(function($){
     $('.flex-card-slick').slick({
         dots: false,
         speed: 300,
-        slidesToShow: 1.6,
+        slidesToShow: 1.2,
         slidesToScroll: 1,
         mobileFirst: true,
         centerMode: false,

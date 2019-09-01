@@ -52,18 +52,17 @@ $rt_row = $output->get('rt_row');
         <?php if(!$logged_info) { ?>
         <div class="col-12">
             <h6 class="weight_lighter mt-4">아직 이력서를 등록하지 않으셨네요!</h6>
-            <button class="btn btn-lg btn-block btn-warning sm_content">이력서 등록하고 맞춤 일자리 확인하기
+            <button class="btn btn-lg btn-block btn-warning xs_content py-3">이력서 등록하고 맞춤 일자리 확인하기
                 <span class="color_primary"><i class="xi-plus-circle"></i></span>
             </button>
         </div>
 
-        <div class="col-9 mr-0 pr-0">
-            <h6 class="weight_lighter mt-4">오늘의 주요 채용 공고!</h6>
-        </div>
-        <div class="col-3 ml-0 pl-0">
-            <a href="#" class="mt-3 btn btn-block btn-primary btn-xxs btn-round">더보기<i class="xi-plus"></i></a>
-        </div>
+        <div class="col-12">
+            <div class="bg-white rounded pt-3 mt-3">
+            <a href="#" class="pull-right mr-2 btn btn-primary btn-xxs btn-round py-1 px-2">공고더보기 <i class="xi-plus"></i></a>
+            <h6 class="weight_lighter ml-2">오늘의 주요 채용 공고!</h6>
 
+                <div class="clearfix"></div>
         <!-- <div class="col-4 mr-0 pr-1">
             <select class="form-control"><option>기계/제조</option></select>
         </div>
@@ -73,15 +72,13 @@ $rt_row = $output->get('rt_row');
         <div class="col-4 ml-0 pl-1">
             <select class="form-control"><option>부산</option></select>
         </div> -->
-
-        <div class="col-12 mt-2">
             <div class="flex-card-slick">
                 <?php foreach($output->get("new_hire3") as $val){ ?>
                   <?php $desired_work_place = $val['local_name'] . " ";if($val['city_name'] != '전체'){ $desired_work_place .= $val['city_name']; }if($val['district_name'] != '전체'){ $desired_work_place .= $val['district_name']; }?>
                     <div class="tech_card bg-white">
                         <div class="thumbnail mx-0 px-0" style="background-image:url('http://www.planttech.co.kr/wp-content/uploads/2018/07/%EC%82%BC%EC%84%B1%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%811-820x457.png')">
                         </div>
-                        <div class="content_padding text-left pb-1">
+                        <div class="p-2 text-left pb-1">
                             <h6><?=$val['c_name']?></h6>
                             <h6 class="red" style="height: 38px;"><?=$val['h_title']?></h6>
                             <p class="weight_lighter xxs_content mx-0 px-0">
@@ -106,7 +103,6 @@ $rt_row = $output->get('rt_row');
                                 <i class="xi-eye-o"></i> 142
                             </p>
                         </div>
-                        <a href="#" class="btn btn-block btn-warning mt-3 rounded-0">자세히 보기</a>
                     </div>
                 <?php } ?>
             </div>
@@ -194,8 +190,12 @@ $rt_row = $output->get('rt_row');
                 </div>
             </div>
 <?php } ?>
+        </div>
+<!--        end whitebox-->
     </div>
+<!--    end col-->
 </div>
+<!--end row-->
     <!--    배너슬라이드 섹션-->
     <br>
     <div id="demo" class="carousel slide standard" data-ride="carousel">
@@ -354,15 +354,15 @@ $rt_row = $output->get('rt_row');
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content text-center" style="border-radius:10px">
             <a class="text-white pull-right text-right" style="margin-top:-40px;" onclick="jQuery('#recommend_technician_modal').modal('hide');" ><i class="xi-close xi-2x"></i></a>
-            <div class="square avatar bg-red mx-auto" style="width:120px; margin-top:-60px; background-image:url('/oPage/ncenter/images/header_icon.png');"></div>
-            <div class="content_padding">
+            <div class="popoup_header rounded-top" style="background-image:url('/oPage/technician/images/popup_header_technician.png');"></div>
+            <div class="px-3 pb-2 pt-4">
                 <h5 class="weight_normal mb-1">기업이 먼저 입사제안을</h5>
                 <h5 class="weight_normal mb-1">할 수 있도록 <span class="red">회원님의 이력서를 </span></h5>
                 <h5 class="weight_normal mb-3"><span class="red">추천해도 될까요?</span></h5>
                 <a class="btn btn-block btn-danger btn-round btn-lg mb-3" style="width: 63%;margin: auto;" onclick="rt_click_yes()">네 추천해주세요</a>
                 <a class="btn btn-block border-danger text-danger btn-round btn-lg mt-3" style="width: 63%;margin: auto;" onclick="rt_click_no()">아니오</a>
             </div>
-            <button class="mt-2 btn btn-block btn-light" onclick="jQuery('#recommend_technician_modal').modal('hide');" style="border-radius:10px;">닫기</button>
+            <button class="py-3  btn btn-block btn-light" onclick="jQuery('#recommend_technician_modal').modal('hide');" style="border-radius:10px;">닫기</button>
         </div>
     </div>
 </div>

@@ -30,6 +30,22 @@
 .btn-round{
     border-radius:200px;
 }
+.rounded-top{
+    border-top-left-radius: 10px !important;
+    border-top-right-radius: 10px !important;
+}
+.rounded-bottom{
+    border-bottom-left-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+}
+.rounded-left{
+    border-top-left-radius: 10px !important;
+    border-bottom-left-radius: 10px !important;
+}
+.rounded-right{
+    border-top-right-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+}
 .rounded-0-left{
     border-top-left-radius: 0 !important;
     border-bottom-left-radius: 0 !important;
@@ -236,6 +252,12 @@ img{
 }
 .tech_card .thumbnail .icon_wrap{
     padding:60px 0 20px;
+}
+.popoup_header{
+    height:150px;
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 .thumbnail{
     position:relative;

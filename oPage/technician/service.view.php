@@ -11,14 +11,14 @@
 <div class="fixed-bottom bg-white purchaseBox">
     <a class="toggleTip d-lg-none xxs_content" href="#" onclick="jQuery(this).parent('div').toggleClass('active');"><i class="xi-angle-up"></i><i class="xi-angle-down"></i></a>
     <form>
-        <div class="content_padding">
+        <div class="px-2 py-2">
             <div class="row flex-lg-column-reverse">
                 <div class="col-4 col-lg-12">
                     <div class="thumbnail bg-secondary square" style="background-image:url('/oPage/technician/images/tech_service.jpg'); background-size:cover;">
 
                     </div>
                 </div>
-                <div class="col-8 pt-3 col-lg-12 text-lg-center">
+                <div class="col-8 pt-2 col-lg-12 text-lg-center">
                     <h5>프리미엄 회원 이용권</h5>
                     <h6>상품 금액 : 50,000원</h6>
                 </div>
@@ -29,10 +29,10 @@
                 <label class="xs_content mb-0 pb-1">쿠폰할인</label>
                 <select class="form-control"><option value="">첫회원가입 기념 10%할인쿠폰</option></select>
                 <h6 class="weight_normal pt-2 text-right">총 결제 금액 <span class="red">27,000원</span></h6>
-                <a href="#" class="btn btn-block btn-light">견적서보기</a>
+                <a href="#" class="btn btn-block btn-light py-2 mb-2">견적서보기</a>
             </div>
         </div>
-        <a href="#" class="btn btn-block btn-danger rounded-0" data-toggle="modal" data-target="#paymentModal">결제하기</a>
+        <a href="#" class="btn btn-block btn-danger py-2 rounded-0" data-toggle="modal" data-target="#paymentModal">결제하기</a>
     </form>
 </div>
 
@@ -49,18 +49,18 @@
             </div>
             <div class="modal-body">
                 <form>
-                    <div class="custom-control custom-radio border rounded content_padding mb-3 pl-5 bigger_control">
+                    <div class="custom-control custom-radio border rounded pl-4 px-3 py-2 mb-3 bigger_control">
                         <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-                        <label class="custom-control-label weight_lighter" for="customRadio1">
-                            <i class="ml-3 xi-credit-card xi-2x" style="vertical-align: -7px;"></i>
-                            신용카드・체크카드
+                        <label class="custom-control-label weight_lighter ml-2" for="customRadio1">
+                            <img src="/oPage/images/imgicons/card.png" height="24" class="imgicon pl-3" />
+                            <span style="vertical-align:7px;" class="pl-2">신용카드・체크카드</span>
                         </label>
                     </div>
-                    <div class="custom-control custom-radio border rounded content_padding mb-3 pl-5 bigger_control">
+                    <div class="custom-control custom-radio border rounded pl-4 px-3 py-2 mb-3 bigger_control">
                         <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-                        <label class="custom-control-label weight_lighter" for="customRadio2">
-                            <i class="ml-3 xi-bank xi-2x" style="vertical-align: -7px;"></i>
-                            무통장 입금
+                        <label class="custom-control-label weight_lighter ml-2" for="customRadio2">
+                            <img src="/oPage/images/imgicons/banking.png" height="24" class="imgicon pl-3" />
+                            <span style="vertical-align:7px;" class="pl-2">무통장 입금</span>
                         </label>
                     </div>
                     <input type="button" class="btn btn-block btn-warning" value="결제하기" />

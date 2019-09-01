@@ -51,8 +51,9 @@
 
 .bigger_control label::before,
 .bigger_control label::after{
-    width:1.4rem;
-    height:1.4rem;
+    width:1.2rem;
+    height:1.2rem;
+    top: 0.20rem;
 }
 
 /*마이페이지용 폼*/

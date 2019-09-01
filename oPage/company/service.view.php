@@ -77,12 +77,12 @@ $choose_hire = $output->get('choose_hire');
 
 <div class="fixed-bottom bg-white purchaseBox" id="pay_box">
     <a class="toggleTip d-lg-none xxs_content" onclick="jQuery(this).parent('div').toggleClass('active');"><i class="xi-angle-up"></i><i class="xi-angle-down"></i></a>
-        <div class="content_padding">
+        <div class="px-2 py-2">
             <div class="row flex-lg-column-reverse">
                 <div class="col-4 col-lg-12">
                     <div class="thumbnail bg-secondary square" style="background-image:url('/oPage/technician/images/tech_service.jpg'); background-size:cover;"></div>
                 </div>
-                <div class="col-8 pt-3 col-lg-12 text-lg-center">
+                <div class="col-8 pt-2 col-lg-12 text-lg-center">
                     <h5>후불공고등록</h5>
                     <h6>상품 금액 : 50,000원</h6>
                 </div>
@@ -107,11 +107,11 @@ $choose_hire = $output->get('choose_hire');
                 <input type="hidden" name="hidden_amount" id="hidden_amount" value="<?=$row['price']?>">
                 <h6 class="weight_normal pt-2 text-right">할인 금액 <span class="red" name="discount" id="discount">0</span><span class="red">원</span></h6>
                 <h6 class="weight_normal pt-2 text-right">총 결제 금액 <span class="red" name="amount" id="amount"><?=$row['price']?></span><span class="red">원</span></h6>
-                <!-- <a href="#" class="btn btn-block btn-light">견적서보기</a> -->
+<!--                <a href="#" class="btn btn-block btn-light py-2 mb-2">견적서보기</a>-->
             </div>
         </div>
         <!-- <a class="btn btn-block btn-danger rounded-0" data-toggle="modal" data-target="#paymentModal">결제하기</a> -->
-        <a class="btn btn-block btn-danger rounded-0" onclick="pay_check()">결제하기</a>
+        <a class="btn btn-block btn-danger py-2 rounded-0 text-white" onclick="pay_check()">결제하기</a>
 </div>
 
 
@@ -127,18 +127,18 @@ $choose_hire = $output->get('choose_hire');
             </div>
             <div class="modal-body">
               <form>
-                  <div class="custom-control custom-radio border rounded content_padding mb-3 pl-5 bigger_control">
-                      <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" checked>
-                      <label class="custom-control-label weight_lighter" for="customRadio1">
-                          <i class="ml-3 xi-credit-card xi-2x" style="vertical-align: -7px;"></i>
-                          신용카드・체크카드
+                  <div class="custom-control custom-radio border rounded pl-4 px-3 py-2 mb-3 bigger_control">
+                      <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                      <label class="custom-control-label weight_lighter ml-2" for="customRadio1">
+                          <img src="/oPage/images/imgicons/card.png" height="24" class="imgicon pl-3" />
+                          <span style="vertical-align:7px;" class="pl-2">신용카드・체크카드</span>
                       </label>
                   </div>
-                  <div class="custom-control custom-radio border rounded content_padding mb-3 pl-5 bigger_control">
+                  <div class="custom-control custom-radio border rounded pl-4 px-3 py-2 mb-3 bigger_control">
                       <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" onclick="radio2_check()">
-                      <label class="custom-control-label weight_lighter" for="customRadio2">
-                          <i class="ml-3 xi-bank xi-2x" style="vertical-align: -7px;"></i>
-                          무통장 입금
+                      <label class="custom-control-label weight_lighter ml-2" for="customRadio2">
+                          <img src="/oPage/images/imgicons/banking.png" height="24" class="imgicon pl-3" />
+                          <span style="vertical-align:7px;" class="pl-2">무통장 입금</span>
                       </label>
                   </div>
 
@@ -265,7 +265,7 @@ $choose_hire = $output->get('choose_hire');
             // 결제 성공 시 로직,
             var params = {};
             params["m_idx"] = m_idx;
-            params["ps_idx"] = <?=$row['ps_idx']?>;
+            params["ps_idx"] = <?=$row['ps_idx'] ? $row['ps_idx'] : 0 ?>;
             params['merchant_uid'] = 'merchant_' + new Date().getTime();
             params["amount"] = amount;
             params["discount"] = discount;
@@ -275,13 +275,13 @@ $choose_hire = $output->get('choose_hire');
               var params = {};
               params["m_idx"] = m_idx;
               params["h_idx"] = h_idx;
-              params["ps_idx"] = <?=$row['ps_idx']?>;
-              params["all_count"] = <?=$row['service_count']?>;
-              params['remain_count'] = <?=$row['service_count']?>;
+              params["ps_idx"] = <?=$row['ps_idx'] ? $row['ps_idx'] : 0 ?>;
+              params["all_count"] = <?=$row['service_count'] ? $row['service_count'] : 0?>;
+              params['remain_count'] = <?=$row['service_count'] ? $row['service_count'] : 0?>;
 
               exec_json("company.add_voucher",params,function(ret_obj){
                 if(hidden_m_idx > 1){
-                  document.location.href="<?=getUrl('company','application',$m_num,array(h_idx=>$h_num))?>";
+                  document.location.href="<?=getUrl('company','application',$m_num,array('h_idx'=>$h_num))?>";
                 }
               });
             });
@@ -312,7 +312,7 @@ $choose_hire = $output->get('choose_hire');
       }
 
       params["m_idx"] = m_idx;
-      params["ps_idx"] = <?=$row['ps_idx']?>;
+      params["ps_idx"] = <?=$row['ps_idx'] ? $row['ps_idx'] : 0?>;
       params['merchant_uid'] = 'cash_' + new Date().getTime();
       params["amount"] = amount;
       params["discount"] = discount;

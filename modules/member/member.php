@@ -90,15 +90,15 @@ class memberView{
         }
     }
 
-    // function niceAuth($args){
-    //     if($_SESSION['nice_auth']["CI"]){
-    //         header("location:" . getUrl('member','signUp'));
-    //         return true;
-    //     };
-    //
-    //     global $set_template_file;
-    //     $set_template_file = "member/nice_auth.php";
-    // }
+//     function niceAuth($args){
+//         if($_SESSION['nice_auth']["CI"]){
+//             header("location:" . getUrl('member','signUp'));
+//             return true;
+//         };
+//
+//         global $set_template_file;
+//         $set_template_file = "member/nice_auth.php";
+//     }
 
     function findPassword($args){
         $output = new Object();

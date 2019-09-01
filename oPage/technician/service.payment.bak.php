@@ -9,14 +9,14 @@
     </div>
     <div class="content_padding">
     <form>
-        <div class="custom-control custom-radio border rounded content_padding mb-3 pl-5 bigger_control">
+        <div class="custom-control custom-radio border rounded  px-3 py-2 mb-3 pl-5 bigger_control">
             <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
             <label class="custom-control-label weight_lighter" for="customRadio1">
                 <i class="ml-3 xi-credit-card xi-2x" style="vertical-align: -7px;"></i>
                 신용카드・체크카드
             </label>
         </div>
-        <div class="custom-control custom-radio border rounded content_padding mb-3 pl-5 bigger_control">
+        <div class="custom-control custom-radio border rounded  px-3 py-2 mb-3 pl-5 bigger_control">
             <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
             <label class="custom-control-label weight_lighter" for="customRadio2">
                 <i class="ml-3 xi-bank xi-2x" style="vertical-align: -7px;"></i>
