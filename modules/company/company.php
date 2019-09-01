@@ -78,6 +78,8 @@ class companyView{
         $output = new Object();
         $site_info->layout = "company";
         $add_body_class[] = "shrink";
+        $add_body_class[] = "no_mobile_header";
+
         $set_template_file = "company/service.history.php";
 
         $m_idx = $_SESSION['LOGGED_INFO'];

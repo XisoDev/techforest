@@ -3,6 +3,7 @@
     font-family: 'Noto Sans KR', sans-serif;
     font-weight:400;
 }
+
 .imgicon{
     vertical-align:0px;
 }
@@ -26,6 +27,32 @@
     text-align:center;
     padding:60px 0;
 }
+
+/*레이아웃 출력 제어*/
+@media screen and (max-width:991px) {
+    body.no_mobile_header .noheader_alert{
+        display:block;
+    }
+    body.no_mobile_header{
+        margin-top: -3.4rem;
+    }
+}
+.noheader_alert {
+    display: none;
+}
+
+body.no_mobile_header #header_mobile{
+    display:none !important;
+}
+
+body.no_pc_header #header_pc{
+    display:none !important;
+}
+body.no_pc_footer footer{
+    display:none !important;
+}
+
+
 /*부트스트랩 손보기*/
 .btn-round{
     border-radius:200px;

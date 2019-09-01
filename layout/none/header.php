@@ -3,7 +3,7 @@
         background:#fff;
     }
 </style>
-<header class="header_pc d-none d-lg-block">
+<header id="header_pc" class="d-none d-lg-block">
     <div class="container py-0 my-0">
         <nav class="navbar navbar-expand-lg navbar-light m-0 p-0">
             <ul class="navbar-nav ml-auto">

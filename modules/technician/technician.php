@@ -413,6 +413,7 @@ class technicianView{
 
         global $add_body_class;
         $add_body_class[] = "shrink";
+        $add_body_class[] = "no_mobile_header";
 
         global $set_template_file;
 

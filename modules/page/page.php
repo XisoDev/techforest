@@ -14,6 +14,8 @@ class pageView{
         global $add_html_header;
 
         $add_body_class[] = "splash_screen";
+        $add_body_class[] = "no_pc_header";
+        $add_body_class[] = "no_pc_footer";
         $add_html_header[] = "<link rel=\"stylesheet\" href=\"/oPage/css/splash.css\">";
         $output = new Object();
 
@@ -25,6 +27,10 @@ class pageView{
     function selectType($args){
 
         global $set_template_file;
+
+        global $add_body_class;
+        $add_body_class[] = "no_pc_header";
+        $add_body_class[] = "no_pc_footer";
 
         $output = new Object();
 

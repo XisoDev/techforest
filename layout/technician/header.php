@@ -1,4 +1,4 @@
-<header class="header_pc d-none d-lg-block">
+<header id="header_pc" class="d-none d-lg-block">
     <div class="container py-0 my-0">
         <nav class="navbar navbar-expand-lg navbar-light m-0 p-0">
             <ul class="navbar-nav ml-auto">
@@ -114,6 +114,13 @@
         <?php } ?>
     </div>
 </header>
+<?php if($logged_info) { ?>
+    <a href="<?=getUrl('ncenter')?>" class="noheader_alert toggle_alert">
+        <img src="/oPage/images/imgicons/bell_white.png" class="white"/>
+        <img src="/oPage/images/imgicons/bell.png" class="black"/>
+        <span id="notice_count" class="badge bg-red"><?=count($output->get("member_notice"))?></span>
+    </a>
+<?php } ?>
 
 <?php
 $file_name = ($act != "index") ? $act : $module;
