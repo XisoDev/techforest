@@ -40,7 +40,7 @@ class companyView{
         global $set_template_file;
 
         $output = new Object();
-
+        $output->add('member_notice',$this->member_notice());
         if($args->document_srl){
             $set_template_file = "company/service.view.php";
 
@@ -108,7 +108,7 @@ class companyView{
         $site_info->layout = "company";
         $add_body_class[] = "shrink";
         $service_option = explode(",",$args->service_option);
-
+        $output->add('member_notice',$this->member_notice());
         $set_template_file = "company/service.payment.php";
 
         return $output;

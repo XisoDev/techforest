@@ -109,7 +109,7 @@
         <?php if($logged_info) { ?>
             <a href="<?=getUrl('ncenter')?>" class="toggle_alert">
                 <img src="/oPage/images/imgicons/bell.png" class="black"/>
-                <span class="badge bg-red">9</span>
+                <span class="badge bg-red"><?=count($output->get("member_notice"))?></span>
             </a>
         <?php } ?>
     </div>
