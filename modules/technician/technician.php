@@ -41,7 +41,7 @@ class technicianView{
         $output->add('member_notice',$this->member_notice());
         if($args->document_srl) {
             $site_info->layout = "none";
-            $add_body_class[] = "";
+            $add_body_class[] = "no_mobile_header";
             $set_template_file = "technician/resume.view.php";
 
             $m_idx = $args->document_srl;
@@ -120,6 +120,7 @@ class technicianView{
         }else{
             $site_info->layout = "technician";
             $add_body_class[] = "shrink";
+            $add_body_class[] = "no_mobile_header";
             $set_template_file = "technician/resume.list.php";
         }
 
@@ -136,6 +137,7 @@ class technicianView{
         $output = new Object();
         $site_info->layout = "technician";
         $add_body_class[] = "shrink";
+        $add_body_class[] = "no_mobile_header";
         $set_template_file = "technician/resume.write.php";
 
         $m_idx = $_SESSION['LOGGED_INFO'];
@@ -271,6 +273,7 @@ class technicianView{
 
         global $add_body_class;
         $add_body_class[] = "shrink";
+        $add_body_class[] = "no_mobile_header";
 
         global $set_template_file;
         $set_template_file = "technician/findjob.php";
@@ -293,6 +296,7 @@ class technicianView{
 
         global $add_body_class;
         $add_body_class[] = "shrink";
+        $add_body_class[] = "no_mobile_header";
 
         global $set_template_file;
         $set_template_file = "technician/findjob.list.php";
@@ -309,6 +313,7 @@ class technicianView{
 
         global $add_body_class;
         $add_body_class[] = "shrink";
+        $add_body_class[] = "no_mobile_header";
 
         global $set_template_file;
         $set_template_file = "technician/findjob.listAll.php";
@@ -387,6 +392,7 @@ class technicianView{
 
         global $add_body_class;
         $add_body_class[] = "shrink";
+        $add_body_class[] = "no_mobile_header";
 
         global $set_template_file;
         if($args->document_srl){
@@ -437,6 +443,7 @@ class technicianView{
 
         global $add_body_class;
         $add_body_class[] = "shrink";
+        $add_body_class[] = "no_mobile_header";
 
         global $set_template_file;
         $set_template_file = "technician/service.history.php";

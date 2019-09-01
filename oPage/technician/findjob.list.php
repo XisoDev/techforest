@@ -12,14 +12,14 @@
         <h6>일자리 정보</h6>
     </div>
 
-    <div class="content_padding px-0 pb-1 pt-0 mt-0 mb-4">
+    <div class="px-0 pb-1 pt-0 mt-0 mb-2">
         <div class="row">
-            <!-- <div class="col-6 pr-1 col-lg-4">
-                <select class="form-control"><option>지역설정</option></select>
-            </div>
-            <div class="col-6 pl-1 col-lg-4">
-                <select class="form-control"><option>직종</option></select>
-            </div> -->
+<!--            <div class="col-6 pr-1 col-lg-4">-->
+<!--                <select class="form-control"><option>지역설정</option></select>-->
+<!--            </div>-->
+<!--            <div class="col-6 pl-1 col-lg-4">-->
+<!--                <select class="form-control"><option>직종</option></select>-->
+<!--            </div>-->
             <div class="col-lg-2 pr-1">
                 <a href="<?=getUrl('technician','findJobList')?>" class="d-lg-block btn-block d-none btn btn-round btn-primary py-2 px-3">맞춤공고</a>
             </div>
@@ -36,7 +36,7 @@
                         <div class="col-5 col-md-12 px-0" style="background-color:#EEE;">
                             <div class="thumbnail mx-0 px-0" style="height:100%; background-image:url('http://www.planttech.co.kr/wp-content/uploads/2018/07/%EC%82%BC%EC%84%B1%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%811-820x457.png')">
                                 <span class="overlay">
-                                <a href="#" class="btn-xxs btn btn-round border-white text-white py-1 px-2 position-absolute mr-lg-3" style="right:10px; top:10px;">
+                                <a href="#" class="btn-xxs btn btn-round border-white text-white py-1 px-2 position-absolute mr-md-3" style="right:10px; top:10px;">
                                     관심공고
                                     <i class="xi-heart red"></i>
                                 </a>
@@ -44,9 +44,10 @@
                             </div>
                         </div>
                         <div class="col-7 col-md-12 pl-0 pl-md-3">
-                            <div class="content_padding">
-                                <h6 class="weight_normal">그림자숲</h6>
-                                <h6 class="red">가공팀(조/반장)</h6>
+                            <div class="p-2">
+                                <h6 class="weight_normal pb-0 mb-0">그림자숲</h6>
+                                <h6 class="red pt-0 mt-0">가공팀(조/반장)</h6>
+                                <hr class="p-0 m-0" />
                                 <p class="weight_lighter xxs_content mx-0 px-0">
                                     <span class="badge badge-danger weight_lighter">위치</span>
                                     경남 김해시
@@ -60,10 +61,10 @@
 
                             <div class="row m-0 p-0 pt-0 mt-0">
                                 <div class="col-6 mx-0 px-0">
-                                    <a href="#" class="btn btn-light btn-block rounded-0">상세보기</a>
+                                    <a href="#" class="btn btn-light text-secondary btn-xs py-3 px-0 btn-block rounded-0">상세보기</a>
                                 </div>
                                 <div class="col-6 mx-0 px-0">
-                                    <button class="btn btn-danger btn-block rounded-0">지원하기</button>
+                                    <button class="btn btn-danger btn-xs py-3 px-0 btn-block rounded-0">지원하기</button>
                                 </div>
                             </div>
                         </div>

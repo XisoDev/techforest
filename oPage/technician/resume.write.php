@@ -114,15 +114,13 @@ shuffle($rand_array);
     <a href="#" class="btn btn-danger">이력서파일 등록하기</a>
     <p class="red xs_content weight_lighter">*영업일 기준 1일 소요됩니다.</p>
 </section>
-<section class="bg-white">
-    <div class="d-block d-lg-none">
-        <div class="content_padding mt-4 pt-5 mb-0 pb-2">
-            <a onclick="history.back();" style="cursor:pointer;"><i class="xi-arrow-left xi-2x"></i></a>
-            <h5 class="weight_normal">이력서 등록</h5>
-        </div>
-        <hr />
+<section class="bg-white d-lg-none">
+    <div class="p-3 mt-4 pt-5 mb-0 pb-2">
+        <a href="#" onclick="history.back();" class="mb-3"><img src="/oPage/images/imgicons/arrow_left.png" height="25" /></a>
+        <h4 class="weight_normal">이력서 등록</h4>
     </div>
-
+</section>
+<section class="bg-white">
 		<input type="hidden" id="my_info3_count" name="my_info3_count" value="<?if($my_info3){echo count($my_info3); } else { echo "0"; }?>" />
 		<input type="hidden" id="my_info5_count" name="my_info5_count" value="<?if($my_info5){echo count($my_info5); } else { echo "0"; }?>" />
 		<input type="hidden" id="my_info6_count" name="my_info6_count" value="<?if($my_info6){echo count($my_info6); } else { echo "0"; }?>" />
