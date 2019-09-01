@@ -111,7 +111,7 @@
         <a href="<?=getUrl('ncenter')?>" class="toggle_alert">
             <img src="/oPage/images/imgicons/bell_white.png" class="white"/>
             <img src="/oPage/images/imgicons/bell.png" class="black"/>
-            <span id="notice_count" class="badge bg-red">0</span>
+            <span id="notice_count" class="badge bg-red"><?=count($output->get("member_notice"))?></span>
         </a>
         <?php } ?>
     </div>

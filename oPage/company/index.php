@@ -322,8 +322,6 @@
         jQuery('#tech_modal_example').modal('show');
     });
   }
-  //알림 설정 초기화
-  $('#notice_count')[0].innerText = <?=count($output->get("member_notice"));?>
 
 
 </script>

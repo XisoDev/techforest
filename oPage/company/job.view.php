@@ -137,11 +137,7 @@
     </div>
 </div>
 <div class="bg-primary d-sm-none" style="height:130px; margin-top:-105px; position:relative; z-index:0;"></div>
-<script type="text/javascript">
-  //알림 설정 초기화
-  $('#notice_count')[0].innerText = <?=count($output->get("member_notice"));?>
 
-</script>
 <?php
 $footer_false = true;
 ?>
