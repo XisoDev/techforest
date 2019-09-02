@@ -448,3 +448,12 @@ body.shrink #header_mobile nav.navbar,
   padding: 9px 0 0 0;
   font-weight: 400;
 }
+.hire_tit{
+  height: 30px;
+  padding-top: 10px;
+  display: inline-block;
+  overflow-y: hidden;
+}
+.salary_span{
+  margin-left: 5px
+}

@@ -423,7 +423,7 @@ class companyView{
       $oDB->join("TF_city_tb c","c.city_idx = h.city_idx","LEFT");
       $oDB->join("TF_local_tb l","l.local_idx = h.local_idx","LEFT");
       $oDB->join("TF_member_commerce_tb co","h.c_idx = co.c_idx","LEFT");
-      $row = $oDB->get("TF_hire_tb h",null,"local_name,city_name,district_name,h.h_idx,h_title,salary_idx,job_salary,count(al.m_idx) AS applicant,TO_DAYS(h.job_end_date )-TO_DAYS(NOW( )) AS job_end_day");
+      $row = $oDB->get("TF_hire_tb h",null,"c_name,local_name,city_name,district_name,h.h_idx,h_title,salary_idx,job_salary,count(al.m_idx) AS applicant,TO_DAYS(h.job_end_date )-TO_DAYS(NOW( )) AS job_end_day");
 
       return $row;
 

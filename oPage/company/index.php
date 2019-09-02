@@ -94,15 +94,15 @@
                         <div class="thumbnail mx-0 px-0" style="background-image:url('http://www.planttech.co.kr/wp-content/uploads/2018/07/%EC%82%BC%EC%84%B1%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%811-820x457.png')">
                         </div>
                         <div class="py-2 px-2 text-left pb-1">
-                            <p class="pb-0 mb-0">(주)에이에스티</p>
-                            <h6 class="red"><?=$val['h_title']?></h6>
+                            <p class="pb-0 mb-0"><?=$val['c_name']?></p>
+                            <h6 class="red hire_tit"><?=$val['h_title']?></h6>
                             <p class="weight_lighter xxs_content mx-0 px-0">
                               <? if ($val['city_name'] == "전체") { $val['city_name'] = "";} ?>
                               <? if ($val['district_name'] == "전체") { $val['district_name'] = ""; }?>
                               <? if($val['salary_idx'] < 3) { $hire_salary_text = "만원"; } else { $hire_salary_text = "원"; } ?>
                                 <span class="badge badge-danger weight_lighter"><i class="xi-map-marker"></i></span>
                                 <?php echo $val['local_name'] . " " . $val['city_name'].$val['district_name'];?>
-                                <span class="badge badge-danger weight_lighter">
+                                <span class="salary_span badge badge-danger weight_lighter">
                                   <?if($val['salary_idx'] == "1"){
                                     echo "연봉";
                                   }else if($val['salary_idx'] == "2"){
