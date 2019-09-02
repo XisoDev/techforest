@@ -16,7 +16,7 @@
             <div class="py-0 text-right mr-4 d-none d-lg-block">
                 <a href="/proc.php?act=member.procLogout" class="btn btn-light border-secondary btn-round btn-xs">로그아웃</a>
             </div>
-      <form id="my_picture_upload" method="post" enctype="multipart/form-data" action="">
+      <form id="theuploadform">
         <div class="col-5 mx-auto px-auto col-md-4 col-lg-3">
           <div class="position-relative">
               <?
@@ -27,10 +27,10 @@
               }
               ?>
               <div class="avatar square" id="my_picture" style="background-image:url('<?=$img_url?>');"></div>
-              <label for="picture_upload" class="position-absolute mb-0 pb-0" style="right:0;bottom:0;">
+              <label for="userfile" class="position-absolute mb-0 pb-0" style="right:0;bottom:0;">
                 <img src="/oPage/images/imgicons/camera_gray.png" height="16" />
               </label>
-              <input type="file" id="picture_upload" style="display:none;">
+              <input type="file" id="userfile" name="userfile" style="display:none;">
           </div>
         </div>
       </form>
@@ -90,8 +90,31 @@
 
 <script type="text/javascript">
 
-  $("#picture_upload").change(function(){
+  $("#userfile").change(function(){
     readURL(this);
+
+    var iframe = $('<iframe name="postiframe" id="postiframe" width=0 height=0 style="display:none"></iframe>');
+
+    $('body').append(iframe);
+
+    var form = $('#theuploadform');
+    form.attr("action", "/proc.php?act=member.procFileUpload");
+    form.attr("method", "post");
+
+    form.attr("encoding", "multipart/form-data");
+    form.attr("enctype", "multipart/form-data");
+
+    form.attr("target", "postiframe");
+    form.attr("file", $('#userfile').val());
+    form.submit();
+
+    $("#postiframe").on('load',function () {
+        // alert("파일이 업로드 되었습니다.");
+        // location.reload();
+    });
+
+    return false;
+
   });
 
   function readURL(input) {
@@ -99,19 +122,6 @@
       var reader = new FileReader();
       reader.onload = function (e) {
         $('#my_picture').css('background-image','url('+e.target.result+')');
-
-        // var formData = new FormData();
-        // formData.append("uploadFile", $("#picture_upload")[0].files[0]);
-        // 
-        // var params = {};
-        // params["m_idx"] = 9245;
-        // params["formData"] = formData;
-        //
-        // exec_json("member.my_picture_upload",params,function(ret_obj){
-        //     toastr.success(ret_obj.message);
-        //     document.location.reload();
-        // });
-
       }
       reader.readAsDataURL(input.files[0]);
     }

@@ -330,4 +330,49 @@ class memberController{
         return new Object(-1,"네트워크 오류가 발생했습니다.");
       }
     }
+
+    function procFileUpload(){
+      global $oDB;
+      $m_idx = $_SESSION['LOGGED_INFO'];
+      $date	= date(YmdHis);
+      $image_name = $m_idx . "_" . $date . ".jpg";
+
+      $file_real_name = $_FILES["userfile"]["name"];
+
+      $target_path = "./m_picture/";
+
+      if($_FILES["userfile"]["tmp_name"]){
+        $oDB->where("m_idx",$m_idx);
+        $row = $oDB->get("TF_member_tb",null,"m_picture");
+
+        $db_img = $row['m_picture'];
+        if($db_img) {
+          unlink("./m_picture/" . $db_img);
+        }
+
+        if(!$row){
+          return new Object(-1,"네트워크 오류입니다.(-1)");
+        }
+        // 파일저장
+      if(move_uploaded_file($_FILES['userfile']['tmp_name'], "./m_picture/" . $image_name)){
+
+        $data = array(
+          "m_picture" => $image_name,
+          "edit_date" => $date
+        );
+        $oDB->where("m_idx",$m_idx);
+        $insert_row = $oDB->update("TF_member_tb",$data);
+
+        if(!$insert_row) {
+          return new Object(-1,"네트워크 오류입니다.(-2)");
+        } else {
+          return new Object(0,"증명사진이 등록/수정되었습니다.");
+        }
+
+      } else {
+        return new Object(-1,"네트워크 오류입니다.(-3)");
+      }
+    }
+
+    }
 }
