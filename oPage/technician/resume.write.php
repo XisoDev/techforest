@@ -705,13 +705,24 @@ shuffle($rand_array);
             </div>
         </div>
     </div>
+
+		<form id="theuploadform">
+    <input id="userfile" name="userfile" size="50" type="file" />
+    <input id="formsubmit" type="submit" value="Send File" />
+</form>
+
+<div id="textarea">
+</div>
+
 </section>
 
 <div class="modal fade" id="fileUpload" tabindex="-1" role="dialog" aria-labelledby="tech_forest_modal_window" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content text-center" style="border-radius:10px">
+        <div class="modal-content text-center" style="border-radius:10px" id="aaa">
             <a href="#" class="text-white pull-right text-right" style="margin-top:-40px;" onclick="jQuery('#fileUpload').modal('hide');" ><i class="xi-close xi-2x"></i></a>
-						<form id="fileUpload_form" method="post" enctype="multipart/form-data">
+						<iframe id="iframe_upload" name="iframe_upload" height="50" width="50" frameborder="0" scrolling="yes"></iframe>
+						<form id="fileUpload_form" action="" method="post" enctype="multipart/form-data" target="iframe_upload">
+
 							<div class="mt-4 mb-3">
 								<h5 class="weight_bold pb-3">관련 서류 등록</h5>
 								구분
@@ -727,16 +738,17 @@ shuffle($rand_array);
 							<div class="mt-4 mb-3">
 								<input type="file" id="fileUpload_file" value="">
 							</div>
-						</form>
+
 						<div class="row px-3 py-3">
 								<div class="col-sm-2"></div>
 								<div class="col-6 col-sm-4">
-									<input type="button" class="btn btn-block btn-danger btn-round mt-3" onclick="fileUpload_click_save()" value="저장" />
+									<input type="button" class="btn btn-block btn-danger btn-round mt-3" value="저장" />
 								</div>
 								<div class="col-6 col-sm-4">
 									<input type="button" class="btn btn-block border-danger text-danger btn-round mt-3" onclick="jQuery('#fileUpload').modal('hide');" value="취소" />
 								</div>
 						</div>
+					</form>
         </div>
     </div>
 </div>
@@ -751,6 +763,33 @@ shuffle($rand_array);
 		if(member_career_arr.length > 0) {
 			addViewMemberCareer ();
 		}
+
+
+		$("#formsubmit").click(function () {
+		var iframe = $('<iframe name="postiframe" id="postiframe" style=""></iframe>');
+
+		$("body").append(iframe);
+
+		var form = $('#theuploadform');
+		form.attr("action", "/proc.php?act=technician.procFileUpload");
+		form.attr("method", "post");
+
+		form.attr("encoding", "multipart/form-data");
+		form.attr("enctype", "multipart/form-data");
+
+		form.attr("target", "postiframe");
+		form.attr("file", $('#userfile').val());
+		form.submit();
+
+		$("#postiframe").on('load',function () {
+				var iframeContents = this.contentWindow.document.body.innerHTML;
+				$("#textarea").html(iframeContents);
+		});
+
+		return false;
+
+		});
+
 	});
 
   var local_arr = <?= json_encode($local_arr) ?>;
@@ -1526,18 +1565,6 @@ function my_info6_del1(idx) {
 			}
 		}
 
-		function fileUpload_click_save(){
-			var formData = new FormData();
-			formData.append("file_select", $('#fileUpload_select option:selected').val());
-
-			$.each($('#fileUpload_file')[0].files, function (i, file) {
-				formData.append("fileObj", file);
-			});
-				exec_json("technician.file_upload",formData,function(ret_obj){
-				    console.log(ret_obj.message);
-				});
-
-		}
 
 
 

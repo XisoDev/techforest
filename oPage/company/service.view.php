@@ -72,8 +72,8 @@ $check_voucher = $output->get('check_voucher');
         <h4 class="weight_normal">유료서비스 안내</h4>
     </div>
 </section>
-<div class="container pt-lg-5 bg-secondary" style="min-height:1000px;">
-    랜딩페이지 들어갈 공간
+<div class="container pt-lg-5" style="min-height:1000px;">
+    <img src="/oPage/company/images/service_img1.jpg" alt="">
 </div>
 
 <div class="fixed-bottom bg-white purchaseBox" id="pay_box">

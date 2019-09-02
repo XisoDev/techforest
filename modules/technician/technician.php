@@ -355,8 +355,8 @@ class technicianView{
         if($o_idx > 0){
           $oDB->where("h.o_idx",$o_idx);
         }
-        if($duty > 0){
-          $oDB->where("h.duty_name","$duty");
+        if($duty > 0 || $duty){
+          $oDB->where("h.duty_name",$duty);
         }
         if($short_term > 0){
           $oDB->where("h_title","[단기]%","like");

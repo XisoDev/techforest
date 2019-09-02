@@ -495,15 +495,32 @@ class technicianController{
     }
   }
 
-  function file_upload($args){
+  function procFileUpload(){
     global $oDB;
     $m_idx = $_SESSION['LOGGED_INFO'];
 
     $oDB->where("m_idx",$m_idx);
     $row = $oDB->get("TF_member_file");
 
+    if(count($row) >= 10){
+      return new Object(1,"파일은 최대 10개까지 업로드 가능합니다.(-1)");
+    }
+    print_r($_FILES["userfile"]["name"]);
+    if(!$_FILES["userfile"]["name"]){
+     return new Object(-1,"파일이 없습니다.(-2)");
+   }
 
-    return new Object(0,"파일 업로드가 완료되었습니다.");
+   if($_FILES["userfile"]["error"] > 0){
+     return new Object(-1,"파일이 잘못되었습니다.(-3)");
+    }
+
+    $access_extension = array('jpg','jpeg','gif','png','bmp', 'doc', 'docx', 'dot', 'dotx', 'ppt', 'pptx', 'xls', 'xlsx', 'hwp', 'zip', 'pdf');
+    $path = pathinfo($_FILES['userfile']['name']);
+    $ext = strtolower($path['extension']);
+
+     if(!in_array($ext, $access_extension)) {
+       return new Object(-1,"허용 되지 않는 확장자 입니다.(-4)");
+     }
 
   }
 }
