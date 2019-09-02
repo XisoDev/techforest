@@ -8,7 +8,7 @@
     </div>
 
     <div class="pt-lg-5 pt-lg-3 position-relative mx-auto col-sm-10 col-md-9 col-lg-8">
-        <h4 class="d-none d-lg-block mb-4"><i class="xi-lightbulb-o text-warning"></i> 내 정보 관리</h4>
+        <h4 class="d-none d-lg-block mb-4"><img src="/oPage/images/imgicons/bulb_yellow.png" height="30" class="imgicon" /> 내 정보 관리</h4>
     </div>
 
     <div class="mx-auto col-sm-10 col-md-9 col-lg-8">
@@ -45,7 +45,7 @@
 
 
     <div class="pt-lg-5 pt-lg-3 position-relative mx-auto col-sm-10 col-md-9 col-lg-8">
-        <h4 class="d-none d-lg-block mb-4"><i class="xi-lightbulb-o text-warning"></i> 설정</h4>
+        <h4 class="d-none d-lg-block mb-4"><img src="/oPage/images/imgicons/bulb_yellow.png" height="30" class="imgicon" /> 설정</h4>
     </div>
     <div class="mb-4 mx-auto col-sm-10 col-md-9 col-lg-8">
         <div class="row d-none d-lg-flex">

@@ -14,7 +14,7 @@
         <div class="px-2 py-2">
             <div class="row flex-lg-column-reverse">
                 <div class="col-4 col-lg-12">
-                    <div class="thumbnail bg-secondary square" style="background-image:url('/oPage/technician/images/tech_service.jpg'); background-size:cover;">
+                    <div class="thumbnail bg-secondary square" style=" max-height:90px; background-image:url('/oPage/technician/images/tech_service.jpg'); background-size:cover;">
 
                     </div>
                 </div>
@@ -39,7 +39,7 @@
 
 <!-- payment Modal -->
 <div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="techforestPaymentModalWindow" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">결제수단 선택</h5>
@@ -62,6 +62,8 @@
                             <img src="/oPage/images/imgicons/banking.png" height="24" class="imgicon pl-3" />
                             <span style="vertical-align:7px;" class="pl-2">무통장 입금</span>
                         </label>
+                    </div>
+                    <div style="min-height:300px;" class="d-none d-md-block">
                     </div>
                     <input type="button" class="btn btn-block btn-warning" value="결제하기" />
                 </form>

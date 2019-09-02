@@ -80,7 +80,7 @@ $choose_hire = $output->get('choose_hire');
         <div class="px-2 py-2">
             <div class="row flex-lg-column-reverse">
                 <div class="col-4 col-lg-12">
-                    <div class="thumbnail bg-secondary square" style="background-image:url('/oPage/technician/images/tech_service.jpg'); background-size:cover;"></div>
+                    <div class="thumbnail bg-secondary square" style="background-image:url('/oPage/technician/images/tech_service.jpg'); background-size:cover; max-height:90px;"></div>
                 </div>
                 <div class="col-8 pt-2 col-lg-12 text-lg-center">
                     <h5>후불공고등록</h5>
@@ -117,7 +117,7 @@ $choose_hire = $output->get('choose_hire');
 
 <!-- payment Modal -->
 <div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="techforestPaymentModalWindow" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">결제수단 선택</h5>

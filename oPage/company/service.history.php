@@ -11,7 +11,7 @@
 </section>
 <div class="container pt-lg-5">
     <div class="py-lg-5 pt-lg-3 position-relative">
-        <h4 class="d-none d-lg-block mb-4"><i class="xi-lightbulb-o text-warning"></i> 사용가능한 쿠폰 <span class="red">3개</span></h4>
+        <h4 class="d-none d-lg-block mb-4"><img src="/oPage/images/imgicons/bulb_yellow.png" height="30" class="imgicon" /> 사용가능한 쿠폰 <span class="red">3개</span></h4>
         <h6 class="d-block d-lg-none weight_normal">사용가능한 쿠폰 <span class="red">3개</span></h6>
 
         <div class="row">
@@ -53,7 +53,7 @@
 
 
     <div class="py-lg-5 pt-lg-3 position-relative">
-        <h4 class="d-none d-lg-block mb-4"><i class="xi-lightbulb-o text-warning"></i> 이용중인 서비스 내역</h4>
+        <h4 class="d-none d-lg-block mb-4"><img src="/oPage/images/imgicons/bulb_yellow.png" height="30" class="imgicon" /> 이용중인 서비스 내역</h4>
         <h6 class="d-block d-lg-none weight_normal"> 이용중인 서비스 내역</span></h6>
 
         <div class="d-none d-lg-block">
@@ -88,7 +88,7 @@
     </div>
 
     <div class="py-lg-5 pt-lg-3 position-relative">
-        <h4 class="d-none d-lg-block mb-4"><i class="xi-lightbulb-o text-warning"></i> 결제내역</h4>
+        <h4 class="d-none d-lg-block mb-4"><img src="/oPage/images/imgicons/bulb_yellow.png" height="30" class="imgicon" /> 결제내역</h4>
         <h6 class="d-block d-lg-none weight_normal"> 결제내역</span></h6>
 
         <div class="d-none d-lg-block">

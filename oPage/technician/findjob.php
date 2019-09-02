@@ -11,7 +11,7 @@
 </section>
 <div class="container pt-lg-5">
     <div class="px-0 pb-1 pt-3 pt-lg-0">
-        <a href="<?=getUrl('technician','findJobList')?>" class="pull-right btn btn-primary btn-xxs btn-round">더보기 +</a>
+        <a href="<?=getUrl('technician','findJobList')?>" class="pull-right btn py-2 px-3 btn-primary btn-xxs btn-round">더보기 +</a>
         <h6>일자리 정보</h6>
     </div>
 
@@ -23,14 +23,14 @@
                     <a href="#" class="btn-xxs btn btn-round border-white text-white py-1 px-2 mr-lg-3 position-absolute" style="right:10px; top:10px;">
                         관심공고
                         <?php if($i % 2 == 0) { ?>
-                        <i class="xi-heart"></i>
+                        <i class="xi-heart" style="font-size:14px; vertical-align:-2px;"></i>
                         <?php }else{ ?>
-                        <i class="xi-heart red"></i>
+                        <i class="xi-heart red" style="font-size:14px; vertical-align:-2px;"></i>
                         <?php } ?>
                     </a>
                     </span>
                 </div>
-                <div class="content_padding text-left pb-1">
+                <div class="p-2 text-left pb-1">
                     <h6>(주)일진</h6>
                     <h6 class="red">CATIA 프로그램 경력자 모집</h6>
                     <p class="weight_lighter xxs_content mx-0 px-0">
@@ -56,18 +56,18 @@
         <?php } ?>
     </div>
 </div>
-<div class="bg-light py-md-4 my-md-5">
+<div class="py-md-4 my-md-5">
     <div class="container">
     <div class="content_padding px-0 pb-1 pt-4 ">
-        <a href="#" class="pull-right btn btn-primary btn-xxs btn-round">더보기 +</a>
+        <a href="#" class="pull-right btn btn-primary btn-xxs py-2 px-3 btn-round">더보기 +</a>
         <h6>입사지원현황</h6>
     </div>
-    <div class="row content_padding">
+    <div class="row px-2">
     <?php for($i=1; $i<=2; $i++) { ?>
         <div class="col-12 col-md-6 px-md-4">
         <div class="magazine tech_card mb-3 bg-white text-left shadow">
-            <div class="row">
-                <div class="col-5 col-md-12 px-0" style="background-color:#EEE;">
+            <div class="row px-0 mx-0">
+                <div class="col-5 col-md-12 px-0 mx-0" style="background-color:#EEE;">
                     <div class="thumbnail d-block" style="height:100%;" onmouseover="jQuery(this).find('div.overlay').removeClass('d-none');" onmouseout="jQuery(this).find('div.overlay').addClass('d-none');">
                     <div class="overlay d-none">
                         <div class="overlay-content" style="width:100%; text-align:center;">
@@ -78,9 +78,10 @@
                     </div>
                 </div>
                 <div class="col-7 col-md-12 pl-0 pl-md-3">
-                    <div class="content_padding">
-                        <h6 class="weight_normal">그림자숲</h6>
-                        <h6 class="red">가공팀(조/반장)</h6>
+                    <div class="p-2">
+                        <h6 class="weight_normal pb-0 mb-0">그림자숲</h6>
+                        <h6 class="red pt-0 mt-0">가공팀(조/반장)</h6>
+                        <hr class="py-1 px-0 m-0" />
                         <p class="weight_lighter xxs_content mx-0 px-0">
                             <span class="badge badge-danger weight_lighter">위치</span>
                             경남 김해시
@@ -94,10 +95,10 @@
 
                     <div class="row m-0 p-0 pt-0 mt-0">
                         <div class="col-6 mx-0 px-0">
-                            <a href="#" class="btn btn-light btn-block rounded-0">상세보기</a>
+                            <a href="#" class="btn btn-light btn-block btn-xs px-0 py-3 rounded-0 text-secondary">상세보기</a>
                         </div>
                         <div class="col-6 mx-0 px-0">
-                            <button class="btn btn-light btn-block rounded-0 red">지원완료</button>
+                            <button class="btn btn-light btn-block btn-xs px-0 py-3 rounded-0 red">지원완료</button>
                         </div>
                     </div>
                 </div>
