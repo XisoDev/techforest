@@ -495,7 +495,7 @@ class technicianController{
     }
   }
 
-  function procFileUpload(){
+  function procFileUpload($args){
     global $oDB;
     $m_idx = $_SESSION['LOGGED_INFO'];
 
@@ -505,7 +505,7 @@ class technicianController{
     if(count($row) >= 10){
       return new Object(1,"파일은 최대 10개까지 업로드 가능합니다.(-1)");
     }
-    print_r($_FILES["userfile"]["name"]);
+
     if(!$_FILES["userfile"]["name"]){
      return new Object(-1,"파일이 없습니다.(-2)");
    }
@@ -522,5 +522,32 @@ class technicianController{
        return new Object(-1,"허용 되지 않는 확장자 입니다.(-4)");
      }
 
+     if($_FILES["userfile"]["size"] > 52428800){
+      return new Object(-1,"파일 크기는 최대 50mb까지입니다.(-5)");
+    }
+
+    $file_select = $args->fileUpload_select;
+
+    $date	= date(YmdHis);
+    $file_real_name = $_FILES["userfile"]["name"];
+    $file_name = $m_idx . "_" . $date . "_" . $file_real_name;
+    $target_path = "./portfolio/";
+
+    if(move_uploaded_file($_FILES["userfile"]["tmp_name"], $target_path . $file_name)){
+      $data = array(
+        "m_idx" => $m_idx,
+        "file_type" => $file_select,
+        "file_name" => $file_real_name,
+        "reg_date" => $date
+      );
+      $upload_row = $oDB->insert("TF_member_file",$data);
+      if(!$upload_row){
+      return new Object(-1,"파일 업로드 중 오류가 발생하였습니다.(-6)");
+      }
+    }else{
+      return new Object(-1,"파일 업로드 중 오류가 발생하였습니다.(-7)");
+    }
+
+    return new Object(0,"파일 업로드가 완료되었습니다.");
   }
 }

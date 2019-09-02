@@ -705,28 +705,19 @@ shuffle($rand_array);
             </div>
         </div>
     </div>
-
-		<form id="theuploadform">
-    <input id="userfile" name="userfile" size="50" type="file" />
-    <input id="formsubmit" type="submit" value="Send File" />
-</form>
-
-<div id="textarea">
-</div>
-
 </section>
 
 <div class="modal fade" id="fileUpload" tabindex="-1" role="dialog" aria-labelledby="tech_forest_modal_window" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content text-center" style="border-radius:10px" id="aaa">
             <a href="#" class="text-white pull-right text-right" style="margin-top:-40px;" onclick="jQuery('#fileUpload').modal('hide');" ><i class="xi-close xi-2x"></i></a>
-						<iframe id="iframe_upload" name="iframe_upload" height="50" width="50" frameborder="0" scrolling="yes"></iframe>
-						<form id="fileUpload_form" action="" method="post" enctype="multipart/form-data" target="iframe_upload">
+
+					<form id="theuploadform">
 
 							<div class="mt-4 mb-3">
 								<h5 class="weight_bold pb-3">관련 서류 등록</h5>
 								구분
-								<select class="red border-danger" style="background:white" id="fileUpload_select">
+								<select class="red border-danger" style="background:white" name="fileUpload_select">
 									<option value="이력서">이력서</option>
 									<option value="자기소개서">자기소개서</option>
 									<option value="학력증명서">학력증명서</option>
@@ -736,19 +727,21 @@ shuffle($rand_array);
 								</select>
 							</div>
 							<div class="mt-4 mb-3">
-								<input type="file" id="fileUpload_file" value="">
+								<input type="file" id="userfile" name="userfile" value="">
 							</div>
 
 						<div class="row px-3 py-3">
 								<div class="col-sm-2"></div>
 								<div class="col-6 col-sm-4">
-									<input type="button" class="btn btn-block btn-danger btn-round mt-3" value="저장" />
+									<input type="submit" id="formsubmit" class="btn btn-block btn-danger btn-round mt-3" value="저장" />
 								</div>
 								<div class="col-6 col-sm-4">
 									<input type="button" class="btn btn-block border-danger text-danger btn-round mt-3" onclick="jQuery('#fileUpload').modal('hide');" value="취소" />
 								</div>
 						</div>
 					</form>
+					<div id="textarea">
+					</div>
         </div>
     </div>
 </div>
@@ -766,9 +759,9 @@ shuffle($rand_array);
 
 
 		$("#formsubmit").click(function () {
-		var iframe = $('<iframe name="postiframe" id="postiframe" style=""></iframe>');
+		var iframe = $('<iframe name="postiframe" id="postiframe" width=0 height=0 style="display:none"></iframe>');
 
-		$("body").append(iframe);
+		$("#aaa").append(iframe);
 
 		var form = $('#theuploadform');
 		form.attr("action", "/proc.php?act=technician.procFileUpload");
@@ -782,8 +775,8 @@ shuffle($rand_array);
 		form.submit();
 
 		$("#postiframe").on('load',function () {
-				var iframeContents = this.contentWindow.document.body.innerHTML;
-				$("#textarea").html(iframeContents);
+				alert("파일이 업로드 되었습니다.");
+				jQuery('#fileUpload').modal('hide');
 		});
 
 		return false;
