@@ -46,8 +46,10 @@
                       <div class="n_text">
                         <p ng-bind-html="feed.message" class="ng-binding"><b><?=$val['m_name']?> 님</b>
                           <?if($val['n_idx']==6){ ?><span style="color:black"><?=$val['m_name']?>님을 위한</span> 맞춤
-                          <?}else if($val['n_idx']==4){?>[<?}?>
+                          <?}else if($val['n_idx']==4){?>[<?=$val['h_title'];}else{?>
                             <b><?=$val['notice_type']?></b>
+                          <? } ?>
+
                           <?if($val['n_idx']==5){?>
                             </span>이 완료되었습니다.
                           <?}else if($val['n_idx']==6){?>

@@ -320,9 +320,32 @@
     // jQuery(document).ready(function($){
     //     $('#tech_modal_example').modal('show');
     // });
-  if(<?=$_SESSION['LOGGED_INFO']?> > 0 && <?=$row['count_hire']?> < 0 || "<?=$logged_info['registration']?>" == "" || "<?=$logged_info['address']?>" == ""){
+  if(<?=$_SESSION['LOGGED_INFO']?> > 0 && <?=$row['count_hire']?> < 1 || "<?=$logged_info['registration']?>" == "" || "<?=$logged_info['address']?>" == ""){
     jQuery(document).ready(function($){
         $('#tech_modal_example').modal('show');
+    });
+  }else if(<?=$_SESSION['LOGGED_INFO']?> > 0){
+    jQuery(document).ready(function($){
+
+    var hire_end = <?=count($output->get('hire_end'))?>;
+    if(hire_end > 0){
+      var params = {};
+      var hire_array = [];
+      var reg_array = [];
+      var i=0;
+      <?php foreach($output->get("hire_end") as $val){ ?>
+        hire_array[i] = <?=$val['h_idx']?>;
+        reg_array[i] = '<?=$val['job_end_date']?>';
+        i++;
+      <? } ?>
+      params['m_idx'] = <?=$_SESSION['LOGGED_INFO']?>;
+      params['hire_array'] = hire_array;
+      params['reg_date'] = reg_array;
+      exec_json("company.hire_end",params,function(ret_obj){
+
+      });
+
+      }
     });
   }
 

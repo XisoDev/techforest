@@ -11,6 +11,35 @@ class companyController{
   //
   //     return $row;
   // }
+  function hire_end($args){
+    global $oDB;
+    $hire_array = $args->hire_array;
+    $reg_array = $args->reg_date;
+    $m_idx = $args->m_idx;
+
+    for($i=0; $i < count($hire_array);$i++){
+
+      $oDB->where("m_idx",$m_idx);
+      $oDB->where("n_idx",4);
+      $oDB->where("num",$hire_array[$i]);
+      $EXISTS = $oDB->get("TF_member_notice as mn",null,'m_idx');
+
+      if(count($EXISTS) < 1){
+        $data = Array ("m_idx" => $m_idx,
+                "n_idx" => 4,
+                "num" => $hire_array[$i],
+                "reg_date" => $reg_array[$i],
+              );
+        $row = $oDB->insert ('TF_member_notice', $data);
+      }
+
+    }
+    if($row){
+      return new Object(0,'공고마감 알림');
+    }else{
+      return new Object(0,'');
+    }
+  }
   function procCompanyCheckHasID($args){
 
       $id = $args->m_id;

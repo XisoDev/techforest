@@ -48,8 +48,10 @@
                   <p class="my-0 py-0 xs_content weight_bold"><?=$val['m_name']?> 님</p>
                   <p class="my-0 py-0 xs_content"><span class="red">
                     <?if($val['n_idx']==6){ ?><span style="color:black"><?=$val['m_name']?>님을 위한</span> 맞춤
-                    <?}else if($val['n_idx']==4){?>[<?}?>
-                      <?=$val['notice_type']?>
+                    <?}else if($val['n_idx']==4){?>[<?=$val['h_title'];}else{?>
+                      <b><?=$val['notice_type']?></b>
+                    <? } ?>
+
                     <?if($val['n_idx']==5){?>
                       </span>이 완료되었습니다.
                     <?}else if($val['n_idx']==6){?>
