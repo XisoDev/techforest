@@ -8,6 +8,7 @@ if(!$m_num){
 
 $row = $output->get('pay_row');
 $choose_hire = $output->get('choose_hire');
+$check_voucher = $output->get('check_voucher');
 
 ?>
 
@@ -92,7 +93,13 @@ $choose_hire = $output->get('choose_hire');
               <select class="form-control" id="service_hire_option" name="service_hire_option">
                 <option value="">공고를 선택해주세요</option>
                 <?foreach ($choose_hire as $val) {?>
-                  <option value="<?=$val['h_idx']?>"><?=$val['h_title']?></option>
+                  <?foreach ($check_voucher as $val2) {?>
+                    <?if($val['h_idx'] == $val2['h_idx']){?>
+                      <option value="<?=$val['h_idx']?>" disabled><?=$val['h_title']?></option>
+                    <?}else{?>
+                      <option value="<?=$val['h_idx']?>"><?=$val['h_title']?></option>
+                    <?}?>
+                  <?}?>
                 <?}?>
               </select>
                 <!-- <label class="xs_content mb-0 pb-1">상품선택</label>
@@ -128,7 +135,7 @@ $choose_hire = $output->get('choose_hire');
             <div class="modal-body">
               <form>
                   <div class="custom-control custom-radio border rounded pl-4 px-3 py-2 mb-3 bigger_control">
-                      <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                      <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" checked>
                       <label class="custom-control-label weight_lighter ml-2" for="customRadio1">
                           <img src="/oPage/images/imgicons/card.png" height="24" class="imgicon pl-3" />
                           <span style="vertical-align:7px;" class="pl-2">신용카드・체크카드</span>
@@ -280,7 +287,7 @@ $choose_hire = $output->get('choose_hire');
               params['remain_count'] = <?=$row['service_count'] ? $row['service_count'] : 0?>;
 
               exec_json("company.add_voucher",params,function(ret_obj){
-                if(hidden_m_idx > 1){
+                if(<?=$m_num?> > 1){
                   document.location.href="<?=getUrl('company','application',$m_num,array('h_idx'=>$h_num))?>";
                 }
               });
@@ -313,7 +320,7 @@ $choose_hire = $output->get('choose_hire');
 
       params["m_idx"] = m_idx;
       params["ps_idx"] = <?=$row['ps_idx'] ? $row['ps_idx'] : 0?>;
-      params['merchant_uid'] = 'cash_' + new Date().getTime();
+      params['merchant_uid'] = 'cash_' + new Date().getTime() +'_'+h_idx;
       params["amount"] = amount;
       params["discount"] = discount;
       params["account_holder"] = account_holder;

@@ -46,6 +46,7 @@ class companyView{
 
 
             $c_idx = $logged_info['c_idx'];
+            $m_idx = $_SESSION['LOGGED_INFO'];
             $now_date = date(YmdHis);
 
             //선택한 유료서비스 조회
@@ -57,9 +58,15 @@ class companyView{
             $oDB->where("job_end_date",$now_date,">");
             $choose_hire = $oDB->get("TF_hire_tb");
 
+            //공고등록권 구매했는지 확인
+            $oDB->where("expire_date",$now_date,">");
+            $oDB->where("m_idx",$m_idx);
+            $check_voucher = $oDB->get("TF_member_voucher",null,"h_idx");
+
+
             $output->add('pay_row',$pay_row);
             $output->add('member_notice',$this->member_notice());
-
+            $output->add('check_voucher',$check_voucher);
             $output->add('choose_hire',$choose_hire);
             $output->add('false_sub_visual',true);
         }else {
@@ -443,5 +450,6 @@ class companyView{
       return $row;
 
     }
+
 
 }

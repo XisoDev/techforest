@@ -326,6 +326,7 @@ class technicianView{
         $local_idx = $args->local_idx;
         $o_idx = $args->o_idx;
         $short_term = $args->short;
+        $duty = $args->duty;
 
         if(!$local_idx) {
         	$local_idx = -1;
@@ -336,7 +337,11 @@ class technicianView{
         }
 
         if(!$short_term) {
-          $local_idx = -1;
+          $short_term = -1;
+        }
+
+        if($duty == 'undefined' || !$duty){
+          $duty = -1;
         }
 
         //전체 일자리 조회
@@ -350,6 +355,9 @@ class technicianView{
         if($o_idx > 0){
           $oDB->where("h.o_idx",$o_idx);
         }
+        if($duty > 0){
+          $oDB->where("h.duty_name","$duty");
+        }
         if($short_term > 0){
           $oDB->where("h_title","[단기]%","like");
         }
@@ -360,7 +368,7 @@ class technicianView{
         $oDB->join("TF_hire_certificate hce","hce.h_idx = h.h_idx","LEFT");
         $hire_rows = $oDB->get("TF_hire_tb h",20,"c_name, h_title, local_name, city_name, district_name,
                                                   h.local_idx, h.city_idx, h.district_idx, job_achievement,
-                                                  salary_idx, job_salary, job_is_career, h.h_idx, h.o_idx");
+                                                  salary_idx, job_salary, job_is_career, h.h_idx, h.o_idx, h.duty_name");
         //지역 리스트
         $oDB->orderBy("visible_idx","ASC");
         $oDB->where("local_visible","Y");

@@ -368,6 +368,7 @@ class companyController{
   function service_order_success2($args){
     global $oDB;
     $now_date = date(YmdHis);
+    $m_idx = $_SESSION['LOGGED_INFO'];
 
     $data = array(
       "m_idx" => $args->m_idx,
@@ -392,6 +393,7 @@ class companyController{
       if($args->receipt_phone){
         $cash_data = array(
           "p_idx" => $search_p_idx[0]['p_idx'],
+          "m_idx" => $m_idx,
           "num_option" => "소득공제용",
           "num" => $args->receipt_phone,
           "reg_date" => $now_date
@@ -401,6 +403,7 @@ class companyController{
       }else if($args->receipt_registration){
         $cash_data = array(
           "p_idx" => $search_p_idx[0]['p_idx'],
+          "m_idx" => $m_idx,
           "num_option" => "지출증빙용",
           "num" => $args->receipt_registration,
           "reg_date" => $now_date
@@ -408,7 +411,7 @@ class companyController{
         $row2 = $oDB->insert("TF_cash_receipt",$cash_data);
       }
     }else{
-      return new Object(-1,"네트워크 오류가 발생했습니다.");
+      return new Object(1,"네트워크 오류가 발생했습니다.");
     }
   }
 
@@ -416,14 +419,16 @@ class companyController{
    function add_voucher($args){
      global $oDB;
      $now_date = date(YmdHis);
-
+     $timestamp = strtotime("+1 months");
+     $expire_date = date("Y-m-d H:i:s", $timestamp);
      $data = array(
        "m_idx" => $args->m_idx,
        "h_idx" => $args->h_idx,
        "ps_idx" => $args->ps_idx,
        "all_count" => $args->all_count,
        "remain_count" => $args->remain_count,
-       "reg_date" => $now_date
+       "reg_date" => $now_date,
+       "expire_date" => $expire_date
      );
 
      $row = $oDB->insert("TF_member_voucher",$data);

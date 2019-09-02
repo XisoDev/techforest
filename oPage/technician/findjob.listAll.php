@@ -4,15 +4,24 @@
   $local_list = $output->get('local_list');
   $occupation_list = $output->get('occupation_list');
   $duty_list = $output->get('duty_list');
+
   if($_GET['local_idx']){
     $search_local_idx = $_GET['local_idx'];
   }
+
   if($_GET['o_idx']){
     $search_o_idx = $_GET['o_idx'];
+  }else{
+    $search_o_idx = -1;
   }
+
   if($_GET['short']){
     $search_short = $_GET['short'];
   }
+  if($_GET['duty']){
+    $search_duty_name = $_GET['duty'];
+  }
+
 ?>
 <section class="bg-white d-lg-none">
     <div class="p-3 mt-4 pt-5 mb-0 pb-2">
@@ -34,9 +43,9 @@
                 <select class="form-control" id="local_select" onchange="location.href=(this.value)">
                   <? foreach ($local_list as $val) { ?>
                       <? if($val["local_idx"] == $search_local_idx){?>
-                        <option value="<?=getUrl('technician','findJobListAll',false,array('local_idx' => $val['local_idx'],'o_idx' => $search_o_idx))?>" selected><?=$val['local_name']?></option>
+                        <option value="<?=getUrl('technician','findJobListAll',false,array('local_idx' => $val['local_idx'],'o_idx' => $search_o_idx, 'duty' => $search_duty_name))?>" selected><?=$val['local_name']?></option>
                       <? }else{ ?>
-                        <option value="<?=getUrl('technician','findJobListAll',false,array('local_idx' => $val['local_idx'],'o_idx' => $search_o_idx))?>"><?=$val['local_name']?></option>
+                        <option value="<?=getUrl('technician','findJobListAll',false,array('local_idx' => $val['local_idx'],'o_idx' => $search_o_idx, 'duty' => $search_duty_name))?>"><?=$val['local_name']?></option>
                       <? }
                     } ?>
                 </select>
@@ -45,9 +54,9 @@
                 <select class="form-control" id="occupation_select" onchange="location.href=(this.value)">
                   <? foreach ($occupation_list as $val) { ?>
                     <? if($val["o_idx"] == $search_o_idx){?>
-                      <option value="<?=getUrl('technician','findJobListAll',false,array('local_idx' => $search_local_idx,'o_idx' => $val['o_idx']))?>" selected><?=$val['o_name']?></option>
+                      <option value="<?=getUrl('technician','findJobListAll',false,array('local_idx' => $search_local_idx,'o_idx' => $val['o_idx'], 'duty' => $search_duty_name))?>" selected><?=$val['o_name']?></option>
                     <? }else{ ?>
-                        <option value="<?=getUrl('technician','findJobListAll',false,array('local_idx' => $search_local_idx,'o_idx' => $val['o_idx']))?>"><?=$val['o_name']?></option>
+                        <option value="<?=getUrl('technician','findJobListAll',false,array('local_idx' => $search_local_idx,'o_idx' => $val['o_idx'], 'duty' => $search_duty_name))?>"><?=$val['o_name']?></option>
                     <? }
                   } ?>
                 </select>
@@ -61,7 +70,18 @@
         </div>
         <div class="row mt-1">
             <div class="col-6 pr-1 col-lg-4">
-                <select class="form-control" id="duty_select" onchange="location.href=(this.value)"></select>
+                <select class="form-control" id="duty_select" onchange="location.href=(this.value)">
+                    <option value="">전체</option>
+                  <?foreach ($duty_list as $val) {?>
+                    <?if($search_o_idx == $val["o_idx"]){?>
+                      <?if($search_duty_name == $val["duty_name"]){?>
+                        <option value="<?=getUrl('technician','findJobListAll',false,array('local_idx' => $search_local_idx,'o_idx' => $search_o_idx, 'duty' => $val['duty_name']))?>" selected><?=$val['duty_name']?></option>
+                      <?}else{?>
+                        <option value="<?=getUrl('technician','findJobListAll',false,array('local_idx' => $search_local_idx,'o_idx' => $search_o_idx, 'duty' => $val['duty_name']))?>"><?=$val['duty_name']?></option>
+                      <?}?>
+                  <?}?>
+                <?}?>
+                </select>
             </div>
             <div class="col-6 pl-1 col-lg-4">
               단기공고
@@ -160,6 +180,14 @@
 
 
 <script type="text/javascript">
+  $(document).ready(function(){
+    //occupation();
+  });
+
+  // function occupation(){
+  //  $("#duty_select").empty();
+  // }
+
  function search_hire(){
    var local_idx = $("#local_select option:selected").val();
    var o_idx = $("#occupation_select option:selected").val();
@@ -192,25 +220,10 @@
   });
  }
 
- /*
- * @brief 희망직무
- */
- var duty_arr = <?= json_encode($duty_list); ?>;
-
- function occupation(obj){
- 	$("#duty_select").empty();
-
- 	for(var i = 0; i < duty_arr.length; i++) {
- 		if(obj.value == duty_arr[i]["o_idx"]) {
- 			var option = $('<option value="' +duty_arr[i]["duty_name"]+ '">' +duty_arr[i]["duty_name"]+ '</option>');
- 			$("#duty_select").append(option);
- 		}
- 	}
-}
 
 $("#short_term").change(function(){
     if($("#short_term").is(":checked")){
-      location.href="<?=getUrl('technician','findJobListAll',false,array('local_idx' => $search_local_idx,$search_o_idx,'short'=>1))?>";
+      location.href="<?=getUrl('technician','findJobListAll',false,array('local_idx' => $search_local_idx,'o_idx' => $search_o_idx, 'short'=>1))?>";
     }
 });
 </script>

@@ -165,7 +165,7 @@
             <?php }else if($check_applicant){?>
                 <button class="btn btn-warning disabled px-4 rounded-0">면접제안 완료</button>
             <?php }else{?>
-                <button data-toggle="modal" data-target="#interview_suggestion" class="btn btn-warning px-4 rounded-0">면접 제안하기</button>
+                <button data-toggle="modal" data-target="#suggestion_way" class="btn btn-warning px-4 rounded-0">면접 제안하기</button>
             <?php } ?>
         </div>
     </div>
@@ -240,7 +240,7 @@
                   공고등록권을 구매 후 해당 지원자에게<br>
                   <b>면접 요청</b>을 하실 수 있습니다.<br>
                 </p>
-                <h5 class="weight_lighter"><span class="red">면접제안권을 구매</span>하시겠습니까?</h5>
+                <h5 class="weight_lighter"><span class="red">공고등록권을 구매</span>하시겠습니까?</h5>
                 <div class="px-3">
                 <button onclick="jQuery('#buy_voucher').modal('hide');document.location.href='<?=getUrl('company','service',4,array(num=>$document_srl,h_idx=>$h_idx))?>'" class="btn btn-block btn-danger btn-round mt-3">구매하기</button>
                 <button class="btn btn-block border-danger text-danger btn-round mt-3" onclick="jQuery('#buy_voucher').modal('hide');">아니오</button>
