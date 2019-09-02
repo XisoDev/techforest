@@ -35,7 +35,7 @@ class ncenterController{
         $url = getUrl('technician','resumeWrite',$num);
         break;
       case 6: //맞춤 일자리 추천
-        $url = getUrl('technician');
+        $url = getUrl('technician','findJobList');
         break;
 
       case 7:

@@ -376,3 +376,75 @@ body.shrink #header_mobile nav.navbar,
     background-color: rgba(32, 56, 130, 1);
     color:#FFF;
 }
+.notification-list{
+  background: transparent;
+  margin: 0;
+  padding: 10px 0px 0px 10px;
+}
+.notification-list > li {
+  border-bottom: 1px solid #dcdce1;
+  overflow: hidden;
+}
+.notice_menu > ul{
+  cursor: pointer;
+}
+.notice_menu{
+  overflow-y: scroll;
+  max-height: 450px;
+  background: #f4f4f5;
+  padding: 20px;
+  width: 380px;
+  font-size: 15px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 400;
+  -webkit-box-shadow: 0 0 20px 0 rgba(0,0,0,.1);
+  -moz-box-shadow: 0 0 20px 0 rgba(0,0,0,.1);
+  box-shadow: 7px 5px 23px 0 grey;
+  z-index: 10;
+  position: absolute;
+  display: none;
+  right: 0px;
+  top: 40px;
+  /* display: none; */
+}
+.ng-binding{
+  margin-bottom: 5px;
+}
+.n_text{
+  float: left;
+  width: 230px;
+  padding: 15px 15px 10px 10px;
+}
+.n_text > p{
+  line-height: 1.6;
+  padding-bottom: 4px;
+}
+.n_status{
+  float: left;
+  text-align: center;
+  width: 70px;
+  padding: 19px 0 19px 0;
+}
+.n_status > em{
+  font-style: normal;
+  display: block;
+  font-size: 10px;
+  color: #8c8c8c;
+  padding: 9px 0 0 0;
+  font-weight: 400;
+}
+.n_img{
+  background: #fff;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  border-radius: 100px;
+  width: 35px;
+  height: 35px;
+  margin: 0 auto;
+}
+.n_rdate{
+  font-size: 10px;
+  color: #8c8c8c;
+  padding: 9px 0 0 0;
+  font-weight: 400;
+}

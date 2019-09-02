@@ -1,30 +1,4 @@
 <style media="screen">
-  .notification-list{
-    background: transparent;
-    margin: 0;
-    padding: 10px 0px 0px 10px;
-    border-bottom: 1px solid #dcdce1;
-  }
-  .notice_menu{
-    background: #f4f4f5;
-    display: block;
-    padding: 20px;
-    width: 365px;
-    font-size: 15px;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-weight: 400;
-    -webkit-box-shadow: 0 0 20px 0 rgba(0,0,0,.1);
-    -moz-box-shadow: 0 0 20px 0 rgba(0,0,0,.1);
-    box-shadow: 0 0 20px 0 rgba(0,0,0,.1);
-    z-index: 10;
-    position: absolute;
-    right: 0px;
-    top: 40px;
-    /* display: none; */
-  }
-  .ng-binding{
-    margin-bottom: 5px;
-  }
 
 </style>
 <header id="header_pc" class="d-none d-lg-block">
@@ -41,27 +15,57 @@
                     }
                 }
                 ?>
-                <li class="nav-item xs_content active weight_normal"><a class="nav-link" href="#"><i class="xi-bell"></i></a></li>
+                <li class="nav-item xs_content active weight_normal"><a id="open_notice" class="nav-link" style="cursor:pointer"><i class="xi-bell"></i></a></li>
                 <div class="notice_menu" uib-dropdown-menu="" aria-labelledby="simple-dropdown">
-                  <ul class="notification-list" ng-if="feeds">
+                  <?php foreach($output->get("member_notice") as $val){
+                    $reg_time = $val['reg_date'];
+
+                    //알림 발생 시간
+                    $reg_y = date("Y", strtotime($reg_time));
+                    $reg_m = date("m", strtotime($reg_time));
+                    $reg_d = date("d", strtotime($reg_time));
+                    $reg_H = date("H", strtotime($reg_time));
+                    $reg_i = date("i", strtotime($reg_time));
+
+                    $reg_hour = $reg_y.".".$reg_m.".".$reg_d." ";
+                    if($reg_H > 12){
+                      $reg_H -= 12;
+                      $reg_hour .= "오후";
+                    }else{
+                      $reg_hour .= "오전";
+                    }
+
+                    $reg_hour .= $reg_H."시".$reg_i."분";
+                    ?>
+                  <ul class="notification-list" ng-if="feeds" onclick="See_more(<?=$val['mn_idx'].",".$val['n_idx'].",".$val['num']?>)">
                     <li ng-repeat="feed in feeds" ng-class="{'unread' : feed.status != 'R'}" class="ng-scope unread">
                       <div class="feed ng-scope ng-isolate-scope" ng-if="feed.type == '2'" ng-click="read(feed.id);" ng-really-message="발송 예약을 취소하고<br>이메일을 수정하시겠습니까?" ng-really-sub-message="<div class='email-subject'>$%name%$님, 아직 이 일자리 못보셨나요?</div><a href='https://stib.ee/c1j1' target='_blank' class='email-link'>이메일보기 <i class='stb-new-window'></i></a>" ng-really-click="reserveCancel(feed)">
-                      <div class="status">
-                        <div class="img">
-                          <img src="../assets/images/notification_status/2.png">
+                      <div class="n_status">
+                        <div class="n_img">
+                          <img src="/oPage/images/imgicons/bell.png">
                         </div>
-                        <em>발송 예약</em>
+                        <em><?=$val['notice_type']?></em>
                       </div>
-                      <div class="text">
-                        <p ng-bind-html="feed.message" class="ng-binding"><b>$%name%$님, 아직 이 일자리 못보셨나요?</b>를 <b>2019. 9. 2. 오후 2:00</b>으로 발송 예약했습니다.</p>
-                        <span class="date ng-binding">2019. 8. 30. 오후 6:17</span>
+                      <div class="n_text">
+                        <p ng-bind-html="feed.message" class="ng-binding"><b><?=$val['m_name']?> 님</b>
+                          <?if($val['n_idx']==6){ ?><span style="color:black"><?=$val['m_name']?>님을 위한</span> 맞춤
+                          <?}else if($val['n_idx']==4){?>[<?}?>
+                            <b><?=$val['notice_type']?></b>
+                          <?if($val['n_idx']==5){?>
+                            </span>이 완료되었습니다.
+                          <?}else if($val['n_idx']==6){?>
+                            !</span>
+                          <?}else if($val['n_idx']==1){?>
+                            가 발생</span>했습니다. 확인해보세요!
+                          <?}else if($val['n_idx']==4){?>
+                            ]</span>해당 공고가 종료되었습니다.
+                          <?}?></p>
+                        <span class="n_rdate"><?=$reg_hour?></span>
                       </div>
                     </div>
                   </li>
                 </ul>
-                <div class="seeall">
-                  <a href="/notification" class="btn block">모두 보기</a>
-                </div>
+                <? } ?>
               </div>
             </ul>
         </nav>
@@ -187,3 +191,29 @@ if(file_exists(_XISO_PATH_ . $bg_url) && !$output->get('false_sub_visual')) {
     <?php
 }
 ?>
+<script type="text/javascript">
+  function See_more(mn_idx,n_idx,num){
+    var params = {};
+    params['mn_idx'] = mn_idx;
+    params['n_idx'] = n_idx;
+    params['num'] = num;
+
+    exec_json("ncenter.see_more",params,function(ret_obj){
+      if(ret_obj.error!=0){
+        toastr.success(ret_obj.message);
+      }else{
+        location.href = ret_obj.message;
+      }
+
+
+    });
+
+  }
+  $("#open_notice").click(function(){
+    if($('.notice_menu').css("display")=='none'){
+      $('.notice_menu').css("display","block");
+    }else{
+      $('.notice_menu').css("display","none");
+    }
+  });
+</script>
