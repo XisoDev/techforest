@@ -6,7 +6,7 @@
     </div>
     <div class="col-12 mt-2">
       <?php foreach($output->get("member_notice") as $val){
-        if(($val['agree']=='Y'||!$val['agree']) && $val['read']==0){ 
+        if(($val['agree']=='Y'||!$val['agree']) && $val['read']==0){
 
         $reg_time = $val['reg_date'];
 
@@ -48,8 +48,8 @@
                   <p class="my-0 py-0 xs_content weight_bold"><?=$val['m_name']?> 님</p>
                   <p class="my-0 py-0 xs_content"><span class="red">
                     <?if($val['n_idx']==6){ ?><span style="color:black"><?=$val['m_name']?>님을 위한</span> 맞춤
-                    <?}else if($val['n_idx']==4){?>[<?=$val['h_title'];}else{?>
-                      <b><?=$val['notice_type']?></b>
+                    <?} if($val['n_idx']==4||$val['n_idx']==1){?>[<?=$val['h_title'];?>]<?}else{?>
+                      <?=$val['notice_type']?>
                     <? } ?>
 
                     <?if($val['n_idx']==5){?>
@@ -57,9 +57,9 @@
                     <?}else if($val['n_idx']==6){?>
                       !</span>
                     <?}else if($val['n_idx']==1){?>
-                      가 발생</span>했습니다. 확인해보세요!
+                    </span>공고에 <span class="red"><?=$val['notice_type']?>가 발생</span>했습니다. 확인해보세요!
                     <?}else if($val['n_idx']==4){?>
-                      ]</span>해당 공고가 종료되었습니다.
+                      </span>해당 공고가 종료되었습니다.
                     <?}?>
                   </p>
                   </div>

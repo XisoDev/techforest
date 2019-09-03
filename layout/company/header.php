@@ -14,7 +14,7 @@
                 ?>
                 <li class="nav-item xs_content active weight_normal"><a id="open_notice" class="nav-link" style="cursor:pointer"><img src="/oPage/images/imgicons/bell.png" class="imgicon pt-1" height="18" /></a></li>
                 <div class="notice_menu" uib-dropdown-menu="" aria-labelledby="simple-dropdown">
-                  <?php foreach($output->get("member_notice") as $val){ 
+                  <?php foreach($output->get("member_notice") as $val){
                     $reg_time = $val['reg_date'];
 
                     //알림 발생 시간
@@ -36,7 +36,6 @@
                     ?>
                   <ul class="notification-list" ng-if="feeds" onclick="See_more(<?=$val['mn_idx'].",".$val['n_idx'].",".$val['num']?>)">
                     <li ng-repeat="feed in feeds" ng-class="{'unread' : feed.status != 'R'}" class="ng-scope unread">
-                      <div class="feed ng-scope ng-isolate-scope" ng-if="feed.type == '2'" ng-click="read(feed.id);" ng-really-message="발송 예약을 취소하고<br>이메일을 수정하시겠습니까?" ng-really-sub-message="<div class='email-subject'>$%name%$님, 아직 이 일자리 못보셨나요?</div><a href='https://stib.ee/c1j1' target='_blank' class='email-link'>이메일보기 <i class='stb-new-window'></i></a>" ng-really-click="reserveCancel(feed)">
                       <div class="n_status">
                         <div class="n_img">
                           <img src="/oPage/images/imgicons/bell.png">
@@ -45,23 +44,14 @@
                       </div>
                       <div class="n_text">
                         <p ng-bind-html="feed.message" class="ng-binding"><b><?=$val['m_name']?> 님</b>
-                          <?if($val['n_idx']==6){ ?><span style="color:black"><?=$val['m_name']?>님을 위한</span> 맞춤
-                          <?}else if($val['n_idx']==4){?>[<?=$val['h_title'];}else{?>
-                            <b><?=$val['notice_type']?></b>
-                          <? } ?>
-
-                          <?if($val['n_idx']==5){?>
-                            </span>이 완료되었습니다.
-                          <?}else if($val['n_idx']==6){?>
-                            !</span>
-                          <?}else if($val['n_idx']==1){?>
-                            가 발생</span>했습니다. 확인해보세요!
+                          <?if($val['n_idx']==4 || $val['n_idx']==1){?>[<?=$val['h_title'];?>]<?}?>
+                          <?if($val['n_idx']==1){?>
+                            공고에 <b><?=$val['notice_type']?></b> 가 발생</span>했습니다. 확인해보세요!
                           <?}else if($val['n_idx']==4){?>
-                            ]</span>해당 공고가 종료되었습니다.
+                            </span>해당 공고가 종료되었습니다.
                           <?}?></p>
                         <span class="n_rdate"><?=$reg_hour?></span>
                       </div>
-                    </div>
                   </li>
                 </ul>
                 <? } ?>
