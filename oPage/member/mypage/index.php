@@ -23,7 +23,7 @@
               if(!$logged_info['m_picture']) {
                   $img_url = "/layout/none/assets/images/no_avatar.png";
               }else {
-                  $img_url = "../../img/" . $logged_info['m_picture'];
+                  $img_url = "../../m_picture/" . $logged_info['m_picture'];
               }
               ?>
               <div class="avatar square" id="my_picture" style="background-image:url('<?=$img_url?>');"></div>
