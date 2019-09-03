@@ -25,7 +25,7 @@
       <?php foreach($row as $val){ ?>
           <div class="tech_card bg-white overflow-hidden mx-3 mb-3 shadow">
               <div class="row">
-                  <div class="col-5 pt-4 pb-0 my-0 pl-4">
+                  <div class="col-5 pt-4 mt-3 pb-0 my-0 pl-4">
                       <div class="avatar square mx-md-2 mx-lg-4" style="background-image:url('/layout/none/assets/images/no_avatar.png');">
                       </div>
                   </div>
@@ -47,9 +47,9 @@
                         <?}?>
                       </div>
                       <div class="clearfix"></div>
+                      <h6 class="weight_normal my-1 text-left"><?=$val['m_name']?> <span class="xs_content">(56세)</span></h6>
                       <p class="m-0 text-left weight_lighter xs_content"><?=$val['a_line_self']?></p>
-                      <h6 class="weight_normal my-1 text-left"><?=$val['m_name']?></h6>
-                      <p class="text-left xxx_content px-3 py-0 m-0 mb-1" class="cut1"> <img class="d-inline imgicon" src="/oPage/images/imgicons/wrench_bg_red.png" height="10" /> 경력 :
+                      <p class="text-left xs_content px-0 py-0 m-0 mb-1" class="cut1"> <img class="d-inline" src="/oPage/images/imgicons/wrench_bg_red.png" height="14" /> 경력 :
                        <?php
                         if(!$val['duty_name']){
                           echo "신입";
@@ -61,15 +61,14 @@
                   </div>
               </div>
               <p class="xxs_content text-right"><i class="xi-clock-o"></i> 지원일자 <?=$val['reg_date']?></p>
-              <a href="<?=getUrl('company','application',$val['m_idx'],array(h_idx=>$val['h_idx']))?>" class="btn btn-block btn-warning mt-3 rounded-0">지원자 정보 상세보기</a>
+              <a href="<?=getUrl('company','application',$val['m_idx'],array(h_idx=>$val['h_idx']))?>" class="btn btn-block btn-warning mt-3 py-md-3 rounded-0">지원자 정보 상세보기</a>
           </div>
           <?php } ?>
     <?php } ?>
 
     </div>
 </div>
-<div class="container-fluid bg-light py-md-5">
-    <div class="container">
+<div class="container py-md-5">
         <div class="content_padding px-0 pb-1 d-md-none">
             <h6>추천 기술자</h6>
         </div>
@@ -80,15 +79,16 @@
     <div class="flex-card-slick">
         <?php for($i=1; $i<=4; $i++){?>
         <div class="tech_card bg-white overflow-hidden mx-md-3 mb-md-3 shadow">
-            <div class="avatar square mx-3 mx-sm-4 mx-md-5 my-2 my-sm-3 my-md-4" style="background-image:url('/layout/none/assets/images/no_avatar.png');">
+            <div class="avatar square w-50 mx-auto my-2 my-sm-3 my-md-4" style="background-image:url('/layout/none/assets/images/no_avatar.png');">
             </div>
-            <h6 class="weight_normal mb-3 px-2">나상호 (56세)</h6>
-            <p class="text-left xxx_content px-3 py-0 m-0 mb-1" class="cut1"> <img class="d-inline imgicon" src="/oPage/images/imgicons/wrench_bg_red.png" height="10" /> 주요경력 : <?=$val['duty_name']?></p>
-            <p class="text-left xxx_content px-3 py-0 m-0 mb-1">  <img class="d-inline imgicon" src="/oPage/images/imgicons/location_bg_red.png" height="10" /> 희망지역 : <?=$desired_work_place?></p>
+            <div class="px-2 mb-0">
+            <h6 class="weight_normal mb-1 text-center">나상호 (56세)</h6>
+            <p class="text-left xs_content px-0 py-0 m-0 mb-1" class="cut1"> <img class="d-inline" src="/oPage/images/imgicons/wrench_bg_red.png" height="14" /> 주요경력 : <?=$val['duty_name']?></p>
+            <p class="text-left xs_content px-0 py-0 m-0 mb-1">  <img class="d-inline" src="/oPage/images/imgicons/location_bg_red.png" height="14" /> 희망지역 : <?=$desired_work_place?></p>
+            </div>
             <a href="<?=getUrl('company','application',100)?>" class="btn btn-block btn-warning mt-3 rounded-0">이력서 보기</a>
         </div>
         <?php } ?>
-    </div>
     </div>
 </div>
 <div class="container py-md-3 py-lg-5">
@@ -98,10 +98,10 @@
     <div class="content_padding px-0 pb-1 d-none d-lg-block">
         <h5 class="py-2">면접자 현황</h5>
     </div>
-    <div class="tech-card-slick slick-white-dots d-md-none">
+    <div class="tech-card-slick slick-white-dots d-md-none" style="z-index:2;">
         <?php foreach($interview_list as $val){?>
             <div class="tech_card bg-white overflow-hidden">
-                <h6 class="color_primary pt-2 pb-0 my-0 mt-2"><?=$val['h_title']?></h6>
+                <h6 class="text-center color_primary pt-2 pb-0 my-0 mt-2"><?=$val['h_title']?></h6>
                 <hr class="mx-2" />
                 <ul class="text-left ml-3 sm_content">
                     <li class="weight_lighter xs_content">지원자명 : <?=$val['m_name']?></li>

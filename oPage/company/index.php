@@ -9,8 +9,9 @@
             <h4 class="weight_bold mb-3">채용담당자님:)</h4>
           <?php } ?>
           <?php if($logged_info) { ?>
-            <h5 class="weight_bold"><?=$logged_info['c_name']?> 채용담당자님:)</h5>
-            <h5 class="weight_bold mb-3">어떤 기술자를 찾고 계신가요?</h5>
+            <h5 class="weight_normal d-none d-md-block">안녕하세요</h5>
+              <h5 class="weight_normal"><span class="weight_bold"><?=$logged_info['c_name']?> 채용담당자님</span> :)</h5>
+            <h5 class="weight_normal mb-3">어떤 기술자를 찾고 계신가요?</h5>
           <?php } ?>
           <ul class="nav">
               <?php if(!$logged_info) { ?>
@@ -190,12 +191,12 @@
                     if($val['m_city_idx'] != -1){ $desired_work_place .= $val['city_name']; }
                     if($val['m_district_idx'] != -1){ $desired_work_place .= $val['district_name']; }?>
                     <div class="tech_card bg-white overflow-hidden mx-md-3 mb-md-3 shadow">
-                        <div class="avatar square mt-3 mx-5 mx-sm-4 mx-md-5 my-2 my-sm-3 my-md-4" style="background-image:url('/layout/none/assets/images/no_avatar.png');">
+                        <div class="avatar square w-50 mx-auto my-2 my-sm-3 my-md-4" style="background-image:url('/layout/none/assets/images/no_avatar.png');">
                         </div>
                         <h6 class="weight_normal mb-3 px-2 text-center"><?=$val['m_name']?> (<?=$val['m_birthday']?>세)</h6>
-                        <p class="text-left xxx_content px-3 py-0 m-0 mb-1" class="cut1"> <img class="d-inline imgicon" src="/oPage/images/imgicons/wrench_bg_red.png" height="10" /> 주요경력 : <?=$val['duty_name']?></p>
-                        <p class="text-left xxx_content px-3 py-0 m-0 mb-1">  <img class="d-inline imgicon" src="/oPage/images/imgicons/location_bg_red.png" height="10" /> 희망지역 : <?=$desired_work_place?></p>
-                        <div class="row mt-1 mx-0 px-0">
+                        <p class="text-left xs_content px-3 py-0 m-0 mb-1">  <img class="d-inline imgicon" src="/oPage/images/imgicons/location_bg_red.png" height="10" /> 희망지역 : <?=$desired_work_place?></p>
+                        <p class="text-left xs_content px-3 py-0 m-0" class="cut1" style="height:42px;"> <img class="d-inline imgicon" src="/oPage/images/imgicons/wrench_bg_red.png" height="10" /> 주요경력 : <?=$val['duty_name']?></p>
+                        <div class="row mt-0 mx-0 px-0">
                             <div class="col-12 mx-0 px-0">
                               <a href="<?=getUrl('technician','resume',$val['m_idx'],array("from"=>"index"))?>" target="_blank" class="btn btn-block btn-warning mt-3 rounded-0">이력서보기</a>
                             </div>
@@ -225,7 +226,6 @@
                     <h3 class="weight_bold mt-3">실시간 지원현황</h3>
                 </div>
             </div>
-            <div class="tech_card bg-white text-left">
                 <div class="weight_lighter">
                   <?php foreach($output->get("now_application") as $val){
                       $diff = time() - strtotime($val['reg_date']);
@@ -239,23 +239,30 @@
                           $application_time= $diff.'초 전';
                         }
                     ?>
-                      <p class="cut1">
+                      <div class="tech_card bg-white text-left p-2 mb-2 shadow">
+                      <p class="cut1 pb-0 mb-0">
                         <span class="btn btn-round btn-xxs btn-danger"><?=$application_time?></span>
                         <?=$val['c_name']?> 에 지원자가 발생했습니다.
                       </p>
+                    </div>
                 <?}?>
-                </div>
             </div>
         </div>
     </div>
 </div>
 </div>
 
-<div class="d-none d-lg-block container-fluid text-white sub_visual" style="background-image:url('<?=$no_auto_bg_url?>')">
+<link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet" />
+<style>
+    .russo_one{
+        font-family: 'Russo One', sans-serif;
+    }
+</style>
+<div class="d-none d-lg-block container-fluid text-white sub_visual" style="background-image:url('/oPage/company/visual/company.noauto.png'); background-color:#1F3951; background-size:contain; background-repeat:no-repeat; background-position:80% bottom;">
     <div class="container py-5 text-left">
         <h5>국내1위 기술인력 전문 구인구직 매칭서비스</h5>
         <h4>지금까지 <span class="text-warning">기술자숲</span>을 통해</h4>
-        <h3>전달된 일자리 <span class="weight_bold" style="font-size:40px;">총 <b class="weight_super">27,567</b>개</span></h3>
+        <h3>전달된 일자리 <span class="weight_bold" style="font-size:40px;">총 <b class="russo_one text-warning">27,567</b>개</span></h3>
     </div>
 </div>
 
@@ -272,13 +279,13 @@
 
                     </div>
                     <div class="px-md-2">
-                        <div class="content_padding">
+                        <div class="p-2">
                             <h6 class="weight_normal">휴대폰으로 딱 10초!, 기술자 일자리 매칭 서비...</h6>
                             <p class="xs_content px-0">
                                 30대 소셜 벤처 기업가가 조선산업 불황 여파로 일자리를 잃은 숙련 기...
                             </p>
                             <hr />
-                            <a class="btn btn-primary pull-right" href="#">자세히 보기</a>
+                            <a class="btn btn-primary btn-xs py-2 px-3 pull-right" href="#">자세히 보기</a>
                             <p class="text-secondary my-0 py-0 px-0">2019.05.30</p>
                         </div>
                     </div>
@@ -291,10 +298,10 @@
 
 <div class="d-none py-5 d-lg-block container-fluid mt-5 bg-light">
     <div class="d-flex justify-content-between container">
-        <a href="#" target="_blank"><img src="/oPage/technician/images/supports_01.jpg" height="59" /></a>
-        <a href="#" target="_blank"><img src="/oPage/technician/images/supports_03.jpg" height="59" /></a>
-        <a href="#" target="_blank"><img src="/oPage/technician/images/supports_05.jpg" height="59" /></a>
-        <a href="#" target="_blank"><img src="/oPage/technician/images/supports_07.png" height="59" /></a>
+        <a href="#" target="_blank"><img src="/oPage/company/supports/01_logo.png" /></a>
+        <a href="#" target="_blank"><img src="/oPage/company/supports/02_logo.png" /></a>
+        <a href="#" target="_blank"><img src="/oPage/company/supports/03_logo.png" /></a>
+        <a href="#" target="_blank"><img src="/oPage/company/supports/04_logo.png" /></a>
     </div>
 </div>
 <!-- 메인에 뜨는 공고등록 유도 팝업 -->

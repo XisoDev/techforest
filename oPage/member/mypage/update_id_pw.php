@@ -24,7 +24,7 @@ if($logged_info['is_commerce'] == 'Y'){
     </div>
 
     <div class="pt-lg-5 pt-lg-3 position-relative mx-auto col-sm-10 col-md-9 col-lg-8">
-        <h4 class="d-none d-lg-block mb-4"><i class="xi-cog text-secondary"></i> 아이디・비밀번호 관리</h4>
+        <h4 class="d-none d-lg-block mb-4"><img src="/oPage/images/imgicons/cog.png" height="30" />  아이디・비밀번호 관리</h4>
     </div>
 
     <div class="mx-auto col-sm-10 col-md-9 col-lg-8 rounded border mobile-border-0 p-4 p-md-5 ">

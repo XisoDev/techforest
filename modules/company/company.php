@@ -140,6 +140,7 @@ class companyView{
         $output = new Object();
         $output->add('member_notice',$this->member_notice());
         if($args->document_srl > 0){
+            $add_body_class[] = "no_mobile_header";
             $set_template_file = "company/application.view.php";
             //여기 array 에는 해당 document_srl 로 조회한 job 정보를 넣으면됨.
             //$output->add('oJob',array());

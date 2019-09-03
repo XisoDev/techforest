@@ -141,7 +141,7 @@
                                     <b><?= number_format($val['job_salary']) . $hire_salary_text?></b>
                                 </p>
                                 <p class="text-secondary xxs_content mx-0 px-0 pt-1">
-                                    <span class="bg-red icon_wrap"><i class="xi-wrench"></i></span><?=$val['job_is_career']?>
+                                    <img src="/oPage/images/imgicons/wrench_bg_red.png" height="14" /> <?=$val['job_is_career']?>
                                 </p>
                             </div>
 

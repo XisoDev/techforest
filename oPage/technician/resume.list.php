@@ -13,7 +13,7 @@ $m_idx = $_SESSION['LOGGED_INFO'];
     <div class="row mb-4">
         <div class="col-12 col-lg-7 mx-lg-auto mx-0">
             <h6>내 이력서 관리</h6>
-            <div class="tech_card bg-white mb-4 border">
+            <div class="tech_card bg-white mb-4 shadow">
                 <div class="xxs_content py-2 weight_lighter position-relative">
                     <span class="position-absolute weight_normal" style="right:10px; top:7px;">
                         이력서 완성도 <span class="btn btn-round btn-danger btn-xxs py-2 px-2 weight_lighter m-0" style="vertical-align:0px;">낮음</span>
@@ -25,7 +25,7 @@ $m_idx = $_SESSION['LOGGED_INFO'];
                 <div class="px-2">
                     <div class="row">
                         <div class="d-none d-lg-block col-lg-1"></div>
-                        <div class="d-none d-lg-block col-lg-3">
+                        <div class="d-none d-lg-block col-lg-3 pb-lg-3">
                             <div class="avatar square" style="background-image:url('/layout/none/assets/images/no_avatar.png');"></div>
                         </div>
                         <div class="d-none d-lg-block col-lg-1"></div>
@@ -50,7 +50,7 @@ $m_idx = $_SESSION['LOGGED_INFO'];
                         <a href="<?=getUrl('technician','resume',$m_idx)?>" target="_blank" class="btn btn-light text-secondary btn-block rounded-0">전체보기</a>
                     </div>
                     <div class="col-6 mx-0 px-0">
-                        <a href="<?=getUrl('technician','resumeWrite')?>" class="btn btn-light text-secondary btn-block rounded-0">수정하기</a>
+                        <a href="<?=getUrl('technician','resumeWrite')?>" class="btn btn-light btn-block rounded-0 red">수정하기</a>
                     </div>
                 </div>
             </div>
@@ -60,7 +60,7 @@ $m_idx = $_SESSION['LOGGED_INFO'];
 
     <div class="row mb-4">
         <div class="col-12 col-lg-10 mx-lg-auto mx-0">
-            <a href="#" class="d-none d-lg-block pull-right btn btn-primary btn-round py-1 px-3 mr-1"><i class="xi-attachment"></i>첨부파일 등록</a>
+            <a href="#" class="d-none d-lg-block pull-right btn btn-primary btn-round py-1 px-3 mr-1"><i class="xi-attachment"></i> 첨부파일 등록</a>
             <a href="#" class="d-block d-lg-none pull-right btn btn-primary btn-xxs btn-round py-2 px-2 mr-1">더보기+</a>
             <h6>첨부파일 관리 <span class="xxs_content px-0">(* 최대 10개 등록 가능)</span></h6>
             <div class="d-none d-lg-block">
@@ -70,21 +70,18 @@ $m_idx = $_SESSION['LOGGED_INFO'];
                     </thead>
                     <tbody>
                         <tr><td>2019.08.14</td><td>[자격증명서]</td><td>전기기사 2급 자격 증명서.png</td><td>
-                                <a href="#" class="btn btn-light border rounded"><i class="xi-trash"></i> 삭제</a>
-                                <a href="#" class="btn btn-primary border rounded"><i class="xi-download"></i> 저장</a>
+                                <a href="#" class="btn btn-light border rounded btn-sm btn-block">삭제하기</a>
                             </td></tr>
                         <tr><td>2019.08.14</td><td>[자격증명서]</td><td>전기기사 2급 자격 증명서.png</td><td>
-                                <a href="#" class="btn btn-light border rounded"><i class="xi-trash"></i> 삭제</a>
-                                <a href="#" class="btn btn-primary border rounded"><i class="xi-download"></i> 저장</a>
+                                <a href="#" class="btn btn-light border rounded btn-sm btn-block">삭제하기</a>
                             </td></tr>
                         <tr><td>2019.08.14</td><td>[자격증명서]</td><td>전기기사 2급 자격 증명서.png</td><td>
-                                <a href="#" class="btn btn-light border rounded"><i class="xi-trash"></i> 삭제</a>
-                                <a href="#" class="btn btn-primary border rounded"><i class="xi-download"></i> 저장</a>
+                                <a href="#" class="btn btn-light border rounded btn-sm btn-block">삭제하기</a>
                             </td></tr>
-                        <tr><td>2019.08.14</td><td>[자격증명서]</td><td>전기기사 2급 자격 증명서.png</td><td>
-                                <a href="#" class="btn btn-light border rounded"><i class="xi-trash"></i> 삭제</a>
-                                <a href="#" class="btn btn-primary border rounded"><i class="xi-download"></i> 저장</a>
-                            </td></tr>
+<!--                        <tr><td>2019.08.14</td><td>[자격증명서]</td><td>전기기사 2급 자격 증명서.png</td><td>-->
+<!--                                <a href="#" class="btn btn-light border rounded btn-sm"><i class="xi-trash"></i> 삭제</a>-->
+<!--                                <a href="#" class="btn btn-primary border rounded btn-sm"><i class="xi-download"></i> 저장</a>-->
+<!--                            </td></tr>-->
                     </tbody>
                 </table>
             </div>

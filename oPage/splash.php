@@ -1,4 +1,9 @@
-<link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet" />
+<style>
+    .russo_one{
+        font-family: 'Russo One', sans-serif;
+    }
+</style>
 <div class="content_padding">
     <h4 class="weight_normal mb-0 pb-0">현재</h4>
     <h1 class="weight_super mt-0 pt-0 mb-0 pb-0">

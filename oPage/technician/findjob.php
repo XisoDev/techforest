@@ -10,9 +10,13 @@
     </div>
 </section>
 <div class="container pt-lg-5">
-    <div class="px-0 pb-1 pt-3 pt-lg-0">
+    <div class="d-block d-lg-none pt-4 pb-2">
         <a href="<?=getUrl('technician','findJobList')?>" class="pull-right btn py-2 px-3 btn-primary btn-xxs btn-round">더보기 +</a>
         <h6>일자리 정보</h6>
+    </div>
+    <div class="d-none d-lg-block pt-4 pb-2">
+        <a href="<?=getUrl('technician','findJobList')?>" class="pull-right btn mt-2 py-2 px-3 btn-primary btn-xs btn-round">더보기 +</a>
+        <h4 class="mb-2">일자리 정보</h4>
     </div>
 
     <div class="flex-card-slick">
@@ -40,7 +44,7 @@
                         <b>7,350 원</b>
                     </p>
                     <p class="text-secondary xxs_content mx-0 px-0 pb-2">
-                    <span class="bg-red icon_wrap"><i class="xi-wrench"></i></span>경력 최소 10년
+                        <img src="/oPage/images/imgicons/wrench_bg_red.png" height="14" /> 경력 최소 10년
                     </p>
                 </div>
 
@@ -56,19 +60,23 @@
         <?php } ?>
     </div>
 </div>
-<div class="py-md-4 my-md-5">
+<div class="py-md-5 my-md-5 bg-light">
     <div class="container">
-    <div class="content_padding px-0 pb-1 pt-4 ">
-        <a href="#" class="pull-right btn btn-primary btn-xxs py-2 px-3 btn-round">더보기 +</a>
-        <h6>입사지원현황</h6>
-    </div>
+        <div class="d-block d-lg-none pt-4 pb-2">
+            <a href="#" class="pull-right btn py-2 px-3 btn-primary btn-xxs btn-round">더보기 +</a>
+            <h6>입사지원현황</h6>
+        </div>
+        <div class="d-none d-lg-block pt-4 pb-2">
+            <a href="#" class="pull-right btn mt-2 py-2 px-3 btn-primary btn-xs btn-round">더보기 +</a>
+            <h4 class="mb-2">입사지원현황</h4>
+        </div>
     <div class="row px-2">
     <?php for($i=1; $i<=2; $i++) { ?>
         <div class="col-12 col-md-6 px-md-4">
         <div class="magazine tech_card mb-3 bg-white text-left shadow">
             <div class="row px-0 mx-0">
                 <div class="col-5 col-md-12 px-0 mx-0" style="background-color:#EEE;">
-                    <div class="thumbnail d-block" style="height:100%;" onmouseover="jQuery(this).find('div.overlay').removeClass('d-none');" onmouseout="jQuery(this).find('div.overlay').addClass('d-none');">
+                    <div class="thumbnail d-block" style="height:100%; min-height:170px;" onmouseover="jQuery(this).find('div.overlay').removeClass('d-none');" onmouseout="jQuery(this).find('div.overlay').addClass('d-none');">
                     <div class="overlay d-none">
                         <div class="overlay-content" style="width:100%; text-align:center;">
                             <a href="#" class="btn-round btn border-white text-white btn-xs">이력서 열람</a>
@@ -77,8 +85,8 @@
                     </div>
                     </div>
                 </div>
-                <div class="col-7 col-md-12 pl-0 pl-md-3">
-                    <div class="p-2">
+                <div class="col-7 col-md-12 pl-0 px-0">
+                    <div class="py-2 px-3">
                         <h6 class="weight_normal pb-0 mb-0">그림자숲</h6>
                         <h6 class="red pt-0 mt-0">가공팀(조/반장)</h6>
                         <hr class="py-1 px-0 m-0" />
@@ -87,9 +95,8 @@
                             경남 김해시
                             <span class="badge badge-danger weight_lighter">시</span>
                             <b>7,350 원</b>
-                        </p>
-                        <p class="text-secondary xxs_content mx-0 px-0 pt-1">
-                            <span class="bg-red icon_wrap"><i class="xi-wrench"></i></span>경력 최소 10년
+                            <br class="d-md-none" />
+                            <img src="/oPage/images/imgicons/wrench_bg_red.png" height="14" /> 경력 최소 10년
                         </p>
                     </div>
 
@@ -110,9 +117,13 @@
     </div>
 </div>
 <div class="container pb-md-5">
-    <div class="content_padding px-0 pb-1">
-        <a href="<?=getUrl('technician','findJobList')?>" class="pull-right btn btn-primary btn-xxs btn-round">더보기 +</a>
+    <div class="d-block d-lg-none pt-4 pb-2">
+        <a href="<?=getUrl('technician','findJobList')?>" class="pull-right btn py-2 px-3 btn-primary btn-xxs btn-round">더보기 +</a>
         <h6>관심공고</h6>
+    </div>
+    <div class="d-none d-lg-block pt-4 pb-2">
+        <a href="<?=getUrl('technician','findJobList')?>" class="pull-right btn mt-2 py-2 px-3 btn-primary btn-xs btn-round">더보기 +</a>
+        <h4 class="mb-2">관심공고</h4>
     </div>
 
     <div class="flex-card-slick">
@@ -163,7 +174,7 @@
                       <b><?= number_format($val['job_salary']) . $hire_salary_text?></b>
                     </p>
                     <p class="text-secondary xxs_content mx-0 px-0 pb-2">
-                        <span class="bg-red icon_wrap"><i class="xi-wrench"></i></span><?=$val['job_is_career']?>
+                        <img src="/oPage/images/imgicons/wrench_bg_red.png" height="14" /> <?=$val['job_is_career']?>
                     </p>
                 </div>
 

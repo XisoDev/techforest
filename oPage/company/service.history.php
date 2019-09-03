@@ -14,16 +14,17 @@
         <h4 class="d-none d-lg-block mb-4"><img src="/oPage/images/imgicons/bulb_yellow.png" height="30" class="imgicon" /> 사용가능한 쿠폰 <span class="red">3개</span></h4>
         <h6 class="d-block d-lg-none weight_normal">사용가능한 쿠폰 <span class="red">3개</span></h6>
 
-        <div class="row">
+        <div class="row col-lg-10 mx-lg-auto">
             <?php
             for($i=1; $i <= 3; $i++){
                 ?>
                 <div class=" col-12 col-md-6 col-lg-4">
-                    <div class="coupon rounded bg-white py-2 px-2 pt-md-4 my-2 shadow">
+                    <div class="coupon rounded bg-white py-2 px-2 pt-md-4 mt-md-5 my-2 shadow">
+                        <div class="row d-none d-md-flex" style="margin-top:-70px">
+                            <div class="mx-auto col-6"><div class="avatar square" style="background-image:url('/oPage/images/coupon_icon.png')"></div></div>
+                        </div>
                         <div class="row">
-                            <div class="col-md-3 d-none d-md-block"></div>
-                            <div class="col-4 col-md-6 pr-2"><div class="avatar square" style="background-image:url('/oPage/images/coupon_icon.png')"></div></div>
-                            <div class="col-md-3 d-none d-md-block"></div>
+                            <div class="col-4 d-md-none border-right pr-2"><div class="avatar square" style="background-image:url('/oPage/images/coupon_icon.png')"></div></div>
                             <div class="col-8 col-md-12 text-md-center">
                                 <p class="xs_content weight_normal py-0 my-0 pt-md-2">바로검색서비스 체험권</p>
                                 <h6 class=" py-0 my-0 py-md-3">선 면접제안 <span class="red">3회 무료</span></h6>
@@ -42,17 +43,17 @@
         <form>
             <div class="input-group rounded overflow-hidden d-lg-none">
                 <input type="text" class="form-control" placeholder="쿠폰 코드를 입력하세요." />
-                <button class="rounded-0 btn btn-danger" onclick="add_coupon()">적용</button>
+                <button class="rounded-0 btn btn-danger btn-sm" onclick="add_coupon()">적용</button>
             </div>
-            <div class="input-group rounded overflow-hidden d-lg-flex d-none position-absolute" style="top:2rem; right:0; width:400px;">
+            <div class="input-group rounded overflow-hidden d-lg-flex d-none position-absolute" style="top:3.5rem; right:0; width:400px;">
                 <input type="text" class="form-control" placeholder="쿠폰 코드를 입력하세요." />
-                <button class="rounded-0 btn btn-danger" onclick="add_coupon()">적용</button>
+                <button class="rounded-0 btn btn-danger btn-sm" onclick="add_coupon()">적용</button>
             </div>
         </form>
 </div>
 
 
-    <div class="py-lg-5 pt-lg-3 position-relative">
+    <div class="py-lg-5 pt-lg-3 position-relative pt-3">
         <h4 class="d-none d-lg-block mb-4"><img src="/oPage/images/imgicons/bulb_yellow.png" height="30" class="imgicon" /> 이용중인 서비스 내역</h4>
         <h6 class="d-block d-lg-none weight_normal"> 이용중인 서비스 내역</span></h6>
 
@@ -87,7 +88,7 @@
         </div>
     </div>
 
-    <div class="py-lg-5 pt-lg-3 position-relative">
+    <div class="py-lg-5 pt-lg-3 position-relative pt-3">
         <h4 class="d-none d-lg-block mb-4"><img src="/oPage/images/imgicons/bulb_yellow.png" height="30" class="imgicon" /> 결제내역</h4>
         <h6 class="d-block d-lg-none weight_normal"> 결제내역</span></h6>
 
