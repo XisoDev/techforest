@@ -51,27 +51,29 @@ body.no_pc_header #header_pc{
 body.no_pc_footer footer{
     display:none !important;
 }
-
+footer{
+    background-color:#212329;
+}
 
 /*부트스트랩 손보기*/
 .btn-round{
     border-radius:200px;
 }
 .rounded-top{
-    border-top-left-radius: 10px !important;
-    border-top-right-radius: 10px !important;
+    border-top-left-radius: 5px !important;
+    border-top-right-radius: 5px !important;
 }
 .rounded-bottom{
-    border-bottom-left-radius: 10px !important;
-    border-bottom-right-radius: 10px !important;
+    border-bottom-left-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
 }
 .rounded-left{
-    border-top-left-radius: 10px !important;
-    border-bottom-left-radius: 10px !important;
+    border-top-left-radius: 5px !important;
+    border-bottom-left-radius: 5px !important;
 }
 .rounded-right{
-    border-top-right-radius: 10px !important;
-    border-bottom-right-radius: 10px !important;
+    border-top-right-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
 }
 .rounded-0-left{
     border-top-left-radius: 0 !important;

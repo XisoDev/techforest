@@ -68,11 +68,11 @@ function salary_select_change(obj){
   switch (obj.value) {
     case '1':
     case '2':
-    document.getElementById('salary_text').innerHTML = "만원 이상";
+        $("#salary_text").find('span').html("만원 이상");
     break;
     case '3':
     case '4':
-    document.getElementById('salary_text').innerHTML = "원 이상";
+        $("#salary_text").find('span').html("원 이상");
     break;
     default:
     $("#salary_text").hide();

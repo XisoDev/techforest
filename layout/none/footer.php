@@ -7,13 +7,13 @@ if(isset($common_back_button)){
 <?php
 }
 ?>
-<footer class="d-none d-sm-block bg-dark">
+<footer class="d-none d-sm-block">
     <div class="container">
         <div class="row">
             <div class="col-3 pt-5">
                 <!--                logo ?-->
                 <a href="<?=getUrl()?>">
-                    <img src="/oPage/images/logo_gray.png" height="49" />
+                    <img src="/oPage/images/footer_logo_gray.png" height="60" />
                 </a>
             </div>
             <div class="col-9 pt-3">
@@ -32,8 +32,9 @@ if(isset($common_back_button)){
 
                 <h6 class="text-warning mt-4 mb-0 pt-0 pb-0">INFO</h6>
                 <div class="pull-right">
-                    <a href="#" class="text-light"><i class="xi-facebook xi-2x"></i></a>
-                    <a href="#" class="text-light"><i class="xi-blogger xi-2x"></i></a>
+                    <a href="#" class="text-light"><img src="/oPage/images/imgicons/facebook_gray.png" height="20" class="imgicon" /></a>
+                    <span class="xxs_content px-3 text-light weight_lighter" style="vertical-align: 6px;">|</span>
+                    <a href="#" class="text-light"><img src="/oPage/images/imgicons/blog_gray.png" height="20" class="imgicon" /></a>
                 </div>
                 <nav class="navbar navbar-expand-lg navbar-light m-0 p-0">
                     <ul class="navbar-nav">
