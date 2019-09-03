@@ -479,6 +479,7 @@ class technicianController{
     if(count($applicant_check) > 0){
       return new Object(1,"이미 지원한 공고입니다.");
     }else{
+      //지원
       $data = array(
         "h_idx" => $h_idx,
         "m_idx" => $m_idx,
@@ -487,7 +488,20 @@ class technicianController{
       );
       $applicant_insert= $oDB->insert("TF_application_letter",$data);
 
-      if($applicant_insert){
+      //알림 설정을 위한 업체 m_idx select
+      $oDB->where("h.h_idx",$h_idx);
+      $oDB->join("TF_member_commerce_tb c","c.c_idx = h.c_idx","LEFT");
+      $row = $oDB->get("TF_hire_tb as h",null,"c.m_idx");
+
+      //알림 설정
+      $data = Array ("m_idx" => $row[0]['m_idx'],
+              "n_idx" => 1,
+              "num" => $h_idx,
+              "reg_date" => $now_date,
+            );
+      $row = $oDB->insert ('TF_member_notice', $data);
+
+      if($row){
         return new Object(0,"지원이 완료되었습니다.");
       }else{
         return new Object(1,"네트워크 오류가 발생했습니다.(-2)");
