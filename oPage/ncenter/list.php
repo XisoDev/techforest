@@ -6,7 +6,7 @@
     </div>
     <div class="col-12 mt-2">
       <?php foreach($output->get("member_notice") as $val){
-        if(($val['agree']=='Y'||!$val['agree']) && $val['read']==0){
+        if(($val['agree']=='Y'||!$val['agree']) && $val['read']==0){ 
 
         $reg_time = $val['reg_date'];
 
@@ -72,7 +72,7 @@
 
 <div class="fixed-bottom pb-2 bg-light content_padding pt-3">
     <span class="btn-round btn btn-warning btn-xxs mb-2">주의사항</span>
-    <p class="xs_content content_padding py-0">알림메세지는 7일동안 보관되며 확인 여부와 상관없이 리스트엣 자동으로 삭제됩니다.</p>
+    <p class="xs_content content_padding py-0">알림메세지는 7일동안 보관되며 확인 여부와 상관없이 리스트에서 자동으로 삭제됩니다.</p>
 </div>
 <div style="height:120px;">&nbsp;</div>
 

@@ -14,7 +14,7 @@
                 ?>
                 <li class="nav-item xs_content active weight_normal"><a id="open_notice" class="nav-link" style="cursor:pointer"><img src="/oPage/images/imgicons/bell.png" class="imgicon pt-1" height="18" /></a></li>
                 <div class="notice_menu" uib-dropdown-menu="" aria-labelledby="simple-dropdown">
-                  <?php foreach($output->get("member_notice") as $val){
+                  <?php foreach($output->get("member_notice") as $val){ 
                     $reg_time = $val['reg_date'];
 
                     //알림 발생 시간
