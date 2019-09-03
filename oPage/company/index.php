@@ -239,7 +239,7 @@
                           $application_time= $diff.'초 전';
                         }
                     ?>
-                      <p id="cut1">
+                      <p class="cut1">
                         <span class="btn btn-round btn-xxs btn-danger"><?=$application_time?></span>
                         <?=$val['c_name']?> 에 지원자가 발생했습니다.
                       </p>

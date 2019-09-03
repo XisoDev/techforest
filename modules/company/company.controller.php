@@ -503,4 +503,49 @@ class companyController{
        return new Object(-1,"네트워크 오류가 발생했습니다.");
      }
    }
+
+   function procFileUpload(){
+     global $oDB;
+     $c_idx = $_SESSION['c_idx'];
+     $date	= date(YmdHis);
+     $image_name = $c_idx . "_" . $date . ".jpg";
+
+     $file_real_name = $_FILES["userfile"]["name"];
+
+     $target_path = "./company_logo/";
+
+     if($_FILES["userfile"]["tmp_name"]){
+       $oDB->where("c_idx",$c_idx);
+       $row = $oDB->get("TF_member_commerce_tb",null,"image");
+
+       $db_img = $row['image'];
+       if($db_img) {
+         unlink("./company_logo/" . $db_img);
+       }
+
+       if(!$row){
+         return new Object(-1,"네트워크 오류입니다.(-1)");
+       }
+       // 파일저장
+     if(move_uploaded_file($_FILES['userfile']['tmp_name'], "./company_logo/" . $image_name)){
+
+       $data = array(
+         "image" => $image_name,
+         "edit_date" => $date
+       );
+       $oDB->where("c_idx",$c_idx);
+       $insert_row = $oDB->update("TF_member_commerce_tb",$data);
+
+       if(!$insert_row) {
+         return new Object(-1,"네트워크 오류입니다.(-2)");
+       } else {
+         return new Object(0,"기업로고가 등록/수정되었습니다.");
+       }
+
+     } else {
+       return new Object(-1,"네트워크 오류입니다.(-3)");
+     }
+   }
+
+   }
 }

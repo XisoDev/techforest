@@ -1,3 +1,4 @@
+
 <section class="bg-white">
     <div class="p-3 mt-4 pt-5 d-lg-none">
         <a href="#" onclick="history.back();" class="mb-3"><img src="/oPage/images/imgicons/arrow_left.png" height="25" /></a>
@@ -24,14 +25,27 @@
     </ul>
     <div class="content_padding mt-0 pt-0 mb-5">
         <div class="row">
+
             <div class="col-5 mx-auto px-auto col-md-4 col-lg-3 pb-sm-3 pb-md-5">
+              <form id="theuploadform">
                 <div class="position-relative">
-                    <div class="avatar square mb-2" style="background-image:url('/layout/none/assets/images/no_company.png');">
-                    </div>
-                    <i class="xi-camera position-absolute text-white" style="right:0;bottom:0; font-size:28px;"></i>
-                    <i class="xi-camera position-absolute text-secondary" style="right:1px;bottom:1px; font-size:26px;"></i>
+                  <?
+                  if(!$logged_info['image']) {
+                      $img_url = "/layout/none/assets/images/no_company.png";
+                  }else {
+                      $img_url = "../../company_logo/" . $logged_info['image'];
+                  }
+                  ?>
+                    <div class="avatar square" id="company_logo" style="background-image:url('<?=$img_url?>');"></div>
+                    <label for="userfile" class="position-absolute mb-0 pb-0" style="right:0;bottom:0;">
+                      <i class="xi-camera position-absolute text-white" style="right:0;bottom:0; font-size:28px;"></i>
+                      <i class="xi-camera position-absolute text-secondary" style="right:1px;bottom:1px; font-size:26px;"></i>
+                    </label>
+                    <input type="file" id="userfile" name="userfile" style="display:none;">
                 </div>
+              </form>
             </div>
+
         </div>
 
             <!--성공하면 자동으로 2단계로 보낼수있음.-->
@@ -165,6 +179,44 @@ $footer_false = true;
 ?>
 
 <script type="text/javascript">
+
+  $("#userfile").change(function(){
+    readURL(this);
+
+    var iframe = $('<iframe name="postiframe" id="postiframe" width=0 height=0 style="display:none"></iframe>');
+
+    $('body').append(iframe);
+
+    var form = $('#theuploadform');
+    form.attr("action", "/proc.php?act=company.procFileUpload");
+    form.attr("method", "post");
+
+    form.attr("encoding", "multipart/form-data");
+    form.attr("enctype", "multipart/form-data");
+
+    form.attr("target", "postiframe");
+    form.attr("file", $('#userfile').val());
+    form.submit();
+
+    $("#postiframe").on('load',function () {
+        //alert("파일이 업로드 되었습니다.");
+        // location.reload();
+    });
+
+    function readURL(input) {
+      if(input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          $('#company_logo').css('background-image','url('+e.target.result+')');
+        }
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+
+    return false;
+
+  });
 
   function temporary_save(){
 
