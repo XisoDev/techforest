@@ -18,7 +18,19 @@
             </div>
       <form id="theuploadform">
         <div class="col-5 mx-auto px-auto col-md-4 col-lg-3">
-          <div class="position-relative">
+          <?if($logged_info['is_commerce'] == 'Y'){?>
+              <?
+              if(!$logged_info['image']) {
+                  $img_url = "/layout/none/assets/images/no_company.png";
+              }else {
+                  $img_url = "../../m_picture/" . $logged_info['image'];
+              }
+              ?>
+            <div class="position-relative">
+                <div class="avatar square" id="my_picture" style="background-image:url('<?=$img_url?>');"></div>
+            </div>
+          <?}else{?>
+            <?if($logged_info['is_commerce'] == 'Y'){?>
               <?
               if(!$logged_info['m_picture']) {
                   $img_url = "/layout/none/assets/images/no_avatar.png";
@@ -26,12 +38,15 @@
                   $img_url = "../../m_picture/" . $logged_info['m_picture'];
               }
               ?>
-              <div class="avatar square" id="my_picture" style="background-image:url('<?=$img_url?>');"></div>
-              <label for="userfile" class="position-absolute mb-0 pb-0" style="right:0;bottom:0;">
-                <img src="/oPage/images/imgicons/camera_gray.png" height="16" />
-              </label>
-              <input type="file" id="userfile" name="userfile" style="display:none;">
-          </div>
+              <div class="position-relative">
+                  <div class="avatar square" id="my_picture" style="background-image:url('<?=$img_url?>');"></div>
+                  <label for="userfile" class="position-absolute mb-0 pb-0" style="right:0;bottom:0;">
+                    <img src="/oPage/images/imgicons/camera_gray.png" height="16" />
+                  </label>
+                  <input type="file" id="userfile" name="userfile" style="display:none;">
+              </div>
+          <?}?>
+        <?}?>
         </div>
       </form>
 
