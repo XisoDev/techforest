@@ -72,16 +72,20 @@
     </div>
 
     <h6 class="text-center weight_lighter">SNS 간편 로그인</h6>
-    <div class="row">
-        <div class="col-1">
-        </div>
-        <div class="col-5 text-center">
+    <!-- <div class="row"> -->
+    <div class="W50_Mauto">
+        <!-- <div class="col-1">
+        </div> -->
+        <!-- <div class="col-5 text-center">
             <img src="/oPage/member/assets/images/facebook_icon.png" height="40" />
             <span class="btn btn-light xxs_content btn-block py-1 px-2 btn-round border">페이스북 로그인</span>
-        </div>
-        <div class="col-5 text-center">
+        </div> -->
+        <div class="text-center">
             <img src="/oPage/member/assets/images/naver_icon.png" height="40"  />
-            <span class="btn btn-light xxs_content btn-block py-1 px-2 btn-round border">네이버 로그인</span>
+            <div class="row">
+              <span id="modal_naver_ok1" class="btn btn-light xxs_content btn-block py-1 px-2 btn-round border" style="margin: 10px 20px;">개인 로그인</span>
+              <span id="modal_naver_ok2" class="btn btn-light xxs_content btn-block py-1 px-2 btn-round border" style="margin: 0 20px;">기업 로그인</span>
+            </div>
         </div>
     </div>
 </div>
@@ -102,3 +106,38 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+
+  // 네이버 - 개인회원가입
+	$("#modal_naver_ok1").click(function(e) {
+    var state = '<?=$_SESSION['state']?>';
+		var href = location.href.replace("#", "");
+		var url = "https://nid.naver.com/oauth2.0/authorize?client_id=cXstjgkmgg8Oiz8d7zHx&response_type=code&redirect_uri=http://127.0.0.1:8080/company/?type=1&state=" + state;
+
+		//var popOption = "width=700, height=500, resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
+		//window.open(url,"",popOption);
+		try {
+			location.replace(url);
+		}
+		catch(exception){
+			location.href = url;
+		}
+
+	});
+
+	// 네이버 - 기업회원가입
+	$("#modal_naver_ok2").click(function(e) {
+		var state = '<?=$_SESSION['state']?>';
+		var href = location.href.replace("#", "");
+		var url = "https://nid.naver.com/oauth2.0/authorize?client_id=cXstjgkmgg8Oiz8d7zHx&response_type=code&redirect_uri=https://http://127.0.0.1:8080/company/?type=1&state=" + state;
+
+		try {
+			location.replace(url);
+		}
+		catch(exception){
+			location.href = url;
+		}
+
+	});
+</script>

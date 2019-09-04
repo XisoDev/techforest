@@ -327,7 +327,13 @@
     // jQuery(document).ready(function($){
     //     $('#tech_modal_example').modal('show');
     // });
-  if(<?=$_SESSION['LOGGED_INFO']?> > 0 && <?=$row['count_hire']?> < 1 || "<?=$logged_info['registration']?>" == "" || "<?=$logged_info['address']?>" == ""){
+    <?if($row['count_hire']){?>
+      var count_hire = <?=$row['count_hire']?>;
+    <? }else{?>
+      var count_hire = 0;
+    <? } ?>;
+    var loginfo = <?=$_SESSION['LOGGED_INFO']?>;
+  if( (loginfo > 0 && count_hire < 1) && ("<?=$logged_info['registration']?>" == "" || "<?=$logged_info['address']?>" == "")){
     jQuery(document).ready(function($){
         $('#tech_modal_example').modal('show');
     });

@@ -63,6 +63,18 @@ for($i=0; $i<sizeof($mAgent); $i++){
         break;
     }
 }
+// 네이버 토큰
+	function generate_state() {
+		$mt = microtime();
+		$rand = mt_rand();
+		return md5($mt . $rand);
+	}
+
+	// 상태 토큰으로 사용할 랜덤 문자열을 생성
+	$state = generate_state();
+	$_SESSION['state']		= $state;
+	// 세션 또는 별도의 저장 공간에 상태 토큰을 저장
+	//$session->set_state($state);
 
 //Check IE
 $is_IE = false;
