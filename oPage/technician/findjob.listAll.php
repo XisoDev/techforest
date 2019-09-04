@@ -147,7 +147,7 @@
 
                             <div class="row m-0 p-0 pt-0 mt-0">
                                 <div class="col-6 mx-0 px-0">
-                                    <a href="<?=getUrl('company','jobDetail',$val['h_idx'])?>" class="btn btn-light btn-block rounded-0">상세보기</a>
+                                    <a href="<?=getUrl('technician','jobDetail',$val['h_idx'])?>" class="btn btn-light btn-block rounded-0">상세보기</a>
                                 </div>
                                 <div class="col-6 mx-0 px-0">
                                     <button class="btn btn-danger btn-block rounded-0" onclick="application_ok(<?=$val['h_idx']?>)">지원하기</button>
