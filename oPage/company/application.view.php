@@ -12,16 +12,17 @@
 
 <div class="container" style="position:relative; z-index:1;">
 
-    <div class="col-lg-8 mx-lg-auto">
-    <h4 class="d-none d-lg-block py-4 mt-5">기본정보</h4>
-    <div class="content_padding px-0 pb-1 d-md-none">
+    <div class="col-lg-8 mx-md-auto px-0 px-md-3">
+    <h4 class="d-none d-lg-block py-4 mt-md-5">기본정보</h4>
+    <div class="p-2 pb-1 d-md-none pt-4">
         <h6>기본정보</h6>
         <div class="row">
-            <div class="col-5 pt-4 pb-0 my-0 pl-4 mx-auto">
+            <div class="col-6 pb-0 my-0 pl-4 mx-auto">
               <?if(!$info_row[0]['m_picture']){?>
                 <div class="avatar square" style="background-image:url('/layout/none/assets/images/no_avatar.png');"></div>
               <?}else{?>
-                <img src="../../../img/<?=$info_row[0]['m_picture']?>" class="avatar" id="my_picture" alt="picture">
+<!--                  배경으로 수정해놓음 / by xiso-->
+                  <div class="avatar square" id="my_picture" alt="picture" style="background-image:url('../../../img/<?=$info_row[0]['m_picture']?>');"></div>
               <?}?>
             </div>
         </div>
@@ -31,11 +32,12 @@
         <div class="row">
             <div class="d-none d-md-block col-md-1">
             </div>
-            <div class="d-none d-md-block col-md-3">
+            <div class="d-none d-md-block col-md-3 pt-3">
                 <?if(!$info_row[0]['m_picture']){?>
                     <div class="avatar square" style="background-image:url('/layout/none/assets/images/no_avatar.png');"></div>
                 <?}else{?>
-                    <img src="../../../img/<?=$info_row[0]['m_picture']?>" class="avatar" id="my_picture" alt="picture">
+                    <!--                  배경으로 수정해놓음 / by xiso-->
+                    <div class="avatar square" id="my_picture" alt="picture" style="background-image:url('../../../img/<?=$info_row[0]['m_picture']?>');"></div>
                 <?}?>
             </div>
             <div class="col-12 col-md-7 col-lg-8">
@@ -75,18 +77,22 @@
     <div class="tech_card bg-white overflow-hidden pt-0 my-3 pt-md-4">
         <h5 class="p-2 d-none d-md-block bg-light">경력간단요약</h5>
         <span class=" d-md-none btn btn-block btn-light mt-0 rounded-0 mb-3">경력간단요약</span>
-        <p>성실한 10년차 용접사</p>
+        <p class="px-3">성실한 10년차 용접사</p>
     </div>
 
     <div class="tech_card bg-white overflow-hidden pt-0 my-3 pt-md-4">
         <h5 class="p-2 d-none d-md-block bg-light">학력</h5>
         <span class=" d-md-none btn btn-block btn-light mt-0 rounded-0 mb-3">학력</span>
-        <ul class="xs_content text-left my-3">
+        <div class="row ml-md-4">
+        <ul class="xs_content text-left my-3 col-md-6">
             <li>학교 : ABCD 학교</li>
             <li>졸업연도 : 1999.02</li>
+        </ul>
+        <ul class="xs_content text-left my-3 col-md-6">
             <li>전공 : 금형,기계제조</li>
             <li>학점 : 4.21/4.5</li>
         </ul>
+        </div>
     </div>
 
     <div class="tech_card bg-white overflow-hidden pt-0 my-3 pt-md-4">
@@ -103,15 +109,16 @@
     <div class="tech_card bg-white overflow-hidden pt-0 my-3 pt-md-4">
         <h5 class="p-2 d-none d-md-block bg-light">자격증</h5>
         <span class=" d-md-none btn btn-block btn-light mt-0 rounded-0 mb-3">자격증</span>
-        <ul class="xs_content text-left my-3">
-            <li>학교 : ABCD 학교</li>
-            <li>졸업연도 : 1999.02</li>
-        </ul>
-        <hr class="mx-4" />
-        <ul class="xs_content text-left my-3">
-            <li>전공 : 금형,기계제조</li>
-            <li>학점 : 4.21/4.5</li>
-        </ul>
+        <div class="row ml-md-4">
+            <ul class="xs_content text-left my-3 col-md-6">
+                <li>학교 : ABCD 학교</li>
+                <li>졸업연도 : 1999.02</li>
+            </ul>
+            <ul class="xs_content text-left my-3 col-md-6">
+                <li>전공 : 금형,기계제조</li>
+                <li>학점 : 4.21/4.5</li>
+            </ul>
+        </div>
     </div>
 
     <div class="tech_card bg-white overflow-hidden pt-0 my-3 pt-md-4">
@@ -134,38 +141,38 @@
         <ul class="xs_content text-left my-3">
             <li>
 <!--                다운로드 링크-->
-                <a href="#">
-                <span class="pull-right mr-3"><i class="xi-download" style="font-size:16px;"></i></span>
+                <a href="#" class="text-dark">
+                <span class="pull-right mr-3"><img src="/oPage/images/imgicons/download.png" height="16" /></span>
                 [이력서] ic_laucher_1024.png
                 </a>
             </li>
             <li>
 <!--                다운로드 링크-->
-                <a href="#">
-                <span class="pull-right mr-3"><i class="xi-download" style="font-size:16px;"></i></span>
+                <a href="#" class="text-dark">
+                <span class="pull-right mr-3"><img src="/oPage/images/imgicons/download.png" height="16" /></span>
                 [이력서] ic_laucher_1024.png
                 </a>
             </li>
             <li>
 <!--                다운로드 링크-->
-                <a href="#">
-                <span class="pull-right mr-3"><i class="xi-download" style="font-size:16px;"></i></span>
+                <a href="#" class="text-dark">
+                <span class="pull-right mr-3"><img src="/oPage/images/imgicons/download.png" height="16" /></span>
                 [이력서] ic_laucher_1024.png
                 </a>
             </li>
         </ul>
     </div>
 
-        <a href="<?=getUrl('technician','resume',$m_idx)?>" class="btn btn-block btn-primary d-md-none">이력서 전체보기</a>
+        <a href="<?=getUrl('technician','resume',$m_idx)?>" class="btn btn-block btn-primary px-5 d-md-none">이력서 전체보기</a>
 
         <div class="d-none d-md-block text-center">
-            <a href="<?=getUrl('technician','resume',$m_idx)?>" class="btn btn-primary px-4 rounded-0">이력서 전체보기</a>
+            <a href="<?=getUrl('technician','resume',$m_idx)?>" class="btn btn-primary px-5 rounded-0">이력서 전체보기</a>
             <?php if(!$check_voucher){?>
-                <button data-toggle="modal" data-target="#buy_voucher" class="btn btn-warning px-4 rounded-0">면접 제안하기</button>
+                <button data-toggle="modal" data-target="#buy_voucher" class="btn btn-warning px-5 rounded-0">면접 제안하기</button>
             <?php }else if($check_applicant){?>
-                <button class="btn btn-warning disabled px-4 rounded-0">면접제안 완료</button>
+                <button class="btn btn-warning disabled px-5 rounded-0">면접제안 완료</button>
             <?php }else{?>
-                <button data-toggle="modal" data-target="#suggestion_way" class="btn btn-warning px-4 rounded-0">면접 제안하기</button>
+                <button data-toggle="modal" data-target="#suggestion_way" class="btn btn-warning px-5 rounded-0">면접 제안하기</button>
             <?php } ?>
         </div>
     </div>

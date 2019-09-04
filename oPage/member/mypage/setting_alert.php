@@ -5,7 +5,7 @@
         <h4 class="weight_normal">알림설정</h4>
     </div>
     <div class="pt-lg-5 pt-lg-3 position-relative mx-auto col-sm-10 col-md-9 col-lg-8">
-        <h4 class="d-none d-lg-block mb-4"><i class="xi-bell-o text-secondary"></i> 알림설정</h4>
+        <h4 class="d-none d-lg-block mb-4"><img src="/oPage/images/imgicons/bell.png" height="30" /> 알림설정</h4>
     </div>
     <?if(count($output->get("notice_setting")) > 0){
       $checked = array(); // 빈 배열인 경우
@@ -26,49 +26,49 @@
     <div class="mx-auto col-sm-10 col-md-9 col-lg-8 rounded border mobile-border-0 p-4 p-md-5 ">
     <form class="tf_underline_form">
       <?if($logged_info['is_commerce'] == 'Y'){?>
-        <div class="form-group">
+        <div class="form-group mt-md-3">
             <label class="just_label">실시간 입사지원자 알림</label>
             <input id='c_check_1' type="checkbox" data-toggle="toggle" data-style="tech_forest" data-onstyle="danger" <?=$checked[0]?> data-size="sm" />
         </div>
-        <div class="form-group">
+        <div class="form-group mt-md-3">
             <label class="just_label">쿠폰 및 할인권 알림</label>
             <input id='c_check_2' type="checkbox" data-toggle="toggle" data-style="tech_forest" data-onstyle="danger" <?=$checked[1]?> data-size="sm" />
         </div>
-        <div class="form-group">
+        <div class="form-group mt-md-3">
             <label class="just_label">유료서비스 마감 알림</label>
             <input id='c_check_3' type="checkbox" data-toggle="toggle" data-style="tech_forest" data-onstyle="danger" <?=$checked[2]?> data-size="sm" />
         </div>
-        <div class="form-group">
+        <div class="form-group mt-md-3">
             <label class="just_label">진행중 공고 마감 알림</label>
             <input id='c_check_4' type="checkbox" data-toggle="toggle" data-style="tech_forest" data-onstyle="danger" <?=$checked[3]?> data-size="sm" />
         </div>
       <?}else {?>
-        <div class="form-group">
+        <div class="form-group mt-md-3">
             <label class="just_label">사진이력서 등록 알림</label>
             <input id='m_check_1' type="checkbox" data-toggle="toggle" data-style="tech_forest" data-onstyle="danger" <?=$checked[0]?> data-size="sm" />
         </div>
-        <div class="form-group">
+        <div class="form-group mt-md-3">
             <label class="just_label">일자리 추천 알림</label>
             <input id='m_check_2' type="checkbox" data-toggle="toggle" data-style="tech_forest" data-onstyle="danger" <?=$checked[1]?> data-size="sm" />
         </div>
-        <div class="form-group">
+        <div class="form-group mt-md-3">
             <label class="just_label">선면접 제안 알림</label>
             <input id='m_check_3' type="checkbox" data-toggle="toggle" data-style="tech_forest" data-onstyle="danger" <?=$checked[2]?> data-size="sm" />
         </div>
-        <div class="form-group">
+        <div class="form-group mt-md-3">
             <label class="just_label">지원 제안 알림</label>
             <input id='m_check_4' type="checkbox" data-toggle="toggle" data-style="tech_forest" data-onstyle="danger" <?=$checked[3]?> data-size="sm" />
         </div>
-        <div class="form-group">
+        <div class="form-group mt-md-3">
             <label class="just_label">지원/관심 공고 마감 알림</label>
             <input id='m_check_5' type="checkbox" data-toggle="toggle" data-style="tech_forest" data-onstyle="danger" <?=$checked[4]?> data-size="sm" />
         </div>
-        <div class="form-group">
+        <div class="form-group mt-md-3">
             <label class="just_label">추천기술자 허용</label>
             <input id='m_check_6' type="checkbox" data-toggle="toggle" data-style="tech_forest" data-onstyle="danger" <?=$checked[5]?> data-size="sm" />
         </div>
       <? } ?>
-        <!-- <div class="form-group">
+        <!-- <div class="form-group mt-md-3">
             <label class="just_label">야간수신 동의</label>
             <input type="checkbox" data-toggle="toggle" data-style="tech_forest" data-onstyle="danger" checked="checked" data-size="sm" />
         </div> -->

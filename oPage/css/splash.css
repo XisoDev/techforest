@@ -2,9 +2,6 @@ body,html{
     height:100%;
     color:#000;
 }
-.russo_one{
-    font-family: 'Russo One', sans-serif;
-}
 #logo_primary{
     position:fixed;
     bottom:20px;

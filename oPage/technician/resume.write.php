@@ -79,6 +79,8 @@ foreach($certificate_row as $val){
 }
 
 //한줄자기소개 랜덤 힌트
+// 요거 왠만하면 site.config 에 전역으로 선언해놓고 여기저기서 불러오시는게좋아요 :)
+// by xiso
 $rand_array = array(
   "최고를 위해 늘 최선을 다하는 기술자",
   "함께 달리고 싶은 열정 지원자 입니다.",
@@ -114,7 +116,7 @@ shuffle($rand_array);
     <a href="#" class="btn btn-danger">이력서파일 등록하기</a>
     <p class="red xs_content weight_lighter">*영업일 기준 1일 소요됩니다.</p>
 </section>
-<section class="bg-white d-lg-none">
+<section class="bg-white d-lg-none border-bottom">
     <div class="p-3 mt-4 pt-5 mb-0 pb-2">
         <a href="#" onclick="history.back();" class="mb-3"><img src="/oPage/images/imgicons/arrow_left.png" height="25" /></a>
         <h4 class="weight_normal">이력서 등록</h4>
@@ -132,9 +134,9 @@ shuffle($rand_array);
                     <h6 class="d-block d-lg-none">기본정보</h6>
                     <h4 class="d-none d-lg-block">기본정보</h4>
                 </div>
-                <div class="col-5 col-sm-4 col-lg-3 mx-auto px-auto mb-3">
+                <div class="col-6 col-sm-5 col-md-4 col-lg-3 mx-auto px-auto mb-3">
                     <div class="position-relative">
-                        <a class="position-absolute text-primary" style="right:0;top:0; font-size:28px;z-index:10;"><i class="xi-close-circle"></i></a>
+                        <a class="position-absolute text-primary" style="right:0;top:0; font-size:26px;z-index:10;"><i class="xi-close-circle"></i></a>
 
 												<div class="position-relative">
 														<?
@@ -145,8 +147,11 @@ shuffle($rand_array);
 														}
 														?>
 														<div class="avatar square" id="my_picture" style="background-image:url('<?=$img_url?>');"></div>
-														<label for="picture_upload" class="position-absolute mb-0 pb-0" style="right:0;bottom:0;">
-															<img src="/oPage/images/imgicons/camera_gray.png" height="16" />
+														<label for="picture_upload" class="position-absolute mb-0 pb-0" style="
+														        left:50%;bottom:-10px;
+														        -webkit-transform: translateX(-50%);-moz-transform: translateX(-50%);-ms-transform: translateX(-50%);-o-transform: translateX(-50%);transform: translateX(-50%);
+                                                            ">
+															<img src="/oPage/images/imgicons/camera_gray.png" height="20" />
 														</label>
 														<input type="file" id="picture_upload" style="display:none;">
 												</div>
@@ -161,19 +166,19 @@ shuffle($rand_array);
                 <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
                     <h6>한줄자기소개</h6>
                 </div>
-                <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
+                <div class="col-12 col-sm-9 mx-0 px-0 mb-2 mt-md-3 ">
                     <input type="text" class="form-control" id="a_line_self" value="<?=$a_line_self[0]['a_line_self']?>" placeholder="<?=$rand_array[0]?>" />
                 </div>
                 <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
                     <h6>이름</h6>
                 </div>
-                <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
+                <div class="col-12 col-sm-9 mx-0 px-0 mb-2 mt-md-3 ">
                     <input type="text" class="form-control" id="m_name" value="<?=$resume_row[0]['m_name']?>"/>
                 </div>
                 <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
                     <h6>성별</h6>
                 </div>
-                <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
+                <div class="col-12 col-sm-9 mx-0 px-0 mb-2 mt-md-3 ">
                     <select class="form-control" id="m_human">
                       <option value="M" <?if($resume_row[0]["m_human"] == "M") { echo "selected=\"selected\"";}?>>남자</option>
                       <option value="F" <?if($resume_row[0]["m_human"] == "F") { echo "selected=\"selected\"";}?>>여자</option>
@@ -182,14 +187,14 @@ shuffle($rand_array);
                 <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
                     <h6>생년월일</h6>
                 </div>
-                <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
+                <div class="col-12 col-sm-9 mx-0 px-0 mb-2 mt-md-3 ">
                     <input type="text" class="form-control xiso_date" id="m_birthday" value="<?=date("Y-m-d", strtotime($resume_row[0]["m_birthday"]));?>" placeholder="" />
                 </div>
 
                 <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
                     <h6>전화번호</h6>
                 </div>
-                <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
+                <div class="col-12 col-sm-9 mx-0 px-0 mb-2 mt-md-3 ">
                     <div class="input-group">
                         <select class="form-control" id="m_phone1">
 													<?
@@ -220,7 +225,7 @@ shuffle($rand_array);
                     <h6>이메일</h6>
                 </div>
 								<?php $email = explode("@", $resume_row[0]['m_email']); ?>
-                <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
+                <div class="col-12 col-sm-9 mx-0 px-0 mb-2 mt-md-3 ">
                     <div class="input-group">
                         <input type="text" class="form-control" id="m_email1" value="<?=$email[0]?>" placeholder="이메일 주소 입력">
                         <div class="input-group-prepend">
@@ -247,10 +252,10 @@ shuffle($rand_array);
                 <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
                     <h6>주소</h6>
                 </div>
-                <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
+                <div class="col-12 col-sm-9 mx-0 px-0 mb-2 mt-md-3 ">
                     <div class="input-group mb-2 overflow-hidden rounded">
                         <input type="text" class="form-control" id="address"  value="<?=$resume_row[0]['m_address']?>" placeholder="주소검색" readonly>
-                        <button type="button" class="btn btn-primary rounded-0" onclick="search_address()">검색</button>
+                        <button type="button" class="btn-sm btn btn-primary rounded-0 rounded-right" onclick="search_address()">주소검색</button>
                     </div>
                     <input type="text" class="form-control" id="address2" value="<?=$resume_row[0]['m_address2']?>" placeholder="상세주소">
                 </div>
@@ -262,10 +267,11 @@ shuffle($rand_array);
                 <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
                     <h6>희망급여</h6>
                 </div>
-                <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
+                <div class="col-12 col-sm-9 mx-0 px-0 mb-2 mt-md-3 ">
                     <div class="input-group">
+                        <div class="input-group-prepend">
                         <select class="form-control" id="job_salary" onchange="salary_select_change(this)">
-													<option value="0">회사내규에 따름</option>
+                            <option value="0">회사내규에 따름</option>
                           <?php
                             foreach($salary_list as $val) {
                               if($val["salary_idx"] == $resume_row[0]["salary_idx"]) {
@@ -276,9 +282,13 @@ shuffle($rand_array);
                             }
                           ?>
                         </select>
+                        </div>
                         <input type="text" class="form-control" id="salary" style="width:50px;" maxlength="10" value="<?=$edit_row[0]["job_salary"]?>" onkeyup="onlyNumber(this)" />
+                        <div class="input-group-append" id="salary_text">
+                            <span class="input-group-text px-1" style="font-size:12px;">만원 이상</span>
+                        </div>
                         <div class="input-group-append">
-                            <span class="input-group-text" id="salary_text" style="font-size:12px;">만원 이상</span>
+                            <span class="input-group-text px-1" style="font-size:12px;">&nbsp;</span>
                         </div>
                     </div>
                 </div>
@@ -286,7 +296,7 @@ shuffle($rand_array);
                 <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
                     <h6>희망근무지</h6>
                 </div>
-                <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
+                <div class="col-12 col-sm-9 mx-0 px-0 mb-2 mt-md-3 ">
                     <div class="input-group">
                         <select class="form-control" id="local_select" onchange="workPlace(this)">
                           <?php
@@ -328,7 +338,7 @@ shuffle($rand_array);
                 <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
                     <h6>희망직종</h6>
                 </div>
-                <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
+                <div class="col-12 col-sm-9 mx-0 px-0 mb-2 mt-md-3 ">
                     <select class="form-control" id="occupation_select" onchange="occupation(this)">
                       <?php
                         foreach($occupation_arr as $val){
@@ -342,23 +352,23 @@ shuffle($rand_array);
                 <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
                     <h6>희망직무</h6>
                 </div>
-                <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
+                <div class="col-12 col-sm-9 mx-0 px-0 mb-2 mt-md-3 ">
                   <div id="duty_field" class="height_35" style="display:table-cell; vertical-align:middle"></div>
-
                     <!-- <span class="selected_item text-secondary xs_content" onclick="jQuery(this).remove();"><i class="xi-close-circle"></i> 기계/제조 관리직</span>
                     <span class="selected_item text-secondary xs_content" onclick="jQuery(this).remove();"><i class="xi-close-circle"></i> 주물사</span> -->
-                    <div class="input-group mb-2 overflow-hidden rounded mt-2">
-                        <select class="form-control" id="select_duty"></select>
-                        <button type="button" class="btn btn-primary rounded-0" onclick="dutyAddItem($('#occupation_select').val(), $('#select_duty').val())">추가</button>
+                    <div class="input-group overflow-hidden rounded">
+                        <select class="form-control" id="select_duty" placeholder="직무를 선택해주세요. (최대 3개 추가가능)">
+                        </select>
+                        <button type="button" class="btn-sm btn btn-primary rounded-0 rounded-right" onclick="dutyAddItem($('#occupation_select').val(), $('#select_duty').val())">추가</button>
                     </div>
                 </div>
 
                 <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
-                    <h6 class="d-none d-sm-block">자기소개 및<br />경력 간단 요약</h6>
-                    <h6 class="d-block d-sm-none bg-primary text-white text-center py-2">경력간단요약 및 자기소개</h6>
+                    <h6 class="d-none d-sm-block mt-0">자기소개 및<br />경력 간단 요약</h6>
+                    <h6 class="d-block d-sm-none bg-primary text-white mb-0 pb-0 text-center py-2 rounded-top">경력간단요약 및 자기소개</h6>
                 </div>
-                <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
-                    <textarea rows="3" class="form-control" id="about_me"><?=$self_row[0]['self_introduction']?></textarea>
+                <div class="col-12 col-sm-9 mx-0 px-0 mt-0 pt-0 mb-2 mt-md-3">
+                    <textarea rows="3" class="form-control rounded-0 rounded-bottom" id="about_me"><?=$self_row[0]['self_introduction']?></textarea>
                 </div>
 
             </div>
@@ -371,13 +381,13 @@ shuffle($rand_array);
                         학력
                     </h5>
                 </div>
-                <div class="col-12 mx-0 px-0 mb-2">
+                <div class="col-12 mx-0 px-0 mb-2 mt-md-3 ">
 									<div id="my_info3_2">
 										<? if(count($my_info3) == 0){ ?>
-											<div class="added_card border rounded position-relative rounded-0 rounded-top container py-3 pt-sm-3 pb-sm-0">
-												<div class="row content_padding">
+											<div class="added_card border rounded position-relative rounded-0 rounded-top container py-0 pb-1 py-md-3 pt-sm-3 pb-sm-0">
+												<div class="row pb-2 px-2">
 													<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학교구분</h6>
-													<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
+													<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
 															<select class="form-control" id="s_idx0" name="s_idx0" onchange="school_changed(0)">
 																<?
 																	for($j = 0; $j < count($school_arr); $j++) {
@@ -386,23 +396,34 @@ shuffle($rand_array);
 																?>
 															</select>
 															<div class="input-group-append" id="ged0">
-																<span class="input-group-text">검정고시 <i class="xi-check-circle-o" onclick="jQuery(this).toggleClass('xi-check-circle-o');jQuery(this).toggleClass('xi-check-circle')"></i></span>
+																<span class="input-group-text sm_content pr-2 pl-3">검정고시 <i class="pl-1 xi-check-circle-o" onclick="jQuery(this).toggleClass('xi-check-circle-o');jQuery(this).toggleClass('xi-check-circle')"></i></span>
 															</div>
-													</div>
-													<h6 class="col-6 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학교명</h6>
-													<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
-														<input type="text" class="form-control" id="school_name0"  placeholder="학교명"/>
-													</div>
-													<h6 class="col-6 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">졸업연도</h6>
-													<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
-														<input type="text" class="form-control monthpicker" id="school_graduated0" placeholder="졸업연도"/>
-													</div>
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text">&nbsp;</span>
+                                                            </div>
+                                                    </div>
+                                                    <div class="col-6 pr-sm-2 mx-0 px-0">
+                                                        <div class="row px-3 px-sm-2">
+                                                        <h6 class="col-12 col-sm-6 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학교명</h6>
+                                                        <div class="col-12 col-sm-6 px-0 mb-2 mr-1 mx-sm-0 mt-sm-3">
+                                                            <input type="text" class="form-control" id="school_name0"  placeholder="학교명"/>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 pr-sm-2 mx-0 px-0">
+                                                        <div class="row px-3 px-sm-2">
+                                                        <h6 class="col-12 col-sm-6 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">졸업연도</h6>
+                                                        <div class="col-12 col-sm-6 px-0 mb-2 ml-1 mx-sm-0 mt-sm-3">
+                                                            <input type="text" class="form-control monthpicker" id="school_graduated0" placeholder="졸업연도"/>
+                                                        </div>
+                                                        </div>
+                                                    </div>
 													<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">전공</h6>
-													<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
+													<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
 														<input type="text" class="form-control" id="school_major0" placeholder="전공"/>
 													</div>
 													<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0" id="school_grade_title0" style="display:none">학점</h6>
-													<div class="input-group col-6 col-sm-3 mx-0 px-0 mb-2" id="grade0" style="display:none;">
+													<div class="input-group col-6 col-sm-3 mx-0 px-0 mb-2 mt-sm-3" id="grade0" style="display:none;">
 														<input type="text" class="form-control text-center" id="school_grade0" placeholder="학점"/>
 														<div class="input-group-prepend">
 															<span class="input-group-text">/</span>
@@ -413,11 +434,13 @@ shuffle($rand_array);
 											</div>
 											<? }else{
 												foreach($my_info3 as $idx => $val){?>
-												<div class="added_card border rounded position-relative rounded-0 rounded-top container py-3 pt-sm-3 pb-sm-0" id="school_div<?=$idx?>">
+
+<!--                                                    수정된 엘리먼트로 변경-->
+												<div class="added_card border rounded position-relative rounded-0 rounded-top container py-0 pb-1 py-md-3 pt-sm-3 pb-sm-0" id="school_div<?=$idx?>">
 													<a class="position-absolute" style="right:10px; top:10px;" id="school_del<?=$idx?>" onclick="my_info3_del1(<?=$idx?>)"><i class="xi-close"></i></a>
-													<div class="row content_padding">
+													<div class="row pb-2 px-2">
 													<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학교구분</h6>
-													<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
+													<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
 															<select class="form-control" id="s_idx<?=$idx?>" onchange="school_changed(<?=$idx?>)">
 																<?
 																	for($j = 0; $j < count($school_arr); $j++) {
@@ -438,23 +461,34 @@ shuffle($rand_array);
 															<div class="input-group-append" id="ged<?=$idx?>" style="display:<?=$is_ged_visible?>">
 																<? //검정고시면
 																	if($val["s_idx"] == 1 && $val['is_ged'] == 1){?>
-																		<span class="input-group-text">검정고시 <i class="xi-check-circle" onclick="jQuery(this).toggleClass('xi-check-circle-o');jQuery(this).toggleClass('xi-check-circle')"></i></span>
+																		<span class="input-group-text sm_content pr-2 pl-3">검정고시 <i class="xi-check-circle" onclick="jQuery(this).toggleClass('xi-check-circle-o');jQuery(this).toggleClass('xi-check-circle')"></i></span>
 																<? }else if($val["s_idx"] == 1 && $val['is_ged'] == 0){ ?>
-																		<span class="input-group-text">검정고시 <i class="xi-check-circle-o" onclick="jQuery(this).toggleClass('xi-check-circle-o');jQuery(this).toggleClass('xi-check-circle')"></i></span>
+																		<span class="input-group-text sm_content pr-2 pl-3">검정고시 <i class="xi-check-circle-o" onclick="jQuery(this).toggleClass('xi-check-circle-o');jQuery(this).toggleClass('xi-check-circle')"></i></span>
 																<? } ?>
 															</div>
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text">&nbsp;</span>
+                                                            </div>
 													</div>
-													<h6 class="col-6 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학교명</h6>
-													<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
-														<input type="text" class="form-control" id="school_name<?=$idx?>"  value="<?=$val['school_name']?>" placeholder="학교명"/>
-													</div>
-													<h6 class="col-6 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">졸업연도</h6>
-													<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
-														<input type="text" class="form-control monthpicker" id="school_graduated<?=$idx?>" value="<?=substr($val['school_graduated'],0,7)?>" placeholder="졸업연도"/>
-													</div>
+                                                        <div class="col-6 pr-sm-2 mx-0 px-0">
+                                                            <div class="row px-3 px-sm-2">
+                                                                <h6 class="col-12 col-sm-6 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학교명</h6>
+                                                                <div class="col-12 col-sm-6 p-0 mb-2 mr-1 mx-sm-0 mt-sm-3">
+                                                                    <input type="text" class="form-control" id="school_name<?=$idx?>"  value="<?=$val['school_name']?>" placeholder="학교명"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 pr-sm-2 mx-0 px-0">
+                                                            <div class="row px-3 px-sm-2">
+                                                                <h6 class="col-12 col-sm-6 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">졸업연도</h6>
+                                                                <div class="col-12 col-sm-6 px-0 mb-2 ml-1 mx-sm-0 mt-sm-3">
+                                                                    <input type="text" class="form-control monthpicker" id="school_graduated<?=$idx?>" value="<?=substr($val['school_graduated'],0,7)?>" placeholder="졸업연도"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
 														<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">전공</h6>
-														<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
+														<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
 															<input type="text" class="form-control" id="school_major<?=$idx?>" value="<?=$val['school_major']?>" placeholder="전공"/>
 														</div>
 														<?
@@ -466,7 +500,7 @@ shuffle($rand_array);
 															}
 														?>
 													<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0" id="school_grade_title<?=$idx?>" style="display:<?=$is_grade_visible?>">학점</h6>
-													<div class="input-group col-6 col-sm-3 mx-0 px-0 mb-2" id="grade<?=$idx?>" style="display:<?=$is_grade_visible2?>;">
+													<div class="input-group col-6 col-sm-3 mx-0 px-0 mb-2 mt-sm-3" id="grade<?=$idx?>" style="display:<?=$is_grade_visible2?>;">
 														<input type="text" class="form-control text-center" id="school_grade<?=$idx?>" value="<?=$val['school_grade']?>" placeholder="학점"/>
 														<div class="input-group-prepend">
 															<span class="input-group-text">/</span>
@@ -492,7 +526,7 @@ shuffle($rand_array);
                         경력
                     </h5>
                 </div>
-                <div class="col-12 mx-0 px-0 mb-2">
+                <div class="col-12 mx-0 px-0 mb-2 mt-sm-3">
 									<div id="my_info4_2"></div>
                     <div class="text-center">
                         <a class="my-3 d-sm-inline-block d-none btn btn-warning" onclick="javascript:addViewMemberCareer();">경력 추가하기</a>
@@ -507,14 +541,14 @@ shuffle($rand_array);
                         자격증
                     </h5>
                 </div>
-                <div class="col-12 mx-0 px-0 mb-2" >
+                <div class="col-12 mx-0 px-0 mb-2 mt-sm-3" >
 									<div id="my_info5_2">
 										<? if(count($my_info5) == 0){ ?>
-										<div class="added_card border rounded position-relative rounded-0 rounded-top container py-3 pb-sm-0">
+										<div class="added_card border rounded position-relative rounded-0 rounded-top container py-0 pb-1 py-md-3 pt-sm-3 pb-sm-0">
 												<!-- <a class="position-absolute" style="right:10px; top:10px;" onclik><i class="xi-close"></i></a> -->
-												<div class="row content_padding">
+												<div class="row pb-2 px-2">
 														<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">자격증명</h6>
-														<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
+														<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
 															<input type="text" class="form-control" name="h_certificate" placeholder="자격증명"/>
 															<input type="text" class="form-control" placeholder="취득일자"/>
 														</div>
@@ -522,12 +556,12 @@ shuffle($rand_array);
 										</div>
 									<?}else{?>
 										<?foreach ($my_info5 as $idx => $val) { ?>
-											<div class="added_card border rounded position-relative rounded-0 rounded-top container py-3 pb-sm-0" id="certificate_div<?=$idx?>">
+											<div class="added_card border rounded position-relative rounded-0 rounded-top container py-0 pb-1 py-md-3 pt-sm-3 pb-sm-0" id="certificate_div<?=$idx?>">
 													<a class="position-absolute" style="right:10px; top:10px;" id="certificate_del<?=$idx?>" onclick="javascript:my_info5_del1(<?=$idx?>)"><i class="xi-close"></i></a>
 													<input type="hidden" id="is_certificate<?=$idx?>" value="<?=$val['is_certificate']?>">
-													<div class="row content_padding">
+													<div class="row pb-2 px-2">
 															<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">자격증명</h6>
-															<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
+															<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
 																<input type="text" class="form-control" id="certificate_name<?=$idx?>" name="h_certificate" value="<?=$val['certificate_name']?>" placeholder="자격증명"/>
 																<input type="text" class="form-control" id="certificate_date<?=$idx?>" value="<?=substr($val['certificate_date'],0,7)?>" placeholder="취득일자"/>
 															</div>
@@ -550,13 +584,13 @@ shuffle($rand_array);
                         어학
                     </h5>
                 </div>
-                <div class="col-12 mx-0 px-0 mb-2">
+                <div class="col-12 mx-0 px-0 mb-2 mt-sm-3">
 									<div id="my_info6_2">
 										<?if(count($my_info6) == 0){?>
-											<div class="added_card border rounded position-relative rounded-0 rounded-top container py-3 pb-sm-0" id="language_div0">
-	                        <div class="row content_padding">
+											<div class="added_card border rounded position-relative rounded-0 rounded-top container py-0 pb-1 py-md-3 pt-sm-3 pb-sm-0" id="language_div0">
+	                        <div class="row pb-2 px-2">
 	                            <h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">언어</h6>
-	                            <div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
+	                            <div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
 	                               <input type="text" class="form-control" id="lc_name_txt0" name="lc_name_txt0" value="">
 																 <select class="form-control" id="lc_name0" name="lc_name0" onchange="languageChange(this.value,0)">
 																	<?
@@ -581,7 +615,7 @@ shuffle($rand_array);
 																</select>
 	                            </div>
 	                            <h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">시험명</h6>
-	                            <div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
+	                            <div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
 																<input type="text" class="form-control" id="lc_d_name_txt0" name="lc_d_name_txt0">
 	                                <select class="form-control" id="lc_d_idx0" name="lc_d_idx0" onchange="d_languageChange(this.value,0);">
 	                                   <?
@@ -594,25 +628,25 @@ shuffle($rand_array);
 	                                </select>
 	                            </div>
 	                            <h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">점수</h6>
-	                            <div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
+	                            <div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
 	                                <input type="text" class="form-control" id="score0"/>
 	                                <div class="input-group-append">
 	                                    <span class="input-group-text">점(급)</span>
 	                                </div>
 	                            </div>
 	                            <h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">취득날짜</h6>
-	                            <div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
+	                            <div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
 	                                <input type="text" class="form-control monthpicker" id="language_date0"/>
 	                            </div>
 	                        </div>
 	                    </div>
 									  <?}else{?>
 											<?foreach ($my_info6 as $idx => $val) {?>
-												<div class="added_card border rounded position-relative rounded-0 rounded-top container py-3 pb-sm-0" id="language_div<?=$idx?>">
+												<div class="added_card border rounded position-relative rounded-0 rounded-top container py-0 pb-1 py-md-3 pt-sm-3 pb-sm-0" id="language_div<?=$idx?>">
 		                        <a class="position-absolute" style="right:10px; top:10px;" id="language_del<?=$idx?>" onclick="javascript:my_info6_del1(<?=$idx?>)"><i class="xi-close"></i></a>
-		                        <div class="row content_padding">
+		                        <div class="row pb-2 px-2">
 		                            <h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">언어</h6>
-		                            <div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
+		                            <div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
 		                               <input type="text" class="form-control" id="lc_name_txt<?=$idx?>" name="lc_name_txt<?=$idx?>" value="<?=$val['lc_idx']?>">
 																	 <select class="form-control" id="lc_name<?=$idx?>" name="lc_name<?=$idx?>" onchange="languageChange(this.value,<?=$idx?>)">
 																		<?
@@ -637,7 +671,7 @@ shuffle($rand_array);
 																	</select>
 		                            </div>
 		                            <h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">시험명</h6>
-		                            <div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
+		                            <div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
 																	<input type="text" class="form-control" id="lc_d_name_txt<?=$idx?>" name="lc_d_name_txt<?=$idx?>" value="<?=$val['lc_d_idx']?>">
 		                                <select class="form-control" id="lc_d_idx<?=$idx?>" name="lc_d_idx<?=$idx?>" onchange="d_languageChange(this.value,<?=$idx?>);">
 		                                   <?
@@ -650,14 +684,14 @@ shuffle($rand_array);
 		                                </select>
 		                            </div>
 		                            <h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">점수</h6>
-		                            <div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
+		                            <div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
 		                                <input type="text" class="form-control" id="score<?=$idx?>" value="<?=$val['score']?>"/>
 		                                <div class="input-group-append">
 		                                    <span class="input-group-text">점(급)</span>
 		                                </div>
 		                            </div>
 		                            <h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">취득날짜</h6>
-		                            <div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">
+		                            <div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
 		                                <input type="text" class="form-control monthpicker" id="language_date<?=$idx?>" value="<?=substr($val['language_date'],0,7)?>" />
 		                            </div>
 		                        </div>
@@ -678,14 +712,14 @@ shuffle($rand_array);
                         관련서류 등록하기
                     </h5>
                 </div>
-                <div class="col-12 mx-0 px-0 mb-2">
-									<?foreach ($file_list as $val) {?>
-										<div class="file_item border rounded py-2 px-2 mb-2">
-												<a onclick="file_trash(<?=$val['file_name']?>)"><i class="xi-trash pull-right" style="font-size:1.5em;"></i></a>
-												<a href="" download="<?=$val['file_name']?>" title="<?=$val['file_name']?>"><i class="xi-download pull-right" style="font-size:1.5em;"></i></a>
-												[<?=$val['file_type']?>] <?=$val['file_name']?>
-										</div>
-									<?}?>
+                <div class="col-12 mx-0 px-0 mb-2 mt-sm-3">
+                    <?foreach ($file_list as $val) {?>
+                        <div class="file_item border rounded py-2 px-2 mb-2 mt-sm-3">
+                                <a onclick="file_trash(<?=$val['file_name']?>)"><i class="xi-trash pull-right" style="font-size:1.2em;"></i></a>
+                                <a href="" download="<?=$val['file_name']?>" title="<?=$val['file_name']?>"><i class="xi-download pull-right" style="font-size:1.2em;"></i></a>
+                                [<?=$val['file_type']?>] <?=$val['file_name']?>
+                        </div>
+                    <?}?>
 
                     <div class="text-center">
                         <button class="my-3 d-sm-inline-block d-none btn btn-warning" data-toggle="modal" data-target="#fileUpload">서류 추가하기</button>
@@ -893,31 +927,44 @@ function occupation(obj){
       //   return;
       // }
 
-			html += '<div class="added_card border rounded position-relative rounded-0 rounded-top container py-3 pt-sm-3 pb-sm-0" id="school_div'+ my_info3_count +'">';
+			html += '<div class="added_card border rounded position-relative rounded-0 rounded-top container py-0 pb-1 py-md-3 pt-sm-3 pb-sm-0" id="school_div'+ my_info3_count +'">';
 			html += '<a class="position-absolute" style="right:10px; top:10px;" id="school_del'+ my_info3_count +'" onclick="javascript:my_info3_del1(' + my_info3_count + ')"><i class="xi-close"></i></a>';
-			html += '<div class="row content_padding">';
+			html += '<div class="row pb-2 px-2">';
 			html += '<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학교구분</h6>';
-			html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">';
+			html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">';
 			html += '<select class="form-control" id="s_idx'+ my_info3_count + '"name="s_idx'+ my_info3_count + '"onchange="school_changed(' +my_info3_count+ ')">';
 			html += '<?= $school_select_tag ?>';
 			html += '</select>';
 			html += '<div class="input-group-append" id="ged'+ my_info3_count + '">';
-			html += '<span class="input-group-text">검정고시 <i class="xi-check-circle-o"></i></span>';
+			html += '<span class="input-group-text sm_content pr-2 pl-3">검정고시 <i class="xi-check-circle-o"></i></span>';
+            //추가
+			html += '<div class="input-group-append"><span class="input-group-text">&nbsp;</span></div>';
+
 			html += '</div></div>';
-			html += '<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학교명</h6>';
-			html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">';
-			html += '<input type="text" id="school_name'+ my_info3_count + '"class="form-control" placeholder="학교명"/>';
-			html += '</div>';
-			html += '<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">졸업연도</h6>';
-			html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">';
-			html += '<input type="text" id="school_graduated'+ my_info3_count + '"class="form-control monthpicker" placeholder="졸업연도"/>';
-			html += '</div>';
+			//변경
+            html += '<div class="col-6 pr-sm-2 mx-0 px-0">';
+            html += '<div class="row px-3 px-sm-2">';
+            html += '<h6 class="col-12 col-sm-6 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학교명</h6>';
+            html += '<div class="col-12 col-sm-6 px-0 mb-2 mr-1 mx-sm-0 mt-sm-3">';
+            html += '<input type="text" class="form-control" id="school_name0"  placeholder="학교명"/>';
+            html += '</div>';
+            html += '</div>';
+            html += '</div>';
+            html += '<div class="col-6 pr-sm-2 mx-0 px-0">';
+            html += '<div class="row px-3 px-sm-2">';
+            html += '<h6 class="col-12 col-sm-6 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">졸업연도</h6>';
+            html += '<div class="col-12 col-sm-6 px-0 mb-2 ml-1 mx-sm-0 mt-sm-3">';
+            html += '<input type="text" class="form-control monthpicker" id="school_graduated0" placeholder="졸업연도"/>';
+            html += '</div>';
+            html += '</div>';
+            html += '</div>';
+            //변경끝.
 			html += '<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">전공</h6>';
-			html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">';
+			html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">';
 			html += '<input type="text" id="school_major'+ my_info3_count + '"class="form-control" placeholder="전공"/>';
 			html += '</div>';
 			html += '<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0" id="school_grade_title'+ my_info3_count +'"style="display:none">학점</h6>';
-			html += '<div class="input-group col-6 col-sm-3 mx-0 px-0 mb-2" id="grade'+ my_info3_count +'" style="display:none">';
+			html += '<div class="input-group col-6 col-sm-3 mx-0 px-0 mb-2 mt-sm-3" id="grade'+ my_info3_count +'" style="display:none">';
 			html += '<input type="text" class="form-control text-center" id="school_grade'+ my_info3_count + '" placeholder="학점"/>';
 			html += '<div class="input-group-prepend">';
 			html += '<span class="input-group-text">/</span>';
@@ -1007,22 +1054,22 @@ function occupation(obj){
 			// 	}
 			//}
 
-			html += '<div class="added_card border rounded position-relative rounded-0 rounded-top container py-3 pb-sm-0">';
+			html += '<div class="added_card border rounded position-relative rounded-0 rounded-top container py-0 pb-1 py-md-3 pt-sm-3 pb-sm-0">';
 			html += '<a class="position-absolute" style="right:10px; top:10px;" name="delete_career" onclick="removeViewMemberCareer(this)"><i class="xi-close"></i></a>';
-			html += '<div class="row content_padding">';
+			html += '<div class="row pb-2 px-2">';
 			html += '<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">기업명</h6>';
-			html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">';
+			html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">';
 			html += '<input type="text" id="c_name'+ i +'"name="c_name" class="form-control" value="' +member_career_arr[i]["c_name"]+ '" placeholder="회사명"/>';
 			html += '<input type="text" id="c_position'+ i +'"name="c_position" class="form-control" value="' +member_career_arr[i]["c_position"]+ '" placeholder="직위(직급)"/>';
 			html += '</div>';
 			html += '<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">직종</h6>';
-			html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">';
+			html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">';
 			html += '<select class="form-control" name="c_o_idx" id="c_o_idx'+ i +'" onchange="addDutyToSelect(this)">';
 			html += '</select>';
 			html += '<select class="form-control" name="c_duty" id="c_duty'+ i +'">';
 			html += '</select></div>';
 			html += '<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">근무기간</h6>';
-			html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">';
+			html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">';
 			html += '<input type="text" class="form-control monthpicker_from" autocomplete="off" name="c_start_date"  value="' +member_career_arr[i]["c_start_date"].substring(0, 7)+ '"/>';
 			html += '<div class="input-group-append">';
 			html += '<span class="input-group-text">~</span>';
@@ -1030,7 +1077,7 @@ function occupation(obj){
 			html += '<input type="text" name="c_end_date" class="form-control monthpicker_to" value="' +member_career_arr[i]["c_end_date"].substring(0, 7)+ '" />';
 			html += '</div>';
 			html += '<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">직무내용</h6>';
-			html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">';
+			html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">';
 			html += '<textarea rows="3" class="form-control" name="c_content" placeholder="기재시 적합한 일자리에 연결될 확률이 77% 증가합니다">'+member_career_arr[i]["c_content"]+'</textarea>';
 			html += '</div></div></div>';
 
@@ -1109,11 +1156,11 @@ function occupation(obj){
 		// 		return;
 		// 	}
 		// }
-		html += '<div class="added_card border rounded position-relative rounded-0 rounded-top container py-3 pb-sm-0" id="certificate_div'+ my_info5_count +'">';
+		html += '<div class="added_card border rounded position-relative rounded-0 rounded-top container py-0 pb-1 py-md-3 pt-sm-3 pb-sm-0" id="certificate_div'+ my_info5_count +'">';
 		html += '<a class="position-absolute" style="right:10px; top:10px;" id="certificate_del'+ my_info5_count +'" onclick="my_info5_del1('+ my_info5_count +')"><i class="xi-close"></i></a>';
-		html += '<div class="row content_padding">';
+		html += '<div class="row pb-2 px-2">';
 		html += '<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">자격증명</h6>';
-		html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">';
+		html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">';
 		html += '<input type="text" class="form-control" id="certificate_name'+ my_info5_count +'" name="h_certificate" placeholder="자격증명"/>';
 		html += '<input type="text" class="form-control monthpicker" id="certificate_date'+ my_info5_count +'" placeholder="취득일자"/>';
 		html += '</div></div></div>';
@@ -1208,29 +1255,29 @@ function my_info6_add() {
 	// 	}
 	//}
 
-	html += '<div class="added_card border rounded position-relative rounded-0 rounded-top container py-3 pb-sm-0" id="language_div' + my_info6_count + '">';
+	html += '<div class="added_card border rounded position-relative rounded-0 rounded-top container py-0 pb-1 py-md-3 pt-sm-3 pb-sm-0" id="language_div' + my_info6_count + '">';
 	html += '<a class="position-absolute" style="right:10px; top:10px;" id="language_del'+ my_info6_count +'" onclick="javascript:my_info6_del1('+ my_info6_count +')"><i class="xi-close"></i></a>';
-	html += '<div class="row content_padding">';
+	html += '<div class="row pb-2 px-2">';
 	html += '<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">언어</h6>';
-	html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">';
+	html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">';
 	html += '<input type="text" class="form-control" id="lc_name_txt'+ my_info6_count +'" name="lc_name_txt'+ my_info6_count +'" value="<?=$language_arr[0]["lc_name"]?>">';
 	html += '<select class="form-control" id="lc_name'+ my_info6_count +'" name="lc_name'+ my_info6_count +'" onchange="javascript:languageChange(this.value,'+ my_info6_count +')">';
  	html += '<?= $language_select_tag ?>';
 	html += '</select></div>';
 	html += '<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">시험명</h6>';
-	html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">';
+	html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">';
 	html += '<input type="text" class="form-control" id="lc_d_name_txt'+ my_info6_count +'" name="lc_d_name_txt'+ my_info6_count +'" value="<?=$d_language_arr[0]["lc_d_name"]?>">';
 	html += '<select class="form-control" id="lc_d_idx'+ my_info6_count +'" name="lc_d_idx'+ my_info6_count +'" onchange="javascript:d_languageChange(this.value,'+ my_info6_count +');">';
 	html += '<?= $d_language_select_tag?>';
 	html += '</select></div>';
 	html += '<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">점수</h6>';
-	html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">';
+	html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">';
 	html += '<input type="text" class="form-control" id="score'+ my_info6_count +'"/>';
 	html += '<div class="input-group-append">';
 	html += '<span class="input-group-text">점(급)</span>';
 	html += '</div></div>';
   html += '<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">취득날짜</h6>';
-	html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2">';
+	html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">';
 	html += '<input type="text" class="form-control" id="language_date'+ my_info6_count +'"/>';
 	html += '</div></div></div>';
 
@@ -1325,13 +1372,16 @@ function my_info6_del1(idx) {
 		$("#salary").show();
 		$("#salary_text").show();
 		switch (obj.value) {
+            case '0' :
+                $("#salary_text").find('span').html("회사 내규에 따름");
+            break;
 			case '1':
 			case '2':
-			document.getElementById('salary_text').innerHTML = "만원 이상";
+                $("#salary_text").find('span').html("만원 이상");
 			break;
 			case '3':
 			case '4':
-			document.getElementById('salary_text').innerHTML = "원 이상";
+                $("#salary_text").find('span').html("원 이상");
 			break;
 			default:
 			$("#job_salary").attr("style", "width:100%");

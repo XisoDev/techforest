@@ -9,8 +9,13 @@
 
 .input-group-text{
     background:#FFF;
-    padding:0;
     border-color:#eee;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.1rem;
+    font-size:12px;
+}
+.input-group-text i{
+    font-size:18px;
 }
 .form-control{
     outline: none !important;

@@ -54,7 +54,7 @@
                     <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
                         <h6>회사명</h6>
                     </div>
-                    <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
+                    <div class="col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
                         <input type="text" class="form-control" id="c_name" value="<?=$logged_info['c_name']?>" placeholder="회사명" required>
                     </div>
                     <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
@@ -64,7 +64,7 @@
                       $registration = explode("-", $logged_info["registration"]);
 
                     ?>
-                    <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
+                    <div class="col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
                         <div class="input-group">
                             <input type="text" class="form-control" id="registration1" value="<?=$registration[0]?>" placeholder="000" maxlength="3" required>
                             <div class="input-group-prepend">
@@ -80,7 +80,7 @@
                     <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
                         <h6>주소</h6>
                     </div>
-                    <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
+                    <div class="col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
                         <div class="input-group mb-2">
                             <input type="text" class="form-control" id="address"  value="<?=$logged_info['address']?>" placeholder="주소검색" readonly>
                             <button type="button" class="btn btn-primary rounded-0" onclick="search_address()">검색</button>
@@ -94,7 +94,7 @@
                         <h6 class="d-sm-none">담당자 정보</h6>
                         <h6 class="d-none d-sm-block">담당자 연락처</h6>
                     </div>
-                    <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
+                    <div class="col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
 
                         <div class="input-group">
                             <select class="form-control" id="c_phone1" required>
@@ -125,7 +125,7 @@
                     <div class="d-none d-sm-block col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
                         <h6>담당자 이메일</h6>
                     </div>
-                    <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
+                    <div class="col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
                         <div class="input-group">
                             <? $email = explode("@", $logged_info['select6']); ?>
                             <input type="text" class="form-control" id="c_email1" value="<?=$email[0]?>" placeholder="이메일 주소 입력" required>
@@ -155,15 +155,13 @@
                     <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
                         <h6>회사 간단소개</h6>
                     </div>
-                    <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
+                    <div class="col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
                         <textarea class="form-control" id="c_introduction"><?=$logged_info['c_introduction']?></textarea>
                     </div>
                     <div class="d-none d-md-block col-md-2"></div>
-                    <div class="col-6 col-md-4 mt-4 px-0 mx-0 pr-1">
-                        <button type="button" onclick="temporary_save()" class="btn border-primary btn-block btn-round">임시저장</button>
-                    </div>
-                    <div class="col-6 col-md-4 mt-4 px-0 mx-0 pl-1">
-                        <button type="button" onclick="company_info_ok()" class="btn btn-primary btn-block btn-round">등록완료</button>
+                    <div class="col-12 text-center py-4">
+                        <button type="button" onclick="temporary_save()" class="btn border-primary py-2 px-4 px-md-5 mr-1 btn-round">임시저장</button>
+                        <button type="button" onclick="company_info_ok()" class="btn btn-primary py-2 px-4 px-md-5 ml-1 btn-round">등록완료</button>
                     </div>
                 </div>
             </div>

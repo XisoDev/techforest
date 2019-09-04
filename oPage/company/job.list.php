@@ -18,7 +18,7 @@
     <div class="row">
     <?php foreach($output->get('row') as $val){ ?>
         <div class=" col-12 col-sm-6 col-lg-4">
-        <div class="tech_card bg-white mb-4">
+        <div class="tech_card bg-white mb-4 shadow">
             <div class="thumbnail mx-0 px-0" style="background-image:url('http://www.planttech.co.kr/wp-content/uploads/2018/07/%EC%82%BC%EC%84%B1%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%811-820x457.png')">
                 <div class="overlay"><span class="overlay-content"><?=$logged_info['c_name']?></span></div>
             </div>
@@ -30,10 +30,9 @@
                     <button class="btn btn-light btn-block rounded-0" onclick="close_job(<?=$val['h_idx']?>)">공고마감하기</button>
                 </div>
             </div>
-            <div class="content_padding text-left py-1">
-                <h6></h6>
+            <div class="py-1 px-3 text-left">
                 <h6 class="red"><?=$val['h_title']?></h6>
-                <p class="weight_lighter xxs_content mx-0 px-0">
+                <p class="weight_lighter xs_content mb-0 mx-0 px-0">
                   <? if ($val['city_name'] == "전체") { $val['city_name'] = "";} ?>
                   <? if ($val['district_name'] == "전체") { $val['district_name'] = ""; }?>
                   <? if($val['salary_idx'] < 3) { $hire_salary_text = "만원"; } else { $hire_salary_text = "원"; } ?>
@@ -52,7 +51,7 @@
                     </span>
                     <b><?php echo number_format($val['job_salary']) . $hire_salary_text?></b>
                 </p>
-                <p class="text-secondary xxs_content mx-0 px-0"><i class="xi-clock-o"></i> 마감 <?=$val['job_end_day']?>일 전</p>
+                <p class="text-secondary xs_content mb-0 mx-0 px-0"><i class="xi-clock-o"></i> 마감 <?=$val['job_end_day']?>일 전</p>
             </div>
             <div class="row mt-1 mx-0 px-0">
                 <div class="col-6 mx-0 px-0">
@@ -81,14 +80,13 @@
         <div class="row">
     <?php foreach($output->get('end_row') as $val){ ?>
             <div class=" col-12 col-sm-6 col-lg-4">
-        <div class="tech_card bg-white mb-4" id="end_list">
+        <div class="tech_card bg-white mb-4 shadow" id="end_list">
             <div class="thumbnail mx-0 px-0" style="background-image:url('http://www.planttech.co.kr/wp-content/uploads/2018/07/%EC%82%BC%EC%84%B1%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%811-820x457.png')">
                 <div class="overlay"><span class="overlay-content"><?=$logged_info['c_name']?></span></div>
             </div>
-            <div class="content_padding text-left py-1">
-              <h6></h6>
+            <div class="text-left py-1 px-3">
               <h6 class="red"><?=$val['h_title']?></h6>
-              <p class="weight_lighter xxs_content mx-0 px-0">
+              <p class="weight_lighter xs_content mb-0 mx-0 px-0">
                 <? if ($val['city_name'] == "전체") { $val['city_name'] = "";} ?>
                 <? if ($val['district_name'] == "전체") { $val['district_name'] = ""; }?>
                 <? if($val['salary_idx'] < 3) { $hire_salary_text = "만원"; } else { $hire_salary_text = "원"; } ?>
