@@ -28,8 +28,6 @@ $add_html_header[] = '<script src="https://cdn.iamport.kr/js/iamport.payment-1.1
 //다음 주소 api
 $add_html_header[] = '<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>';
 
-
-
 $add_body_class[] = 'for_company';
 
 //boostrap script & jquery

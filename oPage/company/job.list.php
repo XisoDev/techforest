@@ -24,7 +24,7 @@
             </div>
             <div class="row m-0 p-0">
                 <div class="col-6 mx-0 px-0">
-                    <a href="#" class="btn btn-danger btn-block rounded-0">상세보기</a>
+                    <a href="<?=getUrl('company','jobDetail',$val['h_idx']);?>" class="btn btn-danger btn-block rounded-0">상세보기</a>
                 </div>
                 <div class="col-6 mx-0 px-0">
                     <button class="btn btn-light btn-block rounded-0" onclick="close_job(<?=$val['h_idx']?>)">공고마감하기</button>
