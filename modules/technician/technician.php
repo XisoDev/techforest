@@ -340,7 +340,7 @@ class technicianView{
           $short_term = -1;
         }
 
-        if($duty == 'undefined' || !$duty){
+        if(!$duty || $duty == '전체'){
           $duty = -1;
         }
 
@@ -355,12 +355,12 @@ class technicianView{
         if($o_idx > 0){
           $oDB->where("h.o_idx",$o_idx);
         }
-        if($duty > 0 || $duty){
-          $oDB->where("h.duty_name",$duty);
+        if($duty != -1){
+          $oDB->where("h.duty_name","$duty");
         }
         if($short_term > 0){
           $oDB->where("h_title","[단기]%","like");
-        } 
+        }
         $oDB->join("TF_member_commerce_tb co","h.c_idx = co.c_idx","LEFT");
         $oDB->join("TF_local_tb l","h.local_idx = l.local_idx","LEFT");
         $oDB->join("TF_city_tb c","h.city_idx = c.city_idx","LEFT");

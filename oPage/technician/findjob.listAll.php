@@ -71,7 +71,7 @@
         <div class="row mt-1">
             <div class="col-6 pr-1 col-lg-4">
                 <select class="form-control" id="duty_select" onchange="location.href=(this.value)">
-                    <option value="">전체</option>
+                    <option value="<?=getUrl('technician','findJobListAll',false,array('local_idx' => $search_local_idx,'o_idx' => $search_o_idx, 'duty' => '전체'))?>">전체</option>
                   <?foreach ($duty_list as $val) {?>
                     <?if($search_o_idx == $val["o_idx"]){?>
                       <?if($search_duty_name == $val["duty_name"]){?>
@@ -147,7 +147,7 @@
 
                             <div class="row m-0 p-0 pt-0 mt-0">
                                 <div class="col-6 mx-0 px-0">
-                                    <a href="#" class="btn btn-light btn-block rounded-0">상세보기</a>
+                                    <a href="<?=getUrl('company','jobDetail',$val['h_idx'])?>" class="btn btn-light btn-block rounded-0">상세보기</a>
                                 </div>
                                 <div class="col-6 mx-0 px-0">
                                     <button class="btn btn-danger btn-block rounded-0" onclick="application_ok(<?=$val['h_idx']?>)">지원하기</button>
@@ -223,7 +223,9 @@
 
 $("#short_term").change(function(){
     if($("#short_term").is(":checked")){
-      location.href="<?=getUrl('technician','findJobListAll',false,array('local_idx' => $search_local_idx,'o_idx' => $search_o_idx, 'short'=>1))?>";
+      location.href="<?=getUrl('technician','findJobListAll',false,array('local_idx' => $search_local_idx,'o_idx' => $search_o_idx, 'duty'=>$search_duty_name, 'short'=>1))?>";
+    }else{
+      location.href="<?=getUrl('technician','findJobListAll',false,array('local_idx' => $search_local_idx,'o_idx' => $search_o_idx, 'duty'=>$search_duty_name, 'short'=>-1))?>";
     }
 });
 </script>
