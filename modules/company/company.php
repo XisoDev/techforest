@@ -299,6 +299,68 @@ class companyView{
         return $output;
     }
 
+    function jobDetail($args){
+        setSEO("공고 상세보기","");
+        global $site_info;
+        $site_info->layout = "company";
+
+        global $logged_info;
+
+        global $set_template_file;
+        $set_template_file = "company/job.detail.php";
+
+        global $add_body_class;
+        $add_body_class[] = "shrink";
+
+        global $oDB;
+
+        $output = new Object();
+
+        $h_idx = $args->document_srl;
+
+        $columns = "h.h_idx, h.c_idx, h.o_idx, h.duty_name, ifnull(nullif(o.o_name, ''), '-') AS hire_o_name,";
+        $columns .= "h.w_idx, w.w_name, h.salary_idx, s.salary_name, ifnull(nullif(h.h_title, ''), '-') AS h_title,";
+        $columns .= "ifnull(nullif(h.job_description, ''), '-') AS job_description,";
+        $columns .= "ifnull(nullif(h.job_salary, ''), '-') AS job_salary,";
+        $columns .= "ifnull(nullif(h.job_achievement, ''), '-') AS job_achievement,";
+        $columns .= "ifnull(nullif(h.job_is_career, ''), '-') AS job_is_career,";
+        $columns .= "ifnull(nullif(h.job_manager, ''), '-') AS job_manager,";
+        $columns .= "h.job_start_date, h.job_end_date, h.local_idx, l.local_name, h.city_idx,";
+        $columns .= "city.city_name, h.district_idx, d.district_name, h.hire_is_show, h.is_my_near,";
+        $columns .= "h.represent_hire_check, h.job_idx, h.reg_date, h.edit_date, h.vip,c.c_name, c.c_introduction, c.registration,";
+        $columns .= "c.select1, c.select2, c.select3, c.select4,c.phonenumber, c.address, c.address2,c.select5, c.select6, c.select7,";
+        $columns .= "c.homepage, c.image, c.reg_date, c.edit_date, c.is_grade,c.m_idx,";
+        $columns .= "(SELECT COUNT(*) FROM TF_application_letter al WHERE al.h_idx = $h_idx AND isVisible = 'Y') AS letter_count";
+
+        $oDB->where("h.h_idx",$h_idx);
+        $oDB->join("TF_member_commerce_tb c","h.c_idx = c.c_idx","LEFT");
+        $oDB->join("TF_occupation o","h.o_idx = o.o_idx","LEFT");
+        $oDB->join("TF_work w","h.w_idx = w.w_idx","LEFT");
+        $oDB->join("TF_salary s","h.salary_idx = s.salary_idx","LEFT");
+        $oDB->join("TF_local_tb l","h.local_idx = l.local_idx","LEFT");
+        $oDB->join("TF_city_tb city","h.city_idx = city.city_idx","LEFT");
+        $oDB->join("TF_district_tb d","h.district_idx = d.district_idx","LEFT");
+        $hire_info = $oDB->get("TF_hire_tb h",null,$columns);
+
+        //기업 필요자격증 조회
+        $oDB->where("h_idx",$h_idx);
+        $h_certificate = $oDB->get("TF_hire_certificate",null,"certificate_name");
+
+        //탈퇴한 지원자 카운트
+        $oDB->where("m.m_name","IS NULL");
+        $oDB->where("al.h_idx",$h_idx);
+        $oDB->join("TF_member_tb m","al.m_idx = m.m_idx","LEFT");
+        $member_count = $oDB->get("TF_application_letter al",null,"count(*) as cnt");
+
+        $output->add('member_notice',$this->member_notice());
+        $output->add('hire_info',$hire_info);
+        $output->add('h_certificate',$h_certificate);
+        $output->add('$member_count',$member_count);
+
+        return $output;
+
+    }
+
     function job_appRegisterComplete($args){
         global $set_template_file;
         $set_template_file = "company/job.reg.complete.php";
@@ -480,64 +542,6 @@ class companyView{
       $row = $oDB->get("TF_hire_tb h",null,$columns);
 
       return $row;
-
-    }
-
-
-function jobDetail($args){
-        setSEO("공고 상세보기","");
-        global $site_info;
-        global $logged_info;
-        global $set_template_file;
-        global $add_body_class;
-        global $oDB;
-
-        $output = new Object();
-        $site_info->layout = "company";
-        $add_body_class[] = "shrink";
-        $set_template_file = "company/job.detail.php";
-        $h_idx = $args->document_srl;
-
-        $columns = "h.h_idx, h.c_idx, h.o_idx, h.duty_name, ifnull(nullif(o.o_name, ''), '-') AS hire_o_name,";
-        $columns .= "h.w_idx, w.w_name, h.salary_idx, s.salary_name, ifnull(nullif(h.h_title, ''), '-') AS h_title,";
-        $columns .= "ifnull(nullif(h.job_description, ''), '-') AS job_description,";
-        $columns .= "ifnull(nullif(h.job_salary, ''), '-') AS job_salary,";
-        $columns .= "ifnull(nullif(h.job_achievement, ''), '-') AS job_achievement,";
-        $columns .= "ifnull(nullif(h.job_is_career, ''), '-') AS job_is_career,";
-        $columns .= "ifnull(nullif(h.job_manager, ''), '-') AS job_manager,";
-        $columns .= "h.job_start_date, h.job_end_date, h.local_idx, l.local_name, h.city_idx,";
-        $columns .= "city.city_name, h.district_idx, d.district_name, h.hire_is_show, h.is_my_near,";
-        $columns .= "h.represent_hire_check, h.job_idx, h.reg_date, h.edit_date, h.vip,c.c_name, c.c_introduction, c.registration,";
-        $columns .= "c.select1, c.select2, c.select3, c.select4,c.phonenumber, c.address, c.address2,c.select5, c.select6, c.select7,";
-        $columns .= "c.homepage, c.image, c.reg_date, c.edit_date, c.is_grade,c.m_idx,";
-        $columns .= "(SELECT COUNT(*) FROM TF_application_letter al WHERE al.h_idx = $h_idx AND isVisible = 'Y') AS letter_count";
-
-        $oDB->where("h.h_idx",$h_idx);
-        $oDB->join("TF_member_commerce_tb c","h.c_idx = c.c_idx","LEFT");
-        $oDB->join("TF_occupation o","h.o_idx = o.o_idx","LEFT");
-        $oDB->join("TF_work w","h.w_idx = w.w_idx","LEFT");
-        $oDB->join("TF_salary s","h.salary_idx = s.salary_idx","LEFT");
-        $oDB->join("TF_local_tb l","h.local_idx = l.local_idx","LEFT");
-        $oDB->join("TF_city_tb city","h.city_idx = city.city_idx","LEFT");
-        $oDB->join("TF_district_tb d","h.district_idx = d.district_idx","LEFT");
-        $hire_info = $oDB->get("TF_hire_tb h",null,$columns);
-
-        //기업 필요자격증 조회
-        $oDB->where("h_idx",$h_idx);
-        $h_certificate = $oDB->get("TF_hire_certificate",null,"certificate_name");
-
-        //탈퇴한 지원자 카운트
-        $oDB->where("m.m_name","IS NULL");
-        $oDB->where("al.h_idx",$h_idx);
-        $oDB->join("TF_member_tb m","al.m_idx = m.m_idx","LEFT");
-        $member_count = $oDB->get("TF_application_letter al",null,"count(*) as cnt");
-
-        $output->add('member_notice',$this->member_notice());
-        $output->add('hire_info',$hire_info);
-        $output->add('h_certificate',$h_certificate);
-        $output->add('$member_count',$member_count);
-
-        return $output;
 
     }
 

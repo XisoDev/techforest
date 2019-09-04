@@ -7,15 +7,16 @@ $member_count = $output->get('member_count');
 <link rel="stylesheet" href="/layout/company/assets/default.css">
 <link rel="stylesheet" href="/layout/none/vendor/bootstrap/bootstrap.min.css">
 
-<section class="p-3 mt-4 pt-5 bg-white d-lg-none">
-    <a href="#" onclick="history.back();" class="mb-3"><img src="/oPage/images/imgicons/arrow_left.png" height="25" /></a>
-    <h4 class="weight_normal">공고 상세보기</h4>
-</section>
+<section class="bg-white">
+  <section class="p-3 mt-4 pt-5 bg-white d-lg-none">
+      <a href="#" onclick="history.back();" class="mb-3"><img src="/oPage/images/imgicons/arrow_left.png" height="25" /></a>
+      <h4 class="weight_normal">공고 상세보기</h4>
+  </section>
 
 
 <div class="container" style="position:relative; z-index:1;">
   <section class="max_width margin_auto inline_block width_100 padding_top_50_xs_null">
-  			<div class="col-md-8 padding_5_xs_null align_left float_left">
+  			<div class="col-md-8 padding_5_xs_null align_left float_left width_100">
   				<div class="padding_5 border1_xs_null">
   					<div class="padding_20">
   						<table>
@@ -240,52 +241,48 @@ $member_count = $output->get('member_count');
   				?>
 
 
-  				<div class="padding_15 border1_xs_null font_size_20 margin_top_20 align_left><?
-  					if($logged_info['is_commerce'] == 'Y') {
-  						if($hire_info[0]["m_idx"] == $m_idx) {
-  							echo "  ";
-  						}
-  					} else {
-  						echo " margin_top_20 ";
-  					}
-  				?>  ">
-  					<?
+  				<div class="padding_15 border1_xs_null font_size_20 margin_top_20 align_left">
+            <?if($logged_info['is_commerce'] == 'Y') {?>
+              광고배너들어감
+  					<?} else {?>
+              <?
+    						if($hire_info[0]["homepage"]) {
+    							echo "<a href=\"" . $hire_info[0]["homepage"] . "\" target=\"_blank\" style=\"margin-right:5px\" ><img class=\"rectangle_60\" src=\"./img/icon_007.png\" alt=\"홈페이지\" /></a>";
+    						}
 
-  						if($hire_info[0]["homepage"]) {
-  							echo "<a href=\"" . $hire_info[0]["homepage"] . "\" target=\"_blank\" style=\"margin-right:5px\" ><img class=\"rectangle_60\" src=\"./img/icon_007.png\" alt=\"홈페이지\" /></a>";
-  						}
+    						if($m_idx > 0) {
+    							if($hire_info[0]["interest_count"] > 0) {
+    								//echo "<a class=\"inline_block\" id=\"click_interest2\"><img class=\"rectangle_60\" src=\"./img/icon_027.png\" alt=\"관심\" /><input type=\"hidden\" value=\"" . $h_idx . "\" /></a>";
+    							} else {
+    								//echo "<a class=\"inline_block\" id=\"click_interest1\"><img class=\"rectangle_60\" src=\"./img/icon_005.png\" alt=\"관심공고\" /><input type=\"hidden\" value=\"" . $h_idx . "\" /></a>";
+    							}
+    						} else {
+    							if($hire_info[0]["interest_count"] > 0) {
+    								//echo "<a class=\"color_point2\" href=\"#\" type=\"button\" role=\"button\" data-toggle=\"modal\" data-target=\"#modal_login\" rel=\"nofollow\"><img class=\"rectangle_60\"src=\"./img/icon_027.png\" alt=\"관심\" /></a>";
+    							} else {
+    								//echo "<a class=\"color_point2\" href=\"#\" type=\"button\" role=\"button\" data-toggle=\"modal\" data-target=\"#modal_login\" rel=\"nofollow\"><img class=\"rectangle_60\"src=\"./img/icon_005.png\" alt=\"관심\" /></a>";
+    							}
+    						}
 
-  						if($m_idx > 0) {
-  							if($hire_info[0]["interest_count"] > 0) {
-  								//echo "<a class=\"inline_block\" id=\"click_interest2\"><img class=\"rectangle_60\" src=\"./img/icon_027.png\" alt=\"관심\" /><input type=\"hidden\" value=\"" . $h_idx . "\" /></a>";
-  							} else {
-  								//echo "<a class=\"inline_block\" id=\"click_interest1\"><img class=\"rectangle_60\" src=\"./img/icon_005.png\" alt=\"관심공고\" /><input type=\"hidden\" value=\"" . $h_idx . "\" /></a>";
-  							}
-  						} else {
-  							if($hire_info[0]["interest_count"] > 0) {
-  								//echo "<a class=\"color_point2\" href=\"#\" type=\"button\" role=\"button\" data-toggle=\"modal\" data-target=\"#modal_login\" rel=\"nofollow\"><img class=\"rectangle_60\"src=\"./img/icon_027.png\" alt=\"관심\" /></a>";
-  							} else {
-  								//echo "<a class=\"color_point2\" href=\"#\" type=\"button\" role=\"button\" data-toggle=\"modal\" data-target=\"#modal_login\" rel=\"nofollow\"><img class=\"rectangle_60\"src=\"./img/icon_005.png\" alt=\"관심\" /></a>";
-  							}
-  						}
+    					?>
 
-  					?>
+    					<img style="cursor:pointer; margin-right:5px;" onclick="javascript:click_share();" class="rectangle_60" src="./img/icon_006.png" alt="공유" />
+    					<!-- 상세공고 다음/이전 작업 -->
+    					<?if($logged_info['is_commerce'] == 'Y') {
 
-  					<img style="cursor:pointer; margin-right:5px;" onclick="javascript:click_share();" class="rectangle_60" src="./img/icon_006.png" alt="공유" />
-  					<!-- 상세공고 다음/이전 작업 -->
-  					<?if($logged_info['is_commerce'] == 'Y') {
+    					}else if(!$m_idx){
+    							if($hire_info[0]["homepage"]){
+    								echo "<a href=\"./careers.html\"><button class=\"btn button1\" style=\"font-size: 19px;width:50%;margin:0px;height:60;background: white;color:  #003E6F;border: 1px solid #003E6F;border-radius: 0;\" ><strong>일자리 더보기</strong></button></a>";
+    							}else{
+    								echo "<a href=\"./careers.html\"><button class=\"btn button1\" style=\"font-size: 19px;width:70%;margin:0px;height:60;background: white;color:  #003E6F;border: 1px solid #003E6F;border-radius: 0;\" ><strong>일자리 더보기</strong></button></a>";
+    							}
 
-  					}else if(!$m_idx){
-  							if($hire_info[0]["homepage"]){
-  								echo "<a href=\"./careers.html\"><button class=\"btn button1\" style=\"font-size: 19px;width:50%;margin:0px;height:60;background: white;color:  #003E6F;border: 1px solid #003E6F;border-radius: 0;\" ><strong>일자리 더보기</strong></button></a>";
-  							}else{
-  								echo "<a href=\"./careers.html\"><button class=\"btn button1\" style=\"font-size: 19px;width:70%;margin:0px;height:60;background: white;color:  #003E6F;border: 1px solid #003E6F;border-radius: 0;\" ><strong>일자리 더보기</strong></button></a>";
-  							}
+    					}else{?>
+    						<img style="cursor:pointer; margin-right:5px;" onclick="javascript:back_careers_detail('<?=$b_h_idx?>');" class="rectangle_60" src="./img/icon_029.png" alt="이전">
+    						<img style="cursor:pointer" onclick="javascript:next_careers_detail('<?=$n_h_idx?>');" class="rectangle_60" src="./img/icon_028.png" alt="다음">
+    					<?}?>
+            <?}?>
 
-  					}else{?>
-  						<img style="cursor:pointer; margin-right:5px;" onclick="javascript:back_careers_detail('<?=$b_h_idx?>');" class="rectangle_60" src="./img/icon_029.png" alt="이전">
-  						<img style="cursor:pointer" onclick="javascript:next_careers_detail('<?=$n_h_idx?>');" class="rectangle_60" src="./img/icon_028.png" alt="다음">
-  					<?}?>
   				</div>
 
   				<?
@@ -299,6 +296,7 @@ $member_count = $output->get('member_count');
   			</div>
   		</section>
 </div>
+</section>
 
 
 
@@ -311,5 +309,5 @@ $member_count = $output->get('member_count');
 
 </script>
 <?php
-//$footer_false = true;
+$footer_false = true;
 ?>
