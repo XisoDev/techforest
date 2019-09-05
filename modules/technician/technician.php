@@ -391,8 +391,10 @@ class technicianView{
         $output->add('duty_list',$duty_list);
         $output->add('interest_rows',$this->interest_hire());
         $output->add('member_notice',$this->member_notice());
+
         return $output;
     }
+
 
     function magazine($args){
         global $site_info;
@@ -796,6 +798,7 @@ class technicianView{
         $oDB->where("m_idx",$m_idx);
         $interest = $oDB->get("TF_interest_career_tb");
 
+        $output->add('h_idx',$h_idx);
         $output->add('interest',$interest);
         $output->add('member_notice',$this->member_notice());
         $output->add('hire_info',$hire_info);

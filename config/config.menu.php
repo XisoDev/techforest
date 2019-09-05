@@ -170,9 +170,9 @@ $oMenu->company->list[] = array(
             "is_logged" => "N"),
         array(
             "title" => "자주묻는 질문",
-            "link" => "#",
+            "link" => getUrl('contact','FAQ'),
             "active_mid" => "contact",
-            "active_act" => "faq",
+            "active_act" => "FAQ",
             "new_window" => "N",
             "is_logged" => "N"),
     )
@@ -250,7 +250,7 @@ $oMenu->technician->list[] = array(
             "is_logged" => "N"),
         array(
             "title" => "자주묻는 질문",
-            "link" => "#",
+            "link" => getUrl('contact','FAQ'),
             "active_mid" => "contact",
             "active_act" => "faq",
             "new_window" => "N",

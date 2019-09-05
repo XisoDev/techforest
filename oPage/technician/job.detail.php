@@ -5,16 +5,16 @@ $h_certificate = $output->get('h_certificate');
 $member_count = $output->get('member_count');
 $interest = $output->get('interest');
 
-$m_idx = $_SESSION['LOGGED_INFO'];
+$h_idx = $output->get('h_idx');
 
 //공고 페이지 이전,다음 보기
 	$i=0;
 	$hire_index=0;
-	$total_record = count($hire);
-	$h_idx = $_REQUEST["h_idx"];
+	$total_record = count($hire_rows);
 
-	for($i=0;$i<=$total_record;$i++){
-		if($hire[$i][h_idx]==$h_idx){
+
+	for($i=0;$i<=count($hire_rows);$i++){
+		if($hire_info[$i]['h_idx']==$h_idx){
 				$hire_index=$i;
 		}
 	}
@@ -28,12 +28,12 @@ $m_idx = $_SESSION['LOGGED_INFO'];
 	if($tb_h_idx==-1){
 		$b_h_idx='';
 	}else{
-		$b_h_idx= $hire[$tb_h_idx][h_idx];
+		$b_h_idx= $hire_info[$tb_h_idx]['h_idx'];
 	}
 	if($tn_h_idx==$total_record+1){
 			$n_h_idx='';
 	}else{
-		$n_h_idx= $hire[$tn_h_idx][h_idx];
+		$n_h_idx= $hire_info[$tn_h_idx]['h_idx'];
 	}
 
 ?>
@@ -274,32 +274,23 @@ $m_idx = $_SESSION['LOGGED_INFO'];
   					<?} else {
     						if($m_idx > 0) {
     							if(!$interest) {?>
-    								<img class="rectangle_60" src="/oPage/images/imgicons/icon_001.png" alt="빈하트" onclick="interest_add(<?=$hire_info[0]['h_idx']?>)">
+    								<img style="cursor:pointer;" class="rectangle_60" src="/oPage/images/imgicons/icon_001.png" alt="빈하트" onclick="interest_add(<?=$hire_info[0]['h_idx']?>)">
     							<?} else {?>
-    								<img class="rectangle_60" src="/oPage/images/imgicons/icon_002.png" alt="찬하트" onclick="interest_remove(<?=$hire_info[0]['h_idx']?>)">
+    								<img style="cursor:pointer;" class="rectangle_60" src="/oPage/images/imgicons/icon_002.png" alt="찬하트" onclick="interest_remove(<?=$hire_info[0]['h_idx']?>)">
     						<?}
     						} else {
-    							if($hire_info[0]["interest_count"] > 0) {?>
-    								<a class="color_point2" href="#" type="button" role="button" data-toggle="modal" data-target="#modal_login" rel="nofollow"><img class="rectangle_60" src="./img/icon_027.png" alt="관심"></a>
-    							<?} else {?>
-    								<a class="color_point2" href="#" type="button" role="button" data-toggle="modal" data-target="#modal_login" rel="nofollow"><img class="rectangle_60" src="./img/icon_005.png" alt="관심"></a>
-    						<?	}
+
               }
     					?>
 
-    					<img style="cursor:pointer; margin-right:5px;" onclick="javascript:click_share();" class="rectangle_60" src="/oPage/images/imgicons/icon_005.png" alt="공유" />
+    					<img style="cursor:pointer;" onclick="javascript:click_share();" class="rectangle_60" src="/oPage/images/imgicons/icon_005.png" alt="공유" />
     					<!-- 상세공고 다음/이전 작업 -->
     					<?if($logged_info['is_commerce'] == 'Y') {
 
-    					}else if(!$m_idx){
-    							if($hire_info[0]["homepage"]){
-    								echo "<a href=\"./careers.html\"><button class=\"btn button1\" style=\"font-size: 19px;width:50%;margin:0px;height:60;background: white;color:  #003E6F;border: 1px solid #003E6F;border-radius: 0;\" ><strong>일자리 더보기</strong></button></a>";
-    							}else{
-    								echo "<a href=\"./careers.html\"><button class=\"btn button1\" style=\"font-size: 19px;width:70%;margin:0px;height:60;background: white;color:  #003E6F;border: 1px solid #003E6F;border-radius: 0;\" ><strong>일자리 더보기</strong></button></a>";
-    							}
-
-    					}else{?>
-    						<img style="cursor:pointer; margin-right:5px;" onclick="javascript:back_careers_detail('<?=$b_h_idx?>');" class="rectangle_60" src="/oPage/images/imgicons/icon_003.png" alt="이전">
+    					}else if(!$m_idx){?>
+    						<a href="./careers.html"><button class="btn button1" style="font-size: 19px;width:65%;margin:0px;height:60px;background: white;color:  #003E6F;border: 1px solid #003E6F;border-radius: 0;"><strong>일자리 더보기</strong></button></a>
+    					<?}else{?>
+    						<img style="cursor:pointer;" onclick="javascript:back_careers_detail('<?=$b_h_idx?>');" class="rectangle_60" src="/oPage/images/imgicons/icon_003.png" alt="이전">
     						<img style="cursor:pointer" onclick="javascript:next_careers_detail('<?=$n_h_idx?>');" class="rectangle_60" src="/oPage/images/imgicons/icon_004.png" alt="다음">
     					<?}?>
             <?}?>
@@ -360,6 +351,39 @@ $m_idx = $_SESSION['LOGGED_INFO'];
       });
    });
   }
+
+	// 공유하기
+function click_share() {
+	//$("#modal_share").modal("toggle");
+	var url = location.href;
+	var IE = (document.all) ? true : false;
+	if (IE) {
+		window.clipboardData.setData('Text', url);
+		alert('주소가 복사되었습니다.');
+	} else {
+		temp = prompt("Ctrl+C를 눌러 클립보드로 복사하세요", url );
+	}
+
+}
+
+//이전공고 이동
+function back_careers_detail(b_h_idx){
+	if(b_h_idx==''){
+		alert(b_h_idx);
+		alert(<?=$b_h_idx?>);
+	}else{
+		location.href = "<?=getUrl('technician','jobDetail',$b_h_idx)?>";
+	}
+
+}
+//다음공고 이동
+function next_careers_detail(n_h_idx){
+	if(n_h_idx==''){
+		alert("다음 공고가 없습니다.");
+	}else{
+		location.href = "./careers_detail.html?h_idx=" + n_h_idx;
+	}
+}
 
 </script>
 <?php
