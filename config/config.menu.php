@@ -198,31 +198,31 @@ $oMenu->technician->list[] = array(
     "new_window" => "N",
     "is_logged" => "N",
 );
-$oMenu->technician->list[] = array(
-    "title" => "서비스이용현황",
-    "link" => getUrl('technician','serviceHistory'),
-    "icon" => "xi-list-number",
-    "active_mid" => "technician",
-    "active_act" => "serviceHistory",
-    "new_window" => "N",
-    "is_logged" => "N",
-    "submenu" => array(
-        array(
-            "title" => "유료서비스 안내",
-            "link" => getUrl('technician','service'),
-            "active_mid" => "company",
-            "active_act" => "service",
-            "new_window" => "N",
-            "is_logged" => "N"),
-        array(
-            "title" => "서비스 이용 및 결제내역",
-            "link" => getUrl('technician','serviceHistory'),
-            "active_mid" => "company",
-            "active_act" => 'serviceHistory',
-            "new_window" => "N",
-            "is_logged" => "N"),
-    )
-);
+// $oMenu->technician->list[] = array(
+//     "title" => "서비스이용현황",
+//     "link" => getUrl('technician','serviceHistory'),
+//     "icon" => "xi-list-number",
+//     "active_mid" => "technician",
+//     "active_act" => "serviceHistory",
+//     "new_window" => "N",
+//     "is_logged" => "N",
+//     "submenu" => array(
+//         array(
+//             "title" => "유료서비스 안내",
+//             "link" => getUrl('technician','service'),
+//             "active_mid" => "company",
+//             "active_act" => "service",
+//             "new_window" => "N",
+//             "is_logged" => "N"),
+//         array(
+//             "title" => "서비스 이용 및 결제내역",
+//             "link" => getUrl('technician','serviceHistory'),
+//             "active_mid" => "company",
+//             "active_act" => 'serviceHistory',
+//             "new_window" => "N",
+//             "is_logged" => "N"),
+//     )
+// );
 $oMenu->technician->list[] = array(
     "title" => "취업정보",
     "link" => getUrl('technician','magazine'),
@@ -231,6 +231,31 @@ $oMenu->technician->list[] = array(
     "active_act" => 'magazine',
     "new_window" => "N",
     "is_logged" => "N",
+);
+$oMenu->technician->list[] = array(
+    "title" => "기술자숲 소개",
+    "link" => "#",
+    "active_mid" => "technician",
+    "imgicon" => "users",
+    "active_act" => time(),
+    "new_window" => "N",
+    "is_logged" => "N",
+    "submenu" => array(
+        array(
+            "title" => "기업소개",
+            "link" => getUrl('contact','TechnicianForest'),
+            "active_mid" => "technician",
+            "active_act" => time(),
+            "new_window" => "N",
+            "is_logged" => "N"),
+        array(
+            "title" => "서비스 소개",
+            "link" => "#",
+            "active_mid" => "technician",
+            "active_act" => time(),
+            "new_window" => "N",
+            "is_logged" => "N"),
+    )
 );
 $oMenu->technician->list[] = array(
     "title" => "문의",

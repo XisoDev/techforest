@@ -89,4 +89,21 @@ class contactView{
       return $output;
     }
 
+    function TechnicianForest(){
+      global $oDB;
+      global $site_info;
+      $site_info->layout = $_SESSION["USER_TYPE"];
+      global $add_body_class;
+      $add_body_class[] = "shrink";
+      $add_body_class[] = "no_mobile_header";
+
+      setSEO("기술자숲 소개","");
+
+      global $set_template_file;
+      $set_template_file = "contact/TechnicianForest.php";
+
+      $output = new Object();
+      return $output;
+    }
+
 }
