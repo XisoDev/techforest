@@ -397,12 +397,15 @@ class technicianView{
 
 
     function magazine($args){
+        global $oDB;
         global $site_info;
         $site_info->layout = "technician";
 
         global $add_body_class;
         $add_body_class[] = "shrink";
         $add_body_class[] = "no_mobile_header";
+
+        $output = new Object();
 
         global $set_template_file;
         if($args->document_srl){
@@ -413,9 +416,13 @@ class technicianView{
         }else {
             setSEO("취업정보","취업박람회 및 정보를 한 눈에 살펴보세요.");
             $set_template_file = "technician/magazine.list.php";
-        }
 
-        $output = new Object();
+            $oDB->orderby("reg_date","ASC");
+            $oDB->where("is_show","Y");
+            $magazine_list = $oDB->get("TF_magazine_tb",null,"category,title,link,image,reg_date");
+
+        }
+        $output->add('magazine_list',$magazine_list);
         $output->add('member_notice',$this->member_notice());
         return $output;
 
