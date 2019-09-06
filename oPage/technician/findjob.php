@@ -94,11 +94,11 @@
 <div class="py-md-5 my-md-5 bg-light">
     <div class="container">
         <div class="d-block d-lg-none pt-4 pb-2">
-            <a href="#" class="pull-right btn py-2 px-3 btn-primary btn-xxs btn-round">더보기 +</a>
+            <a href="<?=getUrl('technician','applicationList')?>" class="pull-right btn py-2 px-3 btn-primary btn-xxs btn-round">더보기 +</a>
             <h6>입사지원현황</h6>
         </div>
         <div class="d-none d-lg-block pt-4 pb-2">
-            <a href="#" class="pull-right btn mt-2 py-2 px-3 btn-primary btn-xs btn-round">더보기 +</a>
+            <a href="<?=getUrl('technician','applicationList')?>" class="pull-right btn mt-2 py-2 px-3 btn-primary btn-xs btn-round">더보기 +</a>
             <h4 class="mb-2">입사지원현황</h4>
         </div>
     <div class="row px-2">
@@ -149,10 +149,10 @@
 
                     <div class="row m-0 p-0 pt-0 mt-0">
                         <div class="col-6 mx-0 px-0">
-                            <a href="<?=getUrl('technician','jobDetail',$application_letter[$i]['h_idx'])?>" class="btn btn-light btn-block btn-xs px-0 py-3 rounded-0 red">상세보기</a>
+                            <a href="<?=getUrl('technician','jobDetail',$application_letter[$i]['h_idx'])?>" class="btn btn-light btn-block btn-xs px-0 py-3 rounded-0">상세보기</a>
                         </div>
                         <div class="col-6 mx-0 px-0">
-                            <button class="btn btn-light btn-block btn-xs px-0 py-3 rounded-0" disabled>지원완료</button>
+                              <button class="btn btn-danger btn-block rounded-0" disabled>지원완료</button>
                         </div>
                     </div>
                 </div>

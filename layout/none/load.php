@@ -21,6 +21,8 @@ $add_html_header[] = '<script src="https://cdn.iamport.kr/js/iamport.payment-1.1
 //monthpicker
 // $add_html_header[] = "<link rel=\"stylesheet\" href=\"/layout/none/assets/jquery.mtz.monthpicker.js\">";
 $add_html_header[] = "<link rel=\"stylesheet\" href=\"//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css\">";
+$add_html_header[] = "<script src=\"https://code.jquery.com/ui/1.12.1/jquery-ui.js\"></script>";
+
 //결제 라이브러리
 $add_body_class[] = '';
 //boostrap script & jquery

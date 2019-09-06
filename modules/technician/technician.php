@@ -957,5 +957,28 @@ class technicianView{
       return $application_letter;
     }
 
+    function applicationList(){
+      setSEO("입사지원현황","");
+      global $site_info;
+      $site_info->layout = "technician";
+
+      global $add_body_class;
+      $add_body_class[] = "shrink";
+      $add_body_class[] = "no_mobile_header";
+
+      global $set_template_file;
+      $set_template_file = "technician/application.list.php";
+
+      global $oDB;
+
+      $output = new Object();
+
+      $output->add('interest_rows',$this->interest_hire());
+      $output->add('application_letter',$this->application_letter());
+      $output->add('member_notice',$this->member_notice());
+
+      return $output;
+    }
+
 
   }

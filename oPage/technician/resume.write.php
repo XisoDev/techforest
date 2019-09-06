@@ -108,12 +108,23 @@ shuffle($rand_array);
 
 ?>
 
-
+<style media="screen">
+	.ui-autocomplete-input{
+		 list-style:none;
+		 background-color: #fff;
+	}
+</style>
 <section class="sub_visual d-none d-lg-block pb-2" style="background-image:url('<?=$no_auto_bg_url?>');">
     <h4 class="red"><?=$site_info->title?></h4>
     <p class="weight_normal text-secondary pb-0 my-0"><?=$site_info->desc?></h4></p>
     <p class="weight_lighter text-secondary pt-0 pb-2 my-0">기술자숲이 대신 작성해 드립니다.</h4></p>
-    <a href="#" class="btn btn-danger">이력서파일 등록하기</a>
+		<form id="theuploadform_resume">
+			<label for="resume_upload">
+	    	<span class="btn btn-danger">이력서파일 등록하기</span>
+			</label>
+			<input type="file" id="resume_upload" name="resume_upload" style="display:none;">
+		</form>
+
     <p class="red xs_content weight_lighter">*영업일 기준 1일 소요됩니다.</p>
 </section>
 <section class="bg-white d-lg-none border-bottom">
@@ -147,10 +158,7 @@ shuffle($rand_array);
 														}
 														?>
 														<div class="avatar square" id="my_picture" style="background-image:url('<?=$img_url?>');"></div>
-														<label for="picture_upload" class="position-absolute mb-0 pb-0" style="
-														        left:50%;bottom:-10px;
-														        -webkit-transform: translateX(-50%);-moz-transform: translateX(-50%);-ms-transform: translateX(-50%);-o-transform: translateX(-50%);transform: translateX(-50%);
-                                                            ">
+														<label for="picture_upload" class="position-absolute mb-0 pb-0" style="left:50%;bottom:-10px;-webkit-transform: translateX(-50%);-moz-transform: translateX(-50%);-ms-transform: translateX(-50%);-o-transform: translateX(-50%);transform: translateX(-50%);">
 															<img src="/oPage/images/imgicons/camera_gray.png" height="20" />
 														</label>
 														<input type="file" id="picture_upload" style="display:none;">
@@ -546,11 +554,11 @@ shuffle($rand_array);
 										<? if(count($my_info5) == 0){ ?>
 										<div class="added_card border rounded position-relative rounded-0 rounded-top container py-0 pb-1 py-md-3 pt-sm-3 pb-sm-0">
 												<!-- <a class="position-absolute" style="right:10px; top:10px;" onclik><i class="xi-close"></i></a> -->
-												<div class="row pb-2 px-2">
+												<div class="row pb-2 px-2" id="certificate_div0">
 														<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">자격증명</h6>
 														<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
-															<input type="text" class="form-control" name="h_certificate" placeholder="자격증명"/>
-															<input type="text" class="form-control" placeholder="취득일자"/>
+															<input type="text" class="form-control" id="certificate_name0" name="h_certificate" placeholder="자격증명"/>
+															<input type="text" class="form-control" id="certificate_date0" placeholder="취득일자"/>
 														</div>
 												</div>
 										</div>
@@ -558,7 +566,6 @@ shuffle($rand_array);
 										<?foreach ($my_info5 as $idx => $val) { ?>
 											<div class="added_card border rounded position-relative rounded-0 rounded-top container py-0 pb-1 py-md-3 pt-sm-3 pb-sm-0" id="certificate_div<?=$idx?>">
 													<a class="position-absolute" style="right:10px; top:10px;" id="certificate_del<?=$idx?>" onclick="javascript:my_info5_del1(<?=$idx?>)"><i class="xi-close"></i></a>
-													<input type="hidden" id="is_certificate<?=$idx?>" value="<?=$val['is_certificate']?>">
 													<div class="row pb-2 px-2">
 															<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">자격증명</h6>
 															<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
@@ -743,7 +750,7 @@ shuffle($rand_array);
 
 <div class="modal fade" id="fileUpload" tabindex="-1" role="dialog" aria-labelledby="tech_forest_modal_window" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content text-center" style="border-radius:10px" id="aaa">
+        <div class="modal-content text-center" style="border-radius:10px" id="file_modal">
             <a href="#" class="text-white pull-right text-right" style="margin-top:-40px;" onclick="jQuery('#fileUpload').modal('hide');" ><i class="xi-close xi-2x"></i></a>
 
 					<form id="theuploadform">
@@ -795,7 +802,7 @@ shuffle($rand_array);
 		$("#formsubmit").click(function () {
 		var iframe = $('<iframe name="postiframe" id="postiframe" width=0 height=0 style="display:none"></iframe>');
 
-		$("#aaa").append(iframe);
+		$("#file_modal").append(iframe);
 
 		var form = $('#theuploadform');
 		form.attr("action", "/proc.php?act=technician.procFileUpload");
@@ -810,7 +817,6 @@ shuffle($rand_array);
 
 		$("#postiframe").on('load',function () {
 				alert("파일이 업로드 되었습니다.");
-				jQuery('#fileUpload').modal('hide');
 		});
 
 		return false;
@@ -1579,8 +1585,6 @@ function my_info6_del1(idx) {
 			});
 		}
 
-
-
 		$("#picture_upload").change(function(){
 			readURL(this);
 		});
@@ -1607,6 +1611,34 @@ function my_info6_del1(idx) {
 				reader.readAsDataURL(input.files[0]);
 			}
 		}
+
+
+		$("#resume_upload").change(function(){
+	    var iframe = $('<iframe name="postiframe_resume" id="postiframe_resume" width=0 height=0 style="display:none"></iframe>');
+
+	    $('body').append(iframe);
+
+	    var form = $('#theuploadform_resume');
+	    form.attr("action", "/proc.php?act=technician.procFileUploadResume");
+	    form.attr("method", "post");
+
+	    form.attr("encoding", "multipart/form-data");
+	    form.attr("enctype", "multipart/form-data");
+
+	    form.attr("target", "postiframe_resume");
+	    form.attr("file", $('#resume_upload').val());
+	    form.submit();
+
+	    $("#postiframe_resume").on('load',function () {
+	        // alert("파일이 업로드 되었습니다.");
+	        // location.reload();
+	    });
+
+	    return false;
+
+	  });
+
+
 
 
 

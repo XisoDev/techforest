@@ -564,4 +564,49 @@ class technicianController{
 
     return new Object(0,"파일 업로드가 완료되었습니다.");
   }
+
+  function procFileUploadResume(){
+    global $oDB;
+    $m_idx = $_SESSION['LOGGED_INFO'];
+
+    if(!$_FILES["resume_upload"]["name"]){
+     return new Object(-1,"파일이 없습니다.(-2)");
+   }
+
+   if($_FILES["resume_upload"]["error"] > 0){
+     return new Object(-1,"파일이 잘못되었습니다.(-3)");
+    }
+
+    $access_extension = array('jpg','jpeg','gif','png','bmp', 'doc', 'docx', 'dot', 'dotx', 'ppt', 'pptx', 'xls', 'xlsx', 'hwp', 'zip', 'pdf');
+    $path = pathinfo($_FILES['resume_upload']['name']);
+    $ext = strtolower($path['extension']);
+
+     if(!in_array($ext, $access_extension)) {
+       return new Object(-1,"허용 되지 않는 확장자 입니다.(-4)");
+     }
+
+
+    $date	= date(YmdHis);
+    $file_real_name = $_FILES["resume_upload"]["name"];
+    $file_name = $m_idx . "_" . $date . "_" . $file_real_name;
+    $target_path = "./resume_upload/";
+
+    if(move_uploaded_file($_FILES["resume_upload"]["tmp_name"], $target_path . $file_name)){
+      $data = array(
+        "m_idx" => $m_idx,
+        "image" => $file_name,
+        "is_ok" => 'N',
+        "reg_date" => $date
+      );
+      $upload_row = $oDB->insert("TF_curriculum_tb",$data);
+
+      if(!$upload_row){
+      return new Object(-1,"파일 업로드 중 오류가 발생하였습니다.(-6)");
+      }
+    }else{
+      return new Object(-1,"파일 업로드 중 오류가 발생하였습니다.(-7)");
+    }
+
+    return new Object(0,"파일 업로드가 완료되었습니다.");
+  }
 }
