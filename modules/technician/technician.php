@@ -208,15 +208,6 @@ class technicianView{
         $oDB->where("district_visible","Y");
         $district_arr = $oDB->get("TF_district_tb",null,"district_idx, district_name, local_idx");
 
-        // 직종 리스트
-        $oDB->where("o_is_show","Y");
-        $occupation_arr = $oDB->get("TF_occupation",null,"o_idx, o_name");
-
-        // 직무 리스트
-        $oDB->orderBy("duty_name","ASC");
-        $oDB->orderBy("visible_idx","ASC");
-        $oDB->orderBy("o_idx","ASC");
-        $duty_arr = $oDB->get("TF_duty");
 
         //학력리스트
         $oDB->orderBy("s_idx","ASC");
@@ -262,6 +253,8 @@ class technicianView{
         $output->add('d_language_arr',$d_language_arr);
         $output->add('file_list',$file_list);
         $output->add('member_notice',$this->member_notice());
+        $output->add('duty_list',$this->duty_list());
+        $output->add('occupation_list',$this->occupation_list());
 
         return $output;
     }
@@ -283,8 +276,13 @@ class technicianView{
 
         $output = new Object();
 
+        $output->add('application_letter',$this->application_letter());
         $output->add('member_notice',$this->member_notice());
         $output->add('interest_rows',$this->interest_hire());
+        $output->add('duty_list',$this->duty_list());
+        $output->add('occupation_list',$this->occupation_list());
+        $output->add('local_list',$this->local_list());
+        $output->add('hire_rows',$this->customized_hire());
 
         return $output;
     }
@@ -301,9 +299,26 @@ class technicianView{
         global $set_template_file;
         $set_template_file = "technician/findjob.list.php";
 
-        $output = new Object();
-        $output->add('member_notice',$this->member_notice());
-        return $output;
+
+
+      //   //이력서 미입력 확인
+      //   if($member_resume[0]['count'] > 0){
+      //     if($member_info[0]['s_idx'] > 0) {$career_n =1; }
+      //     else if(!empty($member_info[0]['self_introduction'])) {$career_n =1; }
+      //     else if($member_info[0]['language'] > 0) {$career_n =1; }
+      //   }else {
+      //     $career_n =0;
+      //   }
+
+      $output = new Object();
+      $output->add('interest_rows',$this->interest_hire());
+      $output->add('member_notice',$this->member_notice());
+      $output->add('duty_list',$this->duty_list());
+      $output->add('occupation_list',$this->occupation_list());
+      $output->add('local_list',$this->local_list());
+      $output->add('hire_rows',$this->customized_hire());
+
+      return $output;
     }
 
     function findJobListAll($args){
@@ -369,28 +384,14 @@ class technicianView{
         $hire_rows = $oDB->get("TF_hire_tb h",20,"c_name, h_title, local_name, city_name, district_name,
                                                   h.local_idx, h.city_idx, h.district_idx, job_achievement,
                                                   salary_idx, job_salary, job_is_career, h.h_idx, h.o_idx, h.duty_name");
-        //지역 리스트
-        $oDB->orderBy("visible_idx","ASC");
-        $oDB->where("local_visible","Y");
-        $local_list = $oDB->get("TF_local_tb");
-
-        //직종 리스트
-        $oDB->where("o_is_show","Y");
-        $occupation_list = $oDB->get("TF_occupation",null,"o_idx, o_name");
-
-        // 직무 리스트
-        $oDB->orderBy("duty_name","ASC");
-        $oDB->orderBy("visible_idx","ASC");
-        $oDB->orderBy("o_idx","ASC");
-        $duty_list = $oDB->get("TF_duty");
 
         $output = new Object();
         $output->add('hire_rows',$hire_rows);
-        $output->add('local_list',$local_list);
-        $output->add('occupation_list',$occupation_list);
-        $output->add('duty_list',$duty_list);
         $output->add('interest_rows',$this->interest_hire());
         $output->add('member_notice',$this->member_notice());
+        $output->add('duty_list',$this->duty_list());
+        $output->add('occupation_list',$this->occupation_list());
+        $output->add('local_list',$this->local_list());
 
         return $output;
     }
@@ -815,5 +816,146 @@ class technicianView{
         return $output;
 
     }
+
+    function duty_list(){
+      global $oDB;
+
+      //직종 리스트
+      $oDB->orderBy("duty_name","ASC");
+      $oDB->orderBy("visible_idx","ASC");
+      $oDB->orderBy("o_idx","ASC");
+      $duty_list = $oDB->get("TF_duty");
+
+      return $duty_list;
+    }
+
+    function occupation_list(){
+      global $oDB;
+
+      //직무 리스트
+      $oDB->where("o_is_show","Y");
+      $occupation_list = $oDB->get("TF_occupation",null,"o_idx, o_name");
+
+      return $occupation_list;
+    }
+
+    function local_list(){
+      global $oDB;
+
+      //지역 리스트
+      $oDB->orderBy("visible_idx","ASC");
+      $oDB->where("local_visible","Y");
+      $local_list = $oDB->get("TF_local_tb");
+
+      return $local_list;
+    }
+
+    function customized_hire(){
+      global $oDB;
+
+      $m_idx = $_SESSION['LOGGED_INFO'];
+      $now_date = date(YmdHis);
+
+      $oDB->orderby("s_idx","DESC");
+      $oDB->where("m.m_idx",$m_idx);
+      $oDB->join("TF_member_occupation oc","m.m_idx = oc.m_idx","LEFT");
+      $oDB->join("TF_member_language_tb la","m.m_idx = la.m_idx","LEFT");
+      $oDB->join("TF_member_career_tb ca","m.m_idx = ca.m_idx","LEFT");
+      $oDB->join("TF_member_self_tb self","m.m_idx = self.m_idx","LEFT");
+      $oDB->join("TF_member_order ord","m.m_idx = ord.m_idx","LEFT");
+      $oDB->join("TF_member_education_tb ed","m.m_idx = ed.m_idx","LEFT");
+      $member_info = $oDB->get("TF_member_tb m",null,"m_local_idx, m_city_idx, m_district_idx, s_idx, salary_idx, desired_salary,
+                                ifnull(self_introduction, NULL) AS self_introduction, la.seq AS language, oc.o_idx");
+
+      $oDB->where("m_idx",$m_idx);
+      $member_certificate = $oDB->get("TF_member_certificate_tb",null,"certificate_name");
+
+      // $member_certificate_array = array();
+      // while($row = mysql_fetch_assoc($member_certificate)){
+      //   array_push($member_certificate_array, "'".$row['certificate_name']."'");
+      // }
+      //   array_push($member_certificate_array, "''");
+
+      // 희망급여
+      switch ($member_info[0]['salary_idx']) {
+        case '1': $salary_y = $member_info[0]['desired_salary'] * 10000; break;
+        case '2':	$salary_y = $member_info[0]['desired_salary'] * 10000 * 12; break;
+        case '4':	$salary_y = $member_info[0]['desired_salary'] * 209 * 12; break;
+        default: $salary_y = 0; break;
+      }
+
+      $oDB->where("m_idx",$m_idx);
+      $member_resume = $oDB->get("TF_member_career_tb",null,"m_idx, count(*) AS count");
+
+
+      //$oDB->groupby("h.h_idx");
+      $oDB->orderby("vip","DESC");
+      $oDB->orderby("h.h_idx","DESC");
+
+      //$oDB->where("certificate_name","IS NULL");
+      // $oDB->orwhere("certificate_name", implode(',',$member_certificate_array), "IN");
+
+      if($member_info[0]['m_local_idx'] != -1){
+        $oDB->where("h.local_idx",$member_info[0]['m_local_idx']);
+      }
+
+      //학력
+      switch ($member_info[0]['s_idx']) {
+        case '1': $oDB->where("job_achievement",Array('무관', '학력무관', '고졸'), "IN"); break;
+        case '2': $oDB->where("job_achievement",Array('무관', '학력무관', '고졸', '초대졸'), "IN"); break;
+        case '3': $oDB->where("job_achievement",Array('무관', '학력무관', '고졸', '초대졸','대졸'), "IN"); break;
+        case '4': $oDB->where("job_achievement",Array('무관', '학력무관', '고졸', '초대졸','대졸','석사'), "IN"); break;
+        case '5': $oDB->where("job_achievement",Array('무관', '학력무관', '고졸', '초대졸','대졸','석사','박사'), "IN"); break;
+        default: break;
+      }
+
+      // 희망직종
+      switch ($member_info[0]['o_idx']) {
+        case '1':break;
+        case '3': $oDB->where("h.o_idx","3"); break;
+        case '4': $oDB->where("h.o_idx","4"); break;
+        case '5': $oDB->where("h.o_idx","5"); break;
+        default:break;
+      }
+
+      $oDB->where("CASE
+                  WHEN salary_idx = 1 THEN job_salary * 10000
+                  WHEN salary_idx = 2 THEN job_salary * 12 * 10000
+                  WHEN salary_idx = 4 THEN job_salary * 209 * 12
+                  ELSE 0
+                  END",$salary_y,">=");
+      $oDB->where("hire_is_show","Y");
+      $oDB->where("job_end_date",$now_date,">=");
+      $oDB->join("TF_hire_certificate hce","hce.h_idx = h.h_idx","LEFT");
+      $oDB->join("TF_district_tb d","h.district_idx = d.district_idx","LEFT");
+      $oDB->join("TF_city_tb c","h.city_idx = c.city_idx","LEFT");
+      $oDB->join("TF_local_tb l","h.local_idx = l.local_idx","LEFT");
+      $oDB->join("TF_member_commerce_tb co","h.c_idx = co.c_idx","LEFT");
+
+      $hire_rows = $oDB->get("TF_hire_tb h",20,"co.image, c_name, h_title, local_name, city_name, district_name,
+                              h.local_idx, h.city_idx, h.district_idx, job_achievement,
+                              salary_idx, job_salary, job_is_career, h.h_idx, h.o_idx,vip");
+
+
+      return $hire_rows;
+    }
+
+    //입사지원 현황
+    function application_letter(){
+      global $oDB;
+
+      $m_idx = $_SESSION['LOGGED_INFO'];
+
+      $oDB->where("al.m_idx",$m_idx);
+      $oDB->join("TF_hire_tb h","al.h_idx = h.h_idx","LEFT");
+      $oDB->join("TF_member_commerce_tb co","h.c_idx = co.c_idx","LEFT");
+      $oDB->join("TF_local_tb l","h.local_idx = l.local_idx","LEFT");
+      $oDB->join("TF_city_tb c","h.city_idx = c.city_idx","LEFT");
+      $oDB->join("TF_district_tb d","h.district_idx = d.district_idx","LEFT");
+      $application_letter = $oDB->get("TF_application_letter al",3,"c_name, h_title, local_name, city_name, district_name,
+                                      salary_idx, job_salary, job_is_career, al.h_idx, al.isChecked, al.check_date");
+      return $application_letter;
+    }
+
 
   }

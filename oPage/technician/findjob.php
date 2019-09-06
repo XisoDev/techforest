@@ -1,6 +1,18 @@
 <?php
   $m_idx = $_SESSION['LOGGED_INFO'];
+
+  //관심공고
   $interest_rows = $output->get('interest_rows');
+  //맞춤공고리스트
+  $hire_rows = $output->get('hire_rows');
+  //지역리스트
+  $local_list = $output->get('local_list');
+  //직종리스트
+  $occupation_list = $output->get('occupation_list');
+  //직무리스트
+  $duty_list = $output->get('duty_list');
+  //입사지원 현황
+  $application_letter = $output->get('application_letter');
 ?>
 
 <section class="bg-white d-lg-none">
@@ -19,41 +31,60 @@
         <h4 class="mb-2">일자리 정보</h4>
     </div>
 
+  <input type="hidden" id="hidden_m_idx" value="<?=$m_idx?>">
     <div class="flex-card-slick">
-        <?php for($i=1; $i<=6; $i++){ ?>
+      <? $count_hire = (count($hire_rows) > 6) ? 6 : count($hire_rows); ?>
+        <?php for($i=0; $i < $count_hire; $i++){ ?>
+          <input type="hidden" id="hidden_h_idx" value="<?=$hire_rows[$i]['h_idx']?>">
             <div class="tech_card bg-white shadow">
                 <div class="thumbnail mx-0 px-0" style="background-image:url('http://www.planttech.co.kr/wp-content/uploads/2018/07/%EC%82%BC%EC%84%B1%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%811-820x457.png')">
-                    <span class="overlay">
-                    <a href="#" class="btn-xxs btn btn-round border-white text-white py-1 px-2 mr-lg-3 position-absolute" style="right:10px; top:10px;">
-                        관심공고
-                        <?php if($i % 2 == 0) { ?>
-                        <i class="xi-heart" style="font-size:14px; vertical-align:-2px;"></i>
-                        <?php }else{ ?>
-                        <i class="xi-heart red" style="font-size:14px; vertical-align:-2px;"></i>
-                        <?php } ?>
-                    </a>
-                    </span>
+                  <span class="overlay">
+                    <?
+                      foreach ($interest_rows as $val2) {
+                        if($val2['h_idx'] == $hire_rows[$i]['h_idx']){
+                          $interest_html2 = '<a class="btn-xxs btn btn-round border-white text-white py-1 px-2 position-absolute mr-lg-3" onclick="interest_remove('. $hire_rows[$i]['h_idx'] .')" style="right:10px; top:10px;">관심공고<i class="xi-heart red" id="yes_interest"></i></a>';
+                          break;
+                        }else{
+                          $interest_html2 = '<a class="btn-xxs btn btn-round border-white text-white py-1 px-2 position-absolute mr-lg-3" onclick="interest_add('. $hire_rows[$i]['h_idx'] .')" style="right:10px; top:10px;">관심공고<i class="xi-heart" id="no_interest"></i></a>';
+                        }
+                      }
+                    ?>
+                    <?= $interest_html2 ?>
+                  </span>
                 </div>
+                <? if ($hire_rows[$i]['city_name'] == "전체") { $hire_rows[$i]['city_name'] = "";} ?>
+                <? if ($hire_rows[$i]['district_name'] == "전체") { $hire_rows[$i]['district_name'] = ""; }?>
+                <? if ($hire_rows[$i]['salary_idx'] < 3) { $hire_salary_text = "만원"; } else { $hire_salary_text = "원"; } ?>
                 <div class="p-2 text-left pb-1">
-                    <h6>(주)일진</h6>
-                    <h6 class="red">CATIA 프로그램 경력자 모집</h6>
+                    <h6 class="cut1"><?=$hire_rows[$i]['c_name']?></h6>
+                    <h6 class="red cut1"><?=$hire_rows[$i]['h_title']?></h6>
                     <p class="weight_lighter xxs_content mx-0 px-0">
                         <span class="badge badge-danger weight_lighter">위치</span>
-                        경남 김해시
-                        <span class="badge badge-danger weight_lighter">시</span>
-                        <b>7,350 원</b>
+                        <?= $hire_rows[$i]['local_name'] . " " . $hire_rows[$i]['city_name'].$hire_rows[$i]['district_name']?>
+                        <span class="badge badge-danger weight_lighter">
+                          <?if($hire_rows[$i]['salary_idx'] == "1"){
+                              echo "연봉";
+                            }else if($hire_rows[$i]['salary_idx'] == "2"){
+                              echo "월급";
+                            }else if($hire_rows[$i]['salary_idx'] == "3"){
+                              echo "일급";
+                            }else{
+                              echo "시급";
+                            }?>
+                        </span>
+                        <b><?= number_format($hire_rows[$i]['job_salary']) . $hire_salary_text?></b>
                     </p>
                     <p class="text-secondary xxs_content mx-0 px-0 pb-2">
-                        <img src="/oPage/images/imgicons/wrench_bg_red.png" height="14" /> 경력 최소 10년
+                        <img src="/oPage/images/imgicons/wrench_bg_red.png" height="14" style="float:left" /> <?=$hire_rows[$i]['job_is_career']?>
                     </p>
                 </div>
 
                 <div class="row m-0 p-0">
                     <div class="col-6 mx-0 px-0">
-                        <a href="#" class="btn btn-light btn-block rounded-0">상세보기</a>
+                        <a href="<?=getUrl('technician','jobDetail',$hire_rows[$i]['h_idx'])?>" class="btn btn-light btn-block rounded-0">상세보기</a>
                     </div>
                     <div class="col-6 mx-0 px-0">
-                        <button class="btn btn-light btn-block rounded-0 red">지원하기</button>
+                        <button class="btn btn-light btn-block rounded-0 red" onclick="application_ok(<?=$hire_rows[$i]['h_idx']?>)">지원하기</button>
                     </div>
                 </div>
             </div>
@@ -71,41 +102,57 @@
             <h4 class="mb-2">입사지원현황</h4>
         </div>
     <div class="row px-2">
-    <?php for($i=1; $i<=2; $i++) { ?>
+    <?php for($i=0; $i<2; $i++) { ?>
         <div class="col-12 col-md-6 px-md-4">
         <div class="magazine tech_card mb-3 bg-white text-left shadow">
             <div class="row px-0 mx-0">
                 <div class="col-5 col-md-12 px-0 mx-0" style="background-color:#EEE;">
-                    <div class="thumbnail d-block" style="height:100%; min-height:170px;" onmouseover="jQuery(this).find('div.overlay').removeClass('d-none');" onmouseout="jQuery(this).find('div.overlay').addClass('d-none');">
+                    <div class="thumbnail d-block" style="background-image:url('http://www.planttech.co.kr/wp-content/uploads/2018/07/%EC%82%BC%EC%84%B1%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%811-820x457.png');height:100%; min-height:170px;"
+                         onmouseover="jQuery(this).find('div.overlay').removeClass('d-none');" onmouseout="jQuery(this).find('div.overlay').addClass('d-none');">
                     <div class="overlay d-none">
                         <div class="overlay-content" style="width:100%; text-align:center;">
+                          <?if($application_letter[$i]['isChecked'] == "Y"){?>
                             <a href="#" class="btn-round btn border-white text-white btn-xs">이력서 열람</a>
-                            <p class="xxs_content">2019.07.01<br />16:18:59</p>
+                            <p class="xxs_content"><?=substr($application_letter[$i]['check_date'],0,10);?><br /><?=substr($application_letter[$i]['check_date'],10);?></p>
+                        <? }?>
                         </div>
                     </div>
                     </div>
                 </div>
+                <? if ($application_letter[$i]['city_name'] == "전체") { $application_letter[$i]['city_name'] = "";} ?>
+                <? if ($application_letter[$i]['district_name'] == "전체") { $application_letter[$i]['district_name'] = ""; }?>
+                <? if ($application_letter[$i]['salary_idx'] < 3) { $hire_salary_text = "만원"; } else { $hire_salary_text = "원"; } ?>
                 <div class="col-7 col-md-12 pl-0 px-0">
                     <div class="py-2 px-3">
-                        <h6 class="weight_normal pb-0 mb-0">그림자숲</h6>
-                        <h6 class="red pt-0 mt-0">가공팀(조/반장)</h6>
+                        <h6 class="weight_normal pb-0 mb-0 cut1"><?=$application_letter[$i]['c_name']?></h6>
+                        <h6 class="red pt-0 mt-0 tut1"><?=$application_letter[$i]['h_title']?></h6>
                         <hr class="py-1 px-0 m-0" />
                         <p class="weight_lighter xxs_content mx-0 px-0">
                             <span class="badge badge-danger weight_lighter">위치</span>
-                            경남 김해시
-                            <span class="badge badge-danger weight_lighter">시</span>
-                            <b>7,350 원</b>
+                            <?= $application_letter[$i]['local_name'] . " " . $application_letter[$i]['city_name'].$application_letter[$i]['district_name']?>
+                            <span class="badge badge-danger weight_lighter">
+                              <?if($application_letter[$i]['salary_idx'] == "1"){
+                                  echo "연봉";
+                                }else if($application_letter[$i]['salary_idx'] == "2"){
+                                  echo "월급";
+                                }else if($application_letter[$i]['salary_idx'] == "3"){
+                                  echo "일급";
+                                }else{
+                                  echo "시급";
+                                }?>
+                            </span>
+                            <b><?= number_format($application_letter[$i]['job_salary']) . $hire_salary_text?></b>
                             <br class="d-md-none" />
-                            <img src="/oPage/images/imgicons/wrench_bg_red.png" height="14" /> 경력 최소 10년
+                            <img src="/oPage/images/imgicons/wrench_bg_red.png" height="14" /> <?=$application_letter[$i]['job_is_career']?>
                         </p>
                     </div>
 
                     <div class="row m-0 p-0 pt-0 mt-0">
                         <div class="col-6 mx-0 px-0">
-                            <a href="#" class="btn btn-light btn-block btn-xs px-0 py-3 rounded-0 text-secondary">상세보기</a>
+                            <a href="<?=getUrl('technician','jobDetail',$application_letter[$i]['h_idx'])?>" class="btn btn-light btn-block btn-xs px-0 py-3 rounded-0 red">상세보기</a>
                         </div>
                         <div class="col-6 mx-0 px-0">
-                            <button class="btn btn-light btn-block btn-xs px-0 py-3 rounded-0 red">지원완료</button>
+                            <button class="btn btn-light btn-block btn-xs px-0 py-3 rounded-0" disabled>지원완료</button>
                         </div>
                     </div>
                 </div>
@@ -174,16 +221,16 @@
                       <b><?= number_format($val['job_salary']) . $hire_salary_text?></b>
                     </p>
                     <p class="text-secondary xxs_content mx-0 px-0 pb-2">
-                        <img src="/oPage/images/imgicons/wrench_bg_red.png" height="14" /> <?=$val['job_is_career']?>
+                        <img src="/oPage/images/imgicons/wrench_bg_red.png" height="14" style="float:left" /> <?=$val['job_is_career']?>
                     </p>
                 </div>
 
                 <div class="row m-0 p-0">
                     <div class="col-6 mx-0 px-0">
-                        <a href="#" class="btn btn-light btn-block rounded-0">상세보기</a>
+                        <a href="<?=getUrl('technician','jobDetail',$val['h_idx'])?>" class="btn btn-light btn-block rounded-0">상세보기</a>
                     </div>
                     <div class="col-6 mx-0 px-0">
-                        <button class="btn btn-light btn-block rounded-0 red">지원하기</button>
+                        <button class="btn btn-light btn-block rounded-0 red" onclick="application_ok(<?=$val['h_idx']?>)">지원하기</button>
                     </div>
                 </div>
             </div>
@@ -195,9 +242,42 @@
     </div>
 </div>
 
+<div class="modal fade" id="check_phonenumber" tabindex="-1" role="dialog" aria-labelledby="tech_forest_modal_window" aria-hidden="true" style="">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content text-center" style="border-radius:10px">
+            <a href="#" class="text-white pull-right text-right" style="margin-top:-40px;" onclick="jQuery('#check_phonenumber').modal('hide');" ><i class="xi-close xi-2x"></i></a>
+            <div class="square avatar bg-red mx-auto" style="width:120px; margin-top:-60px; background-image:url('/oPage/ncenter/images/header_icon.png');"></div>
+            <div class="content_padding">
+                <h5 class="weight_lighter">기업측의 면접요청을 위해 <br> <span class="red">본인의 연락처가 맞는지</span><br>다시 한번 확인해주세요.</h5>
+                <span class="red">─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─</span>
+                <h5 class="weight_normal mb-2 mt-4 mb-3 red">☎ <?=$logged_info['m_phone']?></h5>
+                <a class="btn btn-block btn-danger btn-round btn-lg mb-3" id="applicant_ok">네 맞습니다</a>
+                <a class="btn btn-block border-danger btn-round btn-lg mb-3 red" href="#">연락처 수정하기</a>
+            </div>
+            <button class="mt-2 btn btn-block btn-light" onclick="jQuery('#check_phonenumber').modal('hide');" style="border-radius:10px;">닫기</button>
+        </div>
+    </div>
+</div>
+
+
 
 <script type="text/javascript">
+function application_ok(h_idx){
+  $('#check_phonenumber').modal('show');
 
+  $('#applicant_ok').click(function(e) {
+    var m_idx = <?=$m_idx?>;
+
+    var params = {};
+    params["h_idx"] = h_idx;
+    params["m_idx"] = m_idx;
+
+    exec_json("technician.application_letter_register",params,function(ret_obj){
+        toastr.success(ret_obj.message);
+        $('#check_phonenumber').modal('hide');
+    });
+ });
+}
 </script>
 <?php
 $footer_false = true;
