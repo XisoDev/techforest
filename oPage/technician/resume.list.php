@@ -61,7 +61,7 @@ $m_idx = $_SESSION['LOGGED_INFO'];
     <div class="row mb-4">
         <div class="col-12 col-lg-10 mx-lg-auto mx-0">
             <a href="#" class="d-none d-lg-block pull-right btn btn-primary btn-round py-1 px-3 mr-1"><i class="xi-attachment"></i> 첨부파일 등록</a>
-            <a href="#" class="d-block d-lg-none pull-right btn btn-primary btn-xxs btn-round py-2 px-2 mr-1">더보기+</a>
+            <!-- <a href="#" class="d-block d-lg-none pull-right btn btn-primary btn-xxs btn-round py-2 px-2 mr-1">더보기+</a> -->
             <h6>첨부파일 관리 <span class="xxs_content px-0">(* 최대 10개 등록 가능)</span></h6>
             <div class="d-none d-lg-block">
                 <table class="table table-light table-bordered mt-4" width="100%">

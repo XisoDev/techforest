@@ -24,9 +24,8 @@ $rt_row = $output->get('rt_row');
         <h4 class="weight_lighter mb-3">맞춤 일자리를 확인하세요!</h4>
         <?php } ?>
         <?php if($logged_info) { ?>
-            <h5 class="weight_normal d-none d-md-block">안녕하세요</h5>
-            <h5 class="weight_bold"><?=$logged_info['m_name']?>님 :)</h5>
-            <h5 class="weight_normal mb-3">어떤 일자리를 찾고 계신가요?</h5>
+        <h5 class="weight_bold"><?=$logged_info['m_name']?>님 :)</h5>
+        <h5 class="weight_lighter mb-3">어떤 일자리를 찾고 계신가요?</h5>
         <?php } ?>
         <ul class="nav">
             <?php if(!$logged_info) { ?>
@@ -109,119 +108,87 @@ $rt_row = $output->get('rt_row');
             </div>
         </div>
         <?php }else{ ?>
-            <!--                mobile card-->
-            <div class="d-block d-md-none">
-                <div class="col-12">
-                <h6 class="weight_lighter xs_content mt-4 mb-1">
-                    <span class="red"><?=$logged_info['m_name']?></span>님의 이력서 완성도는
-                    <span class="red">
-                          <?php if($count_career_row['count_career'] == $count_c_content_row['count_c_content'] && $count_myinfo_row['count_myinfo']){
-                              echo '높음';
-                          }else if($count_career_row['count_career'] > $count_c_content_row['count_c_content'] && $count_myinfo_row['count_myinfo']){
-                              echo '중간';
-                          }else{
-                              echo '낮음';
-                          }
-                          ?>
-                        </span>입니다.
-                </h6>
-                <h6 class="weight_lighter xs_content mt-0 mb-2">
-                    상세 경력을 기입하고 취업 성공률을 높여보세요!
-                </h6>
-                    <div class="tech_card overflow-hidden mt-md-n5 shadow">
-                        <div class="row">
-                            <div class="col-4 mr-0 pr-0 d-md-none">
-                                <div class="py-3 px-2">
-                                    <div class="avatar square bg-white" style="background-image:url('/layout/none/assets/images/no_avatar.png');">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-8 ml-0 pl-0 col-md-12 px-md-5">
-                                <div class="text-left">
-                                    <h5 class="weight_bold mb-1 mt-2"><?=$logged_info['m_name']?>
-                                        <span class="xs_content weight_lighter">(<?=$myinfo_row['m_birthday']?>세)</span>
-                                    </h5>
-                                    <?php $desired_work_place = $myinfo_row['local_name'] . " ";
-                                    if($myinfo_row['m_city_idx'] != -1){ $desired_work_place .= $myinfo_row['city_name']; }
-                                    if($myinfo_row['m_district_idx'] != -1){ $desired_work_place .= $myinfo_row['district_name']; }?>
-                                    <div class="row px-3 pb-2">
-                                        <p class="col-12 col-md-6 xxs_content weight_lighter px-0 cut1"><span class="bg-red icon_wrap"><i class="xi-dashboard"></i></span> <b>희망직무</b> : <?=$myinfo_row['hope_duty']?></p>
-                                        <p class="col-12 col-md-6 xxs_content weight_lighter px-0"><span class="bg-red icon_wrap"><i class="xi-wrench"></i></span> <b>주요경력</b> : <?=$myinfo_row['duty_name']?></p>
-                                        <p class="col-12 col-md-6 xxs_content weight_lighter px-0"><span class="bg-red icon_wrap"><i class="xi-map-marker"></i></span> <b>희망지역</b> : <?=$desired_work_place?></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <a href="<?=getUrl('technician','resumeWrite',$m_idx)?>" class="btn btn-block btn-primary mt-0 rounded-0">이력서 수정하기</a>
-                    </div>
-                </div>
-            </div>
-            <!--                end mobile card-->
-            <!--PC card-->
-            <div class="col-12 d-none d-md-block" style="
+            <div class="col-12" style="
                     background-image:url('/oPage/technician/images/main_1section_bg.png');
                     background-size:contain;
                     background-repeat:no-repeat;
                     background-position:center top;
             ">
-                <div class="col-md-10 col-lg-8 mx-auto mt-md-5">
-                    <div class="mx-auto avatar position-relative square bg-white" style="
+                <div class="d-block d-md-none">
+                <h6 class="weight_lighter mt-4 mb-1">
+                    <span class="red"><?=$logged_info['m_name']?></span>님의 이력서 완성도는
+                    <span class="red">
+                      <?php if($count_career_row['count_career'] == $count_c_content_row['count_c_content'] && $count_myinfo_row['count_myinfo']){
+                        echo '높음';
+                      }else if($count_career_row['count_career'] > $count_c_content_row['count_c_content'] && $count_myinfo_row['count_myinfo']){
+                        echo '중간';
+                      }else{
+                        echo '낮음';
+                      }
+                      ?>
+                    </span>입니다.
+                </h6>
+                <h6 class="weight_lighter mt-0 mb-2">
+                    상세 경력을 기입하고 취업 성공률을 높여보세요!
+                </h6>
+                </div>
+
+                <div class=" col-md-10 col-lg-8 mx-auto mt-md-5">
+                    <div class="d-none d-md-block mx-auto avatar position-relative square bg-white" style="
                                 max-width:150px;
                                 margin-top:-75px;
                                 z-index:50;
                                 background-image:url('/layout/none/assets/images/no_avatar.png');
                             ">
                     </div>
-                    <div class="tech_card overflow-hidden mt-md-n5 bg-white shadow">
-                        <div class="row">
-                            <div class="d-none d-md-block px-5 text-center col-12 pt-5">
-                                <h5 class="mt-4 mb-1">
-                                    <span class="red"><?=$logged_info['m_name']?></span>님의 이력서 완성도는
-                                    <span class="red">
-                                      <?php if($count_career_row['count_career'] == $count_c_content_row['count_c_content'] && $count_myinfo_row['count_myinfo']){
-                                          echo '높음';
-                                      }else if($count_career_row['count_career'] > $count_c_content_row['count_c_content'] && $count_myinfo_row['count_myinfo']){
-                                          echo '중간';
-                                      }else{
-                                          echo '낮음';
-                                      }
-                                      ?>
-                                    </span>입니다.
-                                </h5>
-                                <h5 class="mt-0 mb-2">
-                                    상세 경력을 기입하고 취업 성공률을 높여보세요!
-                                </h5>
-                                <hr />
-                            </div>
-                            <div class="col-4 mr-0 pr-0 d-md-none">
-                                <div class="content_padding">
-                                    <div class="avatar square bg-white" style="background-image:url('/layout/none/assets/images/no_avatar.png');">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-8 ml-0 pl-0 col-md-12 px-md-5">
-                                <div class="text-left">
-                                    <h5 class="weight_bold mb-2"><?=$logged_info['m_name']?>
-                                        <span class="xs_content weight_lighter">(<?=$myinfo_row['m_birthday']?>세)</span>
-                                    </h5>
-                                    <?php $desired_work_place = $myinfo_row['local_name'] . " ";
-                                          if($myinfo_row['m_city_idx'] != -1){ $desired_work_place .= $myinfo_row['city_name']; }
-                                          if($myinfo_row['m_district_idx'] != -1){ $desired_work_place .= $myinfo_row['district_name']; }?>
-                                    <div class="row px-3 pb-sm-2 pb-md-3">
-                                    <p class="col-12 col-md-12 xs_content weight_lighter px-0 cut1 mb-1"><img src="/oPage/images/imgicons/helmet_bg_red.png" height="20" /> <b>희망직무</b> : <?=$myinfo_row['hope_duty']?></p>
-                                    <p class="col-12 col-md-6 xs_content weight_lighter px-0"><img src="/oPage/images/imgicons/wrench_bg_red.png" height="20" /> <b>주요경력</b> : <?=$myinfo_row['duty_name']?></p>
-                                    <p class="col-12 col-md-6 xs_content weight_lighter px-0"><img src="/oPage/images/imgicons/location_bg_red.png" height="20" /> <b>희망지역</b> : <?=$desired_work_place?></p>
-                                    </div>
+                <div class="tech_card overflow-hidden mt-md-n5 bg-white shadow">
+                    <div class="row">
+                        <div class="d-none d-md-block px-5 text-center col-12 pt-5">
+                            <h5 class="mt-4 mb-1">
+                                <span class="red"><?=$logged_info['m_name']?></span>님의 이력서 완성도는
+                                <span class="red">
+                                  <?php if($count_career_row['count_career'] == $count_c_content_row['count_c_content'] && $count_myinfo_row['count_myinfo']){
+                                      echo '높음';
+                                  }else if($count_career_row['count_career'] > $count_c_content_row['count_c_content'] && $count_myinfo_row['count_myinfo']){
+                                      echo '중간';
+                                  }else{
+                                      echo '낮음';
+                                  }
+                                  ?>
+                                </span>입니다.
+                            </h5>
+                            <h5 class="mt-0 mb-2">
+                                상세 경력을 기입하고 취업 성공률을 높여보세요!
+                            </h5>
+                            <hr />
+                        </div>
+                        <div class="col-4 mr-0 pr-0 d-md-none">
+                            <div class="content_padding">
+                                <div class="mx-auto avatar square bg-white" style="background-image:url('/layout/none/assets/images/no_avatar.png');">
                                 </div>
                             </div>
                         </div>
-
-                        <a href="<?=getUrl('technician','resumeWrite',$m_idx)?>" class="btn btn-block btn-danger py-2 mt-0 rounded-0">이력서 수정하기</a>
+                        <div class="col-8 ml-0 pl-0 col-md-12 px-md-5">
+                            <div class="text-left">
+                                <h5 class="weight_bold mb-2 pt-3"><?=$logged_info['m_name']?>
+                                    <span class="xs_content weight_lighter">(<?=$myinfo_row['m_birthday']?>세)</span>
+                                </h5>
+                                <?php $desired_work_place = $myinfo_row['local_name'] . " ";
+                                      if($myinfo_row['m_city_idx'] != -1){ $desired_work_place .= $myinfo_row['city_name']; }
+                                      if($myinfo_row['m_district_idx'] != -1){ $desired_work_place .= $myinfo_row['district_name']; }?>
+                                <div class="row px-3 py-sm-2 py-md-3">
+                                <p class="col-12 col-md-6 xxs_content weight_lighter px-0 cut1"><span class="bg-red icon_wrap"><i class="xi-dashboard"></i></span> <b>희망직무</b> : <?=$myinfo_row['hope_duty']?></p>
+                                <p class="col-12 col-md-6 xxs_content weight_lighter px-0"><span class="bg-red icon_wrap"><i class="xi-wrench"></i></span> <b>주요경력</b> : <?=$myinfo_row['duty_name']?></p>
+                                <p class="col-12 col-md-6 xxs_content weight_lighter px-0"><span class="bg-red icon_wrap"><i class="xi-map-marker"></i></span> <b>희망지역</b> : <?=$desired_work_place?></p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <a href="<?=getUrl('technician','resumeWrite',$m_idx)?>" class="btn btn-block btn-danger mt-0 rounded-0">이력서 수정하기</a>
+                </div>
                 </div>
             </div>
-            <!--                end pc card-->
 <?php } ?>
         </div>
 <!--        end whitebox-->
@@ -254,8 +221,7 @@ $rt_row = $output->get('rt_row');
 <div class="container">
     <div class="row">
             <div class="col-12 mt-2">
-                <div class="bg-white tech_card">
-                <div class="d-block d-lg-none py-2 px-3">
+                <div class="d-block d-lg-none">
                 <h5 class="weight_bold mt-3"><span class="red"><?=$logged_info['m_name']?></span>님 께서,</h5>
                 <h6 class="weight_lighter mt-1 mb-2">지원하실 확률이 높은 공고를 찾아왔어요!</h6>
                 </div>
@@ -267,44 +233,10 @@ $rt_row = $output->get('rt_row');
                 <div class="flex-card-slick">
                   <?php foreach($output->get("new_hire2") as $val){ ?>
                     <?php $desired_work_place = $val['local_name'] . " ";if($val['city_name'] != '전체'){ $desired_work_place .= $val['city_name']; }if($val['district_name'] != '전체'){ $desired_work_place .= $val['district_name']; }?>
-                      <div class="tech_card bg-white shadow">
+                      <div class="tech_card bg-white">
                           <div class="thumbnail mx-0 px-0" style="background-image:url('http://www.planttech.co.kr/wp-content/uploads/2018/07/%EC%82%BC%EC%84%B1%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%811-820x457.png')">
                           </div>
-                          <div class="p-2 text-left pb-1">
-                              <h6><?=$val['c_name']?></h6>
-                              <h6 class="red" style="height:38px"><?=$val['h_title']?></h6>
-                              <p class="weight_lighter xxs_content mx-0 px-0">
-                                  <span class="badge badge-danger weight_lighter">위치</span>
-                                  <?=$desired_work_place?>
-                                  <? if($val['salary_idx']==4){?>
-                                    <span class="badge badge-danger weight_lighter">시</span>
-                                    <b><?=$val['job_salary']?>원</b>
-                                  <? }else{ ?>
-                                    <? if($val['salary_idx']==1){ ?>
-                                      <span class="badge badge-danger weight_lighter">연</span>
-                                    <? }else if($val['salary_idx']==2){ ?>
-                                      <span class="badge badge-danger weight_lighter">월</span>
-                                    <? }else if($val['salary_idx']==3){ ?>
-                                      <span class="badge badge-danger weight_lighter">일</span>
-                                    <? } ?>
-                                      <b><?=$val['job_salary']?>만원</b>
-                                  <? } ?>
-                              </p>
-                              <p class="text-secondary xxs_content mx-0 px-0">
-                                  <i class="xi-clock-o"></i> 마감 <?=$val['hire_end_date']?>일 전
-                                  <i class="xi-eye-o"></i> 142
-                              </p>
-                          </div>
-                          <a href="#" class="btn btn-block btn-warning mt-3 rounded-0">자세히 보기</a>
-                      </div>
-                  <?php } ?>
-<!--                    테스트때문에 하나 더넣음-->
-                    <?php foreach($output->get("new_hire2") as $val){ ?>
-                    <?php $desired_work_place = $val['local_name'] . " ";if($val['city_name'] != '전체'){ $desired_work_place .= $val['city_name']; }if($val['district_name'] != '전체'){ $desired_work_place .= $val['district_name']; }?>
-                      <div class="tech_card bg-white shadow">
-                          <div class="thumbnail mx-0 px-0" style="background-image:url('http://www.planttech.co.kr/wp-content/uploads/2018/07/%EC%82%BC%EC%84%B1%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%811-820x457.png')">
-                          </div>
-                          <div class="p-2 text-left pb-1">
+                          <div class="content_padding text-left pb-1">
                               <h6><?=$val['c_name']?></h6>
                               <h6 class="red" style="height:38px"><?=$val['h_title']?></h6>
                               <p class="weight_lighter xxs_content mx-0 px-0">
@@ -333,16 +265,8 @@ $rt_row = $output->get('rt_row');
                       </div>
                   <?php } ?>
                 </div>
-                    <div class="text-center pt-2 pb-4 d-none d-md-block">
-                        <a class="btn btn-primary btn-round px-3 py-1" href="#">공고 더보기</a>
-                    </div>
-<!--                    bgwhite, roundcard-->
             </div>
-<!--                end col-->
-        </div>
-<!--        end row-->
     </div>
-<!--    end container-->
 </div>
 <?php } ?>
 
@@ -353,7 +277,7 @@ $rt_row = $output->get('rt_row');
                 실시간 지원현황
             </h5>
             <div class="tech_card bg-white text-left">
-                <div class="p-2 weight_lighter">
+                <div class="content_padding weight_lighter">
                   <?php foreach($output->get("now_application") as $val){
                       $diff = time() - strtotime($val['reg_date']);
                         if ( $diff>86400 ) {
@@ -378,23 +302,11 @@ $rt_row = $output->get('rt_row');
 </div>
 
 
-<link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet" />
-<style>
-    .russo_one{
-        font-family: 'Russo One', sans-serif;
-    }
-</style>
-<link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet" />
-<style>
-    .russo_one{
-        font-family: 'Russo One', sans-serif;
-    }
-</style>
 <div class="d-none d-lg-block container-fluid mt-5 text-white sub_visual" style="background-image:url('<?=$no_auto_bg_url?>')">
     <div class="container py-5 text-left">
     <h5>국내1위 기술인력 전문 구인구직 매칭서비스</h5>
     <h4>지금까지 <span class="text-warning">기술자숲</span>을 통해</h4>
-    <h3>전달된 일자리 <span class="weight_bold" style="font-size:40px;">총 <b class="russo_one">27,567</b>개</span></h3>
+    <h3>전달된 일자리 <span class="weight_bold" style="font-size:40px;">총 <b class="weight_super">27,567</b>개</span></h3>
     </div>
 </div>
 
@@ -411,13 +323,13 @@ $rt_row = $output->get('rt_row');
 
             </div>
             <div class="px-md-2">
-                <div class="p-2">
+                <div class="content_padding">
                     <h6 class="weight_normal">휴대폰으로 딱 10초!, 기술자 일자리 매칭 서비...</h6>
                     <p class="xs_content px-0">
                         30대 소셜 벤처 기업가가 조선산업 불황 여파로 일자리를 잃은 숙련 기...
                     </p>
                     <hr />
-                    <a class="btn btn-primary btn-xs py-2 px-3 pull-right" href="#">자세히 보기</a>
+                    <a class="btn btn-primary pull-right" href="#">자세히 보기</a>
                     <p class="text-secondary my-0 py-0 px-0">2019.05.30</p>
                 </div>
             </div>
@@ -430,10 +342,10 @@ $rt_row = $output->get('rt_row');
 
 <div class="d-none py-5 d-lg-block container-fluid mt-5 bg-light">
     <div class="d-flex justify-content-between container">
-        <a href="#" target="_blank"><img src="/oPage/technician/supports/01_logo.png" /></a>
-        <a href="#" target="_blank"><img src="/oPage/technician/supports/02_logo.png" /></a>
-        <a href="#" target="_blank"><img src="/oPage/technician/supports/03_logo.png" /></a>
-        <a href="#" target="_blank"><img src="/oPage/technician/supports/04_logo.png" /></a>
+    <a href="#" target="_blank"><img src="/oPage/technician/images/supports_01.jpg" height="59" /></a>
+    <a href="#" target="_blank"><img src="/oPage/technician/images/supports_03.jpg" height="59" /></a>
+    <a href="#" target="_blank"><img src="/oPage/technician/images/supports_05.jpg" height="59" /></a>
+    <a href="#" target="_blank"><img src="/oPage/technician/images/supports_07.png" height="59" /></a>
     </div>
 </div>
 

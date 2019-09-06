@@ -20,10 +20,10 @@ $city_arr = $output->get('city_arr');
 $district_arr = $output->get('district_arr');
 
 //직종리스트
-$occupation_arr = $output->get('occupation_arr');
+$occupation_arr = $output->get('occupation_list');
 
 //직무리스트
-$duty_arr = $output->get('duty_arr');
+$duty_arr = $output->get('duty_list');
 
 //학력리스트
 $school_arr = $output->get('school_arr');
