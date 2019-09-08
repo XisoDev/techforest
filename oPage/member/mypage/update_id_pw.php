@@ -42,6 +42,7 @@ if($logged_info['is_commerce'] == 'Y'){
         </div>
         <div class="form-group">
             <label for=""><img src="/oPage/images/imgicons/lock_gray.png" height="12" class="imgicon" />  <span class="weight_bold">비밀번호</span></label>
+            <input type="text" id="empty_input" style="border:none;outline:none;" readonly>
             <div class="form-control" id="panel" style="display:none;height:auto;border:none;">
               현재 비밀번호 <br>
               <input type="password" id="now_pass"><br>
@@ -51,7 +52,7 @@ if($logged_info['is_commerce'] == 'Y'){
               <input type="password" id="new_pass_check">
             </div>
             <button type="button" id="change_pass_btn" class="bg-red btn btn-xs btn-round">변경</button>
-            <button type="button" id="change_pass_btn_ok" onclick="password()" class="bg-red btn btn-xs btn-round" style="display:none;">수정완료</button>
+            <button type="button" id="change_pass_btn_ok" onclick="password()" class="bg-red btn btn-xs btn-round" style="display:none;">완료</button>
         </div>
     </form>
 
@@ -62,6 +63,7 @@ if($logged_info['is_commerce'] == 'Y'){
 $("#change_pass_btn").click(function(){
   $('#pass_text').css("display","none");
   $('#change_pass_btn').css("display","none");
+  $('#empty_input').css("display","none");
   $('#change_pass_btn_ok').css("display","block");
   $("#panel").slideDown();
 });
