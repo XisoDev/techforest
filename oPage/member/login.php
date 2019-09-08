@@ -130,7 +130,7 @@
 	$("#modal_naver_ok2").click(function(e) {
 		var state = '<?=$_SESSION['state']?>';
 		var href = location.href.replace("#", "");
-		var url = "https://nid.naver.com/oauth2.0/authorize?client_id=cXstjgkmgg8Oiz8d7zHx&response_type=code&redirect_uri=https://http://127.0.0.1:8080/login_naver.php?type=2&state=" + state;
+		var url = "https://nid.naver.com/oauth2.0/authorize?client_id=cXstjgkmgg8Oiz8d7zHx&response_type=code&redirect_uri=http://127.0.0.1:8080/login_naver.php?type=2&state=" + state;
 
 		try {
 			location.replace(url);

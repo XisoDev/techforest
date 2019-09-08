@@ -21,7 +21,7 @@
   $headers = array();
   $response = curl_exec($ch);
   $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-  echo "status_code:".$status_code."";
+  // echo "status_code:".$status_code."";
   curl_close($ch);
   if($status_code == 200) {
 
@@ -55,28 +55,29 @@
       if(!isset($args)) $args = new stdClass();
         $json = json_decode($response);
         $json = $json->{'response'};
-        if($type == 1) {
-    			$is_commerce	= "N";
-    		} else if($type == 2) {
-    			$is_commerce	= "Y";
-    		}
+          if($type == 1) {
+            $is_commerce	= "N";
+          } else if($type == 2) {
+            $is_commerce	= "Y";
+          }
 
-    		$id				= $json->{"id"};
-    		$id = "n" . $is_commerce . "_" . $id;
-    		$birthday		= $json->{"birthday"};
-    		$gender			= $json->{"gender"};
-    		$email			= $json->{"email"};
+    		$id				=  $json->{"id"};
+    		$id = "n".$is_commerce . "_" . $id;
+    		$birthday	= $json->{"birthday"};
+    		$gender		= $json->{"gender"};
+    		$email		= $json->{"email"};
     		$name			= $json->{"name"};
 
     		$birthday = str_replace("-", "", $birthday);
-        $birthday = "0000" . $birthday;
+        $birthday = "0000".$birthday;
         $args2 = array( "id" => $id,
-                 "birthday" => $birthday,
-                 "gender" => $gender,
-                 "email" => $email,
-                 "name" => $name,
-               );
-        // echo "id:".$id."<br>birthday:".$birthday."<br>gender:".$gender."<br>email:".$email;
+                  "birthday" => $birthday,
+                  "gender" => $gender,
+                  "email" => $email,
+                  "name" => $name,
+                  "is_commerce" => $is_commerce,
+                 );
+         // echo "id:".$id."<br>birthday:".$birthday."<br>gender:".$gender."<br>email:".$email;
         $module = "member";
         $function_name = "procNaverLogin";
 
@@ -91,13 +92,12 @@
             if(method_exists($object, $function_name)){
                 $args = (object) $_REQUEST;
 
-
                 $output = $object->$function_name($args,$args2);
             }else{
-                $output = new Object(-1, "잘못된 요청입니다." . $object . " - " . $function_name);
+              $output = new Object(-1, "잘못된 요청입니다." . $object . " - " . $function_name);
             }
         }else{
-            $output = new Object(-1, "존재하지 않는 모듈입니다.");
+          $output = new Object(-1, "존재하지 않는 모듈입니다.");
         }
 
     $output->setSession();
@@ -109,13 +109,12 @@
         $return_url = $_REQUEST['error_return_url'];
         if(!$return_url) $return_url = $output->error_return_url;
     }
-
     if(!$return_url) $return_url =  $_SERVER['HTTP_REFERER'];
-    header('Location: ' . $return_url);
+      header('Location: ' . $return_url);
     } else {
-      echo "Error 내용:".$response;
+      header('Location: ' . getUrl('member','login'));
     }
   } else {
-    echo "Error 내용:".$response;
+    header('Location: ' . getUrl('member','login'));
   }
 ?>

@@ -49,28 +49,50 @@ class memberController{
         //if($args->cur) $output->success_return_url = $args->cur;
         return $output;
     }
+    
     function procNaverLogin($args,$args2){
-        global $oDB;
+      global $oDB;
 
-      $oDB->where("m_idx",9245);
+      $now_date = date(YmdHis);
+
+      if($args2['gender']=='M'){
+        $m_human = 'M';
+      }else if($args2['gender'] == "F" || $args2['gender'] == "W") {
+				$m_human = "F";
+      } else {
+        $m_human = "T";
+      }
+
+      $data = array(
+        "m_id" => $args2['id'],
+        "m_pw" => $args2['id'],
+        "m_birthday" => $args2['birthday'],
+        "m_human" => $m_human,
+        "m_email" => $args2['email'],
+        "m_name" => $args2['name'],
+        "is_commerce" => $args2['is_commerce'],
+        "reg_date" => $now_date,
+        "is_out" => 'N'
+      );
+
+      $updateColumns = array("is_out");
+      $lastInsertId = "is_out";
+      $oDB->onDuplicate($updateColumns,$lastInsertId);
+      $res = $oDB->insert("TF_member_tb",$data);
+
+      $oDB->where("m_id",$args2['id']);
       $row = $oDB->getOne("TF_member_tb");
 
-      echo "id1:".$args->type;
-      echo "id2:".$args2['id'];
-      // if(!$row['m_id']) return new Object(-1, "존재하지 않는 아이디 입니다.");
-      // if($args->password != $row['m_pw']) return new Object(-1, "비밀번호가 잘못 되었습니다.");
-      //
-      // //비밀번호 일치하면 세션생성 후 로그인 기록 변경
-      // $_SESSION['LOGGED_INFO'] = $row['m_idx'];
+      $_SESSION['LOGGED_INFO'] = $row['m_idx'];
 
-      // $output = new Object(0, "로그인 되었습니다.");
-      // // $output->add('member_info',$this->getMemberInfoByMemberSrl($_SESSION['LOGGED_INFO']));
-      // //
-      // if($row['is_commerce'] == 'Y'){
-      //   $output->success_return_url = getUrl('company');
-      // }else{
-      //   $output->success_return_url = getUrl('technician');
-      // }
+      $output = new Object(0, "로그인 되었습니다.");
+      $output->add('member_info',$this->getMemberInfoByMemberSrl($_SESSION['LOGGED_INFO']));
+
+      if($row['is_commerce'] == 'Y'){
+        $output->success_return_url = getUrl('company');
+      }else{
+        $output->success_return_url = getUrl('technician');
+      }
       //if($args->cur) $output->success_return_url = $args->cur;
       return $output;
     }
