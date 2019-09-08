@@ -128,7 +128,7 @@ $oMenu->company->list[] = array(
     )
 );
 $oMenu->company->list[] = array(
-    "title" => "서비스 이용현황",
+    "title" => "서비스이용현황",
     "link" => getUrl('company','serviceHistory'),
     "imgicon" => "donutchart",
     "active_mid" => "company",

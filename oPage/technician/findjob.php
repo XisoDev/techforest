@@ -124,8 +124,8 @@
                 <? if ($application_letter[$i]['salary_idx'] < 3) { $hire_salary_text = "만원"; } else { $hire_salary_text = "원"; } ?>
                 <div class="col-7 col-md-12 pl-0 px-0">
                     <div class="py-2 px-3">
-                        <h6 class="weight_normal pb-0 mb-0 cut1"><?=$application_letter[$i]['c_name']?></h6>
-                        <h6 class="red pt-0 mt-0 tut1"><?=$application_letter[$i]['h_title']?></h6>
+                        <h6 class="weight_normal pb-0 mb-0"><?=$application_letter[$i]['c_name']?></h6>
+                        <h6 class="red pt-0 mt-0 cut1"><?=$application_letter[$i]['h_title']?></h6>
                         <hr class="py-1 px-0 m-0" />
                         <p class="weight_lighter xxs_content mx-0 px-0">
                             <span class="badge badge-danger weight_lighter">위치</span>

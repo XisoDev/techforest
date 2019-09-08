@@ -102,7 +102,7 @@
                     <label class="custom-control-label xs_content" for="customCheck2">동의</label>
                 </div>
             </div>
-            <p class="xxs_content px-0 mx-0 weight_lighter">기술자숲 이용약관 <a class="badge-light px-2 py-0 border btn-round">전문보기</a></p>
+            <p class="xxs_content px-0 mx-0 weight_lighter">기술자숲 이용약관 <button class="badge-light px-2 py-0 border btn-round" data-toggle="modal" data-target="#technician_terms">전문보기</button></p>
 
             <div class="clearfix"></div>
             <div class="pull-right pr-3">
@@ -111,10 +111,27 @@
                     <label class="custom-control-label xs_content" for="customCheck3">동의</label>
                 </div>
             </div>
-            <p class="xxs_content px-0 mx-0 weight_lighter">개인정보 수집 및 이용에 대한 안내 <a class="badge-light px-2 py-0 border btn-round">전문보기</a></p>
+            <p class="xxs_content px-0 mx-0 weight_lighter">개인정보 수집 및 이용에 대한 안내 <button class="badge-light px-2 py-0 border btn-round" data-toggle="modal" data-target="#privacy_policy">전문보기</button></p>
         </div>
         <div class="col-12 mt-4">
             <button type="button" class="btn btn-primary btn-block btn-round" onclick="join()">회원가입</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="technician_terms" tabindex="-1" role="dialog" aria-labelledby="tech_forest_modal_window" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content text-center" style="border-radius:10px">
+             <?php include "technician_terms.php"; ?>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="privacy_policy" tabindex="-1" role="dialog" aria-labelledby="tech_forest_modal_window" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content text-center" style="border-radius:10px">
+             <?php include "privacy_policy.php"; ?>
         </div>
     </div>
 </div>

@@ -376,7 +376,7 @@ shuffle($rand_array);
                     <h6 class="d-block d-sm-none bg-primary text-white mb-0 pb-0 text-center py-2 rounded-top">경력간단요약 및 자기소개</h6>
                 </div>
                 <div class="col-12 col-sm-9 mx-0 px-0 mt-0 pt-0 mb-2 mt-md-3">
-                    <textarea rows="3" class="form-control rounded-0 rounded-bottom" id="about_me"><?=$self_row[0]['self_introduction']?></textarea>
+                    <textarea rows="7" class="form-control rounded-0 rounded-bottom" id="about_me"><?=$self_row[0]['self_introduction']?></textarea>
                 </div>
 
             </div>
@@ -406,26 +406,26 @@ shuffle($rand_array);
 															<div class="input-group-append" id="ged0">
 																<span class="input-group-text sm_content pr-2 pl-3">검정고시 <i class="pl-1 xi-check-circle-o" onclick="jQuery(this).toggleClass('xi-check-circle-o');jQuery(this).toggleClass('xi-check-circle')"></i></span>
 															</div>
-                                                            <div class="input-group-append">
-                                                                <span class="input-group-text">&nbsp;</span>
-                                                            </div>
-                                                    </div>
-                                                    <div class="col-6 pr-sm-2 mx-0 px-0">
-                                                        <div class="row px-3 px-sm-2">
-                                                        <h6 class="col-12 col-sm-6 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학교명</h6>
-                                                        <div class="col-12 col-sm-6 px-0 mb-2 mr-1 mx-sm-0 mt-sm-3">
-                                                            <input type="text" class="form-control" id="school_name0"  placeholder="학교명"/>
-                                                        </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-6 pr-sm-2 mx-0 px-0">
-                                                        <div class="row px-3 px-sm-2">
-                                                        <h6 class="col-12 col-sm-6 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">졸업연도</h6>
-                                                        <div class="col-12 col-sm-6 px-0 mb-2 ml-1 mx-sm-0 mt-sm-3">
-                                                            <input type="text" class="form-control monthpicker" id="school_graduated0" placeholder="졸업연도"/>
-                                                        </div>
-                                                        </div>
-                                                    </div>
+                              <div class="input-group-append">
+                                  <span class="input-group-text">&nbsp;</span>
+                              </div>
+                            </div>
+                              <div class="col-6 pr-sm-2 mx-0 px-0">
+                                  <div class="row px-3 px-sm-2">
+                                  <h6 class="col-12 col-sm-6 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학교명</h6>
+                                  <div class="col-12 col-sm-6 px-0 mb-2 mr-1 mx-sm-0 mt-sm-3">
+                                      <input type="text" class="form-control" id="school_name0"  placeholder="학교명"/>
+                                  </div>
+                                  </div>
+                              </div>
+                              <div class="col-6 pr-sm-2 mx-0 px-0">
+                                  <div class="row px-3 px-sm-2">
+                                  <h6 class="col-12 col-sm-6 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">졸업연도</h6>
+                                  <div class="col-12 col-sm-6 px-0 mb-2 ml-1 mx-sm-0 mt-sm-3">
+                                      <input type="text" class="form-control monthpicker" id="school_graduated0" placeholder="졸업연도"/>
+                                  </div>
+                                  </div>
+                              </div>
 													<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">전공</h6>
 													<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
 														<input type="text" class="form-control" id="school_major0" placeholder="전공"/>
@@ -474,26 +474,26 @@ shuffle($rand_array);
 																		<span class="input-group-text sm_content pr-2 pl-3">검정고시 <i class="xi-check-circle-o" onclick="jQuery(this).toggleClass('xi-check-circle-o');jQuery(this).toggleClass('xi-check-circle')"></i></span>
 																<? } ?>
 															</div>
-                                                            <div class="input-group-append">
-                                                                <span class="input-group-text">&nbsp;</span>
-                                                            </div>
+                              <div class="input-group-append">
+                                  <span class="input-group-text">&nbsp;</span>
+                              </div>
 													</div>
-                                                        <div class="col-6 pr-sm-2 mx-0 px-0">
-                                                            <div class="row px-3 px-sm-2">
-                                                                <h6 class="col-12 col-sm-6 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학교명</h6>
-                                                                <div class="col-12 col-sm-6 p-0 mb-2 mr-1 mx-sm-0 mt-sm-3">
-                                                                    <input type="text" class="form-control" id="school_name<?=$idx?>"  value="<?=$val['school_name']?>" placeholder="학교명"/>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6 pr-sm-2 mx-0 px-0">
-                                                            <div class="row px-3 px-sm-2">
-                                                                <h6 class="col-12 col-sm-6 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">졸업연도</h6>
-                                                                <div class="col-12 col-sm-6 px-0 mb-2 ml-1 mx-sm-0 mt-sm-3">
-                                                                    <input type="text" class="form-control monthpicker" id="school_graduated<?=$idx?>" value="<?=substr($val['school_graduated'],0,7)?>" placeholder="졸업연도"/>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                          <div class="col-6 pr-sm-2 mx-0 px-0">
+                              <div class="row px-3 px-sm-2">
+                                  <h6 class="col-12 col-sm-6 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학교명</h6>
+                                  <div class="col-12 col-sm-6 p-0 mb-2 mr-1 mx-sm-0 mt-sm-3">
+                                      <input type="text" class="form-control" id="school_name<?=$idx?>"  value="<?=$val['school_name']?>" placeholder="학교명"/>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-6 pr-sm-2 mx-0 px-0">
+                              <div class="row px-3 px-sm-2">
+                                  <h6 class="col-12 col-sm-6 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">졸업연도</h6>
+                                  <div class="col-12 col-sm-6 px-0 mb-2 ml-1 mx-sm-0 mt-sm-3">
+                                      <input type="text" class="form-control monthpicker" id="school_graduated<?=$idx?>" value="<?=substr($val['school_graduated'],0,7)?>" placeholder="졸업연도"/>
+                                  </div>
+                              </div>
+                          </div>
 
 														<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">전공</h6>
 														<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">

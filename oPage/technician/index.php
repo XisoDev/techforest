@@ -261,7 +261,7 @@ $rt_row = $output->get('rt_row');
                                   <i class="xi-eye-o"></i> 142
                               </p>
                           </div>
-                          <a href="#" class="btn btn-block btn-warning mt-3 rounded-0">자세히 보기</a>
+                          <a href="<?=getUrl('technician','jobDetail',$val['h_idx'])?>" class="btn btn-block btn-warning mt-3 rounded-0">자세히 보기</a>
                       </div>
                   <?php } ?>
                 </div>
@@ -290,7 +290,7 @@ $rt_row = $output->get('rt_row');
                           $application_time= $diff.'초 전';
                         }
                     ?>
-                      <p>
+                      <p class="cut1">
                         <span class="btn btn-round btn-xxs btn-danger"><?=$application_time?></span>
                         <?=$val['c_name']?>에 지원자가 발생했습니다.
                       </p>
