@@ -266,7 +266,7 @@ class companyView{
     }
 
     function job_register($args){
-        setSEO("공고등록","공고등록 하시고 알맞는 기술자를 찾아보세요.");
+        setSEO("기업정보등록","기업정보등록 하시고 알맞는 기술자를 찾아보세요.");
         global $set_template_file;
         $set_template_file = "company/job.reg.php";
 
@@ -276,8 +276,15 @@ class companyView{
         global $add_body_class;
         $add_body_class[] = "shrink";
 
+        global $oDB;
         $output = new Object();
 
+        $m_idx = $_SESSION['LOGGED_INFO'];
+
+        $oDB->where("m_idx",$m_idx);
+        $company_info = $oDB->get("TF_member_commerce_tb");
+        
+        $output->add('company_info',$company_info);
         $output->add('member_notice',$this->member_notice());
         return $output;
     }

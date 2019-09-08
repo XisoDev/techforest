@@ -1,4 +1,7 @@
+<?
+$company_info = $output->get('company_info');
 
+?>
 <section class="bg-white">
     <div class="p-3 mt-4 pt-5 d-lg-none">
         <a href="#" onclick="history.back();" class="mb-3"><img src="/oPage/images/imgicons/arrow_left.png" height="25" /></a>
@@ -12,7 +15,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <?if(!$logged_info['c_name'] || !$logged_info['registration'] || !$logged_info['address'] || !$logged_info['address2'] || !$logged_info['phonenumber'] || !$logged_info['select6']){?>
+            <?if(!$company_info[0]['c_name'] || !$company_info[0]['registration'] || !$company_info[0]['address'] || !$company_info[0]['address2'] || !$company_info[0]['phonenumber'] || !$company_info[0]['select6']){?>
               <a class="nav-link weight_bold" onclick="back()" >
                   2단계<br />공고등록
               </a>
@@ -30,10 +33,10 @@
               <form id="theuploadform">
                 <div class="position-relative">
                   <?
-                  if(!$logged_info['image']) {
+                  if(!$company_info[0]['image']) {
                       $img_url = "/layout/none/assets/images/no_company.png";
                   }else {
-                      $img_url = "../../company_logo/" . $logged_info['image'];
+                      $img_url = "../../company_logo/" . $company_info[0]['image'];
                   }
                   ?>
                     <div class="avatar square" id="company_logo" style="background-image:url('<?=$img_url?>');"></div>
@@ -55,13 +58,13 @@
                         <h6>회사명</h6>
                     </div>
                     <div class="col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
-                        <input type="text" class="form-control" id="c_name" value="<?=$logged_info['c_name']?>" placeholder="회사명" required>
+                        <input type="text" class="form-control" id="c_name" value="<?=$company_info[0]['c_name']?>" placeholder="회사명" required>
                     </div>
                     <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
                         <h6>사업자등록번호</h6>
                     </div>
                     <?php
-                      $registration = explode("-", $logged_info["registration"]);
+                      $registration = explode("-", $company_info[0]["registration"]);
 
                     ?>
                     <div class="col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
@@ -82,10 +85,10 @@
                     </div>
                     <div class="col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
                         <div class="input-group mb-2">
-                            <input type="text" class="form-control" id="address"  value="<?=$logged_info['address']?>" placeholder="주소검색" readonly>
+                            <input type="text" class="form-control" id="address"  value="<?=$company_info[0]['address']?>" placeholder="주소검색" readonly>
                             <button type="button" class="btn btn-primary rounded-0" onclick="search_address()">검색</button>
                         </div>
-                        <input type="text" class="form-control" id="address2" value="<?=$logged_info['address2']?>" placeholder="상세주소">
+                        <input type="text" class="form-control" id="address2" value="<?=$company_info[0]['address2']?>" placeholder="상세주소">
                     </div>
                     <div id="wrap" style="display:none;border:1px solid;width:100%;height:50%;margin:5px 0;position:relative">
                       <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
@@ -99,7 +102,7 @@
                         <div class="input-group">
                             <select class="form-control" id="c_phone1" required>
                               <?
-                                $phonenumber = explode("-", $logged_info['phonenumber']);
+                                $phonenumber = explode("-", $company_info[0]['phonenumber']);
                                 $phone_arr = array("010", "02", "031", "032", "033", "041", "042", "043", "044", "051", "052", "053", "054", "055", "061", "062", "063", "064", "070");
 
                                 for($i = 0; $i < count($phone_arr); $i++) {
@@ -127,7 +130,7 @@
                     </div>
                     <div class="col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
                         <div class="input-group">
-                            <? $email = explode("@", $logged_info['select6']); ?>
+                            <? $email = explode("@", $company_info[0]['select6']); ?>
                             <input type="text" class="form-control" id="c_email1" value="<?=$email[0]?>" placeholder="이메일 주소 입력" required>
 
                             <div class="input-group-prepend">
@@ -156,7 +159,7 @@
                         <h6>회사 간단소개</h6>
                     </div>
                     <div class="col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
-                        <textarea class="form-control" id="c_introduction"><?=$logged_info['c_introduction']?></textarea>
+                        <textarea class="form-control" id="c_introduction"><?=$company_info[0]['c_introduction']?></textarea>
                     </div>
                     <div class="d-none d-md-block col-md-2"></div>
                     <div class="col-12 text-center py-4">

@@ -35,7 +35,8 @@
             $start_year = 1950;
             while ($start_year <= $this_year) {
               if($start_year == 1975){
-                echo "<option value='0000' selected='selected'>출생 연도</option>";}
+                echo "<option value='0000' selected='selected'>출생 연도</option>";
+              }
                 echo "<option value='$start_year'>{$start_year}</option>";
                 $start_year++;
             }
@@ -98,7 +99,7 @@
 
             <div class="pull-right pr-3">
                 <div class="custom-control right-checkbox custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="agree1" checked>
+                    <input type="checkbox" class="custom-control-input" id="customCheck2" checked>
                     <label class="custom-control-label xs_content" for="customCheck2">동의</label>
                 </div>
             </div>
@@ -107,7 +108,7 @@
             <div class="clearfix"></div>
             <div class="pull-right pr-3">
                 <div class="custom-control right-checkbox custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="agree1" checked>
+                    <input type="checkbox" class="custom-control-input" id="customCheck3" checked>
                     <label class="custom-control-label xs_content" for="customCheck3">동의</label>
                 </div>
             </div>
@@ -163,7 +164,7 @@ function technician_id_check(){
 }
 
 function click_email(email) {
-  $("#c_email2").val(email);
+  $("#m_email2").val(email);
 }
 
 function join(){
@@ -175,8 +176,8 @@ function join(){
   var phone1 = $("#phone1").val();
   var phone2 = $("#phone2").val();
   var phone3 = $("#phone3").val();
-  var agree1 = $("#agree1").val();
-  var agree2 = $("#agree2").val();
+  var agree1 = $("#customCheck2").prop("checked");
+  var agree2 = $("#customCheck3").prop("checked");
   var m_email1 = $("#m_email1").val();
   var m_email2 = $("#m_email2").val();
 
@@ -224,7 +225,7 @@ function join(){
   if(birth_year == '0000'){
     return toastr.error("출생 연도를 선택해주세요.");
   }
-  if(agree1 == 0 || agree2 == 0){
+  if(agree1 == false || agree2 == false){
     return toastr.error("약관에 동의해주세요.");
   }
 

@@ -313,7 +313,7 @@
             <div class="px-3 pb-2 pt-4">
                 <h6 class="weight_lighter">지금 공고를 등록하시면 <span class="red">적합한 구직자와 빠르게</span> 연결될 수 있습니다.</h6>
                 <h6 class="weight_normal mb-2 mt-4 mb-3">공고를 등록하시겠습니까?</h6>
-                <a class="btn btn-block btn-danger btn-round btn-lg mb-3" href="#">공고 등록 하러가기</a>
+                <a class="btn btn-block btn-danger btn-round btn-lg mb-3" href="<?=getUrl('company','job_register')?>">공고 등록 하러가기</a>
             </div>
             <button class="py-3 btn btn-block btn-light" onclick="jQuery('#tech_modal_example').modal('hide');" style="border-radius:10px;">메인페이지로 이동</button>
         </div>

@@ -49,7 +49,7 @@ class memberController{
         //if($args->cur) $output->success_return_url = $args->cur;
         return $output;
     }
-    
+
     function procNaverLogin($args,$args2){
       global $oDB;
 
