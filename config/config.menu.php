@@ -104,7 +104,7 @@ $oMenu->company->list[] = array(
 );
 $oMenu->company->list[] = array(
     "title" => "기술자숲 소개",
-    "link" => "#",
+    "link" => getUrl('contact','TechnicianForest'),
     "active_mid" => "company",
     "imgicon" => "users",
     "active_act" => time(),
@@ -113,7 +113,7 @@ $oMenu->company->list[] = array(
     "submenu" => array(
         array(
             "title" => "기업소개",
-            "link" => "#",
+            "link" => getUrl('contact','TechnicianForest'),
             "active_mid" => "company",
             "active_act" => time(),
             "new_window" => "N",
@@ -234,7 +234,7 @@ $oMenu->technician->list[] = array(
 );
 $oMenu->technician->list[] = array(
     "title" => "기술자숲 소개",
-    "link" => "#",
+    "link" => getUrl('contact','TechnicianForest'),
     "active_mid" => "technician",
     "imgicon" => "users",
     "active_act" => time(),

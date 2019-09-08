@@ -609,4 +609,28 @@ class technicianController{
 
     return new Object(0,"파일 업로드가 완료되었습니다.");
   }
+
+  function FileDelete($args){
+    global $oDB;
+    $m_idx = $_SESSION['LOGGED_INFO'];
+
+    $date = date("YmdHis", strtotime($args->reg_date));
+    $file_real_name = $args->file_name;
+    $file_name = $m_idx . "_" . $date . "_" . $file_real_name;
+    $target_path = "./portfolio/";
+
+    if(unlink($target_path . $file_name)){
+      $oDB->where("reg_date",$date);
+      $oDB->where("file_name",$file_real_name);
+      $file_delete_row = $oDB->delete("TF_member_file");
+
+      if(!$file_delete_row){
+      return new Object(-1,"파일 삭제 중 오류가 발생하였습니다.(-6)");
+      }
+    }else{
+      return new Object(-1,"파일 삭제 중 오류가 발생하였습니다.(-7)");
+    }
+
+    return new Object(0,"파일 삭제가 완료되었습니다.");
+  }
 }

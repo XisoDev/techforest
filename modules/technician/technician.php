@@ -122,6 +122,12 @@ class technicianView{
             $add_body_class[] = "shrink";
             $add_body_class[] = "no_mobile_header";
             $set_template_file = "technician/resume.list.php";
+
+            $output->add('myinfo_row',$this->resume_info());
+            $output->add('file_list',$this->file_list());
+            $output->add('count_career_row',$this->resume_completeness1());
+            $output->add('count_c_content_row',$this->resume_completeness2());
+            $output->add('count_myinfo_row',$this->resume_completeness3());
         }
 
         return $output;
@@ -227,11 +233,6 @@ class technicianView{
         $oDB->join("TF_language_cate lc","lcd.lc_idx = lc.lc_idx","LEFT");
         $d_language_arr = $oDB->get("TF_language_cate_detail lcd",null,"lcd.lc_d_idx, lcd.lc_idx, lcd.lc_d_name, lc.lc_name");
 
-        //파일 리스트
-        $oDB->orderBy("reg_date","DESC");
-        $oDB->orderBy("file_type","ASC");
-        $oDB->where("m_idx",$m_idx);
-        $file_list = $oDB->get("TF_member_file");
 
         $output->add('a_line_row',$a_line_row);
         $output->add('self_row',$self_row);
@@ -251,7 +252,7 @@ class technicianView{
         $output->add('certificate_row',$certificate_row);
         $output->add('language_arr',$language_arr);
         $output->add('d_language_arr',$d_language_arr);
-        $output->add('file_list',$file_list);
+        $output->add('file_list',$this->file_list());
         $output->add('member_notice',$this->member_notice());
         $output->add('duty_list',$this->duty_list());
         $output->add('occupation_list',$this->occupation_list());
@@ -978,6 +979,20 @@ class technicianView{
       $output->add('member_notice',$this->member_notice());
 
       return $output;
+    }
+
+    function file_list(){
+      global $oDB;
+
+      $m_idx = $_SESSION['LOGGED_INFO'];
+
+      //파일 리스트
+      $oDB->orderBy("reg_date","DESC");
+      $oDB->orderBy("file_type","ASC");
+      $oDB->where("m_idx",$m_idx);
+      $file_list = $oDB->get("TF_member_file");
+
+      return $file_list;
     }
 
 
