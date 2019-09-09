@@ -162,6 +162,7 @@ class technicianView{
         $resume_row = $oDB->get("TF_member_tb m",null,"m_id, m_name, m_human, m_birthday, m_phone, m_email,
          m_address, m_address2, m_picture, local_name, city_name, district_name, m_local_idx, m_city_idx, m_district_idx, mo.o_idx");
 
+
          //나의 이력서 정보 조회 - 자기소개
          $oDB->where("m_idx",$m_idx);
          $self_row = $oDB->get("TF_member_self_tb",null,"self_introduction");
@@ -190,6 +191,10 @@ class technicianView{
         //나의 이력서 정보 조회 - 희망직무
         $oDB->where("m_idx",$m_idx);
         $my_duty = $oDB->get("TF_member_duty",null,"o_idx, duty_name");
+
+        //나의 이력서 정보 조회 - 희망급여
+        $oDB->where("m_idx",$m_idx);
+        $member_order_row = $oDB->get("TF_member_order",null,"m_idx,salary_idx,desired_salary");
 
         //급여 리스트
         $oDB->orderBy("salary_idx","ASC");
@@ -252,6 +257,7 @@ class technicianView{
         $output->add('certificate_row',$certificate_row);
         $output->add('language_arr',$language_arr);
         $output->add('d_language_arr',$d_language_arr);
+        $output->add('member_order_row',$member_order_row);
         $output->add('file_list',$this->file_list());
         $output->add('member_notice',$this->member_notice());
         $output->add('duty_list',$this->duty_list());
@@ -559,7 +565,7 @@ class technicianView{
       $oDB->join("TF_member_duty d","m.m_idx = d.m_idx", "LEFT");
       $oDB->join("TF_member_occupation o","m.m_idx = o.m_idx", "LEFT");
       $oDB->join("TF_member_order mo","m.m_idx = mo.m_idx", "LEFT");
-      $count_myinfo_row = $oDB->getOne("TF_member_tb m","count(m.m_idx) as count_myinfo");
+      $count_myinfo_row = $oDB->get("TF_member_tb m",null,"count(m.m_idx) as count_myinfo");
 
       return $count_myinfo_row;
     }
@@ -570,19 +576,18 @@ class technicianView{
       $m_idx = $_SESSION['LOGGED_INFO'];
 
       //이력서 정보
-      $columns = "distinct m.m_idx, group_concat(distinct(mc.duty_name)) as duty_name, group_concat(md.duty_name) as hope_duty,";
-      $columns .= "YEAR(CURRENT_TIMESTAMP) - YEAR(m_birthday) - (RIGHT(CURRENT_TIMESTAMP, 5) < RIGHT(m_birthday, 5))+1 as m_birthday,";
-      $columns .= "local_name, city_name, district_name, m_city_idx, m_district_idx";
+      $columns_info = "distinct m.m_idx, group_concat(distinct(mc.duty_name)) as duty_name, group_concat(md.duty_name) as hope_duty,";
+      $columns_info .= "YEAR(CURRENT_TIMESTAMP) - YEAR(m_birthday) - (RIGHT(CURRENT_TIMESTAMP, 5) < RIGHT(m_birthday, 5))+1 as m_birthday,";
+      $columns_info .= "local_name, city_name, district_name,m_local_idx, m_city_idx, m_district_idx";
 
       $oDB->where("m.m_idx",$m_idx);
       $oDB->where("mc.duty_name","",'!=');
-      $oDB->groupBy("m.m_idx");
       $oDB->join("TF_member_career_tb mc", "m.m_idx = mc.m_idx", "LEFT");
       $oDB->join("TF_member_duty md", "m.m_idx = md.m_idx", "LEFT");
       $oDB->join("TF_local_tb l", "m.m_local_idx = l.local_idx", "LEFT");
       $oDB->join("TF_city_tb c", "m.m_city_idx = c.city_idx", "LEFT");
       $oDB->join("TF_district_tb d", "m.m_district_idx = d.district_idx", "LEFT");
-      $myinfo_row = $oDB->getOne("TF_member_tb m",$columns);
+      $myinfo_row = $oDB->get("TF_member_tb m",null,$columns_info);
 
       return $myinfo_row;
     }

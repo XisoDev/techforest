@@ -13,6 +13,17 @@ $resume_row = $output->get('resume_row');
 
 //급여리스트
 $salary_list = $output->get('salary_list');
+$salary_arr = array(array("salary_idx"=>0, "salary_name"=>"회사내규에 따름"));
+foreach ($salary_list as $value) {
+	$result = array(
+	"salary_idx" => $value["salary_idx"],
+	"salary_name" => $value["salary_name"]
+	);
+	array_push($salary_arr, $result);
+}
+
+//희망급여
+$member_order_row = $output->get('member_order_row');
 
 //지역리스트
 $local_arr = $output->get('local_arr');
@@ -109,10 +120,11 @@ shuffle($rand_array);
 ?>
 
 <style media="screen">
-	.ui-autocomplete-input{
-		 list-style:none;
-		 background-color: #fff;
+	.ui-autocomplete {
+	  list-style: none !important;
+		background-color: #fff !important;
 	}
+
 </style>
 <section class="sub_visual d-none d-lg-block pb-2" style="background-image:url('<?=$no_auto_bg_url?>');">
     <h4 class="red"><?=$site_info->title?></h4>
@@ -146,27 +158,28 @@ shuffle($rand_array);
                     <h4 class="d-none d-lg-block">기본정보</h4>
                 </div>
                 <div class="col-6 col-sm-5 col-md-4 col-lg-3 mx-auto px-auto mb-3">
+									<form id="m_picture_form">
                     <div class="position-relative">
-                        <a class="position-absolute text-primary" style="right:0;top:0; font-size:26px;z-index:10;"><i class="xi-close-circle"></i></a>
-
+                        <a class="position-absolute text-primary" style="right:0;top:0; font-size:26px;z-index:10;" onclick="m_picture_remove(<?=$m_idx?>)"><i class="xi-close-circle"></i></a>
 												<div class="position-relative">
 														<?
 														if(!$logged_info['m_picture']) {
 																$img_url = "/layout/none/assets/images/no_avatar.png";
 														}else {
-																$img_url = "../../../img/" . $resume_row[0]['m_picture'];
+																$img_url = "../../../m_picture/" . $resume_row[0]['m_picture'];
 														}
 														?>
 														<div class="avatar square" id="my_picture" style="background-image:url('<?=$img_url?>');"></div>
 														<label for="picture_upload" class="position-absolute mb-0 pb-0" style="left:50%;bottom:-10px;-webkit-transform: translateX(-50%);-moz-transform: translateX(-50%);-ms-transform: translateX(-50%);-o-transform: translateX(-50%);transform: translateX(-50%);">
 															<img src="/oPage/images/imgicons/camera_gray.png" height="20" />
 														</label>
-														<input type="file" id="picture_upload" style="display:none;">
+														<input type="file" id="picture_upload" name="picture_upload" style="display:none;">
 												</div>
 
                         <!-- <i class="xi-camera position-absolute text-white" style="right:0;bottom:0; font-size:28px;"></i>
                         <i class="xi-camera position-absolute text-secondary" style="right:1px;bottom:1px; font-size:26px;"></i> -->
                     </div>
+									</form>
                 </div>
             </div>
 
@@ -279,10 +292,10 @@ shuffle($rand_array);
                     <div class="input-group">
                         <div class="input-group-prepend">
                         <select class="form-control" id="job_salary" onchange="salary_select_change(this)">
-                            <option value="0">회사내규에 따름</option>
                           <?php
-                            foreach($salary_list as $val) {
-                              if($val["salary_idx"] == $resume_row[0]["salary_idx"]) {
+													echo $resume_row[0]["salary_idx"];
+                            foreach($salary_arr as $val) {
+                              if($val["salary_idx"] == $member_order_row[0]["salary_idx"]) {
                                 echo "<option value=\"" . $val["salary_idx"] . "\" selected=\"selected\">" . $val["salary_name"] . "</option>";
                               } else {
                                 echo "<option value=\"" . $val["salary_idx"] . "\">" . $val["salary_name"] . "</option>";
@@ -291,7 +304,7 @@ shuffle($rand_array);
                           ?>
                         </select>
                         </div>
-                        <input type="text" class="form-control" id="salary" style="width:50px;" maxlength="10" value="<?=$edit_row[0]["job_salary"]?>" onkeyup="onlyNumber(this)" />
+                        <input type="text" class="form-control" id="salary" style="width:50px;text-align:right;" maxlength="10" value="<?=$member_order_row[0]["desired_salary"]?>" onkeyup="onlyNumber(this)" />
                         <div class="input-group-append" id="salary_text">
                             <span class="input-group-text px-1" style="font-size:12px;">만원 이상</span>
                         </div>
@@ -364,7 +377,7 @@ shuffle($rand_array);
                   <div id="duty_field" class="height_35" style="display:table-cell; vertical-align:middle"></div>
                     <!-- <span class="selected_item text-secondary xs_content" onclick="jQuery(this).remove();"><i class="xi-close-circle"></i> 기계/제조 관리직</span>
                     <span class="selected_item text-secondary xs_content" onclick="jQuery(this).remove();"><i class="xi-close-circle"></i> 주물사</span> -->
-                    <div class="input-group overflow-hidden rounded">
+                    <div class="input-group overflow-hidden rounded mt-2">
                         <select class="form-control" id="select_duty" placeholder="직무를 선택해주세요. (최대 3개 추가가능)">
                         </select>
                         <button type="button" class="btn-sm btn btn-primary rounded-0 rounded-right" onclick="dutyAddItem($('#occupation_select').val(), $('#select_duty').val())">추가</button>
@@ -385,7 +398,7 @@ shuffle($rand_array);
                 <div class="col-12 px-sm-0">
                     <h6 class="d-block d-sm-none mt-3">학력</h6>
                     <h5 class="d-none d-sm-block bg-light py-2 px-3 mt-2 mt-sm-4">
-                        <!-- <a href="#" class="text-secondary pull-right"><i class="xi-angle-down"></i></a> -->
+                        <a class="text-secondary pull-right"><i class="xi-angle-down"></i></a>
                         학력
                     </h5>
                 </div>
@@ -443,7 +456,7 @@ shuffle($rand_array);
 											<? }else{
 												foreach($my_info3 as $idx => $val){?>
 
-<!--                                                    수정된 엘리먼트로 변경-->
+													<!--수정된 엘리먼트로 변경-->
 												<div class="added_card border rounded position-relative rounded-0 rounded-top container py-0 pb-1 py-md-3 pt-sm-3 pb-sm-0" id="school_div<?=$idx?>">
 													<a class="position-absolute" style="right:10px; top:10px;" id="school_del<?=$idx?>" onclick="my_info3_del1(<?=$idx?>)"><i class="xi-close"></i></a>
 													<div class="row pb-2 px-2">
@@ -522,7 +535,7 @@ shuffle($rand_array);
 													?>
 									</div>
                     <div class="text-center">
-                        <button class="my-3 d-sm-inline-block d-none btn btn-warning" onclick="javascript:my_info3_add();">학력 추가하기</button>
+                        <button class="my-3 d-sm-inline-block d-none btn btn-warning" onclick="my_info3_add();">학력 추가하기</button>
                     </div>
                     <button class="d-sm-none d-inline-block btn btn-warning btn-block rounded-0 rounded-bottom" onclick="javascript:my_info3_add();">학력 추가하기</button>
 								</div>
@@ -530,7 +543,7 @@ shuffle($rand_array);
                 <div class="col-12 px-sm-0">
                     <h6 class="d-block d-sm-none mt-3">경력</h6>
                     <h5 class="d-none d-sm-block bg-light py-2 px-3 mt-2 mt-sm-4">
-                        <a href="#" class="text-secondary pull-right"><i class="xi-angle-down"></i></a>
+                        <a class="text-secondary pull-right"><i class="xi-angle-down"></i></a>
                         경력
                     </h5>
                 </div>
@@ -545,32 +558,32 @@ shuffle($rand_array);
                 <div class="col-12 px-sm-0">
                     <h6 class="d-block d-sm-none mt-3">자격증</h6>
                     <h5 class="d-none d-sm-block bg-light py-2 px-3 mt-2 mt-sm-4">
-                        <a href="#" class="text-secondary pull-right"><i class="xi-angle-down"></i></a>
+                        <a class="text-secondary pull-right"><i class="xi-angle-down"></i></a>
                         자격증
                     </h5>
                 </div>
                 <div class="col-12 mx-0 px-0 mb-2 mt-sm-3" >
 									<div id="my_info5_2">
-										<? if(count($my_info5) == 0){ ?>
+									<? if(count($my_info5) == 0){ ?>
 										<div class="added_card border rounded position-relative rounded-0 rounded-top container py-0 pb-1 py-md-3 pt-sm-3 pb-sm-0">
 												<!-- <a class="position-absolute" style="right:10px; top:10px;" onclik><i class="xi-close"></i></a> -->
 												<div class="row pb-2 px-2" id="certificate_div0">
 														<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">자격증명</h6>
 														<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
 															<input type="text" class="form-control" id="certificate_name0" name="h_certificate" placeholder="자격증명"/>
-															<input type="text" class="form-control" id="certificate_date0" placeholder="취득일자"/>
+															<input type="text" class="form-control monthpicker" id="certificate_date0" placeholder="취득일자"/>
 														</div>
 												</div>
 										</div>
 									<?}else{?>
-										<?foreach ($my_info5 as $idx => $val) { ?>
+										<?foreach ($my_info5 as $idx => $val) {?>
 											<div class="added_card border rounded position-relative rounded-0 rounded-top container py-0 pb-1 py-md-3 pt-sm-3 pb-sm-0" id="certificate_div<?=$idx?>">
 													<a class="position-absolute" style="right:10px; top:10px;" id="certificate_del<?=$idx?>" onclick="javascript:my_info5_del1(<?=$idx?>)"><i class="xi-close"></i></a>
 													<div class="row pb-2 px-2">
 															<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">자격증명</h6>
 															<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
 																<input type="text" class="form-control" id="certificate_name<?=$idx?>" name="h_certificate" value="<?=$val['certificate_name']?>" placeholder="자격증명"/>
-																<input type="text" class="form-control" id="certificate_date<?=$idx?>" value="<?=substr($val['certificate_date'],0,7)?>" placeholder="취득일자"/>
+																<input type="text" class="form-control monthpicker" id="certificate_date<?=$idx?>" value="<?=substr($val['certificate_date'],0,7)?>" placeholder="취득일자"/>
 															</div>
 													</div>
 											</div>
@@ -587,7 +600,7 @@ shuffle($rand_array);
                 <div class="col-12 px-sm-0">
                     <h6 class="d-block d-sm-none mt-3">어학</h6>
                     <h5 class="d-none d-sm-block bg-light py-2 px-3 mt-2 mt-sm-4">
-                        <a href="#" class="text-secondary pull-right"><i class="xi-angle-down"></i></a>
+                        <a class="text-secondary pull-right"><i class="xi-angle-down"></i></a>
                         어학
                     </h5>
                 </div>
@@ -715,11 +728,11 @@ shuffle($rand_array);
                 <div class="col-12 px-sm-0">
                     <h6 class="d-block d-sm-none mt-3">관련서류 등록하기</h6>
                     <h5 class="d-none d-sm-block bg-light py-2 px-3 mt-2 mt-sm-4">
-                        <a href="#" class="text-secondary pull-right"><i class="xi-angle-down"></i></a>
+                        <a class="text-secondary pull-right"><i class="xi-angle-down"></i></a>
                         관련서류 등록하기
                     </h5>
                 </div>
-                <div class="col-12 mx-0 px-0 mb-2 mt-sm-3">
+                <div class="col-12 mx-0 px-0 mt-sm-3" style="margin-bottom:100px">
                     <?foreach ($file_list as $val) {?>
                         <div class="file_item border rounded py-2 px-2 mb-2 mt-sm-3">
                                 <a onclick="file_trash(<?=$val['file_name']?>)"><i class="xi-trash pull-right" style="font-size:1.2em;"></i></a>
@@ -735,7 +748,7 @@ shuffle($rand_array);
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row fixed-bottom">
                 <div class="col-sm-2"></div>
                 <div class="col-6 col-sm-4">
                     <input type="button" class="btn btn-block btn-light border-primary text-primary btn-round btn-lg my-3" onclick="history.back();" value="취소" />
@@ -790,7 +803,7 @@ shuffle($rand_array);
 <script type="text/javascript">
 
 	$(document).ready(function(){
-		$("#job_salary").trigger('onchange');
+		$("#job_salary").change();
 		$("#occupation_select").change();
 		loadDuty();
 		certificateAutocomplete();
@@ -915,17 +928,17 @@ function occupation(obj){
   }
 
 
-  var my_info3_count = "<?if($my_info3){if(count($my_info3) == 0) { echo "0"; } else { echo count($my_info3); }} else { echo "0"; } ?>";
-  var my_info5_count = "<?if($my_info5){if(count($my_info5) == 0) { echo "0"; } else { echo count($my_info5); }} else { echo "0"; } ?>";
-  var my_info6_count = "<?if($my_info6){if(count($my_info6) == 0) { echo "0"; } else { echo count($my_info6); }} else { echo "0"; } ?>";
+  var my_info3_count = "<?if($my_info3){if(count($my_info3) == 0) { echo "1"; } else { echo count($my_info3); }} else { echo "1"; } ?>";
+  var my_info5_count = "<?if($my_info5){if(count($my_info5) == 0) { echo "1"; } else { echo count($my_info5); }} else { echo "1"; } ?>";
+  var my_info6_count = "<?if($my_info6){if(count($my_info6) == 0) { echo "1"; } else { echo count($my_info6); }} else { echo "1"; } ?>";
 
 
 	//학력추가하기
   function my_info3_add() {
     var html = "";
-    if(my_info3_count != 0) {
+    // if(my_info3_count != 0) {
       //var is_ged = $("#is_ged" + (my_info3_count - 1)).is(":checked");
-      var school_name = $("#school_name" + (my_info3_count - 1)).val();
+      //var school_name = $("#school_name" + (my_info3_count - 1)).val();
 
       // if(!is_ged && !school_name) {
       //   alert("학교명 입력 해주세요.");
@@ -941,30 +954,26 @@ function occupation(obj){
 			html += '<select class="form-control" id="s_idx'+ my_info3_count + '"name="s_idx'+ my_info3_count + '"onchange="school_changed(' +my_info3_count+ ')">';
 			html += '<?= $school_select_tag ?>';
 			html += '</select>';
-			html += '<div class="input-group-append" id="ged'+ my_info3_count + '">';
-			html += '<span class="input-group-text sm_content pr-2 pl-3">검정고시 <i class="xi-check-circle-o"></i></span>';
-            //추가
+			html += '<div class="input-group-append">';
+			html += '<span class="input-group-text sm_content pr-2 pl-3">검정고시 <i class="xi-check-circle-o" id="ged'+ my_info3_count +'" onclick="ged_button('+my_info3_count+')"></i></span>';
 			html += '<div class="input-group-append"><span class="input-group-text">&nbsp;</span></div>';
-
 			html += '</div></div>';
-			//변경
-            html += '<div class="col-6 pr-sm-2 mx-0 px-0">';
-            html += '<div class="row px-3 px-sm-2">';
-            html += '<h6 class="col-12 col-sm-6 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학교명</h6>';
-            html += '<div class="col-12 col-sm-6 px-0 mb-2 mr-1 mx-sm-0 mt-sm-3">';
-            html += '<input type="text" class="form-control" id="school_name0"  placeholder="학교명"/>';
-            html += '</div>';
-            html += '</div>';
-            html += '</div>';
-            html += '<div class="col-6 pr-sm-2 mx-0 px-0">';
-            html += '<div class="row px-3 px-sm-2">';
-            html += '<h6 class="col-12 col-sm-6 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">졸업연도</h6>';
-            html += '<div class="col-12 col-sm-6 px-0 mb-2 ml-1 mx-sm-0 mt-sm-3">';
-            html += '<input type="text" class="form-control monthpicker" id="school_graduated0" placeholder="졸업연도"/>';
-            html += '</div>';
-            html += '</div>';
-            html += '</div>';
-            //변경끝.
+      html += '<div class="col-6 pr-sm-2 mx-0 px-0">';
+      html += '<div class="row px-3 px-sm-2">';
+      html += '<h6 class="col-12 col-sm-6 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학교명</h6>';
+      html += '<div class="col-12 col-sm-6 px-0 mb-2 mr-1 mx-sm-0 mt-sm-3">';
+      html += '<input type="text" class="form-control" id="school_name'+ my_info3_count +'"  placeholder="학교명"/>';
+      html += '</div>';
+      html += '</div>';
+      html += '</div>';
+      html += '<div class="col-6 pr-sm-2 mx-0 px-0">';
+      html += '<div class="row px-3 px-sm-2">';
+      html += '<h6 class="col-12 col-sm-6 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">졸업연도</h6>';
+      html += '<div class="col-12 col-sm-6 px-0 mb-2 ml-1 mx-sm-0 mt-sm-3">';
+      html += '<input type="text" class="form-control monthpicker" id="school_graduated'+ my_info3_count +'" placeholder="졸업연도"/>';
+      html += '</div>';
+      html += '</div>';
+      html += '</div>';
 			html += '<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">전공</h6>';
 			html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">';
 			html += '<input type="text" id="school_major'+ my_info3_count + '"class="form-control" placeholder="전공"/>';
@@ -981,8 +990,9 @@ function occupation(obj){
       $("#my_info3_2").append(html);
       my_info3_count++;
       $('#my_info3_count').val(my_info3_count);
+
       /*$('html,body').animate({scrollTop: $("#node1_" + (type1_count - 1)).offset().top}, 'slow');*/
-    }
+    // }
   }
 
 	function my_info3_del1(idx) {
@@ -1016,7 +1026,7 @@ function occupation(obj){
 			document.getElementById("school_name" + (i + 1)).id = "school_name" + i;
 			document.getElementById("school_graduated" + (i + 1)).id = "school_graduated" + i;
 			$("#school_graduated" + i).removeAttr("onclick");
-			$("#school_graduated" + i).attr("onclick", "javascript:click_datepicker('#school_graduated" + i + "');");
+			$("#school_graduated" + i).addClass("monthpicker");
 
 			document.getElementById("school_major" + (i + 1)).id = "school_major" + i;
 			document.getElementById("school_grade" + (i + 1)).id = "school_grade" + i;
@@ -1207,7 +1217,7 @@ function occupation(obj){
 		document.getElementById("certificate_date" + (i + 1)).id = "certificate_date" + i;
 		$("#certificate_date" + i).removeAttr("onclick");
 		$("#certificate_date" + i).attr("onclick", "javascript:click_datepicker('#certificate_date" + i + "');");
-		document.getElementById("is_certificate" + (i + 1)).id = "is_certificate" + i;
+		// document.getElementById("is_certificate" + (i + 1)).id = "is_certificate" + i;
 
 		// if(i + 2 < my_info5_count) {
 		// 	document.getElementById("certificate_hr" + (i + 2)).id = "certificate_hr" + (i+1);
@@ -1378,21 +1388,21 @@ function my_info6_del1(idx) {
 		$("#salary").show();
 		$("#salary_text").show();
 		switch (obj.value) {
-            case '0' :
-                $("#salary_text").find('span').html("회사 내규에 따름");
-            break;
+      case '0' :
+	      $("#salary_text").find('span').html("회사 내규에 따름");
+      break;
 			case '1':
 			case '2':
-                $("#salary_text").find('span').html("만원 이상");
+        $("#salary_text").find('span').html("만원 이상");
 			break;
 			case '3':
 			case '4':
-                $("#salary_text").find('span').html("원 이상");
+	      $("#salary_text").find('span').html("원 이상");
 			break;
 			default:
 			$("#job_salary").attr("style", "width:100%");
 			$("#salary_text").hide();
-			$("#salary").attr("display", "none");
+			$("#salary").css("display","none");
 			$("#salary").val("");
 		}
 }
@@ -1501,9 +1511,10 @@ function my_info6_del1(idx) {
 			"a_line_self" : a_line_self
 		};
 
+	var my_info3_json = {};
 		for(var i = 0; i < my_info3_count; i++) {
 			var s_idx				=	$("#s_idx" + i + " option:selected").val();
-			var is_ged				=	0;
+			var is_ged = 0;
 			var school_name			=	$("#school_name" + i).val();
 			var school_graduated	=	$("#school_graduated" + i).val() + "-01";
 			var school_major		=	$("#school_major" + i).val();
@@ -1514,6 +1525,8 @@ function my_info6_del1(idx) {
 			if($("#s_idx"+i).val() == 1){
 				if($("#is_ged" + i).hasClass("xi-check-circle") == true) {
 					is_ged = 1;
+				}else{
+					is_ged = 0;
 				}
 			}
 			else if($("#school_grade"+i).val() == "" || $("#max_grade"+i).val() == ""){
@@ -1524,9 +1537,13 @@ function my_info6_del1(idx) {
 
 			var tmp = "var tmpA = {'s_idx" + i + "':'" + s_idx + "', 'is_ged" + i + "':'" + is_ged + "', 'school_name" + i + "':'" + school_name + "', 'school_graduated" + i + "':'" + school_graduated +
 			          "', 'school_major" + i + "':'" + school_major + "', 'school_grade" + i + "':'" + school_grade + "', 'max_grade" + i + "':'" + max_grade + "'}";
-			eval(tmp);
-			$.extend(params, tmpA);
+
+			var json3 = {"s_idx":s_idx,"is_ged":is_ged,"school_name":school_name,"school_graduated":school_graduated,"school_major":school_major,"school_grade":school_grade,"max_grade":max_grade};
+			my_info3_json[i] = json3;
+			// eval(tmp);
+			// $.extend(params, tmpA);
     }
+		$.extend(params, {"my_info3_json":my_info3_json});
 
 			var career_json = {};
 				for(var i = 0; i < member_career_arr.length; i++) {
@@ -1552,20 +1569,20 @@ function my_info6_del1(idx) {
 				}
 				$.extend(params, {"career_json":career_json});
 
-
+			var my_info5_json = {};
 				for(var i = 0; i < my_info5_count; i++) {
 					var certificate_name	=	$("#certificate_name" + i).val();
 					var certificate_date	=	$("#certificate_date" + i).val() + "-01";
-					var is_certificate 		= $("#is_certificate" + i).val();
 
-
-					var tmp = "var tmpA = {'certificate_name" + i + "':'" + certificate_name + "', 'certificate_date" + i + "':'" + certificate_date +"', 'is_certificate" +i+ "':'" +is_certificate+ "'}";
-
-					eval(tmp);
-
-					$.extend(params, tmpA);
+					var tmp = "var tmpA = {'certificate_name" + i + "':'" + certificate_name + "', 'certificate_date" + i + "':'" + certificate_date +"'}";
+					var json5 = {"certificate_name":certificate_name,"certificate_date":certificate_date};
+					my_info5_json[i] = json5;
+					//eval(tmp);
+					//$.extend(params, tmpA);
 				}
+				$.extend(params, {"my_info5_json":my_info5_json});
 
+				var my_info6_json = {};
 				for(var i = 0; i < my_info6_count; i++) {
 					var lc_name_txt			=	$("#lc_name_txt" + i).val();
 					var lc_d_name_txt		=	$("#lc_d_name_txt" + i).val();
@@ -1574,20 +1591,47 @@ function my_info6_del1(idx) {
 
 
 					var tmp = "var tmpA = {'lc_name_txt" + i + "':'" + lc_name_txt + "', 'lc_d_name_txt" + i + "':'" + lc_d_name_txt + "', 'score" + i + "':'" + score + "', 'language_date" + i + "':'" + language_date + "'}";
-
-					eval(tmp);
-
-					$.extend(params, tmpA);
+					var json6 = {"lc_name_txt":lc_name_txt,"lc_d_name_txt":lc_d_name_txt,"score":score,"language_date":language_date};
+					my_info6_json[i] = json6;
+					// eval(tmp);
+					// $.extend(params, tmpA);
 				}
+				$.extend(params, {"my_info6_json":my_info6_json});
 
 			exec_json("technician.my_info_detail_edit",params,function(ret_obj){
 				toastr.success(ret_obj.message);
+				location.reload();
 			});
 		}
 
 		$("#picture_upload").change(function(){
 			readURL(this);
+
+			var iframe = $('<iframe name="m_postiframe" id="m_postiframe" width=0 height=0 style="display:none"></iframe>');
+
+			$('body').append(iframe);
+
+			var form = $('#m_picture_form');
+			form.attr("action", "/proc.php?act=technician.procFileUploadPicture");
+			form.attr("method", "post");
+
+			form.attr("encoding", "multipart/form-data");
+			form.attr("enctype", "multipart/form-data");
+
+			form.attr("target", "m_postiframe");
+			form.attr("file", $('#picture_upload').val());
+			form.submit();
+
+			$("#m_postiframe").on('load',function () {
+					// alert("파일이 업로드 되었습니다.");
+					// location.reload();
+			});
+
+			return false;
+
 		});
+
+
 
 		function readURL(input) {
 			if(input.files && input.files[0]) {
@@ -1638,10 +1682,28 @@ function my_info6_del1(idx) {
 
 	  });
 
+		function ged_button(idx){
+			jQuery('#ged'+idx).toggleClass('xi-check-circle-o');
+			jQuery('#ged'+idx).toggleClass('xi-check-circle');
+		}
 
+		function m_picture_remove(m_idx){
+			if(confirm("이미지가 삭제되며, 복구되지 않습니다.\n그래도 삭제하시겠습니까?") == true) {
+				if(!m_idx) {
+					return;
+				}
 
+				var params = {
+					"m_idx" : m_idx
+				}
 
+				exec_json("technician.m_picture_remove",params,function(ret_obj){
+					toastr.success(ret_obj.message);
+					location.reload();
+				});
 
+			}
+		}
 
 </script>
 <?php $footer_false = true; ?>

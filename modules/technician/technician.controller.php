@@ -79,9 +79,9 @@ class technicianController{
       "m_phone" => $args->m_phone,
       "m_address" => $args->m_address,
       "m_address2" => $args->m_address2,
-      "m_local_idx" => $args->local_idx,
-      "m_city_idx" => $args->city_idx,
-      "m_district_idx" => $args->district_idx,
+      "m_local_idx" => $args->local_select,
+      "m_city_idx" => $args->city_select,
+      "m_district_idx" => $args->district_select,
       "edit_date" => $now_date,
     );
 
@@ -94,7 +94,7 @@ class technicianController{
 
     //희망급여 저장
     $data2 = array(
-      "m_idx" => $args->m_idx,
+      "m_idx" => $m_idx,
       "salary_idx" => $args->desired_salary_select,
       "desired_salary" => $args->desired_salary_input,
       "reg_date" => $now_date,
@@ -147,7 +147,11 @@ class technicianController{
     //1.학력 삭제
     // global $_db_config;
     // $oDBDelete = new MysqliDb($_db_config['host'], $_db_config['user_name'],$_db_config['password'],$_db_config['db'],$_db_config['port']);
-    if($my_info3_count != 0){
+    $oDB->where("m_idx",$m_idx);
+    $result5_0 = $oDB->get("TF_member_education_tb");
+
+    $my_info3_json = $args->my_info3_json;
+    if(count($result5_0) > 0){
       $oDB->where("m_idx",$m_idx);
       $result5_1 = $oDB->delete("TF_member_education_tb");
 
@@ -156,48 +160,44 @@ class technicianController{
       }
     }
 
-    if(!$my_info3_count || $my_info3_count == 0){
-    }else{
-      for($i = 0; $i < $my_info3_count; $i++){
-        $s_idx = $args->s_idx.$i;
-        $school_name = $args->school_name.$i;
-        $school_major = $args->school_major.$i;
-        $school_grade = $args->school_grade.$i;
-        $max_grade = $args->max_grade.$i;
-        $school_graduated = $args->school_graduated.$i;
-        $is_ged = $args->is_ged.$i;
 
-        if($is_ged == 1){
+    for($i = 0, $len = count($my_info3_json); $i < $len; $i++){
+        $s_idx = $my_info3_json[$i]['s_idx'];
+        $school_name = $my_info3_json[$i]['school_name'];
+        $school_major = $my_info3_json[$i]['school_major'];
+        $school_grade = $my_info3_json[$i]['school_grade'];
+        $max_grade = $my_info3_json[$i]['max_grade'];
+        $school_graduated = $my_info3_json[$i]['school_graduated'];
+        $is_ged = $my_info3_json[$i]['is_ged'];
+        $school_idx = $i;
 
-        }else{
-          if(!$school_name || !$school_major || !$school_graduated) {
-          return new Object(1,"학교명, 전공, 졸업연도를 입력하세요.(" . $i . ")");
-				  }
-        }
-        //2. 학력 저장
+          //2. 학력 저장
         $data5_2 = array(
           "m_idx" => $args->m_idx,
-          "s_idx" => $args->s_idx,
-          "school_name" => $args->school_name,
-          "school_major" => $args->school_major,
-          "school_grade" => $args->school_grade,
-          "max_grade" => $args->max_grade,
-          "school_graduated" => $args->school_graduated,
-          "is_ged" => $args->is_ged,
-          "school_idx" => $args->school_idx,
+          "s_idx" => $s_idx,
+          "school_name" => $school_name,
+          "school_major" => $school_major,
+          "school_grade" => $school_grade,
+          "max_grade" => $max_grade,
+          "school_graduated" => $school_graduated,
+          "is_ged" => $is_ged,
+          "school_idx" => $school_idx,
           "reg_date" => $now_date,
           "edit_date" => $now_date
         );
-        $result5_2 = $oDB->insert("TF_member_self_tb",$data5_2);
+        $result5_2 = $oDB->insert("TF_member_education_tb",$data5_2);
         if(!$result5_2){
-          return new Object(1,"네트워크 오류가 발생했습니다.(-5_2". $i .")");
+          return new Object(-1,"네트워크 오류가 발생했습니다.(-5_2". $i .")");
         }
       }//학력 for문 끝
-    }
+
 
     //1.경력 삭제
+    $oDB->where("m_idx",$m_idx);
+    $result6_0 = $oDB->get("TF_member_career_tb");
+
     $career_json = $args->career_json;
-    if(count($career_json) != 0){
+    if(count($result6_0) > 0){
       $oDB->where("m_idx",$m_idx);
       $result6_1 = $oDB->delete("TF_member_career_tb");
 
@@ -259,7 +259,12 @@ class technicianController{
 
 
       //1.자격증 삭제
-      if($my_info5_count != 0){
+      $oDB->where("m_idx",$m_idx);
+      $result7_0 = $oDB->get("TF_member_certificate_tb");
+
+      $my_info5_json = $args->my_info5_json;
+
+      if(count($result7_0) > 0){
         $oDB->where("m_idx",$m_idx);
         $result7_1 = $oDB->delete("TF_member_certificate_tb");
 
@@ -268,24 +273,16 @@ class technicianController{
         }
       }
 
-      if(!$my_info5_count || $my_info5_count == 0){
-
-      }else{
-        for($i = 0; $i < $my_info5_count; $i++){
-          $certificate_name	=	$args->certificate_name.$i;
-          $certificate_date	=	$args->certificate_date.$i;
-          $is_certificate		=	$args->is_certificate.$i;
-
-          if(!$certificate_name || !$certificate_date){
-            return new Object(1,"자격증명, 취득날짜를 입력하세요.(" . $i . ")");
-          }
+        for($i = 0, $len = count($my_info5_json); $i < $len; $i++){
+          $certificate_name = $my_info5_json[$i]['certificate_name'];
+          $certificate_date = $my_info5_json[$i]['certificate_date'];
 
           //2. 자격증 저장
           $data7_2 = array(
             "m_idx" => $args->m_idx,
             "certificate_name" => $certificate_name,
             "certificate_date" => $certificate_date,
-            "is_certificate" => $is_certificate,
+            "is_certificate" => "N",
             "certificate_idx" => $i,
             "reg_date" => $now_date,
             "edit_date" => $now_date
@@ -297,10 +294,15 @@ class technicianController{
             return new Object(1,"네트워크 오류가 발생했습니다.(-7_2)");
           }
         }//자격증 for문 끝
-      }
+
 
       //1.어학 삭제
-      if($my_info6_count != 0){
+      $oDB->where("m_idx",$m_idx);
+      $result8_0 = $oDB->get("TF_member_language_tb");
+
+      $my_info6_json = $args->my_info6_json;
+
+      if(count($result8_0) > 0){
         $oDB->where("m_idx",$m_idx);
         $result8_1 = $oDB->delete("TF_member_language_tb");
 
@@ -309,18 +311,11 @@ class technicianController{
         }
       }
 
-      if(!$my_info6_count || $my_info6_count == 0){
-
-      }else{
-        for($i = 0; $i < $my_info6_count; $i++){
-          $lc_name			=	$args->lc_name_txt. $i;
-          $lc_d_name			=	$args->lc_d_name_txt. $i;
-          $score				=	$args->score. $i;
-          $language_date		=	$args->language_date. $i;
-
-          if(!$lc_name || !$lc_d_name || !$score || !$language_date) {
-            return new Object(1,"어학을 빈칸없이 채워주세요.(" . $i . ")");
-          }
+      for($i = 0, $len = count($my_info6_json); $i < $len; $i++){
+        $lc_name = $my_info6_json[$i]['lc_name_txt'];
+        $lc_d_name = $my_info6_json[$i]['lc_d_name_txt'];
+        $score = $my_info6_json[$i]['score'];
+        $language_date = $my_info6_json[$i]['language_date'];
 
           //2. 어학 저장
           $data8_2 = array(
@@ -333,19 +328,21 @@ class technicianController{
             "reg_date" => $now_date,
             "edit_date" => $now_date
           );
-          $result8_2 = $oDB->insert("TF_member_certificate_tb",$data8_2);
+          $result8_2 = $oDB->insert("TF_member_language_tb",$data8_2);
 
           if(!$result8_2){
             return new Object(1,"네트워크 오류가 발생했습니다.(-8_2)");
           }
         }//어학 for문 끝
-      }
 
       //1.직무 삭제
       $duty_name_arr = $args->duty_name_arr;
       $duty_o_arr = $args->duty_o_arr;
 
-      if(count($duty_name_arr) != 0){
+      $oDB->where("m_idx",$m_idx);
+      $result9_0 = $oDB->get("TF_member_duty");
+
+      if(count($result9_0) > 1){
         $oDB->where("m_idx",$m_idx);
         $result9_1 = $oDB->delete("TF_member_duty");
 
@@ -633,4 +630,76 @@ class technicianController{
 
     return new Object(0,"파일 삭제가 완료되었습니다.");
   }
+
+  function m_picture_remove($args){
+    global $oDB;
+    $m_idx = $_SESSION['LOGGED_INFO'];
+    $now_date = date(YmdHis);
+    $target_path = "./img/";
+
+    $oDB->where("m_idx",$m_idx);
+    $row = $oDB->get("TF_member_tb",null,"m_picture");
+
+    if($row['m_picture']){
+      unlink($target_path . $row['m_picture']);
+    }
+
+    $data = array(
+      "m_picture" => '',
+      "edit_date" => $now_date,
+    );
+    $oDB->where("m_idx",$m_idx);
+    $file_delete_row = $oDB->update("TF_member_tb",$data);
+
+    if(!$file_delete_row){
+    return new Object(-1,"이미지 삭제 중 오류가 발생하였습니다.");
+    }
+    return new Object(0,"이미지 삭제가 완료되었습니다.");
+  }
+
+  function procFileUploadPicture(){
+    global $oDB;
+    $m_idx = $_SESSION['LOGGED_INFO'];
+    $date	= date(YmdHis);
+    $image_name = $m_idx . "_" . $date . ".jpg";
+
+    $file_real_name = $_FILES["picture_upload"]["name"];
+
+    $target_path = "./m_picture/";
+
+    if($_FILES["picture_upload"]["tmp_name"]){
+      $oDB->where("m_idx",$m_idx);
+      $row = $oDB->get("TF_member_tb",null,"m_picture");
+
+      $db_img = $row['m_picture'];
+      if($db_img) {
+        unlink("./m_picture/" . $db_img);
+      }
+
+      if(!$row){
+        return new Object(-1,"네트워크 오류입니다.(-1)");
+      }
+      // 파일저장
+    if(move_uploaded_file($_FILES['picture_upload']['tmp_name'], "./m_picture/" . $image_name)){
+
+      $data = array(
+        "m_picture" => $image_name,
+        "edit_date" => $date
+      );
+      $oDB->where("m_idx",$m_idx);
+      $insert_row = $oDB->update("TF_member_tb",$data);
+
+      if(!$insert_row) {
+        return new Object(-1,"네트워크 오류입니다.(-2)");
+      } else {
+        return new Object(0,"증명사진이 등록/수정되었습니다.");
+      }
+
+    } else {
+      return new Object(-1,"네트워크 오류입니다.(-3)");
+    }
+  }
+
+  }
+
 }

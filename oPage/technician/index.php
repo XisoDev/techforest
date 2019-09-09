@@ -171,14 +171,14 @@ $rt_row = $output->get('rt_row');
                         <div class="col-8 ml-0 pl-0 col-md-12 px-md-5">
                             <div class="text-left">
                                 <h5 class="weight_bold mb-2 pt-3"><?=$logged_info['m_name']?>
-                                    <span class="xs_content weight_lighter">(<?=$myinfo_row['m_birthday']?>세)</span>
+                                    <span class="xs_content weight_lighter">(<?=$myinfo_row[0]['m_birthday']?>세)</span>
                                 </h5>
-                                <?php $desired_work_place = $myinfo_row['local_name'] . " ";
-                                      if($myinfo_row['m_city_idx'] != -1){ $desired_work_place .= $myinfo_row['city_name']; }
-                                      if($myinfo_row['m_district_idx'] != -1){ $desired_work_place .= $myinfo_row['district_name']; }?>
+                                <?php $desired_work_place = $myinfo_row[0]['local_name'] . " ";
+                                      if($myinfo_row[0]['m_city_idx'] != -1){ $desired_work_place .= $myinfo_row[0]['city_name']; }
+                                      if($myinfo_row[0]['m_district_idx'] != -1){ $desired_work_place .= $myinfo_row[0]['district_name']; }?>
                                 <div class="row px-3 py-sm-2 py-md-3">
-                                <p class="col-12 col-md-6 xxs_content weight_lighter px-0 cut1"><span class="bg-red icon_wrap"><i class="xi-dashboard"></i></span> <b>희망직무</b> : <?=$myinfo_row['hope_duty']?></p>
-                                <p class="col-12 col-md-6 xxs_content weight_lighter px-0"><span class="bg-red icon_wrap"><i class="xi-wrench"></i></span> <b>주요경력</b> : <?=$myinfo_row['duty_name']?></p>
+                                <p class="col-12 col-md-6 xxs_content weight_lighter px-0 cut1"><span class="bg-red icon_wrap"><i class="xi-dashboard"></i></span> <b>희망직무</b> : <?=$myinfo_row[0]['hope_duty']?></p>
+                                <p class="col-12 col-md-6 xxs_content weight_lighter px-0"><span class="bg-red icon_wrap"><i class="xi-wrench"></i></span> <b>주요경력</b> : <?=$myinfo_row[0]['duty_name']?></p>
                                 <p class="col-12 col-md-6 xxs_content weight_lighter px-0"><span class="bg-red icon_wrap"><i class="xi-map-marker"></i></span> <b>희망지역</b> : <?=$desired_work_place?></p>
                                 </div>
                             </div>
