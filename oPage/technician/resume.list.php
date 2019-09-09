@@ -21,9 +21,9 @@ $file_list = $output->get('file_list');
 </section>
 <div class="container pt-4">
     <div class="row mb-4">
-        <div class="col-12 col-lg-7 mx-lg-auto mx-0">
-            <h6>내 이력서 관리</h6>
-            <div class="tech_card bg-white mb-4 shadow">
+        <div class="col-12 col-sm-10 col-md-9 col-lg-8 mx-lg-auto mx-0 pt-md-4">
+            <h5>내 이력서 관리</h5>
+            <div class="tech_card bg-white mb-4 shadow-sm mx-5">
                 <div class="xxs_content py-2 weight_lighter position-relative">
                     <span class="position-absolute weight_normal" style="right:10px; top:7px;">
                         이력서 완성도
@@ -51,10 +51,10 @@ $file_list = $output->get('file_list');
                         <div class="d-none d-lg-block col-lg-1"></div>
                         <div class="col-12 col-lg-7 text-center text-lg-left pt-lg-3">
                             <div class="d-block d-lg-none text-center">
-                                <img src="/oPage/images/imgicons/write_underline.png" height="50" />
+                                <img src="/oPage/images/imgicons/attachment_gray.png" height="50" />
                             </div>
                             <h5>
-                                <img src="/oPage/images/imgicons/write_underline.png" height="25" class="d-none d-lg-inline-block" />
+                                <img src="/oPage/images/imgicons/attachment_gray.png" height="25" class="d-none d-lg-inline-block" />
                                 일반 이력서 <span class="red">작성중</span>
                             </h5>
                             <p class="d-none d-lg-block">
@@ -79,14 +79,14 @@ $file_list = $output->get('file_list');
 
 
     <div class="row mb-4">
-        <div class="col-12 col-lg-10 mx-lg-auto mx-0">
+        <div class="col-12 col-sm-10 col-md-9 col-lg-8 mx-lg-auto mx-0 pt-md-4">
             <button class="d-none d-lg-block pull-right btn btn-primary btn-round py-1 px-3 mr-1" data-toggle="modal" data-target="#fileUpload"><i class="xi-attachment"></i> 첨부파일 등록</button>
             <!-- <a href="#" class="d-block d-lg-none pull-right btn btn-primary btn-xxs btn-round py-2 px-2 mr-1">더보기+</a> -->
-            <h6>첨부파일 관리 <span class="xxs_content px-0">(* 최대 10개 등록 가능)</span></h6>
+            <h5>첨부파일 관리 <span class="xxs_content px-0">(* 최대 10개 등록 가능)</span></h5>
             <div class="d-none d-lg-block">
                 <table class="table table-light table-bordered mt-4" width="100%">
-                    <thead class="bg-light text-center">
-                        <tr><th>등록일</th><th>파일구분</th><th>파일명</th><th>관리</th></tr>
+                    <thead class="bg-light">
+                        <tr><th class="weight_bold">등록일</th><th class="weight_bold">파일구분</th><th class="weight_bold">파일명</th><th class="weight_bold">관리</th></tr>
                     </thead>
                     <tbody>
                       <?foreach ($file_list as $val) {?>
@@ -134,7 +134,9 @@ $file_list = $output->get('file_list');
 </div>
 
 <div class="fixed-bottom d-lg-none">
-    <button class="btn btn-warning btn-block rounded-0" data-toggle="modal" data-target="#fileUpload"><img src="/oPage/images/imgicons/Clip.png" height="16" /> 첨부파일 등록</button>
+    <button class="btn btn-warning btn-block rounded-0 py-2" data-toggle="modal" data-target="#fileUpload">
+        <img src="/oPage/images/imgicons/Clip.png" height="16" /> 첨부파일 등록
+    </button>
 </div>
 
 <div class="modal fade" id="fileUpload" tabindex="-1" role="dialog" aria-labelledby="tech_forest_modal_window" aria-hidden="true">

@@ -16,26 +16,29 @@ $duty_list = $output->get('duty_list');
 </section>
 <div class="container pt-lg-5">
     <div class="d-block d-lg-none pt-4 pb-2">
-        <a href="<?=getUrl('technician','findJobListAll')?>" class="d-lg-none pull-right btn btn-xxs border-primary btn-round  py-2 px-3">전체공고</a>
-        <a href="<?=getUrl('technician','findJobList')?>" class="d-lg-none pull-right btn btn-primary btn-xxs btn-round py-2 px-3 mr-1">맞춤공고</a>
-        <h6>일자리 정보 더 보기</h6>
+        <a href="<?=getUrl('technician','findJobListAll')?>" class="d-lg-none pull-right btn btn-xs border-primary btn-round  py-2 px-3">전체공고</a>
+        <a href="<?=getUrl('technician','findJobList')?>" class="d-lg-none pull-right btn btn-primary btn-xs btn-round py-2 px-3 mr-1">맞춤공고</a>
+        <h6>일자리 정보</h6>
     </div>
-    <div class="d-none d-lg-block pt-4 pb-2">
-        <h4 class="mb-2">일자리 정보 더 보기</h4>
-        <div class="row">
-            <!--            <div class="col-6 pr-1 col-lg-4">-->
-            <!--                <select class="form-control"><option>지역설정</option></select>-->
-            <!--            </div>-->
-            <!--            <div class="col-6 pl-1 col-lg-4">-->
-            <!--                <select class="form-control"><option>직종</option></select>-->
-            <!--            </div>-->
-            <div class="col-lg-2 pr-1">
-                <a href="<?=getUrl('technician','findJobList')?>" class="d-lg-block btn-block d-none btn btn-sm btn-round btn-primary py-1 px-2">맞춤공고</a>
+    <div class="d-none d-lg-block pt-4 pb-4">
+            <a href="<?=getUrl('technician','findJobList')?>" class="pull-right btn btn-sm btn-round btn-primary py-1 px-3">맞춤공고</a>
+            <a href="<?=getUrl('technician','findJobListAll')?>" class=" pull-right btn btn-sm border-primary btn-round py-1 px-3 mr-1">전체공고</a>
+            <h4 class="mb-2">일자리 정보</h4>
+            <div class="row">
+                <div class="col-3">
+                    <select class="form-control"><option>지역설정</option></select>
+                </div>
+                <div class="col-3">
+                <select class="form-control"><option>직종</option></select>
+                </div>
+                <div class="col-3">
+                    <select class="form-control"><option>직종</option></select>
+                </div>
+                <div class="col-3">
+                    <select class="form-control"><option>직종</option></select>
+                </div>
             </div>
-            <div class="col-lg-2 pl-1">
-                <a href="<?=getUrl('technician','findJobListAll')?>" class="d-lg-block btn-block d-none btn btn-sm border-primary btn-round py-1 px-2 mr-1">전체공고</a>
-            </div>
-        </div>
+            <div class="clearfix"></div>
     </div>
 
     <div class="row">
@@ -66,7 +69,7 @@ $duty_list = $output->get('duty_list');
                       <? if ($val['district_name'] == "전체") { $val['district_name'] = ""; }?>
                       <? if ($val['salary_idx'] < 3) { $hire_salary_text = "만원"; } else { $hire_salary_text = "원"; } ?>
                       <div class="col-7 col-md-12 pl-0 pl-md-3">
-                          <div class="content_padding">
+                          <div class="p-2">
                               <h6 class="weight_normal cut1"><?=$val['c_name']?></h6>
                               <h6 class="red cut1"><?=$val['h_title']?></h6>
                               <p class="weight_lighter xxs_content mx-0 px-0">

@@ -88,7 +88,7 @@
 </header>
 <header id="header_mobile" class="d-lg-none">
     <div class="overlay" data-toggle="offcanvas" style="display: none;"></div>
-    <div id="sidebar-wrapper">
+    <div id="sidebar-wrapper" class="position-relative">
         <div class="sidebar-card">
             <div class="px-3 py-2">
             <div class="row">
@@ -143,6 +143,9 @@
                 }
             }
             ?>
+            <div class="position-absolute bg-light p-3" data-toggle="offcanvas" style="bottom:0; left:0; width:100%;">
+                <i class="xi-arrow-left"></i> 뒤로가기
+            </div>
         </aside>
     </div>
     <div id="page-content-wrapper">
@@ -174,6 +177,8 @@
 $file_name = ($act != "index") ? $act : $module;
 $bg_url = "/oPage/technician/visual/" . $file_name . ".jpg";
 $no_auto_bg_url = "/oPage/technician/visual/" . $file_name . ".noauto.jpg";
+$mobile_bg_url = "/oPage/technician/visual/" . $file_name . ".mobile.jpg";
+
 
 if(file_exists(_XISO_PATH_ . $bg_url) && !$output->get('false_sub_visual')) {
     ?>

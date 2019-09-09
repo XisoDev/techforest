@@ -42,6 +42,8 @@ class technicianView{
         if($args->document_srl) {
             $site_info->layout = "none";
             $add_body_class[] = "no_mobile_header";
+            $add_body_class[] = "no_pc_header";
+            $add_body_class[] = "no_pc_footer";
             $set_template_file = "technician/resume.view.php";
 
             $m_idx = $args->document_srl;

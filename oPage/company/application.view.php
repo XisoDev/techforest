@@ -41,35 +41,67 @@
                 <?}?>
             </div>
             <div class="col-12 col-md-7 col-lg-8">
-              <ul class="xs_content text-left py-md-4">
-                  <li>이름 : <?=$info_row[0]['m_name']?>
-                    <?php
-                      if($info_row[0]["m_human"] == "M") {
-                        echo "[남자]";
-                      } else if($info_row[0]["m_human"] == "F") {
-                        echo "[여자]";
-                      } else {
-                        echo "";
-                      }
-                    ?>
-                  </li>
-                  <li>생년월일 : <?= date("Y-m-d", strtotime($info_row[0]["m_birthday"])); ?></li>
-                  <li>주소 : <?=$info_row[0]['m_address']?> <?=$info_row[0]['m_address2']?></li>
-                  <?
-                    if(!empty($info_row[0]["desired_salary"]) || $info_row[0]["salary_idx"] == 0){
-                      if($info_row[0]["salary_name"] == "연봉" || $info_row[0]["salary_name"] == "월급"){
-                        echo "<li>희망급여 : " .$info_row[0]['salary_name']." ".number_format($info_row[0]['desired_salary']). " 만원 이상</li>";
-                      }
-                      else if($info_row[0]["salary_name"] == "일급" || $info_row[0]["salary_name"] == "시급"){
-                        echo "<li>희망급여 : " .$info_row[0]['salary_name']." ".number_format($info_row[0]['desired_salary']). " 원 이상</li>";
-                      }
-                      else if($info_row[0]["salary_idx"] == 0){
-                        echo "<li>희망급여 : 회사내규에 따름</li>";
-                      }
-                    }
-                    ?>
-                  <li>희망직종 : 건설/조선</li>
-              </ul>
+                <div class="px-3">
+                <table class="table table-borderless table-vertical-middle table-sm" cellspacing="0" cellpadding="0">
+                    <colgroup>
+                        <col width="10">
+                        <col width="70">
+                        <col width="10">
+                        <col width="*">
+                    </colgroup>
+                    <tr>
+                        <td><i class="xi-cog xxx_content"></i></td>
+                        <th class="weight_bold">이름</th>
+                        <td>:</td>
+                        <td><?=$info_row[0]['m_name']?>
+                            <?php
+                            if($info_row[0]["m_human"] == "M") {
+                                echo "[남자]";
+                            } else if($info_row[0]["m_human"] == "F") {
+                                echo "[여자]";
+                            } else {
+                                echo "";
+                            }
+                            ?></td>
+                    </tr>
+                    <tr>
+                        <td><i class="xi-cog xxx_content"></i></td>
+                        <th class="weight_bold">생년월일</th>
+                        <td>:</td>
+                        <td><?= date("Y-m-d", strtotime($info_row[0]["m_birthday"])); ?></td>
+                    </tr>
+                    <tr>
+                        <td><i class="xi-cog xxx_content"></i></td>
+                        <th class="weight_bold">주소</th>
+                        <td>:</td>
+                        <td><?=$info_row[0]['m_address']?> <?=$info_row[0]['m_address2']?></td>
+                    </tr>
+                    <tr>
+                        <td><i class="xi-cog xxx_content"></i></td>
+                        <th class="weight_bold">희망급여</th>
+                        <td>:</td>
+                        <td><?
+                            if(!empty($info_row[0]["desired_salary"]) || $info_row[0]["salary_idx"] == 0){
+                                if($info_row[0]["salary_name"] == "연봉" || $info_row[0]["salary_name"] == "월급"){
+                                    echo $info_row[0]['salary_name']." ".number_format($info_row[0]['desired_salary']). " 만원 이상";
+                                }
+                                else if($info_row[0]["salary_name"] == "일급" || $info_row[0]["salary_name"] == "시급"){
+                                    echo $info_row[0]['salary_name']." ".number_format($info_row[0]['desired_salary']). " 원 이상";
+                                }
+                                else if($info_row[0]["salary_idx"] == 0){
+                                    echo "회사내규에 따름";
+                                }
+                            }
+                            ?></td>
+                    </tr>
+                    <tr>
+                        <td><i class="xi-cog xxx_content"></i></td>
+                        <th class="weight_bold">희망직종</th>
+                        <td>:</td>
+                        <td>건설/조선</td>
+                    </tr>
+                </table>
+                </div>
             </div>
         </div>
     </div>
@@ -84,86 +116,231 @@
         <h5 class="p-2 d-none d-md-block bg-light">학력</h5>
         <span class=" d-md-none btn btn-block btn-light mt-0 rounded-0 mb-3">학력</span>
         <div class="row ml-md-4">
-        <ul class="xs_content text-left my-3 col-md-6">
-            <li>학교 : ABCD 학교</li>
-            <li>졸업연도 : 1999.02</li>
-        </ul>
-        <ul class="xs_content text-left my-3 col-md-6">
-            <li>전공 : 금형,기계제조</li>
-            <li>학점 : 4.21/4.5</li>
-        </ul>
+            <div class="col-12 col-md-6">
+                <div class="px-3">
+                    <table class="table table-borderless table-vertical-middle table-sm" cellspacing="0" cellpadding="0">
+                        <colgroup>
+                            <col width="10">
+                            <col width="70">
+                            <col width="10">
+                            <col width="*">
+                        </colgroup>
+                        <tr>
+                            <td><i class="xi-cog xxx_content"></i></td>
+                            <th class="weight_bold">학교</th>
+                            <td>:</td>
+                            <td>ABCD 학교</td>
+                        </tr>
+                        <tr>
+                            <td><i class="xi-cog xxx_content"></i></td>
+                            <th class="weight_bold">졸업연도</th>
+                            <td>:</td>
+                            <td>1999.02</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <div class="px-3">
+                    <table class="table table-borderless table-vertical-middle table-sm" cellspacing="0" cellpadding="0">
+                        <colgroup>
+                            <col width="10">
+                            <col width="70">
+                            <col width="10">
+                            <col width="*">
+                        </colgroup>
+                        <tr>
+                            <td><i class="xi-cog xxx_content"></i></td>
+                            <th class="weight_bold">학교</th>
+                            <td>:</td>
+                            <td>ABCD 학교</td>
+                        </tr>
+                        <tr>
+                            <td><i class="xi-cog xxx_content"></i></td>
+                            <th class="weight_bold">졸업연도</th>
+                            <td>:</td>
+                            <td>1999.02</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="tech_card bg-white overflow-hidden pt-0 my-3 pt-md-4">
         <h5 class="p-2 d-none d-md-block bg-light">경력</h5>
         <span class=" d-md-none btn btn-block btn-light mt-0 rounded-0 mb-3">경력</span>
-        <ul class="xs_content text-left my-3">
-            <li>학교 : ABCD 학교</li>
-            <li>졸업연도 : 1999.02</li>
-            <li>전공 : 금형,기계제조</li>
-            <li>학점 : 4.21/4.5</li>
-        </ul>
+        <div class="px-3">
+        <table class="table table-borderless table-vertical-middle table-sm" cellspacing="0" cellpadding="0">
+            <colgroup>
+                <col width="10">
+                <col width="70">
+                <col width="10">
+                <col width="*">
+            </colgroup>
+            <tr>
+                <td><i class="xi-cog xxx_content"></i></td>
+                <th class="weight_bold">전공</th>
+                <td>:</td>
+                <td>금형,기계제조</td>
+            </tr>
+            <tr>
+                <td><i class="xi-cog xxx_content"></i></td>
+                <th class="weight_bold">학점</th>
+                <td>:</td>
+                <td>4.21/4.5</td>
+            </tr>
+            <tr>
+                <td><i class="xi-cog xxx_content"></i></td>
+                <th class="weight_bold">학점</th>
+                <td>:</td>
+                <td>4.21/4.5</td>
+            </tr>
+            <tr>
+                <td><i class="xi-cog xxx_content"></i></td>
+                <th class="weight_bold">학점</th>
+                <td>:</td>
+                <td>4.21/4.5</td>
+            </tr>
+        </table>
+        </div>
     </div>
 
     <div class="tech_card bg-white overflow-hidden pt-0 my-3 pt-md-4">
         <h5 class="p-2 d-none d-md-block bg-light">자격증</h5>
         <span class=" d-md-none btn btn-block btn-light mt-0 rounded-0 mb-3">자격증</span>
-        <div class="row ml-md-4">
-            <ul class="xs_content text-left my-3 col-md-6">
-                <li>학교 : ABCD 학교</li>
-                <li>졸업연도 : 1999.02</li>
-            </ul>
-            <ul class="xs_content text-left my-3 col-md-6">
-                <li>전공 : 금형,기계제조</li>
-                <li>학점 : 4.21/4.5</li>
-            </ul>
+        <div class="ml-md-4">
+            <div class="px-3">
+                <table class="table table-borderless table-vertical-middle table-sm" cellspacing="0" cellpadding="0">
+                    <colgroup>
+                        <col width="10">
+                        <col width="70">
+                        <col width="10">
+                        <col width="*">
+                    </colgroup>
+                    <tr>
+                        <td><i class="xi-cog xxx_content"></i></td>
+                        <th class="weight_bold">학교</th>
+                        <td>:</td>
+                        <td>ABCD 학교</td>
+                    </tr>
+                    <tr>
+                        <td><i class="xi-cog xxx_content"></i></td>
+                        <th class="weight_bold">졸업연도</th>
+                        <td>:</td>
+                        <td>1999.02</td>
+                    </tr>
+                </table>
+            </div>
+            <hr class="mx-4" />
+            <div class="px-3">
+                <table class="table table-borderless table-vertical-middle table-sm" cellspacing="0" cellpadding="0">
+                    <colgroup>
+                        <col width="10">
+                        <col width="70">
+                        <col width="10">
+                        <col width="*">
+                    </colgroup>
+                    <tr>
+                        <td><i class="xi-cog xxx_content"></i></td>
+                        <th class="weight_bold">전공</th>
+                        <td>:</td>
+                        <td>금형,기계제조</td>
+                    </tr>
+                    <tr>
+                        <td><i class="xi-cog xxx_content"></i></td>
+                        <th class="weight_bold">학점</th>
+                        <td>:</td>
+                        <td>4.21/4.5</td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 
     <div class="tech_card bg-white overflow-hidden pt-0 my-3 pt-md-4">
         <h5 class="p-2 d-none d-md-block bg-light">어학</h5>
         <span class=" d-md-none btn btn-block btn-light mt-0 rounded-0 mb-3">어학</span>
-        <ul class="xs_content text-left my-3">
-            <li>학교 : ABCD 학교</li>
-            <li>졸업연도 : 1999.02</li>
-        </ul>
-        <hr class="mx-4" />
-        <ul class="xs_content text-left my-3">
-            <li>전공 : 금형,기계제조</li>
-            <li>학점 : 4.21/4.5</li>
-        </ul>
+        <div class="ml-md-4">
+            <div class="px-3">
+                <table class="table table-borderless table-vertical-middle table-sm" cellspacing="0" cellpadding="0">
+                    <colgroup>
+                        <col width="10">
+                        <col width="70">
+                        <col width="10">
+                        <col width="*">
+                    </colgroup>
+                    <tr>
+                        <td><i class="xi-cog xxx_content"></i></td>
+                        <th class="weight_bold">학교</th>
+                        <td>:</td>
+                        <td>ABCD 학교</td>
+                    </tr>
+                    <tr>
+                        <td><i class="xi-cog xxx_content"></i></td>
+                        <th class="weight_bold">졸업연도</th>
+                        <td>:</td>
+                        <td>1999.02</td>
+                    </tr>
+                </table>
+            </div>
+            <hr class="mx-4" />
+            <div class="px-3">
+                <table class="table table-borderless table-vertical-middle table-sm" cellspacing="0" cellpadding="0">
+                    <colgroup>
+                        <col width="10">
+                        <col width="70">
+                        <col width="10">
+                        <col width="*">
+                    </colgroup>
+                    <tr>
+                        <td><i class="xi-cog xxx_content"></i></td>
+                        <th class="weight_bold">전공</th>
+                        <td>:</td>
+                        <td>금형,기계제조</td>
+                    </tr>
+                    <tr>
+                        <td><i class="xi-cog xxx_content"></i></td>
+                        <th class="weight_bold">학점</th>
+                        <td>:</td>
+                        <td>4.21/4.5</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
 
     <div class="tech_card bg-white overflow-hidden pt-0 my-3 pt-md-4">
         <h5 class="p-2 d-none d-md-block bg-light">관련서류보기</h5>
         <span class=" d-md-none btn btn-block btn-light mt-0 rounded-0 mb-3">관련서류보기</span>
-        <ul class="xs_content text-left my-3">
-            <li>
-<!--                다운로드 링크-->
-                <a href="#" class="text-dark">
-                <span class="pull-right mr-3"><img src="/oPage/images/imgicons/download.png" height="16" /></span>
-                [이력서] ic_laucher_1024.png
-                </a>
-            </li>
-            <li>
-<!--                다운로드 링크-->
-                <a href="#" class="text-dark">
-                <span class="pull-right mr-3"><img src="/oPage/images/imgicons/download.png" height="16" /></span>
-                [이력서] ic_laucher_1024.png
-                </a>
-            </li>
-            <li>
-<!--                다운로드 링크-->
-                <a href="#" class="text-dark">
-                <span class="pull-right mr-3"><img src="/oPage/images/imgicons/download.png" height="16" /></span>
-                [이력서] ic_laucher_1024.png
-                </a>
-            </li>
-        </ul>
+
+
+
+        <div class="px-3">
+            <table class="table table-borderless table-vertical-middle table-sm" cellspacing="0" cellpadding="0">
+                <colgroup>
+                    <col width="10">
+                    <col width="*">
+                    <col width="30">
+                </colgroup>
+                <tr>
+                    <td><i class="xi-cog xxx_content"></i></td>
+                    <td>[이력서] ic_laucher_1024.png</td>
+                    <td><img src="/oPage/images/imgicons/download.png" height="16" /></td>
+                </tr>
+                <tr>
+                    <td><i class="xi-cog xxx_content"></i></td>
+                    <td>[이력서] ic_laucher_1024.png</td>
+                    <td><img src="/oPage/images/imgicons/download.png" height="16" /></td>
+                </tr>
+            </table>
+        </div>
+
+
     </div>
 
-        <a href="<?=getUrl('technician','resume',$m_idx)?>" class="btn btn-block btn-primary px-5 d-md-none">이력서 전체보기</a>
+        <a href="<?=getUrl('technician','resume',$m_idx)?>" class="btn btn-block tech_card bg-primary btn-primary px-5 mb-3 d-md-none">이력서 전체보기</a>
 
         <div class="d-none d-md-block text-center">
             <a href="<?=getUrl('technician','resume',$m_idx)?>" class="btn btn-primary px-5 rounded-0">이력서 전체보기</a>

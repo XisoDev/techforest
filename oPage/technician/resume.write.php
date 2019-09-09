@@ -127,9 +127,9 @@ shuffle($rand_array);
 
 </style>
 <section class="sub_visual d-none d-lg-block pb-2" style="background-image:url('<?=$no_auto_bg_url?>');">
-    <h4 class="red"><?=$site_info->title?></h4>
-    <p class="weight_normal text-secondary pb-0 my-0"><?=$site_info->desc?></h4></p>
-    <p class="weight_lighter text-secondary pt-0 pb-2 my-0">기술자숲이 대신 작성해 드립니다.</h4></p>
+    <h4 class="red mt-n3"><?=$site_info->title?></h4>
+    <p class="weight_normal text-dark pb-0 my-0"><?=$site_info->desc?></p>
+    <p class="weight_normal text-dark pt-0 pb-2 my-0">기술자숲이 대신 작성해 드립니다.</p>
 		<form id="theuploadform_resume">
 			<label for="resume_upload">
 	    	<span class="btn btn-danger">이력서파일 등록하기</span>
@@ -137,13 +137,29 @@ shuffle($rand_array);
 			<input type="file" id="resume_upload" name="resume_upload" style="display:none;">
 		</form>
 
-    <p class="red xs_content weight_lighter">*영업일 기준 1일 소요됩니다.</p>
+    <p class="red xs_content weight_lighter pb-3">*영업일 기준 1일 소요됩니다.</p>
 </section>
 <section class="bg-white d-lg-none border-bottom">
     <div class="p-3 mt-4 pt-5 mb-0 pb-2">
         <a href="#" onclick="history.back();" class="mb-3"><img src="/oPage/images/imgicons/arrow_left.png" height="25" /></a>
         <h4 class="weight_normal">이력서 등록</h4>
     </div>
+</section>
+<section class="sub_visual d-block d-lg-none pb-2 text-left py-4 px-3" style="background-image:url('<?=$mobile_bg_url?>');">
+    <h5 class="red"><?=$site_info->title?></h5>
+    <p class="weight_normal xs_content text-dark pb-0 my-0 pr-5 mr-4"><?=$site_info->desc?>
+        <br />
+        <br />
+        기술자숲이 대신 작성해 드립니다.
+    </p>
+    <p class="red xs_content weight_lighter">*영업일 기준 1일 소요됩니다.</p>
+    <form id="theuploadform_resume">
+        <label for="resume_upload" class="d-block">
+            <span class="btn btn-danger btn-block">이력서파일 등록하기</span>
+        </label>
+        <input type="file" id="resume_upload" name="resume_upload" style="display:none;">
+    </form>
+
 </section>
 <section class="bg-white">
 		<input type="hidden" id="my_info3_count" name="my_info3_count" value="<?if($my_info3){echo count($my_info3); } else { echo "0"; }?>" />
@@ -395,7 +411,7 @@ shuffle($rand_array);
             </div>
 
             <div class="row col-md-10 col-lg-9 mx-md-auto mb-md-4 px-0 mx-0">
-                <div class="col-12 px-sm-0">
+                <div class="col-12 px-0">
                     <h6 class="d-block d-sm-none mt-3">학력</h6>
                     <h5 class="d-none d-sm-block bg-light py-2 px-3 mt-2 mt-sm-4">
                         <a class="text-secondary pull-right"><i class="xi-angle-down"></i></a>
@@ -540,7 +556,7 @@ shuffle($rand_array);
                     <button class="d-sm-none d-inline-block btn btn-warning btn-block rounded-0 rounded-bottom" onclick="javascript:my_info3_add();">학력 추가하기</button>
 								</div>
 
-                <div class="col-12 px-sm-0">
+                <div class="col-12 px-0">
                     <h6 class="d-block d-sm-none mt-3">경력</h6>
                     <h5 class="d-none d-sm-block bg-light py-2 px-3 mt-2 mt-sm-4">
                         <a class="text-secondary pull-right"><i class="xi-angle-down"></i></a>
@@ -555,7 +571,7 @@ shuffle($rand_array);
                     <a class="d-sm-none d-inline-block btn btn-warning btn-block rounded-0 rounded-bottom" onclick="javascript:addViewMemberCareer();">경력 추가하기</a>
                 </div>
 
-                <div class="col-12 px-sm-0">
+                <div class="col-12 px-0">
                     <h6 class="d-block d-sm-none mt-3">자격증</h6>
                     <h5 class="d-none d-sm-block bg-light py-2 px-3 mt-2 mt-sm-4">
                         <a class="text-secondary pull-right"><i class="xi-angle-down"></i></a>
@@ -597,7 +613,7 @@ shuffle($rand_array);
                 </div>
 
 
-                <div class="col-12 px-sm-0">
+                <div class="col-12 px-0">
                     <h6 class="d-block d-sm-none mt-3">어학</h6>
                     <h5 class="d-none d-sm-block bg-light py-2 px-3 mt-2 mt-sm-4">
                         <a class="text-secondary pull-right"><i class="xi-angle-down"></i></a>
@@ -725,7 +741,7 @@ shuffle($rand_array);
                     <a class="d-sm-none d-inline-block btn btn-warning btn-block rounded-0 rounded-bottom" onclick="javascript:my_info6_add()">어학 추가하기</a>
                 </div>
 
-                <div class="col-12 px-sm-0">
+                <div class="col-12 px-0">
                     <h6 class="d-block d-sm-none mt-3">관련서류 등록하기</h6>
                     <h5 class="d-none d-sm-block bg-light py-2 px-3 mt-2 mt-sm-4">
                         <a class="text-secondary pull-right"><i class="xi-angle-down"></i></a>
@@ -748,7 +764,7 @@ shuffle($rand_array);
                 </div>
             </div>
 
-            <div class="row fixed-bottom">
+            <div class="row fixed-bottom px-2 bg-white border-top">
                 <div class="col-sm-2"></div>
                 <div class="col-6 col-sm-4">
                     <input type="button" class="btn btn-block btn-light border-primary text-primary btn-round btn-lg my-3" onclick="history.back();" value="취소" />

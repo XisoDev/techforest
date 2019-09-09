@@ -56,6 +56,8 @@
 //none 레이아웃은 해당 모듈내의 비주얼폴더를 참조하도록 함
 $bg_url = "/oPage/" . $module . "/visual/" . $act . ".jpg";
 $no_auto_bg_url = "/oPage/" . $module . "/visual/" . $act . ".noauto.jpg";
+$mobile_bg_url = "/oPage/" . $module . "/visual/" . $file_name . ".mobile.jpg";
+
 
 if(file_exists(_XISO_PATH_ . $bg_url) && !$output->get('false_sub_visual')) {
     ?>

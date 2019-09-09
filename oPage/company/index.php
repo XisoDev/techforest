@@ -9,9 +9,9 @@
             <h4 class="weight_bold mb-3">채용담당자님:)</h4>
           <?php } ?>
           <?php if($logged_info) { ?>
-            <h5 class="weight_normal d-none d-md-block">안녕하세요</h5>
-              <h5 class="weight_normal"><span class="weight_bold"><?=$logged_info['c_name']?> 채용담당자님</span> :)</h5>
-            <h5 class="weight_normal mb-3">어떤 기술자를 찾고 계신가요?</h5>
+                <h5 class="weight_normal d-none d-md-block">안녕하세요</h5>
+                <h5 class="weight_normal"><span class="weight_bold"><?=$logged_info['c_name']?> 채용담당자님</span> :)</h5>
+                <h5 class="weight_normal mb-3">어떤 기술자를 찾고 계신가요?</h5>
           <?php } ?>
           <ul class="nav">
               <?php if(!$logged_info) { ?>
@@ -33,7 +33,7 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container py-4">
     <div class="row">
         <?php if(!$logged_info) { ?>
         <div class="col-12">
@@ -48,7 +48,7 @@
                                 <i class="xi-plus-circle xi-2x color_primary"></i>
                             </div>
                         </div>
-                        <p class="weight_lighter mt-2">공고등록하고<br />맞춤기술자 보기</p>
+                        <p class="weight_lighter mt-0 pb-3">공고등록하고<br />맞춤기술자 보기</p>
                     </div>
                 <?php } ?>
             </div>
@@ -67,8 +67,8 @@
              $oDB->join("TF_member_commerce_tb co","h.c_idx = co.c_idx","LEFT");
              $row = $oDB->getOne("TF_hire_tb h","count(h.h_idx) as count_hire");
             ?>
-            <h6 class="d-md-none weight_lighter mt-4"><span class="red">총<?=$row['count_hire']?>건</span>의 진행중인 공고가 있어요.</h6>
-            <h5 class="d-none d-md-block weight_lighter mt-4">최근 등록하신 <span class="red"><?=$row['count_hire']?>건</span>의 채용공고가 있어요.</h5>
+            <h5 class="d-md-none weight_bold mt-3"><span class="red">총<?=$row['count_hire']?>건</span>의 진행중인 공고가 있어요.</h5>
+            <h5 class="d-none d-md-block weight_bold mt-4">최근 등록하신 <span class="red"><?=$row['count_hire']?>건</span>의 채용공고가 있어요.</h5>
         </div>
 
 
@@ -161,28 +161,37 @@
 </div>
 
 
-<div class="container">
+<div class="container pt-4 pb-2">
     <div class="row">
         <div class="col-12">
 
             <?php if($logged_info) { ?>
                 <div class="d-block d-lg-none">
-                    <h5 class="weight_lighter mt-4">
+                    <h5 class="weight_bold mt-4">
                         <span class="red">기술자숲</span>에 딱 맞는 추천기술자를 찾아왔어요!
                     </h5>
                 </div>
             <?php } else { ?>
                 <div class="d-block d-lg-none">
-                    <h5 class="weight_lighter mt-4">
+                    <h5 class="weight_bold mt-4">
                         <span class="btn btn-round btn-xxs btn-primary">NEW</span>
                         새로운 기술자가 등록됐어요!
                     </h5>
                 </div>
             <?php } ?>
-            <div class="d-none d-lg-block text-center pt-5 pb-3">
-                <h3 class="weight_bold mt-3">AI 추천 기술자</h3>
-                <h6 class="weight_lighter mt-1 mb-2">ABC기업과 맞는 기술자를 추천 해 드립니다! 지금 확인해보세요!</h6>
-            </div>
+
+            <?php if($logged_info) { ?>
+                <div class="d-none d-lg-block text-center pt-5 pb-3">
+                    <h3 class="weight_bold mt-3">AI 추천 기술자</h3>
+                    <h6 class="weight_lighter mt-1 mb-2">ABC기업과 맞는 기술자를 추천 해 드립니다! 지금 확인해보세요!</h6>
+                </div>
+            <?php } else { ?>
+                <div class="d-none d-lg-block text-center pt-5 pb-3">
+                    <h3 class="weight_bold mt-3">NEW Technician</h3>
+                    <h6 class="weight_lighter mt-1 mb-2">
+                        새로운 기술자가 등록됐어요!</h6>
+                </div>
+            <?php } ?>
         </div>
         <div class="col-12 mt-2">
             <div class="flex-card-slick">
@@ -191,14 +200,14 @@
                     if($val['m_city_idx'] != -1){ $desired_work_place .= $val['city_name']; }
                     if($val['m_district_idx'] != -1){ $desired_work_place .= $val['district_name']; }?>
                     <div class="tech_card bg-white overflow-hidden mx-md-3 mb-md-3 shadow">
-                        <div class="avatar square w-50 mx-auto my-2 my-sm-3 my-md-4" style="background-image:url('/layout/none/assets/images/no_avatar.png');">
+                        <div class="avatar square mx-auto my-2 my-sm-3 my-md-4" style="width:40%; background-image:url('/layout/none/assets/images/no_avatar.png');">
                         </div>
-                        <h6 class="weight_normal mb-3 px-2 text-center"><?=$val['m_name']?> (<?=$val['m_birthday']?>세)</h6>
+                        <h6 class="weight_normal mb-1 px-2 text-center"><?=$val['m_name']?> (<?=$val['m_birthday']?>세)</h6>
                         <p class="text-left xs_content px-3 py-0 m-0 mb-1">  <img class="d-inline imgicon" src="/oPage/images/imgicons/location_bg_red.png" height="10" /> 희망지역 : <?=$desired_work_place?></p>
                         <p class="text-left xs_content px-3 py-0 m-0" class="cut1" style="height:42px;"> <img class="d-inline imgicon" src="/oPage/images/imgicons/wrench_bg_red.png" height="10" /> 주요경력 : <?=$val['duty_name']?></p>
                         <div class="row mt-0 mx-0 px-0">
                             <div class="col-12 mx-0 px-0">
-                              <a href="<?=getUrl('technician','resume',$val['m_idx'],array("from"=>"index"))?>" target="_blank" class="btn btn-block btn-warning mt-3 rounded-0">이력서보기</a>
+                              <a href="<?=getUrl('technician','resume',$val['m_idx'],array("from"=>"index"))?>" target="_blank" class="btn btn-block btn-warning mt-1 rounded-0">이력서보기</a>
                             </div>
                         </div>
                     </div>
@@ -212,13 +221,13 @@
     </div>
 </div>
 
-<div class="container-fluid bg-light pb-5 pt-5 pt-lg-2 mt-5">
+<div class="container-fluid bg-light py-5 pt-lg-2 mt-5">
 <div class="container">
     <div class="row">
         <div class="col-12">
             <div class="col-12">
                 <div class="d-block d-lg-none">
-                    <h5 class="weight_lighter">
+                    <h5 class="weight_bold">
                         실시간 지원현황
                     </h5>
                 </div>
@@ -226,6 +235,7 @@
                     <h3 class="weight_bold mt-3">실시간 지원현황</h3>
                 </div>
             </div>
+            <div class="col-12 bg-white-sm mx-0 rounded shadow-sm-none-md py-2">
                 <div class="weight_lighter">
                   <?php foreach($output->get("now_application") as $val){
                       $diff = time() - strtotime($val['reg_date']);
@@ -239,13 +249,19 @@
                           $application_time= $diff.'초 전';
                         }
                     ?>
-                      <div class="tech_card bg-white text-left p-2 mb-2 shadow">
-                      <p class="cut1 pb-0 mb-0">
-                        <span class="btn btn-round btn-xxs btn-danger"><?=$application_time?></span>
-                        <?=$val['c_name']?> 에 지원자가 발생했습니다.
+                      <div class="position-relative btn-round text-left p-1 py-md-1 pl-md-5 mb-0 mb-md-3 shadow-none-sm bg-white">
+                      <p class="cut1 pb-0 mb-0 pl-md-5">
+                        <span class="d-none d-md-block btn btn-round btn-xs btn-danger p-md-3 position-md-absolute"
+                              style="left:-5px; top:-5px;"
+                        ><?=$application_time?></span>
+                        <span class="d-inline-block d-md-none btn btn-round btn-xxs btn-danger"
+                              style="left:-5px; top:-5px;"
+                        ><?=$application_time?></span>
+                          <span class="d-md-inline-block pl-md-5 ml-md-5"><span class="red"><?=$val['c_name']?></span> 에 지원자가 발생했습니다.</span>
                       </p>
                     </div>
                 <?}?>
+                </div>
             </div>
         </div>
     </div>
@@ -258,7 +274,7 @@
         font-family: 'Russo One', sans-serif;
     }
 </style>
-<div class="d-none d-lg-block container-fluid text-white sub_visual" style="background-image:url('/oPage/company/visual/company.noauto.png'); background-color:#1F3951; background-size:contain; background-repeat:no-repeat; background-position:80% bottom;">
+<div class="d-none d-lg-block container-fluid text-white sub_visual" style="background-image:url('/oPage/company/visual/company.noauto.png'); background-color:#141d35; background-size:contain; background-repeat:no-repeat; background-position:80% bottom;">
     <div class="container py-5 text-left">
         <h5>국내1위 기술인력 전문 구인구직 매칭서비스</h5>
         <h4>지금까지 <span class="text-warning">기술자숲</span>을 통해</h4>
@@ -306,14 +322,16 @@
 </div>
 <!-- 메인에 뜨는 공고등록 유도 팝업 -->
 <div class="modal fade" id="tech_modal_example" tabindex="-1" role="dialog" aria-labelledby="tech_forest_modal_window" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:330px;">
         <div class="modal-content text-center" style="border-radius:10px">
             <a href="#" class="text-white pull-right text-right" style="margin-top:-40px;" onclick="jQuery('#tech_modal_example').modal('hide');" ><i class="xi-close xi-2x"></i></a>
             <div class="popoup_header rounded-top" style="background-image:url('/oPage/company/images/popup_header_company.png');"></div>
-            <div class="px-3 pb-2 pt-4">
-                <h6 class="weight_lighter">지금 공고를 등록하시면 <span class="red">적합한 구직자와 빠르게</span> 연결될 수 있습니다.</h6>
-                <h6 class="weight_normal mb-2 mt-4 mb-3">공고를 등록하시겠습니까?</h6>
-                <a class="btn btn-block btn-danger btn-round btn-lg mb-3" href="<?=getUrl('company','job_register')?>">공고 등록 하러가기</a>
+            <div class="pb-2 pt-4">
+                <h5 class="weight_normal">지금 공고를 등록하시면<br /><span class="red">적합한 구직자와 빠르게</span><br />연결될 수 있습니다.</h5>
+                <h5 class="weight_bold mb-2 mt-4 mb-3">공고를 등록하시겠습니까?</h5>
+                <div class="px-5">
+                <a class="btn btn-block btn-danger btn-round py-3 mb-3" href="<?=getUrl('company','job_register')?>">공고 등록 하러가기</a>
+                </div>
             </div>
             <button class="py-3 btn btn-block btn-light" onclick="jQuery('#tech_modal_example').modal('hide');" style="border-radius:10px;">메인페이지로 이동</button>
         </div>

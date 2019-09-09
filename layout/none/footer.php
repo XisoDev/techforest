@@ -3,7 +3,7 @@
 if(isset($common_back_button)){
 ?>
     <a href="#" onclick="history.back()" class="btn btn-light d-sm-none btn-block rounded-0 text-left position-fixed py-3 px-3" style="bottom:0;"><i class="xi xi-arrow-left"></i> 뒤로가기</a>
-    <div style="height:80px;">&nbsp;</div>
+    <div style="height:50px;">&nbsp;</div>
 <?php
 }
 ?>

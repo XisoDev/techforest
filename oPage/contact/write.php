@@ -1,4 +1,4 @@
-<section class="bg-white">
+<section class="bg-white pb-5">
     <div class="p-3 mt-4 pt-5 d-lg-none">
         <a href="#" onclick="history.back();" class="mb-3"><img src="/oPage/images/imgicons/arrow_left.png" height="25" /></a>
         <h4 class="weight_normal">문의하기</h5>
@@ -23,12 +23,12 @@
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-12 mx-0 px-0 pl-1 mb-2">
-                    <label style="font-size:13px;"><span class="red xxs_content px-0">*</span> 이름</label>
+                <div class="col-12 mx-0 px-0 pl-1 mb-4">
+                    <label class="weight-normal"><span class="red xxs_content px-0">*</span> 이름</label>
                     <input type="text" class="form-control" id="job_manager" placeholder="담당자명을 입력합니다." value="<?=$logged_info['select7']?>">
                 </div>
-                <div class="col-12 mx-0 px-0 pl-1 mb-2">
-                    <label style="font-size:13px;"><span class="red xxs_content px-0">*</span> 휴대폰번호</label>
+                <div class="col-12 mx-0 px-0 pl-1 mb-4">
+                    <label class="weight-normal"><span class="red xxs_content px-0">*</span> 휴대폰번호</label>
                     <div class="input-group">
                         <select class="form-control" id="c_phone1">
                             <?
@@ -55,11 +55,11 @@
                     </div>
                 </div>
 
-                <div class="col-12 mx-0 px-0 pl-1 mb-2">
-                    <label style="font-size:13px;"><span class="red xxs_content px-0">*</span> 내용입력</label>
+                <div class="col-12 mx-0 px-0 pl-1  mb-4">
+                    <label class="weight-normal"><span class="red xxs_content px-0">*</span> 내용입력</label>
                     <textarea rows="3" placeholder="내용을 입력해 주세요." class="form-control"></textarea>
                 </div>
-                <div class="col-12 mx-0 px-0 d-block d-md-none">
+                <div class="col-12 mx-0 px-0 d-block d-md-none my-3">
                 <button type="button" class="btn btn-primary btn-block btn-round">문의하기</button>
                 <a class="d-lg-none btn btn-light border-primary btn-block btn-round" href="tel:+821057595999"><i class="xi-call"></i> 전화로 문의하기</a>
                 </div>

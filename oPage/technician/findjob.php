@@ -80,7 +80,7 @@
                 </div>
 
                 <div class="row m-0 p-0">
-                    <div class="col-6 mx-0 px-0">
+                    <div class="col-6 mx-0 px-0 border-right">
                         <a href="<?=getUrl('technician','jobDetail',$hire_rows[$i]['h_idx'])?>" class="btn btn-light btn-block rounded-0">상세보기</a>
                     </div>
                     <div class="col-6 mx-0 px-0">
@@ -109,12 +109,12 @@
                 <div class="col-5 col-md-12 px-0 mx-0" style="background-color:#EEE;">
                     <div class="thumbnail d-block" style="background-image:url('http://www.planttech.co.kr/wp-content/uploads/2018/07/%EC%82%BC%EC%84%B1%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%811-820x457.png');height:100%; min-height:170px;"
                          onmouseover="jQuery(this).find('div.overlay').removeClass('d-none');" onmouseout="jQuery(this).find('div.overlay').addClass('d-none');">
-                    <div class="overlay d-none">
+                    <div class="overlay">
                         <div class="overlay-content" style="width:100%; text-align:center;">
-                          <?if($application_letter[$i]['isChecked'] == "Y"){?>
+                            <?if($application_letter[$i]['isChecked'] == "Y"){?>
                             <a href="#" class="btn-round btn border-white text-white btn-xs">이력서 열람</a>
                             <p class="xxs_content"><?=substr($application_letter[$i]['check_date'],0,10);?><br /><?=substr($application_letter[$i]['check_date'],10);?></p>
-                        <? }?>
+                            <? }?>
                         </div>
                     </div>
                     </div>
@@ -152,7 +152,7 @@
                             <a href="<?=getUrl('technician','jobDetail',$application_letter[$i]['h_idx'])?>" class="btn btn-light btn-block btn-xs px-0 py-3 rounded-0">상세보기</a>
                         </div>
                         <div class="col-6 mx-0 px-0">
-                              <button class="btn btn-danger btn-block rounded-0" disabled>지원완료</button>
+                              <button class="btn btn-danger btn-block btn-xs px-0 py-3 rounded-0" disabled>지원완료</button>
                         </div>
                     </div>
                 </div>
@@ -237,7 +237,10 @@
         <?php
             }
           }else{ ?>
+            <div class="text-center py-5 bg-white rounded shadow-sm">
             등록된 관심공고가 없습니다.
+                <p class="xxs_content text-secondary">관심있는 공고를 등록 해 보세요 :)</p>
+            </div>
        <? } ?>
     </div>
 </div>

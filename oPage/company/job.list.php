@@ -4,12 +4,12 @@
 // $end_row = $output->get('end_row');
 ?>
 
-<section class="content_padding mt-4 pt-5 bg-white d-lg-none">
+<section class="p-3 mt-4 pt-5 pb-3 bg-white d-lg-none">
     <i class="xi-arrow-left xi-2x" onclick="history.back();"></i>
     <h5 class="weight_normal">공고 ・ 지원자관리</h5>
 </section>
 <div class="container pb-5">
-    <div class="content_padding px-0 d-lg-none">
+    <div class="p-2 px-0 d-lg-none">
         <h6><span class="red">진행중</span>인 공고를 확인해보세요.</h6>
     </div>
 
@@ -31,12 +31,12 @@
                 </div>
             </div>
             <div class="py-1 px-3 text-left">
-                <h6 class="red"><?=$val['h_title']?></h6>
+                <h6 class="red mb-0"><?=$val['h_title']?></h6>
                 <p class="weight_lighter xs_content mb-0 mx-0 px-0">
                   <? if ($val['city_name'] == "전체") { $val['city_name'] = "";} ?>
                   <? if ($val['district_name'] == "전체") { $val['district_name'] = ""; }?>
                   <? if($val['salary_idx'] < 3) { $hire_salary_text = "만원"; } else { $hire_salary_text = "원"; } ?>
-                    <span class="badge badge-danger weight_lighter"><i class="xi-map-marker"></i></span>
+                    <img class="d-inline" src="/oPage/images/imgicons/location_bg_red.png" height="14" />
                     <?php echo $val['local_name'] . " " . $val['city_name'].$val['district_name'];?>
                     <span class="badge badge-danger weight_lighter">
                       <?if($val['salary_idx'] == "1"){
@@ -51,7 +51,10 @@
                     </span>
                     <b><?php echo number_format($val['job_salary']) . $hire_salary_text?></b>
                 </p>
-                <p class="text-secondary xs_content mb-0 mx-0 px-0"><i class="xi-clock-o"></i> 마감 <?=$val['job_end_day']?>일 전</p>
+                <p class="weight_lighter xs_content mb-0 mx-0 px-0">
+                    <img class="d-inline" src="/oPage/images/imgicons/wrench_bg_red.png" height="14" />
+                    경력 : 최소 2년
+                </p>
             </div>
             <div class="row mt-1 mx-0 px-0">
                 <div class="col-6 mx-0 px-0">
@@ -69,9 +72,9 @@
 
 </div>
 
-<div class="container-fluid py-5 bg-light">
+<div class="container-fluid py-3 bg-light">
     <div class="container pb-3 mb-3">
-        <div class="content_padding px-0 d-lg-none">
+        <div class="p-2 px-0 d-lg-none">
             <h6>마감된공고를 확인해보세요.</h6>
         </div>
 
@@ -85,12 +88,12 @@
                 <div class="overlay"><span class="overlay-content"><?=$logged_info['c_name']?></span></div>
             </div>
             <div class="text-left py-1 px-3">
-              <h6 class="red"><?=$val['h_title']?></h6>
+              <h6 class="red mb-0"><?=$val['h_title']?></h6>
               <p class="weight_lighter xs_content mb-0 mx-0 px-0">
                 <? if ($val['city_name'] == "전체") { $val['city_name'] = "";} ?>
                 <? if ($val['district_name'] == "전체") { $val['district_name'] = ""; }?>
                 <? if($val['salary_idx'] < 3) { $hire_salary_text = "만원"; } else { $hire_salary_text = "원"; } ?>
-                  <span class="badge badge-danger weight_lighter"><i class="xi-map-marker"></i></span>
+                  <img class="d-inline" src="/oPage/images/imgicons/location_bg_red.png" height="14" />
                   <?php echo $val['local_name'] . " " . $val['city_name'].$val['district_name'];?>
                   <span class="badge badge-danger weight_lighter">
                     <?if($val['salary_idx'] == "1"){
@@ -105,6 +108,10 @@
                   </span>
                   <b><?php echo number_format($val['job_salary']) . $hire_salary_text?></b>
               </p>
+                <p class="weight_lighter xs_content mb-0 mx-0 px-0">
+                    <img class="d-inline" src="/oPage/images/imgicons/wrench_bg_red.png" height="14" />
+                    경력 : 최소 2년
+                </p>
             </div>
             <div class="row mt-1 mx-0 px-0">
                 <div class="col-12 mx-0 px-0">

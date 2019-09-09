@@ -71,9 +71,9 @@
     </form>
     </div>
 
-    <h6 class="text-center weight_lighter">SNS 간편 로그인</h6>
+    <h6 class="text-center weight_bold xxs_content pb-3">SNS 간편 로그인</h6>
     <!-- <div class="row"> -->
-    <div class="W50_Mauto">
+    <div class="W50_Mauto pb-5">
         <!-- <div class="col-1">
         </div> -->
         <!-- <div class="col-5 text-center">

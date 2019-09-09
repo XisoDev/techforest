@@ -15,6 +15,9 @@
         background-repeat: no-repeat;
         padding: 40px 15px 20px;
     }
+    .welcome_seciton.technician{
+        background-position: 110% 120%;
+    }
     .row{
         min-height:300px;
     }
@@ -46,7 +49,7 @@
         </div>
     </div>
 </div>
-<div class="container-fluid welcome_seciton bg-warning col-sm-6" style="background-image:url('/oPage/images/technician_welcome.png');">
+<div class="container-fluid welcome_seciton technician bg-warning col-sm-6" style="background-image:url('/oPage/images/technician_welcome.png');">
     <img src="/oPage/images/gear.png" class="rotating d-sm-none" style="z-index:0; position:absolute; width:30%; right:-5%; top:-5%;"  />
     <img src="/oPage/images/gear.png" class="rotating_slow d-sm-none" style="z-index:0; position:absolute; left:-35%; width:60%; top:3%;" />
     <div class="container">

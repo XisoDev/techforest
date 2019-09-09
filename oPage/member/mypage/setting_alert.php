@@ -72,7 +72,7 @@
             <label class="just_label">야간수신 동의</label>
             <input type="checkbox" data-toggle="toggle" data-style="tech_forest" data-onstyle="danger" checked="checked" data-size="sm" />
         </div> -->
-        <h6 class="weight_lighter"><i class="xi-clock-o"></i> 알림 수신시간 : 09:00 - 21:00</h6>
+        <h6 class="weight_lighter pt-3"><i class="xi-clock-o"></i> 알림 수신시간 : 09:00 - 21:00</h6>
     </form>
         <div class="row mt-4 col-md-7 col-lg-6 mx-auto">
             <div class="col-6 mx-0 px-0 pr-1">

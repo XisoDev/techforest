@@ -51,6 +51,9 @@ body.no_mobile_header #header_mobile{
 body.no_pc_header #header_pc{
     display:none !important;
 }
+body.no_pc_header .sub_visual{
+    display:none !important;
+}
 body.no_pc_footer footer{
     display:none !important;
 }
@@ -139,25 +142,57 @@ img{
     padding:50px 15px 0 30px;
 }
 .welcome_seciton{
-    background-size: 76%;
-    background-position: right -30%;
+    background-size: 50%;
+    background-position: right bottom;
     background-repeat:no-repeat;
     padding:80px 15px 20px;
 }
+.for_company .welcome_seciton{
+    background-size: 76%;
+}
+@media (max-width: 767px) {
+    .bg-white-sm {
+        background-color: #FFF;
+    }
+    .shadow-sm-none-md{
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+    }
+    .shadow-none-sm {
+        box-shadow: none !important;
+    }
+}
 @media (min-width: 768px) {
     .welcome_seciton{
-        background-size: contain;
-        background-position: 90% bottom;
+        background-size: 300px;
+        background-position: right bottom;
         background-repeat:no-repeat;
         padding:80px 15px 20px;
+    }
+    .for_company .welcome_seciton{
+        background-size: contain;
+        background-position: 90% bottom;
+    }
+    .shadow-sm-none-md{
+        box-shadow: none !important;
+    }
+    .shadow-none-sm {
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
     }
 }
 @media (min-width: 992px) {
     .welcome_seciton{
-        background-size: contain;
-        background-position: right bottom;
+        background-size: 300px;
+        background-position: 80% 25px;
         background-repeat:no-repeat;
-        padding:80px 15px 20px;
+        padding:40px 15px 30px;
+    }
+    .for_company .welcome_seciton{
+        background-size: 400px;
+        background-position: 90% bottom;
+        padding:60px 15px 40px;
+    }
+    .position-md-absolute{
+        position:absolute;
     }
 }
 .coupon .avatar{
@@ -258,7 +293,7 @@ img{
     margin-bottom:15px;
 }
 .tech_card .thumbnail{
-    min-height:120px;
+    min-height:80px;
     overflow:hidden;
     background-color:rgb(224,231,244);
     background-size:cover;
@@ -314,8 +349,25 @@ img{
     transform: translate(-50%,-50%);
     color:#FFF;
     font-weight:400;
+    font-size:1.2rem;
+}
+.vertical-align-0{
+    vertical-align:0 !important;
 }
 
+.table-vertical-middle .xxx_content{
+    vertical-align:2px;
+}
+.table-vertical-middle th{
+    text-align: justify;
+    text-align-last: justify;
+    letter-spacing: -0.1em;
+}
+.table-vertical-middle th,
+.table-vertical-middle td{
+    font-size:.9rem;
+    vertical-align:middle !important;
+}
 .lg_content{
     font-size:22px;
     font-weight:300;

@@ -50,9 +50,11 @@
         </div>
       </form>
 
-        <div class="content_padding text-center weight_lighter">
-            <span class="btn-round btn-xs btn-primary"><?=$logged_info['m_id']?></span>
-            <h6 class="weight_lighter mt-3 mb-2"><i class="xi-mail text-secondary"></i> <?=$logged_info['m_email']?></h6>
+        <div class="px-2 text-center weight_lighter">
+            <div class="py-4 mt-2">
+                <span class="btn-round btn-xs btn-primary"><?=$logged_info['m_id']?></span>
+            </div>
+            <h6 class="weight_lighter mb-2"><i class="xi-mail text-secondary"></i> <?=$logged_info['m_email']?></h6>
             <h6 class="weight_lighter"><i class="xi-call text-secondary"></i> <?=$logged_info['m_phone']?></h6>
         </div>
         </div>

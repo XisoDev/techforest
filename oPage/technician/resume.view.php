@@ -40,21 +40,21 @@ $self_introduction = str_replace("\n", "<br />", $my_info2[0]["self_introduction
 
 ?>
 
-<div class="bg-dark py-2 text-right fixed-top px-3 text-white"><a class="text-white" onclick="window.close();"><i class="xi-close"></i> 닫기</a></div>
-<section class="bg-white container" style="margin-bottom: 100px;">
+<div class="py-2 text-right fixed-top px-3"><a onclick="window.close();"><i class="xi-close"></i> 닫기</a></div>
+<section class="bg-white container pt-3" style="margin-bottom: 100px;">
 
-    <h2 class="weight_bold px-0 mx-0 mt-5 d-none d-md-block">나의 이력서 전체보기</h2>
+    <h4 class="weight_bold px-0 mx-0 mt-5 d-none d-md-block">나의 이력서 전체보기</h4>
     <h5 class="weight_bold px-0 mx-0 mt-5 d-md-none">나의 이력서 전체보기</h5>
 
-    <div class="content_padding">
+    <div class="p-3">
     <div class="row rounded overflow-hidden">
         <div class="py-2 col-sm-4 col-md-3 col-lg-2 bg-primary text-white text-center">한줄자기소개</div>
-        <div class="py-2 col-sm-8 col-md-9 col-lg-10 bg-light"><?=$my_info10[0]['a_line_self']?></div>
+        <div class="py-2 col-sm-8 col-md-9 col-lg-10 bg-light"><?=$my_info10[0]['a_line_self'] ? $my_info10[0]['a_line_self'] : "한줄 자기소개가 등록되지 않았습니다." ?></div>
     </div>
     </div>
 
-    <div class="row my-4 pt-4">
-        <div class="col-4 mx-sm-0 mx-auto col-sm-4 col-md-3 col-lg-2">
+    <div class="row pt-2 mt-md-4">
+        <div class="col-5 mx-sm-0 mx-auto col-sm-4 col-md-3 col-lg-2">
             <div class="avatar square" style="background-image:url('/layout/none/assets/images/no_avatar.png');"></div>
         </div>
         <div class="col-sm-8 col-md-9 col-lg-10 ">
@@ -67,10 +67,10 @@ $self_introduction = str_replace("\n", "<br />", $my_info2[0]["self_introduction
               <span class="sm_content">| <?=$m_human?></span></h3>
             <table class="table table-borderless">
                 <cols>
-                    <col width="120" />
+                    <col width="150" />
                     <col width="*" />
                 </cols>
-                <tr><th>생년월일</th><td><?=$member_birthday?> (<?=$my_info1[0]['m_age']?>세)</td></tr>
+                <tr><th class="pr-0">생년월일</th><td><?=$member_birthday?> (<?=$my_info1[0]['m_age']?>세)</td></tr>
                 <tr><th>연 락 처</th><td><?=$my_info1[0]['m_phone']?></td></tr>
                 <tr><th>이 메 일</th><td><?=$my_info1[0]['m_email']?></td></tr>
                 <tr><th>주&nbsp;&nbsp;&nbsp;&nbsp;소</th><td><?=$my_info1[0]['m_address']?></td></tr>
@@ -78,8 +78,8 @@ $self_introduction = str_replace("\n", "<br />", $my_info2[0]["self_introduction
         </div>
     </div>
 
-    <h4>희망근무조건</h4>
-    <div class="row border-top border-bottom text-center">
+    <h5>희망근무조건</h5>
+    <div class="row border-bottom text-center mx-2" style="border-top:2px solid #aaa;">
         <div class="col-4 px-0">
             <div class="border-right py-3 my-2">
             <h6 class="text-secondary">희망급여</h6>
@@ -185,7 +185,7 @@ $self_introduction = str_replace("\n", "<br />", $my_info2[0]["self_introduction
                 <?}?>
               </select>
             </div>
-            <div class="content_padding">
+            <div class="p-3">
               <h5 class="weight_bold">해당 기술자에게 입사제안 하시겠어요?</h5>
               <div class="px-3 mt-4">
                 <button onclick="suggestion_join_yes()" class="btn btn-block btn-danger btn-round mt-3">네</button>

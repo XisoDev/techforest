@@ -28,7 +28,7 @@
                 <select class="form-control"><option value="">이용기간 선택</option></select>
                 <label class="xs_content mb-0 pb-1">쿠폰할인</label>
                 <select class="form-control"><option value="">첫회원가입 기념 10%할인쿠폰</option></select>
-                <h6 class="weight_normal pt-2 text-right">총 결제 금액 <span class="red">27,000원</span></h6>
+                <h6 class="weight_bold pt-2 text-right">총 결제 금액 <span class="red">27,000원</span></h6>
                 <a href="#" class="btn btn-block btn-light">견적서보기</a>
             </div>
         </div>

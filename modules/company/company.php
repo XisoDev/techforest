@@ -370,6 +370,11 @@ class companyView{
 
     function job_appRegisterComplete($args){
         global $set_template_file;
+        global $add_body_class;
+
+        $add_body_class[] = "no_pc_header";
+        $add_body_class[] = "no_pc_footer";
+        $add_body_class[] = "no_mobile_header";
         $set_template_file = "company/job.reg.complete.php";
 
         $output = new Object();

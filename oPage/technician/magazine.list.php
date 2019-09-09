@@ -17,7 +17,7 @@ $magazine_list = $output->get('magazine_list');
     </div>
     <div class="d-none d-lg-block">
         <span class="xs_content btn btn-xs btn-round border-secondary pull-right">전체 <?=count($magazine_list)?></span>
-        <h4 class="mb-2">취업정보 살펴보기</h4>
+        <h4 class="mb-4">취업정보 살펴보기</h4>
     </div>
 
 

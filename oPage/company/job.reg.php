@@ -7,26 +7,28 @@ $company_info = $output->get('company_info');
         <a href="#" onclick="history.back();" class="mb-3"><img src="/oPage/images/imgicons/arrow_left.png" height="25" /></a>
         <h4 class="weight_normal">공고등록</h4>
     </div>
-    <div class="container pt-lg-5 col-md-10 col-lg-8 mx-auto">
-    <ul class="nav nav-tabs nav-justified mt-0 pt-0 mb-5 mx-0 px-0" role="tablist">
-        <li class="nav-item active">
-            <a class="nav-link weight_bold" href="<?=getUrl('company','job_register')?>">
-                1단계<br />기업정보 등록
-            </a>
-        </li>
-        <li class="nav-item">
-            <?if(!$company_info[0]['c_name'] || !$company_info[0]['registration'] || !$company_info[0]['address'] || !$company_info[0]['address2'] || !$company_info[0]['phonenumber'] || !$company_info[0]['select6']){?>
-              <a class="nav-link weight_bold" onclick="back()" >
-                  2단계<br />공고등록
-              </a>
-            <?}else{?>
-              <a class="nav-link weight_bold" href="<?=getUrl('company','job_appRegister')?>" >
-                  2단계<br />공고등록
-              </a>
-            <?}?>
-        </li>
-    </ul>
-    <div class="content_padding mt-0 pt-0 mb-5">
+    <div class="container pt-lg-5 col-md-8 col-lg-6 mx-auto">
+        <div class="px-lg-5">
+        <ul class="nav nav-tabs nav-justified mt-0 pt-0 mb-5 mx-0 px-0" role="tablist">
+            <li class="nav-item active">
+                <a class="nav-link weight_bold" href="<?=getUrl('company','job_register')?>">
+                    1단계<br />기업정보 등록
+                </a>
+            </li>
+            <li class="nav-item">
+                <?if(!$company_info[0]['c_name'] || !$company_info[0]['registration'] || !$company_info[0]['address'] || !$company_info[0]['address2'] || !$company_info[0]['phonenumber'] || !$company_info[0]['select6']){?>
+                  <a class="nav-link weight_bold" onclick="back()" >
+                      2단계<br />공고등록
+                  </a>
+                <?}else{?>
+                  <a class="nav-link weight_bold" href="<?=getUrl('company','job_appRegister')?>" >
+                      2단계<br />공고등록
+                  </a>
+                <?}?>
+            </li>
+        </ul>
+        </div>
+    <div class="px-2 mt-0 pt-0 pb-5">
         <div class="row">
 
             <div class="col-5 mx-auto px-auto col-md-4 col-lg-3 pb-sm-3 pb-md-5">
@@ -60,39 +62,7 @@ $company_info = $output->get('company_info');
                     <div class="col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
                         <input type="text" class="form-control" id="c_name" value="<?=$company_info[0]['c_name']?>" placeholder="회사명" required>
                     </div>
-                    <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
-                        <h6>사업자등록번호</h6>
-                    </div>
-                    <?php
-                      $registration = explode("-", $company_info[0]["registration"]);
 
-                    ?>
-                    <div class="col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="registration1" value="<?=$registration[0]?>" placeholder="000" maxlength="3" required>
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">-</span>
-                            </div>
-                            <input type="text" class="form-control" id="registration2" value="<?=$registration[1]?>" placeholder="00" maxlength="2" required>
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">-</span>
-                            </div>
-                            <input type="text" class="form-control" id="registration3" value="<?=$registration[2]?>" placeholder="00000" maxlength="5" required>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
-                        <h6>주소</h6>
-                    </div>
-                    <div class="col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
-                        <div class="input-group mb-2">
-                            <input type="text" class="form-control" id="address"  value="<?=$company_info[0]['address']?>" placeholder="주소검색" readonly>
-                            <button type="button" class="btn btn-primary rounded-0" onclick="search_address()">검색</button>
-                        </div>
-                        <input type="text" class="form-control" id="address2" value="<?=$company_info[0]['address2']?>" placeholder="상세주소">
-                    </div>
-                    <div id="wrap" style="display:none;border:1px solid;width:100%;height:50%;margin:5px 0;position:relative">
-                      <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
-                    </div>
                     <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
                         <h6 class="d-sm-none">담당자 정보</h6>
                         <h6 class="d-none d-sm-block">담당자 연락처</h6>
@@ -153,6 +123,41 @@ $company_info = $output->get('company_info');
                             </ul>
                         </div>
 
+                    </div>
+
+                    <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
+                        <h6>사업자등록번호</h6>
+                    </div>
+                    <?php
+                    $registration = explode("-", $company_info[0]["registration"]);
+
+                    ?>
+                    <div class="col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="registration1" value="<?=$registration[0]?>" placeholder="000" maxlength="3" required>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">-</span>
+                            </div>
+                            <input type="text" class="form-control" id="registration2" value="<?=$registration[1]?>" placeholder="00" maxlength="2" required>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">-</span>
+                            </div>
+                            <input type="text" class="form-control" id="registration3" value="<?=$registration[2]?>" placeholder="00000" maxlength="5" required>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
+                        <h6>주소</h6>
+                    </div>
+                    <div class="col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
+                        <div class="input-group mb-2">
+                            <input type="text" class="form-control" id="address"  value="<?=$company_info[0]['address']?>" placeholder="주소검색" readonly>
+                            <button type="button" class="btn btn-primary rounded-0 rounded-right" onclick="search_address()">검색</button>
+                        </div>
+                        <input type="text" class="form-control" id="address2" value="<?=$company_info[0]['address2']?>" placeholder="상세주소">
+                    </div>
+                    <div id="wrap" style="display:none;border:1px solid;width:100%;height:50%;margin:5px 0;position:relative">
+                        <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
                     </div>
 
                     <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">

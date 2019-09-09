@@ -113,7 +113,7 @@ $check_voucher = $output->get('check_voucher');
                 <input type="hidden" name="hidden_discount" id="hidden_discount" value="0">
                 <input type="hidden" name="hidden_amount" id="hidden_amount" value="<?=$row['price']?>">
                 <h6 class="weight_normal pt-2 text-right">할인 금액 <span class="red" name="discount" id="discount">0</span><span class="red">원</span></h6>
-                <h6 class="weight_normal pt-2 text-right">총 결제 금액 <span class="red" name="amount" id="amount"><?=$row['price']?></span><span class="red">원</span></h6>
+                <h6 class="weight_bold pt-2 text-right">총 결제 금액 <span class="red" name="amount" id="amount"><?=number_format($row['price'])?></span><span class="red">원</span></h6>
 <!--                <a href="#" class="btn btn-block btn-light py-2 mb-2">견적서보기</a>-->
             </div>
         </div>
@@ -124,7 +124,7 @@ $check_voucher = $output->get('check_voucher');
 
 <!-- payment Modal -->
 <div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="techforestPaymentModalWindow" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:330px;">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">결제수단 선택</h5>
@@ -135,6 +135,7 @@ $check_voucher = $output->get('check_voucher');
             <div class="modal-body">
               <form>
                   <div class="custom-control custom-radio border rounded pl-4 px-3 py-2 mb-3 bigger_control">
+                      <div style="height:7px;">&nbsp;</div>
                       <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" checked>
                       <label class="custom-control-label weight_lighter ml-2" for="customRadio1">
                           <img src="/oPage/images/imgicons/card.png" height="24" class="imgicon pl-3" />
@@ -142,6 +143,7 @@ $check_voucher = $output->get('check_voucher');
                       </label>
                   </div>
                   <div class="custom-control custom-radio border rounded pl-4 px-3 py-2 mb-3 bigger_control">
+                      <div style="height:7px;">&nbsp;</div>
                       <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" onclick="radio2_check()">
                       <label class="custom-control-label weight_lighter ml-2" for="customRadio2">
                           <img src="/oPage/images/imgicons/banking.png" height="24" class="imgicon pl-3" />
@@ -195,7 +197,7 @@ $check_voucher = $output->get('check_voucher');
                         </p>
                       </div>
                     </div>
-                  <input type="button" onclick="doPay()" class="btn btn-block btn-primary" value="결제하기" />
+                  <input type="button" onclick="doPay()" class="btn btn-block btn-round btn-primary" value="결제하기" />
               </form>
             </div>
         </div>

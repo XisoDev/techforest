@@ -79,7 +79,8 @@ $salary_list = $oDB->get("TF_salary",null,"salary_idx, salary_name, salary_is_sh
         <a href="#" onclick="history.back();" class="mb-3"><img src="/oPage/images/imgicons/arrow_left.png" height="25" /></a>
         <h4 class="weight_normal">공고등록</h4>
     </div>
-    <div class="container pt-lg-5 col-md-10 col-lg-8 mx-auto">
+    <div class="container pt-lg-5 col-md-8 col-lg-6 mx-auto">
+        <div class="px-lg-5">
     <ul class="nav nav-tabs nav-justified mt-0 pt-0 mb-5 mx-0 px-0" role="tablist">
         <li class="nav-item">
             <a class="nav-link weight_bold" href="<?=getUrl('company','job_register')?>">
@@ -92,10 +93,11 @@ $salary_list = $oDB->get("TF_salary",null,"salary_idx, salary_name, salary_is_sh
             </a>
         </li>
     </ul>
-        <div class="content_padding mt-0 pt-0 mb-5">
+        </div>
+        <div class="p-2 mt-0 pt-0 mb-5">
             <div class="container">
                 <div class="row">
-                    <div class="col-10 mx-0 px-0 mb-2">
+                    <div class="col-8 mx-0 px-0 mb-2">
                         <select class="form-control" id="hire_call_select">
                             <option value="">이전 채용공고 불러오기</option>
                               <?php foreach($hire_call_row as $val){ ?>
@@ -103,7 +105,7 @@ $salary_list = $oDB->get("TF_salary",null,"salary_idx, salary_name, salary_is_sh
                               <?php } ?>
                         </select>
                     </div>
-                    <div class="col-2 mx-0 px-0 mb-2 pl-1">
+                    <div class="col-4 mx-0 px-0 mb-2 pl-1">
                         <button class="btn btn-primary btn-block" style="height:45px;" onclick="hire_call()">불러오기</button>
                     </div>
                     <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
@@ -187,7 +189,7 @@ $salary_list = $oDB->get("TF_salary",null,"salary_idx, salary_name, salary_is_sh
                             <input type="text" class="form-control" id="salary" style="width:50px;" maxlength="10" value="<?=$edit_row[0]["job_salary"]?>" onkeyup="onlyNumber(this)" />
 
                             <div class="input-group-append">
-                                <span class="input-group-text" id="salary_text" style="font-size:12px;">만원 이상</span>
+                                <span class="input-group-text pr-2" id="salary_text">만원 이상</span>
                             </div>
                         </div>
                     </div>
@@ -408,7 +410,8 @@ $salary_list = $oDB->get("TF_salary",null,"salary_idx, salary_name, salary_is_sh
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                <?php include "job.reg.complete.php"; ?>
+<!--       이건안됨         --><?php //include "job.reg.complete.php"; ?>
+                <iframe src="<?=getUrl('company','job_appRegisterComplete')?>" frameborder="0" scrolling="no" width="100%" style="height:90vh"></iframe>
             </div>
         </div>
     </div>
