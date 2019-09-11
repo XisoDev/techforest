@@ -28,9 +28,9 @@ $file_list = $output->get('file_list');
                     <span class="position-absolute weight_normal" style="right:10px; top:7px;">
                         이력서 완성도
                         <span class="btn btn-round btn-danger btn-xxs py-2 px-2 weight_lighter m-0" style="vertical-align:0px;">
-                          <?php if($count_career_row['count_career'] == $count_c_content_row['count_c_content'] && $count_myinfo_row['count_myinfo']){
+                          <?php if($count_career_row[0]['count_career'] == $count_c_content_row[0]['count_c_content'] && $count_myinfo_row[0]['count_myinfo']){
                             echo '높음';
-                          }else if($count_career_row['count_career'] > $count_c_content_row['count_c_content'] && $count_myinfo_row['count_myinfo']){
+                          }else if($count_career_row[0]['count_career'] > $count_c_content_row[0]['count_c_content'] && $count_myinfo_row[0]['count_myinfo']){
                             echo '중간';
                           }else{
                             echo '낮음';
@@ -39,7 +39,7 @@ $file_list = $output->get('file_list');
                         </span>
                     </span>
                     <p class="d-block d-lg-none text-left">
-                    <i class="xi-clock-o"></i> 최종 수정일 : 2019.07.17
+                    <i class="xi-clock-o"></i> 최종 수정일 : <?=substr($myinfo_row[0]['edit_date'],0,10)?>
                     </p>
                 </div>
                 <div class="px-2">

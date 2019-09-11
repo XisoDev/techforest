@@ -1,3 +1,9 @@
+<?php
+//언론보도리스트
+$news_list = $output->get('news_list');
+
+?>
+
 <div class="container-fluid welcome_seciton" style="background-image:url('/oPage/images/home_welcome.png');">
     <img src="/oPage/images/gear.png" class="rotating d-sm-none" style="position:absolute; width:30%; right:-5%; top:-5%;"  />
     <img src="/oPage/images/gear.png" class="rotating_slow d-sm-none" style="position:absolute; left:-35%; width:60%; top:3%;" />
@@ -42,6 +48,7 @@
         <div class="col-12 mt-2">
             <div class="flex-card-slick">
                 <?php for($i=1; $i<=3; $i++){ ?>
+                  <a href="<?=getUrl('company','job_register')?>">
                     <div class="tech_card text-center">
                         <div class="thumbnail">
                             <div class="icon_wrap">
@@ -50,6 +57,7 @@
                         </div>
                         <p class="weight_lighter mt-0 pb-3">공고등록하고<br />맞춤기술자 보기</p>
                     </div>
+                  </a>
                 <?php } ?>
             </div>
         </div>
@@ -76,6 +84,7 @@
           <div class="col-12 mt-2">
               <div class="flex-card-slick">
                   <?php for($i=1; $i<=3; $i++){ ?>
+                    <a href="<?=getUrl('company','job_register')?>">
                       <div class="tech_card text-center">
                           <div class="thumbnail">
                               <div class="icon_wrap">
@@ -84,6 +93,7 @@
                           </div>
                           <p class="weight_lighter mt-2">공고등록하고<br />맞춤기술자 보기</p>
                       </div>
+                    </a>
                   <?php } ?>
               </div>
           </div>
@@ -168,7 +178,7 @@
             <?php if($logged_info) { ?>
                 <div class="d-block d-lg-none">
                     <h5 class="weight_bold mt-4">
-                        <span class="red">기술자숲</span>에 딱 맞는 추천기술자를 찾아왔어요!
+                        <span class="red"><?=$logged_info['c_name']?></span>에 딱 맞는 추천기술자를 찾아왔어요!
                     </h5>
                 </div>
             <?php } else { ?>
@@ -204,10 +214,14 @@
                         </div>
                         <h6 class="weight_normal mb-1 px-2 text-center"><?=$val['m_name']?> (<?=$val['m_birthday']?>세)</h6>
                         <p class="text-left xs_content px-3 py-0 m-0 mb-1">  <img class="d-inline imgicon" src="/oPage/images/imgicons/location_bg_red.png" height="10" /> 희망지역 : <?=$desired_work_place?></p>
-                        <p class="text-left xs_content px-3 py-0 m-0" class="cut1" style="height:42px;"> <img class="d-inline imgicon" src="/oPage/images/imgicons/wrench_bg_red.png" height="10" /> 주요경력 : <?=$val['duty_name']?></p>
+                        <p class="text-left xs_content px-3 py-0 m-0 cut1"  style="height:42px;"> <img class="d-inline imgicon" src="/oPage/images/imgicons/wrench_bg_red.png" height="10" /> 주요경력 : <?=$val['duty_name']?></p>
                         <div class="row mt-0 mx-0 px-0">
                             <div class="col-12 mx-0 px-0">
+                              <?if($m_idx){?>
                               <a href="<?=getUrl('technician','resume',$val['m_idx'],array("from"=>"index"))?>" target="_blank" class="btn btn-block btn-warning mt-1 rounded-0">이력서보기</a>
+                              <?}else{?>
+                                <button class="btn btn-block btn-warning mt-1 rounded-0"></button>
+                              <?}?>
                             </div>
                         </div>
                     </div>
@@ -216,9 +230,10 @@
         </div>
     </div>
 
-    <div class="text-center">
+    <!-- 관련페이지 없음. 주석처리 -->
+    <!-- <div class="text-center">
         <a href="#" class="d-none d-md-inline-block mt-3 btn btn-primary btn-round">더 많은 기술자보기</a>
-    </div>
+    </div> -->
 </div>
 
 <div class="container-fluid bg-light py-5 pt-lg-2 mt-5">
@@ -287,22 +302,22 @@
         <h3 class="weight_bold mt-3">언론보도</h3>
         <h6 class="weight_lighter mt-1 mb-2">기술자숲의 언론보도 및 소식을 확인해보세요.</h6>
     </div>
-    <div class="row">
-        <?php for($i=1; $i<=3; $i++){ ?>
+    <div class="flex-card-slick">
+        <?php foreach($news_list as $val){ ?>
             <div class="col-4 mt-2">
                 <div class="shadow">
-                    <div style="background-color:#EEE; min-height:150px;">
+                    <div style="background-image:url('<?=$val['n_img']?>'); min-height:150px;">
 
                     </div>
                     <div class="px-md-2">
-                        <div class="p-2">
-                            <h6 class="weight_normal">휴대폰으로 딱 10초!, 기술자 일자리 매칭 서비...</h6>
-                            <p class="xs_content px-0">
-                                30대 소셜 벤처 기업가가 조선산업 불황 여파로 일자리를 잃은 숙련 기...
+                        <div class="px-2 py-3">
+                            <h6 class="weight_normal cut1"><?=$val['n_title']?></h6>
+                            <p class="xs_content px-0 cut2">
+                                <?=$val['n_content']?>
                             </p>
                             <hr />
-                            <a class="btn btn-primary btn-xs py-2 px-3 pull-right" href="#">자세히 보기</a>
-                            <p class="text-secondary my-0 py-0 px-0">2019.05.30</p>
+                            <a class="btn btn-primary btn-xs py-2 px-3 pull-right" href="<?=$val['n_link']?>">자세히 보기</a>
+                            <p class="text-secondary my-0 py-0 px-0"><?=$val['n_date']?></p>
                         </div>
                     </div>
                 </div>

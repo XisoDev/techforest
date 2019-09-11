@@ -17,13 +17,13 @@ if(!isset($footer_false)){
             <div class="col-9 pt-3">
                 <h6 class="text-warning mt-4 mb-0 pt-0 pb-0">CONTACT</h6>
                 <p class="text-light weight_lighter xs_content">
-                    경남 창원시 마산회원구 봉암북7길 21, ICT 진흥센터 5동 706호<br />
+                    경남 창원시 마산회원구 봉암북7길 21, ICT 진흥센터 5동 607호<br />
                     <a class="text-light" href="tel:+82218009665">1800-9665</a> | <a class="text-light" href="tel:+8255-259-5315">055-259-5315</a>
                 </p>
 
                 <h6 class="text-warning mt-4 mb-0 pt-0 pb-0">COMPANY</h6>
                 <p class="text-light weight_lighter xs_content">
-                    상호 : 기술자숲주식회사 | 사업자등록번호 : 592-81-00527 | 대표 <b class="weight_normal">공태영</b><br />
+                    상호 : 기술자숲 주식회사 | 사업자등록번호 : 592-81-00527 | 대표 <b class="weight_normal">공태영</b><br />
                     통신판매업 신고번호 : 2016-마산회원-0136호 | 직업정보제공사업 : 창원제 2016-3호
                 </p>
 

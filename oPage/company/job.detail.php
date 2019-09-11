@@ -13,7 +13,6 @@ $member_count = $output->get('member_count');
       <h4 class="weight_normal">공고 상세보기</h4>
   </section>
 
-
 <div class="container" style="position:relative; z-index:1;">
   <section class="max_width margin_auto inline_block width_100 padding_top_50_xs_null">
   			<div class="col-md-8 padding_5_xs_null align_left float_left width_100">
@@ -39,7 +38,7 @@ $member_count = $output->get('member_count');
   						</table>
   					</div>
   				</div>
-          <img class="rectangle_60" src="/oPage/images/imgicons/arrow_left.png" alt="관심" />
+          <!-- <img class="rectangle_60" src="/oPage/images/imgicons/arrow_left.png" alt="관심" /> -->
           <?if($logged_info['is_commerce'] == 'Y'){?>
           <?}else{?>
             <div class="d-md-none padding_5 border1_not_top_xs_null">
@@ -48,7 +47,7 @@ $member_count = $output->get('member_count');
     							if($m_idx > 0) {
     								if($hire_info[0]["interest_count"] > 0) {?>
 
-    									<a class="inline_block" id="click_interest2"><img class="rectangle_60" src="/oPage/images/imgicons/arrow_left.png" alt="관심" /><input type="hidden" value="<?=$hire_info[0]["h_idx"]?>" /></a>
+    									<a class="inline_block" id="click_interest2"><img class="rectangle_60" src="./company/images/icon_001.png" alt="관심" /><input type="hidden" value="<?=$hire_info[0]["h_idx"]?>" /></a>
     								<?} else {?>
     									<a class="inline_block" id="click_interest1"><img class="rectangle_60" src="./company/images/icon_002.png" alt="관심공고" /><input type="hidden" value="<?=$hire_info[0]["h_idx"]?>" /></a>
     								<?}?>

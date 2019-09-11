@@ -121,16 +121,20 @@ class companyController{
 
     $data = array(
       "c_name" => $c_name,
+      "m_idx" => $m_idx,
       "registration" => $registration,
       "address" => $address,
       "address2" => $address2,
       "phonenumber" => $phonenumber,
       "select6" => $select6,
       "c_introduction" => $c_introduction,
-      "reg_date" => $now_date
+      "reg_date" => $now_date,
+      "edit_date" => $now_date
     );
-    $oDB->where("m_idx",$m_idx);
-    $row = $oDB->update("TF_member_commerce_tb", $data);
+    $updateColumns = array("c_name","registration","address","address2","phonenumber","select6","c_introduction","edit_date");
+    $lastInsertId = "m_idx";
+    $oDB->onDuplicate($updateColumns,$lastInsertId);
+    $row = $oDB->insert("TF_member_commerce_tb", $data);
 
     if($row){
         return new Object(0,"기업정보가 등록되었습니다.");

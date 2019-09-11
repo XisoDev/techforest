@@ -6,6 +6,82 @@ $local_list = $output->get('local_list');
 $occupation_list = $output->get('occupation_list');
 $duty_list = $output->get('duty_list');
 
+$page =  $_REQUEST['page'];
+
+if(!$page) {
+  $page = 1;
+}
+
+$total_record = count($hire_rows);
+    $scale = 12;
+	$start = ($page - 1) * $scale;
+
+	/* 페이징 시작 */
+	$allPage = ceil($total_record / $scale);
+
+	if($page > $allPage){
+		$page = 1;
+		$total_record = count($hire_rows);
+		$scale = 12;
+	$start = ($page - 1) * $scale;
+
+	/* 페이징 시작 */
+	$allPage = ceil($total_record / $scale);
+	}
+
+	$oneSection = 5;
+	$currentSection = ceil($page / $oneSection);
+	$allSection = ceil($allPage / $oneSection);
+	$firstPage = ($currentSection * $oneSection) - ($oneSection - 1);
+	if($currentSection == $allSection) {
+		$lastPage = $allPage;
+	} else {
+		$lastPage = $currentSection * $oneSection;
+	}
+	$prevPage = (($currentSection - 1) * $oneSection);
+	$nextPage = (($currentSection + 1) * $oneSection) - ($oneSection - 1);
+	if(!$m_idx){
+		if($page != 1) {
+			$paging .= "<li><a href=\"./?page=\" aria-label=\"Previous\">처음</a></li>";
+		}
+		//첫 섹션이 아니라면 이전 버튼을 생성
+		if($currentSection != 1) {
+			$paging .= "<li><a href=\"./?page=\" aria-label=\"Previous\">이전</a></li>";
+		}
+
+		for($i = $firstPage; $i <= $lastPage; $i++) {
+			if($i == $page) {
+				$paging .= "<li class=\"active\"><a>" . $i . "</a></li>";
+			} else {
+				$paging .= "<li><a href=\"./?page=" . $i . "\" aria-label=\"Previous\">" . $i . "</a></li>";
+			}
+		}
+
+	}else{
+		if($page != 1) {
+			$paging .= "<li><a href=\"./?page=1\" aria-label=\"Previous\">처음</a></li>";
+		}
+		//첫 섹션이 아니라면 이전 버튼을 생성
+		if($currentSection != 1) {
+			$paging .= "<li><a href=\"./?page=" . $prevPage . "\" aria-label=\"Previous\">이전</a></li>";
+		}
+
+		for($i = $firstPage; $i <= $lastPage; $i++) {
+			if($i == $page) {
+				$paging .= "<li class=\"active\"><a>" . $i . "</a></li>";
+			} else {
+				$paging .= "<li><a href=\"./?page=" . $i . "\" aria-label=\"Previous\">" . $i . "</a></li>";
+			}
+		}
+
+		if($currentSection != $allSection) {
+		$paging .= "<li><a href=\"./?page=" . $nextPage . "\">다음</a></li>";
+		}
+		if($page != $allPage) {
+			$paging .= "<li><a href=\"./?page=" . $allPage . "\" aria-label=\"Next\">끝</a></li>";
+		}
+	}
+
 ?>
 
 <section class="bg-white d-lg-none">
@@ -24,7 +100,7 @@ $duty_list = $output->get('duty_list');
             <a href="<?=getUrl('technician','findJobList')?>" class="pull-right btn btn-sm btn-round btn-primary py-1 px-3">맞춤공고</a>
             <a href="<?=getUrl('technician','findJobListAll')?>" class=" pull-right btn btn-sm border-primary btn-round py-1 px-3 mr-1">전체공고</a>
             <h4 class="mb-2">일자리 정보</h4>
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-3">
                     <select class="form-control"><option>지역설정</option></select>
                 </div>
@@ -37,14 +113,14 @@ $duty_list = $output->get('duty_list');
                 <div class="col-3">
                     <select class="form-control"><option>직종</option></select>
                 </div>
-            </div>
+            </div> -->
             <div class="clearfix"></div>
     </div>
 
     <div class="row">
       <input type="hidden" id="hidden_m_idx" value="<?=$m_idx?>">
-      <?php foreach($hire_rows as $val) { ?>
-        <input type="hidden" id="hidden_h_idx" value="<?=$val['h_idx']?>">
+      <?php for($i = $start; $i < $start + $scale && $i < $total_record; $i++) { ?>
+        <input type="hidden" id="hidden_h_idx" value="<?=$hire_rows[$i]['h_idx']?>">
           <div class="col-12 col-md-4 px-md-2 pb-md-4">
               <div class="magazine tech_card mb-3 bg-white text-left shadow">
                   <div class="row">
@@ -53,11 +129,11 @@ $duty_list = $output->get('duty_list');
                               <span class="overlay">
                                 <?
                                   foreach ($interest_rows as $val2) {
-                                    if($val2['h_idx'] == $val['h_idx']){
-                                      $interest_html2 = '<a class="btn-xxs btn btn-round border-white text-white py-1 px-2 position-absolute mr-lg-3" onclick="interest_remove('. $val['h_idx'] .')" style="right:10px; top:10px;">관심공고<i class="xi-heart red" id="yes_interest"></i></a>';
+                                    if($val2['h_idx'] == $hire_rows[$i]['h_idx']){
+                                      $interest_html2 = '<a class="btn-xxs btn btn-round border-white text-white py-1 px-2 position-absolute mr-lg-3" onclick="interest_remove('. $hire_rows[$i]['h_idx'] .')" style="right:10px; top:10px;">관심공고<i class="xi-heart red" id="yes_interest"></i></a>';
                                       break;
                                     }else{
-                                      $interest_html2 = '<a class="btn-xxs btn btn-round border-white text-white py-1 px-2 position-absolute mr-lg-3" onclick="interest_add('. $val['h_idx'] .')" style="right:10px; top:10px;">관심공고<i class="xi-heart" id="no_interest"></i></a>';
+                                      $interest_html2 = '<a class="btn-xxs btn btn-round border-white text-white py-1 px-2 position-absolute mr-lg-3" onclick="interest_add('. $hire_rows[$i]['h_idx'] .')" style="right:10px; top:10px;">관심공고<i class="xi-heart" id="no_interest"></i></a>';
                                     }
                                   }
                                 ?>
@@ -65,40 +141,40 @@ $duty_list = $output->get('duty_list');
                               </span>
                           </div>
                       </div>
-                      <? if ($val['city_name'] == "전체") { $val['city_name'] = "";} ?>
-                      <? if ($val['district_name'] == "전체") { $val['district_name'] = ""; }?>
-                      <? if ($val['salary_idx'] < 3) { $hire_salary_text = "만원"; } else { $hire_salary_text = "원"; } ?>
+                      <? if ($hire_rows[$i]['city_name'] == "전체") { $hire_rows[$i]['city_name'] = "";} ?>
+                      <? if ($hire_rows[$i]['district_name'] == "전체") { $hire_rows[$i]['district_name'] = ""; }?>
+                      <? if ($hire_rows[$i]['salary_idx'] < 3) { $hire_salary_text = "만원"; } else { $hire_salary_text = "원"; } ?>
                       <div class="col-7 col-md-12 pl-0 pl-md-3">
                           <div class="p-2">
-                              <h6 class="weight_normal cut1"><?=$val['c_name']?></h6>
-                              <h6 class="red cut1"><?=$val['h_title']?></h6>
+                              <h6 class="weight_normal cut1"><?=$hire_rows[$i]['c_name']?></h6>
+                              <h6 class="red cut1"><?=$hire_rows[$i]['h_title']?></h6>
                               <p class="weight_lighter xxs_content mx-0 px-0">
                                   <span class="badge badge-danger weight_lighter">위치</span>
-                                    <?= $val['local_name'] . " " . $val['city_name'].$val['district_name']?>
+                                    <?= $hire_rows[$i]['local_name'] . " " . $hire_rows[$i]['city_name'].$hire_rows[$i]['district_name']?>
                                   <span class="badge badge-danger weight_lighter">
-                                    <?if($val['salary_idx'] == "1"){
+                                    <?if($hire_rows[$i]['salary_idx'] == "1"){
                                         echo "연봉";
-                                      }else if($val['salary_idx'] == "2"){
+                                      }else if($hire_rows[$i]['salary_idx'] == "2"){
                                         echo "월급";
-                                      }else if($val['salary_idx'] == "3"){
+                                      }else if($hire_rows[$i]['salary_idx'] == "3"){
                                         echo "일급";
                                       }else{
                                         echo "시급";
                                       }?>
                                   </span>
-                                  <b><?= number_format($val['job_salary']) . $hire_salary_text?></b>
+                                  <b><?= number_format($hire_rows[$i]['job_salary']) . $hire_salary_text?></b>
                               </p>
                               <p class="text-secondary xxs_content mx-0 px-0 pt-1">
-                                  <img src="/oPage/images/imgicons/wrench_bg_red.png" height="14" /> <?=$val['job_is_career']?>
+                                  <img src="/oPage/images/imgicons/wrench_bg_red.png" height="14" /> <?=$hire_rows[$i]['job_is_career']?>
                               </p>
                           </div>
 
                           <div class="row m-0 p-0 pt-0 mt-0">
                               <div class="col-6 mx-0 px-0">
-                                  <a href="<?=getUrl('technician','jobDetail',$val['h_idx'])?>" class="btn btn-light btn-block rounded-0">상세보기</a>
+                                  <a href="<?=getUrl('technician','jobDetail',$hire_rows[$i]['h_idx'])?>" class="btn btn-light btn-block rounded-0">상세보기</a>
                               </div>
                               <div class="col-6 mx-0 px-0">
-                                  <button class="btn btn-danger btn-block rounded-0" onclick="application_ok(<?=$val['h_idx']?>)">지원하기</button>
+                                  <button class="btn btn-danger btn-block rounded-0" onclick="application_ok(<?=$hire_rows[$i]['h_idx']?>)">지원하기</button>
                               </div>
                           </div>
                       </div>
@@ -107,6 +183,17 @@ $duty_list = $output->get('duty_list');
           </div>
       <?php } ?>
     </div>
+
+  <div class="" style="text-align:center;">
+    <ul class="pagination">
+      <?
+        if($total_record > 0){
+          echo $paging;
+        }
+      ?>
+    </ul>
+  </div>
+
 </div>
 
 <div class="modal fade" id="check_phonenumber" tabindex="-1" role="dialog" aria-labelledby="tech_forest_modal_window" aria-hidden="true" style="">
@@ -128,6 +215,10 @@ $duty_list = $output->get('duty_list');
 
 
 <script type="text/javascript">
+$(document).ready(function(){
+
+});
+
 function application_ok(h_idx){
   $('#check_phonenumber').modal('show');
 

@@ -55,5 +55,5 @@
 
 <section class="px-3 pb-4 pt-0 text-center bg-white fixed-bottom">
     <a href="#" class="btn btn-block border-danger red btn-lg btn-round mb-3">담당자 연락처 수정</a>
-    <a href="<?=getUrl('company')?>" class="text-white btn btn-block btn-danger btn-lg btn-round">확인</a>
+    <a href="<?=getUrl('company','job')?>" class="text-white btn btn-block btn-danger btn-lg btn-round">확인</a>
 </section>

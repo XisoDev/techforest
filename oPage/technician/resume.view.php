@@ -97,16 +97,17 @@ $self_introduction = str_replace("\n", "<br />", $my_info2[0]["self_introduction
                 <h6 class="text-secondary">희망직무</h6>
                 <?if(count($my_info9) < 2){?>
                   <p><br /><?=$my_info9[0]['duty_name']?></p>
-                <?}?>
+                <?}else{?>
                 <?foreach($my_info9 as $val){?>
                   <p style="margin-bottom:0;"><?=$val['duty_name']?></p>
                 <?}?>
+							<?}?>
             </div>
         </div>
     </div>
 
     <h5 class="bg-light px-2 py-3 mt-5"><span class="red">*</span>경력 간단요약 및 자기소개</h5>
-    <p><?=$self_introduction?></p>
+    <p style="padding-left: 0.75rem;"><?=$self_introduction?></p>
 
     <? if(count($my_info3) > 0){?>
         <h5 class="bg-light px-2 py-3 mt-5">학력</h5>
@@ -117,8 +118,8 @@ $self_introduction = str_replace("\n", "<br />", $my_info2[0]["self_introduction
             </cols>
         <?foreach ($my_info3 as $val) {?>
             <tr><th><?=substr($val['school_graduated'], 0, 7)?></th><td><?=$val['school_name']?> | <?=$val['school_major']?></td></tr>
-        </table>
       <? } ?>
+			</table>
     <? } ?>
 
     <? if(count($my_info4) > 0){?>

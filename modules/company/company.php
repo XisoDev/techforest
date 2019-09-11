@@ -22,6 +22,7 @@ class companyView{
         $output->add('hire_ing',$this->hire_ing());
         $output->add('member_notice',$this->member_notice());
         $output->add('hire_end',$this->hire_end());
+        $output->add('news_list',$this->news_list());
 
         $set_template_file = "company/index.php";
 
@@ -145,12 +146,52 @@ class companyView{
             //여기 array 에는 해당 document_srl 로 조회한 job 정보를 넣으면됨.
             //$output->add('oJob',array());
             $now_date = date("YmdHis");
+
             //상세이력서보기 select
             $m_idx1 = $args->document_srl;
             $oDB->where("m.m_idx",$m_idx1);
+            $oDB->join("TF_a_line_self ls", "ls.m_idx = m.m_idx","LEFT");
             $oDB->join("TF_member_order mo","m.m_idx = mo.m_idx", "LEFT");
             $oDB->join("TF_salary s","mo.salary_idx = s.salary_idx", "LEFT");
             $app_info_row = $oDB->get("TF_member_tb m");
+
+            //상세이력서보기 - 희망직종
+            $oDB->where("m_idx",$m_idx1);
+            $oDB->join("TF_occupation oc","mo.o_idx = oc.o_idx","LEFT");
+            $occupation_row = $oDB->get("TF_member_occupation mo",null,"o_name");
+
+            //상세이력서보기 - 자기소개
+            $oDB->where("m_idx",$m_idx1);
+            $introduction_row = $oDB->get("TF_member_self_tb",null,"self_introduction");
+
+            //상세이력서보기 - 학력
+            $oDB->orderBy("e.seq","ASC");
+            $oDB->where("m_idx",$m_idx1);
+            $oDB->join("TF_school s","e.s_idx = s.s_idx","LEFT");
+            $education_row = $oDB->get("TF_member_education_tb e",null,"school_name, school_major, school_grade, max_grade, school_graduated, is_ged, e.s_idx");
+
+            //상세이력서보기 - 경력
+            $oDB->orderBy("career_idx","DESC");
+            $oDB->orderBy("is_newcommer","ASC");
+            $oDB->where("m_idx",$m_idx1);
+            $career_row = $oDB->get("TF_member_career_tb",null,"c_name, c_position, c_content, c_start_date, c_end_date, is_newcommer, career_idx");
+
+            //상세이력서보기 - 자격증
+            $oDB->orderBy("certificate_idx","DESC");
+            $oDB->orderBy("is_certificate","DESC");
+            $oDB->where("m_idx",$m_idx1);
+            $certificate_row = $oDB->get("TF_member_certificate_tb",null,"certificate_name, certificate_date, is_certificate");
+
+            //상세이력서보기 - 어학
+            $oDB->orderBy("language_idx","DESC");
+            $oDB->where("m_idx",$m_idx1);
+            $language_row = $oDB->get("TF_member_language_tb",null,"lc_d_idx, score, language_date");
+
+            //상세이력서보기 - 관련서류보기
+            $oDB->orderBy("reg_date","DESC");
+            $oDB->orderBy("file_type","ASC");
+            $oDB->where("m_idx",$m_idx1);
+            $file_row = $oDB->get("TF_member_file");
 
             //공고등록권 구매했는지 확인
             $oDB->where("expire_date",$now_date,">");
@@ -163,8 +204,16 @@ class companyView{
             $check_applicant = $oDB->get("TF_suggest_interview");
 
             $output->add('app_info_row',$app_info_row);
+            $output->add('occupation_row',$occupation_row);
             $output->add('check_voucher',$check_voucher);
             $output->add('check_applicant',$check_applicant);
+            $output->add('introduction_row',$introduction_row);
+            $output->add('education_row',$education_row);
+            $output->add('career_row',$career_row);
+            $output->add('certificate_row',$certificate_row);
+            $output->add('language_row',$language_row);
+            $output->add('file_row',$file_row);
+            $output->add('application_m_idx',$m_idx1);
 
 
         }else{
@@ -243,7 +292,7 @@ class companyView{
             $oDB->join("TF_city_tb c","c.city_idx = h.city_idx","LEFT");
             $oDB->join("TF_local_tb l","l.local_idx = h.local_idx","LEFT");
             $oDB->join("TF_member_commerce_tb co","h.c_idx = co.c_idx","LEFT");
-            $row = $oDB->get("TF_hire_tb h",null,"local_name,city_name,district_name,h.h_idx,h_title,salary_idx,job_salary,count(al.m_idx) AS applicant,TO_DAYS(h.job_end_date )-TO_DAYS(NOW( )) AS job_end_day");
+            $row = $oDB->get("TF_hire_tb h",null,"job_is_career,c_name,local_name,city_name,district_name,h.h_idx,h_title,salary_idx,job_salary,count(al.m_idx) AS applicant,TO_DAYS(h.job_end_date )-TO_DAYS(NOW( )) AS job_end_day");
 
             //마감된 공고리스트
             $oDB->orderby("h.h_idx","DESC");
@@ -256,13 +305,87 @@ class companyView{
             $oDB->join("TF_city_tb c","c.city_idx = h.city_idx","LEFT");
             $oDB->join("TF_local_tb l","l.local_idx = h.local_idx","LEFT");
             $oDB->join("TF_member_commerce_tb co","h.c_idx = co.c_idx","LEFT");
-            $end_row = $oDB->get("TF_hire_tb h",null,"local_name,city_name,district_name,h.h_idx,h_title,salary_idx,job_salary,count(al.m_idx) AS applicant,TO_DAYS(h.job_end_date )-TO_DAYS(NOW( )) AS job_end_day");
+            $end_row = $oDB->get("TF_hire_tb h",null,"job_is_career,c_name,local_name,city_name,district_name,h.h_idx,h_title,salary_idx,job_salary,count(al.m_idx) AS applicant,TO_DAYS(h.job_end_date )-TO_DAYS(NOW( )) AS job_end_day");
 
             $output->add('row',$row);
             $output->add('end_row',$end_row);
         }
 
         return $output;
+    }
+
+    function hireList($args){
+      setSEO("진행중인 공고","진행중인 공고를 확인하세요.");
+      global $site_info;
+      $site_info->layout = "company";
+
+      global $add_body_class;
+      $add_body_class[] = "shrink";
+
+      global $set_template_file;
+      global $oDB;
+
+      $m_idx = $_SESSION['LOGGED_INFO'];
+      $now_date = date("YmdHis");
+
+      $set_template_file = "company/hire.list.php";
+      $output = new Object();
+
+      //진행중인 공고리스트
+      $oDB->orderby("h.h_idx","DESC");
+      $oDB->groupBy("h.h_idx");
+      $oDB->where("co.m_idx",$m_idx);
+      $oDB->where("h.job_end_date",$now_date,">");
+      $oDB->joinwhere("TF_application_letter al","al.isVisible","Y");
+      $oDB->join("TF_application_letter al","al.h_idx = h.h_idx","LEFT");
+      $oDB->join("TF_district_tb d","d.district_idx = h.district_idx","LEFT");
+      $oDB->join("TF_city_tb c","c.city_idx = h.city_idx","LEFT");
+      $oDB->join("TF_local_tb l","l.local_idx = h.local_idx","LEFT");
+      $oDB->join("TF_member_commerce_tb co","h.c_idx = co.c_idx","LEFT");
+      $row = $oDB->get("TF_hire_tb h",null,"job_is_career,c_name,local_name,city_name,district_name,h.h_idx,h_title,salary_idx,job_salary,count(al.m_idx) AS applicant,TO_DAYS(h.job_end_date )-TO_DAYS(NOW( )) AS job_end_day");
+
+
+      $output->add('member_notice',$this->member_notice());
+      $output->add('row',$row);
+
+      return $output;
+    }
+
+    function hireEndList($args){
+      setSEO("마감된 공고","마감된 공고를 확인하세요.");
+      global $site_info;
+      $site_info->layout = "company";
+
+      global $add_body_class;
+      $add_body_class[] = "shrink";
+
+      global $set_template_file;
+      global $oDB;
+
+      $m_idx = $_SESSION['LOGGED_INFO'];
+      $now_date = date("YmdHis");
+
+      $set_template_file = "company/hire.endlist.php";
+      $output = new Object();
+
+      //마감된 공고리스트
+      $oDB->orderby("h.h_idx","DESC");
+      $oDB->groupBy("h.h_idx");
+      $oDB->where("co.m_idx",$m_idx);
+      $oDB->where("h.job_end_date",$now_date,"<");
+      $oDB->joinwhere("TF_application_letter al","al.isVisible","Y");
+      $oDB->join("TF_application_letter al","al.h_idx = h.h_idx","LEFT");
+      $oDB->join("TF_district_tb d","d.district_idx = h.district_idx","LEFT");
+      $oDB->join("TF_city_tb c","c.city_idx = h.city_idx","LEFT");
+      $oDB->join("TF_local_tb l","l.local_idx = h.local_idx","LEFT");
+      $oDB->join("TF_member_commerce_tb co","h.c_idx = co.c_idx","LEFT");
+      $end_row = $oDB->get("TF_hire_tb h",null,"job_is_career,c_name,local_name,city_name,district_name,h.h_idx,h_title,salary_idx,job_salary,count(al.m_idx) AS applicant,TO_DAYS(h.job_end_date )-TO_DAYS(NOW( )) AS job_end_day");
+
+
+      $output->add('member_notice',$this->member_notice());
+      $output->add('end_row',$end_row);
+
+      return $output;
     }
 
     function job_register($args){
@@ -283,7 +406,7 @@ class companyView{
 
         $oDB->where("m_idx",$m_idx);
         $company_info = $oDB->get("TF_member_commerce_tb");
-        
+
         $output->add('company_info',$company_info);
         $output->add('member_notice',$this->member_notice());
         return $output;
@@ -555,6 +678,17 @@ class companyView{
 
       return $row;
 
+    }
+
+
+    function news_list(){
+      global $oDB;
+
+      //언론보도자료
+      $oDB->orderby("n_date","DESC");
+      $news_list = $oDB->get("TF_news_tb");
+
+      return $news_list;
     }
 
 

@@ -97,6 +97,9 @@ require_once "./inc/func.inc.php";
 
 $oDB = new MysqliDb($_db_config['host'], $_db_config['user_name'],$_db_config['password'],$_db_config['db'],$_db_config['port']);
 
+
+// $c_page = new PageHandler($total_count, $total_page, $cur_page);
+
 //모듈로드전에 회원 세션을 정의
 require_once "./modules/member/member.controller.php";
 $oMember = new memberController();

@@ -61,7 +61,7 @@
                 </div>
                 <div class="col-12 mx-0 px-0 d-block d-md-none my-3">
                 <button type="button" class="btn btn-primary btn-block btn-round">문의하기</button>
-                <a class="d-lg-none btn btn-light border-primary btn-block btn-round" href="tel:+821057595999"><i class="xi-call"></i> 전화로 문의하기</a>
+                <a class="d-lg-none btn btn border-primary btn-block btn-round mt-3" href="tel:+18009665"><i class="xi-call"></i> 전화로 문의하기</a>
                 </div>
                 <div class="col-12 mx-0 px-0 d-none d-md-block text-right">
                     <button type="button" class="btn btn-primary rounded px-5">문의하기</button>

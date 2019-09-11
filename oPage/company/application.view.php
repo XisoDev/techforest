@@ -2,7 +2,16 @@
   $info_row = $output->get('app_info_row');
   $check_voucher = $output->get('check_voucher');
   $check_applicant = $output->get('check_applicant');
+  $occupation_row = $output->get('occupation_row');
+  $introduction_row = $output->get('introduction_row');
+  $education_row = $output->get('education_row');
+  $career_row = $output->get('career_row');
+  $certificate_row = $output->get('certificate_row');
+  $language_row = $output->get('language_row');
+  $file_row = $output->get('file_row');
+  $application_m_idx = $output->get('application_m_idx');
 
+  $self_introduction = str_replace("\n", "<br />", $introduction_row[0]["self_introduction"]);
   $h_idx = $_REQUEST['h_idx'];
 ?>
 <section class="p-3 mt-4 pt-5 bg-white d-lg-none">
@@ -28,7 +37,9 @@
         </div>
     </div>
     <div class="tech_card bg-white overflow-hidden pt-0 my-3 shadow">
-        <span class="btn btn-block btn-warning mt-0 rounded-0 mb-3">책임감있는 열정적인 10년차 용접사!</span>
+        <span class="btn btn-block btn-warning mt-0 rounded-0 mb-3">
+          <?=$info_row[0]['a_line_self']?>
+        </span>
         <div class="row">
             <div class="d-none d-md-block col-md-1">
             </div>
@@ -98,7 +109,7 @@
                         <td><i class="xi-cog xxx_content"></i></td>
                         <th class="weight_bold">희망직종</th>
                         <td>:</td>
-                        <td>건설/조선</td>
+                        <td><?=$occupation_row[0]["o_name"]?></td>
                     </tr>
                 </table>
                 </div>
@@ -109,213 +120,198 @@
     <div class="tech_card bg-white overflow-hidden pt-0 my-3 pt-md-4">
         <h5 class="p-2 d-none d-md-block bg-light">경력간단요약</h5>
         <span class=" d-md-none btn btn-block btn-light mt-0 rounded-0 mb-3">경력간단요약</span>
-        <p class="px-3">성실한 10년차 용접사</p>
+        <p class="px-3"><?=$self_introduction?></p>
     </div>
 
     <div class="tech_card bg-white overflow-hidden pt-0 my-3 pt-md-4">
         <h5 class="p-2 d-none d-md-block bg-light">학력</h5>
         <span class=" d-md-none btn btn-block btn-light mt-0 rounded-0 mb-3">학력</span>
-        <div class="row ml-md-4">
-            <div class="col-12 col-md-6">
-                <div class="px-3">
-                    <table class="table table-borderless table-vertical-middle table-sm" cellspacing="0" cellpadding="0">
-                        <colgroup>
-                            <col width="10">
-                            <col width="70">
-                            <col width="10">
-                            <col width="*">
-                        </colgroup>
-                        <tr>
-                            <td><i class="xi-cog xxx_content"></i></td>
-                            <th class="weight_bold">학교</th>
-                            <td>:</td>
-                            <td>ABCD 학교</td>
-                        </tr>
-                        <tr>
-                            <td><i class="xi-cog xxx_content"></i></td>
-                            <th class="weight_bold">졸업연도</th>
-                            <td>:</td>
-                            <td>1999.02</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
+          <div class="px-3">
+            <?php foreach ($education_row as $key => $val) {?>
+              <?if($key != 0){?>
+                <hr class="mx-4" />
+              <?}?>
+              <?php if($val['is_ged'] == 1){?>
+                <table class="table table-borderless table-vertical-middle table-sm" cellspacing="0" cellpadding="0">
+                  <colgroup>
+                    <col width="10">
+                    <col width="70">
+                    <col width="10">
+                    <col width="*">
+                  </colgroup>
+                  <tr>
+                      <td><i class="xi-cog xxx_content"></i></td>
+                      <th class="weight_bold">학교</th>
+                      <td>:</td>
+                      <td>검정고시</td>
+                  </tr>
+                </table>
+              <?php }else{ ?>
+                <table class="table table-borderless table-vertical-middle table-sm" cellspacing="0" cellpadding="0">
+                    <colgroup>
+                        <col width="10">
+                        <col width="70">
+                        <col width="10">
+                        <col width="*">
+                    </colgroup>
+                <tr>
+                    <td><i class="xi-cog xxx_content"></i></td>
+                    <th class="weight_bold">학교</th>
+                    <td>:</td>
+                    <td><?=$val['school_name']?></td>
+                </tr>
+                <tr>
+                    <td><i class="xi-cog xxx_content"></i></td>
+                    <th class="weight_bold">졸업연도</th>
+                    <td>:</td>
+                    <td><?=substr($val["school_graduated"], 0, 7)?></td>
+                </tr>
+                <tr>
+                    <td><i class="xi-cog xxx_content"></i></td>
+                    <th class="weight_bold">전공</th>
+                    <td>:</td>
+                    <td><?=$val['school_major']?></td>
+                </tr>
+                <?php if($val['s_idx'] == 1){?>
 
-            <div class="col-12 col-md-6">
-                <div class="px-3">
-                    <table class="table table-borderless table-vertical-middle table-sm" cellspacing="0" cellpadding="0">
-                        <colgroup>
-                            <col width="10">
-                            <col width="70">
-                            <col width="10">
-                            <col width="*">
-                        </colgroup>
-                        <tr>
-                            <td><i class="xi-cog xxx_content"></i></td>
-                            <th class="weight_bold">학교</th>
-                            <td>:</td>
-                            <td>ABCD 학교</td>
-                        </tr>
-                        <tr>
-                            <td><i class="xi-cog xxx_content"></i></td>
-                            <th class="weight_bold">졸업연도</th>
-                            <td>:</td>
-                            <td>1999.02</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+                <?php }else{?>
+                  <tr>
+                      <td><i class="xi-cog xxx_content"></i></td>
+                      <th class="weight_bold">학점</th>
+                      <td>:</td>
+                      <td><?=$val['school_grade']?> / <?=$val['max_grade']?></td>
+                  </tr>
+                <?php }?>
+                </table>
+              <?php }?>
+            <?php } ?>
+          </div>
+      </div>
 
     <div class="tech_card bg-white overflow-hidden pt-0 my-3 pt-md-4">
         <h5 class="p-2 d-none d-md-block bg-light">경력</h5>
         <span class=" d-md-none btn btn-block btn-light mt-0 rounded-0 mb-3">경력</span>
         <div class="px-3">
-        <table class="table table-borderless table-vertical-middle table-sm" cellspacing="0" cellpadding="0">
-            <colgroup>
-                <col width="10">
-                <col width="70">
-                <col width="10">
-                <col width="*">
-            </colgroup>
-            <tr>
-                <td><i class="xi-cog xxx_content"></i></td>
-                <th class="weight_bold">전공</th>
-                <td>:</td>
-                <td>금형,기계제조</td>
-            </tr>
-            <tr>
-                <td><i class="xi-cog xxx_content"></i></td>
-                <th class="weight_bold">학점</th>
-                <td>:</td>
-                <td>4.21/4.5</td>
-            </tr>
-            <tr>
-                <td><i class="xi-cog xxx_content"></i></td>
-                <th class="weight_bold">학점</th>
-                <td>:</td>
-                <td>4.21/4.5</td>
-            </tr>
-            <tr>
-                <td><i class="xi-cog xxx_content"></i></td>
-                <th class="weight_bold">학점</th>
-                <td>:</td>
-                <td>4.21/4.5</td>
-            </tr>
-        </table>
+        <?php if(!$career_row){?>
+          <table class="table table-borderless table-vertical-middle table-sm" cellspacing="0" cellpadding="0">
+              <colgroup>
+                  <col width="10">
+                  <col width="70">
+                  <col width="10">
+                  <col width="*">
+              </colgroup>
+              <tr>
+                  <td><i class="xi-cog xxx_content"></i></td>
+                  <th class="weight_bold">경력</th>
+                  <td>:</td>
+                  <td>신입</td>
+              </tr>
+          </table>
+        <?php }else{ ?>
+        <?php foreach ($career_row as $key => $val) {?>
+          <?if($key != 0){?>
+            <hr class="mx-4" />
+          <?}?>
+          <table class="table table-borderless table-vertical-middle table-sm" cellspacing="0" cellpadding="0">
+              <colgroup>
+                  <col width="10">
+                  <col width="70">
+                  <col width="10">
+                  <col width="*">
+              </colgroup>
+              <tr>
+                  <td><i class="xi-cog xxx_content"></i></td>
+                  <th class="weight_bold">기업명</th>
+                  <td>:</td>
+                  <td><?=$val['c_name']?> | <?=$val['c_position']?></td>
+              </tr>
+              <tr>
+                  <td><i class="xi-cog xxx_content"></i></td>
+                  <th class="weight_bold">기간</th>
+                  <td>:</td>
+                  <td><?=substr($val['c_start_date'],0,7)?> ~ <?=substr($val['c_end_date'],0,7)?></td>
+              </tr>
+              <tr>
+                  <td><i class="xi-cog xxx_content"></i></td>
+                  <th class="weight_bold">직무내용</th>
+                  <td>:</td>
+                  <td style="word-break:break-all"><?=str_replace("\n", "<br />", $val["c_content"])?></td>
+              </tr>
+          </table>
+          <?php } ?>
+        <?php } ?>
         </div>
     </div>
 
     <div class="tech_card bg-white overflow-hidden pt-0 my-3 pt-md-4">
         <h5 class="p-2 d-none d-md-block bg-light">자격증</h5>
         <span class=" d-md-none btn btn-block btn-light mt-0 rounded-0 mb-3">자격증</span>
-        <div class="ml-md-4">
-            <div class="px-3">
-                <table class="table table-borderless table-vertical-middle table-sm" cellspacing="0" cellpadding="0">
-                    <colgroup>
-                        <col width="10">
-                        <col width="70">
-                        <col width="10">
-                        <col width="*">
-                    </colgroup>
-                    <tr>
-                        <td><i class="xi-cog xxx_content"></i></td>
-                        <th class="weight_bold">학교</th>
-                        <td>:</td>
-                        <td>ABCD 학교</td>
-                    </tr>
-                    <tr>
-                        <td><i class="xi-cog xxx_content"></i></td>
-                        <th class="weight_bold">졸업연도</th>
-                        <td>:</td>
-                        <td>1999.02</td>
-                    </tr>
-                </table>
-            </div>
-            <hr class="mx-4" />
-            <div class="px-3">
-                <table class="table table-borderless table-vertical-middle table-sm" cellspacing="0" cellpadding="0">
-                    <colgroup>
-                        <col width="10">
-                        <col width="70">
-                        <col width="10">
-                        <col width="*">
-                    </colgroup>
-                    <tr>
-                        <td><i class="xi-cog xxx_content"></i></td>
-                        <th class="weight_bold">전공</th>
-                        <td>:</td>
-                        <td>금형,기계제조</td>
-                    </tr>
-                    <tr>
-                        <td><i class="xi-cog xxx_content"></i></td>
-                        <th class="weight_bold">학점</th>
-                        <td>:</td>
-                        <td>4.21/4.5</td>
-                    </tr>
-                </table>
-            </div>
+          <div class="px-3">
+            <?php foreach ($certificate_row as $key => $val) {?>
+              <?if($key != 0){?>
+                <hr class="mx-4" />
+              <?}?>
+              <table class="table table-borderless table-vertical-middle table-sm" cellspacing="0" cellpadding="0">
+                  <colgroup>
+                      <col width="10">
+                      <col width="70">
+                      <col width="10">
+                      <col width="*">
+                  </colgroup>
+                  <tr>
+                      <td><i class="xi-cog xxx_content"></i></td>
+                      <th class="weight_bold">자격증명</th>
+                      <td>:</td>
+                      <td><?=$val['certificate_name']?></td>
+                  </tr>
+                  <tr>
+                      <td><i class="xi-cog xxx_content"></i></td>
+                      <th class="weight_bold">취득날짜</th>
+                      <td>:</td>
+                      <td><?=substr($val['certificate_date'],0,7)?></td>
+                  </tr>
+              </table>
+            <?php } ?>
+          </div>
         </div>
-    </div>
+
+
 
     <div class="tech_card bg-white overflow-hidden pt-0 my-3 pt-md-4">
-        <h5 class="p-2 d-none d-md-block bg-light">어학</h5>
-        <span class=" d-md-none btn btn-block btn-light mt-0 rounded-0 mb-3">어학</span>
-        <div class="ml-md-4">
-            <div class="px-3">
-                <table class="table table-borderless table-vertical-middle table-sm" cellspacing="0" cellpadding="0">
-                    <colgroup>
-                        <col width="10">
-                        <col width="70">
-                        <col width="10">
-                        <col width="*">
-                    </colgroup>
-                    <tr>
-                        <td><i class="xi-cog xxx_content"></i></td>
-                        <th class="weight_bold">학교</th>
-                        <td>:</td>
-                        <td>ABCD 학교</td>
-                    </tr>
-                    <tr>
-                        <td><i class="xi-cog xxx_content"></i></td>
-                        <th class="weight_bold">졸업연도</th>
-                        <td>:</td>
-                        <td>1999.02</td>
-                    </tr>
-                </table>
-            </div>
-            <hr class="mx-4" />
-            <div class="px-3">
-                <table class="table table-borderless table-vertical-middle table-sm" cellspacing="0" cellpadding="0">
-                    <colgroup>
-                        <col width="10">
-                        <col width="70">
-                        <col width="10">
-                        <col width="*">
-                    </colgroup>
-                    <tr>
-                        <td><i class="xi-cog xxx_content"></i></td>
-                        <th class="weight_bold">전공</th>
-                        <td>:</td>
-                        <td>금형,기계제조</td>
-                    </tr>
-                    <tr>
-                        <td><i class="xi-cog xxx_content"></i></td>
-                        <th class="weight_bold">학점</th>
-                        <td>:</td>
-                        <td>4.21/4.5</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
+      <h5 class="p-2 d-none d-md-block bg-light">어학</h5>
+      <span class=" d-md-none btn btn-block btn-light mt-0 rounded-0 mb-3">어학</span>
+        <div class="px-3">
+          <?php foreach ($language_row as $key => $val) {?>
+            <?if($key != 0){?>
+              <hr class="mx-4" />
+            <?}?>
+            <table class="table table-borderless table-vertical-middle table-sm" cellspacing="0" cellpadding="0">
+                <colgroup>
+                    <col width="10">
+                    <col width="70">
+                    <col width="10">
+                    <col width="*">
+                </colgroup>
+                <tr>
+                    <td><i class="xi-cog xxx_content"></i></td>
+                    <th class="weight_bold">시험명</th>
+                    <td>:</td>
+                    <td><?=$val['lc_d_idx']?> | <?=$val['score']?></td>
+                </tr>
+                <tr>
+                    <td><i class="xi-cog xxx_content"></i></td>
+                    <th class="weight_bold">취득날짜</th>
+                    <td>:</td>
+                    <td><?=substr($val['language_date'],0,7)?></td>
+                </tr>
+            </table>
+          <?php }?>
+       </div>
     </div>
 
     <div class="tech_card bg-white overflow-hidden pt-0 my-3 pt-md-4">
         <h5 class="p-2 d-none d-md-block bg-light">관련서류보기</h5>
         <span class=" d-md-none btn btn-block btn-light mt-0 rounded-0 mb-3">관련서류보기</span>
-
-
 
         <div class="px-3">
             <table class="table table-borderless table-vertical-middle table-sm" cellspacing="0" cellpadding="0">
@@ -324,26 +320,28 @@
                     <col width="*">
                     <col width="30">
                 </colgroup>
-                <tr>
-                    <td><i class="xi-cog xxx_content"></i></td>
-                    <td>[이력서] ic_laucher_1024.png</td>
-                    <td><img src="/oPage/images/imgicons/download.png" height="16" /></td>
-                </tr>
-                <tr>
-                    <td><i class="xi-cog xxx_content"></i></td>
-                    <td>[이력서] ic_laucher_1024.png</td>
-                    <td><img src="/oPage/images/imgicons/download.png" height="16" /></td>
-                </tr>
+                <?php foreach ($file_row as $val) {?>
+                  <tr>
+                      <td><i class="xi-cog xxx_content"></i></td>
+                      <td>[<?=$val['file_type']?>] <?=$val['file_name']?></td>
+                      <td>
+                        <?  $file_name_sever = $val["file_name"];?>
+                        <a href="../../../portfolio/<?=$file_name_sever?>" download="<?=$val['file_name']?>" title="<?=$val['file_name']?>">
+                          <img src="/oPage/images/imgicons/download.png" height="16"/>
+                        </a>
+                      </td>
+                  </tr>
+                <?php }?>
             </table>
         </div>
 
 
     </div>
 
-        <a href="<?=getUrl('technician','resume',$m_idx)?>" class="btn btn-block tech_card bg-primary btn-primary px-5 mb-3 d-md-none">이력서 전체보기</a>
+        <a href="<?=getUrl('technician','resume',$application_m_idx)?>" class="btn btn-block tech_card bg-primary btn-primary px-5 mb-3 d-md-none" target="_blank">이력서 전체보기</a>
 
         <div class="d-none d-md-block text-center">
-            <a href="<?=getUrl('technician','resume',$m_idx)?>" class="btn btn-primary px-5 rounded-0">이력서 전체보기</a>
+            <a href="<?=getUrl('technician','resume',$application_m_idx)?>" class="btn btn-primary px-5 rounded-0" target="_blank">이력서 전체보기</a>
             <?php if(!$check_voucher){?>
                 <button data-toggle="modal" data-target="#buy_voucher" class="btn btn-warning px-5 rounded-0">면접 제안하기</button>
             <?php }else if($check_applicant){?>

@@ -11,6 +11,7 @@ class technicianView{
     function index($args){
         global $set_template_file;
         global $site_info;
+
         $site_info->layout = "technician";
 
         $output = new Object();
@@ -24,6 +25,7 @@ class technicianView{
         $output->add('count_myinfo_row',$this->resume_completeness3());
         $output->add('rt_row',$this->recommend_technician_check());
         $output->add('member_notice',$this->member_notice());
+        $output->add('news_list',$this->news_list());
 
         $set_template_file = "technician/index.php";
 
@@ -296,9 +298,11 @@ class technicianView{
         return $output;
     }
 
+
     function findJobList($args){
         setSEO("일자리 찾기","기술자님께 딱!맞는 일자리와 관심공고를 살펴보세요");
         global $site_info;
+
         $site_info->layout = "technician";
 
         global $add_body_class;
@@ -320,6 +324,8 @@ class technicianView{
       //   }
 
       $output = new Object();
+
+
       $output->add('interest_rows',$this->interest_hire());
       $output->add('member_notice',$this->member_notice());
       $output->add('duty_list',$this->duty_list());
@@ -390,7 +396,7 @@ class technicianView{
         $oDB->join("TF_city_tb c","h.city_idx = c.city_idx","LEFT");
         $oDB->join("TF_district_tb d","h.district_idx = d.district_idx","LEFT");
         $oDB->join("TF_hire_certificate hce","hce.h_idx = h.h_idx","LEFT");
-        $hire_rows = $oDB->get("TF_hire_tb h",20,"c_name, h_title, local_name, city_name, district_name,
+        $hire_rows = $oDB->get("TF_hire_tb h",null,"c_name, h_title, local_name, city_name, district_name,
                                                   h.local_idx, h.city_idx, h.district_idx, job_achievement,
                                                   salary_idx, job_salary, job_is_career, h.h_idx, h.o_idx, h.duty_name");
 
@@ -578,12 +584,12 @@ class technicianView{
       $m_idx = $_SESSION['LOGGED_INFO'];
 
       //이력서 정보
-      $columns_info = "distinct m.m_idx, group_concat(distinct(mc.duty_name)) as duty_name, group_concat(md.duty_name) as hope_duty,";
+      $columns_info = "group_concat(distinct(mc.duty_name) SEPARATOR ' ') as duty_name, group_concat(distinct(md.duty_name)) as hope_duty,";
       $columns_info .= "YEAR(CURRENT_TIMESTAMP) - YEAR(m_birthday) - (RIGHT(CURRENT_TIMESTAMP, 5) < RIGHT(m_birthday, 5))+1 as m_birthday,";
-      $columns_info .= "local_name, city_name, district_name,m_local_idx, m_city_idx, m_district_idx";
+      $columns_info .= "local_name, city_name, district_name,m_local_idx, m_city_idx, m_district_idx,m.edit_date";
 
+      $oDB->groupBy("m.m_idx");
       $oDB->where("m.m_idx",$m_idx);
-      $oDB->where("mc.duty_name","",'!=');
       $oDB->join("TF_member_career_tb mc", "m.m_idx = mc.m_idx", "LEFT");
       $oDB->join("TF_member_duty md", "m.m_idx = md.m_idx", "LEFT");
       $oDB->join("TF_local_tb l", "m.m_local_idx = l.local_idx", "LEFT");
@@ -940,7 +946,7 @@ class technicianView{
       $oDB->join("TF_local_tb l","h.local_idx = l.local_idx","LEFT");
       $oDB->join("TF_member_commerce_tb co","h.c_idx = co.c_idx","LEFT");
 
-      $hire_rows = $oDB->get("TF_hire_tb h",20,"co.image, c_name, h_title, local_name, city_name, district_name,
+      $hire_rows = $oDB->get("TF_hire_tb h",null,"co.image, c_name, h_title, local_name, city_name, district_name,
                               h.local_idx, h.city_idx, h.district_idx, job_achievement,
                               salary_idx, job_salary, job_is_career, h.h_idx, h.o_idx,vip");
 
@@ -1000,6 +1006,16 @@ class technicianView{
       $file_list = $oDB->get("TF_member_file");
 
       return $file_list;
+    }
+
+    function news_list(){
+      global $oDB;
+
+      //언론보도자료
+      $oDB->orderby("n_date","DESC");
+      $news_list = $oDB->get("TF_news_tb");
+
+      return $news_list;
     }
 
 

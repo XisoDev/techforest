@@ -97,17 +97,22 @@ $salary_list = $oDB->get("TF_salary",null,"salary_idx, salary_name, salary_is_sh
         <div class="p-2 mt-0 pt-0 mb-5">
             <div class="container">
                 <div class="row">
-                    <div class="col-8 mx-0 px-0 mb-2">
-                        <select class="form-control" id="hire_call_select">
-                            <option value="">이전 채용공고 불러오기</option>
-                              <?php foreach($hire_call_row as $val){ ?>
-                                <option value="<?=$val['h_idx']?>">[마감] <?=$val['h_title']?></option>
-                              <?php } ?>
+                  <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
+
+                  </div>
+                    <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
+                        <select class="form-control" id="hire_call_select" onchange="">
+                          <?if(count($hire_call_row) < 1){?>
+                            <option>마감된 공고가 없습니다.</option>
+                              <?}else{?>
+                                <?php foreach($hire_call_row as $val){ ?>
+                                  <option>이전 채용공고 불러오기</option>
+                                  <option value="<?=$val['h_idx']?>">[마감] <?=$val['h_title']?></option>
+                                <?php } ?>
+                              <?}?>
                         </select>
                     </div>
-                    <div class="col-4 mx-0 px-0 mb-2 pl-1">
-                        <button class="btn btn-primary btn-block" style="height:45px;" onclick="hire_call()">불러오기</button>
-                    </div>
+
                     <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
                         <h6>공고제목</h6>
                     </div>
@@ -409,10 +414,7 @@ $salary_list = $oDB->get("TF_salary",null,"salary_idx, salary_name, salary_is_sh
 <div class="modal fade" id="job_reg_complete" style="display:none;" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-body">
-<!--       이건안됨         --><?php //include "job.reg.complete.php"; ?>
-                <iframe src="<?=getUrl('company','job_appRegisterComplete')?>" frameborder="0" scrolling="no" width="100%" style="height:90vh"></iframe>
-            </div>
+          <iframe src="<?=getUrl('company','job_appRegisterComplete')?>" id="job_iframe" frameborder="0" scrolling="no" width="100%" style="height:90vh"></iframe>
         </div>
     </div>
 </div>
@@ -421,10 +423,11 @@ $salary_list = $oDB->get("TF_salary",null,"salary_idx, salary_name, salary_is_sh
 
 
 jQuery(document).ready(function($){
-  
+
   //공고등록완료시 뜨는 팝업인데 디자인 확인을 위해 추가
-  jQuery('#job_reg_complete').modal('show');
+  // jQuery('#job_reg_complete').modal('show');
 });
+
 
 var duty_arr = <? echo json_encode($duty_row); ?>;
 var local_arr = <? echo json_encode($local_arr); ?>;

@@ -391,7 +391,7 @@ img{
 .xxs_content{
     padding:0 10px;
     margin:5px 0 0;
-    font-size:12px;
+    font-size:14px;
     font-weight:300;
 }
 .xxx_content{
@@ -518,9 +518,23 @@ img{
 }
 
 .cut1 {
-white-space:nowrap;
-display:block;
--webkit-line-clamp:1;
-overflow:hidden;
-text-overflow:ellipsis;
+  white-space:nowrap;
+  display:block;
+  -webkit-line-clamp:1;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.cut2 {
+  width: 200px;
+  white-space: normal;
+  overflow: hidden;
+  padding: 10px;
+  text-overflow: ellipsis;
+  line-height: 1.8;
+  height: 4em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  font-size: smaller;
+  -webkit-box-orient: vertical;
 }

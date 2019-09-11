@@ -66,7 +66,7 @@ $oMenu->footer->list[] = array(
 );
 $oMenu->footer->list[] = array(
     "title" => "문의하기",
-    "link" => "#",
+    "link" => getUrl('contact'),
     "active_mid" => "page",
     "active_act" => time(),
     "new_window" => "N",
@@ -74,11 +74,11 @@ $oMenu->footer->list[] = array(
 );
 $oMenu->footer->list[] = array(
     "title" => "회원탈퇴",
-    "link" => "#",
+    "link" => getUrl('member','withdrawMember'),
     "active_mid" => "page",
     "active_act" => time(),
     "new_window" => "N",
-    "is_logged" => "N",
+    "is_logged" => "Y",
 );
 
 //기업메뉴
@@ -118,14 +118,14 @@ $oMenu->company->list[] = array(
             "active_act" => time(),
             "new_window" => "N",
             "is_logged" => "N"),
-        array(
-            "title" => "서비스 소개",
-            "link" => "#",
-            "active_mid" => "company",
-            "active_act" => time(),
-            "new_window" => "N",
-            "is_logged" => "N"),
-    )
+    //     array(
+    //         "title" => "서비스 소개",
+    //         "link" => "#",
+    //         "active_mid" => "company",
+    //         "active_act" => time(),
+    //         "new_window" => "N",
+    //         "is_logged" => "N"),
+     )
 );
 $oMenu->company->list[] = array(
     "title" => "서비스이용현황",
@@ -248,14 +248,14 @@ $oMenu->technician->list[] = array(
             "active_act" => time(),
             "new_window" => "N",
             "is_logged" => "N"),
-        array(
-            "title" => "서비스 소개",
-            "link" => "#",
-            "active_mid" => "technician",
-            "active_act" => time(),
-            "new_window" => "N",
-            "is_logged" => "N"),
-    )
+    //     array(
+    //         "title" => "서비스 소개",
+    //         "link" => "#",
+    //         "active_mid" => "technician",
+    //         "active_act" => time(),
+    //         "new_window" => "N",
+    //         "is_logged" => "N"),
+     )
 );
 $oMenu->technician->list[] = array(
     "title" => "문의",

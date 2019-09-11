@@ -110,6 +110,11 @@
 
 </style>
 <!-- <link rel="stylesheet" href="/layout/company/assets/default.css"> -->
+<section class="p-3 mt-4 pt-5 pb-3 bg-white d-lg-none">
+    <i class="xi-arrow-left xi-2x" onclick="history.back();"></i>
+    <h5 class="weight_normal">기업소개</h5>
+</section>
+
 <section id="TF1">
     <div style="background:url('https://wimirgsjsoop.cdn3.cafe24.com/introduce/background1.jpg'); height:574px">
         <img class="p_center" src="https://wimirgsjsoop.cdn3.cafe24.com/introduce/b1_img1.png" />
@@ -131,9 +136,9 @@
     <span class="t_article">OUR SERVICES</span>
 
     <div style="border-top: solid 1px #BDBDBD; padding:20px; margin-top:70px; display:inline-block; width:100%; letter-spacing:0.2em">
-        <div class="col-xs-12 col-sm-3 float_left" style="padding:30px 0">
+        <div class="col-xs-12 col-sm-3 float_left" style="padding-top:30px">
             <span class="TF4_txt visible-xs">기술인력 특화<br />구인-구직<br /><b>매칭서비스 플랫폼</b></span>
-            <img class="hidden-xs" src="https://wimirgsjsoop.cdn3.cafe24.com/introduce/b4_img_aa.png" style="margin-top:15px"/>
+            <img class="hidden-xs" src="https://wimirgsjsoop.cdn3.cafe24.com/introduce/tf_img1.png" style="width:85%;margin-top:15px"/>
         </div>
 
         <div class="col-xs-12 col-sm-9 float_left" style="padding:30px 0">
@@ -142,14 +147,14 @@
                 -매칭시스템을 기반으로 기업과 기술자를 72시간 이내에 연결시켜주는 가장 빠르고 합리적인 방법<br />
                 -기술자숲 웹서비스 www.gsjsoop.com / 앱서비스 - 안드로이드 ver, IOS ver
             </span>
-            <img class="hidden-xs" src="https://wimirgsjsoop.cdn3.cafe24.com/introduce/b4_img_a.png" style="max-width:100%" />
+            <img class="hidden-xs" src="https://wimirgsjsoop.cdn3.cafe24.com/introduce/tf_img2.png" style="max-width:100%" />
         </div>
     </div>
     <hr style="border-color:#BDBDBD;margin:0" />
-    <div style="border-bottom: solid 1px #BDBDBD; padding:20px; margin-bottom:70px; display:inline-block; width:100%;">
-        <div class="col-xs-12 col-sm-3 float_left" style="padding:30px 0; letter-spacing:0.2em;">
+    <div style="border-bottom: solid 1px #BDBDBD; padding:20px; display:inline-block; width:100%;">
+        <div class="col-xs-12 col-sm-3 float_left" style="padding-top:30px; letter-spacing:0.2em;">
             <span class="TF4_txt visible-xs">행사<br /><b>기획 및 운영</b></span>
-            <img class="hidden-xs" src="https://wimirgsjsoop.cdn3.cafe24.com/introduce/b4_img_bb.png" style="margin-top:7px"/>
+            <img class="hidden-xs" src="https://wimirgsjsoop.cdn3.cafe24.com/introduce/tf_img3.png" style="width:85%;margin-top:7px"/>
         </div>
         <div class="col-xs-12 col-sm-9 float_left" style="padding:30px 0">
             <span class="visible-xs" style="font:300 16px/1.8em 'NanumSquare'; word-break: keep-all;">
@@ -157,7 +162,21 @@
                 - 스타트업 시너지 서밋(2017.04 / 2017.12)<br />
                 - 경남 전문기술인력 채용박람회 (2018.01)
             </span>
-            <img class="hidden-xs" src="https://wimirgsjsoop.cdn3.cafe24.com/introduce/b4_img_b.png" style="max-width:100%" />
+            <img class="hidden-xs" src="https://wimirgsjsoop.cdn3.cafe24.com/introduce/tf_img4.png" style="max-width:100%" />
+        </div>
+    </div>
+
+    <div style="border-bottom: solid 1px #BDBDBD; padding:20px; margin-bottom:70px; display:inline-block; width:100%;">
+        <div class="col-xs-12 col-sm-3 float_left" style="padding-top:30px; letter-spacing:0.2em;">
+            <span class="TF4_txt visible-xs"><b>전직 교육</b>서비스<br /></span>
+            <img class="hidden-xs" src="https://wimirgsjsoop.cdn3.cafe24.com/introduce/tf_img5.png" style="width:85%;margin-top:7px"/>
+        </div>
+        <div class="col-xs-12 col-sm-9 float_left" style="padding:30px 0">
+            <span class="visible-xs" style="font:300 16px/1.8em 'NanumSquare'; word-break: keep-all;">
+                퇴직(예정) 숙련기술자 대상<br />
+                <b>재취업·창직·창업을 위한 교육서비스 제공</b><br />
+            </span>
+            <img class="hidden-xs" src="https://wimirgsjsoop.cdn3.cafe24.com/introduce/tf_img6.png" style="max-width:100%" />
         </div>
     </div>
     <div class="row">

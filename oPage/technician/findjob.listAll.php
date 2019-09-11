@@ -5,22 +5,112 @@
   $occupation_list = $output->get('occupation_list');
   $duty_list = $output->get('duty_list');
 
+
+  $page =  $_REQUEST['page'];
+
+  if(!$page) {
+    $page = 1;
+  }
+
+
   if($_GET['local_idx']){
-    $search_local_idx = $_GET['local_idx'];
+    $local_idx = $_GET['local_idx'];
   }
 
   if($_GET['o_idx']){
-    $search_o_idx = $_GET['o_idx'];
+    $o_idx = $_GET['o_idx'];
   }else{
-    $search_o_idx = -1;
+    $o_idx = -1;
   }
 
   if($_GET['short']){
-    $search_short = $_GET['short'];
+    $short = $_GET['short'];
   }
-  if($_GET['duty']){
-    $search_duty_name = $_GET['duty'];
+  if($_GET['duty_name']){
+    $duty_name = $_GET['duty_name'];
   }
+
+
+  $total_record = count($hire_rows);
+      $scale = 12;
+  	$start = ($page - 1) * $scale;
+
+  	/* 페이징 시작 */
+  	$allPage = ceil($total_record / $scale);
+
+  	if($page > $allPage){
+  		$page = 1;
+  		$total_record = count($hire_rows);
+  		$scale = 12;
+  	$start = ($page - 1) * $scale;
+
+  	/* 페이징 시작 */
+  	$allPage = ceil($total_record / $scale);
+  	}
+
+  	$oneSection = 5;
+  	$currentSection = ceil($page / $oneSection);
+  	$allSection = ceil($allPage / $oneSection);
+  	$firstPage = ($currentSection * $oneSection) - ($oneSection - 1);
+  	if($currentSection == $allSection) {
+  		$lastPage = $allPage;
+  	} else {
+  		$lastPage = $currentSection * $oneSection;
+  	}
+  	$prevPage = (($currentSection - 1) * $oneSection);
+  	$nextPage = (($currentSection + 1) * $oneSection) - ($oneSection - 1);
+  	if(!$m_idx){
+  		if($page != 1) {
+  			$paging .= "<li><a href=\"./?page=&local_idx=" . $local_idx . "&o_idx=" . $o_idx . "&duty_name=" . $duty_name ."\" aria-label=\"Previous\">처음</a></li>";
+  		}
+  		//첫 섹션이 아니라면 이전 버튼을 생성
+  		if($currentSection != 1) {
+  			$paging .= "<li><a href=\"./?page=&local_idx=" . $local_idx . "&o_idx=" . $o_idx . "&duty_name=" . $duty_name ."\" aria-label=\"Previous\">이전</a></li>";
+  		}
+
+  		for($i = $firstPage; $i <= $lastPage; $i++) {
+  			if($i == $page) {
+  				$paging .= "<li class=\"active\"><a>" . $i . "</a></li>";
+  			}else if($i > 2){
+  				$paging .= "<li><a onclick=\"javascript:login_please();\">" . $i . "</a></li>";
+  			} else {
+  				$paging .= "<li><a href=\"./?page=" . $i .  "&local_idx=". $local_idx . "&o_idx=" . $o_idx . "&duty_name=" . $duty_name . "\" aria-label=\"Previous\">" . $i . "</a></li>";
+  			}
+  		}
+
+  		if($currentSection != $allSection) {
+  			$paging .= "<li><a onclick=\"javascript:login_pleasee();\">다음</a></li>";
+  		}
+
+  		if($page != $allPage) {
+  			$paging .= "<li><a onclick=\"javascript:login_please();\">끝</a></li>";
+  		}
+
+  	}else{
+  		if($page != 1) {
+  			$paging .= "<li><a href=\"./?page=1\" aria-label=\"Previous\">처음</a></li>";
+  		}
+  		//첫 섹션이 아니라면 이전 버튼을 생성
+  		if($currentSection != 1) {
+  			$paging .= "<li><a href=\"./?page=" . $prevPage . "\" aria-label=\"Previous\">이전</a></li>";
+  		}
+
+  		for($i = $firstPage; $i <= $lastPage; $i++) {
+  			if($i == $page) {
+  				$paging .= "<li class=\"active\"><a>" . $i . "</a></li>";
+  			} else {
+  				$paging .= "<li><a href=\"./?page=" . $i .  "&local_idx=". $local_idx . "&o_idx=" . $o_idx . "&duty_name=" . $duty_name . "\" aria-label=\"Previous\">" . $i . "</a></li>";
+  			}
+  		}
+
+  		if($currentSection != $allSection) {
+  		$paging .= "<li><a href=\"./?page=" . $nextPage . "\">다음</a></li>";
+  		}
+  		if($page != $allPage) {
+  			$paging .= "<li><a href=\"./?page=" . $allPage . "\" aria-label=\"Next\">끝</a></li>";
+  		}
+  	}
+
 
 ?>
 <section class="bg-white d-lg-none">
@@ -42,10 +132,10 @@
             <div class="col-6 pr-1 col-lg-4">
                 <select class="form-control" id="local_select" onchange="location.href=(this.value)">
                   <? foreach ($local_list as $val) { ?>
-                      <? if($val["local_idx"] == $search_local_idx){?>
-                        <option value="<?=getUrl('technician','findJobListAll',false,array('local_idx' => $val['local_idx'],'o_idx' => $search_o_idx, 'duty' => $search_duty_name))?>" selected><?=$val['local_name']?></option>
+                      <? if($val["local_idx"] == $local_idx){?>
+                        <option value="<?=getUrl('technician','findJobListAll',false,array('page'=>$page, 'local_idx' => $val['local_idx'],'o_idx' => $o_idx, 'duty_name' => $duty_name))?>" selected><?=$val['local_name']?></option>
                       <? }else{ ?>
-                        <option value="<?=getUrl('technician','findJobListAll',false,array('local_idx' => $val['local_idx'],'o_idx' => $search_o_idx, 'duty' => $search_duty_name))?>"><?=$val['local_name']?></option>
+                        <option value="<?=getUrl('technician','findJobListAll',false,array('page'=>$page, 'local_idx' => $val['local_idx'],'o_idx' => $o_idx, 'duty_name' => $duty_name))?>"><?=$val['local_name']?></option>
                       <? }
                     } ?>
                 </select>
@@ -53,10 +143,10 @@
             <div class="col-6 pl-1 col-lg-4">
                 <select class="form-control" id="occupation_select" onchange="location.href=(this.value)">
                   <? foreach ($occupation_list as $val) { ?>
-                    <? if($val["o_idx"] == $search_o_idx){?>
-                      <option value="<?=getUrl('technician','findJobListAll',false,array('local_idx' => $search_local_idx,'o_idx' => $val['o_idx'], 'duty' => $search_duty_name))?>" selected><?=$val['o_name']?></option>
+                    <? if($val["o_idx"] == $o_idx){?>
+                      <option value="<?=getUrl('technician','findJobListAll',false,array('page'=>$page, 'local_idx' => $local_idx,'o_idx' => $val['o_idx'], 'duty_name' => $duty_name))?>" selected><?=$val['o_name']?></option>
                     <? }else{ ?>
-                        <option value="<?=getUrl('technician','findJobListAll',false,array('local_idx' => $search_local_idx,'o_idx' => $val['o_idx'], 'duty' => $search_duty_name))?>"><?=$val['o_name']?></option>
+                        <option value="<?=getUrl('technician','findJobListAll',false,array('page'=>$page, 'local_idx' => $local_idx,'o_idx' => $val['o_idx'], 'duty_name' => $duty_name))?>"><?=$val['o_name']?></option>
                     <? }
                   } ?>
                 </select>
@@ -71,13 +161,13 @@
         <div class="row mt-1">
             <div class="col-6 pr-1 col-lg-4">
                 <select class="form-control" id="duty_select" onchange="location.href=(this.value)">
-                    <option value="<?=getUrl('technician','findJobListAll',false,array('local_idx' => $search_local_idx,'o_idx' => $search_o_idx, 'duty' => '전체'))?>">전체</option>
+                    <option value="<?=getUrl('technician','findJobListAll',false,array('page'=>$page, 'local_idx' => $local_idx,'o_idx' => $o_idx, 'duty_name' => '전체'))?>">전체</option>
                   <?foreach ($duty_list as $val) {?>
-                    <?if($search_o_idx == $val["o_idx"]){?>
-                      <?if($search_duty_name == $val["duty_name"]){?>
-                        <option value="<?=getUrl('technician','findJobListAll',false,array('local_idx' => $search_local_idx,'o_idx' => $search_o_idx, 'duty' => $val['duty_name']))?>" selected><?=$val['duty_name']?></option>
+                    <?if($o_idx == $val["o_idx"]){?>
+                      <?if($duty_name == $val["duty_name"]){?>
+                        <option value="<?=getUrl('technician','findJobListAll',false,array('page'=>$page, 'local_idx' => $local_idx,'o_idx' => $o_idx, 'duty_name' => $val['duty_name']))?>" selected><?=$val['duty_name']?></option>
                       <?}else{?>
-                        <option value="<?=getUrl('technician','findJobListAll',false,array('local_idx' => $search_local_idx,'o_idx' => $search_o_idx, 'duty' => $val['duty_name']))?>"><?=$val['duty_name']?></option>
+                        <option value="<?=getUrl('technician','findJobListAll',false,array('page'=>$page, 'local_idx' => $local_idx,'o_idx' => $o_idx, 'duty_name' => $val['duty_name']))?>"><?=$val['duty_name']?></option>
                       <?}?>
                   <?}?>
                 <?}?>
@@ -85,7 +175,7 @@
             </div>
             <div class="col-6 pl-1 col-lg-4">
               단기공고
-              <?if($search_short > 0){?>
+              <?if($short > 0){?>
                 <input type="checkbox" id="short_term" checked>
               <?}else{?>
                 <input type="checkbox" id="short_term">
@@ -95,8 +185,8 @@
     </div>
     <div class="row">
       <input type="hidden" id="hidden_m_idx" value="<?=$m_idx?>">
-        <?php foreach($hire_rows as $val) { ?>
-          <input type="hidden" id="hidden_h_idx" value="<?=$val['h_idx']?>">
+        <?php for($i = $start; $i < $start + $scale && $i < $total_record; $i++) { ?>
+          <input type="hidden" id="hidden_h_idx" value="<?=$hire_rows[$i]['h_idx']?>">
             <div class="col-12 col-md-4 px-md-2 pb-md-4">
                 <div class="magazine tech_card mb-3 bg-white text-left shadow">
                     <div class="row">
@@ -105,11 +195,11 @@
                                 <span class="overlay">
                                 <?
                                   foreach ($interest_rows as $val2) {
-                                    if($val2['h_idx'] == $val['h_idx']){
-                                      $interest_html2 = '<a class="btn-xxs btn btn-round border-white text-white py-1 px-2 position-absolute mr-lg-3" onclick="interest_remove('. $val['h_idx'] .')" style="right:10px; top:10px;">관심공고<i class="xi-heart red" id="yes_interest"></i></a>';
+                                    if($val2['h_idx'] == $hire_rows[$i]['h_idx']){
+                                      $interest_html2 = '<a class="btn-xxs btn btn-round border-white text-white py-1 px-2 position-absolute mr-lg-3" onclick="interest_remove('. $hire_rows[$i]['h_idx'] .')" style="right:10px; top:10px;">관심공고<i class="xi-heart red" id="yes_interest"></i></a>';
                                       break;
                                     }else{
-                                      $interest_html2 = '<a class="btn-xxs btn btn-round border-white text-white py-1 px-2 position-absolute mr-lg-3" onclick="interest_add('. $val['h_idx'] .')" style="right:10px; top:10px;">관심공고<i class="xi-heart" id="no_interest"></i></a>';
+                                      $interest_html2 = '<a class="btn-xxs btn btn-round border-white text-white py-1 px-2 position-absolute mr-lg-3" onclick="interest_add('. $hire_rows[$i]['h_idx'] .')" style="right:10px; top:10px;">관심공고<i class="xi-heart" id="no_interest"></i></a>';
                                     }
                                   }
                                 ?>
@@ -117,40 +207,40 @@
                                 </span>
                             </div>
                         </div>
-                        <? if ($val['city_name'] == "전체") { $val['city_name'] = "";} ?>
-                        <? if ($val['district_name'] == "전체") { $val['district_name'] = ""; }?>
-                        <? if ($val['salary_idx'] < 3) { $hire_salary_text = "만원"; } else { $hire_salary_text = "원"; } ?>
+                        <? if ($hire_rows[$i]['city_name'] == "전체") { $hire_rows[$i]['city_name'] = "";} ?>
+                        <? if ($hire_rows[$i]['district_name'] == "전체") { $hire_rows[$i]['district_name'] = ""; }?>
+                        <? if ($hire_rows[$i]['salary_idx'] < 3) { $hire_salary_text = "만원"; } else { $hire_salary_text = "원"; } ?>
                         <div class="col-7 col-md-12 pl-0 pl-md-3">
-                            <div class="content_padding">
-                                <h6 class="weight_normal cut1"><?=$val['c_name']?></h6>
-                                <h6 class="red cut1"><?=$val['h_title']?></h6>
+                            <div class="p-2">
+                                <h6 class="weight_normal cut1"><?=$hire_rows[$i]['c_name']?></h6>
+                                <h6 class="red cut1"><?=$hire_rows[$i]['h_title']?></h6>
                                 <p class="weight_lighter xxs_content mx-0 px-0">
                                     <span class="badge badge-danger weight_lighter">위치</span>
-                                      <?= $val['local_name'] . " " . $val['city_name'].$val['district_name']?>
+                                      <?= $hire_rows[$i]['local_name'] . " " . $hire_rows[$i]['city_name'].$hire_rows[$i]['district_name']?>
                                     <span class="badge badge-danger weight_lighter">
-                                      <?if($val['salary_idx'] == "1"){
+                                      <?if($hire_rows[$i]['salary_idx'] == "1"){
                                           echo "연봉";
-                                        }else if($val['salary_idx'] == "2"){
+                                        }else if($hire_rows[$i]['salary_idx'] == "2"){
                                           echo "월급";
-                                        }else if($val['salary_idx'] == "3"){
+                                        }else if($hire_rows[$i]['salary_idx'] == "3"){
                                           echo "일급";
                                         }else{
                                           echo "시급";
                                         }?>
                                     </span>
-                                    <b><?= number_format($val['job_salary']) . $hire_salary_text?></b>
+                                    <b><?= number_format($hire_rows[$i]['job_salary']) . $hire_salary_text?></b>
                                 </p>
                                 <p class="text-secondary xxs_content mx-0 px-0 pt-1">
-                                    <img src="/oPage/images/imgicons/wrench_bg_red.png" height="14" /> <?=$val['job_is_career']?>
+                                    <img src="/oPage/images/imgicons/wrench_bg_red.png" height="14" /> <?=$hire_rows[$i]['job_is_career']?>
                                 </p>
                             </div>
 
                             <div class="row m-0 p-0 pt-0 mt-0">
                                 <div class="col-6 mx-0 px-0">
-                                    <a href="<?=getUrl('technician','jobDetail',$val['h_idx'])?>" class="btn btn-light btn-block rounded-0">상세보기</a>
+                                    <a href="<?=getUrl('technician','jobDetail',$hire_rows[$i]['h_idx'])?>" class="btn btn-light btn-block rounded-0">상세보기</a>
                                 </div>
                                 <div class="col-6 mx-0 px-0">
-                                    <button class="btn btn-danger btn-block rounded-0" onclick="application_ok(<?=$val['h_idx']?>)">지원하기</button>
+                                    <button class="btn btn-danger btn-block rounded-0" onclick="application_ok(<?=$hire_rows[$i]['h_idx']?>)">지원하기</button>
                                 </div>
                             </div>
                         </div>
@@ -158,6 +248,15 @@
                 </div>
             </div>
         <?php } ?>
+    </div>
+    <div class="" style="text-align:center;">
+      <ul class="pagination">
+        <?
+          if($total_record > 0){
+            echo $paging;
+          }
+        ?>
+      </ul>
     </div>
 </div>
 
@@ -223,11 +322,18 @@
 
 $("#short_term").change(function(){
     if($("#short_term").is(":checked")){
-      location.href="<?=getUrl('technician','findJobListAll',false,array('local_idx' => $search_local_idx,'o_idx' => $search_o_idx, 'duty'=>$search_duty_name, 'short'=>1))?>";
+      location.href="<?=getUrl('technician','findJobListAll',false,array('page'=>$page, 'local_idx' => $local_idx,'o_idx' => $o_idx, 'duty_name'=>$duty_name, 'short'=>1))?>";
     }else{
-      location.href="<?=getUrl('technician','findJobListAll',false,array('local_idx' => $search_local_idx,'o_idx' => $search_o_idx, 'duty'=>$search_duty_name, 'short'=>-1))?>";
+      location.href="<?=getUrl('technician','findJobListAll',false,array('page'=>$page, 'local_idx' => $local_idx,'o_idx' => $o_idx, 'duty_name'=>$duty_name, 'short'=>-1))?>";
     }
 });
+
+function login_please(){
+  var result = confirm("로그인 후 이용해주세요. 로그인 하시겠습니까?");
+  if(result){
+    location.href="<?=getUrl('member','login',false,array('cur' => $current_url))?>";
+  }
+}
 </script>
 
 <?php

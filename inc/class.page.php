@@ -10,7 +10,7 @@
  * @remarks Getting total counts, number of pages, current page number, number of items per page,
  *          this class implements methods and contains variables for page navigation
  */
-class PageHandler   
+class PageHandler
 {
 
     var $total_count = 0; ///< number of total items
@@ -32,7 +32,7 @@ class PageHandler
      * @return void
      */
 
-    function PageHandler($total_count, $total_page, $cur_page, $page_count = 10)
+    function PageHandler($total_count, $total_page, $cur_page, $page_count=5)
     {
         $this->total_count = $total_count;
         $this->total_page = $total_page;

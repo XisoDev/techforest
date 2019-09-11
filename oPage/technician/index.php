@@ -9,6 +9,8 @@ $count_myinfo_row = $output->get('count_myinfo_row');
 $myinfo_row = $output->get('myinfo_row');
 //추천기술자 허용여부 팝업
 $rt_row = $output->get('rt_row');
+//언론보도리스트
+$news_list = $output->get('news_list');
 
 ?>
 
@@ -105,7 +107,7 @@ $rt_row = $output->get('rt_row');
                             </p>
                             <p class="text-secondary xxs_content mx-0 px-0">
                                 <i class="xi-clock-o"></i> 마감 <?=$val['hire_end_date']?>일 전
-                                <i class="xi-eye-o"></i> 142
+                                <!-- <i class="xi-eye-o"></i> 142 -->
                             </p>
                         </div>
                     </div>
@@ -118,16 +120,16 @@ $rt_row = $output->get('rt_row');
                 <div class="col-12">
                     <h6 class="weight_normal xs_content mt-4 mb-1">
                         <span class="red"><?=$logged_info['m_name']?></span>님의 이력서 완성도는
-                        <span class="red">'
-                          <?php if($count_career_row['count_career'] == $count_c_content_row['count_c_content'] && $count_myinfo_row['count_myinfo']){
+                        <span class="red">
+                          <?php if($count_career_row[0]['count_career'] == $count_c_content_row[0]['count_c_content'] && $count_myinfo_row[0]['count_myinfo']){
                               echo '높음';
-                          }else if($count_career_row['count_career'] > $count_c_content_row['count_c_content'] && $count_myinfo_row['count_myinfo']){
+                          }else if($count_career_row[0]['count_career'] > $count_c_content_row[0]['count_c_content'] && $count_myinfo_row[0]['count_myinfo']){
                               echo '중간';
                           }else{
                               echo '낮음';
                           }
                           ?>
-                        '</span>입니다.
+                        </span>입니다.
                     </h6>
                     <h6 class="weight_lighter xs_content mt-0 mb-2">
                         상세 경력을 기입하고 취업 성공률을 높여보세요!
@@ -183,9 +185,9 @@ $rt_row = $output->get('rt_row');
                                 <h5 class="mt-4 mb-1">
                                     <span class="red"><?=$logged_info['m_name']?></span>님의 이력서 완성도는
                                     <span class="red">
-                                      <?php if($count_career_row['count_career'] == $count_c_content_row['count_c_content'] && $count_myinfo_row['count_myinfo']){
+                                      <?php if($count_career_row[0]['count_career'] == $count_c_content_row[0]['count_c_content'] && $count_myinfo_row[0]['count_myinfo']){
                                           echo '높음';
-                                      }else if($count_career_row['count_career'] > $count_c_content_row['count_c_content'] && $count_myinfo_row['count_myinfo']){
+                                      }else if($count_career_row[0]['count_career'] > $count_c_content_row[0]['count_c_content'] && $count_myinfo_row[0]['count_myinfo']){
                                           echo '중간';
                                       }else{
                                           echo '낮음';
@@ -295,12 +297,12 @@ $rt_row = $output->get('rt_row');
                                     <? }else if($val['salary_idx']==3){ ?>
                                       <span class="badge badge-danger weight_lighter">일</span>
                                     <? } ?>
-                                      <b><?=$val['job_salary']?>만원</b>
+                                      <b><?=$val['job_salary']?>원</b>
                                   <? } ?>
                               </p>
                               <p class="text-secondary xxs_content mx-0 px-0">
                                   <i class="xi-clock-o"></i> 마감 <?=$val['hire_end_date']?>일 전
-                                  <i class="xi-eye-o"></i> 142
+                                  <!-- <i class="xi-eye-o"></i> 142 -->
                               </p>
                           </div>
                           <a href="<?=getUrl('technician','jobDetail',$val['h_idx'])?>" class="btn btn-block btn-warning mt-3 rounded-0">자세히 보기</a>
@@ -364,22 +366,22 @@ $rt_row = $output->get('rt_row');
         <h3 class="weight_bold mt-3">언론보도</h3>
         <h6 class="weight_lighter mt-1 mb-2">기술자숲의 언론보도 및 소식을 확인해보세요.</h6>
     </div>
-    <div class="row">
-        <?php for($i=1; $i<=3; $i++){ ?>
+    <div class="flex-card-slick">
+        <?php foreach($news_list as $val){ ?>
             <div class="col-4 mt-2">
                 <div class="shadow">
-                    <div style="background-color:#EEE; min-height:150px;">
+                    <div style="background-image:url('<?=$val['n_img']?>'); min-height:150px;">
 
                     </div>
                     <div class="px-md-2">
                         <div class="px-2 py-3">
-                            <h6 class="weight_normal">휴대폰으로 딱 10초!, 기술자 일자리 매칭 서비...</h6>
-                            <p class="xs_content px-0">
-                                30대 소셜 벤처 기업가가 조선산업 불황 여파로 일자리를 잃은 숙련 기...
+                            <h6 class="weight_normal cut1"><?=$val['n_title']?></h6>
+                            <p class="xs_content px-0 cut1">
+                                <?=$val['n_content']?>
                             </p>
                             <hr />
-                            <a class="btn btn-primary btn-xs py-2 px-3 pull-right" href="#">자세히 보기</a>
-                            <p class="text-secondary my-0 py-0 px-0">2019.05.30</p>
+                            <a class="btn btn-primary btn-xs py-2 px-3 pull-right" href="<?=$val['n_link']?>">자세히 보기</a>
+                            <p class="text-secondary my-0 py-0 px-0"><?=$val['n_date']?></p>
                         </div>
                     </div>
                 </div>

@@ -64,8 +64,7 @@ $company_info = $output->get('company_info');
                     </div>
 
                     <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
-                        <h6 class="d-sm-none">담당자 정보</h6>
-                        <h6 class="d-none d-sm-block">담당자 연락처</h6>
+                        <h6>담당자 연락처</h6>
                     </div>
                     <div class="col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
 
@@ -95,8 +94,8 @@ $company_info = $output->get('company_info');
                         </div>
                     </div>
 
-                    <div class="d-none d-sm-block col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
-                        <h6>담당자 이메일</h6>
+                    <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
+                      <h6>담당자 이메일</h6>
                     </div>
                     <div class="col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
                         <div class="input-group">
@@ -168,7 +167,8 @@ $company_info = $output->get('company_info');
                     </div>
                     <div class="d-none d-md-block col-md-2"></div>
                     <div class="col-12 text-center py-4">
-                        <button type="button" onclick="temporary_save()" class="btn border-primary py-2 px-4 px-md-5 mr-1 btn-round">임시저장</button>
+                        <!-- 차후 기능추가 -->
+                        <!-- <button type="button" onclick="temporary_save()" class="btn border-primary py-2 px-4 px-md-5 mr-1 btn-round">임시저장</button> -->
                         <button type="button" onclick="company_info_ok()" class="btn btn-primary py-2 px-4 px-md-5 ml-1 btn-round">등록완료</button>
                     </div>
                 </div>

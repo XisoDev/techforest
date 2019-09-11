@@ -635,13 +635,14 @@ class technicianController{
     global $oDB;
     $m_idx = $_SESSION['LOGGED_INFO'];
     $now_date = date(YmdHis);
-    $target_path = "./img/";
+    $target_path = "./m_picture/";
+    $image_name = $m_idx . "_" . $date . ".jpg";
 
     $oDB->where("m_idx",$m_idx);
     $row = $oDB->get("TF_member_tb",null,"m_picture");
 
     if($row['m_picture']){
-      unlink($target_path . $row['m_picture']);
+      unlink($target_path . $image_name);
     }
 
     $data = array(

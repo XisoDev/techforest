@@ -167,7 +167,7 @@
             <?php } ?>
             </tbody>
         </table>
-        <a class="btn pull-right btn-primary text-white"><i class="xi-file-download"></i> 엑셀 다운로드</a>
+        <!-- <a class="btn pull-right btn-primary text-white"><i class="xi-file-download"></i> 엑셀 다운로드</a> -->
     </div>
 </div>
 <div class="bg-primary d-sm-none" style="height:130px; margin-top:-105px; position:relative; z-index:0;"></div>
