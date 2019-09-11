@@ -81,25 +81,26 @@ $check_voucher = $output->get('check_voucher');
         <div class="px-2 py-2">
             <div class="row flex-lg-column-reverse">
                 <div class="col-4 col-lg-12">
-                    <div class="thumbnail bg-secondary square" style="background-image:url('/oPage/technician/images/tech_service.jpg'); background-size:cover; max-height:90px;"></div>
+                    <div class="thumbnail bg-secondary square" style="background-image:url('/oPage/technician/images/tech_service2.jpg'); background-size:cover; max-height:100px;z-index:-1;"></div>
                 </div>
                 <div class="col-8 pt-2 col-lg-12 text-lg-center">
-                    <h5>후불공고등록</h5>
-                    <h6>상품 금액 : 50,000원</h6>
+                    <h5>후불제 통합 패키지</h5>
+                    <h6>상품 금액 : 39,700원</h6>
                 </div>
             </div>
-            <div class="toggleBox mt-3">
+            <div class="toggleBox mt-3" style="">
               <label class="xs_content mb-0 pb-1">공고선택</label>
               <select class="form-control" id="service_hire_option" name="service_hire_option">
                 <option value="">공고를 선택해주세요</option>
                 <?foreach ($choose_hire as $val) {?>
                   <?foreach ($check_voucher as $val2) {?>
-                    <?if($val['h_idx'] == $val2['h_idx']){?>
-                      <option value="<?=$val['h_idx']?>" disabled><?=$val['h_title']?></option>
-                    <?}else{?>
-                      <option value="<?=$val['h_idx']?>"><?=$val['h_title']?></option>
-                    <?}?>
+                    <?if($val['h_idx'] == $val2['h_idx']){
+                      $disabled = 'disabled';
+                    }else{
+                      $disabled = '';
+                    }?>
                   <?}?>
+                  <option value="<?=$val['h_idx']?>" <?=$disabled?>><?=$val['h_title']?></option>
                 <?}?>
               </select>
                 <!-- <label class="xs_content mb-0 pb-1">상품선택</label>
@@ -136,7 +137,7 @@ $check_voucher = $output->get('check_voucher');
               <form>
                   <div class="custom-control custom-radio border rounded pl-4 px-3 py-2 mb-3 bigger_control">
                       <div style="height:7px;">&nbsp;</div>
-                      <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" checked>
+                      <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" onclick="radio1_check()" checked>
                       <label class="custom-control-label weight_lighter ml-2" for="customRadio1">
                           <img src="/oPage/images/imgicons/card.png" height="24" class="imgicon pl-3" />
                           <span style="vertical-align:7px;" class="pl-2">신용카드・체크카드</span>
@@ -171,11 +172,11 @@ $check_voucher = $output->get('check_voucher');
                       </tr>
                       <tr>
                         <td>할인금액</td>
-                        <td><?=$discount?>원</td>
+                        <td>0원</td>
                       </tr>
                       <tr>
                         <td>결제금액</td>
-                        <td><?=$amount?>원</td>
+                        <td><?=number_format($row['price'])?>원</td>
                       </tr>
                     </table>
                     <img src="/oPage/images/icon_check_off.png" id="cash_receipts_check" alt="check_off">
@@ -332,6 +333,10 @@ $check_voucher = $output->get('check_voucher');
         document.location.href="<?=getUrl('company','serviceHistory')?>";
       });
     }
+  }
+
+  function radio1_check(){
+    $("#bank_transfer").css("display","none");
   }
 
   function radio2_check(){

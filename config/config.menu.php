@@ -72,14 +72,14 @@ $oMenu->footer->list[] = array(
     "new_window" => "N",
     "is_logged" => "N",
 );
-$oMenu->footer->list[] = array(
-    "title" => "회원탈퇴",
-    "link" => getUrl('member','withdrawMember'),
-    "active_mid" => "page",
-    "active_act" => time(),
-    "new_window" => "N",
-    "is_logged" => "Y",
-);
+// $oMenu->footer->list[] = array(
+//     "title" => "회원탈퇴",
+//     "link" => getUrl('member','withdrawMember'),
+//     "active_mid" => "page",
+//     "active_act" => time(),
+//     "new_window" => "N",
+//     "is_logged" => "Y",
+// );
 
 //기업메뉴
 $oMenu->company = new stdClass();

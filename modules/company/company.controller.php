@@ -505,4 +505,9 @@ class companyController{
    }
 
    }
+
+
+     function withdrawCompany($args){
+
+     }
 }

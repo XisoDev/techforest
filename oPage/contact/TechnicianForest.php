@@ -176,7 +176,7 @@
                 퇴직(예정) 숙련기술자 대상<br />
                 <b>재취업·창직·창업을 위한 교육서비스 제공</b><br />
             </span>
-            <img class="hidden-xs" src="https://wimirgsjsoop.cdn3.cafe24.com/introduce/tf_img6.png" style="max-width:100%" />
+            <img class="hidden-xs" src="https://wimirgsjsoop.cdn3.cafe24.com/introduce/tf_img6.png" style="max-width:49%" />
         </div>
     </div>
     <div class="row">

@@ -141,7 +141,4 @@ class memberView{
       return $row;
     }
 
-    function withdrawMember(){
-      
-    }
 }

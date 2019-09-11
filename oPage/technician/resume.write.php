@@ -422,6 +422,8 @@ shuffle($rand_array);
 									<div id="my_info3_2">
 										<? if(count($my_info3) == 0){ ?>
 											<div class="added_card border rounded position-relative rounded-0 rounded-top container py-0 pb-1 py-md-3 pt-sm-3 pb-sm-0">
+												<p class="xxs_content px-0 mx-0" id="x_content0" style="text-align:right;display:none;"><span class="red"><i class="xi-error"></i>입력 할 내용이 없다면? X 클릭</span></p>
+												<a class="position-absolute" style="right:10px; top:10px;" id="language_del0" onclick="javascript:my_info6_del1(0)"><i class="xi-close"></i></a>
 												<div class="row pb-2 px-2">
 													<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학교구분</h6>
 													<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
@@ -944,11 +946,11 @@ function occupation(obj){
   }
 
 
-  var my_info3_count = "<?if($my_info3){if(count($my_info3) == 0) { echo "1"; } else { echo count($my_info3); }} else { echo "1"; } ?>";
+  var my_info3_count = "<?if($my_info3){if(count($my_info3) == 0) {echo "1"; } else {echo count($my_info3); }} else { echo "0"; } ?>";
   var my_info5_count = "<?if($my_info5){if(count($my_info5) == 0) { echo "1"; } else { echo count($my_info5); }} else { echo "1"; } ?>";
   var my_info6_count = "<?if($my_info6){if(count($my_info6) == 0) { echo "1"; } else { echo count($my_info6); }} else { echo "1"; } ?>";
 
-
+console.log(my_info3_count);
 	//학력추가하기
   function my_info3_add() {
     var html = "";
@@ -1544,11 +1546,21 @@ function my_info6_del1(idx) {
 				}else{
 					is_ged = 0;
 				}
-			}
-			else if($("#school_grade"+i).val() == "" || $("#max_grade"+i).val() == ""){
-				alert("학점을 입력하세요.");
+			}else if($("#school_grade"+i).val() == "" || $("#max_grade"+i).val() == ""){
 				$("#school_grade"+i).focus();
-				return;
+				return toastr.error("학점을 입력해주세요.");
+			}
+
+			if($('#school_name'+i).val() == ""){
+				$("#school_name"+i).focus();
+				$('#x_content'+i).css('display','block');
+				return toastr.error("학교명을 입력해주세요.");
+			}
+
+			if($('#school_graduated'+i).val() == ""){
+				$("#school_graduated"+i).focus();
+				$('#x_content'+i).css('display','block');
+				return toastr.error("졸업연도를 입력해주세요.");
 			}
 
 			var tmp = "var tmpA = {'s_idx" + i + "':'" + s_idx + "', 'is_ged" + i + "':'" + is_ged + "', 'school_name" + i + "':'" + school_name + "', 'school_graduated" + i + "':'" + school_graduated +
