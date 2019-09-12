@@ -39,11 +39,21 @@
                     }else{
                         $main_menu = $oMenu->technician->list;
                     }
-
-                    foreach($main_menu as $item){
-                        echo sprintf('<li class="nav-item px-2 weight_normal %s"><a class="nav-link" href="%s" %s>%s',$item["active"],$item["link"],$item["new_window"],$item["title"]);
-
-                        echo "</a></li>";
+                    foreach($main_menu as $key => $item){
+                        if(!is_array($item["submenu"])) {
+                            echo sprintf('<li class="nav-item px-2 weight_normal %s"><a class="nav-link" href="%s" %s>%s', $item["active"], $item["link"], $item["new_window"], $item["title"]);
+                        }else{
+                            echo sprintf('<li class="nav-item dropdown px-2 weight_normal %s"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown-%s" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> %s', $item["active"], $key, $item["title"]);
+                        }
+                        echo "</a>";
+                        if(is_array($item["submenu"])){
+                            echo " <div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdown-{$key}\">";
+                            foreach($item["submenu"] as $sub_item){
+                                echo sprintf("<a class=\"dropdown-item\" href=\"%s\" %s>%s</a>",$sub_item["link"], $sub_item["new_window"], $sub_item["title"]);
+                            }
+                            echo "</div>";
+                        }
+                        echo "</li>";
                     }
                     ?>
                 </ul>

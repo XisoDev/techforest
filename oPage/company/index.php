@@ -43,13 +43,13 @@ $news_list = $output->get('news_list');
     <div class="row">
         <?php if(!$logged_info) { ?>
         <div class="col-12">
-        <h5 class="weight_lighter mt-4">진행중인 <span class="red">채용공고가 0건</span> 이네요!</h5>
+        <h5 class="weight_bold mt-4">진행중인 <span class="red">채용공고가 0건</span> 이네요!</h5>
         </div>
         <div class="col-12 mt-2">
             <div class="flex-card-slick">
                 <?php for($i=1; $i<=3; $i++){ ?>
                   <a href="<?=getUrl('company','job_register')?>">
-                    <div class="tech_card text-center">
+                    <div class="tech_card text-center shadow-sm">
                         <div class="thumbnail">
                             <div class="icon_wrap">
                                 <i class="xi-plus-circle xi-2x color_primary"></i>
@@ -85,7 +85,7 @@ $news_list = $output->get('news_list');
               <div class="flex-card-slick">
                   <?php for($i=1; $i<=3; $i++){ ?>
                     <a href="<?=getUrl('company','job_register')?>">
-                      <div class="tech_card text-center">
+                      <div class="tech_card text-center shadow-sm">
                           <div class="thumbnail">
                               <div class="icon_wrap">
                                   <i class="xi-plus-circle xi-2x color_primary"></i>
@@ -101,7 +101,7 @@ $news_list = $output->get('news_list');
         <div class="col-12 mt-2">
             <div class="flex-card-slick">
                 <?php foreach($output->get("hire_ing") as $val){ ?>
-                    <div class="tech_card bg-white shadow">
+                    <div class="tech_card bg-white shadow-sm">
                         <div class="thumbnail mx-0 px-0" style="background-image:url('http://www.planttech.co.kr/wp-content/uploads/2018/07/%EC%82%BC%EC%84%B1%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%811-820x457.png')">
                         </div>
                         <div class="py-2 px-2 text-left pb-1">
@@ -112,7 +112,7 @@ $news_list = $output->get('news_list');
                               <? if ($val['district_name'] == "전체") { $val['district_name'] = ""; }?>
                               <? if($val['salary_idx'] < 3) { $hire_salary_text = "만원"; } else { $hire_salary_text = "원"; } ?>
                                 <span class="badge badge-danger weight_lighter"><i class="xi-map-marker"></i></span>
-                                <?php echo $val['local_name'] . " " . $val['city_name'].$val['district_name'];?>
+                                <b><?php echo $val['local_name'] . " " . $val['city_name'].$val['district_name'];?></b>
                                 <span class="salary_span badge badge-danger weight_lighter">
                                   <?if($val['salary_idx'] == "1"){
                                     echo "연봉";
@@ -212,9 +212,9 @@ $news_list = $output->get('news_list');
                     <div class="tech_card bg-white overflow-hidden mx-md-3 mb-md-3 shadow">
                         <div class="avatar square mx-auto my-2 my-sm-3 my-md-4" style="width:40%; background-image:url('/layout/none/assets/images/no_avatar.png');">
                         </div>
-                        <h6 class="weight_normal mb-1 px-2 text-center"><?=$val['m_name']?> (<?=$val['m_birthday']?>세)</h6>
-                        <p class="text-left xs_content px-3 py-0 m-0 mb-1">  <img class="d-inline imgicon" src="/oPage/images/imgicons/location_bg_red.png" height="10" /> 희망지역 : <?=$desired_work_place?></p>
-                        <p class="text-left xs_content px-3 py-0 m-0 cut1"  style="height:42px;"> <img class="d-inline imgicon" src="/oPage/images/imgicons/wrench_bg_red.png" height="10" /> 주요경력 : <?=$val['duty_name']?></p>
+                        <h6 class="weight_bold mb-1 px-2 text-center"><?=$val['m_name']?> (<?=$val['m_birthday']?>세)</h6>
+                        <p class="text-left xs_content px-3 py-0 m-0 mb-1">  <img class="d-inline imgicon" src="/oPage/images/imgicons/location_bg_red.png" height="10" /> <b>희망지역 : <?=$desired_work_place?></b></p>
+                        <p class="text-left xs_content px-3 py-0 m-0 cut1"  style="height:42px;"> <img class="d-inline imgicon" src="/oPage/images/imgicons/wrench_bg_red.png" height="10" /> <b>주요경력 : <?=$val['duty_name']?></b></p>
                         <div class="row mt-0 mx-0 px-0">
                             <div class="col-12 mx-0 px-0">
                               <?if($m_idx){?>
@@ -264,15 +264,15 @@ $news_list = $output->get('news_list');
                           $application_time= $diff.'초 전';
                         }
                     ?>
-                      <div class="position-relative btn-round text-left p-1 py-md-1 pl-md-5 mb-0 mb-md-3 shadow-none-sm bg-white">
-                      <p class="cut1 pb-0 mb-0 pl-md-5">
-                        <span class="d-none d-md-block btn btn-round btn-xs btn-danger p-md-3 position-md-absolute"
+                      <div class="position-relative btn-round text-left p-1 py-md-1 pl-md-5 mb-0 mb-md-3 shadow-none-sm bg-white mx-auto" style="max-width:600px;">
+                      <p class="cut1 pb-0 mb-0 pl-sm-5">
+                        <span class="d-none d-sm-inline-block btn btn-round btn-xs btn-danger mt-sm-2 mt-md-0 p-sm-2 p-md-3 position-absolute"
                               style="left:-5px; top:-5px;"
                         ><?=$application_time?></span>
-                        <span class="d-inline-block d-md-none btn btn-round btn-xxs btn-danger"
+                        <span class="d-inline-block d-sm-none btn btn-round btn-xxs btn-danger"
                               style="left:-5px; top:-5px;"
                         ><?=$application_time?></span>
-                          <span class="d-md-inline-block pl-md-5 ml-md-5"><span class="red"><?=$val['c_name']?></span> 에 지원자가 발생했습니다.</span>
+                          <span class="d-sm-block pt-0 mt-0 text-sm-center"><span class="red"><?=$val['c_name']?></span> 에 지원자가 발생했습니다.</span>
                       </p>
                     </div>
                 <?}?>
@@ -328,11 +328,11 @@ $news_list = $output->get('news_list');
 </div>
 
 <div class="d-none py-5 d-lg-block container-fluid mt-5 bg-light">
-    <div class="d-flex justify-content-between container">
+    <div class="d-flex container">
         <a href="#" target="_blank"><img src="/oPage/company/supports/01_logo.png" /></a>
+        <a href="#" target="_blank"><img src="/oPage/company/supports/04_logo.png" /></a>
         <a href="#" target="_blank"><img src="/oPage/company/supports/02_logo.png" /></a>
         <a href="#" target="_blank"><img src="/oPage/company/supports/03_logo.png" /></a>
-        <a href="#" target="_blank"><img src="/oPage/company/supports/04_logo.png" /></a>
     </div>
 </div>
 <!-- 메인에 뜨는 공고등록 유도 팝업 -->

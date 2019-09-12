@@ -58,7 +58,7 @@ $news_list = $output->get('news_list');
     <div class="row">
         <?php if(!$logged_info) { ?>
         <div class="col-12">
-            <h6 class="weight_normal mt-4">아직 이력서를 등록하지 않으셨네요!</h6>
+            <h6 class="weight_bold mt-4">아직 이력서를 등록하지 않으셨네요!</h6>
             <button class="btn btn-lg btn-block btn-warning xs_content py-3">이력서 등록하고 맞춤 일자리 확인하기
                 <span class="color_primary"><i class="xi-plus-circle"></i></span>
             </button>
@@ -67,7 +67,7 @@ $news_list = $output->get('news_list');
         <div class="col-12">
             <div class="bg-white rounded pt-3 mt-3">
             <a href="#" class="pull-right mr-2 btn btn-primary btn-xxs btn-round py-1 px-2">공고더보기 <i class="xi-plus"></i></a>
-            <h6 class="weight_lighter ml-2">오늘의 주요 채용 공고!</h6>
+            <h6 class="weight_bold ml-2">오늘의 주요 채용 공고!</h6>
 
                 <div class="clearfix"></div>
         <!-- <div class="col-4 mr-0 pr-1">
@@ -118,7 +118,7 @@ $news_list = $output->get('news_list');
             <!--                mobile card-->
             <div class="d-block d-md-none">
                 <div class="col-12">
-                    <h6 class="weight_normal xs_content mt-4 mb-1">
+                    <h6 class="weight_bold xs_content mt-4 mb-1">
                         <span class="red"><?=$logged_info['m_name']?></span>님의 이력서 완성도는
                         <span class="red">
                           <?php if($count_career_row[0]['count_career'] == $count_c_content_row[0]['count_c_content'] && $count_myinfo_row[0]['count_myinfo']){
@@ -131,7 +131,7 @@ $news_list = $output->get('news_list');
                           ?>
                         </span>입니다.
                     </h6>
-                    <h6 class="weight_lighter xs_content mt-0 mb-2">
+                    <h6 class="weight_bold xs_content mt-0 mb-2">
                         상세 경력을 기입하고 취업 성공률을 높여보세요!
                     </h6>
                     <div class="tech_card overflow-hidden mt-md-n5 shadow">
@@ -363,6 +363,11 @@ $news_list = $output->get('news_list');
 
 <div class="d-none d-lg-block container">
     <div class="text-center pt-5 pb-3">
+        <div class="text-center xs_content">
+            <i class="text-warning">◆</i>
+            <i class="text-primary">◆</i>
+            <i class="text-warning">◆</i>
+        </div>
         <h3 class="weight_bold mt-3">언론보도</h3>
         <h6 class="weight_lighter mt-1 mb-2">기술자숲의 언론보도 및 소식을 확인해보세요.</h6>
     </div>
@@ -392,11 +397,11 @@ $news_list = $output->get('news_list');
 </div>
 
 <div class="d-none py-5 d-lg-block container-fluid mt-5 bg-light">
-    <div class="d-flex justify-content-between container">
-    <a href="#" target="_blank"><img src="/oPage/technician/images/supports_01.jpg" height="59" /></a>
-    <a href="#" target="_blank"><img src="/oPage/technician/images/supports_03.jpg" height="59" /></a>
-    <a href="#" target="_blank"><img src="/oPage/technician/images/supports_05.jpg" height="59" /></a>
-    <a href="#" target="_blank"><img src="/oPage/technician/images/supports_07.png" height="59" /></a>
+    <div class="d-flex container">
+        <a href="#" target="_blank"><img src="/oPage/company/supports/01_logo.png" /></a>
+        <a href="#" target="_blank"><img src="/oPage/company/supports/04_logo.png" /></a>
+        <a href="#" target="_blank"><img src="/oPage/company/supports/02_logo.png" /></a>
+        <a href="#" target="_blank"><img src="/oPage/company/supports/03_logo.png" /></a>
     </div>
 </div>
 

@@ -21,9 +21,9 @@ $file_list = $output->get('file_list');
 </section>
 <div class="container pt-4">
     <div class="row mb-4">
-        <div class="col-12 col-sm-10 col-md-9 col-lg-8 mx-lg-auto mx-0 pt-md-4">
+        <div class="col-12 col-sm-10 col-md-9 col-lg-8 mx-md-auto mx-0 pt-md-4">
             <h5>내 이력서 관리</h5>
-            <div class="tech_card bg-white mb-4 shadow-sm mx-5">
+            <div class="tech_card bg-white mb-4 shadow-sm mx-md-5">
                 <div class="xxs_content py-2 weight_lighter position-relative">
                     <span class="position-absolute weight_normal" style="right:10px; top:7px;">
                         이력서 완성도
@@ -51,7 +51,7 @@ $file_list = $output->get('file_list');
                         <div class="d-none d-lg-block col-lg-1"></div>
                         <div class="col-12 col-lg-7 text-center text-lg-left pt-lg-3">
                             <div class="d-block d-lg-none text-center">
-                                <img src="/oPage/images/imgicons/attachment_gray.png" height="50" />
+                                <img src="/oPage/images/imgicons/attachment_gray.png" height="40" />
                             </div>
                             <h5>
                                 <img src="/oPage/images/imgicons/attachment_gray.png" height="25" class="d-none d-lg-inline-block" />
