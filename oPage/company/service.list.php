@@ -16,7 +16,7 @@
             <div class="col-12 col-lg-4 py-lg-4 text-center text-lg-left">
                 <div class="px-3 pb-4 pt-4 pl-lg-0">
                     <span class="btn btn-danger btn-lg d-lg-inline-block d-none position-static btn-xs py-2 px-4 mb-3">기업</span>
-                    <h5 class="weight_bold">프리미엄 회원</h5>
+                    <h5 class="weight_bold">후불 통합 패키지</h5>
                     <h6 class="weight_lighter">문자발송 및 연락처 열람</h6>
                 </div>
                 <div class="d-none d-lg-block red pb-4">
@@ -26,7 +26,7 @@
         </div>
     </a>
 
-    <a class="service_card mb-5 bg-white shadow text-dark" href="<?=getUrl('company','service',10)?>">
+    <a class="service_card mb-5 bg-white shadow text-dark" onclick="call_gsjsoop();">
         <div class="row">
             <div class="col-12 col-lg-8">
                 <div class="thumbnail" style="height:100%; background-image:url('/oPage/company/images/company_service2.jpg"></div>
@@ -35,8 +35,8 @@
             <div class="col-12 col-lg-4 py-lg-4 text-center text-lg-left">
                 <div class="px-3 pb-4 pt-4 pl-lg-0">
                     <span class="btn btn-danger btn-lg d-lg-inline-block d-none position-static btn-xs py-2 px-4 mb-3">기업</span>
-                    <h5 class="weight_bold">프리미엄 회원</h5>
-                    <h6 class="weight_lighter">프리미엄 회원권을 이용해보세요.</h6>
+                    <h5 class="weight_bold">광고 배너</h5>
+                    <h6 class="weight_lighter">웹/앱 광고배너 게시</h6>
                 </div>
                 <div class="d-none d-lg-block red pb-4">
                     서비스 자세히보기
@@ -47,7 +47,11 @@
     </div>
 </div>
 
-
+<script type="text/javascript">
+  function call_gsjsoop(){
+    alert("1800-9665로 연락주시면 광고배너상품 소개자료를 보내드립니다.");
+  }
+</script>
 
 <?php
 $footer_false = true;

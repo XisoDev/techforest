@@ -73,7 +73,7 @@ $check_voucher = $output->get('check_voucher');
     </div>
 </section>
 <div class="container pt-lg-5" style="min-height:1000px;">
-    <img src="/oPage/company/images/service_img1.jpg" alt="">
+    <img src="/oPage/company/images/service_img1.png" alt="service">
 </div>
 
 <div class="fixed-bottom bg-white purchaseBox" id="pay_box">

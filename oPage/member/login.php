@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-3"></div>
         <div class="col-6">
-            <img class="align-self-center mr-3" src="/oPage/images/logo.png" alt="기술자 숲">
+            <img class="align-self-center mr-3" src="/oPage/images/logo_black.png" alt="기술자 숲">
         </div>
         <div class="col-3"></div>
     </div>
@@ -59,9 +59,9 @@
                 </div>
             </div>
             <div class="pull-right">
-                <button class="xxs_content text-dark m-0 p-0 btn_style" data-toggle="modal" data-target="#modal_search_id">아이디 찾기</button>
+                <a class="xxs_content text-dark m-0 p-0 btn_style" data-toggle="modal" data-target="#modal_search_id">아이디 찾기</a>
                 <span class="xxs_content px-0">|</span>
-                <button class="xxs_content text-dark m-0 p-0 btn_style" data-toggle="modal" data-target="#modal_search_pw">비밀번호 찾기</button>
+                <a class="xxs_content text-dark m-0 p-0 btn_style" data-toggle="modal" data-target="#modal_search_pw">비밀번호 찾기</a>
             </div>
         </div>
 

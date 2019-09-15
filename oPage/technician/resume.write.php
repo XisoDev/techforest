@@ -541,7 +541,7 @@ shuffle($rand_array);
 														?>
 													<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0" id="school_grade_title<?=$idx?>" style="display:<?=$is_grade_visible?>">학점</h6>
 													<div class="input-group col-6 col-sm-3 mx-0 px-0 mb-2 mt-sm-3" id="grade<?=$idx?>" style="display:<?=$is_grade_visible2?>;">
-														<input type="text" class="form-control text-center" id="school_grade<?=$idx?>" value="<?=$val['school_grade']?>" placeholder="학점"/>
+														<input type="text" class="form-control text-center" id="school_grade<?=$idx?>" onkeyup="onlyNumber(this)" value="<?=$val['school_grade']?>" placeholder="학점"/>
 														<div class="input-group-prepend">
 															<span class="input-group-text">/</span>
 														</div>
@@ -585,7 +585,8 @@ shuffle($rand_array);
 									<div id="my_info5_2">
 									<? if(count($my_info5) == 0){ ?>
 										<div class="added_card border rounded position-relative rounded-0 rounded-top container py-0 pb-1 py-md-3 pt-sm-3 pb-sm-0">
-												<!-- <a class="position-absolute" style="right:10px; top:10px;" onclik><i class="xi-close"></i></a> -->
+											<p class="xxs_content px-0 mx-0 pt-3" id="x_content30" style="text-align:right;display:none;"><span class="red"><i class="xi-error"></i>입력 할 내용이 없다면? X 클릭</span></p>
+												<a class="position-absolute" style="right:10px; top:10px;" id="certificate_del0" onclick="javascript:my_info5_del1(0)"><i class="xi-close"></i></a>
 												<div class="row pb-2 px-2" id="certificate_div0">
 														<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">자격증명</h6>
 														<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
@@ -597,6 +598,7 @@ shuffle($rand_array);
 									<?}else{?>
 										<?foreach ($my_info5 as $idx => $val) {?>
 											<div class="added_card border rounded position-relative rounded-0 rounded-top container py-0 pb-1 py-md-3 pt-sm-3 pb-sm-0" id="certificate_div<?=$idx?>">
+												<p class="xxs_content px-0 mx-0 pt-3" id="x_content3<?=$idx?>" style="text-align:right;display:none;"><span class="red"><i class="xi-error"></i>입력 할 내용이 없다면? X 클릭</span></p>
 													<a class="position-absolute" style="right:10px; top:10px;" id="certificate_del<?=$idx?>" onclick="javascript:my_info5_del1(<?=$idx?>)"><i class="xi-close"></i></a>
 													<div class="row pb-2 px-2">
 															<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">자격증명</h6>
@@ -627,7 +629,9 @@ shuffle($rand_array);
 									<div id="my_info6_2">
 										<?if(count($my_info6) == 0){?>
 											<div class="added_card border rounded position-relative rounded-0 rounded-top container py-0 pb-1 py-md-3 pt-sm-3 pb-sm-0" id="language_div0">
-	                        <div class="row pb-2 px-2">
+												<p class="xxs_content px-0 mx-0 pt-3" id="x_content40" style="text-align:right;display:none;"><span class="red"><i class="xi-error"></i>입력 할 내용이 없다면? X 클릭</span></p>
+												<a class="position-absolute" style="right:10px; top:10px;" id="language_del0" onclick="javascript:my_info6_del1(0)"><i class="xi-close"></i></a>
+													<div class="row pb-2 px-2">
 	                            <h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">언어</h6>
 	                            <div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
 	                               <input type="text" class="form-control" id="lc_name_txt0" name="lc_name_txt0" value="">
@@ -682,7 +686,8 @@ shuffle($rand_array);
 									  <?}else{?>
 											<?foreach ($my_info6 as $idx => $val) {?>
 												<div class="added_card border rounded position-relative rounded-0 rounded-top container py-0 pb-1 py-md-3 pt-sm-3 pb-sm-0" id="language_div<?=$idx?>">
-		                        <a class="position-absolute" style="right:10px; top:10px;" id="language_del<?=$idx?>" onclick="javascript:my_info6_del1(<?=$idx?>)"><i class="xi-close"></i></a>
+													<p class="xxs_content px-0 mx-0 pt-3" id="x_content4<?=$idx?>" style="text-align:right;display:none;"><span class="red"><i class="xi-error"></i>입력 할 내용이 없다면? X 클릭</span></p>
+														<a class="position-absolute" style="right:10px; top:10px;" id="language_del<?=$idx?>" onclick="javascript:my_info6_del1(<?=$idx?>)"><i class="xi-close"></i></a>
 		                        <div class="row pb-2 px-2">
 		                            <h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">언어</h6>
 		                            <div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
@@ -752,10 +757,13 @@ shuffle($rand_array);
                     </h5>
                 </div>
                 <div class="col-12 mx-0 px-0 mt-sm-3" style="margin-bottom:100px">
-                    <?foreach ($file_list as $val) {?>
+                    <?
+										foreach ($file_list as $val) {
+											$file_name_sever = $m_idx . "_" . date("YmdHis", strtotime($val["reg_date"])) . "_" . $val["file_name"];
+											?>
                         <div class="file_item border rounded py-2 px-2 mb-2 mt-sm-3">
-                                <a onclick="file_trash(<?=$val['file_name']?>)"><i class="xi-trash pull-right" style="font-size:1.2em;"></i></a>
-                                <a href="" download="<?=$val['file_name']?>" title="<?=$val['file_name']?>"><i class="xi-download pull-right" style="font-size:1.2em;"></i></a>
+                                <i class="xi-trash pull-right" style="font-size:1.2em;" onclick="file_delete('<?=$val['reg_date']?>','<?=$val['file_name']?>');"></i>
+                                <a href="../../../portfolio/<?=$file_name_sever?>" download="<?=$val['file_name']?>" title="<?=$val['file_name']?>"><i class="xi-download pull-right" style="font-size:1.2em;"></i></a>
                                 [<?=$val['file_type']?>] <?=$val['file_name']?>
                         </div>
                     <?}?>
@@ -776,6 +784,7 @@ shuffle($rand_array);
                     <input type="button" class="btn btn-block btn-primary btn-round btn-lg my-3" onclick="resume_success()" value="저장" />
                 </div>
             </div>
+
         </div>
     </div>
 </section>
@@ -1004,6 +1013,7 @@ function occupation(obj){
       // }
 
 			html += '<div class="added_card border rounded position-relative rounded-0 rounded-top container py-0 pb-1 py-md-3 pt-sm-3 pb-sm-0" id="school_div'+ my_info3_count +'">';
+			html += '<p class="xxs_content px-0 mx-0 pt-3" id="x_content'+my_info3_count+'" style="text-align:right;display:none;"><span class="red"><i class="xi-error"></i>입력 할 내용이 없다면? X 클릭</span></p>';
 			html += '<a class="position-absolute" style="right:10px; top:10px;" id="school_del'+ my_info3_count +'" onclick="javascript:my_info3_del1(' + my_info3_count + ')"><i class="xi-close"></i></a>';
 			html += '<div class="row pb-2 px-2">';
 			html += '<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학교구분</h6>';
@@ -1037,7 +1047,7 @@ function occupation(obj){
 			html += '</div>';
 			html += '<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0" id="school_grade_title'+ my_info3_count +'"style="display:none">학점</h6>';
 			html += '<div class="input-group col-6 col-sm-3 mx-0 px-0 mb-2 mt-sm-3" id="grade'+ my_info3_count +'" style="display:none">';
-			html += '<input type="text" class="form-control text-center" id="school_grade'+ my_info3_count + '" placeholder="학점"/>';
+			html += '<input type="text" class="form-control text-center" id="school_grade'+ my_info3_count + '" onkeyup="onlyNumber(this)" placeholder="학점"/>';
 			html += '<div class="input-group-prepend">';
 			html += '<span class="input-group-text">/</span>';
 			html += '</div>';
@@ -1128,6 +1138,7 @@ function occupation(obj){
 			//}
 
 			html += '<div class="added_card border rounded position-relative rounded-0 rounded-top container py-0 pb-1 py-md-3 pt-sm-3 pb-sm-0">';
+			html += '<p class="xxs_content px-0 mx-0 pt-3" id="x_content2'+ i +'" style="text-align:right;display:none;"><span class="red"><i class="xi-error"></i>입력 할 내용이 없다면? X 클릭</span></p>';
 			html += '<a class="position-absolute" style="right:10px; top:10px;" name="delete_career" onclick="removeViewMemberCareer(this)"><i class="xi-close"></i></a>';
 			html += '<div class="row pb-2 px-2">';
 			html += '<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">기업명</h6>';
@@ -1143,15 +1154,15 @@ function occupation(obj){
 			html += '</select></div>';
 			html += '<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">근무기간</h6>';
 			html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">';
-			html += '<input type="text" class="form-control monthpicker_from" autocomplete="off" name="c_start_date"  value="' +member_career_arr[i]["c_start_date"].substring(0, 7)+ '"/>';
+			html += '<input type="text" class="form-control monthpicker_from" autocomplete="off" name="c_start_date" id="c_start_date'+ i +'" value="' +member_career_arr[i]["c_start_date"].substring(0, 7)+ '"/>';
 			html += '<div class="input-group-append">';
 			html += '<span class="input-group-text">~</span>';
 			html += '</div>';
-			html += '<input type="text" name="c_end_date" class="form-control monthpicker_to" value="' +member_career_arr[i]["c_end_date"].substring(0, 7)+ '" />';
+			html += '<input type="text" name="c_end_date" id="c_end_date'+ i +'" class="form-control monthpicker_to" value="' +member_career_arr[i]["c_end_date"].substring(0, 7)+ '" />';
 			html += '</div>';
 			html += '<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">직무내용</h6>';
 			html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">';
-			html += '<textarea rows="3" class="form-control" name="c_content" placeholder="기재시 적합한 일자리에 연결될 확률이 77% 증가합니다">'+member_career_arr[i]["c_content"]+'</textarea>';
+			html += '<textarea rows="3" class="form-control" name="c_content" id="c_content'+ i +'" placeholder="기재시 적합한 일자리에 연결될 확률이 77% 증가합니다">'+member_career_arr[i]["c_content"]+'</textarea>';
 			html += '</div></div></div>';
 
 
@@ -1183,7 +1194,7 @@ function occupation(obj){
 
 	function addOccupationToSelect(num, o_idx) {
 		var selecter = $('select[name=c_o_idx]').eq(num);
-		$(selecter).append('<option selected disabled>직종을 선택해주세요</option>');
+		$(selecter).append('<option value="" selected disabled>직종을 선택해주세요</option>');
 
 		for(var i = 0; i < occupation_arr.length; i++) {
 			$(selecter).append('<option value="' +occupation_arr[i]["o_idx"]+ '">' +occupation_arr[i]["o_name"]+ '</option>');
@@ -1202,7 +1213,7 @@ function occupation(obj){
 		if(obj.value == 1 || obj.value == 9) {
 			// $(selecter).append('<option selected disabled></option>');
 		} else {
-			$(selecter).append('<option selected disabled>직무를 선택해주세요</option>');
+			$(selecter).append('<option value="" selected disabled>직무를 선택해주세요</option>');
 		}
 
 	  for(var i = 0; i < duty_arr.length; i++) {
@@ -1219,17 +1230,8 @@ function occupation(obj){
 	function my_info5_add(){
 		var html = "";
 
-		// if(my_info5_count != 0) {
-		// 	var certificate_name = $("#certificate_name" + (my_info5_count - 1)).val();
-		// 	var certificate_date = $("#certificate_date" + (my_info5_count - 1)).val();
-		//
-		// 	if(!certificate_name || !certificate_date) {
-		// 		alert("자격증명과 취득날짜를 입력해주세요.");
-		// 		$("#certificate_name").focus();
-		// 		return;
-		// 	}
-		// }
 		html += '<div class="added_card border rounded position-relative rounded-0 rounded-top container py-0 pb-1 py-md-3 pt-sm-3 pb-sm-0" id="certificate_div'+ my_info5_count +'">';
+		html += '<p class="xxs_content px-0 mx-0 pt-3" id="x_content3'+ my_info5_count+'" style="text-align:right;display:none;"><span class="red"><i class="xi-error"></i>입력 할 내용이 없다면? X 클릭</span></p>';
 		html += '<a class="position-absolute" style="right:10px; top:10px;" id="certificate_del'+ my_info5_count +'" onclick="my_info5_del1('+ my_info5_count +')"><i class="xi-close"></i></a>';
 		html += '<div class="row pb-2 px-2">';
 		html += '<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">자격증명</h6>';
@@ -1293,40 +1295,8 @@ function occupation(obj){
 }
 
 function my_info6_add() {
-	// $('#my_info6_2').css('display', 'block');
-	// $('#my_info6_3').css('display', 'none');
-	var html = "";
 
-	// if(my_info6_count != 0) {
-	// 	var lc_name_txt = $("#lc_name_txt" + (my_info6_count - 1)).val();
-	// 	var lc_d_name_txt = $("#lc_d_name_txt" + (my_info6_count - 1)).val();
-	// 	var score = $("#score" + (my_info6_count - 1)).val();
-	// 	var language_date = $("#language_date" + (my_info6_count - 1)).val();
-	//
-	// 	if(!lc_name_txt ) {
-	// 		alert("언어를 입력/선택해주세요.");
-	// 		$("#lc_name_txt").focus();
-	// 		return;
-	// 	}
-	//
-	// 	if(!lc_d_name_txt) {
-	// 		alert("시험명을 입력/선택해주세요.");
-	// 		$("#lc_d_name_txt").focus();
-	// 		return;
-	// 	}
-	//
-	// 	if(!score) {
-	// 		alert("점수를 입력해주세요.");
-	// 		$("#score").focus();
-	// 		return;
-	// 	}
-	//
-	// 	if(!language_date) {
-	// 		alert("취득날짜를 입력해주세요.");
-	// 		$("#language_date").focus();
-	// 		return;
-	// 	}
-	//}
+	var html = "";
 
 	html += '<div class="added_card border rounded position-relative rounded-0 rounded-top container py-0 pb-1 py-md-3 pt-sm-3 pb-sm-0" id="language_div' + my_info6_count + '">';
 	html += '<a class="position-absolute" style="right:10px; top:10px;" id="language_del'+ my_info6_count +'" onclick="javascript:my_info6_del1('+ my_info6_count +')"><i class="xi-close"></i></a>';
@@ -1351,7 +1321,7 @@ function my_info6_add() {
 	html += '</div></div>';
   html += '<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">취득날짜</h6>';
 	html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">';
-	html += '<input type="text" class="form-control" id="language_date'+ my_info6_count +'"/>';
+	html += '<input type="text" class="form-control monthpicker" id="language_date'+ my_info6_count +'"/>';
 	html += '</div></div></div>';
 
 	$("#my_info6_2").append(html);
@@ -1627,6 +1597,44 @@ function my_info6_del1(idx) {
 						is_newcommer = 1;
 					}
 
+					if($('#c_name'+i).val() == ""){
+						$("#c_name"+i).focus();
+						$('#x_content2'+i).css('display','block');
+						return toastr.error("기업명을 입력해주세요.");
+					}
+					;
+					if($("#c_o_idx" + i + " option:selected").val() == ""){
+						$("#c_name"+i).focus();
+						$('#x_content2'+i).css('display','block');
+						return toastr.error("직종을 입력해주세요.");
+					}
+
+					if($("#c_duty" + i + " option:selected").val() == ""){
+						$("#c_name"+i).focus();
+						$('#x_content2'+i).css('display','block');
+						return toastr.error("직무를 입력해주세요.");
+					}
+
+					if($('#c_start_date'+i).val() == ""){
+						$("#c_start_date"+i).focus();
+						$('#x_content2'+i).css('display','block');
+						return toastr.error("근무기간을 입력해주세요.");
+					}
+
+					if($('#c_end_date'+i).val() == ""){
+						$("#c_end_date"+i).focus();
+						$('#x_content2'+i).css('display','block');
+						return toastr.error("근무기간을 입력해주세요.");
+					}
+
+					if($('#c_content'+i).val() == ""){
+						$("#c_content"+i).focus();
+						$('#x_content2'+i).css('display','block');
+						return toastr.error("직무내용을 입력해주세요.");
+					}
+
+
+
 					var tmp = "var tmpA = {'c_name" + i + "':'" + c_name + "', 'c_position" + i + "':'" + c_position + "', 'c_start_date" + i + "':'" + c_start_date + "', 'c_end_date" + i + "':'" + c_end_date +
 					                       "', 'c_o_idx" + i + "':'" + c_o_idx + "', 'c_duty" + i + "':'" + c_duty + "', 'is_newcommer" + i + "':'" + is_newcommer + "', 'c_content" + i + "':'" + c_content + "'}";
 
@@ -1640,6 +1648,19 @@ function my_info6_del1(idx) {
 				for(var i = 0; i < my_info5_count; i++) {
 					var certificate_name	=	$("#certificate_name" + i).val();
 					var certificate_date	=	$("#certificate_date" + i).val() + "-01";
+
+					if($('#certificate_name'+i).val() == ""){
+						$("#certificate_name"+i).focus();
+						$('#x_content3'+i).css('display','block');
+						return toastr.error("자격증명을 입력해주세요.");
+					}
+
+					if($('#certificate_date'+i).val() == ""){
+						$("#certificate_date"+i).focus();
+						$('#x_content3'+i).css('display','block');
+						return toastr.error("취득일자를 입력해주세요.");
+					}
+
 
 					var tmp = "var tmpA = {'certificate_name" + i + "':'" + certificate_name + "', 'certificate_date" + i + "':'" + certificate_date +"'}";
 					var json5 = {"certificate_name":certificate_name,"certificate_date":certificate_date};
@@ -1656,6 +1677,29 @@ function my_info6_del1(idx) {
 					var score				=	$("#score" + i).val();
 					var language_date		=	$("#language_date" + i).val() + "-01";
 
+					if($('#lc_name_txt'+i).val() == ""){
+						$("#lc_name_txt"+i).focus();
+						$('#x_content4'+i).css('display','block');
+						return toastr.error("언어를 입력해주세요.");
+					}
+
+					if($('#lc_d_name_txt'+i).val() == ""){
+						$("#lc_d_name_txt"+i).focus();
+						$('#x_content4'+i).css('display','block');
+						return toastr.error("시험명을 입력해주세요.");
+					}
+
+					if($('#score'+i).val() == ""){
+						$("#score"+i).focus();
+						$('#x_content4'+i).css('display','block');
+						return toastr.error("점수를 입력해주세요.");
+					}
+
+					if($('#language_date'+i).val() == ""){
+						$("#language_date"+i).focus();
+						$('#x_content4'+i).css('display','block');
+						return toastr.error("취득날짜를 입력해주세요.");
+					}
 
 					var tmp = "var tmpA = {'lc_name_txt" + i + "':'" + lc_name_txt + "', 'lc_d_name_txt" + i + "':'" + lc_d_name_txt + "', 'score" + i + "':'" + score + "', 'language_date" + i + "':'" + language_date + "'}";
 					var json6 = {"lc_name_txt":lc_name_txt,"lc_d_name_txt":lc_d_name_txt,"score":score,"language_date":language_date};
@@ -1770,6 +1814,18 @@ function my_info6_del1(idx) {
 				});
 
 			}
+		}
+
+		function file_delete(date,name){
+
+		  var params = {
+		    "file_name" : name,
+		    "reg_date" : date
+		  }
+
+		  exec_json("technician.FileDelete",params,function(ret_obj){
+		    toastr.success(ret_obj.message);
+		  });
 		}
 
 </script>
