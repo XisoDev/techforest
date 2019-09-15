@@ -282,7 +282,7 @@ $news_list = $output->get('news_list');
                           </div>
                           <div class="p-2 text-left pb-1">
                               <h6 class="mb-0 pb-0"><?=$val['c_name']?></h6>
-                              <h6 class="red" style="height:38px"><?=$val['h_title']?></h6>
+                              <h6 class="red cut1 pt-1"><?=$val['h_title']?></h6>
                               <p class="weight_lighter xxs_content mx-0 px-0">
                                   <span class="badge badge-danger weight_lighter">위치</span>
                                   <?=$desired_work_place?>
