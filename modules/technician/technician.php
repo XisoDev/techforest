@@ -784,7 +784,9 @@ class technicianView{
     }
 
     function jobDetail($args){
+
         setSEO("공고 상세보기","");
+        $now_date = date(YmdHis);
         global $site_info;
         $site_info->layout = "technician";
 
@@ -831,6 +833,19 @@ class technicianView{
         $oDB->where("h_idx",$h_idx);
         $h_certificate = $oDB->get("TF_hire_certificate",null,"certificate_name");
 
+        //다음공고
+        $oDB->where("job_end_date",$now_date,'>');
+        $oDB->where("h_idx",$h_idx,'>');
+        $oDB->where("hire_is_show",'Y');
+        $N_hire = $oDB->get("TF_hire_tb AS h",1,'h_idx');
+
+
+        //이전공고
+        $oDB->where("job_end_date",$now_date,'>');
+        $oDB->where("h_idx",$h_idx,'<');
+        $oDB->where("hire_is_show",'Y');
+        $B_hire = $oDB->get("TF_hire_tb AS h",1,'h_idx');
+
         //탈퇴한 지원자 카운트
         $oDB->where("m.m_name","IS NULL");
         $oDB->where("al.h_idx",$h_idx);
@@ -843,6 +858,8 @@ class technicianView{
         $interest = $oDB->get("TF_interest_career_tb");
 
         $output->add('h_idx',$h_idx);
+        $output->add('N_hire',$N_hire);
+        $output->add('B_hire',$B_hire);
         $output->add('interest',$interest);
         $output->add('member_notice',$this->member_notice());
         $output->add('hire_info',$hire_info);
@@ -1039,6 +1056,5 @@ class technicianView{
 
       return $news_list;
     }
-
 
   }
