@@ -98,15 +98,15 @@ $salary_list = $oDB->get("TF_salary",null,"salary_idx, salary_name, salary_is_sh
             <div class="container">
                 <div class="row">
                   <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
-<!--이전 채용공고 불러오기-->
+                  <!--이전 채용공고 불러오기-->
                   </div>
                     <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
-                        <select class="form-control" id="hire_call_select" onchange="">
+                        <select class="form-control" id="hire_call_select" onchange="hire_call()">
                           <?if(count($hire_call_row) < 1){?>
                             <option>마감된 공고가 없습니다.</option>
                               <?}else{?>
+                                <option>이전 채용공고 불러오기</option>
                                 <?php foreach($hire_call_row as $val){ ?>
-                                  <option>이전 채용공고 불러오기</option>
                                   <option value="<?=$val['h_idx']?>">[마감] <?=$val['h_title']?></option>
                                 <?php } ?>
                               <?}?>
@@ -404,11 +404,11 @@ $salary_list = $oDB->get("TF_salary",null,"salary_idx, salary_name, salary_is_sh
 
                     </div>
 
-                    <div class="d-none d-md-block col-md-2"></div>
-                    <div class="col-6 col-md-4 mt-4 px-0 mx-0 pr-1">
+                    <div class="d-none d-md-block col-md-4"></div>
+                    <!-- <div class="col-6 col-md-4 mt-4 px-0 mx-0 pr-1">
                         <button type="submit" class="btn border-primary btn-block btn-round">임시저장</button>
-                    </div>
-                    <div class="col-6 col-md-4 mt-4 px-0 mx-0 pr-1">
+                    </div> -->
+                    <div class="col-12 col-md-4 mt-4 px-0 mx-0 pr-1">
                        <button type="button" class="btn btn-primary btn-block btn-round" onclick="hire_ok()">등록완료</button>
                     </div>
                 </div>
@@ -431,7 +431,7 @@ $salary_list = $oDB->get("TF_salary",null,"salary_idx, salary_name, salary_is_sh
 jQuery(document).ready(function($){
 
   //공고등록완료시 뜨는 팝업인데 디자인 확인을 위해 추가
-  // jQuery('#job_reg_complete').modal('show');
+  jQuery('#job_reg_complete').modal('show');
 });
 
 
@@ -489,7 +489,7 @@ function click_email(email) {
 
 function hire_call(){
   var hire_sel = $("#hire_call_select option:selected").val();
-  document.location.href = "<?=getUrl('company','edit_hire',false,array('h_idx' => hire_sel))?>";
+  location.href = './' + hire_sel;
 }
 
 function hire_ok(){

@@ -51,6 +51,8 @@ if(!isset($footer_false)){
                             }
                         }
                         ?>
+                        <li class=\"nav-item xs_content weight_normal"><a class="text-secondary nav-link xs_content">|</a></li>
+                        <li class="nav-item xs_content weight_normal"><a class="text-secondary nav-link" href="javascript:withdrawTechnician();">회원탈퇴</a></li>
                     </ul>
                 </nav>
 
@@ -59,3 +61,17 @@ if(!isset($footer_false)){
         </div>
     </div>
 </footer>
+
+<script type="text/javascript">
+  function withdrawTechnician(){
+    var confirm_text = confirm("정말 회원탈퇴를 하시겠습니까?");
+    if(confirm_text){
+      var params = {};
+      params["m_idx"] = <?=$m_idx?>;
+      exec_json("technician.withdrawTechnician",params,function(ret_obj){
+          toastr.success(ret_obj.message);
+          location.reload();
+    });
+  }
+  }
+</script>

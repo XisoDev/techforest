@@ -507,7 +507,79 @@ class companyController{
    }
 
 
-     function withdrawCompany($args){
+   function withdrawCompany($args){
+     global $oDB;
 
+     $m_idx = $args->m_idx;
+
+     $oDB->where("m_idx",$m_idx);
+     $row1 = $oDB->get("TF_member_commerce_tb",null,"c_idx, image");
+
+     if($row1){
+       $c_idx = $row1['c_idx'];
+        unlink("./company_logo/" . $row1['image']);
+     }else{
+       return new Object(-1,"회원탈퇴 중 오류가 발생하였습니다. (-1)");
      }
+
+      if(!$c_idx){
+        $c_idx = 0;
+      }
+
+      $oDB->where("c_idx",$c_idx);
+      $row2 = $oDB->get("TF_hire_tb",null,"h_idx");
+
+      if($row2){
+
+        $oDB->where("h_idx",$row2['h_idx']);
+        $del1 = $oDB->delete("TF_hire_certificate");
+        // if(!$del1){
+        //   return new Object(-1,"회원탈퇴 중 오류가 발생하였습니다. (-2)");
+        // }
+
+        $oDB->where("h_idx",$row2['h_idx']);
+        $del2 = $oDB->delete("TF_interest_career_tb");
+        // if(!$del2){
+        //   return new Object(-1,"회원탈퇴 중 오류가 발생하였습니다. (-3)");
+        // }
+        $oDB->where("c_idx",$c_idx);
+        $del3 = $oDB->delete("TF_hire_tb");
+        // if(!$del3){
+        //   return new Object(-1,"회원탈퇴 중 오류가 발생하였습니다. (-4)");
+        // }
+      }
+
+      $oDB->where("m_idx",$m_idx);
+      $row3 = $oDB->delete("TF_member_commerce_tb");
+
+      // if(!$row3){
+      //   return new Object(-1,"회원탈퇴 중 오류가 발생하였습니다. (-6)");
+      // }
+
+      $oDB->where("m_idx",$m_idx);
+      $row4 = $oDB->delete("TF_gcm_tb");
+
+      // if(!$row4){
+      //   return new Object(-1,"회원탈퇴 중 오류가 발생하였습니다. (-7)");
+      // }
+
+      $oDB->where("m_idx",$m_idx);
+      $oDB->join("TF_qna_reply_tb reply","qna.q_idx = reply.q_idx","LEFT");
+      $row5 = $oDB->delete("TF_qna_tb qna");
+      // if(!$row5){
+      //   return new Object(-1,"회원탈퇴 중 오류가 발생하였습니다. (-8)");
+      // }
+
+      $oDB->where("m_idx",$m_idx);
+      $row6 = $oDB->delete("TF_member_setting");
+
+      $oDB->where("m_idx",$m_idx);
+      $row7 = $oDB->delete("TF_EducationEvent_Member_tb");
+
+      $oDB->where("m_idx",$m_idx);
+      $row8 = $oDB->delete("TF_member_tb");
+      if(!$row8){
+        return new Object(-1,"회원탈퇴 중 오류가 발생하였습니다.");
+      }
+    }
 }

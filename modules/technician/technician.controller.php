@@ -703,4 +703,64 @@ class technicianController{
 
   }
 
+  function withdrawTechnician($args){
+    global $oDB;
+
+    $m_idx = $args->m_idx;
+
+    $oDB->where("m_idx",$m_idx);
+    $row1 = $oDB->delete("TF_member_career_tb");
+
+    $oDB->where("m_idx",$m_idx);
+    $row2 = $oDB->delete("TF_member_certificate_tb");
+
+    $oDB->where("m_idx",$m_idx);
+    $row3 = $oDB->delete("TF_member_education_tb");
+
+    $oDB->where("m_idx",$m_idx);
+    $sel = $oDB->get("TF_member_file",null,"file_name, reg_date");
+    if($sel){
+      $filePath = $m_idx . "_" . date_format($sel['reg_date'], "YmdHis") . "_" . $sel['file_name'];
+      unlink("./portfolio/" . $filePath);
+    }
+
+    $oDB->where("m_idx",$m_idx);
+    $row4 = $oDB->delete("TF_member_file");
+
+    $oDB->where("m_idx",$m_idx);
+    $row5 = $oDB->delete("TF_member_language_tb");
+
+    $oDB->where("m_idx",$m_idx);
+    $row6 = $oDB->delete("TF_member_order");
+
+    $oDB->where("m_idx",$m_idx);
+    $row7 = $oDB->delete("TF_member_self_tb");
+
+    $oDB->where("m_idx",$m_idx);
+    $row8 = $oDB->delete("TF_curriculum_tb");
+
+    $oDB->where("m_idx",$m_idx);
+    $row9 = $oDB->delete("TF_gcm_tb");
+
+    $oDB->where("m_idx",$m_idx);
+    $row10 = $oDB->delete("TF_interest_career_tb");
+
+    $oDB->where("m_idx",$m_idx);
+    $oDB->join("TF_qna_reply_tb reply","qna.q_idx = reply.q_idx","LEFT");
+    $row11 = $oDB->delete("TF_qna_tb qna");
+
+    $oDB->where("m_idx",$m_idx);
+    $row10 = $oDB->delete("TF_member_setting");
+
+    $oDB->where("m_idx",$m_idx);
+    $row11 = $oDB->delete("TF_EducationEvent_Member_tb");
+
+    $oDB->where("m_idx",$m_idx);
+    $row12 = $oDB->delete("TF_member_tb");
+    if(!$row12){
+      return new Object(-1,"회원탈퇴 중 오류가 발생하였습니다.");
+    }
+
+  }
+
 }

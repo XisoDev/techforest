@@ -15,8 +15,6 @@ if($logged_info['is_commerce'] == 'Y'){
 }
 ?>
 
-
-
 <div class="container pt-lg-5">
     <div class="p-3 px-0 d-lg-none">
         <a href="#" onclick="history.back();" class="mb-3"><img src="/oPage/images/imgicons/arrow_left.png" height="25" /></a>
@@ -52,6 +50,7 @@ if($logged_info['is_commerce'] == 'Y'){
               <input type="password" id="new_pass_check">
             </div>
             <button type="button" id="change_pass_btn" class="bg-red btn btn-xs btn-round">변경</button>
+            <br>
             <button type="button" id="change_pass_btn_ok" onclick="password()" class="bg-red btn btn-xs btn-round" style="display:none;">완료</button>
         </div>
     </form>

@@ -1,4 +1,10 @@
-
+<style media="screen">
+  .btn_style{
+    border:0;
+    background-color: #FFF;
+    outline:0;
+  }
+</style>
 <div class="container pt-lg-5">
     <div class="bigger_logo d-lg-none">
     <div class="row">
@@ -25,7 +31,7 @@
                     <input type="text"
                            onfocus="jQuery('.bigger_logo').addClass('focus');"
                            onblur="jQuery('.bigger_logo').removeClass('focus');"
-                           class="form-control form-round" name="user_id" id="user_id" placeholder="이메일주소 또는 아이디" required>
+                           class="form-control form-round" name="user_id" id="user_id" placeholder="아이디" required>
                 </div>
             </div>
         </div>
@@ -53,9 +59,9 @@
                 </div>
             </div>
             <div class="pull-right">
-                <a href="#" class="xxs_content text-dark m-0 p-0">아이디 찾기</a>
+                <button class="xxs_content text-dark m-0 p-0 btn_style" data-toggle="modal" data-target="#modal_search_id">아이디 찾기</button>
                 <span class="xxs_content px-0">|</span>
-                <a href="#" class="xxs_content text-dark m-0 p-0">비밀번호 찾기</a>
+                <button class="xxs_content text-dark m-0 p-0 btn_style" data-toggle="modal" data-target="#modal_search_pw">비밀번호 찾기</button>
             </div>
         </div>
 
@@ -107,7 +113,297 @@
     </div>
 </div>
 
+
+<div class="modal fade" id="modal_search_id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">아이디찾기</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+              <div class="col-12 mx-0 px-0 mb-2">
+                <h6>이름</h6>
+                <input type="text" class="form-control mb-2" id="searchid_name" placeholder="이름" required>
+              </div>
+
+              <div class="col-12 mx-0 px-0 mb-2">
+                <h6>전화번호</h6>
+                  <div class="input-group">
+                    <input type="text" class="form-control" id="searchid_phone1" placeholder="전화번호">
+                    <button class="dropdown-toggle" type="button" id="phone_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="caret"></span></button>
+                    <ul id="phone1_list" class="dropdown-menu" aria-labelledby="phone_btn" style="">
+                      <li class="" onclick="click_phone_id('010')">010</li>
+                      <li role="separator" class="divider"></li>
+                      <li class="" onclick="click_phone_id('017')">017</li>
+                      <li role="separator" class="divider"></li>
+                      <li class="" onclick="click_phone_id('016')">016</li>
+                      <li role="separator" class="divider"></li>
+                      <li class="" onclick="click_phone_id('011')">011</li>
+                      <li role="separator" class="divider"></li>
+                      <li class="" onclick="click_phone_id('018')">018</li>
+                    </ul>
+                      </select>
+                      <div class="input-group-prepend">
+                          <span class="input-group-text">-</span>
+                      </div>
+                      <input type="text" class="form-control" id="searchid_phone2" placeholder="0000">
+                      <div class="input-group-prepend">
+                          <span class="input-group-text">-</span>
+                      </div>
+                      <input type="text" class="form-control" id="searchid_phone3" placeholder="0000">
+                  </div>
+              </div>
+              <p id="result_list" class="mt-3"></p>
+              <div class="row px-2">
+                  <div class="col-sm-2"></div>
+                  <div class="col-6 col-sm-4">
+                      <input type="button" class="btn btn-block btn-primary btn-round btn-lg my-3" onclick="search_id()" value="찾기" />
+                  </div>
+                  <div class="col-6 col-sm-4">
+                      <input type="button" class="btn btn-block btn-light border-primary text-primary btn-round btn-lg my-3" onclick="jQuery('#modal_search_id').modal('hide');" value="취소" />
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modal_search_pw" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">비밀번호찾기</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+              <div id="searchpw_layout1" style="display:block">
+                <div class="col-12 mx-0 px-0 mb-2">
+                  <h6>이름</h6>
+                  <input type="text" class="form-control mb-2" id="searchpw_name" placeholder="이름" required>
+                </div>
+
+                <div class="col-12 mx-0 px-0 mb-2">
+                  <h6>아이디</h6>
+                  <input type="text" class="form-control mb-2" id="searchpw_id" placeholder="아이디" required>
+                </div>
+
+                <div class="col-12 mx-0 px-0 mb-2">
+                  <h6>전화번호</h6>
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="searchpw_phone1" placeholder="전화번호">
+                      <button class="dropdown-toggle" type="button" id="phone_btn_pw" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="caret"></span></button>
+                      <ul id="phone2_list" class="dropdown-menu" aria-labelledby="phone_btn_pw" style="">
+                        <li class="" onclick="click_phone_pw('010')">010</li>
+                        <li role="separator" class="divider"></li>
+                        <li class="" onclick="click_phone_pw('017')">017</li>
+                        <li role="separator" class="divider"></li>
+                        <li class="" onclick="click_phone_pw('016')">016</li>
+                        <li role="separator" class="divider"></li>
+                        <li class="" onclick="click_phone_pw('011')">011</li>
+                        <li role="separator" class="divider"></li>
+                        <li class="" onclick="click_phone_pw('018')">018</li>
+                      </ul>
+                        </select>
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">-</span>
+                        </div>
+                        <input type="text" class="form-control" id="searchpw_phone2" placeholder="0000">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">-</span>
+                        </div>
+                        <input type="text" class="form-control" id="searchpw_phone3" placeholder="0000">
+                    </div>
+                </div>
+                <div class="row px-2">
+                    <div class="col-sm-2"></div>
+                    <div class="col-6 col-sm-4">
+                        <input type="button" class="btn btn-block btn-primary btn-round btn-lg my-3" onclick="search_pw()" value="찾기" />
+                    </div>
+                    <div class="col-6 col-sm-4">
+                        <input type="button" class="btn btn-block btn-light border-primary text-primary btn-round btn-lg my-3" onclick="jQuery('#modal_search_pw').modal('hide');" value="취소" />
+                    </div>
+                </div>
+              </div>
+              <input id="searchpw_idx" type="hidden">
+              <input id="searchpw_check" type="hidden">
+              <div id="searchpw_layout2" style="display:none;">
+                <div class="col-12 mx-0 px-0 mb-2">
+                  <h6>새 비밀번호</h6>
+                  <input type="text" class="form-control mb-2" id="new_pw1" placeholder="새 비밀번호" required>
+                </div>
+
+                <div class="col-12 mx-0 px-0 mb-2">
+                  <h6>새 비밀번호 확인</h6>
+                  <input type="text" class="form-control mb-2" id="new_pw2" placeholder="새 비밀번호 확인" required>
+                </div>
+
+                <div class="row px-2">
+                    <div class="col-sm-2"></div>
+                    <div class="col-6 col-sm-4">
+                        <input type="button" class="btn btn-block btn-primary btn-round btn-lg my-3" onclick="change_pw()" value="변경" />
+                    </div>
+                    <div class="col-6 col-sm-4">
+                        <input type="button" class="btn btn-block btn-light border-primary text-primary btn-round btn-lg my-3" onclick="jQuery('#modal_search_pw').modal('hide');" value="취소" />
+                    </div>
+                </div>
+              </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <script type="text/javascript">
+  function click_phone_id(phone) {
+    $("#searchid_phone1").val(phone);
+  }
+
+  function click_phone_pw(phone) {
+    $("#searchpw_phone1").val(phone);
+  }
+
+  function search_id(){
+    var m_name = $("#searchid_name").val();
+    var phone1 = $("#searchid_phone1").val();
+    var phone2 = $("#searchid_phone2").val();
+    var phone3 = $("#searchid_phone3").val();
+
+    var m_phone1 = phone1 + "-" + phone2 + "-" + phone3;
+    var m_phone2 = phone1 + phone2 + phone3;
+
+    if(m_name == ""){
+      $('#searchid_name').focus();
+      return toastr.error("이름을 입력해주세요.");
+    }
+
+    if(phone1 == ""){
+      $('#searchid_phone1').focus();
+      return toastr.error("전화번호를 입력해주세요.");
+    }
+
+    if(phone2 == ""){
+      $('#searchid_phone2').focus();
+      return toastr.error("전화번호를 입력해주세요.");
+    }
+
+    if(phone3 == ""){
+      $('#searchid_phone3').focus();
+      return toastr.error("전화번호를 입력해주세요.");
+    }
+
+    var params = {};
+    params["m_name"] = m_name;
+    params["m_phone1"] = m_phone1;
+    params["m_phone2"] = m_phone2;
+
+    exec_json("member.search_id",params,function(ret_obj){
+        $("#result_list").html(ret_obj.message);
+        //location.reload();
+    });
+  }
+
+  function search_pw(){
+    var m_name = $("#searchpw_name").val();
+    var m_id = $("#searchpw_id").val();
+    var phone1 = $("#searchpw_phone1").val();
+    var phone2 = $("#searchpw_phone2").val();
+    var phone3 = $("#searchpw_phone3").val();
+
+    var m_phone1 = phone1 + "-" + phone2 + "-" + phone3;
+    var m_phone2 = phone1 + phone2 + phone3;
+
+    if(m_name == ""){
+      $('#searchpw_name').focus();
+      return toastr.error("이름을 입력해주세요.");
+    }
+
+    if(m_id == ""){
+      $('#searchpw_id').focus();
+      return toastr.error("아이디를 입력해주세요.");
+    }
+
+    if(phone1 == ""){
+      $('#searchpw_phone1').focus();
+      return toastr.error("전화번호를 입력해주세요.");
+    }
+
+    if(phone2 == ""){
+      $('#searchpw_phone2').focus();
+      return toastr.error("전화번호를 입력해주세요.");
+    }
+
+    if(phone3 == ""){
+      $('#searchpw_phone3').focus();
+      return toastr.error("전화번호를 입력해주세요.");
+    }
+
+    var params = {};
+    params["m_name"] = m_name;
+    params["m_id"] = m_id;
+    params["m_phone1"] = m_phone1;
+    params["m_phone2"] = m_phone2;
+
+    exec_json("member.search_pw",params,function(ret_obj){
+      $("#searchpw_layout1").css("display","none");
+      $("#searchpw_layout2").css("display","block");
+      $("#searchpw_idx").val(ret_obj.message);
+      $("#searchpw_check").val('1');
+    });
+  }
+
+  function change_pw(){
+
+    var new_pw1= $("#new_pw1").val();
+    var new_pw2 = $("#new_pw2").val();
+    var m_idx= $("#searchpw_idx").val();
+
+    if(new_pw1 == ""){
+      $('#new_pw1').focus();
+      return toastr.error("비밀번호를 입력해주세요.");
+    }
+    if(new_pw2 == ""){
+      $('#new_pw2').focus();
+      return toastr.error("비밀번호를 확인해주세요.");
+    }
+    if(new_pw1 && new_pw1 != new_pw2){
+      $('#new_pw2').focus();
+      return toastr.error("비밀번호를 확인해주세요.");
+    }
+    if(new_pw1.length < 6){
+      $('#new_pw1').focus();
+      return toastr.error("비밀번호는 6자리 이상으로 지정해주세요.");
+    }
+
+    var params = {};
+
+    params["m_pw"] = new_pw1;
+    params["m_idx"] = m_idx;
+
+    exec_json("member.change_pw",params,function(ret_obj){
+      // $("#searchpw_name").val("");
+      // $("#searchpw_id").val("");
+      // $("#searchpw_phone1").val("");
+      // $("#searchpw_phone2").val("");
+      // $("#searchpw_phone3").val("");
+      //
+      // $("#searchpw_m_idx").val("");
+      // $("#searchpw_check").val("");
+      // $("#searchpw_layout1").css("display", "block");
+      // $("#searchpw_layout2").css("display", "none");
+      $("#modal_search_pw").modal("hide");
+      toastr.success(ret_obj.message);
+      location.reload();
+    });
+  }
+
 
   // 네이버 - 개인회원가입
 	$("#modal_naver_ok1").click(function(e) {

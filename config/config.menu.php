@@ -84,24 +84,47 @@ $oMenu->footer->list[] = array(
 //기업메뉴
 $oMenu->company = new stdClass();
 $oMenu->company->list = array();
-$oMenu->company->list[] = array(
-    "title" => "공고등록",
-    "link" => getUrl('company','job_register'),
-    "imgicon" => "write_underline",
-    "active_mid" => "company",
-    "active_act" => "job_register",
-    "new_window" => "N",
-    "is_logged" => "N",
-);
-$oMenu->company->list[] = array(
-    "title" => "공고・지원자관리",
-    "link" => getUrl('company','job'),
-    "imgicon" => "clipboard",
-    "active_mid" => "company",
-    "active_act" => "job",
-    "new_window" => "N",
-    "is_logged" => "N",
-);
+  if($m_idx > 0){
+    $oMenu->company->list[] = array(
+        "title" => "공고등록",
+        "link" => getUrl('company','job_register'),
+        "imgicon" => "write_underline",
+        "active_mid" => "company",
+        "active_act" => "job_register",
+        "new_window" => "N",
+        "is_logged" => "N",
+    );
+    $oMenu->company->list[] = array(
+        "title" => "공고・지원자관리",
+        "link" => getUrl('company','job'),
+        "imgicon" => "clipboard",
+        "active_mid" => "company",
+        "active_act" => "job",
+        "new_window" => "N",
+        "is_logged" => "N",
+    );
+
+  }else{
+    $oMenu->company->list[] = array(
+        "title" => "공고등록",
+        "link" => getUrl('member','login',false,array('cur' => $current_url)),
+        "imgicon" => "write_underline",
+        "active_mid" => "company",
+        "active_act" => "job_register",
+        "new_window" => "N",
+        "is_logged" => "N",
+    );
+    $oMenu->company->list[] = array(
+        "title" => "공고・지원자관리",
+        "link" => getUrl('member','login',false,array('cur' => $current_url)),
+        "imgicon" => "clipboard",
+        "active_mid" => "company",
+        "active_act" => "job",
+        "new_window" => "N",
+        "is_logged" => "N",
+    );
+  }
+
 $oMenu->company->list[] = array(
     "title" => "기술자숲 소개",
     "link" => getUrl('contact','TechnicianForest'),
@@ -127,31 +150,61 @@ $oMenu->company->list[] = array(
     //         "is_logged" => "N"),
      )
 );
-$oMenu->company->list[] = array(
-    "title" => "서비스이용현황",
-    "link" => getUrl('company','serviceHistory'),
-    "imgicon" => "donutchart",
-    "active_mid" => "company",
-    "active_act" => "service",
-    "new_window" => "N",
-    "is_logged" => "N",
-    "submenu" => array(
-        array(
-            "title" => "유료서비스 안내",
-            "link" => getUrl('company','service'),
-            "active_mid" => "company",
-            "active_act" => "service",
-            "new_window" => "N",
-            "is_logged" => "N"),
-        array(
-            "title" => "서비스 이용 및 결제내역",
-            "link" => getUrl('company','serviceHistory'),
-            "active_mid" => "company",
-            "active_act" => 'serviceHistory',
-            "new_window" => "N",
-            "is_logged" => "N"),
-    )
-);
+
+if($m_idx > 0){
+  $oMenu->company->list[] = array(
+      "title" => "서비스이용현황",
+      "link" => getUrl('company','serviceHistory'),
+      "imgicon" => "donutchart",
+      "active_mid" => "company",
+      "active_act" => "service",
+      "new_window" => "N",
+      "is_logged" => "N",
+      "submenu" => array(
+          array(
+              "title" => "유료서비스 안내",
+              "link" => getUrl('company','service'),
+              "active_mid" => "company",
+              "active_act" => "service",
+              "new_window" => "N",
+              "is_logged" => "N"),
+          array(
+              "title" => "서비스 이용 및 결제내역",
+              "link" => getUrl('company','serviceHistory'),
+              "active_mid" => "company",
+              "active_act" => 'serviceHistory',
+              "new_window" => "N",
+              "is_logged" => "N"),
+      )
+  );
+}else{
+  $oMenu->company->list[] = array(
+      "title" => "서비스이용현황",
+      "link" => getUrl('member','login',false,array('cur' => $current_url)),
+      "imgicon" => "donutchart",
+      "active_mid" => "company",
+      "active_act" => "service",
+      "new_window" => "N",
+      "is_logged" => "N",
+      "submenu" => array(
+          array(
+              "title" => "유료서비스 안내",
+              "link" => getUrl('member','login',false,array('cur' => $current_url)),
+              "active_mid" => "company",
+              "active_act" => "service",
+              "new_window" => "N",
+              "is_logged" => "N"),
+          array(
+              "title" => "서비스 이용 및 결제내역",
+              "link" => getUrl('member','login',false,array('cur' => $current_url)),
+              "active_mid" => "company",
+              "active_act" => 'serviceHistory',
+              "new_window" => "N",
+              "is_logged" => "N"),
+      )
+  );
+}
+
 $oMenu->company->list[] = array(
     "title" => "문의",
     "link" => getUrl('contact'),

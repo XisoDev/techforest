@@ -71,8 +71,8 @@ $self_introduction = str_replace("\n", "<br />", $my_info2[0]["self_introduction
                     <col width="*" />
                 </cols>
                 <tr><th class="pr-0">생년월일</th><td><?=$member_birthday?> (<?=$my_info1[0]['m_age']?>세)</td></tr>
-                <tr><th>연 락 처</th><td><?=$my_info1[0]['m_phone']?></td></tr>
-                <tr><th>이 메 일</th><td><?=$my_info1[0]['m_email']?></td></tr>
+                <tr><th>연 락 처</th><td><span style="color:#ccc;">비공개 항목입니다.</span></td></tr>
+                <tr><th>이 메 일</th><td><span style="color:#ccc;">비공개 항목입니다.</span></td></tr>
                 <tr><th>주&nbsp;&nbsp;&nbsp;&nbsp;소</th><td><?=$my_info1[0]['m_address']?></td></tr>
             </table>
         </div>

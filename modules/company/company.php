@@ -23,6 +23,7 @@ class companyView{
         $output->add('member_notice',$this->member_notice());
         $output->add('hire_end',$this->hire_end());
         $output->add('news_list',$this->news_list());
+        $output->add('hire_check',$this->hire_check());
 
         $set_template_file = "company/index.php";
 
@@ -261,7 +262,8 @@ class companyView{
           $oDB->join("TF_member_tb m","al.m_idx = m.m_idx","LEFT");
           $oDB->join("TF_member_career_tb AS mc", "m.m_idx = mc.m_idx", "LEFT");
           $oDB->join("TF_application_fitness af", "m.m_idx = af.m_idx", "LEFT");
-          $application_row = $oDB->get("TF_application_letter al",null,"group_concat(distinct(mc.duty_name)) as duty_name,h.h_idx, m.m_idx, m.m_name, m.m_human, m.m_birthday, m.m_phone, m.m_email, al.reg_date, a_line_self, fitness");
+          $application_row = $oDB->get("TF_application_letter al",null,"group_concat(distinct(mc.duty_name)) as duty_name,h.h_idx, m.m_idx,
+          m.m_name, m.m_human,m.m_phone, m.m_email, al.reg_date, a_line_self, fitness, YEAR(CURRENT_TIMESTAMP) - YEAR(m_birthday) - (RIGHT(CURRENT_TIMESTAMP, 5) < RIGHT(m_birthday, 5))+1 as m_birthday");
 
           //면접자현황
           $oDB->where("si.h_idx",$h_idx);
@@ -689,6 +691,19 @@ class companyView{
       $news_list = $oDB->get("TF_news_tb");
 
       return $news_list;
+    }
+
+    function hire_check(){
+      global $oDB;
+      global $logged_info;
+
+      $now_date = date(YmdHis);
+
+      $oDB->where("c_idx",$logged_info['c_idx']);
+      $oDB->where("job_end_date",$now_date,">");
+      $hire_check = $oDB->get("TF_hire_tb",null,"h_idx");
+
+      return $hire_check;
     }
 
 

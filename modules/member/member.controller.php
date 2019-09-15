@@ -422,4 +422,77 @@ class memberController{
     }
 
     }
+
+    function search_id($args){
+      global $oDB;
+
+      $oDB->where("m_name",$args->m_name);
+      $oDB->where("(m_phone = ? or m_phone = ?)", Array($args->m_phone1,$args->m_phone2));
+      $row = $oDB->get("TF_member_tb",null,"m_id, reg_date");
+
+      if($row){
+        for($i=0; $i<count($row); $i++){
+          $reg_date	= substr($row[$i]['reg_date'], 0, 10);
+          $count = mb_strlen($row[$i]['m_id'], "UTF-8");
+          if($count % 2 == 0) {
+            $m_id .= "<br/>". mb_substr($row[$i]['m_id'], 0, $count / 2, "UTF-8");
+            for($j = 0; $j < $count / 2; $j++) {
+              $m_id .= "*";
+            }
+            $m_id .= '　　　　　　'.$reg_date;
+          }else{
+            $m_id .= "<br/>". mb_substr($row[$i]['m_id'], 0, ($count + 1) / 2, "UTF-8");
+            for($k = 0; $k < ($count - 1) / 2; $k++) {
+              $m_id .= "*";
+            }
+            $m_id .= '　　　　　　'.$reg_date;
+        }
+
+      }
+
+        // $reg_date		= substr($row[0]['reg_date'], 0, 10);
+        // $result = array("m_id" => $m_id, "reg_date" => $reg_date);
+        // array_push($arr, $result);
+
+        return new Object(0,$m_id);
+
+      }else{
+        return new Object(-1,"일치하는 회원정보가 없습니다.");
+      }
+
+  }
+
+  function search_pw($args){
+    global $oDB;
+
+    $oDB->where("m_name",$args->m_name);
+    $oDB->where("m_id",$args->m_id);
+    $oDB->where("(m_phone = ? or m_phone = ?)", Array($args->m_phone1,$args->m_phone2));
+    $row = $oDB->get("TF_member_tb",null,"m_idx");
+
+    if(!$row){
+      return new Object(-1,"일치하는 회원정보가 없습니다.");
+    }else{
+      $m_idx = $row[0]['m_idx'];
+      return new Object(0,$m_idx);
+    }
+  }
+
+  function change_pw($args){
+    global $oDB;
+
+    $data = array(
+      "m_pw" => $args->m_pw,
+      "edit_date" => $date
+    );
+
+    $oDB->where("m_idx",$args->m_idx);
+    $row = $oDB->update("TF_member_tb",$data);
+
+    if($row){
+      return new Object(0,"비밀번호가 성공적으로 변경되었습니다.");
+    }else{
+      return new Object(-1,"네트워크 오류가 발생했습니다.");
+    }
+  }
 }

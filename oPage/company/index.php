@@ -1,6 +1,8 @@
 <?php
 //언론보도리스트
 $news_list = $output->get('news_list');
+//공고등록여부확인
+$hire_check = $output->get('hire_check');
 
 ?>
 
@@ -48,6 +50,7 @@ $news_list = $output->get('news_list');
         <div class="col-12 mt-2">
             <div class="flex-card-slick">
                 <?php for($i=1; $i<=3; $i++){ ?>
+                  <?if($m_idx > 0){?>
                   <a href="<?=getUrl('company','job_register')?>">
                     <div class="tech_card text-center shadow-sm">
                         <div class="thumbnail">
@@ -58,6 +61,18 @@ $news_list = $output->get('news_list');
                         <p class="weight_lighter mt-0 pb-3">공고등록하고<br />맞춤기술자 보기</p>
                     </div>
                   </a>
+                  <?}else{?>
+                    <a href="<?=getUrl('member','login',false,array('cur' => $current_url))?>">
+                      <div class="tech_card text-center shadow-sm">
+                          <div class="thumbnail">
+                              <div class="icon_wrap">
+                                  <i class="xi-plus-circle xi-2x color_primary"></i>
+                              </div>
+                          </div>
+                          <p class="weight_lighter mt-0 pb-3">공고등록하고<br />맞춤기술자 보기</p>
+                      </div>
+                    </a>
+                  <?}?>
                 <?php } ?>
             </div>
         </div>
@@ -84,6 +99,7 @@ $news_list = $output->get('news_list');
           <div class="col-12 mt-2">
               <div class="flex-card-slick">
                   <?php for($i=1; $i<=3; $i++){ ?>
+                    <?php if($m_idx > 0){?>
                     <a href="<?=getUrl('company','job_register')?>">
                       <div class="tech_card text-center shadow-sm">
                           <div class="thumbnail">
@@ -94,7 +110,19 @@ $news_list = $output->get('news_list');
                           <p class="weight_lighter mt-2">공고등록하고<br />맞춤기술자 보기</p>
                       </div>
                     </a>
+                  <?php }else{ ?>
+                    <a href="<?=getUrl('member','login',false,array('cur' => $current_url))?>">
+                      <div class="tech_card text-center shadow-sm">
+                          <div class="thumbnail">
+                              <div class="icon_wrap">
+                                  <i class="xi-plus-circle xi-2x color_primary"></i>
+                              </div>
+                          </div>
+                          <p class="weight_lighter mt-2">공고등록하고<br />맞춤기술자 보기</p>
+                      </div>
+                    </a>
                   <?php } ?>
+                <?php } ?>
               </div>
           </div>
         <?php }else{ ?>
@@ -175,7 +203,7 @@ $news_list = $output->get('news_list');
     <div class="row">
         <div class="col-12">
 
-            <?php if($logged_info) { ?>
+            <?php if($logged_info && count($hire_check) > 0) { ?>
                 <div class="d-block d-lg-none">
                     <h5 class="weight_bold mt-4">
                         <span class="red"><?=$logged_info['c_name']?></span>에 딱 맞는 추천기술자를 찾아왔어요!
@@ -190,10 +218,10 @@ $news_list = $output->get('news_list');
                 </div>
             <?php } ?>
 
-            <?php if($logged_info) { ?>
+            <?php if($logged_info && count($hire_check) > 0) { ?>
                 <div class="d-none d-lg-block text-center pt-5 pb-3">
                     <h3 class="weight_bold mt-3">AI 추천 기술자</h3>
-                    <h6 class="weight_lighter mt-1 mb-2">ABC기업과 맞는 기술자를 추천 해 드립니다! 지금 확인해보세요!</h6>
+                    <h6 class="weight_lighter mt-1 mb-2"><?=$logged_info['c_name']?>에 맞는 기술자를 추천 해 드립니다! 지금 확인해보세요!</h6>
                 </div>
             <?php } else { ?>
                 <div class="d-none d-lg-block text-center pt-5 pb-3">

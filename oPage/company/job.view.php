@@ -4,18 +4,18 @@
 ?>
 
 <section class="p-3 mt-4 pt-5 bg-white d-lg-none">
-    <a onclick="history.back();" class="mb-3"><img src="/oPage/images/imgicons/arrow_left.png" height="25" /></a>
+    <a href="#" onclick="history.back();" class="mb-3"><img src="/oPage/images/imgicons/arrow_left.png" height="25" /></a>
     <h4 class="weight_normal">지원자 현황</h4>
 </section>
 
 <div class="container pb-md-3" style="position:relative; z-index:1;">
     <h4 class="text-center d-none d-lg-block py-4 mt-5">지원자 현황</h4>
     <div class="content_padding px-0 pb-1 d-md-none">
-        <a href="#" class="pull-right btn btn-primary btn-xxs btn-round">더보기 +</a>
+        <!-- <a href="#" class="pull-right btn btn-primary btn-xxs btn-round">더보기 +</a> -->
         <h5>지원자 관리</h5>
     </div>
     <div class="content_padding px-0 pb-1 d-none d-lg-block">
-        <a href="#" class="pull-right btn btn-primary btn-round">더보기 +</a>
+        <!-- <a href="#" class="pull-right btn btn-primary btn-round">더보기 +</a> -->
         <h4 class="py-2">지원자 관리</h4>
     </div>
     <div class="tech-card-slick">
@@ -48,7 +48,7 @@
                       </div>
                       <div class="clearfix"></div>
                       <div class="pr-2">
-                      <h5 class="weight_normal mt-2 mb-0 text-left"><?=$val['m_name']?> <span class="xs_content vertical-align-0">(56세)</span></h5>
+                      <h5 class="weight_normal mt-2 mb-0 text-left"><?=$val['m_name']?> <span class="xs_content vertical-align-0">(<?=$val['m_birthday']?>세)</span></h5>
                       <p class="m-0 text-left weight_lighter xs_content"><?=$val['a_line_self']?></p>
                       <p class="text-left xs_content px-0 py-0 m-0 mb-1" class="cut1"> <img class="d-inline" src="/oPage/images/imgicons/wrench_bg_red.png" height="14" /> 경력 :
                        <?php
@@ -75,7 +75,7 @@
             <h5>추천 기술자</h5>
         </div>
         <div class="content_padding px-0 pb-1 d-none d-lg-block">
-            <a href="#" class="pull-right btn btn-primary btn-round">더보기 +</a>
+            <!-- <a href="#" class="pull-right btn btn-primary btn-round">더보기 +</a> -->
             <h4 class="py-2">추천 기술자</h4>
         </div>
     <div class="flex-card-slick">
