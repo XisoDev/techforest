@@ -70,7 +70,7 @@ loadLayout($site_info->layout);
 
     <title><?=$site_info->title_for_browser?></title>
     <link rel="alternate" type="application/rss+xml" title="Site RSS" href="//<?=$site_info->domain?>/rss" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link rel="canonical" href="<?=$site_info->domain?>" />
 
     <meta name="keywords" content="<?=$site_info->keyword?>" />

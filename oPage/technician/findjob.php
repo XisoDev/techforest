@@ -91,7 +91,7 @@
         <?php } ?>
     </div>
 </div>
-<div class="py-md-5 my-md-5 bg-light">
+<div class="py-md-5 my-md-5">
     <div class="container">
         <div class="d-block d-lg-none pt-4 pb-2">
             <a href="<?=getUrl('technician','applicationList')?>" class="pull-right btn py-2 px-3 btn-primary btn-xxs btn-round">더보기 +</a>
@@ -149,7 +149,7 @@
                         </p>
                     </div>
 
-                    <div class="row m-0 p-0 pt-0 mt-0">
+                    <div class="row m-0 p-0 pt-0 mt-1">
                         <div class="col-6 mx-0 px-0">
                             <a href="<?=getUrl('technician','jobDetail',$application_letter[$i]['h_idx'])?>" class="btn btn-light btn-block btn-xs px-0 py-3 rounded-0">상세보기</a>
                         </div>
@@ -230,7 +230,7 @@
                     </p>
                 </div>
 
-                <div class="row m-0 p-0">
+                <div class="row m-0 p-0 mt-1">
                     <div class="col-6 mx-0 px-0">
                         <a href="<?=getUrl('technician','jobDetail',$val['h_idx'])?>" class="btn btn-light btn-block rounded-0">상세보기</a>
                     </div>

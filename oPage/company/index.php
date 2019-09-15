@@ -236,6 +236,11 @@ $(document).ready(function(){
                 </div>
             <?php } else { ?>
                 <div class="d-none d-lg-block text-center pt-5 pb-3">
+                    <div class="text-center xs_content">
+                        <i class="text-warning">◆</i>
+                        <i class="text-primary">◆</i>
+                        <i class="text-warning">◆</i>
+                    </div>
                     <h3 class="weight_bold mt-3">NEW Technician</h3>
                     <h6 class="weight_lighter mt-1 mb-2">
                         새로운 기술자가 등록됐어요!</h6>
@@ -254,15 +259,22 @@ $(document).ready(function(){
                         <h6 class="weight_bold mb-1 px-2 text-center"><?=$val['m_name']?> (<?=$val['m_birthday']?>세)</h6>
                         <p class="text-left xs_content px-3 py-0 m-0 mb-1">  <img class="d-inline imgicon" src="/oPage/images/imgicons/location_bg_red.png" height="10" /> <b>희망지역 : <?=$desired_work_place?></b></p>
                         <p class="text-left xs_content px-3 py-0 m-0 cut1"  style="height:42px;"> <img class="d-inline imgicon" src="/oPage/images/imgicons/wrench_bg_red.png" height="10" /> <b>주요경력 : <?=$val['duty_name']?></b></p>
-                        <div class="row mt-0 mx-0 px-0">
-                            <div class="col-12 mx-0 px-0">
-                              <?if($m_idx){?>
-                              <a href="<?=getUrl('technician','resume',$val['m_idx'],array("from"=>"index"))?>" target="_blank" class="btn btn-block btn-warning mt-1 rounded-0">이력서보기</a>
-                              <?}else{?>
-                                <button class="btn btn-block btn-warning mt-1 rounded-0"></button>
-                              <?}?>
+<!--                        <div class="row mt-0 mx-0 px-0">-->
+<!--                            <div class="col-12 mx-0 px-0">-->
+<!--                              --><?//if($m_idx){?>
+<!--                              <a href="--><?//=getUrl('technician','resume',$val['m_idx'],array("from"=>"index"))?><!--" target="_blank" class="btn btn-block btn-warning mt-1 rounded-0">이력서보기</a>-->
+<!--                              --><?//}else{?>
+<!--                                <button class="btn btn-block btn-warning mt-1 rounded-0"></button>-->
+<!--                              --><?//}?>
+<!--                            </div>-->
+<!--                        </div>-->
+                                <?if($m_idx){?>
+                            <div class="row mt-0 mx-0 px-0">
+                                <div class="col-12 mx-0 px-0">
+                                        <a href="<?=getUrl('technician','resume',$val['m_idx'],array("from"=>"index"))?>" target="_blank" class="btn btn-block btn-warning mt-1 rounded-0">이력서보기</a>
+                                </div>
                             </div>
-                        </div>
+                                <?}?>
                     </div>
                 <?php } ?>
             </div>
@@ -338,6 +350,11 @@ $(document).ready(function(){
 
 <div class="d-none d-lg-block container">
     <div class="text-center pt-5 pb-3">
+        <div class="text-center xs_content">
+            <i class="text-warning">◆</i>
+            <i class="text-primary">◆</i>
+            <i class="text-warning">◆</i>
+        </div>
         <h3 class="weight_bold mt-3">언론보도</h3>
         <h6 class="weight_lighter mt-1 mb-2">기술자숲의 언론보도 및 소식을 확인해보세요.</h6>
     </div>
@@ -376,7 +393,7 @@ $(document).ready(function(){
 </div>
 <!-- 메인에 뜨는 공고등록 유도 팝업 -->
 <div class="modal fade" id="tech_modal_example" tabindex="-1" role="dialog" aria-labelledby="tech_forest_modal_window" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:330px;">
+    <div class="modal-dialog modal-dialog-centered mx-auto" role="document" style="max-width:330px;">
         <div class="modal-content text-center" style="border-radius:10px">
             <a href="#" class="text-white pull-right text-right" style="margin-top:-40px;" onclick="jQuery('#tech_modal_example').modal('hide');" ><i class="xi-close xi-2x"></i></a>
             <div class="popoup_header rounded-top" style="background-image:url('/oPage/company/images/popup_header_company.png');"></div>
@@ -396,9 +413,10 @@ $(document).ready(function(){
 <?php $footer_false = true; ?>
 
 <script type="text/javascript">
-    // jQuery(document).ready(function($){
-    //     $('#tech_modal_example').modal('show');
-    // });
+    // // 테스트용 팝업띄우기
+    jQuery(document).ready(function($){
+        $('#tech_modal_example').modal('show');
+    });
     <?if($row['count_hire']){?>
       var count_hire = <?=$row['count_hire']?>;
     <? }else{?>

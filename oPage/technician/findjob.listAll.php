@@ -120,66 +120,94 @@
     </div>
 </section>
 <div class="container pt-lg-5">
-    <div class="px-0 pb-1 pt-3 pt-lg-0">
-        <!-- 모바일버전 버튼 -->
-        <a href="<?=getUrl('technician','findJobListAll')?>" class="d-lg-none pull-right btn btn-xxs btn-round btn-primary py-2 px-3">전체공고</a>
-        <a href="<?=getUrl('technician','findJobList')?>" class="d-lg-none pull-right btn border-primary btn-xxs btn-round py-2 px-3 mr-1">맞춤공고</a>
+    <div class="d-block d-lg-none pt-4 pb-2">
+        <a href="<?=getUrl('technician','findJobListAll')?>" class="d-lg-none pull-right btn btn-xs border-primary btn-round  py-2 px-3">전체공고</a>
+        <a href="<?=getUrl('technician','findJobList')?>" class="d-lg-none pull-right btn btn-primary btn-xs btn-round py-2 px-3 mr-1">맞춤공고</a>
         <h6>일자리 정보</h6>
+    </div>
+    <div class="d-none d-lg-block pt-4 pb-4">
+        <a href="<?=getUrl('technician','findJobList')?>" class="pull-right btn btn-sm btn-round btn-primary py-1 px-3">맞춤공고</a>
+        <a href="<?=getUrl('technician','findJobListAll')?>" class=" pull-right btn btn-sm border-primary btn-round py-1 px-3 mr-1">전체공고</a>
+        <h4 class="mb-2">일자리 정보</h4>
+        <!-- <div class="row">
+            <div class="col-3">
+                <select class="form-control"><option>지역설정</option></select>
+            </div>
+            <div class="col-3">
+            <select class="form-control"><option>직종</option></select>
+            </div>
+            <div class="col-3">
+                <select class="form-control"><option>직종</option></select>
+            </div>
+            <div class="col-3">
+                <select class="form-control"><option>직종</option></select>
+            </div>
+        </div> -->
+        <div class="clearfix"></div>
     </div>
 
     <div class="content_padding px-0 pb-1 pt-0 mt-0 mb-4">
         <div class="row">
             <div class="col-6 pr-1 col-lg-4">
-                <select class="form-control" id="local_select" onchange="location.href=(this.value)">
-                  <? foreach ($local_list as $val) { ?>
-                      <? if($val["local_idx"] == $local_idx){?>
-                        <option value="<?=getUrl('technician','findJobListAll',false,array('page'=>$page, 'local_idx' => $val['local_idx'],'o_idx' => $o_idx, 'duty_name' => $duty_name))?>" selected><?=$val['local_name']?></option>
-                      <? }else{ ?>
-                        <option value="<?=getUrl('technician','findJobListAll',false,array('page'=>$page, 'local_idx' => $val['local_idx'],'o_idx' => $o_idx, 'duty_name' => $duty_name))?>"><?=$val['local_name']?></option>
-                      <? }
-                    } ?>
-                </select>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-light">지역</span>
+                    </div>
+                    <select class="form-control" id="local_select" onchange="location.href=(this.value)">
+                        <? foreach ($local_list as $val) { ?>
+                            <? if($val["local_idx"] == $local_idx){?>
+                                <option value="<?=getUrl('technician','findJobListAll',false,array('page'=>$page, 'local_idx' => $val['local_idx'],'o_idx' => $o_idx, 'duty_name' => $duty_name))?>" selected><?=$val['local_name']?></option>
+                            <? }else{ ?>
+                                <option value="<?=getUrl('technician','findJobListAll',false,array('page'=>$page, 'local_idx' => $val['local_idx'],'o_idx' => $o_idx, 'duty_name' => $duty_name))?>"><?=$val['local_name']?></option>
+                            <? }
+                        } ?>
+                    </select>
+                </div>
             </div>
             <div class="col-6 pl-1 col-lg-4">
-                <select class="form-control" id="occupation_select" onchange="location.href=(this.value)">
-                  <? foreach ($occupation_list as $val) { ?>
-                    <? if($val["o_idx"] == $o_idx){?>
-                      <option value="<?=getUrl('technician','findJobListAll',false,array('page'=>$page, 'local_idx' => $local_idx,'o_idx' => $val['o_idx'], 'duty_name' => $duty_name))?>" selected><?=$val['o_name']?></option>
-                    <? }else{ ?>
-                        <option value="<?=getUrl('technician','findJobListAll',false,array('page'=>$page, 'local_idx' => $local_idx,'o_idx' => $val['o_idx'], 'duty_name' => $duty_name))?>"><?=$val['o_name']?></option>
-                    <? }
-                  } ?>
-                </select>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-light">직군</span>
+                    </div>
+                    <select class="form-control" id="occupation_select" onchange="location.href=(this.value)">
+                      <? foreach ($occupation_list as $val) { ?>
+                        <? if($val["o_idx"] == $o_idx){?>
+                          <option value="<?=getUrl('technician','findJobListAll',false,array('page'=>$page, 'local_idx' => $local_idx,'o_idx' => $val['o_idx'], 'duty_name' => $duty_name))?>" selected><?=$val['o_name']?></option>
+                        <? }else{ ?>
+                            <option value="<?=getUrl('technician','findJobListAll',false,array('page'=>$page, 'local_idx' => $local_idx,'o_idx' => $val['o_idx'], 'duty_name' => $duty_name))?>"><?=$val['o_name']?></option>
+                        <? }
+                      } ?>
+                    </select>
+                </div>
             </div>
-            <div class="col-lg-2 pr-1">
-                <a href="<?=getUrl('technician','findJobList')?>" class="d-lg-block btn-block d-none btn btn-round border-primary py-2 px-3">맞춤공고</a>
-            </div>
-            <div class="col-lg-2 pl-1">
-                <a href="<?=getUrl('technician','findJobListAll')?>" class="d-lg-block btn-block d-none btn btn-primary btn-round py-2 px-3 mr-1">전체공고</a>
-            </div>
-        </div>
-        <div class="row mt-1">
             <div class="col-6 pr-1 col-lg-4">
-                <select class="form-control" id="duty_select" onchange="location.href=(this.value)">
-                    <option value="<?=getUrl('technician','findJobListAll',false,array('page'=>$page, 'local_idx' => $local_idx,'o_idx' => $o_idx, 'duty_name' => '전체'))?>">전체</option>
-                  <?foreach ($duty_list as $val) {?>
-                    <?if($o_idx == $val["o_idx"]){?>
-                      <?if($duty_name == $val["duty_name"]){?>
-                        <option value="<?=getUrl('technician','findJobListAll',false,array('page'=>$page, 'local_idx' => $local_idx,'o_idx' => $o_idx, 'duty_name' => $val['duty_name']))?>" selected><?=$val['duty_name']?></option>
-                      <?}else{?>
-                        <option value="<?=getUrl('technician','findJobListAll',false,array('page'=>$page, 'local_idx' => $local_idx,'o_idx' => $o_idx, 'duty_name' => $val['duty_name']))?>"><?=$val['duty_name']?></option>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-light">직종</span>
+                    </div>
+                    <select class="form-control" id="duty_select" onchange="location.href=(this.value)">
+                        <option value="<?=getUrl('technician','findJobListAll',false,array('page'=>$page, 'local_idx' => $local_idx,'o_idx' => $o_idx, 'duty_name' => '전체'))?>">전체</option>
+                      <?foreach ($duty_list as $val) {?>
+                        <?if($o_idx == $val["o_idx"]){?>
+                          <?if($duty_name == $val["duty_name"]){?>
+                            <option value="<?=getUrl('technician','findJobListAll',false,array('page'=>$page, 'local_idx' => $local_idx,'o_idx' => $o_idx, 'duty_name' => $val['duty_name']))?>" selected><?=$val['duty_name']?></option>
+                          <?}else{?>
+                            <option value="<?=getUrl('technician','findJobListAll',false,array('page'=>$page, 'local_idx' => $local_idx,'o_idx' => $o_idx, 'duty_name' => $val['duty_name']))?>"><?=$val['duty_name']?></option>
+                          <?}?>
                       <?}?>
-                  <?}?>
-                <?}?>
-                </select>
+                    <?}?>
+                    </select>
+                </div>
             </div>
-            <div class="col-6 pl-1 col-lg-4">
+            <div class="col-6 pl-1 col-lg-12 p-3">
+                <span class="pull-right">
               단기공고
               <?if($short > 0){?>
                 <input type="checkbox" id="short_term" checked>
               <?}else{?>
                 <input type="checkbox" id="short_term">
               <?}?>
+                </span>
             </div>
         </div>
     </div>

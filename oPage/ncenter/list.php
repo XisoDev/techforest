@@ -1,8 +1,8 @@
 <div class="container">
     <div class="p-3 px-0">
         <a href="#" onclick="history.back();" class="mb-3"><img src="/oPage/images/imgicons/arrow_left.png" height="25" /></a>
-        <h4 class="pull-right pt-2"><a href="<?=getUrl('member','settingAlert')?>">설정 <i class="xi-cog"></i></a></h4>
-        <h4 class="weight_normal">알림센터</h4>
+        <h4 class="pull-right pt-2"><a href="<?=getUrl('member','settingAlert')?>" class="text-dark">설정 <i class="xi-cog"></i></a></h4>
+        <h4 class="weight_bold">알림센터</h4>
     </div>
     <div class="col-12 mt-2">
       <?php foreach($output->get("member_notice") as $val){
@@ -30,23 +30,22 @@
         }
         $reg_hour .= $reg_H."시".$reg_i."분";
       ?>
-          <div class="alert_card">
-              <a href="#" class="btn btn-block btn-danger mt-0 rounded-0"><i class="xi-volume-mute"></i> 알림 도착</a>
-              <div class="content_padding pt-2 pb-2">
+          <div class="alert_card shadow-sm rounded-xl">
+              <a href="#" class="btn btn-block btn-danger mt-0 rounded-0"> <img src="/oPage/images/imgicons/speaker.png" height="20" style="vertical-align:-3px;" class="mr-1" /> 알림 도착</a>
+              <div class="p-3">
                 <div>
-                  <span class="btn btn-danger btn-xxs btn-round">
                     <?if($day > 0){
-                      echo $day."일전";
+                      echo "<span class=\"xxs_content weight_bold\">".$day."일전</span>";
                       }else{
-                      echo "오늘";
+                      echo "<span class=\"btn btn-danger btn-xxs btn-round\">오늘</span>";
                       }
                     ?>
-                  </span>
+
                   <span class="pull-right xxs_content"><i class="xi-clock-o"></i><?=$reg_hour?></span>
                 </div>
                 <div class="mt-2">
-                  <p class="my-0 py-0 xs_content weight_bold"><?=$val['m_name']?> 님</p>
-                  <p class="my-0 py-0 xs_content"><span class="red">
+                  <p class="my-0 py-0 sm_content weight_bold"><?=$val['m_name']?> 님</p>
+                  <p class="my-0 py-0 sm_content weight_normal"><span class="red">
                     <?if($val['n_idx']==6){ ?><span style="color:black"><?=$val['m_name']?>님을 위한</span> 맞춤
                     <?} if($val['n_idx']==4||$val['n_idx']==1){?>[<?=$val['h_title'];?>]<?}else{?>
                       <?=$val['notice_type']?>
@@ -63,7 +62,7 @@
                     <?}?>
                   </p>
                   </div>
-                  <a onclick="See_more(<?=$val['mn_idx'].",".$val['n_idx'].",".$val['num']?>)" class="mt-2 btn btn-block btn-light">자세히 보기</a>
+                  <a onclick="See_more(<?=$val['mn_idx'].",".$val['n_idx'].",".$val['num']?>)" class="mt-2 btn btn-block btn-light rounded-xl shadow-sm">자세히 보기</a>
               </div>
           </div>
         <?php } } ?>
