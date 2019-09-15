@@ -432,7 +432,13 @@ jQuery(document).ready(function($){
 
   //공고등록완료시 뜨는 팝업인데 디자인 확인을 위해 추가
   jQuery('#job_reg_complete').modal('show');
+
 });
+
+function closs_complete() {
+  jQuery('#job_reg_complete').modal('hide');
+  location.href = "<?=getUrl('company','job')?>";
+}
 
 
 var duty_arr = <? echo json_encode($duty_row); ?>;
