@@ -554,9 +554,9 @@ shuffle($rand_array);
 													?>
 									</div>
                     <div class="text-center">
-                        <button class="my-3 d-sm-inline-block d-none btn btn-warning" onclick="my_info3_add();">학력 추가하기</button>
+                        <button class="my-3 d-sm-inline-block d-none btn btn-warning test_month" onclick="my_info3_add();">학력 추가하기</button>
                     </div>
-                    <button class="d-sm-none d-inline-block btn btn-warning btn-block rounded-0 rounded-bottom" onclick="javascript:my_info3_add();">학력 추가하기</button>
+                    <button class="d-sm-none d-inline-block btn btn-warning btn-block rounded-0 rounded-bottom test_month" onclick="javascript:my_info3_add();">학력 추가하기</button>
 								</div>
 
                 <div class="col-12 px-0">
@@ -569,9 +569,9 @@ shuffle($rand_array);
                 <div class="col-12 mx-0 px-0 mb-2 mt-sm-3">
 									<div id="my_info4_2"></div>
                     <div class="text-center">
-                        <a class="my-3 d-sm-inline-block d-none btn btn-warning" onclick="javascript:addViewMemberCareer();">경력 추가하기</a>
+                        <a class="my-3 d-sm-inline-block d-none btn btn-warning test_month" onclick="javascript:addViewMemberCareer();">경력 추가하기</a>
                     </div>
-                    <a class="d-sm-none d-inline-block btn btn-warning btn-block rounded-0 rounded-bottom" onclick="javascript:addViewMemberCareer();">경력 추가하기</a>
+                    <a class="d-sm-none d-inline-block btn btn-warning btn-block rounded-0 rounded-bottom test_month" onclick="javascript:addViewMemberCareer();">경력 추가하기</a>
                 </div>
 
                 <div class="col-12 px-0">
@@ -610,9 +610,9 @@ shuffle($rand_array);
 									<? } ?>
 									</div>
                     <div class="text-center">
-                      <button class="my-3 d-sm-inline-block d-none btn btn-warning" onclick="javascript:my_info5_add()">자격증 추가하기</button>
+                      <button class="my-3 d-sm-inline-block d-none btn btn-warning test_month" onclick="javascript:my_info5_add()">자격증 추가하기</button>
                     </div>
-                    <button class="d-sm-none d-inline-block btn btn-warning btn-block rounded-0 rounded-bottom" onclick="javascript:my_info5_add()">자격증 추가하기</button>
+                    <button class="d-sm-none d-inline-block btn btn-warning btn-block rounded-0 rounded-bottom test_month" onclick="javascript:my_info5_add()">자격증 추가하기</button>
                 </div>
 
 
@@ -739,9 +739,9 @@ shuffle($rand_array);
 										<?}?>
 									</div>
                     <div class="text-center">
-                      <a class="my-3 d-sm-inline-block d-none btn btn-warning" onclick="javascript:my_info6_add()">어학 추가하기</a>
+                      <a class="my-3 d-sm-inline-block d-none btn btn-warning test_month" onclick="javascript:my_info6_add()">어학 추가하기</a>
                     </div>
-                    <a class="d-sm-none d-inline-block btn btn-warning btn-block rounded-0 rounded-bottom" onclick="javascript:my_info6_add()">어학 추가하기</a>
+                    <a class="d-sm-none d-inline-block btn btn-warning btn-block rounded-0 rounded-bottom test_month" onclick="javascript:my_info6_add()">어학 추가하기</a>
                 </div>
 
                 <div class="col-12 px-0">
@@ -821,40 +821,42 @@ shuffle($rand_array);
 
 <script type="text/javascript">
 
-	$(document).on("ready",".monthpicker",function(){
+	$(".test_month").click(function(){
 
-		    var startDate = new Date();
-		    var FromEndDate = new Date();
 
-		    $('.monthpicker').datepicker({
-		      autoclose: true,
-		      minViewMode: 1,
-		      format: 'yyyy-mm',
-		      language: "kr"
-		    });
+		var startDate = new Date();
+		var FromEndDate = new Date();
 
-		    $('.monthpicker_from').datepicker({
-		      autoclose: true,
-		      minViewMode: 1,
-		      format: 'yyyy-mm',
-		      language: "kr"
-		    }).on('changeDate', function(selected){
-		        startDate = new Date(selected.date.valueOf());
-		        startDate.setDate(startDate.getDate(new Date(selected.date.valueOf())));
-		        $('.monthpicker_to').datepicker('setStartDate', startDate);
-		    });
+		$('.monthpicker').datepicker({
+			autoclose: true,
+			minViewMode: 1,
+			format: 'yyyy-mm',
+			language: "kr"
+		});
 
-		    $('.monthpicker_to').datepicker({
-		      autoclose: true,
-		      minViewMode: 1,
-		      format: 'yyyy-mm',
-		      language: "kr"
-		    }).on('changeDate', function(selected){
-		        FromEndDate = new Date(selected.date.valueOf());
-		        FromEndDate.setDate(FromEndDate.getDate(new Date(selected.date.valueOf())));
-		        $('.monthpicker_from').datepicker('setEndDate', FromEndDate);
-		    });
-	})
+		$('.monthpicker_from').datepicker({
+			autoclose: true,
+			minViewMode: 1,
+			format: 'yyyy-mm',
+			language: "kr"
+		}).on('changeDate', function(selected){
+				startDate = new Date(selected.date.valueOf());
+				startDate.setDate(startDate.getDate(new Date(selected.date.valueOf())));
+				$('.monthpicker_to').datepicker('setStartDate', startDate);
+		});
+
+		$('.monthpicker_to').datepicker({
+			autoclose: true,
+			minViewMode: 1,
+			format: 'yyyy-mm',
+			language: "kr"
+		}).on('changeDate', function(selected){
+				FromEndDate = new Date(selected.date.valueOf());
+				FromEndDate.setDate(FromEndDate.getDate(new Date(selected.date.valueOf())));
+				$('.monthpicker_from').datepicker('setEndDate', FromEndDate);
+		});
+	});
+
 	$(document).ready(function(){
 
 
