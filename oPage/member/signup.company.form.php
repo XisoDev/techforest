@@ -71,11 +71,11 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">-</span>
                 </div>
-                <input type="text" class="form-control" id="phone2" placeholder="0000">
+                <input type="text" class="form-control" id="phone2" maxlength="4" placeholder="0000" onkeyup="onlyNumber(this)">
                 <div class="input-group-prepend">
                     <span class="input-group-text">-</span>
                 </div>
-                <input type="text" class="form-control" id="phone3" placeholder="0000">
+                <input type="text" class="form-control" id="phone3" maxlength="4" placeholder="0000" onkeyup="onlyNumber(this)">
             </div>
             <p class="xxs_content px-0 mx-0"><span class="red"><i class="xi-error"></i> 휴대전화 권장</span> : 매칭결과 안내문자를 받을 수 있습니다.</p>
         </div>

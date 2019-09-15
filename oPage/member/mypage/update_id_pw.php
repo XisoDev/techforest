@@ -40,7 +40,7 @@ if($logged_info['is_commerce'] == 'Y'){
         </div>
         <div class="form-group">
             <label for=""><img src="/oPage/images/imgicons/lock_gray.png" height="12" class="imgicon" />  <span class="weight_bold">비밀번호</span></label>
-            <input type="text" id="empty_input" style="border:none;outline:none;" readonly>
+            <br>
             <div class="form-control" id="panel" style="display:none;height:auto;border:none;">
               현재 비밀번호 <br>
               <input type="password" id="now_pass"><br>

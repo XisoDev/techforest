@@ -61,7 +61,7 @@ $end_row = $output->get('end_row');
             </div>
             <div class="row mt-1 mx-0 px-0">
                 <div class="col-6 mx-0 px-0">
-                    <a href="#" class="btn btn-light btn-block rounded-0">수정</a>
+                    <a  href="<?=getUrl('company','job_appRegister',$row[$i]['h_idx']);?>" class="btn btn-light btn-block rounded-0">수정</a>
                 </div>
                 <div class="col-6 mx-0 px-0">
                     <a href="<?=getUrl('company','job',$row[$i]['h_idx']);?>" class="btn btn-light btn-block rounded-0 red">지원자 (<?=$row[$i]['applicant']?>)</a>

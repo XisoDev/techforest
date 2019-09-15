@@ -210,13 +210,13 @@ class companyController{
       $oDB->where("c_idx",$c_idx);
       $row_info = $oDB->update("TF_member_commerce_tb",$data_info);
 
+      if(!$row_info){
+        return new Object(-1,"네트워크 오류가 발생했습니다.(-2)");
+      }
       //global $_db_config;
       //$oDBDelete = new MysqliDb($_db_config['host'], $_db_config['user_name'],$_db_config['password'],$_db_config['db'],$_db_config['port']);
       $oDB->where("h_idx",$h_idx);
       $del = $oDB->delete("TF_hire_certificate");
-      if(!$del){
-        return new Object(-1,"네트워크 오류가 발생했습니다.(-3)");
-      }
 
       for($i = 0; $i < $h_certificate_count; $i++) {
         $certificate_data[$i] = array(
@@ -231,7 +231,7 @@ class companyController{
 
       if($a_row){
         $update_check = 1;
-        return new Object(0,"공고가 수정되었습니다.");
+        return new Object(0,$update_check);
       }else{
         return new Object(-1,"네트워크 오류가 발생했습니다.(-2)");
       }
@@ -396,8 +396,9 @@ class companyController{
         );
         $row2 = $oDB->insert("TF_cash_receipt",$cash_data);
       }
+      return new Object(0,"무통장입금신청이 완료되었습니다.");
     }else{
-      return new Object(1,"네트워크 오류가 발생했습니다.");
+      return new Object(-1,"네트워크 오류가 발생했습니다.");
     }
   }
 

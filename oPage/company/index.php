@@ -132,9 +132,9 @@ $hire_check = $output->get('hire_check');
                     <div class="tech_card bg-white shadow-sm">
                         <div class="thumbnail mx-0 px-0" style="background-image:url('http://www.planttech.co.kr/wp-content/uploads/2018/07/%EC%82%BC%EC%84%B1%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%811-820x457.png')">
                         </div>
-                        <div class="py-2 px-2 text-left pb-1">
+                        <div class="py-2 px-2 text-left pb-1" onclick="location.href='<?=getUrl('company','jobDetail',$val['h_idx'])?>'">
                             <p class="pb-0 mb-0"><?=$val['c_name']?></p>
-                            <h6 class="red hire_tit"><?=$val['h_title']?></h6>
+                            <h6 class="red cut1 mb-0"><?=$val['h_title']?></h6>
                             <p class="weight_lighter xxs_content mx-0 px-0">
                               <? if ($val['city_name'] == "전체") { $val['city_name'] = "";} ?>
                               <? if ($val['district_name'] == "전체") { $val['district_name'] = ""; }?>

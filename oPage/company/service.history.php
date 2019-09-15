@@ -73,7 +73,7 @@
                 </thead>
                 <tbody>
                 <?php foreach($voucher_list as $val){ ?>
-                <tr><td><?=$val['pay_service']?></td><td><span class="red"><?=$val['remain_count']?>회</span> / 총 <?=$val['all_count']?>회</td><td><?=date("Y-m-d", strtotime($val["reg_date"]))?> ~ <?=date("Y-m-d", strtotime($val["expire_date"]))?></td></tr>
+                <tr><td><?=$val['pay_service']?></td><td>-</td><td><?=date("Y-m-d", strtotime($val["reg_date"]))?> ~ <?=date("Y-m-d", strtotime($val["expire_date"]))?></td></tr>
                 <?php } ?>
                 </tbody>
             </table>
@@ -123,7 +123,7 @@
                         <h6 class="xs_content weight_bold"><span class="xxs_content text-secondary">결제금액</span> <?=number_format($val['amount'])?>원</h6>
                         <h6 class="xs_content weight_lighter"><span class="xxs_content text-secondary">결제상태</span> <?=($val['state'] == "Y") ? "완료" : "대기"?></h6>
                     </div>
-                <a href="#" class="btn btn-primary btn-block rounded-0 rounded-bottom">전자 세금계산서 발행하기</a>
+                <a href="#" class="btn btn-primary btn-block rounded-0 rounded-bottom" onclick="tax_invoice()">전자 세금계산서 발행하기</a>
             </div>
             <?php } ?>
         </div>
@@ -133,6 +133,9 @@
 <script type="text/javascript">
   function add_coupon(){
     alert("올바른 쿠폰코드를 입력해주세요.");
+  }
+  function tax_invoice(){
+    alert("전자세금계산서발행을 원하실 경우,1800-9665로 연락주시기 바랍니다.");
   }
 </script>
 <?php

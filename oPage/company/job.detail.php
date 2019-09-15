@@ -169,7 +169,7 @@ $member_count = $output->get('member_count');
                     </button>
                   </a>
 
-                  <a href="#" onclick="javascript:move_hire_insert( <?=$hire_info[0]["h_idx"]?> );" >
+                  <a href="<?=getUrl('company','job_appRegister',$hire_info[0]);?>">
                     <button class="width_60 btn button1" style="background: #777; font-size: 19px;">
                       <!-- <img class="rectangle_30 margin_right_5" src="./img/icon_025.png" alt="공고수정" style="margin-top: -5px;" /> -->
                       <strong>공고수정</strong>
@@ -210,7 +210,7 @@ $member_count = $output->get('member_count');
   										<strong>지원자보기</strong>
   									</button>
   								</a>
-  								<a href="#" onclick="javascript:move_hire_insert(<?=$hire_info[0]["h_idx"]?>)">
+  								<a href="<?=getUrl('company','job_appRegister',$hire_info[0]['h_idx']);?>">
   									<button class="btn button1" style="background: #777; font-size: 19px;">
   										<!-- <img class="rectangle_30 margin_right_5" src="./img/icon_025.png" alt="공고수정" style="margin-top: -5px;"> -->
   										<strong>공고수정</strong>

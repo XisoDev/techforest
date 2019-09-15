@@ -63,13 +63,14 @@ $rows = $output->get('row');
                             <?foreach ($rows as $key => $val) {?>
                               <tr class="on">
                                 <td style="vertical-align:middle;"><?=$key+1?></td>
-                                <td style="vertical-align:middle"><?=$val['title']?></td>
+                                <td class="cut1" style="vertical-align:middle"><?=$val['title']?></td>
                                 <td style="vertical-align:middle"><?=substr($val['reg_date'],0,10)?></td>
                                 <td style="vertical-align:middle">
                                   <?if(!$val['r_idx']){?>
-                                    <spen class="reply_style1">답변대기</spen>
+                                    <img src="../../img/reply1.png" alt="답변대기" style="width:85px;">
+
                                   <?}else{?>
-                                    <spen class="reply_style2">답변완료</spen>
+                                    <img src="../../img/reply2.png" alt="답변완료" style="width:85px;!important">
                                   <?}?>
                                 </td>
                               </tr>

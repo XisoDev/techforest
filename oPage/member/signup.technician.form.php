@@ -43,26 +43,35 @@
             ?>
           </select>
         </div>
+
         <div class="col-12 mx-0 px-0 mb-2">
             <div class="input-group">
-                <select class="form-control" id="phone1">
-                    <option value="010" selected="selected">010</option>
-                    <option value="011">011</option>
-                    <option value="017">017</option>
-                    <option value="051">051</option>
+              <input type="text" class="form-control" id="phone1" placeholder="직접입력">
+              <button class="dropdown-toggle" type="button" id="phone_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="caret"></span></button>
+              <ul id="phone1_list" class="dropdown-menu" aria-labelledby="phone_btn" style="">
+                <li class="" onclick="click_phone('010')">010</li>
+                <li role="separator" class="divider"></li>
+                <li class="" onclick="click_phone('017')">017</li>
+                <li role="separator" class="divider"></li>
+                <li class="" onclick="click_phone('016')">016</li>
+                <li role="separator" class="divider"></li>
+                <li class="" onclick="click_phone('011')">011</li>
+                <li role="separator" class="divider"></li>
+                <li class="" onclick="click_phone('018')">018</li>
+              </ul>
                 </select>
                 <div class="input-group-prepend">
                     <span class="input-group-text">-</span>
                 </div>
-                <input type="text" class="form-control" id="phone2" placeholder="0000">
+                <input type="text" class="form-control" id="phone2" maxlength="4" placeholder="0000" onkeyup="onlyNumber(this)">
                 <div class="input-group-prepend">
                     <span class="input-group-text">-</span>
                 </div>
-                <input type="text" class="form-control" id="phone3" placeholder="0000">
+                <input type="text" class="form-control" id="phone3" maxlength="4" placeholder="0000" onkeyup="onlyNumber(this)">
             </div>
             <p class="xxs_content px-0 mx-0"><span class="red"><i class="xi-error"></i> 휴대전화 권장</span> : 매칭결과 안내문자를 받을 수 있습니다.</p>
         </div>
-
+        
         <div class="col-12 mx-0 px-0 mb-2">
             <div class="input-group">
                 <input type="text" class="form-control" id="m_email1" placeholder="이메일 주소 입력">

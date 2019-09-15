@@ -24,53 +24,45 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 mx-0 px-0 pl-1 mb-4">
-                    <label class="weight-normal"><span class="red xxs_content px-0">*</span> 이름</label>
-                    <input type="text" class="form-control" id="job_manager" placeholder="담당자명을 입력합니다." value="<?=$logged_info['select7']?>">
-                </div>
-                <div class="col-12 mx-0 px-0 pl-1 mb-4">
-                    <label class="weight-normal"><span class="red xxs_content px-0">*</span> 휴대폰번호</label>
-                    <div class="input-group">
-                        <select class="form-control" id="c_phone1">
-                            <?
-                            $phonenumber = explode("-", $logged_info['m_phone']);
-                            $phone_arr = array("선택", "02", "031", "032", "033", "041", "042", "043", "044", "051", "052", "053", "054", "055", "061", "062", "063", "064", "010", "070");
-
-                            for($i = 0; $i < count($phone_arr); $i++) {
-                                if($phone_arr[$i] == $phonenumber[0]) {
-                                    echo "<option value=\"" . $phone_arr[$i] . "\" selected=\"selected\">" . $phone_arr[$i] . "</option>";
-                                } else {
-                                    echo "<option value=\"" . $phone_arr[$i] . "\">" . $phone_arr[$i] . "</option>";
-                                }
-                            }
-                            ?>
-                        </select>
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">-</span>
-                        </div>
-                        <input type="text" class="form-control" id="c_phone2" value="<?=$phonenumber[1]?>" maxlength="4" placeholder="0000" onkeyup="onlyNumber(this)">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">-</span>
-                        </div>
-                        <input type="text" class="form-control" id="c_phone3" value="<?=$phonenumber[2]?>" maxlength="4" placeholder="0000" onkeyup="onlyNumber(this)">
-                    </div>
+                    <label class="weight-normal"><span class="red xxs_content px-0">*</span> 제목</label>
+                    <input type="text" class="form-control" id="title" placeholder="제목을 입력해주세요." value="">
                 </div>
 
                 <div class="col-12 mx-0 px-0 pl-1  mb-4">
                     <label class="weight-normal"><span class="red xxs_content px-0">*</span> 내용입력</label>
-                    <textarea rows="3" placeholder="내용을 입력해 주세요." class="form-control"></textarea>
+                    <textarea rows="3" placeholder="내용을 입력해 주세요." id="content" class="form-control"></textarea>
                 </div>
                 <div class="col-12 mx-0 px-0 d-block d-md-none my-3">
-                <button type="button" class="btn btn-primary btn-block btn-round">문의하기</button>
+                <button type="button" class="btn btn-primary btn-block btn-round" onclick="question()">문의하기</button>
                 <a class="d-lg-none btn btn border-primary btn-block btn-round mt-3" href="tel:18009665"><i class="xi-call"></i> 전화로 문의하기</a>
                 </div>
                 <div class="col-12 mx-0 px-0 d-none d-md-block text-right">
-                    <button type="button" class="btn btn-primary rounded px-5">문의하기</button>
+                    <button type="button" class="btn btn-primary rounded px-5" onclick="question()">문의하기</button>
                 </div>
             </div>
         </div>
     </div>
     </div>
 </section>
+
+<script type="text/javascript">
+  function question(){
+    var m_idx = <?=$m_idx?>;
+    var title = $('#title').val();
+    var content = $('#content').val();
+
+    var params = {
+      "m_idx" : m_idx,
+      "title" : title,
+      "content" : content
+    }
+
+    exec_json("contact.question",params,function(ret_obj){
+      location.href="<?=getUrl('contact','replies')?>";
+      toastr.success(ret_obj.message);
+    });
+  }
+</script>
 <?php
 $footer_false = true;
 

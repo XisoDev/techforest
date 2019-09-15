@@ -177,6 +177,33 @@ if($m_idx > 0){
               "is_logged" => "N"),
       )
   );
+
+
+  $oMenu->company->list[] = array(
+      "title" => "문의",
+      "link" => getUrl('contact'),
+      "imgicon" => "headset",
+      "active_mid" => "contact",
+      "active_act" => "index",
+      "new_window" => "N",
+      "is_logged" => "N",
+      "submenu" => array(
+          array(
+              "title" => "1:1 문의",
+              "link" => getUrl('contact'),
+              "active_mid" => "contact",
+              "active_act" => "index",
+              "new_window" => "N",
+              "is_logged" => "N"),
+          array(
+              "title" => "자주묻는 질문",
+              "link" => getUrl('contact','FAQ'),
+              "active_mid" => "contact",
+              "active_act" => "FAQ",
+              "new_window" => "N",
+              "is_logged" => "N"),
+      )
+  );
 }else{
   $oMenu->company->list[] = array(
       "title" => "서비스이용현황",
@@ -203,54 +230,80 @@ if($m_idx > 0){
               "is_logged" => "N"),
       )
   );
+
+
+  $oMenu->company->list[] = array(
+      "title" => "문의",
+      "link" => getUrl('member','login',false,array('cur' => $current_url)),
+      "imgicon" => "headset",
+      "active_mid" => "contact",
+      "active_act" => "index",
+      "new_window" => "N",
+      "is_logged" => "N",
+      "submenu" => array(
+          array(
+              "title" => "1:1 문의",
+              "link" => getUrl('member','login',false,array('cur' => $current_url)),
+              "active_mid" => "contact",
+              "active_act" => "index",
+              "new_window" => "N",
+              "is_logged" => "N"),
+          array(
+              "title" => "자주묻는 질문",
+              "link" => getUrl('contact','FAQ'),
+              "active_mid" => "contact",
+              "active_act" => "FAQ",
+              "new_window" => "N",
+              "is_logged" => "N"),
+      )
+  );
 }
 
-$oMenu->company->list[] = array(
-    "title" => "문의",
-    "link" => getUrl('contact'),
-    "imgicon" => "headset",
-    "active_mid" => "contact",
-    "active_act" => "index",
-    "new_window" => "N",
-    "is_logged" => "N",
-    "submenu" => array(
-        array(
-            "title" => "1:1 문의",
-            "link" => getUrl('contact'),
-            "active_mid" => "contact",
-            "active_act" => "index",
-            "new_window" => "N",
-            "is_logged" => "N"),
-        array(
-            "title" => "자주묻는 질문",
-            "link" => getUrl('contact','FAQ'),
-            "active_mid" => "contact",
-            "active_act" => "FAQ",
-            "new_window" => "N",
-            "is_logged" => "N"),
-    )
-);
 //기술자메뉴
 $oMenu->technician = new stdClass();
 $oMenu->technician->list = array();
-$oMenu->technician->list[] = array(
-    "title" => "이력서등록",
-    "link" => getUrl('technician','resume'),
-    "icon" => "xi-library-books-o",
-    "active_mid" => "technician",
-    "active_act" => "resume",
-    "new_window" => "N",
-    "is_logged" => "N",
-);
-$oMenu->technician->list[] = array(
-    "title" => "일자리찾기",
-    "link" => getUrl('technician','findJob'),
-    "icon" => "xi-zoom-in",
-    "active_mid" => "technician",
-    "active_act" => "findJob",
-    "new_window" => "N",
-    "is_logged" => "N",
-);
+
+if($m_idx > 0){
+  $oMenu->technician->list[] = array(
+      "title" => "이력서등록",
+      "link" => getUrl('technician','resume'),
+      "icon" => "xi-library-books-o",
+      "active_mid" => "technician",
+      "active_act" => "resume",
+      "new_window" => "N",
+      "is_logged" => "N",
+  );
+  $oMenu->technician->list[] = array(
+      "title" => "일자리찾기",
+      "link" => getUrl('technician','findJob'),
+      "icon" => "xi-zoom-in",
+      "active_mid" => "technician",
+      "active_act" => "findJob",
+      "new_window" => "N",
+      "is_logged" => "N",
+  );
+}else{
+  $oMenu->technician->list[] = array(
+      "title" => "이력서등록",
+      "link" => getUrl('member','login',false,array('cur' => $current_url)),
+      "icon" => "xi-library-books-o",
+      "active_mid" => "technician",
+      "active_act" => "resume",
+      "new_window" => "N",
+      "is_logged" => "N",
+  );
+  $oMenu->technician->list[] = array(
+      "title" => "일자리찾기",
+      "link" => getUrl('member','login',false,array('cur' => $current_url)),
+      "icon" => "xi-zoom-in",
+      "active_mid" => "technician",
+      "active_act" => "findJob",
+      "new_window" => "N",
+      "is_logged" => "N",
+  );
+}
+
+
 $oMenu->technician->list[] = array(
     "title" => "서비스이용현황",
     "link" => getUrl('technician','serviceHistory'),
@@ -276,6 +329,7 @@ $oMenu->technician->list[] = array(
     //         "is_logged" => "N"),
       )
 );
+
 $oMenu->technician->list[] = array(
     "title" => "취업정보",
     "link" => getUrl('technician','magazine'),
@@ -285,6 +339,7 @@ $oMenu->technician->list[] = array(
     "new_window" => "N",
     "is_logged" => "N",
 );
+
 $oMenu->technician->list[] = array(
     "title" => "기술자숲 소개",
     "link" => getUrl('contact','TechnicianForest'),
@@ -310,31 +365,61 @@ $oMenu->technician->list[] = array(
     //         "is_logged" => "N"),
      )
 );
-$oMenu->technician->list[] = array(
-    "title" => "문의",
-    "link" => getUrl('contact'),
-    "icon" => "xi-mail-o",
-    "active_mid" => "contact",
-    "active_act" => "index",
-    "new_window" => "N",
-    "is_logged" => "N",
-    "submenu" => array(
-        array(
-            "title" => "1:1 문의",
-            "link" => getUrl('contact'),
-            "active_mid" => "contact",
-            "active_act" => "index",
-            "new_window" => "N",
-            "is_logged" => "N"),
-        array(
-            "title" => "자주묻는 질문",
-            "link" => getUrl('contact','FAQ'),
-            "active_mid" => "contact",
-            "active_act" => "faq",
-            "new_window" => "N",
-            "is_logged" => "N"),
-    )
-);
+
+if($m_idx > 0){
+  $oMenu->technician->list[] = array(
+      "title" => "문의",
+      "link" => getUrl('contact'),
+      "icon" => "xi-mail-o",
+      "active_mid" => "contact",
+      "active_act" => "index",
+      "new_window" => "N",
+      "is_logged" => "N",
+      "submenu" => array(
+          array(
+              "title" => "1:1 문의",
+              "link" => getUrl('contact'),
+              "active_mid" => "contact",
+              "active_act" => "index",
+              "new_window" => "N",
+              "is_logged" => "N"),
+          array(
+              "title" => "자주묻는 질문",
+              "link" => getUrl('contact','FAQ'),
+              "active_mid" => "contact",
+              "active_act" => "faq",
+              "new_window" => "N",
+              "is_logged" => "N"),
+      )
+  );
+}else{
+  $oMenu->technician->list[] = array(
+      "title" => "문의",
+      "link" =>getUrl('member','login',false,array('cur' => $current_url)),
+      "icon" => "xi-mail-o",
+      "active_mid" => "contact",
+      "active_act" => "index",
+      "new_window" => "N",
+      "is_logged" => "N",
+      "submenu" => array(
+          array(
+              "title" => "1:1 문의",
+              "link" => getUrl('member','login',false,array('cur' => $current_url)),
+              "active_mid" => "contact",
+              "active_act" => "index",
+              "new_window" => "N",
+              "is_logged" => "N"),
+          array(
+              "title" => "자주묻는 질문",
+              "link" => getUrl('contact','FAQ'),
+              "active_mid" => "contact",
+              "active_act" => "faq",
+              "new_window" => "N",
+              "is_logged" => "N"),
+      )
+  );
+}
+
 
 function arrangeMenuItem($menu_item){
     global $module;

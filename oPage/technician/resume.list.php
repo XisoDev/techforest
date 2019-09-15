@@ -24,7 +24,7 @@ $file_list = $output->get('file_list');
         <div class="col-12 col-sm-10 col-md-9 col-lg-8 mx-md-auto mx-0 pt-md-4">
             <h5>내 이력서 관리</h5>
             <div class="tech_card bg-white mb-4 shadow-sm mx-md-5">
-                <div class="xxs_content py-2 weight_lighter position-relative">
+                <div class="xxs_content py-3 weight_lighter position-relative">
                     <span class="position-absolute weight_normal" style="right:10px; top:7px;">
                         이력서 완성도
                         <span class="btn btn-round btn-danger btn-xxs py-2 px-2 weight_lighter m-0" style="vertical-align:0px;">
@@ -38,9 +38,7 @@ $file_list = $output->get('file_list');
                           ?>
                         </span>
                     </span>
-                    <p class="d-block d-lg-none text-left">
-                    <i class="xi-clock-o"></i> 최종 수정일 : <?=substr($myinfo_row[0]['edit_date'],0,10)?>
-                    </p>
+
                 </div>
                 <div class="px-2">
                     <div class="row">
@@ -54,13 +52,16 @@ $file_list = $output->get('file_list');
                                 <img src="/oPage/images/imgicons/attachment_gray.png" height="40" />
                             </div>
                             <h5>
-                                <img src="/oPage/images/imgicons/attachment_gray.png" height="25" class="d-none d-lg-inline-block" />
+                                <img src="/oPage/images/imgicons/attachment_gray.png" height="25" class="d-none d-lg-inline-block pt-0" />
                                 일반 이력서 <span class="red">작성중</span>
                             </h5>
                             <p class="d-none d-lg-block">
-                                최종 수정일 : 2019.07.17
+                                최종 수정일 : <?=substr($myinfo_row[0]['edit_date'],0,10)?>
                             </p>
                         </div>
+                        <p class="d-block d-lg-none" style="margin:0px auto;">
+                        <i class="xi-clock-o"></i> 최종 수정일 : <?=substr($myinfo_row[0]['edit_date'],0,10)?>
+                        </p>
                     </div>
 
                 </div>

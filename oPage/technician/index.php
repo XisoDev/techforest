@@ -59,14 +59,14 @@ $news_list = $output->get('news_list');
         <?php if(!$logged_info) { ?>
         <div class="col-12">
             <h6 class="weight_bold mt-4">아직 이력서를 등록하지 않으셨네요!</h6>
-            <button class="btn btn-lg btn-block btn-warning xs_content py-3">이력서 등록하고 맞춤 일자리 확인하기
+            <button class="btn btn-lg btn-block btn-warning xs_content py-3" onclick="location.href='<?=getUrl('member','login',false,array('cur' => $current_url))?>'">이력서 등록하고 맞춤 일자리 확인하기
                 <span class="color_primary"><i class="xi-plus-circle"></i></span>
             </button>
         </div>
 
         <div class="col-12">
             <div class="bg-white rounded pt-3 mt-3">
-            <a href="#" class="pull-right mr-2 btn btn-primary btn-xxs btn-round py-1 px-2">공고더보기 <i class="xi-plus"></i></a>
+            <a href="<?=getUrl('technician','findJobListAll')?>" class="pull-right mr-2 btn btn-primary btn-xxs btn-round py-1 px-2">공고더보기 <i class="xi-plus"></i></a>
             <h6 class="weight_bold ml-2">오늘의 주요 채용 공고!</h6>
 
                 <div class="clearfix"></div>
@@ -79,15 +79,15 @@ $news_list = $output->get('news_list');
         <div class="col-4 ml-0 pl-1">
             <select class="form-control"><option>부산</option></select>
         </div> -->
-            <div class="flex-card-slick">
+            <div class="flex-card-slick" onclick="location.href='<?=getUrl('member','login',false,array('cur' => $current_url))?>'">
                 <?php foreach($output->get("new_hire3") as $val){ ?>
                   <?php $desired_work_place = $val['local_name'] . " ";if($val['city_name'] != '전체'){ $desired_work_place .= $val['city_name']; }if($val['district_name'] != '전체'){ $desired_work_place .= $val['district_name']; }?>
                     <div class="tech_card bg-white">
                         <div class="thumbnail mx-0 px-0" style="background-image:url('http://www.planttech.co.kr/wp-content/uploads/2018/07/%EC%82%BC%EC%84%B1%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%811-820x457.png')">
                         </div>
                         <div class="p-2 text-left pb-1">
-                            <h6><?=$val['c_name']?></h6>
-                            <h6 class="red" style="height: 38px;"><?=$val['h_title']?></h6>
+                            <h6 class="pb-0 mb-0"><?=$val['c_name']?></h6>
+                            <h6 class="red cut1 m-0"><?=$val['h_title']?></h6>
                             <p class="weight_lighter xxs_content mx-0 px-0">
                                 <span class="badge badge-danger weight_lighter">위치</span>
                                 <?=$desired_work_place?>

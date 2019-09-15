@@ -519,7 +519,7 @@ img{
 
 .cut1 {
   white-space:nowrap;
-  display:block;
+  /* display:block; */
   -webkit-line-clamp:1;
   overflow:hidden;
   text-overflow:ellipsis;

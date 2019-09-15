@@ -429,15 +429,18 @@ $salary_list = $oDB->get("TF_salary",null,"salary_idx, salary_name, salary_is_sh
 
 
 jQuery(document).ready(function($){
-
   //공고등록완료시 뜨는 팝업인데 디자인 확인을 위해 추가
-  jQuery('#job_reg_complete').modal('show');
-
+  //jQuery('#job_reg_complete').modal('show');
+  $("#o_idx").change();
 });
 
 function closs_complete() {
   jQuery('#job_reg_complete').modal('hide');
   location.href = "<?=getUrl('company','job')?>";
+}
+function closs_complete2() {
+  jQuery('#job_reg_complete').modal('hide');
+  location.href = "<?=getUrl('member','myprofile')?>";
 }
 
 
@@ -571,9 +574,12 @@ function hire_ok(){
   exec_json("company.job_register_success",params,function(ret_obj){
      //통신에러나 모듈내부에서 에러가있을땐 알아서 처리해주므로 성공시만 처리하면됨.
      // alert(ret_obj.message); // alert 해도되지만 toastr 권장
-      toastr.success(ret_obj.message);
-      // alert(ret_obj.result);
-      jQuery('#job_reg_complete').modal('show');
+     if(ret_obj.message == 1){
+       location.href = "<?=getUrl('company','job')?>";
+     }else{
+       toastr.success(ret_obj.message);
+       jQuery('#job_reg_complete').modal('show');
+     }
   });
 }
 

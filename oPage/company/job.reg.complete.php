@@ -54,7 +54,7 @@
 </div>
 
 <section class="px-3 pb-4 pt-0 text-center bg-white fixed-bottom">
-    <a href="#" class="btn btn-block border-danger red btn-lg btn-round mb-3">담당자 연락처 수정</a>
+    <a href="#" id="edit_phone" class="btn btn-block border-danger red btn-lg btn-round mb-3">담당자 연락처 수정</a>
     <a href="#" id="down_check" class="text-white btn btn-block btn-danger btn-lg btn-round">확인</a>
 
 </section>
@@ -62,5 +62,8 @@
 <script type="text/javascript">
   $('#down_check').click(function(){
     window.parent.closs_complete();
+  });
+  $('#edit_phone').click(function(){
+    window.parent.closs_complete2();
   });
 </script>
