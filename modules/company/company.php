@@ -273,7 +273,7 @@ class companyView{
 
           $output->add('application_row',$application_row);
           $output->add('interview_list',$interview_list);
-
+          $output->add('new_member2',$this->new_member2());
 
         }else{
             $set_template_file = "company/job.list.php";

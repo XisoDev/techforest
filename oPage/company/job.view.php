@@ -79,18 +79,27 @@
             <h4 class="py-2">추천 기술자</h4>
         </div>
     <div class="flex-card-slick">
-        <?php for($i=1; $i<=4; $i++){?>
-        <div class="tech_card bg-white overflow-hidden mx-md-3 mb-md-3 shadow">
-            <div class="avatar square w-50 mx-auto my-2 my-sm-3 my-md-4" style="background-image:url('/layout/none/assets/images/no_avatar.png');">
-            </div>
-            <div class="px-2 mb-0">
-            <h6 class="weight_normal mb-1 text-center">나상호 (56세)</h6>
-            <p class="text-left xs_content px-0 py-0 m-0 mb-1" class="cut1"> <img class="d-inline" src="/oPage/images/imgicons/wrench_bg_red.png" height="14" /> 주요경력 : <?=$val['duty_name']?> 기타기타기타기타</p>
-            <p class="text-left xs_content px-0 py-0 m-0 mb-1">  <img class="d-inline" src="/oPage/images/imgicons/location_bg_red.png" height="14" /> 희망지역 : <?=$desired_work_place?></p>
-            </div>
-            <a href="<?=getUrl('company','application',100)?>" class="btn btn-block btn-warning mt-3 rounded-0">이력서 보기</a>
-        </div>
-        <?php } ?>
+      <?php foreach($output->get("new_member2") as $val){ ?>
+          <?php $desired_work_place = $val['local_name'] . " ";
+          if($val['m_city_idx'] != -1){ $desired_work_place .= $val['city_name']; }
+          if($val['m_district_idx'] != -1){ $desired_work_place .= $val['district_name']; }?>
+          <div class="tech_card bg-white overflow-hidden mx-md-3 mb-md-3 shadow">
+              <div class="avatar square mx-auto my-2 my-sm-3 my-md-4" style="width:40%; background-image:url('/layout/none/assets/images/no_avatar.png');">
+              </div>
+              <h6 class="weight_bold mb-1 px-2 text-center"><?=$val['m_name']?> (<?=$val['m_birthday']?>세)</h6>
+              <p class="text-left xs_content px-3 py-0 m-0 mb-1">  <img class="d-inline imgicon" src="/oPage/images/imgicons/location_bg_red.png" height="10" /> <b>희망지역 : <?=$desired_work_place?></b></p>
+              <p class="text-left xs_content px-3 py-0 m-0 cut1"  style="height:42px;"> <img class="d-inline imgicon" src="/oPage/images/imgicons/wrench_bg_red.png" height="10" /> <b>주요경력 : <?=$val['duty_name']?></b></p>
+              <div class="row mt-0 mx-0 px-0">
+                  <div class="col-12 mx-0 px-0">
+                    <?if($m_idx){?>
+                    <a href="<?=getUrl('technician','resume',$val['m_idx'],array("from"=>"index"))?>" target="_blank" class="btn btn-block btn-warning mt-1 rounded-0">이력서보기</a>
+                    <?}else{?>
+                      <button class="btn btn-block btn-warning mt-1 rounded-0"></button>
+                    <?}?>
+                  </div>
+              </div>
+          </div>
+      <?php } ?>
     </div>
 </div>
 <div class="container py-md-3 py-lg-5">
