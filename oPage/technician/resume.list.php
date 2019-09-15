@@ -51,7 +51,7 @@ $file_list = $output->get('file_list');
                             <div class="d-block d-lg-none text-center">
                                 <img src="/oPage/images/imgicons/attachment_gray.png" height="40" />
                             </div>
-                            <h5>
+                            <h5 class="p-0 m-0">
                                 <img src="/oPage/images/imgicons/attachment_gray.png" height="25" class="d-none d-lg-inline-block pt-0" />
                                 일반 이력서 <span class="red">작성중</span>
                             </h5>
@@ -59,7 +59,7 @@ $file_list = $output->get('file_list');
                                 최종 수정일 : <?=substr($myinfo_row[0]['edit_date'],0,10)?>
                             </p>
                         </div>
-                        <p class="d-block d-lg-none" style="margin:0px auto;">
+                        <p class="d-block d-lg-none" style="margin:5px auto;">
                         <i class="xi-clock-o"></i> 최종 수정일 : <?=substr($myinfo_row[0]['edit_date'],0,10)?>
                         </p>
                     </div>

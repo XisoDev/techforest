@@ -25,6 +25,7 @@ class companyView{
         $output->add('news_list',$this->news_list());
         $output->add('hire_check',$this->hire_check());
 
+
         $set_template_file = "company/index.php";
 
         return $output;

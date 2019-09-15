@@ -14,6 +14,7 @@ $interest_rows = $output->get('interest_rows');
 <div class="container pt-lg-5">
 
     <div class="row">
+      <?if(count($application_letter) > 0){?>
       <?php foreach($application_letter as $val) { ?>
         <input type="hidden" id="hidden_h_idx" value="<?=$val['h_idx']?>">
           <div class="col-12 col-md-4 px-md-2 pb-md-4">
@@ -77,6 +78,9 @@ $interest_rows = $output->get('interest_rows');
               </div>
           </div>
       <?php } ?>
+    <?php }else{ ?>
+      <p>입사지원현황이 없습니다.</p>
+      <?}?>
     </div>
 </div>
 

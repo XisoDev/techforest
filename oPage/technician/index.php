@@ -12,8 +12,24 @@ $rt_row = $output->get('rt_row');
 //언론보도리스트
 $news_list = $output->get('news_list');
 
+if($logged_info['is_commerce']=='Y'){
+  echo ("<script>
+    location.href='".getUrl('company')."';
+  </script>");
+}
 ?>
+<script type="text/javascript">
+// $(document).ready(function(){
+//   var is_commerce = "<?=$logged_info['is_commerce']?>";
+//   if( is_commerce == 'Y'){
+//     location.href="<?=getUrl('company')?>";
+//   }else{
+//
+//   }
+// });
 
+
+</script>
 
 <div class="container-fluid welcome_seciton" style="background-image:url('/oPage/images/technician_welcome.png');">
     <img src="/oPage/images/gear.png" class="rotating d-sm-none" style="position:absolute; width:30%; right:-5%; top:-5%;"  />

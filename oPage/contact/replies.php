@@ -26,7 +26,6 @@ $rows = $output->get('row');
 
 </style>
 <link rel="stylesheet" href="/layout/company/assets/default.css">
-<link rel="stylesheet" href="/layout/none/vendor/bootstrap/bootstrap.min.css">
 
 <section class="bg-white">
     <div class="p-3 mt-4 pt-5 d-lg-none">
@@ -57,20 +56,20 @@ $rows = $output->get('row');
                   					<th class="col-xs-2 col-sm-1 col-md-2" style="border-top: 3px solid black;">번호</th>
                   					<th class="col-xs-7 col-sm-9 col-md-7" style="border-top: 3px solid black;">제목</th>
                   					<th class="col-xs-4 col-sm-2 col-md-3" style="border-top: 3px solid black;">작성일</th>
-                            <th class="col-xs-4 col-sm-2 col-md-3" style="border-top: 3px solid black;">답변여부</th>
+                            <th class="col-xs-4 col-sm-2 col-md-3" style="border-top: 3px solid black;">답변</th>
                   				</tr>
 
                             <?foreach ($rows as $key => $val) {?>
                               <tr class="on">
                                 <td style="vertical-align:middle;"><?=$key+1?></td>
-                                <td class="cut1" style="vertical-align:middle"><?=$val['title']?></td>
+                                <td style="vertical-align:middle" class=""><?=$val['title']?></td>
                                 <td style="vertical-align:middle"><?=substr($val['reg_date'],0,10)?></td>
                                 <td style="vertical-align:middle">
                                   <?if(!$val['r_idx']){?>
                                     <img src="../../img/reply1.png" alt="답변대기" style="width:85px;">
 
                                   <?}else{?>
-                                    <img src="../../img/reply2.png" alt="답변완료" style="width:85px;!important">
+                                    <img src="../../img/reply2.png" alt="답변완료" style="width:85px">
                                   <?}?>
                                 </td>
                               </tr>

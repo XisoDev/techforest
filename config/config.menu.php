@@ -64,14 +64,26 @@ $oMenu->footer->list[] = array(
     "new_window" => "N",
     "is_logged" => "N",
 );
-$oMenu->footer->list[] = array(
-    "title" => "문의하기",
-    "link" => getUrl('contact'),
-    "active_mid" => "page",
-    "active_act" => time(),
-    "new_window" => "N",
-    "is_logged" => "N",
-);
+if($m_idx > 0){
+  $oMenu->footer->list[] = array(
+      "title" => "문의하기",
+      "link" => getUrl('contact'),
+      "active_mid" => "page",
+      "active_act" => time(),
+      "new_window" => "N",
+      "is_logged" => "N",
+  );
+}else{
+  $oMenu->footer->list[] = array(
+      "title" => "문의하기",
+      "link" => getUrl('member','login',false,array('cur' => $current_url)),
+      "active_mid" => "page",
+      "active_act" => time(),
+      "new_window" => "N",
+      "is_logged" => "N",
+  );
+}
+
 // $oMenu->footer->list[] = array(
 //     "title" => "회원탈퇴",
 //     "link" => getUrl('member','withdrawMember'),

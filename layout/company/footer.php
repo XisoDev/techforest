@@ -10,9 +10,9 @@ if(!isset($footer_false)){
         <div class="row">
             <div class="col-3 pt-5">
 <!--                logo ?-->
-                <a href="<?=getUrl()?>">
+
                 <img src="/oPage/images/footer_logo_gray.png" height="60" />
-                </a>
+        
             </div>
             <div class="col-9 pt-3">
                 <h6 class="text-warning mt-4 mb-0 pt-0 pb-0">CONTACT</h6>
@@ -30,9 +30,9 @@ if(!isset($footer_false)){
 
                 <h6 class="text-warning mt-4 mb-0 pt-0 pb-0">INFO</h6>
                 <div class="pull-right">
-                    <a href="#" class="text-light"><img src="/oPage/images/imgicons/facebook_gray.png" height="20" class="imgicon" /></a>
+                    <a href="https://www.facebook.com/gsjsoop/" target="_blank" class="text-light"><img src="/oPage/images/imgicons/facebook_gray.png" height="20" class="imgicon" /></a>
                     <span class="xxs_content px-3 text-light weight_lighter" style="vertical-align: 6px;">|</span>
-                    <a href="#" class="text-light"><img src="/oPage/images/imgicons/blog_gray.png" height="20" class="imgicon" /></a>
+                    <a href="http://blog.naver.com/gsjsoop" target="_blank" class="text-light"><img src="/oPage/images/imgicons/blog_gray.png" height="20" class="imgicon" /></a>
                 </div>
                 <nav class="navbar navbar-expand-lg navbar-light m-0 p-0">
                 <ul class="navbar-nav">

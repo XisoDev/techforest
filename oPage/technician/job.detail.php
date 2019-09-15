@@ -79,18 +79,13 @@ $h_idx = $output->get('h_idx');
     						<?
     							if($m_idx > 0) {
     								if(!$interest) {?>
-    									<a class="inline_block" id="click_interest2"><img class="rectangle_60" src="/oPage/images/imgicons/icon_001.png" alt="빈하트"><input type="hidden" value="<?=$hire_info[0]["h_idx"]?>"></a>
+    									<img style="cursor:pointer;" class="rectangle_60" src="/oPage/images/imgicons/icon_001.png" alt="빈하트" onclick="interest_add(<?=$hire_info[0]['h_idx']?>)">
     								<?} else {?>
-    									<a class="inline_block" id="click_interest1"><img class="rectangle_60" src="/oPage/images/imgicons/icon_002.png" alt="찬하트"><input type="hidden" value="<?=$hire_info[0]["h_idx"]?>"></a>
+    									<img style="cursor:pointer;" class="rectangle_60" src="/oPage/images/imgicons/icon_002.png" alt="찬하트" onclick="interest_remove(<?=$hire_info[0]['h_idx']?>)">
     								<?}?>
     							<?} else {?>
-    								<?if($hire_info[0]["interest_count"] > 0) {?>
-    									<a class="color_point2" href="#" type=\"button" role="button" data-toggle="modal" data-target="#modal_login" rel="nofollow"><img  class="rectangle_60" src="./images/icon_002.png" alt="관심" /></a>
-    								<?} else {?>
-    									<a class="color_point2" href="#" type=\"button" role="button" data-toggle="modal" data-target="#modal_login" rel="nofollow"><img  class="rectangle_60" src="./images/icon_001.png" alt="관심" /></a>
-    								<?}?>
-    							<?}?>
 
+    							<?}?>
 
     						<img style="cursor:pointer; margin-right:5px;" onclick="javascript:click_share();" class="rectangle_60" src="/oPage/images/imgicons/icon_005.png" alt="공유" />
     						<!-- 상세공고 다음/이전 작업 -->
@@ -270,7 +265,7 @@ $h_idx = $output->get('h_idx');
 
   				<div class="padding_15 border1_xs_null font_size_20 margin_top_20 align_left">
             <?if($logged_info['is_commerce'] == 'Y') {?>
-              광고배너들어감
+              <!-- 광고배너들어감 -->
   					<?} else {
     						if($m_idx > 0) {
     							if(!$interest) {?>

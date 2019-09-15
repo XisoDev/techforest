@@ -102,7 +102,9 @@
             <h4 class="mb-2">입사지원현황</h4>
         </div>
     <div class="row px-2">
-    <?php for($i=0; $i<2; $i++) { ?>
+    <?if(count($application_letter) > 0){?>
+      <? $count_application_letter = (count($application_letter) > 2) ? 2 : count($application_letter); ?>
+        <?php for($i=0; $i<$count_application_letter; $i++) { ?>
         <div class="col-12 col-md-6 px-md-4">
         <div class="magazine tech_card mb-3 bg-white text-left shadow">
             <div class="row px-0 mx-0">
@@ -160,16 +162,19 @@
         </div>
         </div>
     <?php } ?>
+    <?php }else{ ?>
+      <p>입사지원현황이 없습니다.</p>
+    <?php } ?>
     </div>
     </div>
 </div>
 <div class="container pb-md-5">
     <div class="d-block d-lg-none pt-4 pb-2">
-        <a href="<?=getUrl('technician','findJobList')?>" class="pull-right btn py-2 px-3 btn-primary btn-xxs btn-round">더보기 +</a>
+        <a href="<?=getUrl('technician','interest_list')?>" class="pull-right btn py-2 px-3 btn-primary btn-xxs btn-round">더보기 +</a>
         <h6>관심공고</h6>
     </div>
     <div class="d-none d-lg-block pt-4 pb-2">
-        <a href="<?=getUrl('technician','findJobList')?>" class="pull-right btn mt-2 py-2 px-3 btn-primary btn-xs btn-round">더보기 +</a>
+        <a href="<?=getUrl('technician','interest_list')?>" class="pull-right btn mt-2 py-2 px-3 btn-primary btn-xs btn-round">더보기 +</a>
         <h4 class="mb-2">관심공고</h4>
     </div>
 
@@ -201,7 +206,7 @@
                 <? if ($val['city_name'] == "전체") { $val['city_name'] = "";} ?>
                 <? if ($val['district_name'] == "전체") { $val['district_name'] = ""; }?>
                 <? if ($val['salary_idx'] < 3) { $hire_salary_text = "만원"; } else { $hire_salary_text = "원"; } ?>
-                <div class="content_padding text-left pb-1">
+                <div class="text-left pb-1 p-2">
                     <h6 class="cut1"><?=$val['c_name']?></h6>
                     <h6 class="red cut1"><?=$val['h_title']?></h6>
                     <p class="weight_lighter xxs_content mx-0 px-0">
@@ -255,7 +260,7 @@
                 <span class="red">─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─</span>
                 <h5 class="weight_normal mb-2 mt-4 mb-3 red">☎ <?=$logged_info['m_phone']?></h5>
                 <a class="btn btn-block btn-danger btn-round btn-lg mb-3" id="applicant_ok">네 맞습니다</a>
-                <a class="btn btn-block border-danger btn-round btn-lg mb-3 red" href="#">연락처 수정하기</a>
+                <a class="btn btn-block border-danger btn-round btn-lg mb-3 red" href="<?=getUrl('member','myprofile')?>">연락처 수정하기</a>
             </div>
             <button class="mt-2 btn btn-block btn-light" onclick="jQuery('#check_phonenumber').modal('hide');" style="border-radius:10px;">닫기</button>
         </div>

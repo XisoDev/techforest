@@ -11,10 +11,14 @@ class technicianView{
     function index($args){
         global $set_template_file;
         global $site_info;
+        global $logged_info;
 
         $site_info->layout = "technician";
 
         $output = new Object();
+
+
+
         $output->add('new_hire2',$this->new_hire2());
         $output->add('new_hire3',$this->new_hire3());
 
@@ -26,7 +30,6 @@ class technicianView{
         $output->add('rt_row',$this->recommend_technician_check());
         $output->add('member_notice',$this->member_notice());
         $output->add('news_list',$this->news_list());
-
         $set_template_file = "technician/index.php";
 
         return $output;
@@ -482,6 +485,25 @@ class technicianView{
         $set_template_file = "technician/service.history.php";
 
         $output = new Object();
+        $output->add('member_notice',$this->member_notice());
+        return $output;
+
+    }
+
+    function interest_list($args){
+        setSEO("관심공고","");
+        global $site_info;
+        $site_info->layout = "technician";
+
+        global $add_body_class;
+        $add_body_class[] = "shrink";
+        $add_body_class[] = "no_mobile_header";
+
+        global $set_template_file;
+        $set_template_file = "technician/interest.list.php";
+
+        $output = new Object();
+        $output->add('interest_rows',$this->interest_hire());
         $output->add('member_notice',$this->member_notice());
         return $output;
 

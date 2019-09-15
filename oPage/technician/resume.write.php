@@ -118,7 +118,6 @@ $rand_array = array(
 shuffle($rand_array);
 
 ?>
-
 <style media="screen">
 	.ui-autocomplete {
 	  list-style: none !important;
@@ -126,6 +125,7 @@ shuffle($rand_array);
 	}
 
 </style>
+
 <section class="sub_visual d-none d-lg-block pb-2" style="background-image:url('<?=$no_auto_bg_url?>');">
     <h4 class="red mt-n3"><?=$site_info->title?></h4>
     <p class="weight_normal text-dark pb-0 my-0"><?=$site_info->desc?></p>
@@ -250,11 +250,11 @@ shuffle($rand_array);
                         <div class="input-group-prepend">
                             <span class="input-group-text">-</span>
                         </div>
-                        <input type="text" class="form-control" id="m_phone2" value="<?=$phonenumber[1]?>" placeholder="0000">
+                        <input type="text" class="form-control" id="m_phone2" value="<?=$phonenumber[1]?>" maxlength="4" onkeyup="onlyNumber(this)" placeholder="0000">
                         <div class="input-group-prepend">
                             <span class="input-group-text">-</span>
                         </div>
-                        <input type="text" class="form-control" id="m_phone3" value="<?=$phonenumber[2]?>" placeholder="0000">
+                        <input type="text" class="form-control" id="m_phone3" value="<?=$phonenumber[2]?>" maxlength="4" onkeyup="onlyNumber(this)" placeholder="0000">
                     </div>
                 </div>
 
@@ -421,9 +421,9 @@ shuffle($rand_array);
                 <div class="col-12 mx-0 px-0 mb-2 mt-md-3 ">
 									<div id="my_info3_2">
 										<? if(count($my_info3) == 0){ ?>
-											<div class="added_card border rounded position-relative rounded-0 rounded-top container py-0 pb-1 py-md-3 pt-sm-3 pb-sm-0">
-												<p class="xxs_content px-0 mx-0" id="x_content0" style="text-align:right;display:none;"><span class="red"><i class="xi-error"></i>입력 할 내용이 없다면? X 클릭</span></p>
-												<a class="position-absolute" style="right:10px; top:10px;" id="language_del0" onclick="javascript:my_info6_del1(0)"><i class="xi-close"></i></a>
+											<div class="added_card border rounded position-relative rounded-0 rounded-top container py-0 pb-1 py-md-3 pt-sm-3 pb-sm-0" id="school_div0">
+												<p class="xxs_content px-0 mx-0 pt-3" id="x_content0" style="text-align:right;display:none;"><span class="red"><i class="xi-error"></i>입력 할 내용이 없다면? X 클릭</span></p>
+												<a class="position-absolute" style="right:10px; top:10px;" id="language_del0" onclick="javascript:my_info3_del1(0)"><i class="xi-close"></i></a>
 												<div class="row pb-2 px-2">
 													<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학교구분</h6>
 													<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
@@ -463,7 +463,7 @@ shuffle($rand_array);
 													</div>
 													<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0" id="school_grade_title0" style="display:none">학점</h6>
 													<div class="input-group col-6 col-sm-3 mx-0 px-0 mb-2 mt-sm-3" id="grade0" style="display:none;">
-														<input type="text" class="form-control text-center" id="school_grade0" placeholder="학점"/>
+														<input type="text" class="form-control text-center" id="school_grade0" onkeyup="onlyNumber(this)" placeholder="학점"/>
 														<div class="input-group-prepend">
 															<span class="input-group-text">/</span>
 														</div>
@@ -476,6 +476,7 @@ shuffle($rand_array);
 
 													<!--수정된 엘리먼트로 변경-->
 												<div class="added_card border rounded position-relative rounded-0 rounded-top container py-0 pb-1 py-md-3 pt-sm-3 pb-sm-0" id="school_div<?=$idx?>">
+													<p class="xxs_content px-0 mx-0 pt-3" id="x_content<?=$idx?>" style="text-align:right;display:none;"><span class="red"><i class="xi-error"></i>입력 할 내용이 없다면? X 클릭</span></p>
 													<a class="position-absolute" style="right:10px; top:10px;" id="school_del<?=$idx?>" onclick="my_info3_del1(<?=$idx?>)"><i class="xi-close"></i></a>
 													<div class="row pb-2 px-2">
 													<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학교구분</h6>
@@ -544,7 +545,7 @@ shuffle($rand_array);
 														<div class="input-group-prepend">
 															<span class="input-group-text">/</span>
 														</div>
-															<input type="text" class="form-control text-center" id="max_grade<?=$idx?>" value="<?=$val['max_grade']?>" placeholder="최대학점"/>
+															<input type="text" class="form-control text-center" id="max_grade<?=$idx?>"  value="<?=$val['max_grade']?>" placeholder="최대학점"/>
 													</div>
 												</div>
 											</div>
@@ -820,7 +821,43 @@ shuffle($rand_array);
 
 <script type="text/javascript">
 
+	$(document).on("ready",".monthpicker",function(){
+
+		    var startDate = new Date();
+		    var FromEndDate = new Date();
+
+		    $('.monthpicker').datepicker({
+		      autoclose: true,
+		      minViewMode: 1,
+		      format: 'yyyy-mm',
+		      language: "kr"
+		    });
+
+		    $('.monthpicker_from').datepicker({
+		      autoclose: true,
+		      minViewMode: 1,
+		      format: 'yyyy-mm',
+		      language: "kr"
+		    }).on('changeDate', function(selected){
+		        startDate = new Date(selected.date.valueOf());
+		        startDate.setDate(startDate.getDate(new Date(selected.date.valueOf())));
+		        $('.monthpicker_to').datepicker('setStartDate', startDate);
+		    });
+
+		    $('.monthpicker_to').datepicker({
+		      autoclose: true,
+		      minViewMode: 1,
+		      format: 'yyyy-mm',
+		      language: "kr"
+		    }).on('changeDate', function(selected){
+		        FromEndDate = new Date(selected.date.valueOf());
+		        FromEndDate.setDate(FromEndDate.getDate(new Date(selected.date.valueOf())));
+		        $('.monthpicker_from').datepicker('setEndDate', FromEndDate);
+		    });
+	})
 	$(document).ready(function(){
+
+
 		$("#job_salary").change();
 		$("#occupation_select").change();
 		loadDuty();
@@ -848,6 +885,7 @@ shuffle($rand_array);
 
 		$("#postiframe").on('load',function () {
 				alert("파일이 업로드 되었습니다.");
+				$('#fileUpload').modal('hide');
 		});
 
 		return false;
@@ -946,11 +984,10 @@ function occupation(obj){
   }
 
 
-  var my_info3_count = "<?if($my_info3){if(count($my_info3) == 0) {echo "1"; } else {echo count($my_info3); }} else { echo "0"; } ?>";
+  var my_info3_count = "<?if($my_info3){if(count($my_info3) == 0) {echo "1"; } else {echo count($my_info3); }} else { echo "1"; } ?>";
   var my_info5_count = "<?if($my_info5){if(count($my_info5) == 0) { echo "1"; } else { echo count($my_info5); }} else { echo "1"; } ?>";
   var my_info6_count = "<?if($my_info6){if(count($my_info6) == 0) { echo "1"; } else { echo count($my_info6); }} else { echo "1"; } ?>";
 
-console.log(my_info3_count);
 	//학력추가하기
   function my_info3_add() {
     var html = "";
@@ -969,10 +1006,10 @@ console.log(my_info3_count);
 			html += '<div class="row pb-2 px-2">';
 			html += '<h6 class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">학교구분</h6>';
 			html += '<div class="input-group col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">';
-			html += '<select class="form-control" id="s_idx'+ my_info3_count + '"name="s_idx'+ my_info3_count + '"onchange="school_changed(' +my_info3_count+ ')">';
+			html += '<select class="form-control" id="s_idx'+ my_info3_count + '"name="s_idx'+ my_info3_count + '"onchange="school_changed('+my_info3_count+')">';
 			html += '<?= $school_select_tag ?>';
 			html += '</select>';
-			html += '<div class="input-group-append">';
+			html += '<div class="input-group-append" id="ged'+my_info3_count+'">';
 			html += '<span class="input-group-text sm_content pr-2 pl-3">검정고시 <i class="xi-check-circle-o" id="ged'+ my_info3_count +'" onclick="ged_button('+my_info3_count+')"></i></span>';
 			html += '<div class="input-group-append"><span class="input-group-text">&nbsp;</span></div>';
 			html += '</div></div>';
@@ -1044,7 +1081,7 @@ console.log(my_info3_count);
 			document.getElementById("school_name" + (i + 1)).id = "school_name" + i;
 			document.getElementById("school_graduated" + (i + 1)).id = "school_graduated" + i;
 			$("#school_graduated" + i).removeAttr("onclick");
-			$("#school_graduated" + i).addClass("monthpicker");
+			$("#school_graduated" + i).removeClass("monthpicker");
 
 			document.getElementById("school_major" + (i + 1)).id = "school_major" + i;
 			document.getElementById("school_grade" + (i + 1)).id = "school_grade" + i;
@@ -1628,7 +1665,7 @@ function my_info6_del1(idx) {
 
 			exec_json("technician.my_info_detail_edit",params,function(ret_obj){
 				toastr.success(ret_obj.message);
-				location.reload();
+				location.href="<?=getUrl('technician','resume')?>"
 			});
 		}
 
