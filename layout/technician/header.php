@@ -1,5 +1,13 @@
 <style media="screen">
-
+  .no_notice{
+    text-align: center;
+    margin-top: 65px;
+    padding: 0;
+  }
+  .bell{
+    width: 40px;
+    margin-bottom: 30px;
+  }
 </style>
 <header id="header_pc" class="d-none d-lg-block">
     <div class="container py-0 my-0">
@@ -17,6 +25,12 @@
                 ?>
                 <li class="nav-item xs_content active weight_normal"><a id="open_notice" class="nav-link" style="cursor:pointer"><i class="xi-bell"></i></a></li>
                 <div class="notice_menu" uib-dropdown-menu="" aria-labelledby="simple-dropdown">
+                  <?php if(!$output->get("member_notice")){?>
+                    <ul class="no_notice">
+                      <img src="/oPage/images/notification.png" class="bell" alt="">
+                      <p>오늘은 알림이 없어요</p>
+                    </ul>
+                  <?}else{?>
                   <?php foreach($output->get("member_notice") as $val){
                     $reg_time = $val['reg_date'];
 
@@ -40,26 +54,30 @@
                   <ul class="notification-list" ng-if="feeds" onclick="See_more(<?=$val['mn_idx'].",".$val['n_idx'].",".$val['num']?>)">
                     <li ng-repeat="feed in feeds" ng-class="{'unread' : feed.status != 'R'}" class="ng-scope unread">
                       <div class="n_status">
-                        <div class="n_img">
-                          <img src="/oPage/images/imgicons/bell.png">
+                        <div class="n_img" style="background:#00000000">
+                          <img src="/oPage/images/notification.png">
                         </div>
-                        <em><?=$val['notice_type']?></em>
                       </div>
                       <div class="n_text">
-                        <p class="ng-binding"><b><?=$val['m_name']?> 님</b>
-                          <?if($val['n_idx']==6){ ?><span style="color:black"><?=$val['m_name']?>님을 위한</span> 맞춤 <?}?>
-                            <b><?=$val['notice_type']?></b>
+                        <p class="ng-binding">
+                          <span class="red">[<?=$val['notice_type']?>]</span>
+
                           <?if($val['n_idx']==5){?>
-                            </span>이 완료되었습니다.
-                          <?}else if($val['n_idx']==6){?>
-                            !</span>
+                            <?=$val['m_name']?>님의 </span>이 완료되었습니다.
+                          <?}else if($val['n_idx']==6){ ?><span style="color:black"><?=$val['m_name']?>님을 위한</span> 맞춤 일자리 추천!
                           <? } ?>
+
                         </p>
                         <span class="n_rdate"><?=$reg_hour?></span>
                       </div>
                   </li>
                 </ul>
-                <? } ?>
+              <? } } ?>
+
+                <ul class="notification-list">
+                  <span class="btn-round btn btn-warning btn-xxs mb-2">주의사항</span>
+                  <p class="xs_content content_padding py-0">알림메세지는 7일동안 보관되며 확인 여부와 상관없이 리스트에서 자동으로 삭제됩니다.</p>
+                </ul>
               </div>
             </ul>
         </nav>

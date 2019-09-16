@@ -391,8 +391,9 @@ body.shrink #header_mobile nav.navbar,
 .notice_menu{
   overflow-y: scroll;
   max-height: 450px;
-  background: #f4f4f5;
-  padding: 20px;
+  background: #FFF;
+  padding: 5px;
+  border: 10px solid #f4f4f5;
   width: 380px;
   font-size: 15px;
   font-family: 'Noto Sans KR', sans-serif;

@@ -197,7 +197,7 @@ $(document).ready(function(){
   <div class="carousel-inner slick_wrap affix_middle">
       <?php for($i=1; $i<=5; $i++){ ?>
           <div class="carousel-item bg-primary<?php print ($i==1) ? " active" : ""?> text-center">
-              <img src="/layout/none/assets/images/no_banner.png" alt="banner1" width="100%" style="width:auto; max-height:120px;">
+              <img src="/layout/none/assets/images/banner_test1.png" alt="banner1" width="100%" style="width:auto; max-height:120px;">
           </div>
       <?php } ?>
   </div>

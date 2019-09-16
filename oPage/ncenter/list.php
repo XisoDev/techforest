@@ -1,3 +1,13 @@
+<style media="screen">
+  .no_notice{
+    text-align: center;
+    margin-top: 65px;
+  }
+  .bell{
+    width: 50px;
+    margin-bottom: 30px;
+  }
+</style>
 <div class="container">
     <div class="p-3 px-0">
         <a href="#" onclick="history.back();" class="mb-3"><img src="/oPage/images/imgicons/arrow_left.png" height="25" /></a>
@@ -5,6 +15,12 @@
         <h4 class="weight_bold">알림센터</h4>
     </div>
     <div class="col-12 mt-2">
+      <?php if(!$output->get("member_notice")){?>
+        <div class="no_notice">
+          <img src="/oPage/images/notification.png" class="bell" alt="">
+          <p>오늘은 알림이 없어요</p>
+        </div>
+      <?}else{?>
       <?php foreach($output->get("member_notice") as $val){
         if(($val['agree']=='Y'||!$val['agree']) && $val['read']==0){
 
@@ -65,7 +81,7 @@
                   <a onclick="See_more(<?=$val['mn_idx'].",".$val['n_idx'].",".$val['num']?>)" class="mt-2 btn btn-block btn-light rounded-xl shadow-sm">자세히 보기</a>
               </div>
           </div>
-        <?php } } ?>
+        <?php } } } ?>
     </div>
 </div>
 
