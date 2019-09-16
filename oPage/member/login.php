@@ -4,13 +4,16 @@
     background-color: #FFF;
     outline:0;
   }
+  #naver_log{
+    cursor: pointer;
+  }
 </style>
 <div class="container pt-lg-5">
     <div class="bigger_logo d-lg-none">
     <div class="row">
         <div class="col-3"></div>
         <div class="col-6">
-            <img class="align-self-center mr-3" src="/oPage/images/logo_blue.png" alt="기술자 숲">
+            <img class="align-self-center mr-3" src="/oPage/images/logo_black.png" alt="기술자 숲">
         </div>
         <div class="col-3"></div>
     </div>
@@ -78,26 +81,19 @@
     </div>
 
     <h6 class="text-center weight_bold xxs_content pb-3">SNS 간편 로그인</h6>
-    <div class="row">
+    <!-- <div class="row"> -->
     <div class="W50_Mauto pb-5">
         <!-- <div class="col-1">
         </div> -->
-        <div class="text-center">
-          <span id="facebook_icon" class="col-5">
+        <!-- <div class="col-5 text-center">
             <img src="/oPage/member/assets/images/facebook_icon.png" height="40" />
-          </span>
-          <span id="naver_icon" class="col-5">
-            <img src="/oPage/member/assets/images/naver_icon.png" height="40"/>
-          </span>
-        </div>
+            <span class="btn btn-light xxs_content btn-block py-1 px-2 btn-round border">페이스북 로그인</span>
+        </div> -->
         <div class="text-center">
-            <div class="row pt-2" id="naver_login_btn" style="display:none;">
-              <span id="modal_naver_ok1" class="btn btn-light xxs_content btn-block py-1 px-2 border" style="background-color:#fff;">네이버로 개인 로그인</span>
-              <span id="modal_naver_ok2" class="btn btn-light xxs_content btn-block py-1 px-2 border" style="background-color:#fff;">네이버로 기업 로그인</span>
-            </div>
-            <div class="row pt-2" id="facebook_login_btn" style="display:none;">
-              <span id="modal_facebook_ok1" class="btn btn-light xxs_content btn-block py-1 px-2 border" style="background-color:#fff;">페이스북으로 개인 로그인</span>
-              <span id="modal_facebook_ok2" class="btn btn-light xxs_content btn-block py-1 px-2 border" style="background-color:#fff;">페이스북으로 기업 로그인</span>
+            <img id="naver_log" src="/oPage/member/assets/images/naver_icon.png" height="40"  />
+            <div class="row naver_row" style="display:none;">
+              <span id="modal_naver_ok1" class="btn btn-light xxs_content btn-block py-1 px-2 border" style="margin: 10px 0; background: #00000000;color:#595959;">네이버 개인 로그인</span>
+              <span id="modal_naver_ok2" class="btn btn-light xxs_content btn-block py-1 px-2 border" style="background: #00000000; color:#595959;">네이버 기업 로그인</span>
             </div>
         </div>
     </div>
@@ -269,12 +265,19 @@
 
 
 <script type="text/javascript">
-  function click_phone_id(phone) {
-    $("#searchid_phone1").val(phone);
+  $("#naver_log").click(function(){
+    if($('.naver_row').css('display')=='none'){
+      $('.naver_row').css('display','block');
+    }else{
+      $('.naver_row').css('display','none');
+    }
+  });
+  function click_phone_id(콜) {
+    $("#searchid_phone1").val(콜);
   }
 
-  function click_phone_pw(phone) {
-    $("#searchpw_phone1").val(phone);
+  function click_phone_pw(콜) {
+    $("#searchpw_phone1").val(콜);
   }
 
   function search_id(){
@@ -411,16 +414,6 @@
     });
   }
 
-
-  $("#naver_icon").click(function(e) {
-    $('#naver_login_btn').css('display','block');
-    $('#facebook_login_btn').css('display','none');
-  });
-
-  $("#facebook_icon").click(function(e) {
-    $('#naver_login_btn').css('display','none');
-    $('#facebook_login_btn').css('display','block');
-  });
 
   // 네이버 - 개인회원가입
 	$("#modal_naver_ok1").click(function(e) {
