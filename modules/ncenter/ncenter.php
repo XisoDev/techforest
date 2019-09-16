@@ -29,10 +29,12 @@ class ncenterView
 
       $m_idx = $_SESSION['LOGGED_INFO'];
 
-      $columns = "h_title, mn_idx, mn.m_idx, mn.n_idx, mn.num, n.notice_type, n.division, n.used, ns.agree, mn.reg_date, m_name, mn.read";
+      $columns = "DISTINCT h_title, mn_idx, mn.m_idx, mn.n_idx, mn.num, n.notice_type, n.division, n.used, ns.agree, mn.reg_date, m_name, mn.read";
 
       $oDB->where("mn.m_idx",$m_idx);
+      $oDB->where("ns.m_idx",$m_idx);
       $oDB->where("mn.read",0);
+      $oDB->where("ns.agree",'Y');
       $oDB->where("mn.reg_date",$date,">=");
 
       $oDB->join("TF_notice AS n", "n.n_idx = mn.n_idx", "LEFT");
