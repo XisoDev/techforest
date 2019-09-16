@@ -36,7 +36,7 @@
     <h1 class="pb-4">기술자숲</h1>
 </div>
 <div class="row mx-auto" style="max-width:900px">
-<div class="container-fluid welcome_seciton bg-primary col-sm-6" style="background-image:url('/oPage/images/home_welcome.png');">
+<div id="get_company" class="container-fluid welcome_seciton bg-primary col-sm-6" style="background-image:url('/oPage/images/home_welcome.png');">
     <img src="/oPage/images/gear.png" class="rotating d-sm-none" style="z-index:0; position:absolute; width:30%; right:-5%; top:-5%;"  />
     <img src="/oPage/images/gear.png" class="rotating_slow d-sm-none" style="z-index:0; position:absolute; left:-35%; width:60%; top:3%;" />
     <div class="container">
@@ -49,7 +49,7 @@
         </div>
     </div>
 </div>
-<div class="container-fluid welcome_seciton technician bg-warning col-sm-6" style="background-image:url('/oPage/images/technician_welcome.png');">
+<div id="get_technician" class="container-fluid welcome_seciton technician bg-warning col-sm-6" style="background-image:url('/oPage/images/technician_welcome.png');">
     <img src="/oPage/images/gear.png" class="rotating d-sm-none" style="z-index:0; position:absolute; width:30%; right:-5%; top:-5%;"  />
     <img src="/oPage/images/gear.png" class="rotating_slow d-sm-none" style="z-index:0; position:absolute; left:-35%; width:60%; top:3%;" />
     <div class="container">
@@ -63,6 +63,15 @@
     </div>
 </div>
 </div>
+
+<script type="text/javascript">
+    $('#get_company').click(function(){
+      location.href = '<?=getUrl('company')?>';
+    });
+    $('#get_technician').click(function(){
+      location.href = '<?=getUrl('technician')?>';
+    });
+</script>
 <?php
 
 /* ajax 예제
