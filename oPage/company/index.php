@@ -3,6 +3,8 @@
 $news_list = $output->get('news_list');
 //공고등록여부확인
 $hire_check = $output->get('hire_check');
+//총공고개수
+$all_hire_row = $output->get('all_hire_row');
 
 ?>
 <script type="text/javascript">
@@ -237,13 +239,13 @@ $(document).ready(function(){
             <?php } else { ?>
                 <div class="d-none d-lg-block text-center pt-5 pb-3">
                     <div class="text-center xs_content">
-                        <i class="text-warning">◆</i>
-                        <i class="text-primary">◆</i>
-                        <i class="text-warning">◆</i>
+                        <i class="text-warning">●</i>
+                        <i class="text-primary">●</i>
+                        <i class="text-warning">●</i>
                     </div>
-                    <h3 class="weight_bold mt-3">NEW Technician</h3>
+                    <h3 class="weight_bold mt-3">새로운 기술자가 등록됐어요!</h3>
                     <h6 class="weight_lighter mt-1 mb-2">
-                        새로운 기술자가 등록됐어요!</h6>
+                        공고등록하고 맞춤기술자를 추천받아보세요.</h6>
                 </div>
             <?php } ?>
         </div>
@@ -344,7 +346,7 @@ $(document).ready(function(){
     <div class="container py-5 text-left">
         <h5>국내1위 기술인력 전문 구인구직 매칭서비스</h5>
         <h4>지금까지 <span class="text-warning">기술자숲</span>을 통해</h4>
-        <h3>전달된 일자리 <span class="weight_bold" style="font-size:40px;">총 <b class="russo_one text-warning">27,567</b>개</span></h3>
+        <h3>전달된 일자리 <span class="weight_bold" style="font-size:40px;">총 <b class="russo_one text-warning"><?=number_format($all_hire_row[0]['count_hire'])?></b>개</span></h3>
     </div>
 </div>
 

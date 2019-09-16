@@ -162,7 +162,7 @@ $member_count = $output->get('member_count');
   				<? if($logged_info['is_commerce'] == 'Y') {
   						if($hire_info[0]["m_idx"] == $m_idx) {?>
   							<div class="d-md-none padding_5 border1_not_top_xs_null font_size_20 align_center padding_top_30 padding_bottom_30">
-                  <span>총<strong>(<?=$hire_info[0]["letter_count"]?>)명</strong>의 지원자가 있습니다.</span>
+                  <span>총<strong><?=$hire_info[0]["letter_count"]?>명</strong>의 지원자가 있습니다.</span>
                   <a href="<?=getUrl('company','job',$hire_info[0]['h_idx']);?>">
                     <button class="width_60 btn button1 margin_auto block" style="font-size: 19px;" >
                       <strong>지원자보기</strong>
@@ -239,7 +239,7 @@ $member_count = $output->get('member_count');
 
   				<div class="padding_15 border1_xs_null font_size_20 margin_top_20 align_left">
             <?if($logged_info['is_commerce'] == 'Y') {?>
-              광고배너들어감
+              <!-- 광고배너들어감 -->
   					<?} else {?>
               <?
     						if($hire_info[0]["homepage"]) {
