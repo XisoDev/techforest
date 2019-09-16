@@ -1,4 +1,4 @@
-<?if($isMobile == 1){?>
+
 
 <link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet" />
 <style>
@@ -32,9 +32,3 @@
         },5000);
     });
 </script>
-
-<?}else{?>
-  <script type="text/javascript">
-    document.location.href="<?=getUrl('page','selectType')?>";
-  </script>
-<?}?>

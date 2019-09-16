@@ -11,12 +11,15 @@
 </section>
 <div class="container pt-3 pt-lg-5">
     <div class="py-lg-5 pt-lg-3 position-relative">
-        <h4 class="d-none d-lg-block mb-4"><img src="/oPage/images/imgicons/bulb_yellow.png" height="30" class="imgicon" /> 사용가능한 쿠폰 <span class="red">3개</span></h4>
-        <h6 class="d-block d-lg-none weight_normal">사용가능한 쿠폰 <span class="red">3개</span></h6>
+        <h4 class="d-none d-lg-block mb-4"><img src="/oPage/images/imgicons/bulb_yellow.png" height="30" class="imgicon" /> 사용가능한 쿠폰 <span class="red">0개</span></h4>
+        <h6 class="d-block d-lg-none weight_normal">사용가능한 쿠폰 <span class="red">0개</span></h6>
         <div class="row">
         <div class="col-lg-10 mx-lg-auto">
         <div class="row">
-            <?php
+          <div class="col-12 py-5 shadow rounded-2" style="text-align:center;color:#aaa;">
+            사용가능한 쿠폰이 아직없어요!
+          </div>
+            <!-- <?php
             for($i=1; $i <= 3; $i++){
                 ?>
                 <div class=" col-12 col-md-6 col-lg-4">
@@ -45,7 +48,7 @@
                 </div>
                 <?php
             }
-            ?>
+            ?> -->
         </div>
         </div>
         </div>
@@ -72,9 +75,13 @@
                 <tr><th>이용상품</th><th>잔여횟수</th><th>이용기한</th></tr>
                 </thead>
                 <tbody>
-                <?php foreach($voucher_list as $val){ ?>
-                <tr><td><?=$val['pay_service']?></td><td>-</td><td><?=date("Y-m-d", strtotime($val["reg_date"]))?> ~ <?=date("Y-m-d", strtotime($val["expire_date"]))?></td></tr>
-                <?php } ?>
+                <?php if(count($voucher_list) > 0){ ?>
+                  <?php foreach($voucher_list as $val){ ?>
+                    <tr><td><?=$val['pay_service']?></td><td>-</td><td><?=date("Y-m-d", strtotime($val["reg_date"]))?> ~ <?=date("Y-m-d", strtotime($val["expire_date"]))?></td></tr>
+                  <?php } ?>
+                <?php } else{?>
+                  <tr><td>이용중인 서비스가 없어요.</td></tr>
+                <?php }?>
                 </tbody>
             </table>
         </div>
