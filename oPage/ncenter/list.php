@@ -35,7 +35,7 @@
               <div class="p-3">
                 <div>
                     <?if($day > 0){
-                      echo "<span class=\"xxs_content weight_bold\">".$day."일전</span>";
+                      echo "<span class=\"btn btn-danger btn-xxs btn-round\">".$day."일전</span>";
                       }else{
                       echo "<span class=\"btn btn-danger btn-xxs btn-round\">오늘</span>";
                       }
