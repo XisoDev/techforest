@@ -107,12 +107,6 @@
                   </div>
               </div>
           </div>
-
-
-
-
-
-
       <?php } ?>
       <!-- <div class="tech_card bg-white overflow-hidden mx-md-3 mb-md-3 shadow py-5">
         <img src="/oPage/company/images/job_img.png" alt="돋보기이미지" class="mx-auto" width="50">
@@ -130,6 +124,7 @@
         <h4 class="py-2">면접자 현황</h4>
     </div>
     <div class="tech-card-slick slick-white-dots d-md-none" style="z-index:2;">
+      <?if(count($interview_list) > 0){?>
         <?php foreach($interview_list as $val){?>
             <div class="tech_card bg-white overflow-hidden">
                 <h6 class="text-center color_primary pt-2 pb-0 my-0 mt-2"><?=$val['h_title']?></h6>
@@ -178,6 +173,18 @@
                 </div>
             </div>
         <?php } ?>
+      <?}else{?>
+        <div class="tech_card bg-white overflow-hidden">
+            <h6 class="text-center color_primary pt-2 pb-0 my-0 mt-2"></h6>
+
+            <div class="px-3 py-5">
+              <div class="text-center">
+                <h6>면접자가 없습니다.</h6>
+                <h6>면접제안을 해보세요!</h6>
+              </div>
+            </div>
+        </div>
+      <?}?>
     </div>
     <div class="d-none d-md-block pb-5">
         <table class="table table-light table-bordered mt-4  text-center" width="100%">
@@ -185,6 +192,7 @@
             <tr><th>공고제목</th><th>지원자 명</th><th>면접요청발송</th><th>요청일시</th><th>면접일</th></tr>
             </thead>
             <tbody>
+            <?if(count($interview_list) > 0){?>
             <?php foreach($interview_list as $val){?>
             <tr>
                 <td><?=$val['h_title']?></td>
@@ -194,6 +202,11 @@
                 <td><?=($val['way'] == "문자") ? "19.08.01 12:00" : "-"?></td>
             </tr>
             <?php } ?>
+            <?}else{?>
+              <tr>
+                <td colspan="5">면접자가 없습니다.</td>
+              </tr>
+            <?}?>
             </tbody>
         </table>
         <!-- <a class="btn pull-right btn-primary text-white"><i class="xi-file-download"></i> 엑셀 다운로드</a> -->

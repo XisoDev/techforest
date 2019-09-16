@@ -260,6 +260,7 @@ class companyView{
           $oDB->where("al.isVisible","Y");
           $oDB->where("h.c_idx",$c_idx);
           $oDB->where("al.h_idx",$h_idx);
+          $oDB->where("mc.duty_name","","!=");
           $oDB->join("TF_a_line_self ls","ls.m_idx = al.m_idx","LEFT");
           $oDB->join("TF_hire_tb h","al.h_idx = h.h_idx","LEFT");
           $oDB->join("TF_member_tb m","al.m_idx = m.m_idx","LEFT");

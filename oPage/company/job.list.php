@@ -35,7 +35,7 @@ $end_row = $output->get('end_row');
                 </div>
             </div>
             <div class="py-1 px-3 text-left">
-                <h6 class="red mb-0"><?=$row[$i]['h_title']?></h6>
+                <h6 class="red mb-0 cut1"><?=$row[$i]['h_title']?></h6>
                 <p class="weight_lighter xs_content mb-0 mx-0 px-0">
                   <? if ($row[$i]['city_name'] == "전체") { $row[$i]['city_name'] = "";} ?>
                   <? if ($row[$i]['district_name'] == "전체") { $row[$i]['district_name'] = ""; }?>
@@ -127,7 +127,7 @@ $end_row = $output->get('end_row');
                 <div class="overlay"><span class="overlay-content"><?=$end_row[$i]['c_name']?></span></div>
             </div>
             <div class="text-left py-1 px-3">
-              <h6 class="red mb-0"><?=$end_row[$i]['h_title']?></h6>
+              <h6 class="red mb-0 cut1"><?=$end_row[$i]['h_title']?></h6>
               <p class="weight_lighter xs_content mb-0 mx-0 px-0">
                 <? if ($end_row[$i]['city_name'] == "전체") { $end_row[$i]['city_name'] = "";} ?>
                 <? if ($end_row[$i]['district_name'] == "전체") { $end_row[$i]['district_name'] = ""; }?>

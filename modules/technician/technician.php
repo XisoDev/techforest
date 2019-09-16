@@ -607,12 +607,13 @@ class technicianView{
       $m_idx = $_SESSION['LOGGED_INFO'];
 
       //이력서 정보
-      $columns_info = "group_concat(distinct(mc.duty_name) SEPARATOR ' ') as duty_name, group_concat(distinct(md.duty_name)) as hope_duty,";
+      $columns_info = "group_concat(distinct(mc.duty_name)) as duty_name, group_concat(distinct(md.duty_name)) as hope_duty,";
       $columns_info .= "YEAR(CURRENT_TIMESTAMP) - YEAR(m_birthday) - (RIGHT(CURRENT_TIMESTAMP, 5) < RIGHT(m_birthday, 5))+1 as m_birthday,";
       $columns_info .= "local_name, city_name, district_name,m_local_idx, m_city_idx, m_district_idx,m.edit_date";
 
       $oDB->groupBy("m.m_idx");
       $oDB->where("m.m_idx",$m_idx);
+      $oDB->Where("mc.duty_name","","!=");
       $oDB->join("TF_member_career_tb mc", "m.m_idx = mc.m_idx", "LEFT");
       $oDB->join("TF_member_duty md", "m.m_idx = md.m_idx", "LEFT");
       $oDB->join("TF_local_tb l", "m.m_local_idx = l.local_idx", "LEFT");

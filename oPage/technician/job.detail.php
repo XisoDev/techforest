@@ -9,7 +9,6 @@ $h_idx = $output->get('h_idx');
 $N_hire = $output->get('N_hire');
 $B_hire = $output->get('B_hire');
 
-
 ?>
 <link rel="stylesheet" href="/layout/company/assets/default.css">
 <!-- <link rel="stylesheet" href="/layout/none/vendor/bootstrap/css/bootstrap.min.css"> -->
@@ -186,12 +185,12 @@ $B_hire = $output->get('B_hire');
 
   							<?$date_now = date("Y-m-d H:i:s");
   							if($date_now > strtotime($hire_info[0]["job_end_date"]) ){?>
-  								<button class="btn btn-block btn-primary d-md-none" style="font-size: 19px;" onclick="application_ok(<?=$val['h_idx']?>)"><strong>지원하기1</strong></button>
+  								<button class="btn btn-block btn-primary d-md-none" style="font-size: 19px;" onclick="application_ok(<?=$val['h_idx']?>)"><strong>지원하기</strong></button>
   						<?}
   							else if($m_idx > 0) {?>
-  							  <button class="btn btn-block btn-primary d-md-none" style="font-size: 19px;" onclick="application_ok(<?=$val['h_idx']?>)"><strong>지원하기2</strong></button>
+  							  <button class="btn btn-block btn-primary d-md-none" style="font-size: 19px;" onclick="application_ok(<?=$val['h_idx']?>)"><strong>지원하기</strong></button>
   						<?} else {?>
-  								<button class="btn btn-block btn-primary d-md-none" style="font-size: 19px;" onclick="login_please();"><strong>지원하기3</strong></button>
+  								<button class="btn btn-block btn-primary d-md-none" style="font-size: 19px;" onclick="login_please();"><strong>지원하기</strong></button>
   						<?}?>
   						</div>
   					<?}?>

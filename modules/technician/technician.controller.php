@@ -217,24 +217,6 @@ class technicianController{
       $is_newcommer = $career_json[$i]['is_newcommer'];
       $c_content = $career_json[$i]['c_content'];
 
-      if($is_newcommer == 1){
-
-        }else{
-          if(!($c_o_idx > 0)) {
-            return new Object(1,"해당 경력의 직종을 설정해주세요.(" . $i+1 . ")");
-          }
-
-          if($c_o_idx == 1 || $c_o_idx == 9){
-            $c_duty = "";
-          }else if(empty($c_duty) || $c_duty == "null"){
-            return new Object(1,"해당 경력의 직무를 설정해주세요.(" . $i+1 . ")");
-          }
-
-          if(!$c_name || !$c_position || !$c_start_date || !$c_end_date){
-            return new Object(1,"기업명, 직위(직급), 근무기간을 입력하세요.(" . $i+1 . ")");
-          }
-        }
-
         //2. 경력 저장
         $data6_2 = array(
           "m_idx" => $args->m_idx,
