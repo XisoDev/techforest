@@ -36,7 +36,7 @@ class technicianView{
     }
 
     function resume($args){
-        setSEO("이력서 등록","상세한 이력서로 면접기회를 높여보세요!");
+        setSEO("이력서 등록","상세한 이력서로 면접기회를 높여보세요.");
         global $site_info;
         global $add_body_class;
         global $set_template_file;
@@ -359,7 +359,7 @@ class technicianView{
         $local_idx = $args->local_idx;
         $o_idx = $args->o_idx;
         $short_term = $args->short;
-        $duty = $args->duty;
+        $duty = $args->duty_name;
 
         if(!$local_idx) {
         	$local_idx = -1;
@@ -436,7 +436,7 @@ class technicianView{
             setSEO("취업정보","다양한 취업정보를 한눈에 확인하세요.");
             $set_template_file = "technician/magazine.list.php";
 
-            $oDB->orderby("reg_date","ASC");
+            $oDB->orderby("reg_date","DESC");
             $oDB->where("is_show","Y");
             $magazine_list = $oDB->get("TF_magazine_tb",null,"category,title,link,image,reg_date");
 

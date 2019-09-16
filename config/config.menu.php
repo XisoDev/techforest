@@ -228,7 +228,7 @@ if($m_idx > 0){
       "submenu" => array(
           array(
               "title" => "유료서비스 안내",
-              "link" => getUrl('member','login',false,array('cur' => $current_url)),
+              "link" => getUrl('company','service'),
               "active_mid" => "company",
               "active_act" => "service",
               "new_window" => "N",
@@ -306,7 +306,7 @@ if($m_idx > 0){
   );
   $oMenu->technician->list[] = array(
       "title" => "일자리찾기",
-      "link" => getUrl('member','login',false,array('cur' => $current_url)),
+      "link" => getUrl('technician','findJobListAll'),
       "icon" => "xi-zoom-in",
       "active_mid" => "technician",
       "active_act" => "findJob",

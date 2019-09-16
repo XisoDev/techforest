@@ -13,8 +13,8 @@ if(isset($common_back_button)){
             <div class="col-3 pt-5">
                 <!--                logo ?-->
 
-                    <img src="/oPage/images/footer_logo_gray.png" height="60" />
-              
+                    <img src="/oPage/images/footer_logo_gray1.png" height="50" />
+
             </div>
             <div class="col-9 pt-3">
                 <h6 class="text-warning mt-4 mb-0 pt-0 pb-0">CONTACT</h6>

@@ -121,13 +121,17 @@
 </section>
 <div class="container pt-lg-5">
     <div class="d-block d-lg-none pt-4 pb-2">
-        <a href="<?=getUrl('technician','findJobListAll')?>" class="d-lg-none pull-right btn btn-xs border-primary btn-round  py-2 px-3">전체공고</a>
-        <a href="<?=getUrl('technician','findJobList')?>" class="d-lg-none pull-right btn btn-primary btn-xs btn-round py-2 px-3 mr-1">맞춤공고</a>
+        <a href="<?=getUrl('technician','findJobListAll')?>" class="d-lg-none pull-right btn btn-primary btn-xs btn-round py-2 px-3 mr-1">전체공고</a>
+        <?if($m_idx > 0){?>
+        <a href="<?=getUrl('technician','findJobList')?>" class="d-lg-none pull-right btn btn-xs border-primary btn-round  py-2 px-3">맞춤공고</a>
+        <?}?>
         <h6>일자리 정보</h6>
     </div>
     <div class="d-none d-lg-block pt-4 pb-4">
-        <a href="<?=getUrl('technician','findJobList')?>" class="pull-right btn btn-sm btn-round btn-primary py-1 px-3">맞춤공고</a>
-        <a href="<?=getUrl('technician','findJobListAll')?>" class=" pull-right btn btn-sm border-primary btn-round py-1 px-3 mr-1">전체공고</a>
+        <?if($m_idx > 0){?>
+        <a href="<?=getUrl('technician','findJobList')?>" class="pull-right btn btn-sm border-primary btn-round py-1 px-3 mr-1">맞춤공고</a>
+        <?}?>
+        <a href="<?=getUrl('technician','findJobListAll')?>" class="pull-right btn btn-sm btn-round btn-primary py-1 px-3">전체공고</a>
         <h4 class="mb-2">일자리 정보</h4>
         <!-- <div class="row">
             <div class="col-3">
@@ -213,6 +217,7 @@
     </div>
     <div class="row">
       <input type="hidden" id="hidden_m_idx" value="<?=$m_idx?>">
+      <?if($total_record > 0){?>
         <?php for($i = $start; $i < $start + $scale && $i < $total_record; $i++) { ?>
           <input type="hidden" id="hidden_h_idx" value="<?=$hire_rows[$i]['h_idx']?>">
             <div class="col-12 col-md-4 px-md-2 pb-md-4">
@@ -221,16 +226,18 @@
                         <div class="col-5 col-md-12 px-0" style="background-color:#EEE;">
                             <div class="thumbnail mx-0 px-0" style="height:100%; background-image:url('http://www.planttech.co.kr/wp-content/uploads/2018/07/%EC%82%BC%EC%84%B1%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%811-820x457.png')">
                                 <span class="overlay">
-                                <?
-                                  foreach ($interest_rows as $val2) {
-                                    if($val2['h_idx'] == $hire_rows[$i]['h_idx']){
-                                      $interest_html2 = '<a class="btn-xxs btn btn-round border-white text-white py-1 px-2 position-absolute mr-lg-3" onclick="interest_remove('. $hire_rows[$i]['h_idx'] .')" style="right:10px; top:10px;">관심공고<i class="xi-heart red" id="yes_interest"></i></a>';
-                                      break;
-                                    }else{
-                                      $interest_html2 = '<a class="btn-xxs btn btn-round border-white text-white py-1 px-2 position-absolute mr-lg-3" onclick="interest_add('. $hire_rows[$i]['h_idx'] .')" style="right:10px; top:10px;">관심공고<i class="xi-heart" id="no_interest"></i></a>';
+                                 <?if($m_idx > 0){
+                                    foreach ($interest_rows as $val2) {
+                                      if($val2['h_idx'] == $hire_rows[$i]['h_idx']){
+                                        $interest_html2 = '<a class="btn-xxs btn btn-round border-white text-white py-1 px-2 position-absolute mr-lg-3" onclick="interest_remove('. $hire_rows[$i]['h_idx'] .')" style="right:10px; top:10px;">관심공고<i class="xi-heart red" id="yes_interest"></i></a>';
+                                        break;
+                                      }else{
+                                        $interest_html2 = '<a class="btn-xxs btn btn-round border-white text-white py-1 px-2 position-absolute mr-lg-3" onclick="interest_add('. $hire_rows[$i]['h_idx'] .')" style="right:10px; top:10px;">관심공고<i class="xi-heart" id="no_interest"></i></a>';
+                                      }
                                     }
-                                  }
-                                ?>
+                                  }else{
+                                    $interest_html2 = '<a class="btn-xxs btn btn-round border-white text-white py-1 px-2 position-absolute mr-lg-3" onclick="login_please();" style="right:10px; top:10px;">관심공고<i class="xi-heart"></i></a>';
+                                  }?>
                                 <?= $interest_html2 ?>
                                 </span>
                             </div>
@@ -265,10 +272,18 @@
 
                             <div class="row m-0 p-0 pt-0 mt-0">
                                 <div class="col-6 mx-0 px-0">
+                                  <?if($m_idx > 0){?>
                                     <a href="<?=getUrl('technician','jobDetail',$hire_rows[$i]['h_idx'])?>" class="btn btn-light btn-block rounded-0">상세보기</a>
+                                  <?}else{?>
+                                    <button onclick="login_please()" class="btn btn-light btn-block rounded-0">상세보기</button>
+                                  <?}?>
                                 </div>
                                 <div class="col-6 mx-0 px-0">
+                                  <?if($m_idx > 0){?>
                                     <button class="btn btn-danger btn-block rounded-0" onclick="application_ok(<?=$hire_rows[$i]['h_idx']?>)">지원하기</button>
+                                  <?}else{?>
+                                    <button class="btn btn-danger btn-block rounded-0" onclick="login_please();">지원하기</button>
+                                  <?}?>
                                 </div>
                             </div>
                         </div>
@@ -276,6 +291,9 @@
                 </div>
             </div>
         <?php } ?>
+      <?}else{?>
+        일자리가 없습니다.
+      <?}?>
     </div>
     <div class="" style="text-align:center;">
       <ul class="pagination">

@@ -119,7 +119,11 @@ $check_voucher = $output->get('check_voucher');
             </div>
         </div>
         <!-- <a class="btn btn-block btn-danger rounded-0" data-toggle="modal" data-target="#paymentModal">결제하기</a> -->
-        <a class="btn btn-block btn-danger py-2 rounded-0 text-white" onclick="pay_check()">결제하기</a>
+        <?if($m_idx){?>
+          <a class="btn btn-block btn-danger py-2 rounded-0 text-white" onclick="pay_check()">결제하기</a>
+        <?}else{?>
+          <a class="btn btn-block btn-danger py-2 rounded-0 text-white" onclick="login_please()">결제하기</a>
+        <?}?>
 </div>
 
 
@@ -365,7 +369,12 @@ $check_voucher = $output->get('check_voucher');
   }
 
 
-
+  function login_please(){
+  var result = confirm("로그인 후 이용해주세요. 로그인 하시겠습니까?");
+  if(result){
+    location.href="<?=getUrl('member','login',false,array('cur' => $current_url))?>";
+  }
+}
 
 </script>
 

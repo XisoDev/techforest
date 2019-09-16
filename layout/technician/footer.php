@@ -11,7 +11,7 @@ if(!isset($footer_false)){
             <div class="col-3 pt-5">
                 <!--                logo ?-->
 
-                    <img src="/oPage/images/footer_logo_gray.png" height="60" />
+                    <img src="/oPage/images/footer_logo_gray1.png" height="50" />
 
             </div>
             <div class="col-9 pt-3">
