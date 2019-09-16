@@ -426,18 +426,18 @@ if($logged_info['is_commerce']=='Y'){
 
 <!-- 이름,생년,전화번호,주소,경력이 있는 개인회원에게 추천기술자 알림 팝업 -->
 <div class="modal fade" id="recommend_technician_modal" tabindex="-1" role="dialog" aria-labelledby="tech_forest_modal_window" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:330px;">
         <div class="modal-content text-center" style="border-radius:10px">
             <a class="text-white pull-right text-right" style="margin-top:-40px;" onclick="jQuery('#recommend_technician_modal').modal('hide');" ><i class="xi-close xi-2x"></i></a>
             <div class="popoup_header rounded-top" style="background-image:url('/oPage/technician/images/popup_header_technician.png');"></div>
             <div class="px-3 pb-2 pt-4">
-                <h5 class="weight_normal mb-1">기업이 먼저 입사제안을</h5>
-                <h5 class="weight_normal mb-1">할 수 있도록 <span class="red">회원님의 이력서를 </span></h5>
-                <h5 class="weight_normal mb-3"><span class="red">추천해도 될까요?</span></h5>
-                <a class="btn btn-block btn-danger btn-round btn-lg mb-3" style="width: 63%;margin: auto;" onclick="rt_click_yes()">네 추천해주세요</a>
-                <a class="btn btn-block border-danger text-danger btn-round btn-lg mt-3" style="width: 63%;margin: auto;" onclick="rt_click_no()">아니오</a>
+                <h6 class="weight_normal mb-1">기업이 먼저 입사제안을</h6>
+                <h6 class="weight_normal mb-1">할 수 있도록 <span class="red">회원님의 이력서를 </span></h6>
+                <h6 class="weight_normal mb-3"><span class="red">추천해도 될까요?</span></h6>
+                <a class="btn btn-block btn-danger btn-round btn-lg mb-3" style="color:#fff;font-size:16px;" onclick="rt_click_yes()">네 추천해주세요</a>
+                <a class="btn btn-block border-danger text-danger btn-round btn-lg mt-3 mb-2" style="font-size:16px;" onclick="rt_click_no()">아니오</a>
             </div>
-            <button class="py-3  btn btn-block btn-light" onclick="jQuery('#recommend_technician_modal').modal('hide');" style="border-radius:10px;">닫기</button>
+            <button class="btn btn-block btn-light" onclick="jQuery('#recommend_technician_modal').modal('hide');" style="border-radius:10px;">닫기</button>
         </div>
     </div>
 </div>

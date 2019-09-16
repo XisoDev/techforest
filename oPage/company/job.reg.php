@@ -72,7 +72,7 @@ $company_info = $output->get('company_info');
                             <select class="form-control" id="c_phone1" required>
                               <?
                                 $phonenumber = explode("-", $company_info[0]['phonenumber']);
-                                $phone_arr = array("010", "02", "031", "032", "033", "041", "042", "043", "044", "051", "052", "053", "054", "055", "061", "062", "063", "064", "070");
+                                $phone_arr = array("010","011","017");
 
                                 for($i = 0; $i < count($phone_arr); $i++) {
                                   if($phone_arr[$i] == $phonenumber[0]) {
@@ -86,11 +86,11 @@ $company_info = $output->get('company_info');
                             <div class="input-group-prepend">
                                 <span class="input-group-text">-</span>
                             </div>
-                            <input type="text" class="form-control" id="c_phone2" value="<?=$phonenumber[1]?>" placeholder="0000" maxlength="4" required>
+                            <input type="text" class="form-control" id="c_phone2" value="<?=$phonenumber[1]?>" placeholder="0000" maxlength="4" onkeyup="onlyNumber(this)" required>
                             <div class="input-group-prepend">
                                 <span class="input-group-text">-</span>
                             </div>
-                            <input type="text" class="form-control" id="c_phone3" value="<?=$phonenumber[2]?>" placeholder="0000" maxlength="4" required>
+                            <input type="text" class="form-control" id="c_phone3" value="<?=$phonenumber[2]?>" placeholder="0000" maxlength="4" onkeyup="onlyNumber(this)" required>
                         </div>
                     </div>
 
@@ -133,15 +133,15 @@ $company_info = $output->get('company_info');
                     ?>
                     <div class="col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3">
                         <div class="input-group">
-                            <input type="text" class="form-control" id="registration1" value="<?=$registration[0]?>" placeholder="000" maxlength="3" required>
+                            <input type="text" class="form-control" id="registration1" value="<?=$registration[0]?>" placeholder="000" maxlength="3" onkeyup="onlyNumber(this)" required>
                             <div class="input-group-prepend">
                                 <span class="input-group-text">-</span>
                             </div>
-                            <input type="text" class="form-control" id="registration2" value="<?=$registration[1]?>" placeholder="00" maxlength="2" required>
+                            <input type="text" class="form-control" id="registration2" value="<?=$registration[1]?>" placeholder="00" maxlength="2" onkeyup="onlyNumber(this)" required>
                             <div class="input-group-prepend">
                                 <span class="input-group-text">-</span>
                             </div>
-                            <input type="text" class="form-control" id="registration3" value="<?=$registration[2]?>" placeholder="00000" maxlength="5" required>
+                            <input type="text" class="form-control" id="registration3" value="<?=$registration[2]?>" placeholder="00000" maxlength="5" onkeyup="onlyNumber(this)" required>
                         </div>
                     </div>
 

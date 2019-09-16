@@ -20,7 +20,15 @@
     </div>
     <div class="tech-card-slick">
     <?php if(count($row) == 0){ ?>
-      지원자가 없습니다.
+
+      <div class="tech_card bg-white overflow-hidden mx-3 mb-3 shadow">
+          <div class="text-center pt-2">
+            <h6 class="pt-4">아직 지원자가 발생하지 않았어요.</h6>
+            <h6 class="pb-3">추천 기술자에게 입사제안을 해보세요!</h6>
+          </div>
+          <a href="<?=getUrl('company','service')?>" class="btn btn-block btn-warning rounded-0">우리회사 채용공고 홍보하기</a>
+      </div>
+
     <?php }else{ ?>
       <?php foreach($row as $val){ ?>
           <div class="tech_card bg-white overflow-hidden mx-3 mb-3 shadow">
@@ -99,8 +107,20 @@
                   </div>
               </div>
           </div>
+
+
+
+
+
+
       <?php } ?>
-    </div>
+      <!-- <div class="tech_card bg-white overflow-hidden mx-md-3 mb-md-3 shadow py-5">
+        <img src="/oPage/company/images/job_img.png" alt="돋보기이미지" class="mx-auto" width="50">
+        <h6 class="mx-auto text-center pt-5">이력서 공개를</h6>
+        <h6 class="mx-auto text-center">희망하는 기술자를</h6>
+        <h6 class="mx-auto text-center">더 찾아볼게요!</h6>
+      </div>
+    </div> -->
 </div>
 <div class="container py-md-3 py-lg-5">
     <div class="content_padding px-0 pb-1 d-md-none">

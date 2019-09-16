@@ -345,7 +345,7 @@
             <?php if(!$check_voucher){?>
                 <button data-toggle="modal" data-target="#buy_voucher" class="btn btn-block btn-warning btn-lg rounded-0 fixed-bottom mx-auto" style="width:60%">면접 제안하기</button>
             <?php }else if($check_applicant){?>
-                <button class="btn btn-block btn-warning btn-lg rounded-0 fixed-bottom mx-auto disabled">면접제안 완료</button>
+                <button class="btn btn-block btn-warning btn-lg rounded-0 fixed-bottom mx-auto disabled" style="width:60%">면접제안 완료</button>
             <?php }else{?>
                 <button data-toggle="modal" data-target="#suggestion_way" class="btn btn-block btn-warning btn-lg rounded-0 fixed-bottom mx-auto" style="width:60%">면접 제안하기</button>
             <?php } ?>
@@ -376,7 +376,7 @@
                   <!-- <button onclick="jQuery('#suggestion_way').modal('hide');jQuery('#interview_sms').modal('show');" class="btn btn-block btn-danger btn-round mt-3">문자메세지 발송</button> -->
 <!--                    이렇게 쓰시면 미리 내용을 채워서 공고등록자 휴대전화로 바로 문자전송가능-->
 <!--                <a class="btn btn-block btn-danger btn-round mt-3" href="sms:+821057595999&amp;body=%EA%B8%B0%EC%88%A0%EC%9E%90%EC%88%B2%20%EC%A7%80%EC%9B%90%EC%9E%90%EB%8B%98%EA%BB%98%20%EB%A9%B4%EC%A0%91%EC%9A%94%EC%B2%AD%20%EB%93%9C%EB%A6%BD%EB%8B%88%EB%8B%A4.">문자메세지 발송</a>-->
-                <?if($isMobile == true){?>
+                <?if($isMobile == 1){?>
                   <a class="btn btn-block border-danger text-danger btn-round mt-3" onclick="suggestion_call()" href="tel:+821057595999">지원자에게 직접 전화</a>
                 <?}else{?>
                   <button onclick="suggestion_call()" class="btn btn-block border-danger text-danger btn-round mt-3">지원자에게 직접 전화</button>
@@ -389,40 +389,35 @@
 </div>
 
 <div class="modal fade" id="application_phone" tabindex="-1" role="dialog" aria-labelledby="tech_forest_modal_window" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered mx-auto" role="document" style="max-width:380px;">
         <div class="modal-content text-center" style="border-radius:10px">
             <a href="#" class="text-white pull-right text-right" style="margin-top:-40px;" onclick="jQuery('#application_phone').modal('hide');" ><i class="xi-close xi-2x"></i></a>
-            <div class="square avatar bg-red mx-auto" style="width:120px; margin-top:-60px; background-image:url('/oPage/ncenter/images/header_icon.png');"></div>
-            <div class="content_padding">
-                <p>
-                  <span class="red">
-                    지원자 : <?=$info_row[0]['m_name']?><br>
-                    ☎ <?=$info_row[0]['m_phone']?><br>
-                  </span>
-                  <span>
-                    *면접정보 외 다른 목적으로<br>
-                    개인정보를 이용할 수 없습니다.
-                  </span>
-                </p>
-                <div class="px-3">
-                <button class="btn btn-block border-danger text-danger btn-round mt-3" onclick="jQuery('#application_phone').modal('hide');">닫기</button>
-                </div>
+            <div class="popoup_header rounded-top" style="background-image:url('/oPage/company/images/popup_header_company.png');"></div>
+            <div class="pb-2 pt-4">
+              <div class="red">지원자 : <?=$info_row[0]['m_name']?></div><br>
+              <div class="btn border-danger text-danger btn-round px-5"> ☎ <?=$info_row[0]['m_phone']?></div><br>
+
+              <div class="pt-3">
+                *면접정보 외 다른 목적으로<br>
+                개인정보를 이용할 수 없습니다.
+              </div>
             </div>
         </div>
     </div>
 </div>
 
 <div class="modal fade" id="buy_voucher" tabindex="-1" role="dialog" aria-labelledby="tech_forest_modal_window" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:330px;">
         <div class="modal-content text-center" style="border-radius:10px">
             <a href="#" class="text-white pull-right text-right" style="margin-top:-40px;" onclick="jQuery('#buy_voucher').modal('hide');" ><i class="xi-close xi-2x"></i></a>
-            <div class="square avatar bg-red mx-auto" style="width:120px; margin-top:-60px; background-image:url('/oPage/ncenter/images/header_icon.png');"></div>
-            <div class="content_padding">
+            <div class="popoup_header rounded-top" style="background-image:url('/oPage/company/images/popup_img2.png');"></div>
+            <div class="p-3">
                 <p>
-                  공고등록권을 구매 후 해당 지원자에게<br>
-                  <b>면접 요청</b>을 하실 수 있습니다.<br>
+                  <b><후불제 통합패키지></b> 상품 구매 후<br>
+                  해당 지원자에게 면접 요청 및<br>
+                  연락처열람 가능합니다.<br>
                 </p>
-                <h5 class="weight_lighter"><span class="red">공고등록권을 구매</span>하시겠습니까?</h5>
+                <h6 class="weight_lighter"><span class="red">해당상품을 구매</span>하시겠습니까?</h6>
                 <div class="px-3">
                 <button onclick="jQuery('#buy_voucher').modal('hide');document.location.href='<?=getUrl('company','service',4,array(num=>$document_srl,h_idx=>$h_idx))?>'" class="btn btn-block btn-danger btn-round mt-3">구매하기</button>
                 <button class="btn btn-block border-danger text-danger btn-round mt-3" onclick="jQuery('#buy_voucher').modal('hide');">아니오</button>
@@ -522,6 +517,7 @@
 </div> -->
 
 <script type="text/javascript">
+
   //알림 숫자 초기화
   $('#notice_count')[0].innerText = <?=count($output->get("member_notice"));?>
 

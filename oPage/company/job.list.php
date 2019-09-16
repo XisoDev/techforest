@@ -18,6 +18,7 @@ $end_row = $output->get('end_row');
     <a href="<?=getUrl('company','hireList')?>" class="d-none d-lg-inline-block btn btn-primary pull-right btn-round mt-3">더보기 <i class="xi-plus"></i></a>
     <h4 class="d-none d-lg-block mt-5 py-3">진행중인 공고</h4>
     <div class="row">
+      <?if(count($row) > 0){?>
       <? $hire = (count($row) > 3) ? 3 : count($row); ?>
       <?php for($i=0; $i < $hire; $i++){ ?>
         <div class=" col-12 col-sm-6 col-lg-4">
@@ -70,6 +71,40 @@ $end_row = $output->get('end_row');
         </div>
         </div>
     <?php } ?>
+    <?}else{?>
+          <div class="col-12 mt-2 d-none d-lg-inline-block">
+              <div class="flex-card-slick">
+                  <?php for($i=1; $i<=3; $i++){ ?>
+                    <a href="<?=getUrl('company','job_register')?>">
+                      <div class="tech_card text-center shadow-sm">
+                          <div class="thumbnail">
+                              <div class="icon_wrap">
+                                  <i class="xi-plus-circle xi-2x color_primary"></i>
+                              </div>
+                          </div>
+                          <p class="weight_lighter">공고등록하고<br />맞춤기술자 보기</p>
+                      </div>
+                    </a>
+                <?php } ?>
+              </div>
+          </div>
+
+
+          <div class="col-12 mt-2 d-lg-none pb-3">
+              <div class="">
+                    <a href="<?=getUrl('company','job_register')?>">
+                      <div class="tech_card text-center shadow-sm">
+                          <div class="thumbnail">
+                              <div class="icon_wrap">
+                                  <i class="xi-plus-circle xi-2x color_primary"></i>
+                              </div>
+                          </div>
+                          <p class="weight_lighter">공고등록하고<br />맞춤기술자 보기</p>
+                      </div>
+                    </a>
+              </div>
+          </div>
+        <?}?>
     </div>
     <a href="<?=getUrl('company','hireList');?>" class="btn btn-block btn-primary d-lg-none">공고 더보기</a>
 </div>
@@ -83,6 +118,7 @@ $end_row = $output->get('end_row');
         <a href="<?=getUrl('company','hireEndList')?>" class="d-none d-lg-inline-block btn btn-primary pull-right btn-round mt-3">더보기 <i class="xi-plus"></i></a>
         <h4 class="d-none d-lg-block mt-5 py-3">마감된 공고</h4>
         <div class="row">
+          <?if(count($end_row) > 0){?>
           <? $end_hire = (count($end_row) > 3) ? 3 : count($end_row); ?>
           <?php for($i=0; $i < $end_hire; $i++){ ?>
             <div class=" col-12 col-sm-6 col-lg-4">
@@ -123,7 +159,12 @@ $end_row = $output->get('end_row');
             </div>
         </div>
             </div>
-    <?php } ?>
+          <?php } ?>
+      <?php }else{?>
+        <div class="col-12 py-5 shadow rounded-2 mb-3">
+          <p class="text-center">마감된 공고가 없어요.</p>
+        </div>
+      <?php }?>
         </div>
     <a href="<?=getUrl('company','hireEndList')?>" class="btn btn-block btn-primary d-lg-none">마감된 공고 더보기</a>
     </div>

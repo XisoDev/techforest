@@ -16,44 +16,51 @@
         <div class="row">
         <div class="col-lg-10 mx-lg-auto">
         <div class="row">
-          <div class="col-12 py-5 shadow rounded-2" style="text-align:center;color:#aaa;">
+          <div class="col-12 py-5 shadow rounded-2 d-none d-md-block" style="text-align:center;color:#aaa;">
             사용가능한 쿠폰이 아직없어요!
           </div>
-            <!-- <?php
-            for($i=1; $i <= 3; $i++){
-                ?>
-                <div class=" col-12 col-md-6 col-lg-4">
-                    <div class="coupon rounded bg-white py-2 px-2 pt-md-4 mt-md-5 my-2 shadow-sm">
-                        <div class="row d-none d-md-flex" style="margin-top:-70px">
-                            <div class="mx-auto col-6"><div class="avatar square" style="background-image:url('/oPage/images/coupon_icon.png')"></div></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4 d-md-none border-right pr-1"><div class="avatar square" style="background-image:url('/oPage/images/coupon_icon.png')"></div></div>
-                            <div class="col-8 col-md-12 text-md-center">
-                                <p class="xs_content weight_normal py-0 my-0 pt-md-2">바로검색서비스 체험권</p>
-                                <h6 class=" py-0 my-0 py-md-3">선 면접제안 <span class="red">3회 무료</span></h6>
-                                <p class="xs_content text-secondary d-none d-md-block">결제금액의 50%를 <br />할인 해 드립니다.</p>
-                                <div class="d-block d-md-none">
-                                    <p class="pb-0 mb-0 px-0 mx-0 xxs_content text-secondary">잔여횟수 1회 / 총 3회</p>
-                                    <p class="pt-0 mt-0 px-0 mx-0 xxs_content text-secondary">유효기간 : 18.06.21 ~ 19.07.31</p>
-                                </div>
-                                <hr class="d-none d-md-block my-1" />
-                                <div class="d-none d-md-block weight_bold py-2">
-                                    <p class="pb-0 mb-0 px-0 mx-0 xs_content">사용기한</p>
-                                    <p class="pb-0 mb-0 px-0 mx-0 xs_content">2018.06.19~19.06.30</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <?php
-            }
-            ?> -->
+
+          <div class="col-12 col-md-6 col-lg-4 d-block d-md-none">
+              <div class="coupon rounded bg-white py-2 px-2 pt-md-4 mt-md-5 my-2 shadow-sm">
+                  <div class="row">
+                      <div class="col-4 d-md-none border-right pr-1"><div class="avatar square" style="background-image:url('/oPage/images/coupon_icon.png')"></div></div>
+                      <div class="col-8 col-md-12 text-md-center">
+                          <p class="text-center text-secondary my-5" style="">사용가능한 쿠폰이 <br> 아직 없어요!</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <!-- <div class=" col-12 col-md-6 col-lg-4">
+              <div class="coupon rounded bg-white py-2 px-2 pt-md-4 mt-md-5 my-2 shadow-sm">
+                  <div class="row d-none d-md-flex" style="margin-top:-70px">
+                      <div class="mx-auto col-6"><div class="avatar square" style="background-image:url('/oPage/images/coupon_icon.png')"></div></div>
+                  </div>
+                  <div class="row">
+                      <div class="col-4 d-md-none border-right pr-1"><div class="avatar square" style="background-image:url('/oPage/images/coupon_icon.png')"></div></div>
+                      <div class="col-8 col-md-12 text-md-center">
+                          <p class="xs_content weight_normal py-0 my-0 pt-md-2">바로검색서비스 체험권</p>
+                          <h6 class=" py-0 my-0 py-md-3">선 면접제안 <span class="red">3회 무료</span></h6>
+                          <p class="xs_content text-secondary d-none d-md-block">결제금액의 50%를 <br />할인 해 드립니다.</p>
+                          <div class="d-block d-md-none">
+                              <p class="pb-0 mb-0 px-0 mx-0 xxs_content text-secondary">잔여횟수 1회 / 총 3회</p>
+                              <p class="pt-0 mt-0 px-0 mx-0 xxs_content text-secondary">유효기간 : 18.06.21 ~ 19.07.31</p>
+                          </div>
+                          <hr class="d-none d-md-block my-1" />
+                          <div class="d-none d-md-block weight_bold py-2">
+                              <p class="pb-0 mb-0 px-0 mx-0 xs_content">사용기한</p>
+                              <p class="pb-0 mb-0 px-0 mx-0 xs_content">2018.06.19~19.06.30</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div> -->
+
         </div>
         </div>
         </div>
         <form>
-            <div class="input-group rounded overflow-hidden d-lg-none">
+            <div class="input-group rounded overflow-hidden d-lg-none pt-3">
                 <input type="text" class="form-control" placeholder="쿠폰 코드를 입력하세요." />
                 <button class="rounded-0 btn btn-danger btn-sm" onclick="add_coupon()">적용</button>
             </div>
@@ -87,12 +94,12 @@
         </div>
         <div class="d-block d-lg-none">
             <div class="tech_card text-left shadow-sm">
+              <?php foreach($voucher_list as $val){ ?>
                 <h6 class="bg-light weight_normal px-2 py-2 text-left my-0">이용상품</h6>
-                <?php foreach($voucher_list as $val){ ?>
                   <div class="bg-white p-2">
                       <h5 class="weight_normal my-0"><?=$val['pay_service']?></h5>
                       <p class="xs_content px-0 weight_lighter">
-                          잔여횟수 : <span class="red"><?=$val['remain_count']?>회</span> / 총 <?=$val['all_count']?>회
+                          잔여횟수 : -
                       </p>
                       <p class="xxs_content px-0 weight_lighter">
 

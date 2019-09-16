@@ -242,8 +242,8 @@
         <?php
             }
           }else{ ?>
-            <div class="text-center py-5 bg-white rounded shadow-sm">
-            등록된 관심공고가 없습니다.
+            <div class="text-center py-5 bg-white rounded shadow-sm mx-auto">
+                등록된 관심공고가 없습니다.
                 <p class="xxs_content text-secondary">관심있는 공고를 등록 해 보세요 :)</p>
             </div>
        <? } ?>

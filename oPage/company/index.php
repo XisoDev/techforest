@@ -273,10 +273,10 @@ $(document).ready(function(){
                                 <?if($m_idx){?>
                             <div class="row mt-0 mx-0 px-0">
                                 <div class="col-12 mx-0 px-0">
-                                        <a href="<?=getUrl('technician','resume',$val['m_idx'],array("from"=>"index"))?>" target="_blank" class="btn btn-block btn-warning mt-1 rounded-0">이력서보기</a>
+                                      <a href="<?=getUrl('technician','resume',$val['m_idx'],array("from"=>"index"))?>" target="_blank" class="btn btn-block btn-warning mt-1 rounded-0">이력서보기</a>
                                 </div>
                             </div>
-                                <?}?>
+                          <?}?>
                     </div>
                 <?php } ?>
             </div>
@@ -353,9 +353,9 @@ $(document).ready(function(){
 <div class="d-none d-lg-block container">
     <div class="text-center pt-5 pb-3">
         <div class="text-center xs_content">
-            <i class="text-warning">◆</i>
-            <i class="text-primary">◆</i>
-            <i class="text-warning">◆</i>
+            <i class="text-warning">●</i>
+            <i class="text-primary">●</i>
+            <i class="text-warning">●</i>
         </div>
         <h3 class="weight_bold mt-3">언론보도</h3>
         <h6 class="weight_lighter mt-1 mb-2">기술자숲의 언론보도 및 소식을 확인해보세요.</h6>

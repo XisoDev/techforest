@@ -13,7 +13,7 @@
     <div class="row">
         <div class="col-3"></div>
         <div class="col-6">
-            <img class="align-self-center mr-3" src="/oPage/images/logo_black.png" alt="기술자 숲">
+            <img class="align-self-center mr-3" src="/oPage/images/logo_blue.png" alt="기술자 숲">
         </div>
         <div class="col-3"></div>
     </div>

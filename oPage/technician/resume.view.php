@@ -179,11 +179,11 @@ $self_introduction = str_replace("\n", "<br />", $my_info2[0]["self_introduction
 <?}?>
 
 <div class="modal fade" id="suggestion_join" tabindex="-1" role="dialog" aria-labelledby="tech_forest_modal_window" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width:330px;">
         <div class="modal-content text-center" style="border-radius:10px">
             <a href="#" class="text-white pull-right text-right" style="margin-top:-40px;" onclick="jQuery('#suggestion_join').modal('hide');" ><i class="xi-close xi-2x"></i></a>
             <img src='/oPage/company/images/popup_img2.png';>
-            <div class="mt-4 mb-3">
+            <div class="mt-4 mb-2">
               <select class="red border-danger" style="background:white" id="hire_sel">
                 <option value="">입사제안 할 공고를 선택해주세요</option>
                 <?foreach ($suggestion_join_hire as $val) {?>
@@ -192,7 +192,7 @@ $self_introduction = str_replace("\n", "<br />", $my_info2[0]["self_introduction
               </select>
             </div>
             <div class="p-3">
-              <h5 class="weight_bold">해당 기술자에게 입사제안 하시겠어요?</h5>
+              <h6 class="weight_bold">해당 기술자에게 입사제안 하시겠어요?</h6>
               <div class="px-3 mt-4">
                 <button onclick="suggestion_join_yes()" class="btn btn-block btn-danger btn-round mt-3">네</button>
                 <button class="btn btn-block border-danger text-danger btn-round mt-3" onclick="jQuery('#suggestion_join').modal('hide');">아니오</button>

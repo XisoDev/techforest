@@ -58,7 +58,7 @@ $rows = $output->get('row');
                   					<th class="col-xs-4 col-sm-2 col-md-3" style="border-top: 3px solid black;">작성일</th>
                             <th class="col-xs-4 col-sm-2 col-md-3" style="border-top: 3px solid black;">답변</th>
                   				</tr>
-
+                          <?if(count($rows) > 0){?>
                             <?foreach ($rows as $key => $val) {?>
                               <tr class="on">
                                 <td style="vertical-align:middle;"><?=$key+1?></td>
@@ -96,6 +96,11 @@ $rows = $output->get('row');
                               </div>
 
                             <?}?>
+                          <?}else{?>
+                            <tr>
+                              <td colspan="4" class="text-center py-4">문의 내역이 없어요</td>
+                            </tr>
+                          <?}?>
                   	</tbody>
                   </table>
                 </div>

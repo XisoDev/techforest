@@ -191,7 +191,7 @@ $B_hire = $output->get('B_hire');
   							else if($m_idx > 0) {?>
   							  <button class="btn btn-block btn-primary d-md-none" style="font-size: 19px;" onclick="application_ok(<?=$val['h_idx']?>)"><strong>지원하기2</strong></button>
   						<?} else {?>
-  								<a href="#" type="button" role="button" data-toggle="modal" data-target="#modal_login" rel="nofollow"><button class="btn btn-block btn-primary d-md-none" style="font-size: 19px;"><strong>지원하기3</strong></button></a>
+  								<button class="btn btn-block btn-primary d-md-none" style="font-size: 19px;" onclick="login_please();"><strong>지원하기3</strong></button>
   						<?}?>
   						</div>
   					<?}?>
@@ -354,6 +354,14 @@ function next_careers_detail(){
 		location.href = "<?=getUrl('technician','jobDetail',$N_hire[0]['h_idx'])?>";
 	}
 }
+
+function login_please(){
+  var result = confirm("로그인 후 이용해주세요. 로그인 하시겠습니까?");
+  if(result){
+    location.href="<?=getUrl('member','login',false,array('cur' => $current_url))?>";
+  }
+}
+
 
 </script>
 <?php

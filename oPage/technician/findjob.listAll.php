@@ -292,7 +292,11 @@
             </div>
         <?php } ?>
       <?}else{?>
-        일자리가 없습니다.
+        <div class="text-center mx-auto">
+          <img src="/oPage/technician/images/info.png" alt="인포아이콘" width="40">
+          <h6 class="pt-3">원하시는 조건의 일자리가 아직 없어요.</h6>
+          <h6>기술자숲이 열심히 찾아볼게요!</h6>
+        </div>
       <?}?>
     </div>
     <div class="" style="text-align:center;">
