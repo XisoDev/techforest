@@ -1,3 +1,5 @@
+<?if($isMobile == 1){?>
+
 <link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet" />
 <style>
     .russo_one{
@@ -15,7 +17,7 @@
 
     <img src="/oPage/images/1x/splash_human.png" id="splash_human" />
 
-    <img src="/oPage/images/logo_primary.png" id="logo_primary" />
+    <img src="/oPage/images/logo_black.png" id="logo_primary" />
 </div>
 
 <script type="text/javascript">
@@ -30,3 +32,9 @@
         },5000);
     });
 </script>
+
+<?}else{?>
+  <script type="text/javascript">
+    document.location.href="<?=getUrl('page','selectType')?>";
+  </script>
+<?}?>

@@ -1063,18 +1063,6 @@ function occupation(obj){
   }
 
 	function my_info3_del1(idx) {
-		// $('#my_info3_2').css('display', 'block');
-		// $('#my_info3_3').css('display', 'none');
-
-		// if(my_info3_count - 1 != idx) {
-		// 	idx *= 1;
-		// 	var node1 = "school_hr" + (idx + 1);
-		// 	document.getElementById("my_info3_2").removeChild(document.getElementById(node1));
-		// } else if(my_info3_count - 1 == idx && idx > 0) {
-		// 	idx *= 1;
-		// 	var node1 = "school_hr" + idx;
-		// 	document.getElementById("my_info3_2").removeChild(document.getElementById(node1));
-		// }
 
 		var node1 = "school_div" + idx;
 		document.getElementById("my_info3_2").removeChild(document.getElementById(node1));
@@ -1331,16 +1319,6 @@ function my_info6_add() {
 
 function my_info6_del1(idx) {
 
-	// if(my_info6_count - 1 != idx) {
-	// 	idx *= 1;
-	// 	var node1 = "language_hr" + (idx + 1);
-	// 	document.getElementById("my_info6_2").removeChild(document.getElementById(node1));
-	// } else if(my_info6_count - 1 == idx && idx > 0) {
-	// 	idx *= 1;
-	// 	var node1 = "language_hr" + idx;
-	// 	document.getElementById("my_info6_2").removeChild(document.getElementById(node1));
-	// }
-
 	var node1 = "language_div" + idx;
 	document.getElementById("my_info6_2").removeChild(document.getElementById(node1));
 
@@ -1350,7 +1328,7 @@ function my_info6_del1(idx) {
 		document.getElementById("language_div" + (i + 1)).id = "language_div" + i;
 		document.getElementById("language_del" + (i + 1)).id = "language_del" + i;
 		$("#language_del" + i).removeAttr("onclick");
-		$("#language_del" + i).attr("onclick", "javascript:my_info6_del1(" + i + ");");
+		$("#language_del" + i).attr("onclick", "javascript:my_info6_del1(" + i + ")");
 
 		document.getElementById("lc_name_txt" + (i + 1)).id = "lc_name_txt" + i;
 		document.getElementById("lc_name_txt" + i).name = "lc_name_txt" + i;

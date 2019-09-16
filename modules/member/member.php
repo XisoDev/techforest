@@ -24,13 +24,22 @@ class memberView{
         createToken();
 
         if(!$args->is_seo){
-            setSEO("내 정보 관리", $logged_info['m_name']."님의 개인정보를 관리할 수 있습니다.");
+            setSEO("내 정보 관리", "기술자님의 정보를 관리해보세요!");
         }
 
         $output = new Object();
         $output->add('notice_setting',$this->notice_setting());
         $output->add('page_title',"마이페이지");
         $output->add('act',$args->act);
+        return $output;
+    }
+
+    function agree($args){
+        $output = new Object();
+        global $set_template_file;
+
+        $set_template_file = "member/agree.php";
+
         return $output;
     }
 

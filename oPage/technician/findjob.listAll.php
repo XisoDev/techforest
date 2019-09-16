@@ -167,7 +167,7 @@
             <div class="col-6 pl-1 col-lg-4">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text bg-light">직군</span>
+                        <span class="input-group-text bg-light">직종</span>
                     </div>
                     <select class="form-control" id="occupation_select" onchange="location.href=(this.value)">
                       <? foreach ($occupation_list as $val) { ?>
@@ -183,7 +183,7 @@
             <div class="col-6 pr-1 col-lg-4">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text bg-light">직종</span>
+                        <span class="input-group-text bg-light">직무</span>
                     </div>
                     <select class="form-control" id="duty_select" onchange="location.href=(this.value)">
                         <option value="<?=getUrl('technician','findJobListAll',false,array('page'=>$page, 'local_idx' => $local_idx,'o_idx' => $o_idx, 'duty_name' => '전체'))?>">전체</option>

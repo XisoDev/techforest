@@ -12,7 +12,7 @@ if(!isset($footer_false)){
 <!--                logo ?-->
 
                 <img src="/oPage/images/footer_logo_gray.png" height="60" />
-        
+
             </div>
             <div class="col-9 pt-3">
                 <h6 class="text-warning mt-4 mb-0 pt-0 pb-0">CONTACT</h6>
@@ -51,8 +51,10 @@ if(!isset($footer_false)){
                         }
                     }
                     ?>
+                    <?if($m_idx > 0){?>
                     <li class=\"nav-item xs_content weight_normal"><a class="text-secondary nav-link xs_content">|</a></li>
                     <li class="nav-item xs_content weight_normal"><a class="text-secondary nav-link" href="javascript:withdrawCompany();">회원탈퇴</a></li>
+                    <?}?>
                 </ul>
                 </nav>
 

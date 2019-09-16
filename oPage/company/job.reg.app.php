@@ -318,7 +318,7 @@ $salary_list = $oDB->get("TF_salary",null,"salary_idx, salary_name, salary_is_sh
                         <h6>공고종료</h6>
                     </div>
                     <div class="col-12 col-sm-9 mx-0 px-0 mb-2 mt-sm-3 pr-1 position-relative">
-                        <input type="text" class="form-control xiso_date" id="job_end_date" value="<?=substr($edit_row[0]["job_start_date"], 0, 10)?>"/>
+                        <input type="text" class="form-control xiso_date" id="job_end_date" value="<?=substr($edit_row[0]["job_end_date"], 0, 10)?>"/>
                         <i class="xi-calendar-check right-icon"></i>
                     </div>
 

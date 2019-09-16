@@ -9,6 +9,7 @@
 class pageView{
 
     function index($args){
+
         global $set_template_file;
         global $add_body_class;
         global $add_html_header;
@@ -16,12 +17,13 @@ class pageView{
         $add_body_class[] = "splash_screen";
         $add_body_class[] = "no_pc_header";
         $add_body_class[] = "no_pc_footer";
-        $add_html_header[] = "<link rel=\"stylesheet\" href=\"/oPage/css/splash.css\">";
         $output = new Object();
+
+        $add_html_header[] = "<link rel=\"stylesheet\" href=\"/oPage/css/splash.css\">";
 
         $set_template_file = "splash.php";
 
-        return $output;
+      return $output;
     }
 
     function selectType($args){

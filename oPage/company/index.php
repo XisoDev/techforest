@@ -413,10 +413,7 @@ $(document).ready(function(){
 <?php $footer_false = true; ?>
 
 <script type="text/javascript">
-    // // 테스트용 팝업띄우기
-    jQuery(document).ready(function($){
-        $('#tech_modal_example').modal('show');
-    });
+
     <?if($row['count_hire']){?>
       var count_hire = <?=$row['count_hire']?>;
     <? }else{?>
