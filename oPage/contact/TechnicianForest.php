@@ -244,7 +244,7 @@
         <div style="height:40px"></div>
         <span style="color:#363432; font:15px 'Nanum Myeongjo'; line-height:1.9em">
             Email: Kong@gsjsoop.com<br />
-            Tel: 055-259-5312 / Fax: 055-259-5315<br />
+            Tel: 1800-9665 / Fax: 055-259-5315<br />
             경남 창원시 마산회원구 봉암북 7길 21, ICT진흥센터 5동 607호
         </span>
     </div>

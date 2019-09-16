@@ -30,6 +30,7 @@ class technicianView{
         $output->add('rt_row',$this->recommend_technician_check());
         $output->add('member_notice',$this->member_notice());
         $output->add('news_list',$this->news_list());
+        $output->add('all_hire_row',$this->all_hire_count());
         $set_template_file = "technician/index.php";
 
         return $output;
@@ -1055,6 +1056,14 @@ class technicianView{
       $news_list = $oDB->get("TF_news_tb");
 
       return $news_list;
+    }
+
+    function all_hire_count(){
+      global $oDB;
+
+      $row = $oDB->get("TF_hire_tb",null,"count(h_idx) as count_hire");
+
+      return $row;
     }
 
   }

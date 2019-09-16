@@ -24,7 +24,7 @@ class companyView{
         $output->add('hire_end',$this->hire_end());
         $output->add('news_list',$this->news_list());
         $output->add('hire_check',$this->hire_check());
-
+        $output->add('all_hire_row',$this->all_hire_count());
 
         $set_template_file = "company/index.php";
 
@@ -707,6 +707,14 @@ class companyView{
       $hire_check = $oDB->get("TF_hire_tb",null,"h_idx");
 
       return $hire_check;
+    }
+
+    function all_hire_count(){
+      global $oDB;
+
+      $row = $oDB->get("TF_hire_tb",null,"count(h_idx) as count_hire");
+
+      return $row;
     }
 
 

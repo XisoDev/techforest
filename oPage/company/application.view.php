@@ -338,16 +338,16 @@
 
     </div>
 
-        <a href="<?=getUrl('technician','resume',$application_m_idx)?>" class="btn btn-block tech_card bg-primary btn-primary px-5 mb-3 d-md-none" target="_blank">이력서 전체보기</a>
+        <a href="<?=getUrl('technician','resume',$application_m_idx)?>" class="btn btn-block tech_card bg-primary btn-primary px-5 mb-3" target="_blank">이력서 전체보기</a>
 
         <div class="d-none d-md-block text-center">
-            <a href="<?=getUrl('technician','resume',$application_m_idx)?>" class="btn btn-primary px-5 rounded-0" target="_blank">이력서 전체보기</a>
+            <!-- <a href="<?=getUrl('technician','resume',$application_m_idx)?>" class="btn btn-primary px-5 rounded-0" target="_blank">이력서 전체보기1</a> -->
             <?php if(!$check_voucher){?>
-                <button data-toggle="modal" data-target="#buy_voucher" class="btn btn-warning px-5 rounded-0">면접 제안하기</button>
+                <button data-toggle="modal" data-target="#buy_voucher" class="btn btn-block btn-warning btn-lg rounded-0 fixed-bottom mx-auto" style="width:60%">면접 제안하기</button>
             <?php }else if($check_applicant){?>
-                <button class="btn btn-warning disabled px-5 rounded-0">면접제안 완료</button>
+                <button class="btn btn-block btn-warning btn-lg rounded-0 fixed-bottom mx-auto disabled">면접제안 완료</button>
             <?php }else{?>
-                <button data-toggle="modal" data-target="#suggestion_way" class="btn btn-warning px-5 rounded-0">면접 제안하기</button>
+                <button data-toggle="modal" data-target="#suggestion_way" class="btn btn-block btn-warning btn-lg rounded-0 fixed-bottom mx-auto" style="width:60%">면접 제안하기</button>
             <?php } ?>
         </div>
     </div>
@@ -355,11 +355,11 @@
 
 <div class="d-md-none">
 <?php if(!$check_voucher){?>
-  <button data-toggle="modal" data-target="#buy_voucher" class="btn btn-block btn-warning btn-lg rounded-0 fixed-bottom">면접 제안하기</button>
+  <button data-toggle="modal" data-target="#buy_voucher" class="btn btn-block btn-warning btn-lg rounded-0 fixed-bottom mx-auto">면접 제안하기</button>
 <?php }else if($check_applicant){?>
-  <button class="btn btn-block btn-warning btn-lg rounded-0 fixed-bottom disabled">면접제안 완료</button>
+  <button class="btn btn-block btn-warning btn-lg rounded-0 fixed-bottom mx-auto disabled">면접제안 완료</button>
 <?php }else{?>
-  <button data-toggle="modal" data-target="#suggestion_way" class="btn btn-block btn-warning btn-lg rounded-0 fixed-bottom">면접 제안하기</button>
+  <button data-toggle="modal" data-target="#suggestion_way" class="btn btn-block btn-warning btn-lg rounded-0 fixed-bottom mx-auto">면접 제안하기</button>
 <?php } ?>
 </div>
 
@@ -368,9 +368,9 @@
         <div class="modal-content text-center" style="border-radius:10px">
             <a href="#" class="text-white pull-right text-right" style="margin-top:-40px;" onclick="jQuery('#suggestion_way').modal('hide');" ><i class="xi-close xi-2x"></i></a>
             <div class="square avatar bg-red mx-auto" style="width:120px; margin-top:-60px; background-image:url('/oPage/ncenter/images/header_icon.png');"></div>
-            <div class="content_padding">
+            <div class="pt-3">
                 <h5 class="weight_lighter"><span class="red">면접 요청방법</span>을<br />선택 해 주세요.</h5>
-                <div class="px-3">
+                <div class="pt-2 pb-3 px-3">
                   <button onclick="prepare()" class="btn btn-block btn-danger btn-round mt-3">문자메세지 발송</button>
 
                   <!-- <button onclick="jQuery('#suggestion_way').modal('hide');jQuery('#interview_sms').modal('show');" class="btn btn-block btn-danger btn-round mt-3">문자메세지 발송</button> -->

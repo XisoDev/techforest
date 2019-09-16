@@ -171,10 +171,10 @@ $self_introduction = str_replace("\n", "<br />", $my_info2[0]["self_introduction
 </section>
 <?if($from_index == 'index'){?>
 <div class="d-md-none">
-    <button data-toggle="modal" data-target="#suggestion_join" class="btn btn-block btn-warning btn-lg rounded-0 fixed-bottom">입사 제안하기</button>
+    <button data-toggle="modal" data-target="#suggestion_join" class="btn btn-block btn-warning btn-lg rounded-0 fixed-bottom weight_bold">입사 제안하기</button>
 </div>
 <div class="d-none d-md-block text-center">
-  <button data-toggle="modal" data-target="#suggestion_join" class="btn btn-warning px-4 rounded-0">입사 제안하기</button>
+  <button data-toggle="modal" data-target="#suggestion_join" class="btn btn-block btn-warning px-4 rounded-0 fixed-bottom mx-auto weight_bold" style="width:50%">입사 제안하기</button>
 </div>
 <?}?>
 

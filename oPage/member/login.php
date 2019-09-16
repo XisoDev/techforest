@@ -4,6 +4,9 @@
     background-color: #FFF;
     outline:0;
   }
+  #naver_log{
+    cursor: pointer;
+  }
 </style>
 <div class="container pt-lg-5">
     <div class="bigger_logo d-lg-none">
@@ -87,10 +90,10 @@
             <span class="btn btn-light xxs_content btn-block py-1 px-2 btn-round border">페이스북 로그인</span>
         </div> -->
         <div class="text-center">
-            <img src="/oPage/member/assets/images/naver_icon.png" height="40"  />
-            <div class="row">
-              <span id="modal_naver_ok1" class="btn btn-light xxs_content btn-block py-1 px-2 btn-round border" style="margin: 10px 20px;">개인 로그인</span>
-              <span id="modal_naver_ok2" class="btn btn-light xxs_content btn-block py-1 px-2 btn-round border" style="margin: 0 20px;">기업 로그인</span>
+            <img id="naver_log" src="/oPage/member/assets/images/naver_icon.png" height="40"  />
+            <div class="row naver_row" style="display:none;">
+              <span id="modal_naver_ok1" class="btn btn-light xxs_content btn-block py-1 px-2 border" style="margin: 10px 0; background: #00000000;color:#595959;">네이버 개인 로그인</span>
+              <span id="modal_naver_ok2" class="btn btn-light xxs_content btn-block py-1 px-2 border" style="background: #00000000; color:#595959;">네이버 기업 로그인</span>
             </div>
         </div>
     </div>
@@ -262,12 +265,19 @@
 
 
 <script type="text/javascript">
-  function click_phone_id(phone) {
-    $("#searchid_phone1").val(phone);
+  $("#naver_log").click(function(){
+    if($('.naver_row').css('display')=='none'){
+      $('.naver_row').css('display','block');
+    }else{
+      $('.naver_row').css('display','none');
+    }
+  });
+  function click_phone_id(콜) {
+    $("#searchid_phone1").val(콜);
   }
 
-  function click_phone_pw(phone) {
-    $("#searchpw_phone1").val(phone);
+  function click_phone_pw(콜) {
+    $("#searchpw_phone1").val(콜);
   }
 
   function search_id(){

@@ -11,9 +11,12 @@ $myinfo_row = $output->get('myinfo_row');
 $rt_row = $output->get('rt_row');
 //언론보도리스트
 $news_list = $output->get('news_list');
+//총공고개수
+$all_hire_row = $output->get('all_hire_row');
 
 if($logged_info['is_commerce']=='Y'){
   echo ("<script>
+    alert('잘못된 접속입니다.');
     location.href='".getUrl('company')."';
   </script>");
 }
@@ -282,9 +285,9 @@ if($logged_info['is_commerce']=='Y'){
                 </div>
                 <div class="d-none d-lg-block text-center pt-5 pb-3">
                     <div class="text-center xs_content">
-                        <i class="text-warning">◆</i>
-                        <i class="text-primary">◆</i>
-                        <i class="text-warning">◆</i>
+                        <i class="text-warning">●</i>
+                        <i class="text-primary">●</i>
+                        <i class="text-warning">●</i>
                     </div>
                     <h3 class="weight_bold mt-3">AI 추천 공고</h3>
                     <h6 class="weight_lighter mt-1 mb-2">지원하실 확률이 높은 공고를 찾아왔어요!</h6>
@@ -313,7 +316,7 @@ if($logged_info['is_commerce']=='Y'){
                                     <? }else if($val['salary_idx']==3){ ?>
                                       <span class="badge badge-danger weight_lighter">일</span>
                                     <? } ?>
-                                      <b><?=$val['job_salary']?>원</b>
+                                      <b><?=$val['job_salary']?>만원</b>
                                   <? } ?>
                               </p>
                               <p class="text-secondary xxs_content mx-0 px-0">
@@ -373,16 +376,16 @@ if($logged_info['is_commerce']=='Y'){
     <div class="container py-5 text-left">
         <h5>국내1위 기술인력 전문 구인구직 매칭서비스</h5>
         <h4>지금까지 <span class="text-warning">기술자숲</span>을 통해</h4>
-        <h3>전달된 일자리 <span class="weight_bold" style="font-size:40px;">총 <b class="russo_one text-warning">27,567</b>개</span></h3>
+        <h3>전달된 일자리 <span class="weight_bold" style="font-size:40px;">총 <b class="russo_one text-warning"><?=number_format($all_hire_row[0]['count_hire'])?></b>개</span></h3>
     </div>
 </div>
 
 <div class="d-none d-lg-block container">
     <div class="text-center pt-5 pb-3">
         <div class="text-center xs_content">
-            <i class="text-warning">◆</i>
-            <i class="text-primary">◆</i>
-            <i class="text-warning">◆</i>
+            <i class="text-warning">●</i>
+            <i class="text-primary">●</i>
+            <i class="text-warning">●</i>
         </div>
         <h3 class="weight_bold mt-3">언론보도</h3>
         <h6 class="weight_lighter mt-1 mb-2">기술자숲의 언론보도 및 소식을 확인해보세요.</h6>
