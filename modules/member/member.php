@@ -24,8 +24,14 @@ class memberView{
         createToken();
 
         if(!$args->is_seo){
+          if($_SESSION["USER_TYPE"] == 'technician'){
             setSEO("내 정보 관리", "기술자님의 정보를 관리해보세요!");
+          }else{
+           setSEO("내 정보 관리", "채용담당자님의 정보를 관리해보세요!");
+          }
         }
+
+
 
         $output = new Object();
         $output->add('notice_setting',$this->notice_setting());
@@ -46,17 +52,32 @@ class memberView{
 //    마이페이지 Alias
     function myprofile($args){
         global $logged_info;
-        setSEO("내 정보 관리", $logged_info['m_name']."님의 정보를 업데이트 할 수 있습니다.");
+
+        if($_SESSION["USER_TYPE"] == 'technician'){
+          setSEO("내 정보 설정", "기술자님의 정보를 수정할 수 있어요.");
+        }else{
+          setSEO("내 정보 설정", "채용담당자님의 정보를 수정할 수 있어요.");
+        }
         $args->is_seo = "Y";
 
         $args->act = "myprofile";
         return $this->index($args);
     }
+
     function updateIdpw($args){
+        if($_SESSION["USER_TYPE"] == 'technician'){
+          setSEO("아이디·비밀번호 관리", "기술자님의 계정을 수정할 수 있어요.");
+        }else{
+          setSEO("아이디·비밀번호 관리", "채용담당자님의 계정을 수정할 수 있어요.");
+        }
+        $args->is_seo = "Y";
         $args->act = "updateIdpw";
         return $this->index($args);
     }
+
     function settingAlert($args){
+        setSEO("알림설정", "원하시는 알림을 직접 설정해보세요.");
+        $args->is_seo = "Y";
         $args->act = "settingAlert";
         return $this->index($args);
     }

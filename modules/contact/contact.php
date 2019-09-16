@@ -14,7 +14,7 @@ class contactView{
         $add_body_class[] = "shrink";
         $add_body_class[] = "no_mobile_header";
 
-        setSEO("문의하기","기술자숲에 궁금한것이 있다면 무엇이든 문의 해 보세요!");
+        setSEO("문의하기","궁금한게 있으신가요? 무엇이든 물어보세요!");
 
         global $set_template_file;
         $set_template_file = "contact/write.php";

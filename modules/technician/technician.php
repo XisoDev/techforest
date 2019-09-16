@@ -36,7 +36,7 @@ class technicianView{
     }
 
     function resume($args){
-        setSEO("이력서 등록","기술자숲 회원이라면 누구나 작성할 수 있습니다.");
+        setSEO("이력서 등록","상세한 이력서로 면접기회를 높여보세요!");
         global $site_info;
         global $add_body_class;
         global $set_template_file;
@@ -274,7 +274,7 @@ class technicianView{
     }
 
     function findJob($args){
-        setSEO("일자리 찾기","기술자님께 딱!맞는 일자리와 관심공고를 살펴보세요");
+        setSEO("일자리 찾기","맞춤일자리뿐 아니라 전체일자리를 확인해보세요.");
         global $site_info;
         $site_info->layout = "technician";
 
@@ -303,7 +303,7 @@ class technicianView{
 
 
     function findJobList($args){
-        setSEO("일자리 찾기","기술자님께 딱!맞는 일자리와 관심공고를 살펴보세요");
+        setSEO("일자리 찾기","맞춤일자리뿐 아니라 전체일자리를 확인해보세요.");
         global $site_info;
 
         $site_info->layout = "technician";
@@ -340,7 +340,7 @@ class technicianView{
     }
 
     function findJobListAll($args){
-        setSEO("일자리 찾기","기술자님께 딱!맞는 일자리와 관심공고를 살펴보세요");
+        setSEO("일자리 찾기","맞춤일자리뿐 아니라 전체일자리를 확인해보세요.");
         global $site_info;
         $site_info->layout = "technician";
 
@@ -428,12 +428,12 @@ class technicianView{
 
         global $set_template_file;
         if($args->document_srl){
-            setSEO("글제목 넣으셔요","작성자, 날짜같은거 넣으면 좋음");
-            //또는
-            setSEO("취업정보","글제목 넣으셔요");
-            $set_template_file = "technician/magazine.view.php";
+            // setSEO("글제목 넣으셔요","작성자, 날짜같은거 넣으면 좋음");
+            // //또는
+            // setSEO("취업정보","글제목 넣으셔요");
+            // $set_template_file = "technician/magazine.view.php";
         }else {
-            setSEO("취업정보","취업박람회 및 정보를 한 눈에 살펴보세요.");
+            setSEO("취업정보","다양한 취업정보를 한눈에 확인하세요.");
             $set_template_file = "technician/magazine.list.php";
 
             $oDB->orderby("reg_date","ASC");
@@ -449,7 +449,7 @@ class technicianView{
 
 
     function service($args){
-        setSEO("유료 서비스 안내","기업을 쉽게 찾을 수 있는 유료서비스를 이용해보세요.");
+        setSEO("유료 서비스 안내","기술자숲의 상품을 만나보세요.");
         global $site_info;
         $site_info->layout = "technician";
 
