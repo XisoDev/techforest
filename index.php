@@ -93,14 +93,15 @@ loadLayout($site_info->layout);
 
     <?php if($api_key["google_gtag"]){ ?>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=<?=$api_key["google_gtag"]?>"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-93362110-2"></script>
+  	<script>
+  	  window.dataLayer = window.dataLayer || [];
+  	  function gtag(){dataLayer.push(arguments);}
+  	  gtag('js', new Date());
 
-        gtag('config', '<?=$api_key["google_gtag"]?>');
-    </script>
+  	  gtag('config', 'UA-93362110-2');
+  		gtag('config', 'AW-844892489');
+  	</script>
     <?php } ?>
 <?php
     //JS용 전역변수 정의.

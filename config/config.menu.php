@@ -1,6 +1,20 @@
 <?php
 //index에서 정의하지만 별도로도 동작할 수 있으므로 한번더 정의
-$module = "page";
+$mAgent = array("iPhone","iPod","Android","Blackberry",
+    "Opera Mini", "Windows ce", "Nokia", "sony" );
+$chkMobile = false;
+for($i=0; $i<sizeof($mAgent); $i++){
+    if(stripos( $_SERVER['HTTP_USER_AGENT'], $mAgent[$i] )){
+        $chkMobile = true;
+        break;
+    }
+}
+if($chkMobile){
+  $module = "page";
+}else{
+  $module = "page_nos";
+}
+
 if(isset($_GET['mid'])) $module = $_GET['mid'];
 $act = "index";
 if(isset($_GET['act'])) $act = $_GET['act'];
