@@ -47,7 +47,7 @@ class companyView{
         $output->add('member_notice',$this->member_notice());
         if($args->document_srl){
             $set_template_file = "company/service.view.php";
-
+            $add_body_class[] = "no_mobile_header";
 
             $c_idx = $logged_info['c_idx'];
             $m_idx = $_SESSION['LOGGED_INFO'];
@@ -91,7 +91,7 @@ class companyView{
         $output = new Object();
         $site_info->layout = "company";
         $add_body_class[] = "shrink";
-        $add_body_class[] = "no_mobile_header";
+        // $add_body_class[] = "no_mobile_header";
 
         $set_template_file = "company/service.history.php";
 
@@ -249,6 +249,7 @@ class companyView{
 
         if($args->document_srl > 0){
           $set_template_file = "company/job.view.php";
+          $add_body_class[] = "no_mobile_header";
           //여기 array 에는 해당 document_srl 로 조회한 job 정보를 넣으면됨.
           //$output->add('oJob',array());
           $h_idx = $args->document_srl;
@@ -321,7 +322,7 @@ class companyView{
     }
 
     function hireList($args){
-      setSEO("진행중인 공고","진행중인 공고를 확인하세요.");
+      setSEO("진행중인 공고","현재 진행중인 공고를 확인해보세요!");
       global $site_info;
       $site_info->layout = "company";
 
@@ -358,7 +359,7 @@ class companyView{
     }
 
     function hireEndList($args){
-      setSEO("마감된 공고","마감된 공고를 확인하세요.");
+      setSEO("마감된 공고","이미 마감된 구인공고를 확인할 수 있어요!");
       global $site_info;
       $site_info->layout = "company";
 
@@ -395,7 +396,7 @@ class companyView{
     }
 
     function job_register($args){
-        setSEO("기업정보등록","기업정보등록 하시고 알맞는 기술자를 찾아보세요.");
+        setSEO("기업정보등록","기업정보를 간단하게 등록해보세요!");
         global $set_template_file;
         $set_template_file = "company/job.reg.php";
 
@@ -436,7 +437,7 @@ class companyView{
     }
 
     function jobDetail($args){
-        setSEO("공고 상세보기","");
+        setSEO("공고 상세보기","작성하신 공고의 상세한 정보들을 확인해보세요!");
         global $site_info;
         $site_info->layout = "company";
 
@@ -447,6 +448,7 @@ class companyView{
 
         global $add_body_class;
         $add_body_class[] = "shrink";
+        $add_body_class[] = "no_mobile_header";
 
         global $oDB;
 

@@ -226,11 +226,12 @@ $B_hire = $output->get('B_hire');
   									<button class="btn btn-block btn-primary" style="font-size: 19px;" onclick="application_ok(<?=$hire_info[0]['h_idx']?>)"><strong>지원하기4</strong></button>
   								<?}
   								if($career_n==0){?>
+                    경력없음.
   									<button class="btn btn-block btn-primary" style="font-size: 19px;" onclick="application_ok(<?=$hire_info[0]['h_idx']?>)"><strong>지원하기5</strong></button>
   								<?}
   							} else {?>
                   <!-- 로그인어떻게 할것인가? 페이지이동? 아니면 비로그인시 지원하기 버튼 안보이기-->
-  								<button class="btn btn-block btn-primary" style="font-size: 19px;" ><strong>지원하기6</strong></button>
+  								<button class="btn btn-block btn-primary" style="font-size: 19px;" onclick="login_please();"><strong>지원하기</strong></button>
   							<?}?>
   						</div>
   					<?}?>

@@ -217,6 +217,10 @@
     </div>
     <div class="row">
       <input type="hidden" id="hidden_m_idx" value="<?=$m_idx?>">
+      <?php
+          //기준 숫자
+          $file_count = FileHandler::getFileCount('oPage/technician/company_thumbnails','png');
+      ?>
       <?if($total_record > 0){?>
         <?php for($i = $start; $i < $start + $scale && $i < $total_record; $i++) { ?>
           <input type="hidden" id="hidden_h_idx" value="<?=$hire_rows[$i]['h_idx']?>">
@@ -224,7 +228,12 @@
                 <div class="magazine tech_card mb-3 bg-white text-left shadow">
                     <div class="row">
                         <div class="col-5 col-md-12 px-0" style="background-color:#EEE;">
-                            <div class="thumbnail mx-0 px-0" style="height:100%; background-image:url('http://www.planttech.co.kr/wp-content/uploads/2018/07/%EC%82%BC%EC%84%B1%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%811-820x457.png')">
+                          <?php
+                          //랜덤 이미지를 h_idx 에의해 고정적으로 출력하기 위한 계산식
+                          $img_num = $hire_rows[$i]['h_idx'] % $file_count;
+                          $img_num = $img_num + 1;
+                          ?>
+                            <div class="thumbnail mx-0 px-0" style="height:100%; background-image:url('/oPage/technician/company_thumbnails/<?=$img_num?>.png')">
                                 <span class="overlay">
                                  <?if($m_idx > 0){
                                     foreach ($interest_rows as $val2) {

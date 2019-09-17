@@ -12,7 +12,7 @@ class contactView{
         $site_info->layout = $_SESSION["USER_TYPE"];
         global $add_body_class;
         $add_body_class[] = "shrink";
-        $add_body_class[] = "no_mobile_header";
+        // $add_body_class[] = "no_mobile_header";
 
         setSEO("문의하기","궁금한게 있으신가요? 무엇이든 물어보세요!");
 
@@ -52,7 +52,6 @@ class contactView{
       $site_info->layout = $_SESSION["USER_TYPE"];
       global $add_body_class;
       $add_body_class[] = "shrink";
-      $add_body_class[] = "no_mobile_header";
 
       setSEO("내문의답변","기술자숲에 궁금한것이 있다면 무엇이든 문의 해 보세요!");
 
@@ -78,9 +77,7 @@ class contactView{
       $site_info->layout = $_SESSION["USER_TYPE"];
       global $add_body_class;
       $add_body_class[] = "shrink";
-      $add_body_class[] = "no_mobile_header";
-
-      setSEO("자주묻는질문","");
+      // $add_body_class[] = "no_mobile_header";
 
       global $set_template_file;
       $set_template_file = "contact/FAQ.php";
@@ -95,9 +92,7 @@ class contactView{
       $site_info->layout = $_SESSION["USER_TYPE"];
       global $add_body_class;
       $add_body_class[] = "shrink";
-      $add_body_class[] = "no_mobile_header";
-
-      setSEO("기술자숲 소개","");
+      // $add_body_class[] = "no_mobile_header";
 
       global $set_template_file;
       $set_template_file = "contact/TechnicianForest.php";

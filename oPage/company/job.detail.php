@@ -5,7 +5,6 @@ $h_certificate = $output->get('h_certificate');
 $member_count = $output->get('member_count');
 ?>
 <link rel="stylesheet" href="/layout/company/assets/default.css">
-<link rel="stylesheet" href="/layout/none/vendor/bootstrap/bootstrap.min.css">
 
 <section class="bg-white">
   <section class="p-3 mt-4 pt-5 bg-white d-lg-none">
@@ -204,7 +203,7 @@ $member_count = $output->get('member_count');
   						if($hire_info[0]["m_idx"] == $m_idx) {
   							$hire_info[0]["letter_count"] -= $member_count[0]['cnt'];?>
   							  <div class="padding_15 border1_xs_null font_size_20">
-  								<span>총<strong>(<?=$hire_info[0]["letter_count"]?>)명</strong>의 지원자가 있습니다.</span>
+  								<span>총<strong><?=$hire_info[0]["letter_count"]?>명</strong>의 지원자가 있습니다.</span>
   								<a href="<?=getUrl('company','job',$hire_info[0]['h_idx']);?>">
   									<button class="btn button1" style="font-size: 19px;" >
   										<strong>지원자보기</strong>

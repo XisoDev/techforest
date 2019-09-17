@@ -128,7 +128,7 @@ class technicianView{
         }else{
             $site_info->layout = "technician";
             $add_body_class[] = "shrink";
-            $add_body_class[] = "no_mobile_header";
+            // $add_body_class[] = "no_mobile_header";
             $set_template_file = "technician/resume.list.php";
 
             $output->add('myinfo_row',$this->resume_info());
@@ -275,13 +275,13 @@ class technicianView{
     }
 
     function findJob($args){
-        setSEO("일자리 찾기","맞춤일자리뿐 아니라 전체일자리를 확인해보세요.");
+        setSEO("일자리 찾기","일자리정보들과 입사지원현황을 확인할 수 있어요!");
         global $site_info;
         $site_info->layout = "technician";
 
         global $add_body_class;
         $add_body_class[] = "shrink";
-        $add_body_class[] = "no_mobile_header";
+        // $add_body_class[] = "no_mobile_header";
 
         global $set_template_file;
         $set_template_file = "technician/findjob.php";
@@ -423,7 +423,7 @@ class technicianView{
 
         global $add_body_class;
         $add_body_class[] = "shrink";
-        $add_body_class[] = "no_mobile_header";
+        // $add_body_class[] = "no_mobile_header";
 
         $output = new Object();
 
@@ -456,7 +456,7 @@ class technicianView{
 
         global $add_body_class;
         $add_body_class[] = "shrink";
-        $add_body_class[] = "no_mobile_header";
+        // $add_body_class[] = "no_mobile_header";
 
         global $set_template_file;
 
@@ -492,7 +492,7 @@ class technicianView{
     }
 
     function interest_list($args){
-        setSEO("관심공고","");
+        setSEO("관심공고","최근 관심있게 본 공고를 확인해보세요!");
         global $site_info;
         $site_info->layout = "technician";
 
@@ -789,7 +789,7 @@ class technicianView{
 
     function jobDetail($args){
 
-        setSEO("공고 상세보기","");
+        setSEO("공고 상세보기","직무와 근무조건 등을 상세히 확인해보세요!");
         $now_date = date(YmdHis);
         global $site_info;
         $site_info->layout = "technician";
@@ -801,7 +801,8 @@ class technicianView{
 
         global $add_body_class;
         $add_body_class[] = "shrink";
-
+        $add_body_class[] = "no_mobile_header";
+        
         global $oDB;
 
         $output = new Object();
@@ -1015,7 +1016,7 @@ class technicianView{
     }
 
     function applicationList(){
-      setSEO("입사지원현황","");
+      setSEO("입사지원현황","입사지원하신 공고들을 확인해보세요!");
       global $site_info;
       $site_info->layout = "technician";
 

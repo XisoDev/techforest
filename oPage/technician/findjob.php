@@ -13,6 +13,10 @@
   $duty_list = $output->get('duty_list');
   //입사지원 현황
   $application_letter = $output->get('application_letter');
+
+
+  //랜덤 이미지 기준 숫자
+  $file_count = FileHandler::getFileCount('oPage/technician/company_thumbnails','png');
 ?>
 
 <section class="bg-white d-lg-none">
@@ -37,7 +41,12 @@
         <?php for($i=0; $i < $count_hire; $i++){ ?>
           <input type="hidden" id="hidden_h_idx" value="<?=$hire_rows[$i]['h_idx']?>">
             <div class="tech_card bg-white shadow">
-                <div class="thumbnail mx-0 px-0" style="background-image:url('http://www.planttech.co.kr/wp-content/uploads/2018/07/%EC%82%BC%EC%84%B1%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%811-820x457.png')">
+              <?php
+              //랜덤 이미지를 h_idx 에의해 고정적으로 출력하기 위한 계산식
+              $img_num = $hire_rows[$i]['h_idx'] % $file_count;
+              $img_num = $img_num + 1;
+              ?>
+                <div class="thumbnail mx-0 px-0" style="height:100%; background-image:url('/oPage/technician/company_thumbnails/<?=$img_num?>.png')">
                   <span class="overlay">
                     <?
                       foreach ($interest_rows as $val2) {
@@ -102,6 +111,7 @@
             <h4 class="mb-2">입사지원현황</h4>
         </div>
     <div class="row px-2">
+
     <?if(count($application_letter) > 0){?>
       <? $count_application_letter = (count($application_letter) > 2) ? 2 : count($application_letter); ?>
         <?php for($i=0; $i<$count_application_letter; $i++) { ?>
@@ -109,8 +119,13 @@
         <div class="magazine tech_card mb-3 bg-white text-left shadow">
             <div class="row px-0 mx-0">
                 <div class="col-5 col-md-12 px-0 mx-0" style="background-color:#EEE;">
-                    <div class="thumbnail d-block" style="background-image:url('http://www.planttech.co.kr/wp-content/uploads/2018/07/%EC%82%BC%EC%84%B1%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%811-820x457.png');height:100%; min-height:170px;"
-                         onmouseover="jQuery(this).find('div.overlay').removeClass('d-none');" onmouseout="jQuery(this).find('div.overlay').addClass('d-none');">
+                  <?php
+                  //랜덤 이미지를 h_idx 에의해 고정적으로 출력하기 위한 계산식
+                  $img_num2 = $application_letter[$i]['h_idx'] % $file_count;
+                  $img_num2 = $img_num2 + 1;
+                  ?>
+                    <div class="thumbnail d-block" style="background-image:url('/oPage/technician/company_thumbnails/<?=$img_num2?>.png');height:100%; min-height:170px;"
+                      onmouseover="jQuery(this).find('div.overlay').removeClass('d-none');" onmouseout="jQuery(this).find('div.overlay').addClass('d-none');">
                     <div class="overlay">
                         <div class="overlay-content" style="width:100%; text-align:center;">
                             <?if($application_letter[$i]['isChecked'] == "Y"){?>
@@ -182,9 +197,13 @@
       <input type="hidden" id="hidden_m_idx" value="<?=$m_idx?>">
         <?php if(count($interest_rows) != 0){ ?>
           <?php foreach($interest_rows as $val){ ?>
+            <?php
+            //랜덤 이미지를 h_idx 에의해 고정적으로 출력하기 위한 계산식
+            $img_num3 = $hire_rows[$i]['h_idx'] % $file_count;
+            $img_num3 = $img_num3 + 1;
+            ?>
             <div class="tech_card bg-white shadow">
-                <div class="thumbnail mx-0 px-0" style="background-image:url('http://www.planttech.co.kr/wp-content/uploads/2018/07/%EC%82%BC%EC%84%B1%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%811-820x457.png')">
-                    <span class="overlay">
+                <div class="thumbnail mx-0 px-0" style="height:100%; background-image:url('/oPage/technician/company_thumbnails/<?=$img_num3?>.png')">
                       <?
                         if($m_idx > 0) {
                           if(count($interest_rows) == 0) {
