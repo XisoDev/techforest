@@ -14,10 +14,10 @@ if($chkMobile){
 }else{
   $module = "page_nos";
 }
-
-if($_SERVER['HTTP_USER_AGENT']=='androidwebview'){
-  $module = "page";
-}
+// 
+// if($_SERVER['HTTP_USER_AGENT']=='androidwebview'){
+//   $module = "page";
+// }
 
 if(isset($_GET['mid'])) $module = $_GET['mid'];
 $act = "index";
