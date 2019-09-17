@@ -113,8 +113,8 @@ $salary_list = $oDB->get("TF_salary",null,"salary_idx, salary_name, salary_is_sh
                         </select>
                     </div>
 
-                    <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mx-0 px-0">
-                        <h6 class="mt-sm-1">공고제목</h6>
+                    <div class="col-12 col-sm-3 text-sm-right pr-md-3 pr-sm-2 mt-3 mx-0 px-0">
+                        <h6 class="">공고제목</h6>
                     </div>
                     <div class="col-12 col-sm-9 mx-0 px-0 mb-2">
                         <input type="text" class="form-control" id="h_title" value="<?=$edit_row[0]['h_title']?>" placeholder="공고제목을 입력해주세요." required>

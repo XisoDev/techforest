@@ -87,7 +87,7 @@
                     <tr><td><?=$val['pay_service']?></td><td>-</td><td><?=date("Y-m-d", strtotime($val["reg_date"]))?> ~ <?=date("Y-m-d", strtotime($val["expire_date"]))?></td></tr>
                   <?php } ?>
                 <?php } else{?>
-                  <tr><td>이용중인 서비스가 없어요.</td></tr>
+                  <tr><td colspan="3">이용중인 서비스가 없어요.</td></tr>
                 <?php }?>
                 </tbody>
             </table>

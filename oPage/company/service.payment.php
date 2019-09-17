@@ -117,12 +117,12 @@
             </div>
             <div id="London" class="tabcontent">
               <p>
-                휴대폰번호 <input type="text" id="receipt_phone" style="width:150px;">
+                휴대폰번호 <input type="text" id="receipt_phone" onkeyup="onlyNumber(this)" style="width:150px;">
               </p>
             </div>
             <div id="Paris" class="tabcontent">
               <p>
-                사업자번호 <input type="text" id="receipt_registration" style="width:150px;">
+                사업자번호 <input type="text" id="receipt_registration" maxlength="10" onkeyup="onlyNumber(this)" style="width:150px;">
               </p>
             </div>
           </div>

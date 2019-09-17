@@ -72,8 +72,8 @@ $self_introduction = str_replace("\n", "<br />", $my_info2[0]["self_introduction
                 </cols>
                 <tr><th class="pr-0">생년월일</th><td><?=$member_birthday?> (<?=$my_info1[0]['m_age']?>세)</td></tr>
 								<?if($logged_info['is_commerce'] == 'Y'){ ?>
-                <tr><th>연 락 처</th><td><a href="<?=getUrl('company','service',4)?>">후불 통합 패키지 상품 구매 후 확인 가능합니다.(자세히보기)</a></td></tr>
-                <tr><th>이 메 일</th><td><a href="<?=getUrl('company','service',4)?>">후불 통합 패키지 상품 구매 후 확인 가능합니다.(자세히보기)</a></td></tr>
+                <tr><th>연 락 처</th><td><a href="<?=getUrl('company','service',4)?>" class="red">후불 통합 패키지 상품 구매 후 확인 가능합니다.(자세히보기)</a></td></tr>
+                <tr><th>이 메 일</th><td><a href="<?=getUrl('company','service',4)?>" class="red">후불 통합 패키지 상품 구매 후 확인 가능합니다.(자세히보기)</a></td></tr>
 								<?}else{?>
 									<tr><th>연 락 처</th><td><?=$my_info1[0]['m_phone']?></td></tr>
 									<tr><th>이 메 일</th><td><?=$my_info1[0]['m_email']?></td></tr>
@@ -194,7 +194,11 @@ $self_introduction = str_replace("\n", "<br />", $my_info2[0]["self_introduction
             <div class="p-3">
               <h6 class="weight_bold">해당 기술자에게 입사제안 하시겠어요?</h6>
               <div class="px-3 mt-4">
-                <button onclick="suggestion_join_yes()" class="btn btn-block btn-danger btn-round mt-3">네</button>
+								<?if(count($suggestion_join_hire) > 0){?>
+                	<button onclick="suggestion_join_yes()" class="btn btn-block btn-danger btn-round mt-3">네</button>
+								<?}else{?>
+									<button onclick="no_hire()" class="btn btn-block btn-danger btn-round mt-3">네</button>
+								<?}?>
                 <button class="btn btn-block border-danger text-danger btn-round mt-3" onclick="jQuery('#suggestion_join').modal('hide');">아니오</button>
               </div>
             </div>
@@ -223,5 +227,12 @@ function suggestion_join_yes(){
     jQuery('#suggestion_join').modal('hide');
   });
 
+}
+
+function no_hire(){
+	var result = confirm("등록된 공고가 없습니다. 등록하시겠습니까?");
+	if(result){
+		location.href="<?=getUrl('company','job_register')?>";
+	}
 }
 </script>
