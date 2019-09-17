@@ -1,6 +1,7 @@
 <?php
   $row = $output->get('application_row');
   $interview_list = $output->get('interview_list');
+
 ?>
 
 <section class="p-3 mt-4 pt-5 bg-white d-lg-none">
@@ -34,8 +35,11 @@
           <div class="tech_card bg-white overflow-hidden mx-3 mb-3 shadow">
               <div class="row">
                   <div class="col-5 pt-4 mt-3 pb-0 my-0 pl-4 pr-2">
-                      <div class="avatar square mx-md-2 mx-lg-4" style="background-image:url('/layout/none/assets/images/no_avatar.png');">
-                      </div>
+                    <?if($val['m_picture']){?>
+                      <div class="avatar square mx-md-2 mx-lg-4" style="background-image:url('/layout/none/assets/images/no_avatar.png');"></div>
+                    <?}else{?>
+                      <div class="avatar square" id="my_picture" alt="picture" style="background-image:url('../TF/selfImg/<?=$val['m_picture']?>');"></div>
+                    <?}?>
                   </div>
                   <div class="col-7 pl-0 ml-0">
                       <div class="star_rating pull-right p-2 xxs_content">

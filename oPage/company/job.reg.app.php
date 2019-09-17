@@ -350,7 +350,7 @@ $salary_list = $oDB->get("TF_salary",null,"salary_idx, salary_name, salary_is_sh
                         <div class="input-group">
                             <select class="form-control" id="c_phone1">
                               <?
-                                $phonenumber = explode("-", $logged_info['m_phone']);
+                                $phonenumber = explode("-", $logged_info['phonenumber']);
                                 $phone_arr = array("선택", "02", "031", "032", "033", "041", "042", "043", "044", "051", "052", "053", "054", "055", "061", "062", "063", "064", "010", "070");
 
                                 for($i = 0; $i < count($phone_arr); $i++) {

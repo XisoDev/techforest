@@ -470,7 +470,7 @@ class companyController{
 
      $file_real_name = $_FILES["userfile"]["name"];
 
-     $target_path = "./company_logo/";
+     $target_path = "../TF/commerce/";
 
      if($_FILES["userfile"]["tmp_name"]){
        $oDB->where("c_idx",$c_idx);
@@ -478,14 +478,14 @@ class companyController{
 
        $db_img = $row['image'];
        if($db_img) {
-         unlink("./company_logo/" . $db_img);
+         unlink("../TF/commerce/" . $db_img);
        }
 
        if(!$row){
          return new Object(-1,"네트워크 오류입니다.(-1)");
        }
        // 파일저장
-     if(move_uploaded_file($_FILES['userfile']['tmp_name'], "./company_logo/" . $image_name)){
+     if(move_uploaded_file($_FILES['userfile']['tmp_name'], "../TF/commerce/" . $image_name)){
 
        $data = array(
          "image" => $image_name,
@@ -518,7 +518,7 @@ class companyController{
 
      if($row1){
        $c_idx = $row1['c_idx'];
-        unlink("./company_logo/" . $row1['image']);
+        unlink("../TF/commerce/" . $row1['image']);
      }else{
        return new Object(-1,"회원탈퇴 중 오류가 발생하였습니다. (-1)");
      }

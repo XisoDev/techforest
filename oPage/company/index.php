@@ -6,6 +6,7 @@ $hire_check = $output->get('hire_check');
 //총공고개수
 $all_hire_row = $output->get('all_hire_row');
 
+
 ?>
 <script type="text/javascript">
 $(document).ready(function(){

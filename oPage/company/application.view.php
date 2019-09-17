@@ -30,8 +30,8 @@
               <?if(!$info_row[0]['m_picture']){?>
                 <div class="avatar square" style="background-image:url('/layout/none/assets/images/no_avatar.png');"></div>
               <?}else{?>
-<!--                  배경으로 수정해놓음 / by xiso-->
-                  <div class="avatar square" id="my_picture" alt="picture" style="background-image:url('../../../img/<?=$info_row[0]['m_picture']?>');"></div>
+                  <!--배경으로 수정해놓음 / by xiso-->
+                  <div class="avatar square" id="my_picture" alt="picture" style="background-image:url('../TF/selfImg/<?=$info_row[0]['m_picture']?>');"></div>
               <?}?>
             </div>
         </div>
@@ -48,7 +48,7 @@
                     <div class="avatar square" style="background-image:url('/layout/none/assets/images/no_avatar.png');"></div>
                 <?}else{?>
                     <!--                  배경으로 수정해놓음 / by xiso-->
-                    <div class="avatar square" id="my_picture" alt="picture" style="background-image:url('../../../img/<?=$info_row[0]['m_picture']?>');"></div>
+                    <div class="avatar square" id="my_picture" alt="picture" style="background-image:url('../TF/selfImg/<?=$info_row[0]['m_picture']?>');"></div>
                 <?}?>
             </div>
             <div class="col-12 col-md-7 col-lg-8">

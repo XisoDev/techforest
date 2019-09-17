@@ -23,7 +23,7 @@
               if(!$logged_info['image']) {
                   $img_url = "/layout/none/assets/images/no_company.png";
               }else {
-                  $img_url = "../../m_picture/" . $logged_info['image'];
+                  $img_url = "../TF/commerce/" . $logged_info['image'];
               }
               ?>
             <div class="position-relative">
@@ -35,7 +35,7 @@
               if(!$logged_info['m_picture']) {
                   $img_url = "/layout/none/assets/images/no_avatar.png";
               }else {
-                  $img_url = "../../m_picture/" . $logged_info['m_picture'];
+                  $img_url = "../TF/selfImg/" . $logged_info['m_picture'];
               }
               ?>
               <div class="position-relative">

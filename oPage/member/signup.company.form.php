@@ -56,7 +56,7 @@
             <div class="input-group">
               <input type="text" class="form-control" id="phone1" placeholder="직접입력">
               <button class="dropdown-toggle" type="button" id="phone_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="caret"></span></button>
-              <ul id="phone1_list" class="dropdown-menu" aria-labelledby="phone_btn" style="">
+              <ul id="phone1_list" class="dropdown-menu" aria-labelledby="phone_btn" style="margin:20px;">
                 <li class="" onclick="click_phone('010')">010</li>
                 <li role="separator" class="divider"></li>
                 <li class="" onclick="click_phone('017')">017</li>
@@ -65,7 +65,6 @@
                 <li role="separator" class="divider"></li>
                 <li class="" onclick="click_phone('011')">011</li>
                 <li role="separator" class="divider"></li>
-                <li class="" onclick="click_phone('018')">018</li>
               </ul>
                 </select>
                 <div class="input-group-prepend">

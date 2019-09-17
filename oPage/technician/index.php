@@ -210,6 +210,15 @@ if($logged_info['is_commerce']=='Y'){
                     background-position:center top;
             ">
                 <div class="col-md-10 col-lg-8 mx-auto mt-md-5">
+                  <?if($logged_info['m_picture']){?>
+                    <div class="mx-auto avatar position-relative square bg-white" style="
+                                max-width:150px;
+                                margin-top:-75px;
+                                z-index:50;
+                                background-image:url('../TF/selfImg/<?=$logged_info['m_picture']?>');
+                            ">
+                    </div>
+                  <?}else{?>
                     <div class="mx-auto avatar position-relative square bg-white" style="
                                 max-width:150px;
                                 margin-top:-75px;
@@ -217,6 +226,7 @@ if($logged_info['is_commerce']=='Y'){
                                 background-image:url('/layout/none/assets/images/no_avatar.png');
                             ">
                     </div>
+                  <?}?>
                     <div class="tech_card overflow-hidden mt-md-n5 bg-white shadow">
                         <div class="row">
                             <div class="d-none d-md-block px-5 text-center col-12 pt-5">

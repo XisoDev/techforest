@@ -210,7 +210,7 @@ $self_introduction = str_replace("\n", "<br />", $my_info2[0]["self_introduction
 
 function suggestion_join_yes(){
   var m_idx = <?=$my_info1[0]['m_idx']?>;
-  var c_idx = <?=$suggestion_join_hire[0]['c_idx']?>;
+  var c_idx = <?=$logged_info['c_idx']?>;
   var h_idx =  $("#hire_sel option:selected").val();
 
   if(h_idx == ""){
@@ -230,7 +230,7 @@ function suggestion_join_yes(){
 }
 
 function no_hire(){
-	var result = confirm("등록된 공고가 없습니다. 등록하시겠습니까?");
+	var result = confirm("등록된 공고가 없습니다.공고를 등록하시겠습니까?");
 	if(result){
 		location.href="<?=getUrl('company','job_register')?>";
 	}

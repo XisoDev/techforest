@@ -524,7 +524,7 @@ class technicianController{
     $date	= date(YmdHis);
     $file_real_name = $_FILES["userfile"]["name"];
     $file_name = $m_idx . "_" . $date . "_" . $file_real_name;
-    $target_path = "./portfolio/";
+    $target_path = "../TF/portfolio/";
 
     if(move_uploaded_file($_FILES["userfile"]["tmp_name"], $target_path . $file_name)){
       $data = array(
@@ -568,7 +568,7 @@ class technicianController{
     $date	= date(YmdHis);
     $file_real_name = $_FILES["resume_upload"]["name"];
     $file_name = $m_idx . "_" . $date . "_" . $file_real_name;
-    $target_path = "./resume_upload/";
+    $target_path = "../TF/curriculum/";
 
     if(move_uploaded_file($_FILES["resume_upload"]["tmp_name"], $target_path . $file_name)){
       $data = array(
@@ -596,7 +596,7 @@ class technicianController{
     $date = date("YmdHis", strtotime($args->reg_date));
     $file_real_name = htmlspecialchars($args->file_name);
     $file_name = $m_idx . "_" . $date . "_" . $file_real_name;
-    $target_path = "./portfolio/";
+    $target_path = "../TF/portfolio/";
 
     if(unlink($target_path . $file_name)){
       $oDB->where("reg_date",$date);
@@ -617,7 +617,7 @@ class technicianController{
     global $oDB;
     $m_idx = $_SESSION['LOGGED_INFO'];
     $now_date = date(YmdHis);
-    $target_path = "./m_picture/";
+    $target_path = "../TF/selfImg/";
     $image_name = $m_idx . "_" . $date . ".jpg";
 
     $oDB->where("m_idx",$m_idx);
@@ -648,7 +648,7 @@ class technicianController{
 
     $file_real_name = $_FILES["picture_upload"]["name"];
 
-    $target_path = "./m_picture/";
+    $target_path = "../TF/selfImg/";
 
     if($_FILES["picture_upload"]["tmp_name"]){
       $oDB->where("m_idx",$m_idx);
@@ -656,14 +656,14 @@ class technicianController{
 
       $db_img = $row['m_picture'];
       if($db_img) {
-        unlink("./m_picture/" . $db_img);
+        unlink("../TF/selfImg/" . $db_img);
       }
 
       if(!$row){
         return new Object(-1,"네트워크 오류입니다.(-1)");
       }
       // 파일저장
-    if(move_uploaded_file($_FILES['picture_upload']['tmp_name'], "./m_picture/" . $image_name)){
+    if(move_uploaded_file($_FILES['picture_upload']['tmp_name'], "../TF/selfImg/" . $image_name)){
 
       $data = array(
         "m_picture" => $image_name,
@@ -703,7 +703,7 @@ class technicianController{
     $sel = $oDB->get("TF_member_file",null,"file_name, reg_date");
     if($sel){
       $filePath = $m_idx . "_" . date_format($sel['reg_date'], "YmdHis") . "_" . $sel['file_name'];
-      unlink("./portfolio/" . $filePath);
+      unlink("../TF/curriculum/" . $filePath);
     }
 
     $oDB->where("m_idx",$m_idx);

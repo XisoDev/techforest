@@ -40,7 +40,7 @@
               <select class="form-control" id="m_phonenumber1">
                 <?
                   $phonenumber = explode("-", $logged_info['m_phone']);
-                  $phone_arr = array("선택", "02", "031", "032", "033", "041", "042", "043", "044", "051", "052", "053", "054", "055", "061", "062", "063", "064", "010", "070");
+                  $phone_arr = array("선택","010", "011", "017");
 
                   for($i = 0; $i < count($phone_arr); $i++) {
                     if($phone_arr[$i] == $phonenumber[0]) {

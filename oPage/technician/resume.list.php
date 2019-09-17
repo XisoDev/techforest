@@ -63,7 +63,11 @@ if(!$count_myinfo_row[0]['count_myinfo']){
                     <div class="row">
                         <div class="d-none d-lg-block col-lg-1"></div>
                         <div class="d-none d-lg-block col-lg-3 pb-lg-3">
+                          <?if($myinfo_row[0]['m_picture']){?>
+                            <div class="avatar square" style="background-image:url('../TF/selfImg/<?=$myinfo_row[0]['m_picture']?>');"></div>
+                          <?}else{?>
                             <div class="avatar square" style="background-image:url('/layout/none/assets/images/no_avatar.png');"></div>
+                          <?}?>
                         </div>
                         <div class="d-none d-lg-block col-lg-1"></div>
                         <div class="col-12 col-lg-7 text-center text-lg-left pt-lg-3">
@@ -142,7 +146,7 @@ if(!$count_myinfo_row[0]['count_myinfo']){
                     </div>
                     <div class="px-2 text-center pb-3">
                         <h6 class="red">[<?=$val2['file_type']?>]</h6>
-                        <h6><?=$val['file_name']?></h6>
+                        <h6><?=$val2['file_name']?></h6>
                     </div>
 
                     <button class="btn btn-light btn-block rounded-0 text-secondary" onclick="file_delete('<?=$val['reg_date']?>','<?=$val['file_name']?>');">삭제하기</button>

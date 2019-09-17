@@ -41,7 +41,7 @@ $interest_rows = $output->get('interest_rows');
                       <? if ($val['district_name'] == "전체") { $val['district_name'] = ""; }?>
                       <? if ($val['salary_idx'] < 3) { $hire_salary_text = "만원"; } else { $hire_salary_text = "원"; } ?>
                       <div class="col-7 col-md-12 pl-0 pl-md-3">
-                          <div class="content_padding">
+                          <div class="p-2">
                               <h6 class="weight_normal cut1"><?=$val['c_name']?></h6>
                               <h6 class="red cut1"><?=$val['h_title']?></h6>
                               <p class="weight_lighter xxs_content mx-0 px-0">
@@ -67,7 +67,7 @@ $interest_rows = $output->get('interest_rows');
 
                           <div class="row m-0 p-0 pt-0 mt-0">
                               <div class="col-6 mx-0 px-0">
-                                  <a href="<?=getUrl('technician','jobDetail',$val['h_idx'])?>" class="btn btn-light btn-block rounded-0">상세보기</a>
+                                  <a href="<?=getUrl('technician','jobDetail',$val['h_idx'])?>" class="btn btn-light btn-block btn-xs px-0 py-3 rounded-0">상세보기</a>
                               </div>
                               <div class="col-6 mx-0 px-0">
                                   <button class="btn btn-danger btn-block btn-xs px-0 py-3 rounded-0" disabled>지원완료</button>

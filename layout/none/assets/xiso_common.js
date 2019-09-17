@@ -26,7 +26,7 @@ jQuery(document).ready(function($){
      * by xiso
      */
     $(".nav-link").click(function(){
-        console.log('click');
+        // console.log('click');
        if($(this).find(".has_submenu").length > 0){
            $(".submenu").hide();
            $(this).next('.submenu').show();

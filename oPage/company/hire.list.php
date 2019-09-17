@@ -16,6 +16,7 @@ $row = $output->get('row');
 
     <h4 class="d-none d-lg-block mt-5 py-3">진행중인 공고</h4>
     <div class="row">
+    <?if(count($row) > 0){?>
     <?php foreach($row as $val){ ?>
         <div class=" col-12 col-sm-6 col-lg-4">
         <div class="tech_card bg-white mb-4 shadow">
@@ -67,6 +68,12 @@ $row = $output->get('row');
         </div>
         </div>
     <?php } ?>
+    <?}else {?>
+      <div class="mx-auto">
+        진행중인 공고가 없습니다.<br>
+        지금 공고를 등록해주세요!
+      </div>
+    <?}?>
     </div>
 </div>
 

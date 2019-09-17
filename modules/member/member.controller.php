@@ -387,7 +387,7 @@ class memberController{
 
       $file_real_name = $_FILES["userfile"]["name"];
 
-      $target_path = "./m_picture/";
+      $target_path = "../TF/selfImg/";
 
       if($_FILES["userfile"]["tmp_name"]){
         $oDB->where("m_idx",$m_idx);
@@ -395,14 +395,14 @@ class memberController{
 
         $db_img = $row['m_picture'];
         if($db_img) {
-          unlink("./m_picture/" . $db_img);
+          unlink("../TF/selfImg/" . $db_img);
         }
 
         if(!$row){
           return new Object(-1,"네트워크 오류입니다.(-1)");
         }
         // 파일저장
-      if(move_uploaded_file($_FILES['userfile']['tmp_name'], "./m_picture/" . $image_name)){
+      if(move_uploaded_file($_FILES['userfile']['tmp_name'], "../TF/selfImg/" . $image_name)){
 
         $data = array(
           "m_picture" => $image_name,
