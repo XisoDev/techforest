@@ -238,10 +238,13 @@ if(file_exists(_XISO_PATH_ . $bg_url) && !$output->get('false_sub_visual')) {
 
   }
   $("#open_notice").click(function(){
-    if($('.notice_menu').css("display")=='none'){
-      $('.notice_menu').css("display","block");
-    }else{
-      $('.notice_menu').css("display","none");
+    if(<?=$logged_info?>){
+      if($('.notice_menu').css("display")=='none'){
+        $('.notice_menu').css("display","block");
+      }else{
+        $('.notice_menu').css("display","none");
+      }
     }
+
   });
 </script>
