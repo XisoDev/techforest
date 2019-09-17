@@ -14,6 +14,8 @@
   //입사지원 현황
   $application_letter = $output->get('application_letter');
 
+  $career_n = $output->get('career_n');
+
 
   //랜덤 이미지 기준 숫자
   $file_count = FileHandler::getFileCount('oPage/technician/company_thumbnails','png');
@@ -93,7 +95,13 @@
                         <a href="<?=getUrl('technician','jobDetail',$hire_rows[$i]['h_idx'])?>" class="btn btn-light btn-block rounded-0">상세보기</a>
                     </div>
                     <div class="col-6 mx-0 px-0">
+                      <?if($career_n == 0 && ($hire_rows[$i]['job_is_career'] == '무관' || $hire_rows[$i]['job_is_career'] == '신입')){?>
                         <button class="btn btn-light btn-block rounded-0 red" onclick="application_ok(<?=$hire_rows[$i]['h_idx']?>)">지원하기</button>
+                      <?}else if($career_n == 0 && ($hire_rows[$i]['job_is_career'] != '무관' || $hire_rows[$i]['job_is_career'] != '신입')){?>
+                        <button class="btn btn-light btn-block rounded-0 red" onclick="write_career();">지원하기</button>
+                      <?}else if($career_n == 1){?>
+                        <button class="btn btn-light btn-block rounded-0 red" onclick="application_ok(<?=$hire_rows[$i]['h_idx']?>)">지원하기</button>
+                      <?}?>
                     </div>
                 </div>
             </div>
@@ -254,7 +262,13 @@
                         <a href="<?=getUrl('technician','jobDetail',$val['h_idx'])?>" class="btn btn-light btn-block rounded-0">상세보기</a>
                     </div>
                     <div class="col-6 mx-0 px-0">
+                      <?if($career_n == 0 && ($val['job_is_career'] == '무관' || $val['job_is_career'] == '신입')){?>
                         <button class="btn btn-light btn-block rounded-0 red" onclick="application_ok(<?=$val['h_idx']?>)">지원하기</button>
+                      <?}else if($career_n == 0 && ($val['job_is_career'] != '무관' || $val['job_is_career'] != '신입')){?>
+                        <button class="btn btn-light btn-block rounded-0 red" onclick="write_career();">지원하기</button>
+                      <?}else if($career_n == 1){?>
+                        <button class="btn btn-light btn-block rounded-0 red" onclick="application_ok(<?=$val['h_idx']?>)">지원하기</button>
+                      <?}?>
                     </div>
                 </div>
             </div>
@@ -304,6 +318,13 @@ function application_ok(h_idx){
         $('#check_phonenumber').modal('hide');
     });
  });
+}
+
+function write_career(){
+  var result = confirm("지원을 위해 이력정보등록이 필요합니다. 등록하시겠습니까?");
+  if(result){
+    location.href="<?=getUrl('technician','resumeWrite',$m_idx)?>";
+  }
 }
 </script>
 <?php

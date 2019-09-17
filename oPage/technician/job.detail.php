@@ -1,9 +1,10 @@
 <?php
-$m_idx = $_SESSION['LOGGED_INFO'];
+
 $hire_info = $output->get('hire_info');
 $h_certificate = $output->get('h_certificate');
 $member_count = $output->get('member_count');
 $interest = $output->get('interest');
+$career_n = $output->get('career_n');
 
 $h_idx = $output->get('h_idx');
 $N_hire = $output->get('N_hire');
@@ -186,10 +187,18 @@ $B_hire = $output->get('B_hire');
   							<?$date_now = date("Y-m-d H:i:s");
   							if($date_now > strtotime($hire_info[0]["job_end_date"]) ){?>
   								<button class="btn btn-block btn-primary d-md-none" style="font-size: 19px;" onclick="application_ok(<?=$val['h_idx']?>)"><strong>지원하기</strong></button>
-  						<?}
-  							else if($m_idx > 0) {?>
-  							  <button class="btn btn-block btn-primary d-md-none" style="font-size: 19px;" onclick="application_ok(<?=$val['h_idx']?>)"><strong>지원하기</strong></button>
-  						<?} else {?>
+  						<?}else if($m_idx > 0) {?>
+                  <?if($career_n == 1){?>
+                    <!-- 경력있을때 -->
+  							    <button class="btn btn-block btn-primary d-md-none" style="font-size: 19px;" onclick="application_ok(<?=$val['h_idx']?>)"><strong>지원하기</strong></button>
+                  <?}else if($career_n == 0 && ($hire_info[0]["job_is_career"] == '무관' || $hire_info[0]["job_is_career"] == '신입')){?>
+                    <!-- 경력없는데 지원하려는 공고가 경력 무관일떼(지원가능) -->
+                    <button class="btn btn-block btn-primary d-md-none" style="font-size: 19px;" onclick="application_ok(<?=$val['h_idx']?>)"><strong>지원하기</strong></button>
+                  <?}else if($career_n != 0 && ($hire_info[0]["job_is_career"] == '무관'|| $hire_info[0]["job_is_career"] != '신입')){?>
+                    <!-- 경력없는데 지원하려는 공고의 경력이 무관이 아닐때(지원불가능) -->
+                    <button class="btn btn-block btn-primary d-md-none" style="font-size: 19px;" onclick="write_career();"><strong>지원하기</strong></button>
+                  <?}?>
+              <?}else{?>
   								<button class="btn btn-block btn-primary d-md-none" style="font-size: 19px;" onclick="login_please();"><strong>지원하기</strong></button>
   						<?}?>
   						</div>
@@ -223,14 +232,17 @@ $B_hire = $output->get('B_hire');
   						<span><strong><?=$hire_info[0]["c_name"]?></strong>에 <br /><strong>지원</strong>하시겠습니까?</span><br>
   							<?if($m_idx > 0) {
   								if($career_n==1){?>
-  									<button class="btn btn-block btn-primary" style="font-size: 19px;" onclick="application_ok(<?=$hire_info[0]['h_idx']?>)"><strong>지원하기4</strong></button>
+                    <!-- 경력있을때 -->
+  									<button class="btn btn-block btn-primary" style="font-size: 19px;" onclick="application_ok(<?=$hire_info[0]['h_idx']?>)"><strong>지원하기</strong></button>
   								<?}
-  								if($career_n==0){?>
-                    경력없음.
-  									<button class="btn btn-block btn-primary" style="font-size: 19px;" onclick="application_ok(<?=$hire_info[0]['h_idx']?>)"><strong>지원하기5</strong></button>
-  								<?}
-  							} else {?>
-                  <!-- 로그인어떻게 할것인가? 페이지이동? 아니면 비로그인시 지원하기 버튼 안보이기-->
+  								if($career_n==0 && ($hire_info[0]["job_is_career"] == '무관'|| $hire_info[0]["job_is_career"] == '신입')){?>
+                    <!-- 경력없는데 지원하려는 공고의 경력이 무관일때(지원가능) -->
+  									<button class="btn btn-block btn-primary" style="font-size: 19px;" onclick="application_ok(<?=$hire_info[0]['h_idx']?>)"><strong>지원하기</strong></button>
+  								<?}else if($career_n==0 && ($hire_info[0]["job_is_career"] != '무관'|| $hire_info[0]["job_is_career"] != '신입')){?>
+                    <!-- 경력없는데 지원하려는 공고의 경력이 무관이 아닐때(지원불가능) -->
+                    <button class="btn btn-block btn-primary" style="font-size: 19px;" onclick="write_career();"><strong>지원하기</strong></button>
+                  <?}?>
+  							<?} else {?>
   								<button class="btn btn-block btn-primary" style="font-size: 19px;" onclick="login_please();"><strong>지원하기</strong></button>
   							<?}?>
   						</div>
@@ -361,6 +373,14 @@ function login_please(){
     location.href="<?=getUrl('member','login',false,array('cur' => $current_url))?>";
   }
 }
+
+function write_career(){
+  var result = confirm("지원을 위해 이력정보등록이 필요합니다. 등록하시겠습니까?");
+  if(result){
+    location.href="<?=getUrl('technician','resumeWrite',$m_idx)?>";
+  }
+}
+
 
 
 </script>

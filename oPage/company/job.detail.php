@@ -1,8 +1,9 @@
 <?php
-$m_idx = $_SESSION['LOGGED_INFO'];
+
 $hire_info = $output->get('hire_info');
 $h_certificate = $output->get('h_certificate');
 $member_count = $output->get('member_count');
+$career_n = $output->get('career_n');
 ?>
 <link rel="stylesheet" href="/layout/company/assets/default.css">
 
@@ -299,8 +300,6 @@ $member_count = $output->get('member_count');
 <script type="text/javascript">
   //알림 숫자 초기화
   $('#notice_count')[0].innerText = <?=count($output->get("member_notice"));?>
-
-
 
 </script>
 <?php

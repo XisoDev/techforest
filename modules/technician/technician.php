@@ -298,6 +298,7 @@ class technicianView{
         $output->add('occupation_list',$this->occupation_list());
         $output->add('local_list',$this->local_list());
         $output->add('hire_rows',$this->customized_hire());
+        $output->add('career_n',$this->career_check());
 
         return $output;
     }
@@ -802,7 +803,7 @@ class technicianView{
         global $add_body_class;
         $add_body_class[] = "shrink";
         $add_body_class[] = "no_mobile_header";
-        
+
         global $oDB;
 
         $output = new Object();
@@ -870,6 +871,7 @@ class technicianView{
         $output->add('hire_info',$hire_info);
         $output->add('h_certificate',$h_certificate);
         $output->add('member_count',$member_count);
+        $output->add('career_n',$this->career_check());
 
         return $output;
 
@@ -1068,6 +1070,43 @@ class technicianView{
       $row = $oDB->get("TF_hire_tb",null,"count(h_idx) as count_hire");
 
       return $row;
+    }
+
+    function career_check(){
+      global $oDB;
+
+      $m_idx = $_SESSION['LOGGED_INFO'];
+
+      $oDB->where("m_idx",$m_idx);
+      $row = $oDB->get("TF_member_career_tb",null,"count(*) as count");
+
+      $oDB->where("m_idx",$m_idx);
+      $certificate_row = $oDB->get("TF_member_certificate_tb",null,"count(*) as c_count");
+
+      $oDB->where("m_idx",$m_idx);
+      $education_row = $oDB->get("TF_member_education_tb",null,"count(*) as e_count");
+
+      $oDB->where("m_idx",$m_idx);
+      $self_row = $oDB->get("TF_member_self_tb",null,"self_introduction");
+
+      $oDB->where("m_idx",$m_idx);
+      $language_row = $oDB->get("TF_member_language_tb",null,"count(*) as l_count");
+
+      if($row[0]['count'] > 0){
+        if($certificate_row[0]['c_count'] > 0){
+          $career_n = 1;
+        }else if($education_row[0]['e_count'] > 0){
+          $career_n = 1;
+        }else if($self_row[0]['self_introduction'] != ""){
+          $career_n = 1;
+        }else if($language_row[0]['l_count'] > 0){
+          $career_n = 1;
+        }
+      }else{
+        $career_n = 0;
+      }
+
+      return $career_n;
     }
 
   }
