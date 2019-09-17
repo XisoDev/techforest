@@ -385,12 +385,17 @@ $(document).ready(function(){
 
 </div>
 
+
 <div class="d-none py-5 d-lg-block container-fluid mt-5 bg-light">
-    <div class="d-flex container">
+    <div class="d-flex container support-slick">
         <a href="#" target="_blank"><img src="/oPage/company/supports/01_logo.png" /></a>
         <a href="#" target="_blank"><img src="/oPage/company/supports/04_logo.png" /></a>
         <a href="#" target="_blank"><img src="/oPage/company/supports/02_logo.png" /></a>
         <a href="#" target="_blank"><img src="/oPage/company/supports/03_logo.png" /></a>
+        <a href="#" target="_blank"><img src="/oPage/company/supports/08_logo.png" /></a>
+        <a href="#" target="_blank"><img src="/oPage/company/supports/05_logo.png" /></a>
+        <a href="#" target="_blank"><img src="/oPage/company/supports/06_logo.png" /></a>
+        <a href="#" target="_blank"><img src="/oPage/company/supports/07_logo.png" /></a>
     </div>
 </div>
 <!-- 메인에 뜨는 공고등록 유도 팝업 -->

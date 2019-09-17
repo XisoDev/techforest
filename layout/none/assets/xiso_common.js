@@ -101,6 +101,21 @@ jQuery(document).ready(function($){
         $('.monthpicker_from').datepicker('setEndDate', FromEndDate);
     });
 
+    /**
+     * 기업/기술자쪽 서포트배너
+     *
+     */
+    //지원자관리
+    $('.support-slick').slick({
+        dots: false,
+        speed: 300,
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        centerMode: false,
+        infinite:true,
+        arrows: true,
+        centerPadding: '0'
+    });
 });
 
 
