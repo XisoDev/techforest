@@ -11,6 +11,21 @@ $N_hire = $output->get('N_hire');
 $B_hire = $output->get('B_hire');
 
 ?>
+<style media="screen">
+  .col-no-8 {
+    -ms-flex: 0 0 66.666667%;
+    flex: 0 0 66.666667%;
+    max-width: 66.666667%;
+    width: 66.666667%;
+  }
+  .col-no-4 {
+    -ms-flex: 0 0 33.333333%;
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+    width: 33.33333%;
+  }
+
+</style>
 <link rel="stylesheet" href="/layout/company/assets/default.css">
 <!-- <link rel="stylesheet" href="/layout/none/vendor/bootstrap/css/bootstrap.min.css"> -->
 
@@ -73,36 +88,36 @@ $B_hire = $output->get('B_hire');
   					<div class="padding_20">
   						<table class="width_100" style="line-height: 1.7;">
   							<tr class="height_45">
-  								<td class="col-xs-4 col-sm-4 padding_0" style="font-weight: bold;">공고제목</td>
-  								<td class="col-xs-8 col-sm-8 padding_0"><?=$hire_info[0]["h_title"]?></td>
+  								<td class=" col-no-4 padding_0" style="font-weight: bold;">공고제목</td>
+  								<td class=" col-no-8 padding_0"><?=$hire_info[0]["h_title"]?></td>
   							</tr>
   							<tr class="height_45">
-  								<td class="col-xs-4 col-sm-3 padding_0" style="font-weight: bold;">직종</td>
-  								<td class="col-xs-8 col-sm-9 padding_0"><?=$hire_info[0]["hire_o_name"]?></td>
+  								<td class=" col-no-4 padding_0" style="font-weight: bold;">직종</td>
+  								<td class=" col-no-8 padding_0"><?=$hire_info[0]["hire_o_name"]?></td>
   							</tr>
   							<? if($hire_info[0]['duty_name']){ ?>
   								<tr class="height_45">
-  									<td class="col-xs-4 col-sm-3 padding_0" style="font-weight: bold;">직무</td>
-  									<td class="col-xs-8 col-sm-9 padding_0"><?=$hire_info[0]['duty_name']; ?></td>
+  									<td class=" col-no-4 padding_0" style="font-weight: bold;">직무</td>
+  									<td class=" col-no-8 padding_0"><?=$hire_info[0]['duty_name']; ?></td>
   								</tr>
   							<? } ?>
   							<tr class="height_45">
-  								<td class="col-xs-4 col-sm-3 padding_0" style="font-weight: bold;">직무상세내용</td>
-  								<td class="col-xs-8 col-sm-9 padding_0"><?=$hire_info[0]["job_description"]?></td>
+  								<td class=" col-no-4 padding_0" style="font-weight: bold;">직무상세내용</td>
+  								<td class=" col-no-8 padding_0"><?=$hire_info[0]["job_description"]?></td>
   							</tr>
   							<? if(count($h_certificate) > 0) {
   								for($i=0, $len = count($h_certificate); $i < $len; $i++){ ?>
   								<tr class="height_45">
-  									<td class="col-xs-4 col-sm-3 padding_0" style="font-weight: bold;">
+  									<td class=" col-no-4 padding_0" style="font-weight: bold;">
   										<? echo ($i==0) ? "필요자격증":""; ?>
   									</td>
-  									<td class="col-xs-8 col-sm-9 padding_0"><?=$h_certificate[$i]['certificate_name']?></td>
+  									<td class=" col-no-8 padding_0"><?=$h_certificate[$i]['certificate_name']?></td>
   								</tr>
   								<? }
   							} ?>
   							<tr class="height_45">
-  								<td class="col-xs-4 col-sm-3 padding_0" style="font-weight: bold;">급여</td>
-  								<td class="col-xs-8 col-sm-9 padding_0">
+  								<td class=" col-no-4 padding_0" style="font-weight: bold;">급여</td>
+  								<td class=" col-no-8 padding_0">
   								<?
   								if (is_numeric($hire_info[0]['job_salary']) ){
   									if($hire_info[0]["salary_idx"] == 1 || $hire_info[0]["salary_idx"] == 2){
@@ -118,19 +133,19 @@ $B_hire = $output->get('B_hire');
   								</td>
   							</tr>
   							<tr class="height_45">
-  								<td class="col-xs-4 col-sm-3 padding_0" style="font-weight: bold;">신입/경력</td>
-  								<td class="col-xs-8 col-sm-9 padding_0"><?=$hire_info[0]["job_is_career"]?></td>
+  								<td class=" col-no-4 padding_0" style="font-weight: bold;">신입/경력</td>
+  								<td class=" col-no-8 padding_0"><?=$hire_info[0]["job_is_career"]?></td>
   							</tr>
   							<tr class="height_45">
-  								<td class="col-xs-4 col-sm-3 padding_0" style="font-weight: bold;">학력</td>
-  								<td class="col-xs-8 col-sm-9 padding_0"><?=$hire_info[0]["job_achievement"]?></td>
+  								<td class=" col-no-4 padding_0" style="font-weight: bold;">학력</td>
+  								<td class=" col-no-8 padding_0"><?=$hire_info[0]["job_achievement"]?></td>
   							</tr>
   							<tr class="height_45">
-  								<td class="col-xs-4 col-sm-3 padding_0" style="font-weight: bold;">근무형태</td>
-  								<td class="col-xs-8 col-sm-9 padding_0"><?=$hire_info[0]["w_name"]?></td>
+  								<td class=" col-no-4 padding_0" style="font-weight: bold;">근무형태</td>
+  								<td class=" col-no-8 padding_0"><?=$hire_info[0]["w_name"]?></td>
   							</tr>
   							<tr class="height_45">
-  								<td class="col-xs-4 col-sm-3 padding_0" style="font-weight: bold;">근무지역</td>
+  								<td class=" col-no-4 padding_0" style="font-weight: bold;">근무지역</td>
   								<?
   								$hire_location = $hire_info[0]["local_name"];
   								if($hire_info[0]["city_name"] != "전체") {
@@ -139,19 +154,19 @@ $B_hire = $output->get('B_hire');
   									$hire_location .= " " . $hire_info[0]["district_name"];
   								}
   								?>
-  								<td class="col-xs-8 col-sm-9 padding_0"><?=$hire_location?></td>
+  								<td class=" col-no-8 padding_0"><?=$hire_location?></td>
   							</tr>
   							<tr class="height_45">
-  								<td class="col-xs-4 col-sm-3 padding_0" style="font-weight: bold;">공고시작</td>
-  								<td class="col-xs-8 col-sm-9 padding_0"><?=substr($hire_info[0]["job_start_date"],0, 10)?></td>
+  								<td class=" col-no-4 padding_0" style="font-weight: bold;">공고시작</td>
+  								<td class=" col-no-8 padding_0"><?=substr($hire_info[0]["job_start_date"],0, 10)?></td>
   							</tr>
   							<tr class="height_45">
-  								<td class="col-xs-4 col-sm-3 padding_0" style="font-weight: bold;">공고종료</td>
-  								<td class="col-xs-8 col-sm-9 padding_0"><?=substr($hire_info[0]["job_end_date"], 0, 10)?></td>
+  								<td class=" col-no-4 padding_0" style="font-weight: bold;">공고종료</td>
+  								<td class=" col-no-8 padding_0"><?=substr($hire_info[0]["job_end_date"], 0, 10)?></td>
   							</tr>
   							<tr class="height_45">
-  								<td class="col-xs-4 col-sm-3 padding_0" style="font-weight: bold;">담당자 및 기타정보</td>
-  								<td class="col-xs-8 col-sm-9 padding_0"><? echo str_replace("\n", "<br />" , $hire_info[0]["job_manager"]);?></td>
+  								<td class=" col-no-4 padding_0" style="font-weight: bold;">담당자 및 기타정보</td>
+  								<td class=" col-no-8 padding_0"><? echo str_replace("\n", "<br />" , $hire_info[0]["job_manager"]);?></td>
   							</tr>
   						</table>
   					</div>
