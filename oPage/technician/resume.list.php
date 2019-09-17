@@ -11,6 +11,25 @@ $myinfo_row = $output->get('myinfo_row');
 //파일 리스트
 $file_list = $output->get('file_list');
 
+
+if(!$count_career_row[0]['count_career']){
+  $count_career = 0;
+}else{
+  $count_career = $count_career_row[0]['count_career'];
+}
+
+if(!$count_c_content_row[0]['count_c_content']){
+  $count_c_content = 0;
+}else{
+  $count_c_content = $count_c_content_row[0]['count_c_content'];
+}
+
+if(!$count_myinfo_row[0]['count_myinfo']){
+  $count_myinfo = 0;
+}else{
+  $count_myinfo = $count_myinfo_row[0]['count_myinfo'];
+}
+
 ?>
 
 <section class="bg-white d-lg-none">
@@ -28,9 +47,9 @@ $file_list = $output->get('file_list');
                     <span class="position-absolute weight_normal" style="right:10px; top:7px;">
                         이력서 완성도
                         <span class="btn btn-round btn-danger btn-xxs py-2 px-2 weight_lighter m-0" style="vertical-align:0px;">
-                          <?php if($count_career_row[0]['count_career'] == $count_c_content_row[0]['count_c_content'] && $count_myinfo_row[0]['count_myinfo']){
+                          <?php if(($count_career == $count_c_content) && $count_career != 0 && $count_myinfo > 0){
                             echo '높음';
-                          }else if($count_career_row[0]['count_career'] > $count_c_content_row[0]['count_c_content'] && $count_myinfo_row[0]['count_myinfo']){
+                          }else if(($count_career > $count_c_content) && $count_myinfo > 0){
                             echo '중간';
                           }else{
                             echo '낮음';

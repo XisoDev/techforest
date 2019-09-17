@@ -5,7 +5,7 @@ $interest_rows = $output->get('interest_rows');
 $local_list = $output->get('local_list');
 $occupation_list = $output->get('occupation_list');
 $duty_list = $output->get('duty_list');
-
+$career_n = $output->get('career_n');
 $page =  $_REQUEST['page'];
 
 if(!$page) {
@@ -137,6 +137,7 @@ $total_record = count($hire_rows);
                           <div class="thumbnail mx-0 px-0" style="height:100%; background-image:url('/oPage/technician/company_thumbnails/<?=$img_num?>.png')">
                               <span class="overlay">
                                 <?
+                                if(count($interest_rows) > 0){
                                   foreach ($interest_rows as $val2) {
                                     if($val2['h_idx'] == $hire_rows[$i]['h_idx']){
                                       $interest_html2 = '<a class="btn-xxs btn btn-round border-white text-white py-1 px-2 position-absolute mr-lg-3" onclick="interest_remove('. $hire_rows[$i]['h_idx'] .')" style="right:10px; top:10px;">관심공고<i class="xi-heart red" id="yes_interest"></i></a>';
@@ -145,6 +146,9 @@ $total_record = count($hire_rows);
                                       $interest_html2 = '<a class="btn-xxs btn btn-round border-white text-white py-1 px-2 position-absolute mr-lg-3" onclick="interest_add('. $hire_rows[$i]['h_idx'] .')" style="right:10px; top:10px;">관심공고<i class="xi-heart" id="no_interest"></i></a>';
                                     }
                                   }
+                                }else{
+                                  $interest_html2 = '<a class="btn-xxs btn btn-round border-white text-white py-1 px-2 position-absolute mr-lg-3" onclick="login_please()" style="right:10px; top:10px;">관심공고<i class="xi-heart" id="no_interest"></i></a>';
+                                }
                                 ?>
                                 <?= $interest_html2 ?>
                               </span>
@@ -183,7 +187,13 @@ $total_record = count($hire_rows);
                                   <a href="<?=getUrl('technician','jobDetail',$hire_rows[$i]['h_idx'])?>" class="btn btn-light btn-block rounded-0">상세보기</a>
                               </div>
                               <div class="col-6 mx-0 px-0">
+                                <?if($career_n == 0 && ($hire_rows[$i]['job_is_career'] == '무관' || $hire_rows[$i]['job_is_career'] == '신입')){?>
                                   <button class="btn btn-danger btn-block rounded-0" onclick="application_ok(<?=$hire_rows[$i]['h_idx']?>)">지원하기</button>
+                                <?}else if($career_n == 0 && ($hire_rows[$i]['job_is_career'] != '무관' || $hire_rows[$i]['job_is_career'] != '신입')){?>
+                                  <button class="btn btn-danger btn-block rounded-0" onclick="write_career();">지원하기</button>
+                                <?}else if($career_n == 1){?>
+                                  <button class="btn btn-danger btn-block rounded-0" onclick="application_ok(<?=$hire_rows[$i]['h_idx']?>)">지원하기</button>
+                                <?}?>
                               </div>
                           </div>
                       </div>
@@ -205,12 +215,12 @@ $total_record = count($hire_rows);
 
 </div>
 
-<div class="modal fade" id="check_phonenumber" tabindex="-1" role="dialog" aria-labelledby="tech_forest_modal_window" aria-hidden="true" style="">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+<div class="modal fade" id="check_phonenumber" tabindex="-1" role="dialog" aria-labelledby="tech_forest_modal_window" aria-hidden="true" class="mx-auto">
+    <div class="modal-dialog modal-dialog-centered mx-auto" role="document" style="max-width:330px;">
         <div class="modal-content text-center" style="border-radius:10px">
             <a href="#" class="text-white pull-right text-right" style="margin-top:-40px;" onclick="jQuery('#check_phonenumber').modal('hide');" ><i class="xi-close xi-2x"></i></a>
             <div class="square avatar bg-red mx-auto" style="width:120px; margin-top:-60px; background-image:url('/oPage/ncenter/images/header_icon.png');"></div>
-            <div class="content_padding">
+            <div class="p-3 text-center">
                 <h5 class="weight_lighter">기업측의 면접요청을 위해 <br> <span class="red">본인의 연락처가 맞는지</span><br>다시 한번 확인해주세요.</h5>
                 <span class="red">─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─</span>
                 <h5 class="weight_normal mb-2 mt-4 mb-3 red">☎ <?=$logged_info['m_phone']?></h5>
@@ -244,6 +254,23 @@ function application_ok(h_idx){
     });
  });
 }
+
+
+function write_career(){
+  var result = confirm("지원을 위해 이력정보등록이 필요합니다. 등록하시겠습니까?");
+  if(result){
+    location.href="<?=getUrl('technician','resumeWrite',$m_idx)?>";
+  }
+}
+
+function login_please(){
+  var result = confirm("로그인 후 이용해주세요. 로그인 하시겠습니까?");
+  if(result){
+    location.href="<?=getUrl('member','login',false,array('cur' => $current_url))?>";
+  }
+}
+
+
 </script>
 
 <?php

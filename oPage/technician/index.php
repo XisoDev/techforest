@@ -14,6 +14,25 @@ $news_list = $output->get('news_list');
 //총공고개수
 $all_hire_row = $output->get('all_hire_row');
 
+if(!$count_career_row[0]['count_career']){
+  $count_career = 0;
+}else{
+  $count_career = $count_career_row[0]['count_career'];
+}
+
+if(!$count_c_content_row[0]['count_c_content']){
+  $count_c_content = 0;
+}else{
+  $count_c_content = $count_c_content_row[0]['count_c_content'];
+}
+
+if(!$count_myinfo_row[0]['count_myinfo']){
+  $count_myinfo = 0;
+}else{
+  $count_myinfo = $count_myinfo_row[0]['count_myinfo'];
+}
+
+
 if($logged_info['is_commerce']=='Y'){
   echo ("<script>
     alert('잘못된 접속입니다.');
@@ -140,9 +159,9 @@ if($logged_info['is_commerce']=='Y'){
                     <h6 class="weight_bold xs_content mt-4 mb-1">
                         <span class="red"><?=$logged_info['m_name']?></span>님의 이력서 완성도는
                         <span class="red">
-                          <?php if($count_career_row[0]['count_career'] == $count_c_content_row[0]['count_c_content'] && $count_myinfo_row[0]['count_myinfo']){
+                          <?php if(($count_career == $count_c_content) && $count_career != 0 && $count_myinfo > 0){
                               echo '높음';
-                          }else if($count_career_row[0]['count_career'] > $count_c_content_row[0]['count_c_content'] && $count_myinfo_row[0]['count_myinfo']){
+                          }else if(($count_career > $count_c_content) && $count_myinfo > 0){
                               echo '중간';
                           }else{
                               echo '낮음';

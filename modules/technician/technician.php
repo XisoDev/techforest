@@ -131,7 +131,12 @@ class technicianView{
             // $add_body_class[] = "no_mobile_header";
             $set_template_file = "technician/resume.list.php";
 
-            $output->add('myinfo_row',$this->resume_info());
+            $m_idx2 = $_SESSION['LOGGED_INFO'];
+
+            $oDB->where("m_idx",$m_idx2);
+            $row = $oDB->get("TF_member_tb",null,"edit_date");
+
+            $output->add('myinfo_row',$row);
             $output->add('file_list',$this->file_list());
             $output->add('count_career_row',$this->resume_completeness1());
             $output->add('count_c_content_row',$this->resume_completeness2());
@@ -337,6 +342,7 @@ class technicianView{
       $output->add('occupation_list',$this->occupation_list());
       $output->add('local_list',$this->local_list());
       $output->add('hire_rows',$this->customized_hire());
+      $output->add('career_n',$this->career_check());
 
       return $output;
     }
@@ -412,6 +418,7 @@ class technicianView{
         $output->add('duty_list',$this->duty_list());
         $output->add('occupation_list',$this->occupation_list());
         $output->add('local_list',$this->local_list());
+        $output->add('career_n',$this->career_check());
 
         return $output;
     }
@@ -561,9 +568,10 @@ class technicianView{
 
       //이력서완성도(경력 개수)
       $oDB->where("m_idx",$m_idx);
-      $count_career_row = $oDB->getOne("TF_member_career_tb","count(m_idx) as count_career");
+      $count_career_row = $oDB->get("TF_member_career_tb",null,"count(*) as count_career");
 
       return $count_career_row;
+
     }
 
     function resume_completeness2(){
@@ -575,7 +583,7 @@ class technicianView{
       $oDB->where("m_idx",$m_idx);
       $oDB->where("c_content","","!=");
       $oDB->where("c_content",NULL, 'IS NOT');
-      $count_c_content_row = $oDB->getOne("TF_member_career_tb","count(c_content) as count_c_content");
+      $count_c_content_row = $oDB->get("TF_member_career_tb",null,"count(c_content) as count_c_content");
 
       return $count_c_content_row;
     }
@@ -586,6 +594,7 @@ class technicianView{
       $m_idx = $_SESSION['LOGGED_INFO'];
 
       //이력서완성도(기본정보+희망4종 입력 여부)
+      $oDB->groupby("m.m_idx");
       $oDB->where("m.m_idx",$m_idx);
       $oDB->where("d.m_idx",NULL,"IS NOT");
       $oDB->where("m.m_address2",NULL,"IS NOT");

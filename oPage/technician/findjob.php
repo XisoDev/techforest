@@ -23,7 +23,7 @@
 
 <section class="bg-white d-lg-none">
     <div class="p-3 mt-4 pt-5 mb-0 pb-2">
-        <a href="#" onclick="history.back();" class="mb-3"><img src="/oPage/images/imgicons/arrow_left.png" height="25" /></a>
+        <!-- <a href="#" onclick="history.back();" class="mb-3"><img src="/oPage/images/imgicons/arrow_left.png" height="25" /></a> -->
         <h4 class="weight_normal">일자리 찾기</h4>
     </div>
 </section>
@@ -42,15 +42,16 @@
       <? $count_hire = (count($hire_rows) > 6) ? 6 : count($hire_rows); ?>
         <?php for($i=0; $i < $count_hire; $i++){ ?>
           <input type="hidden" id="hidden_h_idx" value="<?=$hire_rows[$i]['h_idx']?>">
+            <?php
+            //랜덤 이미지를 h_idx 에의해 고정적으로 출력하기 위한 계산식
+            $img_num = $hire_rows[$i]['h_idx'] % $file_count;
+            $img_num = $img_num + 1;
+            ?>
             <div class="tech_card bg-white shadow">
-              <?php
-              //랜덤 이미지를 h_idx 에의해 고정적으로 출력하기 위한 계산식
-              $img_num = $hire_rows[$i]['h_idx'] % $file_count;
-              $img_num = $img_num + 1;
-              ?>
                 <div class="thumbnail mx-0 px-0" style="height:100%; background-image:url('/oPage/technician/company_thumbnails/<?=$img_num?>.png')">
                   <span class="overlay">
                     <?
+                    if(count($interest_rows) > 0){
                       foreach ($interest_rows as $val2) {
                         if($val2['h_idx'] == $hire_rows[$i]['h_idx']){
                           $interest_html2 = '<a class="btn-xxs btn btn-round border-white text-white py-1 px-2 position-absolute mr-lg-3" onclick="interest_remove('. $hire_rows[$i]['h_idx'] .')" style="right:10px; top:10px;">관심공고<i class="xi-heart red" id="yes_interest"></i></a>';
@@ -59,8 +60,12 @@
                           $interest_html2 = '<a class="btn-xxs btn btn-round border-white text-white py-1 px-2 position-absolute mr-lg-3" onclick="interest_add('. $hire_rows[$i]['h_idx'] .')" style="right:10px; top:10px;">관심공고<i class="xi-heart" id="no_interest"></i></a>';
                         }
                       }
+                    }else{
+                      $interest_html2 = '<a class="btn-xxs btn btn-round border-white text-white py-1 px-2 position-absolute mr-lg-3" onclick="interest_add('. $hire_rows[$i]['h_idx'] .')" style="right:10px; top:10px;">관심공고<i class="xi-heart" id="no_interest"></i></a>';
+                    }
                     ?>
                     <?= $interest_html2 ?>
+
                   </span>
                 </div>
                 <? if ($hire_rows[$i]['city_name'] == "전체") { $hire_rows[$i]['city_name'] = "";} ?>
