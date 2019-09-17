@@ -29,7 +29,8 @@ class memberController{
     function procMemberLogin($args){
         global $oDB;
 
-        $oDB->where("m_id",$args->user_id);
+        $user_id = htmlspecialchars($args->user_id);
+        $oDB->where("m_id",$user_id);
         $row = $oDB->getOne("TF_member_tb");
 
         if(!$row['m_id']) return new Object(-1, "존재하지 않는 아이디 입니다.");
@@ -131,7 +132,7 @@ class memberController{
 
     function procMemberCheckHasID($args){
 
-        $id = $args->m_id;
+        $id = htmlspecialchars($args->m_id);
 
         global $oDB;
         $oDB->where("m_id","$id");
@@ -157,13 +158,13 @@ class memberController{
 
         //insert
         $data = array(
-          "m_id" => $args->m_id,
-          "m_pw" => $args->m_pw1,
-          "m_name" => $args->m_name,
+          "m_id" => htmlspecialchars($args->m_id),
+          "m_pw" => htmlspecialchars($args->m_pw1),
+          "m_name" => htmlspecialchars($args->m_name),
           "m_human" => "M",
           "m_birthday" => $args->birth_year."0101",
-          "m_phone" => $args->m_phone,
-          "m_email" => $args->m_email,
+          "m_phone" => htmlspecialchars($args->m_phone),
+          "m_email" => htmlspecialchars($args->m_email),
           "is_commerce" => "N",
           "is_device" => "W",
           "is_external" => "A",
@@ -173,7 +174,7 @@ class memberController{
         $row = $oDB->insert("TF_member_tb", $data);
 
         if($row){
-            $m_id = $args->m_id;
+            $m_id = htmlspecialchars($args->m_id);
             //회원가입 후 바로 로그인
             $oDB->where("m_id",$m_id);
             $m_row = $oDB->getOne("TF_member_tb",null,"m_idx");
@@ -190,7 +191,7 @@ class memberController{
       date_default_timezone_set('Asia/Seoul');
       $now_date = date(YmdHis);
 
-      $m_phone = $args->m_phone;
+      $m_phone = htmlspecialchars($args->m_phone);
       $m_idx = $_SESSION['LOGGED_INFO'];
 
       $data = array(
@@ -426,7 +427,7 @@ class memberController{
     function search_id($args){
       global $oDB;
 
-      $oDB->where("m_name",$args->m_name);
+      $oDB->where("m_name",htmlspecialchars($args->m_name));
       $oDB->where("(m_phone = ? or m_phone = ?)", Array($args->m_phone1,$args->m_phone2));
       $row = $oDB->get("TF_member_tb",null,"m_id, reg_date");
 
@@ -465,8 +466,8 @@ class memberController{
   function search_pw($args){
     global $oDB;
 
-    $oDB->where("m_name",$args->m_name);
-    $oDB->where("m_id",$args->m_id);
+    $oDB->where("m_name",htmlspecialchars($args->m_name));
+    $oDB->where("m_id",htmlspecialchars($args->m_id));
     $oDB->where("(m_phone = ? or m_phone = ?)", Array($args->m_phone1,$args->m_phone2));
     $row = $oDB->get("TF_member_tb",null,"m_idx");
 
@@ -482,11 +483,11 @@ class memberController{
     global $oDB;
 
     $data = array(
-      "m_pw" => $args->m_pw,
+      "m_pw" => htmlspecialchars($args->m_pw),
       "edit_date" => $date
     );
 
-    $oDB->where("m_idx",$args->m_idx);
+    $oDB->where("m_idx",htmlspecialchars($args->m_idx));
     $row = $oDB->update("TF_member_tb",$data);
 
     if($row){

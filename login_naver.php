@@ -7,11 +7,11 @@
 	$state=	$_REQUEST["state"];
 
 	// 네이버 로그인 콜백 예제
-	$client_id = "cXstjgkmgg8Oiz8d7zHx";
-	$client_secret = "i6G7wCnYBe";
+	$client_id = "9TWCl12zse_283Kcwhc9";
+	$client_secret = "OTD31wUJTi";
 	$code = $_GET["code"];
 	$state = $_GET["state"];
-  $redirectURI = urlencode("http://127.0.0.1:8080/company");
+  $redirectURI = urlencode("https://gsjsoop.com/company");
   $url = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=".$client_id."&client_secret=".$client_secret."&redirect_uri=".$redirectURI."&code=".$code."&state=".$state;
   $is_post = false;
   $ch = curl_init();

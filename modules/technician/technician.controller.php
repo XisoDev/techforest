@@ -4,8 +4,8 @@ class technicianController{
   function interest_remove($args){
     global $oDB;
 
-    $h_idx = $args->h_idx;
-    $m_idx = $args->m_idx;
+    $h_idx = htmlspecialchars($args->h_idx);
+    $m_idx = htmlspecialchars($args->m_idx);
 
     $oDB->where("h_idx",$h_idx);
     $oDB->where("m_idx",$m_idx);
@@ -21,8 +21,8 @@ class technicianController{
   function interest_add($args){
     global $oDB;
     $now_date = date(YmdHis);
-    $h_idx = $args->h_idx;
-    $m_idx = $args->m_idx;
+    $h_idx = htmlspecialchars($args->h_idx);
+    $m_idx = htmlspecialchars($args->m_idx);
 
     $data = array(
       "m_idx" => $m_idx,
@@ -42,7 +42,7 @@ class technicianController{
     global $oDB;
     //$output = new Object();
 
-    $lc_name = $args->value;
+    $lc_name = htmlspecialchars($args->value);
 
     $oDB->where("lc_d_is_show","Y");
     $oDB->where("lc_name","$lc_name");
@@ -68,17 +68,17 @@ class technicianController{
   function my_info_detail_edit($args){
     global $oDB;
     $now_date = date(YmdHis);
-    $m_idx = $args->m_idx;
+    $m_idx = htmlspecialchars($args->m_idx);
 
     //기본정보 저장
     $data1 = array(
-      "m_name" => $args->m_name,
-      "m_human" => $args->m_human,
-      "m_birthday" => $args->m_birthday,
-      "m_email" => $args->m_email,
-      "m_phone" => $args->m_phone,
-      "m_address" => $args->m_address,
-      "m_address2" => $args->m_address2,
+      "m_name" => htmlspecialchars($args->m_name),
+      "m_human" => htmlspecialchars($args->m_human),
+      "m_birthday" => htmlspecialchars($args->m_birthday),
+      "m_email" => htmlspecialchars($args->m_email),
+      "m_phone" => htmlspecialchars($args->m_phone),
+      "m_address" => htmlspecialchars($args->m_address),
+      "m_address2" => htmlspecialchars($args->m_address2),
       "m_local_idx" => $args->local_select,
       "m_city_idx" => $args->city_select,
       "m_district_idx" => $args->district_select,
@@ -96,7 +96,7 @@ class technicianController{
     $data2 = array(
       "m_idx" => $m_idx,
       "salary_idx" => $args->desired_salary_select,
-      "desired_salary" => $args->desired_salary_input,
+      "desired_salary" => htmlspecialchars($args->desired_salary_input),
       "reg_date" => $now_date,
       "edit_date" => $now_date
     );
@@ -131,7 +131,7 @@ class technicianController{
     //자기소개 저장
     $data4 = array(
       "m_idx" => $args->m_idx,
-      "self_introduction" => $args->about_me,
+      "self_introduction" => htmlspecialchars($args->about_me),
       "reg_date" => $now_date,
       "edit_date" => $now_date
     );
@@ -175,11 +175,11 @@ class technicianController{
         $data5_2 = array(
           "m_idx" => $args->m_idx,
           "s_idx" => $s_idx,
-          "school_name" => $school_name,
-          "school_major" => $school_major,
-          "school_grade" => $school_grade,
-          "max_grade" => $max_grade,
-          "school_graduated" => $school_graduated,
+          "school_name" => htmlspecialchars($school_name),
+          "school_major" => htmlspecialchars($school_major),
+          "school_grade" => htmlspecialchars($school_grade),
+          "max_grade" => htmlspecialchars($max_grade),
+          "school_graduated" => htmlspecialchars($school_graduated),
           "is_ged" => $is_ged,
           "school_idx" => $school_idx,
           "reg_date" => $now_date,
@@ -220,14 +220,14 @@ class technicianController{
         //2. 경력 저장
         $data6_2 = array(
           "m_idx" => $args->m_idx,
-          "c_name" => $c_name,
-          "c_position" => $c_position,
-          "c_content" => $c_content,
+          "c_name" => htmlspecialchars($c_name),
+          "c_position" => htmlspecialchars($c_position),
+          "c_content" => htmlspecialchars($c_content),
           "o_idx" => $c_o_idx,
-          "duty_name" => $c_duty,
-          "c_start_date" => $c_start_date,
-          "c_end_date" => $c_end_date,
-          "is_newcommer" => $is_newcommer,
+          "duty_name" => htmlspecialchars($c_duty),
+          "c_start_date" => htmlspecialchars($c_start_date),
+          "c_end_date" => htmlspecialchars($c_end_date),
+          "is_newcommer" => htmlspecialchars($is_newcommer),
           "career_idx" => $i,
           "reg_date" => $now_date,
           "edit_date" => $now_date
@@ -262,7 +262,7 @@ class technicianController{
           //2. 자격증 저장
           $data7_2 = array(
             "m_idx" => $args->m_idx,
-            "certificate_name" => $certificate_name,
+            "certificate_name" => htmlspecialchars($certificate_name),
             "certificate_date" => $certificate_date,
             "is_certificate" => "N",
             "certificate_idx" => $i,
@@ -302,10 +302,10 @@ class technicianController{
           //2. 어학 저장
           $data8_2 = array(
             "m_idx" => $args->m_idx,
-            "lc_idx" => $lc_name,
-            "lc_d_idx" => $lc_d_name,
-            "score" => $score,
-            "language_date" => $language_date,
+            "lc_idx" => htmlspecialchars($lc_name),
+            "lc_d_idx" => htmlspecialchars($lc_d_name),
+            "score" => htmlspecialchars($score),
+            "language_date" => htmlspecialchars($language_date),
             "language_idx" => $i,
             "reg_date" => $now_date,
             "edit_date" => $now_date
@@ -318,8 +318,8 @@ class technicianController{
         }//어학 for문 끝
 
       //1.직무 삭제
-      $duty_name_arr = $args->duty_name_arr;
-      $duty_o_arr = $args->duty_o_arr;
+      $duty_name_arr = htmlspecialchars($args->duty_name_arr)htmlspecialchars();
+      $duty_o_arr = htmlspecialchars($args->duty_o_arr)htmlspecialchars();
 
       $oDB->where("m_idx",$m_idx);
       $result9_0 = $oDB->get("TF_member_duty");
@@ -338,7 +338,7 @@ class technicianController{
         $data9_2 = array(
           "m_idx" => $args->m_idx,
           "o_idx" => $duty_o_arr[$i],
-          "duty_name" => $duty_name_arr[$i],
+          "duty_name" => htmlspecialchars($duty_name_arr[$i]),
           "reg_date" => $now_date
         );
         $result9_2 = $oDB->insert("TF_member_duty",$data9_2);
@@ -352,7 +352,7 @@ class technicianController{
 
       $data10 = array(
         "m_idx" => $args->m_idx,
-        "a_line_self" => $args->a_line_self,
+        "a_line_self" => htmlspecialchars($args->a_line_self),
         "reg_date" => $now_date,
         "edit_date" => $now_date
       );
@@ -529,8 +529,8 @@ class technicianController{
     if(move_uploaded_file($_FILES["userfile"]["tmp_name"], $target_path . $file_name)){
       $data = array(
         "m_idx" => $m_idx,
-        "file_type" => $file_select,
-        "file_name" => $file_real_name,
+        "file_type" => htmlspecialchars($file_select),
+        "file_name" => htmlspecialchars($file_real_name),
         "reg_date" => $date
       );
       $upload_row = $oDB->insert("TF_member_file",$data);
@@ -573,7 +573,7 @@ class technicianController{
     if(move_uploaded_file($_FILES["resume_upload"]["tmp_name"], $target_path . $file_name)){
       $data = array(
         "m_idx" => $m_idx,
-        "image" => $file_name,
+        "image" => htmlspecialchars($file_name),
         "is_ok" => 'N',
         "reg_date" => $date
       );
@@ -594,7 +594,7 @@ class technicianController{
     $m_idx = $_SESSION['LOGGED_INFO'];
 
     $date = date("YmdHis", strtotime($args->reg_date));
-    $file_real_name = $args->file_name;
+    $file_real_name = htmlspecialchars($args->file_name);
     $file_name = $m_idx . "_" . $date . "_" . $file_real_name;
     $target_path = "./portfolio/";
 
